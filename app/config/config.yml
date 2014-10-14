@@ -51,7 +51,7 @@ assetic:
 nelmio_security:
     # Content Security Policy
     csp:
-        report_uri: /nelmio/csp/report
+        report_uri: /csp/report
         # Log to security channel
         report_logger_service: monolog.logger.security
         # Content types: default, script, object, style, img, media, frame, font, connect
