@@ -1,3 +1,13 @@
 welcome:
     path:     /
-    defaults: { _controller: SurfnetStepupRaBundle:Welcome:welcome }
+    defaults: { _controller: SurfnetStepupRaRaBundle:Welcome:welcome }
+
+ra_saml_metadata:
+    path: /authentication/metadata
+    methods: [GET]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Saml:metadata }
+
+ra_serviceprovider_consume_assertion:
+    path: /authentication/consume-assertion
+    methods: [POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Saml:consumeAssertion }

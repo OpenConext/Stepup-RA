@@ -16,18 +16,31 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Controller;
+namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Token;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
-class WelcomeController extends Controller
+class SamlToken extends AbstractToken
 {
     /**
-     * @Template
+     * @var \SAML2_Assertion
      */
-    public function welcomeAction()
+    public $assertion;
+
+    public function __construct(array $roles = array())
     {
-        return [];
+        parent::__construct($roles);
+
+        $this->setAuthenticated(count($roles));
+    }
+
+    /**
+     * Returns the user credentials.
+     *
+     * @return mixed The user credentials
+     */
+    public function getCredentials()
+    {
+        return '';
     }
 }

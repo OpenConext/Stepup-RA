@@ -16,18 +16,31 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Controller;
+namespace Surfnet\StepupRa\RaBundle\Command;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Validator\Constraints as Assert;
 
-class WelcomeController extends Controller
+class VerifyYubikeyOtpCommand
 {
     /**
-     * @Template
+     * @Assert\NotBlank(message="ra.verify_yubikey_command.otp.may_not_be_empty")
+     * @Assert\Type(type="string", message="ra.verify_yubikey_command.otp.must_be_string")
+     *
+     * @var string
      */
-    public function welcomeAction()
-    {
-        return [];
-    }
+    public $otp;
+
+    /**
+     * The requesting identity's ID (not name ID).
+     *
+     * @var string
+     */
+    public $identity;
+
+    /**
+     * The requesting identity's institution.
+     *
+     * @var string
+     */
+    public $institution;
 }
