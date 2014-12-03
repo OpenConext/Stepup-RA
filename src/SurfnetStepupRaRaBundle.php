@@ -16,18 +16,20 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Controller;
+namespace Surfnet\StepupRa\RaBundle;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Surfnet\StepupRa\RaBundle\Security\Factory\SamlFactory;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class WelcomeController extends Controller
+class SurfnetStepupRaRaBundle extends Bundle
 {
-    /**
-     * @Template
-     */
-    public function welcomeAction()
+    public function build(ContainerBuilder $container)
     {
-        return [];
+        parent::build($container);
+
+        /** @var \Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension $extension */
+        $extension = $container->getExtension('security');
+        $extension->addSecurityListenerFactory(new SamlFactory());
     }
 }

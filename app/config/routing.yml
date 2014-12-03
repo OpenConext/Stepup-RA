@@ -3,5 +3,5 @@ nelmio_security_report:
     defaults: { _controller: nelmio_security.csp_reporter_controller:indexAction }
     methods: [POST]
 
-surf_stepup:
-    resource: "@SurfnetStepupRaBundle/Resources/config/routing.yml"
+surfnet_stepup_ra_ra:
+    resource: "@SurfnetStepupRaRaBundle/Resources/config/routing.yml"

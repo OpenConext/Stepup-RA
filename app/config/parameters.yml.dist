@@ -1,8 +1,27 @@
 parameters:
-    default_locale:    nl
-    locales:           [nl]
+    default_locale:    en_GB
+    locales:           [nl_NL, en_GB]
     secret:            NotSoSecretReplaceMe!
 
     debug_toolbar:          true
     debug_redirects:        false
     use_assetic_controller: true
+
+    gateway_api_url: https://gateway.tld/
+    gateway_api_username: ra
+    gateway_api_password: ra
+
+    middleware_credentials_username: ra
+    middleware_credentials_password: ra
+    middleware_url_command_api: https://middleware.tld/command
+    middleware_url_api: https://middleware.tld/
+
+    sms_originator: SURFStepup
+
+    saml_sp_publickey:
+    saml_sp_privatekey:
+    saml_metadata_publickey:
+    saml_metadata_privatekey:
+    saml_remote_idp_entity_id:
+    saml_remote_idp_sso_url:
+    saml_remote_idp_certificate:

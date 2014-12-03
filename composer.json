@@ -4,13 +4,13 @@
     "description": "The SURFnet Step-up Registration Authority application allows Registration Authorities to vet identities by combining a real-world identity, federated identity and a token.",
     "autoload": {
         "psr-4": {
-            "Surfnet\\StepupRaBundle\\": "src"
+            "Surfnet\\StepupRa\\RaBundle\\": "src"
         }
     },
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4",
-        "symfony/symfony": "~2.5",
+        "symfony/symfony": "~2.6",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
@@ -22,13 +22,25 @@
         "twbs/bootstrap": "~3.2.0",
         "fortawesome/font-awesome": "~4.2.0",
         "jms/translation-bundle": "~1.1.0",
-        "jms/di-extra-bundle": "~1.4.0"
+        "jms/di-extra-bundle": "~1.4.0",
+        "surfnet/stepup-middleware-client-bundle": "dev-develop",
+        "surfnet/stepup-middleware-client": "@dev",
+        "surfnet/stepup-saml-bundle": "dev-develop",
+        "surfnet/stepup-bundle": "dev-develop",
+        "simplesamlphp/saml2": "@dev",
+        "guzzlehttp/guzzle": "~4"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
         "ibuildings/qa-tools": "~1.1,>=1.1.27",
         "liip/rmt": "1.1.*"
     },
+    "repositories" : [
+        {
+            "type": "vcs",
+            "url": "https://github.com/SURFnet/saml2"
+        }
+    ],
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",

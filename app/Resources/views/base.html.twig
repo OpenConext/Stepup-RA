@@ -1,10 +1,13 @@
 {% extends 'MopaBootstrapBundle::base.html.twig' %}
 {% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}
 
-{% block title %}{{ 'app.name'|trans }}{% endblock title %}
+{% block title %}
+    {%  if block('page_title') is not empty %}{{ block('page_title') }} &mdash; {% endif %}
+    {{ 'app.name'|trans }}
+{% endblock title %}
 {% block head_style %}
     {% stylesheets
-    '@SurfnetStepupRaBundle/Resources/public/less/style.less' filter='less'
+    '@SurfnetStepupRaRaBundle/Resources/public/less/style.less' filter='less'
     %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
     {% endstylesheets %}
@@ -18,7 +21,10 @@
     {% endblock header %}
 
         {% block page_header %}
-            {#<div class="page-header"></div>#}
+            <div class="page-header clearfix">
+                <img src="/images/surfnet.jpg" class="pull-right" alt="SURFnet">
+                <h1>{{ 'app.name'|trans }}</h1>
+            </div>
         {% endblock page_header %}
 
         {% block flashes %}
@@ -48,11 +54,11 @@
         {% endblock footer %}
 
 {% block foot_script %}
-    {% javascripts
-    '@SurfnetStepupRaBundle/Resources/public/js/jquery-1.11.1.min.js'
-    %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {#{% javascripts#}
+    {#'@SurfnetStepupRaRaBundle/Resources/public/js/jquery-1.11.1.min.js'#}
+    {#%}#}
+    {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
+    {#{% endjavascripts %}#}
 {% endblock foot_script %}
 {% block foot_script_additional %}
 {% endblock foot_script_additional %}

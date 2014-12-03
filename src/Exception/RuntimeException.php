@@ -16,10 +16,10 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRaBundle;
+namespace Surfnet\StepupRa\RaBundle\Exception;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use RuntimeException as CoreRuntimeException;
 
-class SurfnetStepupRaBundle extends Bundle
+class RuntimeException extends CoreRuntimeException
 {
 }
