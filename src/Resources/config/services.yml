@@ -34,6 +34,13 @@ services:
             - @surfnet_stepup_middleware_client.service.command
             - @logger
 
+    ra.service.second_factor:
+        class: Surfnet\StepupRa\RaBundle\Service\SecondFactorService
+        arguments:
+            - @surfnet_stepup_middleware_client.identity.service.second_factor
+            - @surfnet_stepup_middleware_client.service.command
+            - @logger
+
     ra.security.authentication.provider:
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider
         arguments:

@@ -20,7 +20,9 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
+use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -37,9 +39,25 @@ class VettingController extends Controller
         $form = $this->createForm('ra_start_vetting_procedure', $command)->handleRequest($request);
 
         if ($form->isValid()) {
+            $secondFactor = $this->getSecondFactorService()
+                ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode);
 
+            if ($secondFactor !== null) {
+                // TODO redirect to second factor type-specific controller
+                return ['form' => $form->createView()];
+            }
+
+            $form->addError(new FormError('ra.form.start_vetting_procedure.unknown_registration_code'));
         }
 
         return ['form' => $form->createView()];
+    }
+
+    /**
+     * @return SecondFactorService
+     */
+    private function getSecondFactorService()
+    {
+        return $this->get('ra.service.second_factor');
     }
 }
