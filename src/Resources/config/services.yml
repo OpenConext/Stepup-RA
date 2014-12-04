@@ -3,6 +3,10 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\AnchorType
         tags: [{ name: form.type, alias: anchor }]
 
+    ra.form.type.start_vetting_procedure:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\StartVettingProcedureType
+        tags: [{ name: form.type, alias: ra_start_vetting_procedure }]
+
     ra.service.yubikey:
         public: false
         class: Surfnet\StepupRa\RaBundle\Service\YubikeyService

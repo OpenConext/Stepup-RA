@@ -19,15 +19,27 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-class WelcomeController extends Controller
+class VettingController extends Controller
 {
     /**
      * @Template
+     * @param Request $request
+     * @return mixed
      */
-    public function welcomeAction()
+    public function startProcedureAction(Request $request)
     {
-        return [];
+        $command = new StartVettingProcedureCommand();
+        $form = $this->createForm('ra_start_vetting_procedure', $command)->handleRequest($request);
+
+        if ($form->isValid()) {
+
+        }
+
+        return ['form' => $form->createView()];
     }
 }

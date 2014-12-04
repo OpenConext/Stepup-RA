@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block page_title %}{{ 'ra.vetting.start_procedure.title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="cols-sm-12">
+            {{ form(form) }}
+        </div>
+    </div>
+{% endblock %}
