@@ -20,7 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Command;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class VerifyYubikeyOtpCommand
+class VerifyYubikeyPublicIdCommand
 {
     /**
      * @Assert\NotBlank(message="ra.verify_yubikey_command.otp.may_not_be_empty")
@@ -29,6 +29,13 @@ class VerifyYubikeyOtpCommand
      * @var string
      */
     public $otp;
+
+    /**
+     * The expected Yubikey public ID.
+     *
+     * @var string
+     */
+    public $publicId;
 
     /**
      * The requesting identity's ID (not name ID).

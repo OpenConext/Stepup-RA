@@ -12,3 +12,10 @@ vetting_search:
     path:     /
     methods: [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:startProcedure }
+
+vetting_yubikey_verify:
+    path: /vetting-procedure/{procedureUuid}/verify-yubikey
+    methods: [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Yubikey:verify }
+    requirements:
+        procedureUuid: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'

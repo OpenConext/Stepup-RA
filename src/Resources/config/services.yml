@@ -1,4 +1,5 @@
 services:
+    # Forms
     ra.form.type.anchor:
         class: Surfnet\StepupRa\RaBundle\Form\Type\AnchorType
         tags: [{ name: form.type, alias: anchor }]
@@ -7,11 +8,23 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\StartVettingProcedureType
         tags: [{ name: form.type, alias: ra_start_vetting_procedure }]
 
+    ra.form.type.prove_yubikey_possession:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\VerifyYubikeyPublicIdType
+        tags: [{ name: form.type, alias: ra_verify_yubikey_public_id }]
+
+    # Services
     ra.service.yubikey:
         public: false
         class: Surfnet\StepupRa\RaBundle\Service\YubikeyService
         arguments:
             - @ra.guzzle.gateway_api
+            - @logger
+
+    ra.service.yubikey_second_factor:
+        public: true
+        class: Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorService
+        arguments:
+            - @ra.service.yubikey
             - @logger
 
     ra.service.sms:
@@ -41,6 +54,14 @@ services:
             - @surfnet_stepup_middleware_client.service.command
             - @logger
 
+    # Repositories
+    ra.repository.vetting_procedure:
+        class: Surfnet\StepupRa\RaBundle\Repository\SessionVettingProcedureRepository
+        arguments:
+            - @session
+            - 'Surfnet/StepupRa/RaBundle/Repository/VettingProcedureRepository'
+
+    # SAML login
     ra.security.authentication.provider:
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider
         arguments:
@@ -71,3 +92,10 @@ services:
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\SessionHandler
         arguments:
             - @session
+
+    # Param converters
+    ra.request.vetting_procedure_param_converter:
+        class: Surfnet\StepupRa\RaBundle\Request\VettingProcedureParamConverter
+        arguments: [ @ra.repository.vetting_procedure ]
+        tags:
+            - { name: request.param_converter, priority: -10, converter: ra.vetting_procedure }

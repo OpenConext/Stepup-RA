@@ -22,33 +22,32 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class StartVettingProcedureType extends AbstractType
+class VerifyYubikeyPublicIdType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('registrationCode', 'text', [
+        $builder->add('otp', 'text', [
             'label' => /** @Ignore */ false,
             'required' => true,
             'widget_addon_prepend' => [
-                'icon' => 'search'
+                'icon' => 'key'
             ],
-            'attr' => array(
+            'attr' => [
                 'autofocus' => true,
                 'autocomplete' => 'off',
-                'placeholder' => 'Enter registration code here...',
-            )
+            ]
         ]);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand',
+            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand',
         ]);
     }
 
     public function getName()
     {
-        return 'ra_start_vetting_procedure';
+        return 'ra_verify_yubikey_public_id';
     }
 }

@@ -20,6 +20,9 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
+use Surfnet\StepupRa\RaBundle\Dto\VettingProcedure;
+use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
+use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -31,7 +34,7 @@ class VettingController extends Controller
     /**
      * @Template
      * @param Request $request
-     * @return mixed
+     * @return array|Response
      */
     public function startProcedureAction(Request $request)
     {
@@ -42,12 +45,33 @@ class VettingController extends Controller
             $secondFactor = $this->getSecondFactorService()
                 ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode);
 
-            if ($secondFactor !== null) {
-                // TODO redirect to second factor type-specific controller
+            if ($secondFactor === null) {
+                $form->addError(new FormError('ra.form.start_vetting_procedure.unknown_registration_code'));
+
                 return ['form' => $form->createView()];
             }
 
-            $form->addError(new FormError('ra.form.start_vetting_procedure.unknown_registration_code'));
+            $procedure = VettingProcedure::start();
+            $procedure->identityId = $secondFactor->identityId;
+            $procedure->institution = $secondFactor->institution;
+            $procedure->commonName = $secondFactor->commonName;
+            $procedure->secondFactorType = $secondFactor->type;
+            $procedure->expectedSecondFactorIdentifier = $secondFactor->secondFactorIdentifier;
+            $procedure->registrationCode = $command->registrationCode;
+
+            $this->getVettingProcedureRepository()->store($procedure);
+
+            switch ($procedure->secondFactorType) {
+                case 'yubikey':
+                    return $this->redirectToRoute(
+                        'vetting_yubikey_verify',
+                        ['procedureUuid' => $procedure->uuid]
+                    );
+            }
+
+            throw new RuntimeException(
+                sprintf("Unexpected second factor type '%s'", $procedure->secondFactorType)
+            );
         }
 
         return ['form' => $form->createView()];
@@ -59,5 +83,13 @@ class VettingController extends Controller
     private function getSecondFactorService()
     {
         return $this->get('ra.service.second_factor');
+    }
+
+    /**
+     * @return VettingProcedureRepository
+     */
+    private function getVettingProcedureRepository()
+    {
+        return $this->get('ra.repository.vetting_procedure');
     }
 }
