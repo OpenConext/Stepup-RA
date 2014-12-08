@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
+use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
 use Surfnet\StepupRa\RaBundle\VettingProcedure;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
@@ -28,6 +29,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class VettingController extends Controller
 {
@@ -69,6 +71,34 @@ class VettingController extends Controller
         }
 
         return ['form' => $form->createView()];
+    }
+
+    /**
+     * @Template
+     * @param Request $request
+     * @param VettingProcedure $procedure
+     * @return array|Response
+     */
+    public function verifyIdentityAction(Request $request, VettingProcedure $procedure)
+    {
+        if (!$procedure->isReadyForIdentityVerification()) {
+            # RA may not yet verify identity. Starting a login procedure doesn't help, so no AccessDeniedException.
+            throw new AccessDeniedHttpException("Second factor must be verified before verifying a registrant's identity");
+        }
+
+        $command = new VerifyIdentityCommand();
+        $command->commonName = $procedure->getSecondFactor()->commonName;
+
+        $form = $this->createForm('ra_verify_identity', $command)->handleRequest($request);
+
+        if ($form->isValid()) {
+            $procedure->verifyIdentity($command->documentNumber);
+        }
+
+        return [
+            'commonName' => $procedure->getSecondFactor()->commonName,
+            'form' => $form->createView()
+        ];
     }
 
     /**

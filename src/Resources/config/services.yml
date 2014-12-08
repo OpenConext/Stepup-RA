@@ -12,6 +12,10 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\VerifyYubikeyPublicIdType
         tags: [{ name: form.type, alias: ra_verify_yubikey_public_id }]
 
+    ra.form.type.verify_identity:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\VerifyIdentityType
+        tags: [{ name: form.type, alias: ra_verify_identity }]
+
     # Services
     ra.service.yubikey:
         public: false

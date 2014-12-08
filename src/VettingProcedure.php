@@ -21,6 +21,7 @@ namespace Surfnet\StepupRa\RaBundle;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 use Surfnet\StepupMiddlewareClientBundle\Uuid\Uuid;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
+use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
 /**
  * @SuppressWarnings(PHPMD.UnusedPrivateFields)
@@ -46,6 +47,11 @@ class VettingProcedure
      * @var string|null
      */
     private $inputSecondFactorIdentifier;
+
+    /**
+     * @var string|null
+     */
+    private $documentNumber;
 
     /**
      * @var boolean|null
@@ -81,6 +87,20 @@ class VettingProcedure
         }
 
         $this->inputSecondFactorIdentifier = $secondFactorIdentifier;
+    }
+
+    public function verifyIdentity($documentNumber)
+    {
+        if (!is_string($documentNumber)) {
+            throw InvalidArgumentException::invalidType('string', 'documentNumber', $documentNumber);
+        }
+
+        if (empty($documentNumber)) {
+            throw new InvalidArgumentException('Document number may not be empty.');
+        }
+
+        $this->documentNumber = $documentNumber;
+        $this->identityVerified = true;
     }
 
     /**

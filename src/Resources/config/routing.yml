@@ -19,3 +19,10 @@ vetting_yubikey_verify:
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Yubikey:verify }
     requirements:
         procedureUuid: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+
+vetting_verify_identity:
+    path:     /vetting-procedure/{procedureUuid}/verify-identity
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:verifyIdentity }
+    requirements:
+        procedureUuid: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
