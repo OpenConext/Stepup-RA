@@ -18,7 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Repository;
 
-use Surfnet\StepupRa\RaBundle\Dto\VettingProcedure;
+use Surfnet\StepupRa\RaBundle\VettingProcedure;
 
 interface VettingProcedureRepository
 {

@@ -20,7 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
-use Surfnet\StepupRa\RaBundle\Dto\VettingProcedure;
+use Surfnet\StepupRa\RaBundle\VettingProcedure;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
@@ -51,26 +51,20 @@ class VettingController extends Controller
                 return ['form' => $form->createView()];
             }
 
-            $procedure = VettingProcedure::start();
-            $procedure->identityId = $secondFactor->identityId;
-            $procedure->institution = $secondFactor->institution;
-            $procedure->commonName = $secondFactor->commonName;
-            $procedure->secondFactorType = $secondFactor->type;
-            $procedure->expectedSecondFactorIdentifier = $secondFactor->secondFactorIdentifier;
-            $procedure->registrationCode = $command->registrationCode;
+            $procedure = VettingProcedure::start($command->registrationCode, $secondFactor);
 
             $this->getVettingProcedureRepository()->store($procedure);
 
-            switch ($procedure->secondFactorType) {
+            switch ($procedure->getSecondFactor()->type) {
                 case 'yubikey':
                     return $this->redirectToRoute(
                         'vetting_yubikey_verify',
-                        ['procedureUuid' => $procedure->uuid]
+                        ['procedureUuid' => $procedure->getUuid()]
                     );
             }
 
             throw new RuntimeException(
-                sprintf("Unexpected second factor type '%s'", $procedure->secondFactorType)
+                sprintf("Unexpected second factor type '%s'", $procedure->getSecondFactor()->type)
             );
         }
 

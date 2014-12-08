@@ -20,7 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
-use Surfnet\StepupRa\RaBundle\Dto\VettingProcedure;
+use Surfnet\StepupRa\RaBundle\VettingProcedure;
 use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -39,9 +39,9 @@ class YubikeyController extends Controller
     public function verifyAction(Request $request, VettingProcedure $procedure)
     {
         $command = new VerifyYubikeyPublicIdCommand();
-        $command->publicId = $procedure->expectedSecondFactorIdentifier;
-        $command->identityId = $procedure->identityId;
-        $command->institution = $procedure->institution;
+        $command->publicId = $procedure->getSecondFactor()->secondFactorIdentifier;
+        $command->identityId = $procedure->getSecondFactor()->identityId;
+        $command->institution = $procedure->getSecondFactor()->institution;
 
         $form = $this->createForm('ra_verify_yubikey_public_id', $command)->handleRequest($request);
 
@@ -51,7 +51,7 @@ class YubikeyController extends Controller
             $result = $service->verifyYubikeyPublicId($command);
 
             if ($result->didPublicIdMatch()) {
-                $procedure->inputSecondFactorIdentifier = $result->getPublicId();
+                $procedure->verifySecondFactorIdentifier($result->getPublicId());
 
                 $this->getVettingProcedureRepository()->store($procedure);
 

@@ -18,7 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Repository;
 
-use Surfnet\StepupRa\RaBundle\Dto\VettingProcedure;
+use Surfnet\StepupRa\RaBundle\VettingProcedure;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -46,7 +46,7 @@ class SessionVettingProcedureRepository implements VettingProcedureRepository
 
     public function store(VettingProcedure $vettingProcedure)
     {
-        $this->session->set(sprintf('%s:%s', $this->namespace, $vettingProcedure->uuid), $vettingProcedure);
+        $this->session->set(sprintf('%s:%s', $this->namespace, $vettingProcedure->getUuid()), $vettingProcedure);
     }
 
     public function retrieve($uuid)

@@ -53,6 +53,6 @@ class VettingProcedureParamConverter implements ParamConverterInterface
 
     public function supports(ParamConverter $configuration)
     {
-        return $configuration->getClass() === 'Surfnet\StepupRa\RaBundle\Dto\VettingProcedure';
+        return $configuration->getClass() === 'Surfnet\StepupRa\RaBundle\VettingProcedure';
     }
 }
