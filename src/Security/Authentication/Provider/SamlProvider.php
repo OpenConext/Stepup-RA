@@ -20,12 +20,11 @@ namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Provider;
 
 
 use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
-use Surfnet\StepupMiddlewareClientBundle\Uuid\Uuid;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 class SamlProvider implements AuthenticationProviderInterface
 {
@@ -48,7 +47,7 @@ class SamlProvider implements AuthenticationProviderInterface
     }
 
     /**
-     * @param  SamlToken $token
+     * @param SamlToken|TokenInterface $token
      * @return TokenInterface|void
      */
     public function authenticate(TokenInterface $token)
@@ -57,29 +56,36 @@ class SamlProvider implements AuthenticationProviderInterface
 
         $nameId      = $translatedAssertion->getNameID();
         $institution = $translatedAssertion->getAttribute('schacHomeOrganization');
-        $email       = $translatedAssertion->getAttribute('mail');
-        $commonName  = $translatedAssertion->getAttribute('displayName');
 
         $identity = $this->identityService->findByNameIdAndInstitution($nameId, $institution);
 
+        // if no identity can be found, we're done.
         if ($identity === null) {
-            $identity = new Identity();
-            $identity->id           = Uuid::generate();
-            $identity->nameId       = $nameId;
-            $identity->institution  = $institution;
-            $identity->email        = $email;
-            $identity->commonName   = $commonName;
-
-            $this->identityService->createIdentity($identity);
-        } elseif ($identity->email !== $email || $identity->commonName !== $commonName) {
-            $identity->email = $email;
-            $identity->commonName = $commonName;
-
-            $this->identityService->updateIdentity($identity);
+            throw new BadCredentialsException(
+                'Unable to find Identity matching the criteria. Has the identity been registered before?'
+            );
         }
 
-        $authenticatedToken = new SamlToken(['ROLE_USER']);
+        $raCredentials = $this->identityService->getRaCredentials($identity);
 
+        // if no credentials can be found, we're done.
+        if (!$raCredentials) {
+            throw new BadCredentialsException(
+                'The Identity is not registered as (S)RA(A) and therefor does not have access to this application'
+            );
+        }
+
+        // determine the role based on the credentials given
+        if ($raCredentials->isRaa) {
+            $roles = ['ROLE_RAA'];
+        } elseif ($raCredentials->isSraa) {
+            $roles = ['ROLE_SRAA'];
+        } else {
+            $roles = ['ROLE_RA'];
+        }
+
+        // set the token
+        $authenticatedToken = new SamlToken($roles);
         $authenticatedToken->setUser($identity);
 
         return $authenticatedToken;
