@@ -91,6 +91,16 @@ class Configuration implements ConfigurationInterface
                         )
                     ->end()
                 ->end()
+                ->scalarNode('required_loa')
+                    ->info('The required LOA to be able to log in, should match the loa defined at the gateway')
+                    ->isRequired()
+                    ->validate()
+                    ->ifTrue(function ($value) {
+                        return !is_string($value);
+                    })
+                        ->thenInvalid('the required loa must be a string')
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;

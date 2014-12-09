@@ -73,6 +73,7 @@ surfnet_stepup_ra_ra:
         credentials:
             username: %gateway_api_username%
             password: %gateway_api_password%
+    required_loa: %loa_required_for_login%
 
 mopa_bootstrap:
     form:

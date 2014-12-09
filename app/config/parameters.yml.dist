@@ -25,3 +25,4 @@ parameters:
     saml_remote_idp_entity_id:
     saml_remote_idp_sso_url:
     saml_remote_idp_certificate:
+    loa_required_for_login: 'https://gateway.example.tld/authorisation/loa3'

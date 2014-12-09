@@ -52,5 +52,8 @@ class SurfnetStepupRaRaExtension extends Extension
 
         $gatewayGuzzle = $container->getDefinition('ra.guzzle.gateway_api');
         $gatewayGuzzle->replaceArgument(0, $gatewayGuzzleOptions);
+
+        // inject the required loa as parameter into the service container
+        $container->setParameter('surfnet_stepup_ra.security.required_loa', $config['required_loa']);
     }
 }
