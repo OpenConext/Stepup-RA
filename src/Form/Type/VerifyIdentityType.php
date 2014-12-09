@@ -28,6 +28,10 @@ class VerifyIdentityType extends AbstractType
     {
         $builder->add('documentNumber', 'text', [
             'label' => 'ra.form.verify_identity.document_number.label',
+            'attr' => array(
+                'autofocus' => true,
+                'autocomplete' => 'off',
+            )
         ]);
         $builder->add('identityVerified', 'checkbox', [
             'label' => 'ra.form.verify_identity.identity_verified.label',
