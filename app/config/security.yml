@@ -15,6 +15,11 @@ security:
         saml_based:
             saml: true
 
+    role_hierarchy:
+        ROLE_SRAA: ROLE_RAA
+        ROLE_RAA: ROLE_RA
+        ROLE_RA: ROLE_USER
+
     access_control:
         - { path: ^/authentication, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        - { path: ^/, roles: ROLE_USER, requires_channel: https }
+        - { path: ^/, roles: ROLE_RA, requires_channel: https }

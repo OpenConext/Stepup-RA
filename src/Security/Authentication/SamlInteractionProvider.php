@@ -52,18 +52,25 @@ class SamlInteractionProvider
      */
     private $sessionHandler;
 
+    /**
+     * @var string
+     */
+    private $requiredLoa;
+
     public function __construct(
         ServiceProvider $serviceProvider,
         IdentityProvider $identityProvider,
         RedirectBinding $redirectBinding,
         PostBinding $postBinding,
-        SessionHandler $sessionHandler
+        SessionHandler $sessionHandler,
+        $requiredLoa
     ) {
-        $this->serviceProvider = $serviceProvider;
+        $this->serviceProvider  = $serviceProvider;
         $this->identityProvider = $identityProvider;
-        $this->redirectBinding = $redirectBinding;
-        $this->postBinding = $postBinding;
-        $this->sessionHandler = $sessionHandler;
+        $this->redirectBinding  = $redirectBinding;
+        $this->postBinding      = $postBinding;
+        $this->sessionHandler   = $sessionHandler;
+        $this->requiredLoa      = $requiredLoa;
     }
 
     /**
@@ -84,7 +91,8 @@ class SamlInteractionProvider
             $this->identityProvider
         );
 
-        $authnRequest->setAuthenticationContext(['http://gw-dev.stepup.coin.surf.net/assurance/loa2']);
+        // @todo this will be enabled in a later PR, depends on the Gateway
+//        $authnRequest->setAuthenticationContext([$this->requiredLoa]);
 
         $this->sessionHandler->setRequestId($authnRequest->getRequestId());
 

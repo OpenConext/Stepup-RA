@@ -54,6 +54,7 @@ services:
             - @surfnet_saml.http.redirect_binding
             - @surfnet_saml.http.post_binding
             - @ra.security.authentication.session_handler
+            - %surfnet_stepup_ra.security.required_loa%
 
     ra.security.authentication.session_handler:
         public: false
