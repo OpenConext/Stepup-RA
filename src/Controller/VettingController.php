@@ -19,8 +19,10 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
+use Surfnet\StepupRa\RaBundle\Identity\Command\VetSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\VettingProcedure;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
@@ -93,6 +95,25 @@ class VettingController extends Controller
 
         if ($form->isValid()) {
             $procedure->verifyIdentity($command->documentNumber);
+
+            $vetCommand = new VetSecondFactorCommand();
+            $vetCommand->identityId = $procedure->getSecondFactor()->identityId;
+            $vetCommand->registrationCode = $procedure->getRegistrationCode();
+            $vetCommand->secondFactorIdentifier = $procedure->getInputSecondFactorIdentifier();
+            $vetCommand->documentNumber = $procedure->getDocumentNumber();
+            $vetCommand->identityVerified = $procedure->isIdentityVerified();
+
+            /** @var CommandService $service */
+            $service = $this->get('surfnet_stepup_middleware_client.service.command');
+            $result = $service->execute($vetCommand);
+
+            if ($result->isSuccessful()) {
+                $this->get('session')->getFlashBag()->add('success', 'ra.vetting.second_factor_vetted');
+
+                return $this->redirectToRoute('vetting_search');
+            }
+
+            $form->addError(new FormError('ra.verify_identity.second_factor_vetting_failed'));
         }
 
         return [

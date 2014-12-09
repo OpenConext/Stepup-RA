@@ -120,10 +120,42 @@ class VettingProcedure
     }
 
     /**
+     * @return null|string
+     */
+    public function getRegistrationCode()
+    {
+        return $this->registrationCode;
+    }
+
+    /**
      * @return VerifiedSecondFactor
      */
     public function getSecondFactor()
     {
         return $this->secondFactor;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getInputSecondFactorIdentifier()
+    {
+        return $this->inputSecondFactorIdentifier;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getDocumentNumber()
+    {
+        return $this->documentNumber;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function isIdentityVerified()
+    {
+        return $this->identityVerified;
     }
 }

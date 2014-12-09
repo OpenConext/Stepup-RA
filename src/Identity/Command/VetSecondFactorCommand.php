@@ -24,10 +24,20 @@ use Symfony\Component\Validator\Constraints as Assert;
 class VetSecondFactorCommand extends AbstractCommand
 {
     /**
+     * The ID of an existing identity.
+     *
+     * @Assert\NotBlank(message="ra.vet_second_factor.identity_id.must_not_be_blank")
+     * @Assert\Type(type="string", message="ra.vet_second_factor.identity_id.must_be_string")
+     *
+     * @var string
+     */
+    public $identityId;
+
+    /**
      * @Assert\NotBlank(message="ra.vet_second_factor.registration_code.may_not_be_blank")
      * @Assert\Type(type="string", message="ra.vet_second_factor.registration_code.must_be_string")
      *
-     * @var string|null
+     * @var string
      */
     public $registrationCode;
 
@@ -35,23 +45,32 @@ class VetSecondFactorCommand extends AbstractCommand
      * @Assert\NotBlank(message="ra.vet_second_factor.second_factor_identifier.may_not_be_blank")
      * @Assert\Type(type="string", message="ra.vet_second_factor.second_factor_identifier.must_be_string")
      *
-     * @var string|null
+     * @var string
      */
     public $secondFactorIdentifier;
 
     /**
-     * @Assert\NotBlank(message="ra.vet_second_factor.identity_verified.may_not_be_blank")
+     * @Assert\NotBlank(message="ra.vet_second_factor.document_number.may_not_be_blank")
+     * @Assert\Type(type="string", message="ra.vet_second_factor.document_number.must_be_string")
+     *
+     * @var string
+     */
+    public $documentNumber;
+
+    /**
      * @Assert\EqualTo(value=true, message="ra.vet_second_factor.identity_verified.must_be_true")
      *
-     * @var boolean|null
+     * @var boolean
      */
     public $identityVerified;
 
     public function serialise()
     {
         return [
+            'identity_id'              => $this->identityId,
             'registration_code'        => $this->registrationCode,
             'second_factor_identifier' => $this->secondFactorIdentifier,
+            'document_number'          => $this->documentNumber,
             'identity_verified'        => $this->identityVerified,
         ];
     }
