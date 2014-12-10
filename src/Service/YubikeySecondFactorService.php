@@ -63,13 +63,15 @@ class YubikeySecondFactorService
             return new VerificationResult(VerificationResult::RESULT_OTP_VERIFICATION_FAILED, $publicId);
         }
 
-        if ($publicId !== $command->publicId) {
+        if ($publicId !== $command->procedure->getSecondFactor()->secondFactorIdentifier) {
             $this->logger->notice(
                 'Yubikey used by registrant during vetting did not match the one used during registration.'
             );
 
             return new VerificationResult(VerificationResult::RESULT_PUBLIC_ID_DID_NOT_MATCH, $publicId);
         }
+
+        $command->procedure->verifySecondFactorIdentifier($publicId);
 
         $this->logger->info(
             'Yubikey used by registrant during vetting matches the one used during registration.'

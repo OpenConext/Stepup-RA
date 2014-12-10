@@ -39,9 +39,9 @@ class YubikeyController extends Controller
     public function verifyAction(Request $request, VettingProcedure $procedure)
     {
         $command = new VerifyYubikeyPublicIdCommand();
-        $command->publicId = $procedure->getSecondFactor()->secondFactorIdentifier;
         $command->identityId = $procedure->getSecondFactor()->identityId;
         $command->institution = $procedure->getSecondFactor()->institution;
+        $command->procedure = $procedure;
 
         $form = $this->createForm('ra_verify_yubikey_public_id', $command)->handleRequest($request);
 
@@ -51,11 +51,8 @@ class YubikeyController extends Controller
             $result = $service->verifyYubikeyPublicId($command);
 
             if ($result->didPublicIdMatch()) {
-                $procedure->verifySecondFactorIdentifier($result->getPublicId());
-
                 $this->getVettingProcedureRepository()->store($procedure);
 
-                // TODO: Goto verify identity
                 return $this->redirectToRoute('ra_vetting_verify_identity', ['procedureUuid' => $procedure->getUuid()]);
             } elseif ($result->didOtpVerificationFail()) {
                 $form->get('otp')->addError(new FormError('ra.verify_yubikey_command.otp.verification_error'));

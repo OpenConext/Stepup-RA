@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Command;
 
+use Surfnet\StepupRa\RaBundle\VettingProcedure;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class VerifyYubikeyPublicIdCommand
@@ -29,13 +30,6 @@ class VerifyYubikeyPublicIdCommand
      * @var string
      */
     public $otp;
-
-    /**
-     * The expected Yubikey public ID.
-     *
-     * @var string
-     */
-    public $publicId;
 
     /**
      * The requesting identity's ID (not name ID).
@@ -50,4 +44,9 @@ class VerifyYubikeyPublicIdCommand
      * @var string
      */
     public $institution;
+
+    /**
+     * @var VettingProcedure
+     */
+    public $procedure;
 }
