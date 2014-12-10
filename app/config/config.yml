@@ -69,6 +69,14 @@ monolog:
             publisher: { hostname: %graylog_hostname% }
             formatter: surfnet_stepup.monolog.full_message_exception_gelf_message_formatter
 
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
 nelmio_security:
     # Content Security Policy
     csp:
