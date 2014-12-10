@@ -56,7 +56,7 @@ class YubikeyController extends Controller
                 $this->getVettingProcedureRepository()->store($procedure);
 
                 // TODO: Goto verify identity
-                return $this->redirectToRoute('vetting_verify_identity', ['procedureUuid' => $procedure->getUuid()]);
+                return $this->redirectToRoute('ra_vetting_verify_identity', ['procedureUuid' => $procedure->getUuid()]);
             } elseif ($result->didOtpVerificationFail()) {
                 $form->get('otp')->addError(new FormError('ra.verify_yubikey_command.otp.verification_error'));
             } else {

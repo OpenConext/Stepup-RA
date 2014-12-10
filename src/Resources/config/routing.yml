@@ -8,19 +8,19 @@ ra_serviceprovider_consume_assertion:
     methods: [POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Saml:consumeAssertion }
 
-vetting_search:
+ra_vetting_search:
     path:     /
     methods: [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:startProcedure }
 
-vetting_yubikey_verify:
+ra_vetting_yubikey_verify:
     path: /vetting-procedure/{procedureUuid}/verify-yubikey
     methods: [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Yubikey:verify }
     requirements:
         procedureUuid: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
 
-vetting_verify_identity:
+ra_vetting_verify_identity:
     path:     /vetting-procedure/{procedureUuid}/verify-identity
     methods:  [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:verifyIdentity }

@@ -62,7 +62,7 @@ class VettingController extends Controller
             switch ($procedure->getSecondFactor()->type) {
                 case 'yubikey':
                     return $this->redirectToRoute(
-                        'vetting_yubikey_verify',
+                        'ra_vetting_yubikey_verify',
                         ['procedureUuid' => $procedure->getUuid()]
                     );
             }
@@ -110,7 +110,7 @@ class VettingController extends Controller
             if ($result->isSuccessful()) {
                 $this->get('session')->getFlashBag()->add('success', 'ra.vetting.second_factor_vetted');
 
-                return $this->redirectToRoute('vetting_search');
+                return $this->redirectToRoute('ra_vetting_search');
             }
 
             $form->addError(new FormError('ra.verify_identity.second_factor_vetting_failed'));
