@@ -25,6 +25,14 @@ services:
         tags: [{ name: form.type, alias: ra_verify_phone_number }]
 
     # Services
+    ra.service.vetting:
+        class: Surfnet\StepupRa\RaBundle\Service\VettingService
+        arguments:
+            - @ra.service.sms_second_factor
+            - @ra.service.yubikey_second_factor
+            - @surfnet_stepup_middleware_client.service.command
+            - @ra.repository.vetting_procedure
+
     ra.service.yubikey:
         public: false
         class: Surfnet\StepupRa\RaBundle\Service\YubikeyService
@@ -119,10 +127,3 @@ services:
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\SessionHandler
         arguments:
             - @session
-
-    # Param converters
-    ra.request.vetting_procedure_param_converter:
-        class: Surfnet\StepupRa\RaBundle\Request\VettingProcedureParamConverter
-        arguments: [ @ra.repository.vetting_procedure ]
-        tags:
-            - { name: request.param_converter, priority: -10, converter: ra.vetting_procedure }

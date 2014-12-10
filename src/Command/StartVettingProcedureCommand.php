@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Command;
 
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class StartVettingProcedureCommand
@@ -29,4 +30,9 @@ class StartVettingProcedureCommand
      * @var string
      */
     public $registrationCode;
+
+    /**
+     * @var VerifiedSecondFactor
+     */
+    public $secondFactor;
 }

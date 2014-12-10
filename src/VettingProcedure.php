@@ -31,7 +31,7 @@ class VettingProcedure
     /**
      * @var string
      */
-    private $uuid;
+    private $id;
 
     /**
      * @var string|null
@@ -59,14 +59,28 @@ class VettingProcedure
     private $identityVerified;
 
     /**
+     * @var boolean|null
+     */
+    private $vetted;
+
+    /**
+     * @param string $id
      * @param string $registrationCode
      * @param VerifiedSecondFactor $secondFactor
      * @return self
      */
-    public static function start($registrationCode, VerifiedSecondFactor $secondFactor)
+    public static function start($id, $registrationCode, VerifiedSecondFactor $secondFactor)
     {
+        if (!is_string($id)) {
+            throw InvalidArgumentException::invalidType('string', 'id', $id);
+        }
+
+        if (!is_string($registrationCode)) {
+            throw InvalidArgumentException::invalidType('string', 'registrationCode', $registrationCode);
+        }
+
         $procedure = new self();
-        $procedure->uuid = Uuid::generate();
+        $procedure->id = $id;
         $procedure->registrationCode = $registrationCode;
         $procedure->secondFactor = $secondFactor;
 
@@ -79,9 +93,18 @@ class VettingProcedure
 
     /**
      * @param string $secondFactorIdentifier
+     * @return void
+     * @throws DomainException
      */
     public function verifySecondFactorIdentifier($secondFactorIdentifier)
     {
+        if (!$this->isReadyForSecondFactorToBeVerified()) {
+            throw new DomainException(
+                'Second factor is not yet ready for verification of second factor, ' .
+                'it has already been verified or the registration code is unknown.'
+            );
+        }
+
         if ($secondFactorIdentifier !== $this->secondFactor->secondFactorIdentifier) {
             throw new DomainException("Input second factor identifier doesn't match expected second factor identifier");
         }
@@ -89,8 +112,21 @@ class VettingProcedure
         $this->inputSecondFactorIdentifier = $secondFactorIdentifier;
     }
 
-    public function verifyIdentity($documentNumber)
+    /**
+     * @param string $documentNumber
+     * @param bool $identityVerified
+     * @return void
+     * @throws DomainException
+     */
+    public function verifyIdentity($documentNumber, $identityVerified)
     {
+        if (!$this->isReadyForIdentityVerification()) {
+            throw new DomainException(
+                'Second factor is not yet ready for verification of its Identity; ' .
+                'verify the registrant has the same second factor as used during the registration process.'
+            );
+        }
+
         if (!is_string($documentNumber)) {
             throw InvalidArgumentException::invalidType('string', 'documentNumber', $documentNumber);
         }
@@ -99,32 +135,37 @@ class VettingProcedure
             throw new InvalidArgumentException('Document number may not be empty.');
         }
 
+        if ($identityVerified !== true) {
+            throw new DomainException("The registrant's identity must have been confirmed by the RA.");
+        }
+
         $this->documentNumber = $documentNumber;
         $this->identityVerified = true;
     }
 
     /**
-     * @return bool
+     * @return void
+     * @throws DomainException
      */
-    public function isReadyForIdentityVerification()
+    public function vet()
     {
-        return $this->inputSecondFactorIdentifier === $this->secondFactor->secondFactorIdentifier;
+        if (!$this->isReadyForVetting()) {
+            throw new DomainException(
+                'Second factor is not yet ready for verification of its Identity; ' .
+                'verify the registrant has the same second factor as used during the registration process, '.
+                "and verify the registrant's identity."
+            );
+        }
+
+        $this->vetted = true;
     }
 
     /**
      * @return string
      */
-    public function getUuid()
+    public function getId()
     {
-        return $this->uuid;
-    }
-
-    /**
-     * @return null|string
-     */
-    public function getRegistrationCode()
-    {
-        return $this->registrationCode;
+        return $this->id;
     }
 
     /**
@@ -133,6 +174,14 @@ class VettingProcedure
     public function getSecondFactor()
     {
         return $this->secondFactor;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getRegistrationCode()
+    {
+        return $this->registrationCode;
     }
 
     /**
@@ -157,5 +206,33 @@ class VettingProcedure
     public function isIdentityVerified()
     {
         return $this->identityVerified;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isReadyForSecondFactorToBeVerified()
+    {
+        return !empty($this->registrationCode);
+    }
+
+    /**
+     * @return bool
+     */
+    private function isReadyForIdentityVerification()
+    {
+        return $this->inputSecondFactorIdentifier === $this->secondFactor->secondFactorIdentifier
+            && !empty($this->registrationCode);
+    }
+
+    /**
+     * @return bool
+     */
+    private function isReadyForVetting()
+    {
+        return $this->inputSecondFactorIdentifier === $this->secondFactor->secondFactorIdentifier
+            && !empty($this->registrationCode)
+            && !empty($this->documentNumber)
+            && $this->identityVerified === true;
     }
 }

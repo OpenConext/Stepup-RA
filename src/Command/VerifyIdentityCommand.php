@@ -23,11 +23,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class VerifyIdentityCommand
 {
     /**
-     * @var string
-     */
-    public $commonName;
-
-    /**
      * @Assert\NotBlank(message="ra.verify_identity_command.document_number.may_not_be_empty")
      * @Assert\Type(type="string", message="ra.verify_identity_command.document_number.must_be_string")
      *

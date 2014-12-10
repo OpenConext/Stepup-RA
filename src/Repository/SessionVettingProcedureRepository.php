@@ -46,15 +46,28 @@ class SessionVettingProcedureRepository implements VettingProcedureRepository
 
     public function store(VettingProcedure $vettingProcedure)
     {
-        $this->session->set(sprintf('%s:%s', $this->namespace, $vettingProcedure->getUuid()), $vettingProcedure);
+        $this->session->set(sprintf('%s:%s', $this->namespace, $vettingProcedure->getId()), $vettingProcedure);
     }
 
-    public function retrieve($uuid)
+    public function retrieve($id)
     {
-        if (!is_string($uuid)) {
-            throw InvalidArgumentException::invalidType('string', 'uuid', $uuid);
+        if (!is_string($id)) {
+            throw InvalidArgumentException::invalidType('string', 'uuid', $id);
         }
 
-        return $this->session->get(sprintf('%s:%s', $this->namespace, $uuid));
+        return $this->session->get(sprintf('%s:%s', $this->namespace, $id));
+    }
+
+    /**
+     * @param string $id
+     * @return void
+     */
+    public function remove($id)
+    {
+        if (!is_string($id)) {
+            throw InvalidArgumentException::invalidType('string', 'uuid', $id);
+        }
+
+        return $this->session->remove(sprintf('%s:%s', $this->namespace, $id));
     }
 }

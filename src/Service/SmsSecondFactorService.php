@@ -19,15 +19,11 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
-use Surfnet\StepupMiddlewareClientBundle\Uuid\Uuid;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyPhoneNumberCommand;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
-use Surfnet\StepupRa\RaBundle\Identity\Command\ProvePhonePossessionCommand;
-use Surfnet\StepupRa\RaBundle\Identity\Command\VerifyEmailCommand;
 use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\ChallengeStore;
-use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\ProofOfPossessionResult;
 use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SendChallengeResult;
 use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\VerificationResult;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -99,7 +95,7 @@ class SmsSecondFactorService
      */
     public function sendChallenge(SendSmsChallengeCommand $command)
     {
-        if ($command->recipient !== $command->procedure->getSecondFactor()->secondFactorIdentifier) {
+        if ($command->phoneNumber !== $command->expectedPhoneNumber) {
             return SendChallengeResult::RESULT_PHONE_NUMBER_DID_NOT_MATCH;
         }
 
@@ -108,7 +104,7 @@ class SmsSecondFactorService
         $body = $this->translator->trans('ra.vetting.sms.challenge_body', ['%challenge%' => $challenge]);
 
         $smsCommand = new SendSmsCommand();
-        $smsCommand->recipient = $command->recipient;
+        $smsCommand->recipient = $command->phoneNumber;
         $smsCommand->originator = $this->originator;
         $smsCommand->body = $body;
         $smsCommand->identity = $command->identity;
@@ -125,16 +121,12 @@ class SmsSecondFactorService
      */
     public function verifyPossession(VerifyPhoneNumberCommand $command)
     {
-        if ($command->phoneNumber !== $command->procedure->getSecondFactor()->secondFactorIdentifier) {
+        if ($command->phoneNumber !== $command->expectedPhoneNumber) {
             return VerificationResult::RESULT_PHONE_NUMBER_DID_NOT_MATCH;
         }
 
-        if (!$this->challengeStore->verifyChallenge($command->challenge)) {
-            return VerificationResult::RESULT_CHALLENGE_MISMATCH;
-        }
-
-        $command->procedure->verifySecondFactorIdentifier($command->phoneNumber);
-
-        return VerificationResult::RESULT_SUCCESS;
+        return $this->challengeStore->verifyChallenge($command->challenge)
+            ? VerificationResult::RESULT_SUCCESS
+            : VerificationResult::RESULT_CHALLENGE_MISMATCH;
     }
 }

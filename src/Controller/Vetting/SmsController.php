@@ -21,13 +21,9 @@ namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyPhoneNumberCommand;
-use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SendChallengeResult;
 use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\VerificationResult;
-use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactorService;
-use Surfnet\StepupRa\RaBundle\VettingProcedure;
-use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
-use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorService;
+use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,31 +34,25 @@ class SmsController extends Controller
     /**
      * @Template
      * @param Request $request
-     * @param VettingProcedure $procedure
+     * @param string $procedureId
      * @return array|Response
      */
-    public function sendChallengeAction(Request $request, VettingProcedure $procedure)
+    public function sendChallengeAction(Request $request, $procedureId)
     {
         $command = new SendSmsChallengeCommand();
-        $command->identity = $procedure->getSecondFactor()->identityId;
-        $command->institution = $procedure->getSecondFactor()->institution;
-        $command->procedure = $procedure;
-
         $form = $this->createForm('ra_send_sms_challenge', $command)->handleRequest($request);
 
         if (!$form->isValid()) {
             return ['form' => $form->createView()];
         }
 
-        /** @var SmsSecondFactorService $service */
-        $service = $this->get('ra.service.sms_second_factor');
-        $result = $service->sendChallenge($command);
+        $result = $this->getVettingService()->sendSmsChallenge($procedureId, $command);
 
         switch ($result) {
             case SendChallengeResult::RESULT_CHALLENGE_SENT:
                 return $this->redirectToRoute(
                     'ra_vetting_sms_prove_possession',
-                    ['procedureUuid' => $procedure->getUuid(), 'phoneNumber' => $command->recipient]
+                    ['procedureId' => $procedureId, 'phoneNumber' => $command->phoneNumber]
                 );
             case SendChallengeResult::RESULT_PHONE_NUMBER_DID_NOT_MATCH:
                 $form->addError(new FormError('ra.sms_send_challenge.phone_number_mismatch'));
@@ -80,35 +70,30 @@ class SmsController extends Controller
     /**
      * @Template
      * @param Request $request
-     * @param VettingProcedure $procedure
+     * @param string $procedureId
      * @param string $phoneNumber
      * @return array|Response
      */
-    public function provePossessionAction(Request $request, VettingProcedure $procedure, $phoneNumber)
+    public function provePossessionAction(Request $request, $procedureId, $phoneNumber)
     {
         $command = new VerifyPhoneNumberCommand();
         $command->phoneNumber = $phoneNumber;
-        $command->procedure = $procedure;
 
         $form = $this
-            ->createForm('ra_verify_phone_number', $command, ['procedureUuid' => $procedure->getUuid()])
+            ->createForm('ra_verify_phone_number', $command, ['procedureId' => $procedureId])
             ->handleRequest($request);
 
         if (!$form->isValid()) {
             return ['form' => $form->createView()];
         }
 
-        /** @var SmsSecondFactorService $service */
-        $service = $this->get('ra.service.sms_second_factor');
-        $result = $service->verifyPossession($command);
+        $result = $this->getVettingService()->verifyPhoneNumber($procedureId, $command);
 
         switch ($result) {
             case VerificationResult::RESULT_SUCCESS:
-                $this->getVettingProcedureRepository()->store($procedure);
-
                 return $this->redirectToRoute(
                     'ra_vetting_verify_identity',
-                    ['procedureUuid' => $procedure->getUuid()]
+                    ['procedureId' => $procedureId]
                 );
             case VerificationResult::RESULT_CHALLENGE_MISMATCH:
                 $form->addError(new FormError('ra.prove_phone_possession.proof_of_possession_failed'));
@@ -124,10 +109,10 @@ class SmsController extends Controller
     }
 
     /**
-     * @return VettingProcedureRepository
+     * @return VettingService
      */
-    private function getVettingProcedureRepository()
+    private function getVettingService()
     {
-        return $this->get('ra.repository.vetting_procedure');
+        return $this->get('ra.service.vetting');
     }
 }

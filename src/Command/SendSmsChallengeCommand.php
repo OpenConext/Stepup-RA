@@ -24,35 +24,35 @@ use Symfony\Component\Validator\Constraints as Assert;
 class SendSmsChallengeCommand
 {
     /**
-     * @Assert\NotBlank(message="ra.send_sms_challenge_command.recipient.may_not_be_empty")
-     * @Assert\Type(type="string", message="ra.send_sms_challenge_command.recipient.must_be_string")
+     * @Assert\NotBlank(message="ra.send_sms_challenge_command.phone_number.may_not_be_empty")
+     * @Assert\Type(type="string", message="ra.send_sms_challenge_command.phone_number.must_be_string")
      * @Assert\Regex(
      *     pattern="~^\d+$~",
-     *     message="ra.send_sms_challenge_command.recipient.must_be_full_number_with_country_code_no_plus"
+     *     message="ra.send_sms_challenge_command.phone_number.must_be_full_number_with_country_code_no_plus"
      * )
      *
      * The recipient as a string of digits (31612345678 for +31 6 1234 5678).
      *
      * @var string
      */
-    public $recipient;
+    public $phoneNumber;
+
+    /**
+     * @var string Filled in by the VettingService
+     */
+    public $expectedPhoneNumber;
 
     /**
      * The requesting identity's ID (not name ID).
      *
-     * @var string
+     * @var string Filled in by the VettingService
      */
     public $identity;
 
     /**
      * The requesting identity's institution.
      *
-     * @var string
+     * @var string Filled in by the VettingService
      */
     public $institution;
-
-    /**
-     * @var VettingProcedure
-     */
-    public $procedure;
 }

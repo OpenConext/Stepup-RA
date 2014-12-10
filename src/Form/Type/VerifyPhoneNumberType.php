@@ -43,7 +43,7 @@ class VerifyPhoneNumberType extends AbstractType
             'label' => 'ra.form.ra_verify_phone_number.button.resend_challenge',
             'attr' => [ 'class' => 'btn btn-default' ],
             'route' => 'ra_vetting_sms_send_challenge',
-            'route_parameters' => ['procedureUuid' => $options['procedureUuid']],
+            'route_parameters' => ['procedureId' => $options['procedureId']],
         ]);
     }
 
@@ -51,13 +51,13 @@ class VerifyPhoneNumberType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => 'Surfnet\StepupRa\RaBundle\Command\VerifyPhoneNumberCommand',
-            'procedureUuid' => null,
+            'procedureId' => null,
         ]);
 
-        $resolver->setRequired(['procedureUuid']);
+        $resolver->setRequired(['procedureId']);
 
         $resolver->setAllowedTypes([
-            'procedureUuid' => 'string',
+            'procedureId' => 'string',
         ]);
     }
 

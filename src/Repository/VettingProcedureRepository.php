@@ -28,8 +28,14 @@ interface VettingProcedureRepository
     public function store(VettingProcedure $vettingProcedure);
 
     /**
-     * @param string $uuid
+     * @param string $id
      * @return VettingProcedure|null
      */
-    public function retrieve($uuid);
+    public function retrieve($id);
+
+    /**
+     * @param string $id
+     * @return void
+     */
+    public function remove($id);
 }

@@ -26,7 +26,7 @@ class SendSmsChallengeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('recipient', 'text', [
+        $builder->add('phoneNumber', 'text', [
             'label' => /** @Ignore */ false,
             'required' => true,
             'widget_addon_prepend' => [

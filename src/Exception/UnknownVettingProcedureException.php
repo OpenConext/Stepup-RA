@@ -16,28 +16,8 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Command;
+namespace Surfnet\StepupRa\RaBundle\Exception;
 
-use Surfnet\StepupRa\RaBundle\VettingProcedure;
-use Symfony\Component\Validator\Constraints as Assert;
-
-class VerifyPhoneNumberCommand
+class UnknownVettingProcedureException extends RuntimeException
 {
-    /**
-     * @Assert\NotBlank(message="ra.verify_sms_challenge_command.challenge.may_not_be_empty")
-     * @Assert\Type(type="string", message="ra.verify_sms_challenge_command.challenge.must_be_string")
-     *
-     * @var string
-     */
-    public $challenge;
-
-    /**
-     * @var string
-     */
-    public $phoneNumber;
-
-    /**
-     * @var string Filled in by the VettingService
-     */
-    public $expectedPhoneNumber;
 }

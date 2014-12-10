@@ -20,9 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
-use Surfnet\StepupRa\RaBundle\VettingProcedure;
-use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
-use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorService;
+use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,27 +31,19 @@ class YubikeyController extends Controller
     /**
      * @Template
      * @param Request $request
-     * @param VettingProcedure $procedure
+     * @param $procedureId
      * @return array|Response
      */
-    public function verifyAction(Request $request, VettingProcedure $procedure)
+    public function verifyAction(Request $request, $procedureId)
     {
         $command = new VerifyYubikeyPublicIdCommand();
-        $command->identityId = $procedure->getSecondFactor()->identityId;
-        $command->institution = $procedure->getSecondFactor()->institution;
-        $command->procedure = $procedure;
-
         $form = $this->createForm('ra_verify_yubikey_public_id', $command)->handleRequest($request);
 
         if ($form->isValid()) {
-            /** @var YubikeySecondFactorService $service */
-            $service = $this->get('ra.service.yubikey_second_factor');
-            $result = $service->verifyYubikeyPublicId($command);
+            $result = $this->getVettingService()->verifyYubikeyPublicId($procedureId, $command);
 
             if ($result->didPublicIdMatch()) {
-                $this->getVettingProcedureRepository()->store($procedure);
-
-                return $this->redirectToRoute('ra_vetting_verify_identity', ['procedureUuid' => $procedure->getUuid()]);
+                return $this->redirectToRoute('ra_vetting_verify_identity', ['procedureId' => $procedureId]);
             } elseif ($result->didOtpVerificationFail()) {
                 $form->get('otp')->addError(new FormError('ra.verify_yubikey_command.otp.verification_error'));
             } else {
@@ -66,10 +56,10 @@ class YubikeyController extends Controller
     }
 
     /**
-     * @return VettingProcedureRepository
+     * @return VettingService
      */
-    private function getVettingProcedureRepository()
+    private function getVettingService()
     {
-        return $this->get('ra.repository.vetting_procedure');
+        return $this->get('ra.service.vetting');
     }
 }

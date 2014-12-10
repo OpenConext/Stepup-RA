@@ -19,19 +19,16 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
-use Surfnet\StepupRa\RaBundle\Identity\Command\VetSecondFactorCommand;
-use Surfnet\StepupRa\RaBundle\VettingProcedure;
+use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
-use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
+use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class VettingController extends Controller
 {
@@ -43,6 +40,7 @@ class VettingController extends Controller
     public function startProcedureAction(Request $request)
     {
         $command = new StartVettingProcedureCommand();
+
         $form = $this->createForm('ra_start_vetting_procedure', $command)->handleRequest($request);
 
         if ($form->isValid()) {
@@ -55,25 +53,24 @@ class VettingController extends Controller
                 return ['form' => $form->createView()];
             }
 
-            $procedure = VettingProcedure::start($command->registrationCode, $secondFactor);
+            $command->secondFactor = $secondFactor;
+            $procedureId = $this->getVettingService()->startProcedure($command);
 
-            $this->getVettingProcedureRepository()->store($procedure);
-
-            switch ($procedure->getSecondFactor()->type) {
+            switch ($secondFactor->type) {
                 case 'yubikey':
                     return $this->redirectToRoute(
                         'ra_vetting_yubikey_verify',
-                        ['procedureUuid' => $procedure->getUuid()]
+                        ['procedureId' => $procedureId]
                     );
                 case 'sms':
                     return $this->redirectToRoute(
                         'ra_vetting_sms_send_challenge',
-                        ['procedureUuid' => $procedure->getUuid()]
+                        ['procedureId' => $procedureId]
                     );
             }
 
             throw new RuntimeException(
-                sprintf("Unexpected second factor type '%s'", $procedure->getSecondFactor()->type)
+                sprintf("Unexpected second factor type '%s'", $secondFactor->type)
             );
         }
 
@@ -83,46 +80,45 @@ class VettingController extends Controller
     /**
      * @Template
      * @param Request $request
-     * @param VettingProcedure $procedure
+     * @param string $procedureId
      * @return array|Response
      */
-    public function verifyIdentityAction(Request $request, VettingProcedure $procedure)
+    public function verifyIdentityAction(Request $request, $procedureId)
     {
-        if (!$procedure->isReadyForIdentityVerification()) {
-            # RA may not yet verify identity. Starting a login procedure doesn't help, so no AccessDeniedException.
-            throw new AccessDeniedHttpException("Second factor must be verified before verifying a registrant's identity");
-        }
-
         $command = new VerifyIdentityCommand();
-        $command->commonName = $procedure->getSecondFactor()->commonName;
 
         $form = $this->createForm('ra_verify_identity', $command)->handleRequest($request);
+        $vettingService = $this->getVettingService();
 
         if ($form->isValid()) {
-            $procedure->verifyIdentity($command->documentNumber);
+            try {
+                $vettingService->verifyIdentity($procedureId, $command);
 
-            $vetCommand = new VetSecondFactorCommand();
-            $vetCommand->identityId = $procedure->getSecondFactor()->identityId;
-            $vetCommand->registrationCode = $procedure->getRegistrationCode();
-            $vetCommand->secondFactorIdentifier = $procedure->getInputSecondFactorIdentifier();
-            $vetCommand->documentNumber = $procedure->getDocumentNumber();
-            $vetCommand->identityVerified = $procedure->isIdentityVerified();
+                try {
+                    if ($vettingService->vet($procedureId)) {
+                        return $this->redirectToRoute('ra_vetting_search');
+                    }
 
-            /** @var CommandService $service */
-            $service = $this->get('surfnet_stepup_middleware_client.service.command');
-            $result = $service->execute($vetCommand);
-
-            if ($result->isSuccessful()) {
-                $this->get('session')->getFlashBag()->add('success', 'ra.vetting.second_factor_vetted');
-
-                return $this->redirectToRoute('ra_vetting_search');
+                    $this->get('logger')->error('RA attempted to vet second factor, but the command failed');
+                    $form->addError(new FormError('ra.verify_identity.second_factor_vetting_failed'));
+                } catch (DomainException $e) {
+                    $this->get('logger')->error(
+                        "RA attempted to vet second factor, but the vetting procedure didn't allow it",
+                        ['exception' => $e]
+                    );
+                    $form->addError(new FormError('ra.verify_identity.second_factor_vetting_failed'));
+                }
+            } catch (DomainException $e) {
+                $this->get('logger')->error(
+                    "RA attempted to verify identity, but the vetting procedure didn't allow it",
+                    ['exception' => $e]
+                );
+                $form->addError(new FormError('ra.verify_identity.identity_verification_failed'));
             }
-
-            $form->addError(new FormError('ra.verify_identity.second_factor_vetting_failed'));
         }
 
         return [
-            'commonName' => $procedure->getSecondFactor()->commonName,
+            'commonName' => $vettingService->getIdentityCommonName($procedureId),
             'form' => $form->createView()
         ];
     }
@@ -136,10 +132,10 @@ class VettingController extends Controller
     }
 
     /**
-     * @return VettingProcedureRepository
+     * @return VettingService
      */
-    private function getVettingProcedureRepository()
+    private function getVettingService()
     {
-        return $this->get('ra.repository.vetting_procedure');
+        return $this->get('ra.service.vetting');
     }
 }
