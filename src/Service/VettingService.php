@@ -33,6 +33,9 @@ use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\VerificationResult as SmsV
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult as YubikeyVerificationResult;
 use Surfnet\StepupRa\RaBundle\VettingProcedure;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class VettingService
 {
     /**
