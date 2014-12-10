@@ -39,14 +39,16 @@ class AnchorType extends AbstractType implements ButtonTypeInterface
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'route'           => null,
-            'auto_initialize' => false,
+            'route'            => null,
+            'route_parameters' => [],
+            'auto_initialize'  => false,
         ]);
 
         $resolver->setRequired(['route']);
 
         $resolver->setAllowedTypes([
-            'route' => 'string',
+            'route'            => 'string',
+            'route_parameters' => 'array',
         ]);
     }
 
@@ -55,5 +57,6 @@ class AnchorType extends AbstractType implements ButtonTypeInterface
         parent::buildView($view, $form, $options);
 
         $view->vars['route'] = $options['route'];
+        $view->vars['routeParameters'] = $options['route_parameters'];
     }
 }
