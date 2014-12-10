@@ -65,6 +65,11 @@ class VettingController extends Controller
                         'ra_vetting_yubikey_verify',
                         ['procedureUuid' => $procedure->getUuid()]
                     );
+                case 'sms':
+                    return $this->redirectToRoute(
+                        'ra_vetting_sms_send_challenge',
+                        ['procedureUuid' => $procedure->getUuid()]
+                    );
             }
 
             throw new RuntimeException(

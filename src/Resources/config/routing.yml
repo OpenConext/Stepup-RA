@@ -20,6 +20,21 @@ ra_vetting_yubikey_verify:
     requirements:
         procedureUuid: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
 
+ra_vetting_sms_send_challenge:
+    path:     /vetting-procedure/{procedureUuid}/send-sms-challenge
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Sms:sendChallenge }
+    requirements:
+        procedureUuid: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+
+ra_vetting_sms_prove_possession:
+    path:     /vetting-procedure/{procedureUuid}/verify-sms-challenge/{phoneNumber}
+    methods:  [GET,POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Sms:provePossession }
+    requirements:
+        procedureUuid: '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+        phoneNumber: .+
+
 ra_vetting_verify_identity:
     path:     /vetting-procedure/{procedureUuid}/verify-identity
     methods:  [GET, POST]

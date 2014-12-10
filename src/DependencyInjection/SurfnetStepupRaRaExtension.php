@@ -52,5 +52,9 @@ class SurfnetStepupRaRaExtension extends Extension
 
         $gatewayGuzzle = $container->getDefinition('ra.guzzle.gateway_api');
         $gatewayGuzzle->replaceArgument(0, $gatewayGuzzleOptions);
+
+        $smsSecondFactorService =
+            $container->getDefinition('ra.service.sms_second_factor');
+        $smsSecondFactorService->replaceArgument(4, $config['sms_originator']);
     }
 }

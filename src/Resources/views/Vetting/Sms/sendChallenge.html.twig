@@ -1,0 +1,26 @@
+{% extends "::base.html.twig" %}
+
+{% block page_title %}{{ 'ra.vetting.sms.send_challenge.title.page'|trans }}{% endblock %}
+
+{% block page_header %}
+    {{ parent() }}
+
+    {% include 'SurfnetStepupRaRaBundle:Vetting/partial:progressBar.html.twig' with {'progress': 25} only %}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ block('page_title') }}</h2>
+
+    <p>{{ 'ra.vetting.sms.text.help_user_enter_phone_number'|trans }}</p>
+
+    <ol>
+        <li>{{ 'ra.vetting.sms.text.ensure_phone_has_signal'|trans }}</li>
+        <li>{{ 'ra.vetting.sms.text.enter_phone_number_below'|trans }}</li>
+        <li>{{ 'ra.vetting.sms.text.after_pressing_proceed'|trans }}</li>
+    </ol>
+
+    <hr>
+
+    {{ form(form) }}
+
+{% endblock %}
