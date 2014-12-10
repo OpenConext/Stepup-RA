@@ -27,7 +27,8 @@
         "surfnet/stepup-saml-bundle": "dev-develop",
         "surfnet/stepup-bundle": "dev-develop",
         "simplesamlphp/saml2": "@dev",
-        "guzzlehttp/guzzle": "~4"
+        "guzzlehttp/guzzle": "~4",
+        "symfony/swiftmailer-bundle": "~2.3"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
