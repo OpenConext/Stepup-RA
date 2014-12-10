@@ -56,5 +56,8 @@ class SurfnetStepupRaRaExtension extends Extension
         $smsSecondFactorService =
             $container->getDefinition('ra.service.sms_second_factor');
         $smsSecondFactorService->replaceArgument(4, $config['sms_originator']);
+
+        // inject the required loa as parameter into the service container
+        $container->setParameter('surfnet_stepup_ra.security.required_loa', $config['required_loa']);
     }
 }

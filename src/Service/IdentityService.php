@@ -173,4 +173,22 @@ class IdentityService implements UserProviderInterface
             throw new RuntimeException($note);
         }
     }
+
+    /**
+     * @param Identity $identity
+     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RegistrationAuthorityCredentials|null
+     */
+    public function getRaCredentials(Identity $identity)
+    {
+        try {
+            $credentials = $this->apiIdentityService->getRegistrationAuthorityCredentials($identity);
+        } catch (Exception $e) {
+            $message = sprintf('Exception when retrieving RA credentials: "%s"', $e->getMessage());
+            $this->logger->critical($message);
+
+            throw new RuntimeException($message, 0, $e);
+        }
+
+        return $credentials;
+    }
 }

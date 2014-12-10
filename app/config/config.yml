@@ -48,6 +48,35 @@ assetic:
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
 
+monolog:
+    handlers:
+        main:
+            type: group
+            members:
+                - main_graylog
+                - main_logfile
+        main_graylog:
+            type: buffer
+            handler: graylog
+            level: NOTICE
+        main_logfile:
+            type: stream
+            handler: logfile
+            level: NOTICE
+            path: %kernel.logs_dir%/%kernel.environment%.log
+        graylog:
+            type: gelf
+            publisher: { hostname: %graylog_hostname% }
+            formatter: surfnet_stepup.monolog.full_message_exception_gelf_message_formatter
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
 nelmio_security:
     # Content Security Policy
     csp:
@@ -73,6 +102,7 @@ surfnet_stepup_ra_ra:
         credentials:
             username: %gateway_api_username%
             password: %gateway_api_password%
+    required_loa: %loa_required_for_login%
 
 mopa_bootstrap:
     form:
