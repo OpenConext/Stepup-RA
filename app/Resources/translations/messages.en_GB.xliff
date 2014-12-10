@@ -8,7 +8,6 @@
     <body>
       <trans-unit id="0c3112826a8c897ac0b6a3d3a8432059b74dd996" resname="app.name">
         <jms:reference-file line="6">Resources/views/base.html.twig</jms:reference-file>
-        <jms:reference-file line="26">Resources/views/base.html.twig</jms:reference-file>
         <source>app.name</source>
         <target>Step-up Registration Authority</target>
       </trans-unit>
