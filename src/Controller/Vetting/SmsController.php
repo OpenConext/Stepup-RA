@@ -21,8 +21,6 @@ namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyPhoneNumberCommand;
-use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SendChallengeResult;
-use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\VerificationResult;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -42,43 +40,37 @@ class SmsController extends Controller
         $command = new SendSmsChallengeCommand();
         $form = $this->createForm('ra_send_sms_challenge', $command)->handleRequest($request);
 
+        $vettingService = $this->getVettingService();
+        $phoneNumber = $vettingService->getSecondFactorIdentifier($procedureId);
+
         if (!$form->isValid()) {
-            return ['form' => $form->createView()];
+            return [
+                'phoneNumber' => $phoneNumber,
+                'form'        => $form->createView()
+            ];
         }
 
-        $result = $this->getVettingService()->sendSmsChallenge($procedureId, $command);
-
-        switch ($result) {
-            case SendChallengeResult::RESULT_CHALLENGE_SENT:
-                return $this->redirectToRoute(
-                    'ra_vetting_sms_prove_possession',
-                    ['procedureId' => $procedureId, 'phoneNumber' => $command->phoneNumber]
-                );
-            case SendChallengeResult::RESULT_PHONE_NUMBER_DID_NOT_MATCH:
-                $form->addError(new FormError('ra.sms_send_challenge.phone_number_mismatch'));
-                break;
-            case SendChallengeResult::RESULT_CHALLENGE_NOT_SENT:
-                $form->addError(new FormError('ra.sms_send_challenge.send_sms_challenge_failed'));
-                break;
-            default:
-                throw new \LogicException('Invalid send challenge result');
+        if ($vettingService->sendSmsChallenge($procedureId, $command)) {
+            return $this->redirectToRoute('ra_vetting_sms_prove_possession', ['procedureId' => $procedureId]);
         }
 
-        return ['form' => $form->createView()];
+        $form->addError(new FormError('ra.sms_send_challenge.send_sms_challenge_failed'));
+
+        return [
+            'phoneNumber' => $phoneNumber,
+            'form'        => $form->createView()
+        ];
     }
 
     /**
      * @Template
      * @param Request $request
      * @param string $procedureId
-     * @param string $phoneNumber
      * @return array|Response
      */
-    public function provePossessionAction(Request $request, $procedureId, $phoneNumber)
+    public function provePossessionAction(Request $request, $procedureId)
     {
         $command = new VerifyPhoneNumberCommand();
-        $command->phoneNumber = $phoneNumber;
-
         $form = $this
             ->createForm('ra_verify_phone_number', $command, ['procedureId' => $procedureId])
             ->handleRequest($request);
@@ -87,23 +79,14 @@ class SmsController extends Controller
             return ['form' => $form->createView()];
         }
 
-        $result = $this->getVettingService()->verifyPhoneNumber($procedureId, $command);
-
-        switch ($result) {
-            case VerificationResult::RESULT_SUCCESS:
-                return $this->redirectToRoute(
-                    'ra_vetting_verify_identity',
-                    ['procedureId' => $procedureId]
-                );
-            case VerificationResult::RESULT_CHALLENGE_MISMATCH:
-                $form->addError(new FormError('ra.prove_phone_possession.proof_of_possession_failed'));
-                break;
-            case VerificationResult::RESULT_PHONE_NUMBER_DID_NOT_MATCH:
-                $form->addError(new FormError('ra.prove_phone_possession.phone_number_mismatch'));
-                break;
-            default:
-                throw new \LogicException('Invalid prove possession result');
+        if ($this->getVettingService()->verifyPhoneNumber($procedureId, $command)) {
+            return $this->redirectToRoute(
+                'ra_vetting_verify_identity',
+                ['procedureId' => $procedureId]
+            );
         }
+
+        $form->addError(new FormError('ra.prove_phone_possession.proof_of_possession_failed'));
 
         return ['form' => $form->createView()];
     }

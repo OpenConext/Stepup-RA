@@ -21,6 +21,19 @@
 
     <hr>
 
-    {{ form(form) }}
+    <div class="form-ra-send-sms-challenge">
+
+        <table class="table table-bordered table-hover">
+            <tbody>
+            <tr>
+                <th scope="row">{{ 'ra.form.ra_send_sms_challenge.label.phone_number'|trans }}</th>
+                <td>+{{ phoneNumber }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        {{ form(form) }}
+
+    </div>
 
 {% endblock %}

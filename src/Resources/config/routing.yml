@@ -24,7 +24,7 @@ ra_vetting_sms_send_challenge:
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Sms:sendChallenge }
 
 ra_vetting_sms_prove_possession:
-    path:     /vetting-procedure/{procedureId}/verify-sms-challenge/{phoneNumber}
+    path:     /vetting-procedure/{procedureId}/verify-sms-challenge
     methods:  [GET,POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Sms:provePossession }
 

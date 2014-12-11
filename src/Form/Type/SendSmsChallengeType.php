@@ -26,17 +26,6 @@ class SendSmsChallengeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('phoneNumber', 'text', [
-            'label' => /** @Ignore */ false,
-            'required' => true,
-            'widget_addon_prepend' => [
-                'text' => '+'
-            ],
-            'attr' => array(
-                'autofocus' => true,
-                'placeholder' => '31612345678',
-            )
-        ]);
         $builder->add('send-challenge', 'submit', [
             'label' => 'ra.form.ra_send_sms_challenge.button.send_challenge',
             'attr' => [ 'class' => 'btn btn-primary' ],

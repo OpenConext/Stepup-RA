@@ -90,7 +90,7 @@ class VettingService
     /**
      * @param string $procedureId
      * @param SendSmsChallengeCommand $command
-     * @return int One of the SendChallengeResult::RESULT_* constants.
+     * @return bool
      * @throws UnknownVettingProcedureException
      * @throws DomainException
      */
@@ -98,7 +98,7 @@ class VettingService
     {
         $procedure = $this->getProcedure($procedureId);
 
-        $command->expectedPhoneNumber = $procedure->getSecondFactor()->secondFactorIdentifier;
+        $command->phoneNumber = $procedure->getSecondFactor()->secondFactorIdentifier;
         $command->identity = $procedure->getSecondFactor()->identityId;
         $command->institution = $procedure->getSecondFactor()->institution;
 
@@ -116,17 +116,16 @@ class VettingService
     {
         $procedure = $this->getProcedure($procedureId);
 
-        $command->expectedPhoneNumber = $procedure->getSecondFactor()->secondFactorIdentifier;
+        $command->phoneNumber = $procedure->getSecondFactor()->secondFactorIdentifier;
 
-        $result = $this->smsSecondFactorService->verifyPossession($command);
-
-        if ($result === SmsVerificationResult::RESULT_SUCCESS) {
-            $procedure->verifySecondFactorIdentifier($command->phoneNumber);
-
-            $this->vettingProcedureRepository->store($procedure);
+        if (!$this->smsSecondFactorService->verifyPossession($command)) {
+            return false;
         }
 
-        return $result;
+        $procedure->verifySecondFactorIdentifier($procedure->getSecondFactor()->secondFactorIdentifier);
+        $this->vettingProcedureRepository->store($procedure);
+
+        return true;
     }
 
     /**
@@ -207,6 +206,16 @@ class VettingService
     public function getIdentityCommonName($procedureId)
     {
         return $this->getProcedure($procedureId)->getSecondFactor()->commonName;
+    }
+
+    /**
+     * @param $procedureId
+     * @return string
+     * @throws UnknownVettingProcedureException
+     */
+    public function getSecondFactorIdentifier($procedureId)
+    {
+        return $this->getProcedure($procedureId)->getSecondFactor()->secondFactorIdentifier;
     }
 
     /**

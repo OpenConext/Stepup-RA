@@ -91,14 +91,10 @@ class SmsSecondFactorService
 
     /**
      * @param SendSmsChallengeCommand $command
-     * @return int One of the SendChallengeResult::RESULT_* constants.
+     * @return bool
      */
     public function sendChallenge(SendSmsChallengeCommand $command)
     {
-        if ($command->phoneNumber !== $command->expectedPhoneNumber) {
-            return SendChallengeResult::RESULT_PHONE_NUMBER_DID_NOT_MATCH;
-        }
-
         $challenge = $this->challengeStore->generateChallenge();
 
         $body = $this->translator->trans('ra.vetting.sms.challenge_body', ['%challenge%' => $challenge]);
@@ -110,23 +106,15 @@ class SmsSecondFactorService
         $smsCommand->identity = $command->identity;
         $smsCommand->institution = $command->institution;
 
-        return $this->smsService->sendSms($smsCommand)
-            ? SendChallengeResult::RESULT_CHALLENGE_SENT
-            : SendChallengeResult::RESULT_CHALLENGE_NOT_SENT;
+        return $this->smsService->sendSms($smsCommand);
     }
 
     /**
      * @param VerifyPhoneNumberCommand $command
-     * @return int One of the VerificationResult::RESULT_* constants.
+     * @return bool
      */
     public function verifyPossession(VerifyPhoneNumberCommand $command)
     {
-        if ($command->phoneNumber !== $command->expectedPhoneNumber) {
-            return VerificationResult::RESULT_PHONE_NUMBER_DID_NOT_MATCH;
-        }
-
-        return $this->challengeStore->verifyChallenge($command->challenge)
-            ? VerificationResult::RESULT_SUCCESS
-            : VerificationResult::RESULT_CHALLENGE_MISMATCH;
+        return $this->challengeStore->verifyChallenge($command->challenge);
     }
 }

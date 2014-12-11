@@ -24,20 +24,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 class VerifyPhoneNumberCommand
 {
     /**
-     * @Assert\NotBlank(message="ra.verify_sms_challenge_command.challenge.may_not_be_empty")
-     * @Assert\Type(type="string", message="ra.verify_sms_challenge_command.challenge.must_be_string")
+     * @Assert\NotBlank(message="ra.verify_phone_number_command.challenge.may_not_be_empty")
+     * @Assert\Type(type="string", message="ra.verify_phone_number_command.challenge.must_be_string")
      *
      * @var string
      */
     public $challenge;
-
-    /**
-     * @var string
-     */
-    public $phoneNumber;
-
-    /**
-     * @var string Filled in by the VettingService
-     */
-    public $expectedPhoneNumber;
 }
