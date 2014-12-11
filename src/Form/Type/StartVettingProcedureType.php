@@ -38,6 +38,10 @@ class StartVettingProcedureType extends AbstractType
                 'placeholder' => 'Enter registration code here...',
             )
         ]);
+        $builder->add('search', 'submit', [
+            'label' => 'ra.form.start_vetting_procedure.search',
+            'attr' => [ 'class' => 'btn btn-primary' ],
+        ]);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

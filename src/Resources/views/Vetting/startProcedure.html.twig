@@ -5,7 +5,11 @@
 {% block content %}
     <div class="row">
         <div class="col-sm-12">
-            {{ form(form) }}
+            {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
+            {{ form_errors(form) }}
+            {{ form_widget(form.registrationCode) }}
+            {{ form_widget(form.search) }}
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}
