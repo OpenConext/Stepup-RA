@@ -16,31 +16,10 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Command;
+namespace Surfnet\StepupRa\RaBundle\Exception;
 
-use Symfony\Component\Validator\Constraints as Assert;
+use DomainException as CoreDomainException;
 
-class VerifyYubikeyOtpCommand
+class DomainException extends CoreDomainException
 {
-    /**
-     * @Assert\NotBlank(message="ra.verify_yubikey_command.otp.may_not_be_empty")
-     * @Assert\Type(type="string", message="ra.verify_yubikey_command.otp.must_be_string")
-     *
-     * @var string
-     */
-    public $otp;
-
-    /**
-     * The requesting identity's ID (not name ID).
-     *
-     * @var string
-     */
-    public $identityId;
-
-    /**
-     * The requesting identity's institution.
-     *
-     * @var string
-     */
-    public $institution;
 }

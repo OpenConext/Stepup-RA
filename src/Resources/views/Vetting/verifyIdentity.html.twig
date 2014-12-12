@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+
+{% block page_title %}{{ 'ra.vetting.verify_identity.title'|trans }}{% endblock %}
+
+{% block page_header %}
+    {{ parent() }}
+
+    {% include 'SurfnetStepupRaRaBundle:Vetting/partial:progressBar.html.twig' with {'progress': 50} only %}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ block('page_title') }}</h2>
+
+    <p>{{ 'ra.vetting.verify_identity.text.verify_identity_document'|trans }}</p>
+
+    <hr>
+
+    <div class="form-ra-verify-identity">
+
+        <table class="table table-bordered table-hover">
+            <tbody>
+            <tr>
+                <th scope="row">Name</th>
+                <td>{{ commonName }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        {{ form(form) }}
+
+    </div>
+{% endblock %}

@@ -16,31 +16,22 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Command;
+namespace Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
-class VerifyYubikeyOtpCommand
+interface ChallengeStore
 {
     /**
-     * @Assert\NotBlank(message="ra.verify_yubikey_command.otp.may_not_be_empty")
-     * @Assert\Type(type="string", message="ra.verify_yubikey_command.otp.must_be_string")
+     * Generates a challenge, stores it and returns it.
      *
-     * @var string
+     * @return string
      */
-    public $otp;
+    public function generateChallenge();
 
     /**
-     * The requesting identity's ID (not name ID).
+     * Verifies a previously generated challenge.
      *
-     * @var string
+     * @param string $challenge
+     * @return bool
      */
-    public $identityId;
-
-    /**
-     * The requesting identity's institution.
-     *
-     * @var string
-     */
-    public $institution;
+    public function verifyChallenge($challenge);
 }

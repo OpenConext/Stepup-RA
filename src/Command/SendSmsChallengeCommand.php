@@ -16,18 +16,29 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Controller;
+namespace Surfnet\StepupRa\RaBundle\Command;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Surfnet\StepupRa\RaBundle\VettingProcedure;
+use Symfony\Component\Validator\Constraints as Assert;
 
-class WelcomeController extends Controller
+class SendSmsChallengeCommand
 {
     /**
-     * @Template
+     * @var string Filled in by the VettingService
      */
-    public function welcomeAction()
-    {
-        return [];
-    }
+    public $phoneNumber;
+
+    /**
+     * The requesting identity's ID (not name ID).
+     *
+     * @var string Filled in by the VettingService
+     */
+    public $identity;
+
+    /**
+     * The requesting identity's institution.
+     *
+     * @var string Filled in by the VettingService
+     */
+    public $institution;
 }

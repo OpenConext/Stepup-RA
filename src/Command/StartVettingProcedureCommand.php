@@ -18,29 +18,21 @@
 
 namespace Surfnet\StepupRa\RaBundle\Command;
 
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class VerifyYubikeyOtpCommand
+class StartVettingProcedureCommand
 {
     /**
-     * @Assert\NotBlank(message="ra.verify_yubikey_command.otp.may_not_be_empty")
-     * @Assert\Type(type="string", message="ra.verify_yubikey_command.otp.must_be_string")
+     * @Assert\NotBlank(message="ra.start_vetting_procedure.registration_code.may_not_be_empty")
+     * @Assert\Type(type="string", message="ra.start_vetting_procedure.registration_code.must_be_string")
      *
      * @var string
      */
-    public $otp;
+    public $registrationCode;
 
     /**
-     * The requesting identity's ID (not name ID).
-     *
-     * @var string
+     * @var VerifiedSecondFactor
      */
-    public $identityId;
-
-    /**
-     * The requesting identity's institution.
-     *
-     * @var string
-     */
-    public $institution;
+    public $secondFactor;
 }

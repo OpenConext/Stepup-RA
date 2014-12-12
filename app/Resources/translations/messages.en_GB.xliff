@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file date="2014-12-11T17:25:21Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="0c3112826a8c897ac0b6a3d3a8432059b74dd996" resname="app.name">
+        <jms:reference-file line="6">Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="26">Resources/views/base.html.twig</jms:reference-file>
+        <source>app.name</source>
+        <target>Step-up Registration Authority</target>
+      </trans-unit>
+      <trans-unit id="b190a055ec0458747cdff543e6693c2433a6eb6b" resname="ra.form.ra_send_sms_challenge.button.send_challenge">
+        <jms:reference-file line="30">Form/Type/SendSmsChallengeType.php</jms:reference-file>
+        <source>ra.form.ra_send_sms_challenge.button.send_challenge</source>
+        <target>Request new code</target>
+      </trans-unit>
+      <trans-unit id="7adfead474c46f8b890dc00049e7d0f031ebff1a" resname="ra.form.ra_send_sms_challenge.label.phone_number">
+        <jms:reference-file line="29">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
+        <source>ra.form.ra_send_sms_challenge.label.phone_number</source>
+        <target>Phone number</target>
+      </trans-unit>
+      <trans-unit id="636bb81263385bccfb6863049ed0c085aa6cdb3b" resname="ra.form.ra_verify_phone_number.button.resend_challenge">
+        <jms:reference-file line="43">Form/Type/VerifyPhoneNumberType.php</jms:reference-file>
+        <source>ra.form.ra_verify_phone_number.button.resend_challenge</source>
+        <target>Resend code</target>
+      </trans-unit>
+      <trans-unit id="6f8bd23ca2d1b8a9908d9d9ecbb3f8f4e4f9486e" resname="ra.form.ra_verify_phone_number.button.verify_challenge">
+        <jms:reference-file line="39">Form/Type/VerifyPhoneNumberType.php</jms:reference-file>
+        <source>ra.form.ra_verify_phone_number.button.verify_challenge</source>
+        <target>Verify code</target>
+      </trans-unit>
+      <trans-unit id="3404f2a8bad599af84df03bcfc68fbe9888e7df1" resname="ra.form.ra_verify_phone_number.text.challenge">
+        <jms:reference-file line="32">Form/Type/VerifyPhoneNumberType.php</jms:reference-file>
+        <source>ra.form.ra_verify_phone_number.text.challenge</source>
+        <target>Code</target>
+      </trans-unit>
+      <trans-unit id="e73181ada31381965b99c58914199f626edb7ec9" resname="ra.form.start_vetting_procedure.search">
+        <jms:reference-file line="42">Form/Type/StartVettingProcedureType.php</jms:reference-file>
+        <source>ra.form.start_vetting_procedure.search</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="5bd6714db09c4a8b818081f114f12f7415a50e40" resname="ra.form.start_vetting_procedure.unknown_registration_code">
+        <jms:reference-file line="4">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.form.start_vetting_procedure.unknown_registration_code</source>
+        <target>Unknown registration code</target>
+      </trans-unit>
+      <trans-unit id="d6e1e4afd83a6b390c24762cee6939338734afc5" resname="ra.form.verify_identity.document_number.label">
+        <jms:reference-file line="30">Form/Type/VerifyIdentityType.php</jms:reference-file>
+        <source>ra.form.verify_identity.document_number.label</source>
+        <target>Document number</target>
+      </trans-unit>
+      <trans-unit id="7a8ae994c21e499a1774bc81190c90f6cd7a16d5" resname="ra.form.verify_identity.identity_verified.label">
+        <jms:reference-file line="37">Form/Type/VerifyIdentityType.php</jms:reference-file>
+        <source>ra.form.verify_identity.identity_verified.label</source>
+        <target>I verified the registrant's identity.</target>
+      </trans-unit>
+      <trans-unit id="975e2aa48fa95999ba9438d5f377e097fad24d17" resname="ra.form.verify_identity.verify_identity.button">
+        <jms:reference-file line="42">Form/Type/VerifyIdentityType.php</jms:reference-file>
+        <source>ra.form.verify_identity.verify_identity.button</source>
+        <target>Verify identity</target>
+      </trans-unit>
+      <trans-unit id="e79f76835dc7d8016510e2b53e35570b5fd36323" resname="ra.prove_phone_possession.phone_number_mismatch">
+        <jms:reference-file line="15">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.prove_phone_possession.phone_number_mismatch</source>
+        <target>Phone number mismatch</target>
+      </trans-unit>
+      <trans-unit id="dea47ffb6ae681e53e6691b53940ec4b5a8a952c" resname="ra.prove_phone_possession.proof_of_possession_failed">
+        <jms:reference-file line="14">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="16">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.prove_phone_possession.proof_of_possession_failed</source>
+        <target>Proof of possession failed due to unknown reasons</target>
+      </trans-unit>
+      <trans-unit id="06ada20a09df4484b41e75a58e813b54d4904f33" resname="ra.prove_yubikey_possession.different_yubikey_used">
+        <jms:reference-file line="8">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.prove_yubikey_possession.different_yubikey_used</source>
+        <target>Another Yubikey was used during the registration process.</target>
+      </trans-unit>
+      <trans-unit id="ee8b15d139dd5ba69eb2bfbc1c540b03894bafd7" resname="ra.registration.yubikey.title.enter_challenge">
+        <jms:reference-file line="3">Vetting/Yubikey/verify.html.twig</jms:reference-file>
+        <source>ra.registration.yubikey.title.enter_challenge</source>
+        <target>Yubikey</target>
+      </trans-unit>
+      <trans-unit id="e97a4607287c491dfdf51e781109b35cf646ac7b" resname="ra.sms_send_challenge.phone_number_mismatch">
+        <jms:reference-file line="12">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.sms_send_challenge.phone_number_mismatch</source>
+        <target>Phone number mismatch</target>
+      </trans-unit>
+      <trans-unit id="a718fae8b5a05ddfe4f55f3ed1a4bb8b365ea12c" resname="ra.sms_send_challenge.send_sms_challenge_failed">
+        <jms:reference-file line="13">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.sms_send_challenge.send_sms_challenge_failed</source>
+        <target>The sending of the code via SMS failed.</target>
+      </trans-unit>
+      <trans-unit id="ba1980036b712688f6681fb8f86ac6925a1cba5a" resname="ra.verify_identity.second_factor_vetting_failed">
+        <jms:reference-file line="9">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.verify_identity.second_factor_vetting_failed</source>
+        <target>The security token could not be vetted due to unknown reasons.</target>
+      </trans-unit>
+      <trans-unit id="669fe8c5f63adab894fc62f2bbf036f2fe9e8b6c" resname="ra.verify_yubikey_command.otp.verification_error">
+        <jms:reference-file line="7">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.verify_yubikey_command.otp.verification_error</source>
+        <target>The Yubikey code could not be verified.</target>
+      </trans-unit>
+      <trans-unit id="3f708a1089bb9a75621006456174cd658d18b541" resname="ra.vetting.progress_bar.enter_registration_code">
+        <jms:reference-file line="2">Vetting/partial/progressBar.html.twig</jms:reference-file>
+        <source>ra.vetting.progress_bar.enter_registration_code</source>
+        <target>Enter registration code</target>
+      </trans-unit>
+      <trans-unit id="02d4c777e02e931dbd3ea7679b63fef94c6a4568" resname="ra.vetting.progress_bar.prove_possession">
+        <jms:reference-file line="3">Vetting/partial/progressBar.html.twig</jms:reference-file>
+        <source>ra.vetting.progress_bar.prove_possession</source>
+        <target>Prove possession of token</target>
+      </trans-unit>
+      <trans-unit id="597130e7834e42d27745084f2bb5e63d11f464fa" resname="ra.vetting.progress_bar.second_factor_vetted">
+        <jms:reference-file line="5">Vetting/partial/progressBar.html.twig</jms:reference-file>
+        <source>ra.vetting.progress_bar.second_factor_vetted</source>
+        <target>Security token vetted</target>
+      </trans-unit>
+      <trans-unit id="e181bfdd209284dcfa1b54c6a7e815df0fa0165c" resname="ra.vetting.progress_bar.verify_identity">
+        <jms:reference-file line="4">Vetting/partial/progressBar.html.twig</jms:reference-file>
+        <source>ra.vetting.progress_bar.verify_identity</source>
+        <target>Verify identity</target>
+      </trans-unit>
+      <trans-unit id="8e4a356a46fe95b04ae1cbb201b8d62e15670b2e" resname="ra.vetting.sms.challenge_body">
+        <jms:reference-file line="100">src/Service/SmsSecondFactorService.php</jms:reference-file>
+        <source>ra.vetting.sms.challenge_body</source>
+        <target>Your code: %challenge%</target>
+      </trans-unit>
+      <trans-unit id="6d55aa46fb97f555148f92291a878be8ed732361" resname="ra.vetting.sms.prove_possession.title.page">
+        <jms:reference-file line="3">Vetting/Sms/provePossession.html.twig</jms:reference-file>
+        <source>ra.vetting.sms.prove_possession.title.page</source>
+        <target>Verify code</target>
+      </trans-unit>
+      <trans-unit id="122625611b2434287aaf762b79f6c5ef2d54de9c" resname="ra.vetting.sms.send_challenge.title.page">
+        <jms:reference-file line="3">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
+        <source>ra.vetting.sms.send_challenge.title.page</source>
+        <target>Send SMS-code</target>
+      </trans-unit>
+      <trans-unit id="9693ed02e85804a1bbc1c925f2fb4fdad1ef1abe" resname="ra.vetting.sms.text.after_pressing_proceed">
+        <jms:reference-file line="19">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
+        <source>ra.vetting.sms.text.after_pressing_proceed</source>
+        <target>After clicking “Send code”, the registrant will receive a text message with a code. On the next page, please enter said code.</target>
+      </trans-unit>
+      <trans-unit id="564f2e679815f6bbffd527a7328c336752b6bf0b" resname="ra.vetting.sms.text.ensure_phone_has_signal">
+        <jms:reference-file line="17">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
+        <source>ra.vetting.sms.text.ensure_phone_has_signal</source>
+        <target>Please ensure the registrant's mobile phone has a signal and can receive text messages.</target>
+      </trans-unit>
+      <trans-unit id="2cbc684a2effa4742ae0eb83b4952c16f4223d6c" resname="ra.vetting.sms.text.enter_challenge_below">
+        <jms:reference-file line="17">Vetting/Sms/provePossession.html.twig</jms:reference-file>
+        <source>ra.vetting.sms.text.enter_challenge_below</source>
+        <target>Enter the code below.</target>
+      </trans-unit>
+      <trans-unit id="3fa753b7ac529d009469515548734ce8e88194db" resname="ra.vetting.sms.text.enter_phone_number_below">
+        <jms:reference-file line="18">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
+        <source>ra.vetting.sms.text.enter_phone_number_below</source>
+        <target>To link the text message based one-time-password, please follow the next steps:</target>
+      </trans-unit>
+      <trans-unit id="6a9db598111b1d8b3cfe3e1be9e81002fdb3763c" resname="ra.vetting.sms.text.help_user_enter_challenge">
+        <jms:reference-file line="14">Vetting/Sms/provePossession.html.twig</jms:reference-file>
+        <source>ra.vetting.sms.text.help_user_enter_challenge</source>
+        <target>Follow the instructions below to verify the registrant's possession of his or her phone:</target>
+      </trans-unit>
+      <trans-unit id="d3c53573346b6d86baa91a5fdf1d639dcd493997" resname="ra.vetting.sms.text.help_user_enter_phone_number">
+        <jms:reference-file line="14">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
+        <source>ra.vetting.sms.text.help_user_enter_phone_number</source>
+        <target>To check the text message based security token, please follow the next steps:</target>
+      </trans-unit>
+      <trans-unit id="9d1b5bdcf087c109a4f392cffe734db05b74fb48" resname="ra.vetting.sms.text.retry_if_not_received">
+        <jms:reference-file line="18">Vetting/Sms/provePossession.html.twig</jms:reference-file>
+        <source>ra.vetting.sms.text.retry_if_not_received</source>
+        <target>Request another code if the registrant doesn't receive a text message within one minute.</target>
+      </trans-unit>
+      <trans-unit id="f67f9a1925f44474f600a9b2145828791fc3d8f7" resname="ra.vetting.start_procedure.title">
+        <jms:reference-file line="3">views/Vetting/startProcedure.html.twig</jms:reference-file>
+        <source>ra.vetting.start_procedure.title</source>
+        <target>Dashboard</target>
+      </trans-unit>
+      <trans-unit id="bf6edaa01a042e92b71226319fa83366bb4921e6" resname="ra.vetting.verify_identity.text.verify_identity_document">
+        <jms:reference-file line="14">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
+        <source>ra.vetting.verify_identity.text.verify_identity_document</source>
+        <target>Please verify that the registrant's identity document matches the information below.</target>
+      </trans-unit>
+      <trans-unit id="3c2703cee98881520a811a59e7b6cffb21d98ba0" resname="ra.vetting.verify_identity.title">
+        <jms:reference-file line="3">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
+        <source>ra.vetting.verify_identity.title</source>
+        <target>Verify identity</target>
+      </trans-unit>
+      <trans-unit id="da87c92a1202225a559ff2b66b96128cca9c2c29" resname="ra.vetting.yubikey.text.connect_yubikey_to_pc">
+        <jms:reference-file line="17">Vetting/Yubikey/verify.html.twig</jms:reference-file>
+        <source>ra.vetting.yubikey.text.connect_yubikey_to_pc</source>
+        <target>Connect the registrant's personal Yubikey with the computer.</target>
+      </trans-unit>
+      <trans-unit id="6b09c6df1720b27892d03d1e92b5bda74366ee50" resname="ra.vetting.yubikey.text.ensure_form_field_focus">
+        <jms:reference-file line="18">Vetting/Yubikey/verify.html.twig</jms:reference-file>
+        <source>ra.vetting.yubikey.text.ensure_form_field_focus</source>
+        <target>Please ensure that the form field below is focussed.</target>
+      </trans-unit>
+      <trans-unit id="83ab24a97aef5fcc466cda3afbf47ca508216487" resname="ra.vetting.yubikey.text.help_user_enter_challenge">
+        <jms:reference-file line="14">Vetting/Yubikey/verify.html.twig</jms:reference-file>
+        <source>ra.vetting.yubikey.text.help_user_enter_challenge</source>
+        <target>To link the registrant's personal Yubikey, please execute the following steps:</target>
+      </trans-unit>
+      <trans-unit id="3c5318f4ea48fec91126f71622f099e7dfdae754" resname="ra.vetting.yubikey.text.press_once_form_auto_submitted">
+        <jms:reference-file line="19">Vetting/Yubikey/verify.html.twig</jms:reference-file>
+        <source>ra.vetting.yubikey.text.press_once_form_auto_submitted</source>
+        <target>Press the button on your personal Yubikey once to enter an OTP in the field below.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

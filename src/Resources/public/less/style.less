@@ -7,3 +7,63 @@
 .progress-steps {
     font-size: 110%;
 }
+
+form[name="ra_start_vetting_procedure"] {
+    max-width: 500px;
+    margin: 3em auto;
+
+    input[name="ra_start_vetting_procedure[registrationCode]"] {
+        min-width: 220px;
+        text-transform: uppercase;
+    }
+
+    ::-webkit-input-placeholder { text-transform: none; }
+    :-moz-placeholder { text-transform: none; }
+    ::-moz-placeholder { text-transform: none; }
+    :-ms-input-placeholder { text-transform: none; }
+}
+
+form[name="ra_verify_yubikey_public_id"] {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 525px;
+
+    input[type="text"] {
+        text-align: center;
+    }
+}
+
+div.form-ra-verify-identity {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 525px;
+
+    .form-group-verify-identity {
+        text-align: center;
+
+        label {
+            font-weight: bold;
+        }
+    }
+}
+
+div.form-ra-send-sms-challenge {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 525px;
+
+    form {
+        text-align: center;
+    }
+}
+
+form[name="ra_verify_phone_number"] {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 525px;
+
+    input[type="text"] {
+        font-family: "Monaco", "Inconsolata", "Consolas", monospace;
+        text-transform: uppercase;
+    }
+}

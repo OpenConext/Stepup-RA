@@ -16,31 +16,26 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Command;
+namespace Surfnet\StepupRa\RaBundle\Repository;
 
-use Symfony\Component\Validator\Constraints as Assert;
+use Surfnet\StepupRa\RaBundle\VettingProcedure;
 
-class VerifyYubikeyOtpCommand
+interface VettingProcedureRepository
 {
     /**
-     * @Assert\NotBlank(message="ra.verify_yubikey_command.otp.may_not_be_empty")
-     * @Assert\Type(type="string", message="ra.verify_yubikey_command.otp.must_be_string")
-     *
-     * @var string
+     * @param VettingProcedure $vettingProcedure
      */
-    public $otp;
+    public function store(VettingProcedure $vettingProcedure);
 
     /**
-     * The requesting identity's ID (not name ID).
-     *
-     * @var string
+     * @param string $id
+     * @return VettingProcedure|null
      */
-    public $identityId;
+    public function retrieve($id);
 
     /**
-     * The requesting identity's institution.
-     *
-     * @var string
+     * @param string $id
+     * @return void
      */
-    public $institution;
+    public function remove($id);
 }

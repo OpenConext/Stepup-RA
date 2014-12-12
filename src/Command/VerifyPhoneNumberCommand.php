@@ -18,29 +18,16 @@
 
 namespace Surfnet\StepupRa\RaBundle\Command;
 
+use Surfnet\StepupRa\RaBundle\VettingProcedure;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class VerifyYubikeyOtpCommand
+class VerifyPhoneNumberCommand
 {
     /**
-     * @Assert\NotBlank(message="ra.verify_yubikey_command.otp.may_not_be_empty")
-     * @Assert\Type(type="string", message="ra.verify_yubikey_command.otp.must_be_string")
+     * @Assert\NotBlank(message="ra.verify_phone_number_command.challenge.may_not_be_empty")
+     * @Assert\Type(type="string", message="ra.verify_phone_number_command.challenge.must_be_string")
      *
      * @var string
      */
-    public $otp;
-
-    /**
-     * The requesting identity's ID (not name ID).
-     *
-     * @var string
-     */
-    public $identityId;
-
-    /**
-     * The requesting identity's institution.
-     *
-     * @var string
-     */
-    public $institution;
+    public $challenge;
 }

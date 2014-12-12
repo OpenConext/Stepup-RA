@@ -19,44 +19,35 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ButtonTypeInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AnchorType extends AbstractType implements ButtonTypeInterface
+class VerifyYubikeyPublicIdType extends AbstractType
 {
-    public function getParent()
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        return 'button';
-    }
-
-    public function getName()
-    {
-        return 'anchor';
+        $builder->add('otp', 'text', [
+            'label' => /** @Ignore */ false,
+            'required' => true,
+            'widget_addon_prepend' => [
+                'icon' => 'key'
+            ],
+            'attr' => [
+                'autofocus' => true,
+                'autocomplete' => 'off',
+            ]
+        ]);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'route'            => null,
-            'route_parameters' => [],
-            'auto_initialize'  => false,
-        ]);
-
-        $resolver->setRequired(['route']);
-
-        $resolver->setAllowedTypes([
-            'route'            => 'string',
-            'route_parameters' => 'array',
+            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand',
         ]);
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function getName()
     {
-        parent::buildView($view, $form, $options);
-
-        $view->vars['route'] = $options['route'];
-        $view->vars['routeParameters'] = $options['route_parameters'];
+        return 'ra_verify_yubikey_public_id';
     }
 }

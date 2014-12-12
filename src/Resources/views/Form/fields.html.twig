@@ -6,7 +6,7 @@
         {% if label is empty %}
             {% set label = name|humanize %}
         {% endif %}
-        <a href="{{ path(route) }}" {{ block('button_attributes') }}>
+        <a href="{{ path(route, routeParameters) }}" {{ block('button_attributes') }}>
             {% if icon is not empty %}
                 {{ mopa_bootstrap_icon(icon, icon_inverted|default(false)) }}
             {% endif %}

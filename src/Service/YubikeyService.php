@@ -53,7 +53,7 @@ class YubikeyService
         $this->logger->info('Verifying Yubikey OTP');
 
         $body = [
-            'requester' => ['institution' => $command->institution, 'identity' => $command->identity],
+            'requester' => ['institution' => $command->institution, 'identity' => $command->identityId],
             'otp' => ['value' => $command->otp],
         ];
         $response = $this->guzzleClient->post('api/verify-yubikey', ['json' => $body, 'exceptions' => false]);
