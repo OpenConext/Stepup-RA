@@ -5,7 +5,7 @@
 {% block page_header %}
     {{ parent() }}
 
-    {% include 'SurfnetStepupRaRaBundle:Vetting/partial:progressBar.html.twig' with {'progress': 25} only %}
+    {% include 'SurfnetStepupRaRaBundle:Vetting/partial:progressBar.html.twig' with {'progress': 25, 'step': 2} only %}
 {% endblock %}
 
 {% block content %}
