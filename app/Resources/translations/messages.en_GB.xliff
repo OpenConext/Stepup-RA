@@ -14,9 +14,7 @@
       </trans-unit>
       <trans-unit id="b190a055ec0458747cdff543e6693c2433a6eb6b" resname="ra.form.ra_send_sms_challenge.button.send_challenge">
         <jms:reference-file line="30">Form/Type/SendSmsChallengeType.php</jms:reference-file>
-        <source>ra.form.ra_send_sms_challenge.button.send_challenge</source>
-        <target>Request new code</target>
-      </trans-unit>
+        <source>ra.form.ra_send_sms_challenge.button.send_challenge</source> <target state="needs-translation">Send code</target> </trans-unit>
       <trans-unit id="7adfead474c46f8b890dc00049e7d0f031ebff1a" resname="ra.form.ra_send_sms_challenge.label.phone_number">
         <jms:reference-file line="29">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
         <source>ra.form.ra_send_sms_challenge.label.phone_number</source>
@@ -135,9 +133,7 @@
       </trans-unit>
       <trans-unit id="122625611b2434287aaf762b79f6c5ef2d54de9c" resname="ra.vetting.sms.send_challenge.title.page">
         <jms:reference-file line="3">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
-        <source>ra.vetting.sms.send_challenge.title.page</source>
-        <target>Send SMS-code</target>
-      </trans-unit>
+        <source>ra.vetting.sms.send_challenge.title.page</source> <target state="needs-translation">Send SMS code</target> </trans-unit>
       <trans-unit id="9693ed02e85804a1bbc1c925f2fb4fdad1ef1abe" resname="ra.vetting.sms.text.after_pressing_proceed">
         <jms:reference-file line="19">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
         <source>ra.vetting.sms.text.after_pressing_proceed</source>
