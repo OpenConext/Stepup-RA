@@ -91,8 +91,7 @@ class SamlInteractionProvider
             $this->identityProvider
         );
 
-        // @todo this will be enabled in a later PR, depends on the Gateway
-//        $authnRequest->setAuthenticationContext([$this->requiredLoa]);
+        $authnRequest->setAuthenticationContext([$this->requiredLoa]);
 
         $this->sessionHandler->setRequestId($authnRequest->getRequestId());
 
