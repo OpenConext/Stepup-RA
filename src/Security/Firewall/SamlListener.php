@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Security\Firewall;
 
 use Exception;
 use Psr\Log\LoggerInterface;
+use Surfnet\SamlBundle\SAML2\Response\Assertion\InResponseTo;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SamlInteractionProvider;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SessionHandler;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
@@ -87,11 +88,16 @@ class SamlListener implements ListenerInterface
             return;
         }
 
+        $expectedInResponseTo = $this->sessionHandler->getRequestId();
         try {
             $assertion = $this->samlInteractionProvider->processSamlResponse($event->getRequest());
         } catch (Exception $e) {
             $this->logger->error(sprintf('Failed SAMLResponse Parsing: "%s"', $e->getMessage()));
             throw new AuthenticationException('Failed SAMLResponse parsing', 0, $e);
+        }
+
+        if (!InResponseTo::assertEquals($assertion, $expectedInResponseTo)) {
+            throw new AuthenticationException('Unknown or unexpected InResponseTo in SAMLResponse');
         }
 
         $token = new SamlToken();
