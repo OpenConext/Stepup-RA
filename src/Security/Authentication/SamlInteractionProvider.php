@@ -115,4 +115,13 @@ class SamlInteractionProvider
 
         return $assertion;
     }
+
+    /**
+     * Resets the SAML flow.
+     */
+    public function reset()
+    {
+        $this->sessionHandler->clearRequestId();
+        $this->sessionHandler->clearToken();
+    }
 }
