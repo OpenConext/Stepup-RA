@@ -230,6 +230,21 @@
         <source>ra.vetting.verify_identity.title</source>
         <target>Identiteit natrekken</target>
       </trans-unit>
+      <trans-unit id="08aec9430aaba5a2b7652c24582bbb0bb320d1f9" resname="ra.vetting.vetting_completed.button.back_to_dashboard">
+        <jms:reference-file line="17">views/Vetting/vettingCompleted.html.twig</jms:reference-file>
+        <source>ra.vetting.vetting_completed.button.back_to_dashboard</source>
+        <target>Terug naar het dashboard</target>
+      </trans-unit>
+      <trans-unit id="85f8a896e4fb57f2dd0a05049395117fe378df66" resname="ra.vetting.vetting_completed.text.vetting_completed">
+        <jms:reference-file line="14">views/Vetting/vettingCompleted.html.twig</jms:reference-file>
+        <source>ra.vetting.vetting_completed.text.vetting_completed</source>
+        <target>De registrant heeft het bezit van zijn/haar token bewezen en het token, de digitale identiteit en de fysieke identiteit zijn gekoppeld.</target>
+      </trans-unit>
+      <trans-unit id="34b41c5dfa574f1b89314b57e2feb702bde49aee" resname="ra.vetting.vetting_completed.title">
+        <jms:reference-file line="3">views/Vetting/vettingCompleted.html.twig</jms:reference-file>
+        <source>ra.vetting.vetting_completed.title</source>
+        <target>Token gekoppeld</target>
+      </trans-unit>
       <trans-unit id="da87c92a1202225a559ff2b66b96128cca9c2c29" resname="ra.vetting.yubikey.text.connect_yubikey_to_pc">
         <jms:reference-file line="17">Vetting/Yubikey/verify.html.twig</jms:reference-file>
         <source>ra.vetting.yubikey.text.connect_yubikey_to_pc</source>
