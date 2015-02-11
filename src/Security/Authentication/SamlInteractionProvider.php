@@ -91,7 +91,7 @@ class SamlInteractionProvider
             $this->identityProvider
         );
 
-        $authnRequest->setAuthenticationContext([$this->requiredLoa]);
+        $authnRequest->setAuthenticationContextClassRef($this->requiredLoa);
 
         $this->sessionHandler->setRequestId($authnRequest->getRequestId());
 
