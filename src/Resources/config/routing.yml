@@ -32,3 +32,8 @@ ra_vetting_verify_identity:
     path:     /vetting-procedure/{procedureId}/verify-identity
     methods:  [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:verifyIdentity }
+
+ra_vetting_completed:
+    path:     /vetting-procedure/{procedureId}/completed
+    methods:  [GET]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:vettingCompleted }

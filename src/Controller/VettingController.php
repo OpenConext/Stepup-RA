@@ -96,7 +96,7 @@ class VettingController extends Controller
 
                 try {
                     if ($vettingService->vet($procedureId)) {
-                        return $this->redirectToRoute('ra_vetting_search');
+                        return $this->redirectToRoute('ra_vetting_completed', ['procedureId' => $procedureId]);
                     }
 
                     $this->get('logger')->error('RA attempted to vet second factor, but the command failed');
@@ -121,6 +121,14 @@ class VettingController extends Controller
             'commonName' => $vettingService->getIdentityCommonName($procedureId),
             'form' => $form->createView()
         ];
+    }
+
+    /**
+     * @Template
+     */
+    public function vettingCompletedAction()
+    {
+        return [];
     }
 
     /**
