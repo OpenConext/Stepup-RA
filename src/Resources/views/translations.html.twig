@@ -1,16 +1,15 @@
 {# Store hidden translation keys here so they will be picked up by JMSTranslationBundle #}
 
 {# VettingController #}
-{{ 'ra.form.start_vetting_procedure.unknown_registration_code'|trans }}
+{{ 'ra.form.start_vetting_procedure.unknown_registration_code'|trans({}, 'validators') }}
+{{ 'ra.verify_identity.second_factor_vetting_failed'|trans({}, 'validators') }}
+{{ 'ra.verify_identity.identity_verification_failed'|trans({}, 'validators') }}
 
 {# Prove Yubikey form #}
-{{ 'ra.verify_yubikey_command.otp.verification_error'|trans }}
-{{ 'ra.prove_yubikey_possession.different_yubikey_used'|trans }}
-{{ 'ra.verify_identity.second_factor_vetting_failed'|trans }}
+{{ 'ra.verify_yubikey_command.otp.otp_invalid'|trans({}, 'validators') }}
+{{ 'ra.verify_yubikey_command.otp.verification_error'|trans({}, 'validators') }}
+{{ 'ra.prove_yubikey_possession.different_yubikey_used'|trans({}, 'validators') }}
 
 {# SmsController #}
-{{ 'ra.sms_send_challenge.phone_number_mismatch'|trans }}
-{{ 'ra.sms_send_challenge.send_sms_challenge_failed'|trans }}
-{{ 'ra.prove_phone_possession.proof_of_possession_failed'|trans }}
-{{ 'ra.prove_phone_possession.phone_number_mismatch'|trans }}
-{{ 'ra.prove_phone_possession.proof_of_possession_failed'|trans }}
+{{ 'ra.sms_send_challenge.send_sms_challenge_failed'|trans({}, 'validators') }}
+{{ 'ra.prove_phone_possession.proof_of_possession_failed'|trans({}, 'validators') }}

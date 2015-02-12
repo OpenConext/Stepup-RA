@@ -26,6 +26,7 @@ class VerificationResult
     const RESULT_PUBLIC_ID_MATCHED = 0;
     const RESULT_PUBLIC_ID_DID_NOT_MATCH = 1;
     const RESULT_OTP_VERIFICATION_FAILED = 2;
+    const RESULT_OTP_INVALID = 3;
 
     /**
      * @var string|null
@@ -46,7 +47,8 @@ class VerificationResult
         $acceptableResults = [
             self::RESULT_PUBLIC_ID_MATCHED,
             self::RESULT_PUBLIC_ID_DID_NOT_MATCH,
-            self::RESULT_OTP_VERIFICATION_FAILED
+            self::RESULT_OTP_VERIFICATION_FAILED,
+            self::RESULT_OTP_INVALID,
         ];
 
         if (!in_array($result, $acceptableResults)) {
@@ -64,6 +66,11 @@ class VerificationResult
     public function didPublicIdMatch()
     {
         return $this->result === self::RESULT_PUBLIC_ID_MATCHED && is_string($this->publicId);
+    }
+
+    public function wasOtpInvalid()
+    {
+        return $this->result === self::RESULT_OTP_INVALID;
     }
 
     public function didOtpVerificationFail()

@@ -57,10 +57,13 @@ class YubikeySecondFactorService
         $verifyOtpCommand->identityId = $command->identityId;
         $verifyOtpCommand->institution = $command->institution;
 
+        $verificationResult = $this->yubikeyService->verify($verifyOtpCommand);
         $publicId = Otp::isValid($command->otp) ? Otp::fromString($command->otp)->publicId : null;
 
-        if (!$this->yubikeyService->verify($verifyOtpCommand)) {
+        if ($verificationResult->isServerError()) {
             return new VerificationResult(VerificationResult::RESULT_OTP_VERIFICATION_FAILED, $publicId);
+        } elseif ($verificationResult->isClientError()) {
+            return new VerificationResult(VerificationResult::RESULT_OTP_INVALID, $publicId);
         }
 
         if ($publicId !== $command->expectedPublicId) {
