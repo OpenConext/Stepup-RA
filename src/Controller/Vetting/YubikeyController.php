@@ -44,6 +44,8 @@ class YubikeyController extends Controller
 
             if ($result->didPublicIdMatch()) {
                 return $this->redirectToRoute('ra_vetting_verify_identity', ['procedureId' => $procedureId]);
+            } elseif ($result->wasOtpInvalid()) {
+                $form->get('otp')->addError(new FormError('ra.verify_yubikey_command.otp.otp_invalid'));
             } elseif ($result->didOtpVerificationFail()) {
                 $form->get('otp')->addError(new FormError('ra.verify_yubikey_command.otp.verification_error'));
             } else {
