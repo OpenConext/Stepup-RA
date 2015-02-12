@@ -86,7 +86,7 @@ class SmsController extends Controller
             );
         }
 
-        $form->addError(new FormError('ra.prove_phone_possession.proof_of_possession_failed'));
+        $form->addError(new FormError('ra.prove_phone_possession.challenge_response_incorrect'));
 
         return ['form' => $form->createView()];
     }

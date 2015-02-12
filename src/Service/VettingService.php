@@ -108,7 +108,7 @@ class VettingService
     /**
      * @param $procedureId
      * @param VerifyPhoneNumberCommand $command
-     * @return int One of the VerificationResult::RESULT_* constants.
+     * @return bool
      * @throws UnknownVettingProcedureException
      * @throws DomainException
      */
