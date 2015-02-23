@@ -1845,12 +1845,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-saml-bundle.git",
-                "reference": "9948f0e1eba25bf3fa5349fddfb88181d1056a44"
+                "reference": "f3be91f57c802ead44307ca94ace3774f1e8b090"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-saml-bundle/zipball/9948f0e1eba25bf3fa5349fddfb88181d1056a44",
-                "reference": "9948f0e1eba25bf3fa5349fddfb88181d1056a44",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-saml-bundle/zipball/f3be91f57c802ead44307ca94ace3774f1e8b090",
+                "reference": "f3be91f57c802ead44307ca94ace3774f1e8b090",
                 "shasum": ""
             },
             "require": {
@@ -1883,7 +1883,7 @@
                 "stepup",
                 "surfnet"
             ],
-            "time": "2015-02-11 12:41:51"
+            "time": "2015-02-23 13:01:51"
         },
         {
             "name": "swiftmailer/swiftmailer",
