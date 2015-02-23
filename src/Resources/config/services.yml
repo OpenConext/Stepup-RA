@@ -111,6 +111,7 @@ services:
             - @ra.security.authentication.saml
             - @ra.security.authentication.session_handler
             - @logger
+            - @twig
 
     ra.security.authentication.saml:
         public: false

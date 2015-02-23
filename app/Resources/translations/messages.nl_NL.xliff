@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-02-12T12:29:18Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2015-02-23T14:09:01Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -22,6 +22,41 @@
         <jms:reference-file line="3">views/Exception/error404.html.twig</jms:reference-file>
         <source>ra.error.page_not_found.title</source>
         <target>Pagina niet gevonden</target>
+      </trans-unit>
+      <trans-unit id="47315f10d842cd2eebc6edd15f7fc5fa5bdeb631" resname="ra.error.saml_authn_failed.button.try_again">
+        <jms:reference-file line="10">Saml/Exception/authnFailed.html.twig</jms:reference-file>
+        <source>ra.error.saml_authn_failed.button.try_again</source>
+        <target>Opnieuw inloggen</target>
+      </trans-unit>
+      <trans-unit id="175453c747d9009681e48b1fea3c1a5bb83077ad" resname="ra.error.saml_authn_failed.text.authn_failed">
+        <jms:reference-file line="8">Saml/Exception/authnFailed.html.twig</jms:reference-file>
+        <source>ra.error.saml_authn_failed.text.authn_failed</source>
+        <target>U heeft niet in kunnen loggen.</target>
+      </trans-unit>
+      <trans-unit id="91796128309d18718b9a06d39bd0b24a705e8c4e" resname="ra.error.saml_authn_failed.title">
+        <jms:reference-file line="3">Saml/Exception/authnFailed.html.twig</jms:reference-file>
+        <source>ra.error.saml_authn_failed.title</source>
+        <target>Inloggen</target>
+      </trans-unit>
+      <trans-unit id="4c1a7f7aa6b9f7a2928e894933fac97b7d41198c" resname="ra.error.saml_no_authn_context.text.authn_failed">
+        <jms:reference-file line="8">Saml/Exception/noAuthnContext.html.twig</jms:reference-file>
+        <source>ra.error.saml_no_authn_context.text.authn_failed</source>
+        <target>U heeft niet de benodigde veiligheidsmachtiging om in de Registration Authority-applicatie in te loggen.</target>
+      </trans-unit>
+      <trans-unit id="16cdeb502fd697b0179fb1a528fc59f216ba2184" resname="ra.error.saml_no_authn_context.title">
+        <jms:reference-file line="3">Saml/Exception/noAuthnContext.html.twig</jms:reference-file>
+        <source>ra.error.saml_no_authn_context.title</source>
+        <target>Onvoldoende veiligheidsmachtiging</target>
+      </trans-unit>
+      <trans-unit id="d480fbb8440eb4218358f6d448b7033e5ddf201c" resname="ra.error.saml_precondition_not_met.text.precondition_not_met">
+        <jms:reference-file line="8">Saml/Exception/preconditionNotMet.html.twig</jms:reference-file>
+        <source>ra.error.saml_precondition_not_met.text.precondition_not_met</source>
+        <target>U voldoet niet aan alle voorwaarden om in te mogen loggen bij de Registration Authority-applicatie.</target>
+      </trans-unit>
+      <trans-unit id="b286c74078cb8da3bc0126dc1d888d9f445468b9" resname="ra.error.saml_precondition_not_met.title">
+        <jms:reference-file line="3">Saml/Exception/preconditionNotMet.html.twig</jms:reference-file>
+        <source>ra.error.saml_precondition_not_met.title</source>
+        <target>Inloggen</target>
       </trans-unit>
       <trans-unit id="40350a9cdf8f8964a6900f7dc524a91fa7b23df6" resname="ra.error.text.an_error_occurred">
         <jms:reference-file line="8">views/Exception/error.html.twig</jms:reference-file>
