@@ -112,6 +112,7 @@ class SamlListener implements ListenerInterface
         try {
             $assertion = $this->samlInteractionProvider->processSamlResponse($event->getRequest());
         } catch (PreconditionNotMetException $e) {
+            $this->logger->notice(sprintf('SAML response precondition not met: "%s"', $e->getMessage()));
             return $this->setPreconditionExceptionResponse($e, $event);
         } catch (Exception $e) {
             $this->logger->error(sprintf('Failed SAMLResponse Parsing: "%s"', $e->getMessage()));
