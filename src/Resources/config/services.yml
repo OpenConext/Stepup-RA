@@ -89,6 +89,13 @@ services:
             - @surfnet_stepup_middleware_client.service.command
             - @logger
 
+    ra.service.ra_second_factor:
+        class: Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService
+        arguments:
+            - @surfnet_stepup_middleware_client.identity.service.ra_second_factor
+            - @surfnet_stepup_middleware_client.service.command
+            - @logger
+
     # Repositories
     ra.repository.vetting_procedure:
         class: Surfnet\StepupRa\RaBundle\Repository\SessionVettingProcedureRepository

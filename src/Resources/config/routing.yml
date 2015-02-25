@@ -13,6 +13,11 @@ ra_vetting_search:
     methods: [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:startProcedure }
 
+ra_second_factors_search:
+    path:     /second-factors
+    methods: [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:SecondFactor:search }
+
 ra_vetting_yubikey_verify:
     path: /vetting-procedure/{procedureId}/verify-yubikey
     methods: [GET, POST]

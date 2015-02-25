@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-02-23T14:09:01Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2015-03-02T13:27:38Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -134,9 +134,84 @@
         <source>ra.form.verify_identity.verify_identity.button</source>
         <target>Identiteit bevestigen</target>
       </trans-unit>
+      <trans-unit id="7d6a9d74b9561d924dc4411c3ceebc63a01c83ae" resname="ra.menu.registration">
+        <jms:reference-file line="31">Resources/views/base.html.twig</jms:reference-file>
+        <source>ra.menu.registration</source>
+        <target>Registratie</target>
+      </trans-unit>
+      <trans-unit id="1a955d4adfae2bc0a0c0177a672e95c7dcbb486d" resname="ra.menu.search">
+        <jms:reference-file line="32">Resources/views/base.html.twig</jms:reference-file>
+        <source>ra.menu.search</source>
+        <target>Beveiligingstokens</target>
+      </trans-unit>
       <trans-unit id="ee8b15d139dd5ba69eb2bfbc1c540b03894bafd7" resname="ra.registration.yubikey.title.enter_challenge">
         <jms:reference-file line="3">Vetting/Yubikey/verify.html.twig</jms:reference-file>
         <source>ra.registration.yubikey.title.enter_challenge</source>
+        <target>Yubikey</target>
+      </trans-unit>
+      <trans-unit id="e091076baef38f98898434eb2e98795a0c439a9e" resname="ra.second_factor.search.column.email">
+        <jms:reference-file line="15">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.column.email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="21e718b7694ff1f02469cb238e02b7a7ff64bb1a" resname="ra.second_factor.search.column.name">
+        <jms:reference-file line="14">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.column.name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="12433df5e39e32ee3299e49c188a30bd31df39e2" resname="ra.second_factor.search.column.second_factor_id">
+        <jms:reference-file line="12">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.column.second_factor_id</source>
+        <target>Token-ID</target>
+      </trans-unit>
+      <trans-unit id="58e40269b93faaaea1a3f28625676038219aa401" resname="ra.second_factor.search.column.status">
+        <jms:reference-file line="16">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.column.status</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="34c288fe87f33cd2c28aef89b556aace8a8e64d2" resname="ra.second_factor.search.column.type">
+        <jms:reference-file line="13">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.column.type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="5396da3d169284da408b7e41c919fc3cbb0a7789" resname="ra.second_factor.search.status.revoked">
+        <jms:reference-file line="23">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.status.revoked</source>
+        <target>Ingetrokken</target>
+      </trans-unit>
+      <trans-unit id="b95f6a983c4cb565e06b2b444afd9e53737e41d7" resname="ra.second_factor.search.status.unverified">
+        <jms:reference-file line="20">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.status.unverified</source>
+        <target>Ongeverifiëerd</target>
+      </trans-unit>
+      <trans-unit id="342a7ca495a8ab8baf8c65ca63c53558cb01688d" resname="ra.second_factor.search.status.verified">
+        <jms:reference-file line="21">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.status.verified</source>
+        <target>Geverifiëerd</target>
+      </trans-unit>
+      <trans-unit id="876f09e852960f57e319006c49585af1bbd55a84" resname="ra.second_factor.search.status.vetted">
+        <jms:reference-file line="22">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.status.vetted</source>
+        <target>Gekeurd</target>
+      </trans-unit>
+      <trans-unit id="b460113e39fffb71f86d0c0a9509b5c741924e99" resname="ra.second_factor.search.text.no_second_factors">
+        <jms:reference-file line="33">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.text.no_second_factors</source>
+        <target>Er zijn op dit moment geen geregistreerde beveiligingstokens.</target>
+      </trans-unit>
+      <trans-unit id="eb850d6b26e216bb475d931bd9d785fde606299d" resname="ra.second_factor.search.title">
+        <jms:reference-file line="3">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.title</source>
+        <target>Beveiligingstokens</target>
+      </trans-unit>
+      <trans-unit id="e806f4c23b643c67a31167df8119efee18fae7a6" resname="ra.second_factor.search.type.sms">
+        <jms:reference-file line="18">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.type.sms</source>
+        <target>SMS</target>
+      </trans-unit>
+      <trans-unit id="85d8e5c7803600b08c39830c29a12bee3aa97146" resname="ra.second_factor.search.type.yubikey">
+        <jms:reference-file line="19">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.type.yubikey</source>
         <target>Yubikey</target>
       </trans-unit>
       <trans-unit id="3f708a1089bb9a75621006456174cd658d18b541" resname="ra.vetting.progress_bar.enter_registration_code">
