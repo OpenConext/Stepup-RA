@@ -19,22 +19,38 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Surfnet\StepupMiddlewareClient\Identity\Dto\RaSecondFactorSearchQuery;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 final class SecondFactorController extends Controller
 {
     /**
      * @Template
+     * @param Request $request
+     * @return array|Response
      */
-    public function searchAction()
+    public function searchAction(Request $request)
     {
-        $secondFactors = $this->get('ra.service.ra_second_factor')->search(
-            new RaSecondFactorSearchQuery('Ibuildings bv')
-        );
+        /** @var Identity $identity */
+        $identity = $this->get('security.token_storage')->getToken()->getUser();
+
+        $command = new SearchRaSecondFactorsCommand();
+        $command->institution = $identity->institution;
+
+        $form = $this->createForm('ra_search_ra_second_factors', $command, ['method' => 'get']);
+        $form->handleRequest($request);
+
+        $secondFactors = $this->get('ra.service.ra_second_factor')->search($command);
 
         return [
-            'secondFactors' => $secondFactors,
+            'form'          => $form->createView(),
+            'secondFactors'  => $secondFactors,
+            'orderBy'        => $command->orderBy,
+            'orderDirection' => $command->orderDirection ?: 'asc',
+            'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',
         ];
     }
 }

@@ -5,15 +5,48 @@
 {% block content %}
     <div class="row">
         <div class="col-sm-12">
+            {{ form(form) }}
+
+            <hr>
+
             {% if secondFactors.elements|length > 0 %}
+                {% import _self as search %}
+
+                {% macro sort(name, currentOrderBy, currentOrderDirection, currentInverseOrderDirection) %}
+                    {% if currentOrderBy == name %}
+                        <a href="{{ path('ra_second_factors_search', app.request.query.all|merge({'ra_search_ra_second_factors[orderDirection]': currentInverseOrderDirection})) }}">
+                            <i class="fa fa-sort-{{ currentOrderDirection }}"></i>
+                        </a>
+                    {% else %}
+                        <a href="{{ path('ra_second_factors_search', app.request.query.all|merge({'ra_search_ra_second_factors[orderBy]': name, 'ra_search_ra_second_factors[orderDirection]': 'asc'})) }}">
+                            <i class="fa fa-sort"></i>
+                        </a>
+                    {% endif %}
+                {% endmacro %}
+
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>{{ 'ra.second_factor.search.column.second_factor_id'|trans }}</th>
-                        <th>{{ 'ra.second_factor.search.column.type'|trans }}</th>
-                        <th>{{ 'ra.second_factor.search.column.name'|trans }}</th>
-                        <th>{{ 'ra.second_factor.search.column.email'|trans }}</th>
-                        <th>{{ 'ra.second_factor.search.column.status'|trans }}</th>
+                        <th>
+                            {{ 'ra.second_factor.search.column.second_factor_id'|trans }}
+                            {{ search.sort('secondFactorId', orderBy, orderDirection, inverseOrderDirection) }}
+                        </th>
+                        <th>
+                            {{ 'ra.second_factor.search.column.type'|trans }}
+                            {{ search.sort('type', orderBy, orderDirection, inverseOrderDirection) }}
+                        </th>
+                        <th>
+                            {{ 'ra.second_factor.search.column.name'|trans }}
+                            {{ search.sort('name', orderBy, orderDirection, inverseOrderDirection) }}
+                        </th>
+                        <th>
+                            {{ 'ra.second_factor.search.column.email'|trans }}
+                            {{ search.sort('email', orderBy, orderDirection, inverseOrderDirection) }}
+                        </th>
+                        <th>
+                            {{ 'ra.second_factor.search.column.status'|trans }}
+                            {{ search.sort('status', orderBy, orderDirection, inverseOrderDirection) }}
+                        </th>
                     </tr>
                     </thead>
                     <tbody>

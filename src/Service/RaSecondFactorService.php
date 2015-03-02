@@ -23,6 +23,7 @@ use Surfnet\StepupMiddlewareClient\Identity\Dto\RaSecondFactorSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaSecondFactorCollection;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaSecondFactorService as ApiRaSecondFactorService;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
+use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 
 class RaSecondFactorService
 {
@@ -57,11 +58,41 @@ class RaSecondFactorService
     }
 
     /**
-     * @param RaSecondFactorSearchQuery $query
+     * @param SearchRaSecondFactorsCommand $command
      * @return RaSecondFactorCollection
      */
-    public function search(RaSecondFactorSearchQuery $query)
+    public function search(SearchRaSecondFactorsCommand $command)
     {
+        $query = new RaSecondFactorSearchQuery($command->institution);
+
+        if ($command->name) {
+            $query->setName($command->name);
+        }
+
+        if ($command->type) {
+            $query->setType($command->type);
+        }
+
+        if ($command->secondFactorId) {
+            $query->setSecondFactorId($command->secondFactorId);
+        }
+
+        if ($command->email) {
+            $query->setEmail($command->email);
+        }
+
+        if ($command->status) {
+            $query->setStatus($command->status);
+        }
+
+        if ($command->orderBy) {
+            $query->setOrderBy($command->orderBy);
+        }
+
+        if ($command->orderDirection) {
+            $query->setOrderDirection($command->orderDirection);
+        }
+
         return $this->apiRaSecondFactorService->search($query);
     }
 }
