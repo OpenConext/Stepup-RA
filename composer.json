@@ -27,7 +27,8 @@
         "surfnet/stepup-saml-bundle": "dev-develop",
         "surfnet/stepup-bundle": "dev-develop",
         "guzzlehttp/guzzle": "~4",
-        "symfony/swiftmailer-bundle": "~2.3"
+        "symfony/swiftmailer-bundle": "~2.3",
+        "knplabs/knp-paginator-bundle": "~2.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

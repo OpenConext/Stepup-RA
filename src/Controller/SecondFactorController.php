@@ -39,17 +39,25 @@ final class SecondFactorController extends Controller
 
         $command = new SearchRaSecondFactorsCommand();
         $command->institution = $identity->institution;
+        $command->pageNumber = (int) $request->get('p', 1);
 
         $form = $this->createForm('ra_search_ra_second_factors', $command, ['method' => 'get']);
         $form->handleRequest($request);
 
         $secondFactors = $this->get('ra.service.ra_second_factor')->search($command);
 
+        $pagination = $this->get('knp_paginator')->paginate(
+            array_fill(0, $secondFactors->getTotalItems(), 1),
+            $secondFactors->getCurrentPage(),
+            $secondFactors->getItemsPerPage()
+        );
+
         return [
-            'form'          => $form->createView(),
-            'secondFactors'  => $secondFactors,
-            'orderBy'        => $command->orderBy,
-            'orderDirection' => $command->orderDirection ?: 'asc',
+            'form'                  => $form->createView(),
+            'secondFactors'         => $secondFactors,
+            'pagination'            => $pagination,
+            'orderBy'               => $command->orderBy,
+            'orderDirection'        => $command->orderDirection ?: 'asc',
             'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',
         ];
     }

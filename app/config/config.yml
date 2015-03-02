@@ -152,3 +152,10 @@ jms_translation:
             excluded_names: ['*TestCase.php', '*Test.php']
             excluded_dirs: [cache, data, logs, Tests]
             extractors: []
+
+knp_paginator:
+    page_range: 5
+    default_options:
+        page_name: p
+    template:
+        pagination: MopaBootstrapBundle:Pagination:sliding.html.twig

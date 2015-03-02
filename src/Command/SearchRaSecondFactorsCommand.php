@@ -83,4 +83,12 @@ final class SearchRaSecondFactorsCommand
      * @var string|null
      */
     public $orderDirection;
+
+    /**
+     * @Assert\Type("integer", message="ra.search_ra_second_factors.page_number.type")
+     * @Assert\GreaterThan(0, message="ra.search_ra_second_factors.page_number.greater_than_zero")
+     *
+     * @var int
+     */
+    public $pageNumber;
 }

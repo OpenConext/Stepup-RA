@@ -61,6 +61,8 @@
                     {% endfor %}
                     </tbody>
                 </table>
+
+                {{ knp_pagination_render(pagination) }}
             {% else %}
                 <p>
                     {{ 'ra.second_factor.search.text.no_second_factors'|trans }}

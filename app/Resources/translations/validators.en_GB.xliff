@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-02-12T12:43:49Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2015-03-02T16:55:49Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -160,6 +160,38 @@
         <jms:reference-file line="11">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.prove_yubikey_possession.different_yubikey_used</source>
         <target>A different Yubikey was used during the registration process.</target>
+      </trans-unit>
+      <trans-unit id="96fa6c297f7ae3acce042b0fe9a271753761c646" resname="ra.search_ra_second_factors.institution.blank">
+        <source>ra.search_ra_second_factors.institution.blank</source>
+        <target>Identity institution must be filled out.</target>
+      </trans-unit>
+      <trans-unit id="2857be76516afd4c42c8fd8f2f0111b41fd1d0ab" resname="ra.search_ra_second_factors.institution.type">
+        <source>ra.search_ra_second_factors.institution.type</source>
+        <target>Identity institution must be a string.</target>
+      </trans-unit>
+      <trans-unit id="63a7ae276c7780ef51e59bed7c762f30d8d7dff3" resname="ra.search_ra_second_factors.order_by.invalid_choice">
+        <source>ra.search_ra_second_factors.order_by.invalid_choice</source>
+        <target>Cannot sort by given column.</target>
+      </trans-unit>
+      <trans-unit id="a5f3a4004ff31a1cae1da1b520852d2d7ff62af9" resname="ra.search_ra_second_factors.order_direction.invalid_choice">
+        <source>ra.search_ra_second_factors.order_direction.invalid_choice</source>
+        <target>Cannot sort in given direction.</target>
+      </trans-unit>
+      <trans-unit id="aa510fb37ff449341393cc8cf9d8e928ea175ac7" resname="ra.search_ra_second_factors.page_number.greater_than_zero">
+        <source>ra.search_ra_second_factors.page_number.greater_than_zero</source>
+        <target>Page number must be greater than zero.</target>
+      </trans-unit>
+      <trans-unit id="7093c1aa981f640cbcc59c54355db93e393179e0" resname="ra.search_ra_second_factors.page_number.type">
+        <source>ra.search_ra_second_factors.page_number.type</source>
+        <target>Page number must be an integer.</target>
+      </trans-unit>
+      <trans-unit id="748937a659d4aa99dc50f581104a1d507d2ce2da" resname="ra.search_ra_second_factors.status.invalid_choice">
+        <source>ra.search_ra_second_factors.status.invalid_choice</source>
+        <target>Cannot filter by given status.</target>
+      </trans-unit>
+      <trans-unit id="35adfd1c62274a4757400abb4c2cb8a4d7d295c6" resname="ra.search_ra_second_factors.type.invalid_choice">
+        <source>ra.search_ra_second_factors.type.invalid_choice</source>
+        <target>Cannot filter by given token type.</target>
       </trans-unit>
       <trans-unit id="0facb08a0b6d9cecff3d2f842519b3cada5837a0" resname="ra.send_sms_command.recipient.may_not_be_empty">
         <source>ra.send_sms_command.recipient.may_not_be_empty</source>

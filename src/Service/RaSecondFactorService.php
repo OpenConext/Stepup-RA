@@ -63,7 +63,7 @@ class RaSecondFactorService
      */
     public function search(SearchRaSecondFactorsCommand $command)
     {
-        $query = new RaSecondFactorSearchQuery($command->institution);
+        $query = new RaSecondFactorSearchQuery($command->institution, $command->pageNumber);
 
         if ($command->name) {
             $query->setName($command->name);
