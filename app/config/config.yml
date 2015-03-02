@@ -157,5 +157,8 @@ knp_paginator:
     page_range: 5
     default_options:
         page_name: p
+        sort_field_name: orderBy
+        sort_direction_name: orderDirection
     template:
         pagination: MopaBootstrapBundle:Pagination:sliding.html.twig
+        sortable: SurfnetStepupRaRaBundle:Pagination:sortable_link.html.twig

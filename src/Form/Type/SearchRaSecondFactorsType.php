@@ -53,8 +53,6 @@ class SearchRaSecondFactorsType extends AbstractType
             ],
             'required' => false,
         ]);
-        $builder->add('orderBy', 'hidden');
-        $builder->add('orderDirection', 'hidden');
         $builder->add('search', 'submit', [
             'label' => 'ra.form.ra_search_ra_second_factors.button.search',
             'attr' => [ 'class' => 'btn btn-primary' ],

@@ -40,6 +40,8 @@ final class SecondFactorController extends Controller
         $command = new SearchRaSecondFactorsCommand();
         $command->institution = $identity->institution;
         $command->pageNumber = (int) $request->get('p', 1);
+        $command->orderBy = $request->get('orderBy');
+        $command->orderDirection = $request->get('orderDirection');
 
         $form = $this->createForm('ra_search_ra_second_factors', $command, ['method' => 'get']);
         $form->handleRequest($request);
