@@ -40,6 +40,7 @@ class AppKernel extends Kernel
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\AopBundle\JMSAopBundle(),
+            // Replace with Pagerfanta https://www.pivotaltracker.com/story/show/89688680
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
 
