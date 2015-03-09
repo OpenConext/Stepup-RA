@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-03-02T15:56:56Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2015-03-09T14:26:51Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -16,7 +16,7 @@
         <jms:reference-file line="9">views/Exception/error.html.twig</jms:reference-file>
         <jms:reference-file line="9">views/Exception/error404.html.twig</jms:reference-file>
         <source>ra.error.button.go_home</source>
-        <target>Terug naar het dashboard</target>
+        <target>Terug naar Home</target>
       </trans-unit>
       <trans-unit id="6d60c5162dbeb9c4b044e13179d6cf00136039a2" resname="ra.error.page_not_found.title">
         <jms:reference-file line="3">views/Exception/error404.html.twig</jms:reference-file>
@@ -90,7 +90,7 @@
         <target>Foutmelding</target>
       </trans-unit>
       <trans-unit id="7317a2726d1f0c5a5457e36c46f817004792dd9d" resname="ra.form.ra_search_ra_second_factors.button.search">
-        <jms:reference-file line="59">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="57">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.button.search</source>
         <target>Zoeken</target>
       </trans-unit>
@@ -155,7 +155,7 @@
         <target>Verstuur code</target>
       </trans-unit>
       <trans-unit id="7adfead474c46f8b890dc00049e7d0f031ebff1a" resname="ra.form.ra_send_sms_challenge.label.phone_number">
-        <jms:reference-file line="29">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
+        <jms:reference-file line="26">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
         <source>ra.form.ra_send_sms_challenge.label.phone_number</source>
         <target>Telefoonnummer</target>
       </trans-unit>
@@ -182,17 +182,17 @@
       <trans-unit id="d6e1e4afd83a6b390c24762cee6939338734afc5" resname="ra.form.verify_identity.document_number.label">
         <jms:reference-file line="30">Form/Type/VerifyIdentityType.php</jms:reference-file>
         <source>ra.form.verify_identity.document_number.label</source>
-        <target>Documentnummer</target>
+        <target>Laatste 6 karakters van documentnummer</target>
       </trans-unit>
       <trans-unit id="7a8ae994c21e499a1774bc81190c90f6cd7a16d5" resname="ra.form.verify_identity.identity_verified.label">
         <jms:reference-file line="37">Form/Type/VerifyIdentityType.php</jms:reference-file>
         <source>ra.form.verify_identity.identity_verified.label</source>
-        <target>Ik heb de identiteit van de registrant nagetrokken.</target>
+        <target>Ik heb de identiteit van de gebruiker succesvol kunnen verifiëren.</target>
       </trans-unit>
       <trans-unit id="975e2aa48fa95999ba9438d5f377e097fad24d17" resname="ra.form.verify_identity.verify_identity.button">
         <jms:reference-file line="42">Form/Type/VerifyIdentityType.php</jms:reference-file>
         <source>ra.form.verify_identity.verify_identity.button</source>
-        <target>Identiteit bevestigen</target>
+        <target>Verifieer identiteit</target>
       </trans-unit>
       <trans-unit id="7d6a9d74b9561d924dc4411c3ceebc63a01c83ae" resname="ra.menu.registration">
         <jms:reference-file line="31">Resources/views/base.html.twig</jms:reference-file>
@@ -210,27 +210,27 @@
         <target>Yubikey</target>
       </trans-unit>
       <trans-unit id="e091076baef38f98898434eb2e98795a0c439a9e" resname="ra.second_factor.search.column.email">
-        <jms:reference-file line="15">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="19">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.search.column.email</source>
         <target>E-mail</target>
       </trans-unit>
       <trans-unit id="21e718b7694ff1f02469cb238e02b7a7ff64bb1a" resname="ra.second_factor.search.column.name">
-        <jms:reference-file line="14">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="18">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.search.column.name</source>
         <target>Naam</target>
       </trans-unit>
       <trans-unit id="12433df5e39e32ee3299e49c188a30bd31df39e2" resname="ra.second_factor.search.column.second_factor_id">
-        <jms:reference-file line="12">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="16">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.search.column.second_factor_id</source>
         <target>Token-ID</target>
       </trans-unit>
       <trans-unit id="58e40269b93faaaea1a3f28625676038219aa401" resname="ra.second_factor.search.column.status">
-        <jms:reference-file line="16">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="20">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.search.column.status</source>
         <target>Status</target>
       </trans-unit>
       <trans-unit id="34c288fe87f33cd2c28aef89b556aace8a8e64d2" resname="ra.second_factor.search.column.type">
-        <jms:reference-file line="13">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="17">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.search.column.type</source>
         <target>Type</target>
       </trans-unit>
@@ -255,7 +255,7 @@
         <target>Gekeurd</target>
       </trans-unit>
       <trans-unit id="b460113e39fffb71f86d0c0a9509b5c741924e99" resname="ra.second_factor.search.text.no_second_factors">
-        <jms:reference-file line="33">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="39">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.search.text.no_second_factors</source>
         <target>Er zijn op dit moment geen geregistreerde beveiligingstokens.</target>
       </trans-unit>
@@ -277,7 +277,7 @@
       <trans-unit id="3f708a1089bb9a75621006456174cd658d18b541" resname="ra.vetting.progress_bar.enter_registration_code">
         <jms:reference-file line="2">Vetting/partial/progressBar.html.twig</jms:reference-file>
         <source>ra.vetting.progress_bar.enter_registration_code</source>
-        <target>Registratiecode invoeren</target>
+        <target>Type registratiecode hier...</target>
       </trans-unit>
       <trans-unit id="02d4c777e02e931dbd3ea7679b63fef94c6a4568" resname="ra.vetting.progress_bar.prove_possession">
         <jms:reference-file line="3">Vetting/partial/progressBar.html.twig</jms:reference-file>
@@ -287,7 +287,7 @@
       <trans-unit id="597130e7834e42d27745084f2bb5e63d11f464fa" resname="ra.vetting.progress_bar.second_factor_vetted">
         <jms:reference-file line="5">Vetting/partial/progressBar.html.twig</jms:reference-file>
         <source>ra.vetting.progress_bar.second_factor_vetted</source>
-        <target>Beveiligingstoken gekeurd</target>
+        <target>Token geactiveerd</target>
       </trans-unit>
       <trans-unit id="e181bfdd209284dcfa1b54c6a7e815df0fa0165c" resname="ra.vetting.progress_bar.verify_identity">
         <jms:reference-file line="4">Vetting/partial/progressBar.html.twig</jms:reference-file>
@@ -310,49 +310,44 @@
         <target>SMS-code versturen</target>
       </trans-unit>
       <trans-unit id="9693ed02e85804a1bbc1c925f2fb4fdad1ef1abe" resname="ra.vetting.sms.text.after_pressing_proceed">
-        <jms:reference-file line="19">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
+        <jms:reference-file line="16">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
         <source>ra.vetting.sms.text.after_pressing_proceed</source>
-        <target>Nadat de registrant op "Versturen" heeft geklikt, ontvangt de registrant een SMS-bericht. Vul op de volgende pagina de code in.</target>
+        <target>Klik op 'Verstuur code' om een SMS code naar het opgegeven mobiele nummer te versturen.</target>
       </trans-unit>
       <trans-unit id="564f2e679815f6bbffd527a7328c336752b6bf0b" resname="ra.vetting.sms.text.ensure_phone_has_signal">
-        <jms:reference-file line="17">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
+        <jms:reference-file line="15">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
         <source>ra.vetting.sms.text.ensure_phone_has_signal</source>
-        <target>Controleer dat de telefoon signaal heeft en SMS-berichten kan ontvangen.</target>
+        <target>Controleer of de mobiele telefoon van de gebruiker bereik heeft en sms-jes kan ontvangen</target>
       </trans-unit>
       <trans-unit id="2cbc684a2effa4742ae0eb83b4952c16f4223d6c" resname="ra.vetting.sms.text.enter_challenge_below">
         <jms:reference-file line="17">Vetting/Sms/provePossession.html.twig</jms:reference-file>
         <source>ra.vetting.sms.text.enter_challenge_below</source>
-        <target>Voer de code hieronder in.</target>
-      </trans-unit>
-      <trans-unit id="3fa753b7ac529d009469515548734ce8e88194db" resname="ra.vetting.sms.text.enter_phone_number_below">
-        <jms:reference-file line="18">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
-        <source>ra.vetting.sms.text.enter_phone_number_below</source>
-        <target>Om het bezit van de telefoon aan te tonen, volg de volgende stappen:</target>
+        <target>Voer de SMS code in en klik op 'Verifieer code'</target>
       </trans-unit>
       <trans-unit id="6a9db598111b1d8b3cfe3e1be9e81002fdb3763c" resname="ra.vetting.sms.text.help_user_enter_challenge">
         <jms:reference-file line="14">Vetting/Sms/provePossession.html.twig</jms:reference-file>
         <source>ra.vetting.sms.text.help_user_enter_challenge</source>
-        <target>Volg onderstaande instructies om de code te bevestigen:</target>
-      </trans-unit>
-      <trans-unit id="d3c53573346b6d86baa91a5fdf1d639dcd493997" resname="ra.vetting.sms.text.help_user_enter_phone_number">
-        <jms:reference-file line="14">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
-        <source>ra.vetting.sms.text.help_user_enter_phone_number</source>
-        <target>Voer de code uit het SMS-bericht dat u heeft ontvangen hierboven in.</target>
+        <target>Er is via SMS een code verstuurd naar het mobiele nummer van de gebruiker.</target>
       </trans-unit>
       <trans-unit id="9d1b5bdcf087c109a4f392cffe734db05b74fb48" resname="ra.vetting.sms.text.retry_if_not_received">
         <jms:reference-file line="18">Vetting/Sms/provePossession.html.twig</jms:reference-file>
         <source>ra.vetting.sms.text.retry_if_not_received</source>
-        <target>Vraag een nieuwe code aan als de registrant niet binnen een minuut een code heeft ontvangen.</target>
+        <target>Verstuur een nieuwe code als de gebruiker niet binnen één minuut een SMS-je heeft ontvangen met de code </target>
       </trans-unit>
       <trans-unit id="f67f9a1925f44474f600a9b2145828791fc3d8f7" resname="ra.vetting.start_procedure.title">
         <jms:reference-file line="3">views/Vetting/startProcedure.html.twig</jms:reference-file>
         <source>ra.vetting.start_procedure.title</source>
         <target>Dashboard</target>
       </trans-unit>
+      <trans-unit id="a27cb1fbe67c5a7a112850e184104c6338e3266e" resname="ra.vetting.verify_identity.text.proceed_only_when_id_match_success">
+        <jms:reference-file line="16">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
+        <source>ra.vetting.verify_identity.text.proceed_only_when_id_match_success</source>
+        <target>Ga alleen verder na een succesvolle ID-verificatie.</target>
+      </trans-unit>
       <trans-unit id="bf6edaa01a042e92b71226319fa83366bb4921e6" resname="ra.vetting.verify_identity.text.verify_identity_document">
-        <jms:reference-file line="14">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
+        <jms:reference-file line="15">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
         <source>ra.vetting.verify_identity.text.verify_identity_document</source>
-        <target>Ga alstublieft na of het identiteitsbewijs van de registrant overeenkomt met de gegevens hieronder.</target>
+        <target>Controleer of de informatie op het legitimatiebewijs van de gebruiker overeen komt met onderstaande informatie.</target>
       </trans-unit>
       <trans-unit id="3c2703cee98881520a811a59e7b6cffb21d98ba0" resname="ra.vetting.verify_identity.title">
         <jms:reference-file line="3">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
@@ -367,32 +362,29 @@
       <trans-unit id="85f8a896e4fb57f2dd0a05049395117fe378df66" resname="ra.vetting.vetting_completed.text.vetting_completed">
         <jms:reference-file line="14">views/Vetting/vettingCompleted.html.twig</jms:reference-file>
         <source>ra.vetting.vetting_completed.text.vetting_completed</source>
-        <target>De registrant heeft het bezit van zijn/haar token bewezen en het token, de digitale identiteit en de fysieke identiteit zijn gekoppeld.</target>
+        <target>De gebruiker heeft bewezen in het bezit te zijn van zijn token, en heeft zowel zijn digitale als fysieke identiteit aangetoond.  
+
+Het token is nu geactiveerd en klaar voor gebruik.</target>
       </trans-unit>
       <trans-unit id="34b41c5dfa574f1b89314b57e2feb702bde49aee" resname="ra.vetting.vetting_completed.title">
         <jms:reference-file line="3">views/Vetting/vettingCompleted.html.twig</jms:reference-file>
         <source>ra.vetting.vetting_completed.title</source>
-        <target>Token gekoppeld</target>
+        <target>Token geactiveerd</target>
       </trans-unit>
       <trans-unit id="da87c92a1202225a559ff2b66b96128cca9c2c29" resname="ra.vetting.yubikey.text.connect_yubikey_to_pc">
-        <jms:reference-file line="17">Vetting/Yubikey/verify.html.twig</jms:reference-file>
+        <jms:reference-file line="15">Vetting/Yubikey/verify.html.twig</jms:reference-file>
         <source>ra.vetting.yubikey.text.connect_yubikey_to_pc</source>
-        <target>Verbind de persoonlijke Yubikey van de registrant met de computer.</target>
+        <target>Stop de Yubikey van de gebruiker in de USB drive van je computer.</target>
       </trans-unit>
       <trans-unit id="6b09c6df1720b27892d03d1e92b5bda74366ee50" resname="ra.vetting.yubikey.text.ensure_form_field_focus">
-        <jms:reference-file line="18">Vetting/Yubikey/verify.html.twig</jms:reference-file>
+        <jms:reference-file line="16">Vetting/Yubikey/verify.html.twig</jms:reference-file>
         <source>ra.vetting.yubikey.text.ensure_form_field_focus</source>
-        <target>Controleer dat het tekstveld geactiveerd is.</target>
-      </trans-unit>
-      <trans-unit id="83ab24a97aef5fcc466cda3afbf47ca508216487" resname="ra.vetting.yubikey.text.help_user_enter_challenge">
-        <jms:reference-file line="14">Vetting/Yubikey/verify.html.twig</jms:reference-file>
-        <source>ra.vetting.yubikey.text.help_user_enter_challenge</source>
-        <target>Voer de stappen hieronder uit om het bezit van de persoonlijke Yubikey van de registrant aan te tonen.</target>
+        <target>Zorg dat het invulveld hieronder actief is.</target>
       </trans-unit>
       <trans-unit id="3c5318f4ea48fec91126f71622f099e7dfdae754" resname="ra.vetting.yubikey.text.press_once_form_auto_submitted">
-        <jms:reference-file line="19">Vetting/Yubikey/verify.html.twig</jms:reference-file>
+        <jms:reference-file line="17">Vetting/Yubikey/verify.html.twig</jms:reference-file>
         <source>ra.vetting.yubikey.text.press_once_form_auto_submitted</source>
-        <target>Het formulier wordt automatisch verstuurd na het indrukken van uw Yubikey.</target>
+        <target>Druk op de knop van de Yubikey en houd even vast. Er verschijnt automatisch een eenmalig wachtwoord in het invulveld.</target>
       </trans-unit>
     </body>
   </file>

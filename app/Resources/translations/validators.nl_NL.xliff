@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-03-02T16:57:10Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2015-03-09T14:32:14Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -45,6 +45,10 @@
       <trans-unit id="7174eff8bbc2102aee4f3af7e3a73e7681fe9abc" resname="middleware_client.dto.identity.name_id.must_not_be_blank">
         <source>middleware_client.dto.identity.name_id.must_not_be_blank</source>
         <target>Remote identity's NameID may not be blank.</target>
+      </trans-unit>
+      <trans-unit id="92fbc58313ab0a848a53c1f0c6f0e282b44ab7d1" resname="middleware_client.dto.ra_credentials.common_name.must_be_null_or_string">
+        <source>middleware_client.dto.ra_credentials.common_name.must_be_null_or_string</source>
+        <target state="new">middleware_client.dto.ra_credentials.common_name.must_be_null_or_string</target>
       </trans-unit>
       <trans-unit id="6682caeda2a849d079878cb5072b58b591f68403" resname="middleware_client.dto.ra_credentials.contact_information.must_be_null_or_string">
         <source>middleware_client.dto.ra_credentials.contact_information.must_be_null_or_string</source>
@@ -98,6 +102,14 @@
         <source>middleware_client.dto.unverified_second_factor.type.must_not_be_blank</source>
         <target>Remote unverified second factor type may not be blank.</target>
       </trans-unit>
+      <trans-unit id="fdb8ca7d662676edf76b28ef862c6ca417993585" resname="middleware_client.dto.verified_second_factor.common_name.must_be_string">
+        <source>middleware_client.dto.verified_second_factor.common_name.must_be_string</source>
+        <target state="new">middleware_client.dto.verified_second_factor.common_name.must_be_string</target>
+      </trans-unit>
+      <trans-unit id="b7d75d62447f50a9cd17804a27e2294b1845805c" resname="middleware_client.dto.verified_second_factor.common_name.must_not_be_blank">
+        <source>middleware_client.dto.verified_second_factor.common_name.must_not_be_blank</source>
+        <target state="new">middleware_client.dto.verified_second_factor.common_name.must_not_be_blank</target>
+      </trans-unit>
       <trans-unit id="f698eaa978e06a006719be57650566e044f6438d" resname="middleware_client.dto.verified_second_factor.id.must_be_string">
         <source>middleware_client.dto.verified_second_factor.id.must_be_string</source>
         <target>Remote verified second factor ID must be string.</target>
@@ -105,6 +117,30 @@
       <trans-unit id="89cd06f61965837c0b36e3c041f1c3212c85aca2" resname="middleware_client.dto.verified_second_factor.id.must_not_be_blank">
         <source>middleware_client.dto.verified_second_factor.id.must_not_be_blank</source>
         <target>Remote verified second factor ID may not be blank.</target>
+      </trans-unit>
+      <trans-unit id="18696186e0b2662157baf33fdd3e2c64ee369874" resname="middleware_client.dto.verified_second_factor.identity_id.must_be_string">
+        <source>middleware_client.dto.verified_second_factor.identity_id.must_be_string</source>
+        <target state="new">middleware_client.dto.verified_second_factor.identity_id.must_be_string</target>
+      </trans-unit>
+      <trans-unit id="d8b523d943ed459013a199aad977ad34815179d0" resname="middleware_client.dto.verified_second_factor.identity_id.must_not_be_blank">
+        <source>middleware_client.dto.verified_second_factor.identity_id.must_not_be_blank</source>
+        <target state="new">middleware_client.dto.verified_second_factor.identity_id.must_not_be_blank</target>
+      </trans-unit>
+      <trans-unit id="e599ec801e28a54b7c1d0efe3c95e01c11496b41" resname="middleware_client.dto.verified_second_factor.institution.must_be_string">
+        <source>middleware_client.dto.verified_second_factor.institution.must_be_string</source>
+        <target state="new">middleware_client.dto.verified_second_factor.institution.must_be_string</target>
+      </trans-unit>
+      <trans-unit id="0d1058689e86b8179b680b3c1a7eeb1636878446" resname="middleware_client.dto.verified_second_factor.institution.must_not_be_blank">
+        <source>middleware_client.dto.verified_second_factor.institution.must_not_be_blank</source>
+        <target state="new">middleware_client.dto.verified_second_factor.institution.must_not_be_blank</target>
+      </trans-unit>
+      <trans-unit id="4e1143bb261ac170bc1f826bc7a1c4a0f9e85f11" resname="middleware_client.dto.verified_second_factor.registration_code.must_be_string">
+        <source>middleware_client.dto.verified_second_factor.registration_code.must_be_string</source>
+        <target state="new">middleware_client.dto.verified_second_factor.registration_code.must_be_string</target>
+      </trans-unit>
+      <trans-unit id="b8a440b9c7aa00c8838d0bfa93bab53460b3674f" resname="middleware_client.dto.verified_second_factor.registration_code.must_not_be_blank">
+        <source>middleware_client.dto.verified_second_factor.registration_code.must_not_be_blank</source>
+        <target state="new">middleware_client.dto.verified_second_factor.registration_code.must_not_be_blank</target>
       </trans-unit>
       <trans-unit id="81d066f7f22e6fbe8e97f68b51b49caf338c3dbb" resname="middleware_client.dto.verified_second_factor.second_factor_identifier.must_be_string">
         <source>middleware_client.dto.verified_second_factor.second_factor_identifier.must_be_string</source>
@@ -154,12 +190,12 @@
       <trans-unit id="f4e4a44fa84430b2d144a6dee71c69e914a963dd" resname="ra.prove_phone_possession.challenge_response_incorrect">
         <jms:reference-file line="15">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.prove_phone_possession.challenge_response_incorrect</source>
-        <target>De ingevoerde code is onjuist.</target>
+        <target>Deze code is niet juist. Probeer het nog eens, of vraag een nieuwe code op.</target>
       </trans-unit>
       <trans-unit id="06ada20a09df4484b41e75a58e813b54d4904f33" resname="ra.prove_yubikey_possession.different_yubikey_used">
         <jms:reference-file line="11">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.prove_yubikey_possession.different_yubikey_used</source>
-        <target>Een andere Yubikey is gebruikt tijdens het registratieproces.</target>
+        <target>Tijdens het registratieproces heeft de gebruiker een andere Yubikey gebruikt.</target>
       </trans-unit>
       <trans-unit id="96fa6c297f7ae3acce042b0fe9a271753761c646" resname="ra.search_ra_second_factors.institution.blank">
         <source>ra.search_ra_second_factors.institution.blank</source>
@@ -212,11 +248,16 @@
       </trans-unit>
       <trans-unit id="25f28c755234f7056ca31e9a493447c1f328fbfd" resname="ra.start_vetting_procedure.registration_code.may_not_be_empty">
         <source>ra.start_vetting_procedure.registration_code.may_not_be_empty</source>
-        <target>Registratiecode mag niet leeg zijn.</target>
+        <target>Typ hier de registratiecode die de gebruiker per e-mail heeft ontvangen.</target>
       </trans-unit>
       <trans-unit id="0891f5e98021a5c756bc410f56c1450858d0d621" resname="ra.start_vetting_procedure.registration_code.must_be_string">
         <source>ra.start_vetting_procedure.registration_code.must_be_string</source>
-        <target>Registratiecode moet een tekenreeks zijn.</target>
+        <target>Typ hier de registratiecode die de gebruiker per e-mail heeft ontvangen.</target>
+      </trans-unit>
+      <trans-unit id="abe2e824031a2393db11918365a49cf65d3ec585" resname="ra.verify_identity.identity_verification_failed">
+        <jms:reference-file line="6">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.verify_identity.identity_verification_failed</source>
+        <target state="new">ra.verify_identity.identity_verification_failed</target>
       </trans-unit>
       <trans-unit id="ba1980036b712688f6681fb8f86ac6925a1cba5a" resname="ra.verify_identity.second_factor_vetting_failed">
         <jms:reference-file line="5">Resources/views/translations.html.twig</jms:reference-file>
@@ -225,15 +266,15 @@
       </trans-unit>
       <trans-unit id="fe4c3e776f7b06d80ac6f0a4ac29013337290fe6" resname="ra.verify_identity_command.document_number.may_not_be_empty">
         <source>ra.verify_identity_command.document_number.may_not_be_empty</source>
-        <target>Documentnummer mag niet leeg zijn.</target>
+        <target>Voor de laatste 6 karakters van het documentnummer in</target>
       </trans-unit>
       <trans-unit id="6a7721edc1618980a3d081cf8df1585ec10018ec" resname="ra.verify_identity_command.document_number.must_be_string">
         <source>ra.verify_identity_command.document_number.must_be_string</source>
-        <target>Documentnummer moet een tekenreeks zijn.</target>
+        <target>Voor de laatste 6 karakters van het documentnummer in</target>
       </trans-unit>
       <trans-unit id="9a75d96edde941f307ca863377d3b7e4ee117542" resname="ra.verify_identity_command.identity_verified.must_be_checked">
         <source>ra.verify_identity_command.identity_verified.must_be_checked</source>
-        <target>De identiteit moet handmatig gecontroleerd zijn.</target>
+        <target>Kruis dit hokje aan wanneer je de identiteit van de gebruiker succesvol hebt kunnen verifiëren en klik op 'Verifieer identiteit'</target>
       </trans-unit>
       <trans-unit id="9113def6d7bffe1a7a21db09b2abc36b1f16c725" resname="ra.verify_phone_number_command.challenge.may_not_be_empty">
         <source>ra.verify_phone_number_command.challenge.may_not_be_empty</source>
@@ -245,16 +286,16 @@
       </trans-unit>
       <trans-unit id="462445b93a181d615ec47505462f69bf13f4af7a" resname="ra.verify_yubikey_command.otp.may_not_be_empty">
         <source>ra.verify_yubikey_command.otp.may_not_be_empty</source>
-        <target>Het Yubikey-OTP mag niet leeg zijn.</target>
+        <target>Druk op de knop van de Yubikey en houd even vast. Er verschijnt automatisch een eenmalig wachtwoord in het invulveld.</target>
       </trans-unit>
       <trans-unit id="3c1d0889a1f01c377dd4d50a3b29b2ec634be91d" resname="ra.verify_yubikey_command.otp.must_be_string">
         <source>ra.verify_yubikey_command.otp.must_be_string</source>
-        <target>Het Yubikey-OTP moet een tekenreeks zijn.</target>
+        <target>Druk op de knop van de Yubikey en houd even vast. Er verschijnt automatisch een eenmalig wachtwoord in het invulveld.</target>
       </trans-unit>
       <trans-unit id="7b8f4a813ad65c5f70c2f28e3459db2300aa11d8" resname="ra.verify_yubikey_command.otp.otp_invalid">
         <jms:reference-file line="9">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.verify_yubikey_command.otp.otp_invalid</source>
-        <target>De Yubikey-code was onjuist. Probeer het opnieuw.</target>
+        <target>De Yubikey code is ongeldig. Probeer het nog eens</target>
       </trans-unit>
       <trans-unit id="669fe8c5f63adab894fc62f2bbf036f2fe9e8b6c" resname="ra.verify_yubikey_command.otp.verification_error">
         <jms:reference-file line="10">Resources/views/translations.html.twig</jms:reference-file>
