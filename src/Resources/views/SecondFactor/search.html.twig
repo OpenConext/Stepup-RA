@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block page_title %}{{ 'ra.second_factor.search.title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            {{ form(form) }}
+
+            <hr>
+
+            {% if secondFactors.elements|length > 0 %}
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.second_factor_id'|trans, 'secondFactorId') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.type'|trans, 'type') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.name'|trans, 'name') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.email'|trans, 'email') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.status'|trans, 'status') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for secondFactor in secondFactors.elements %}
+                        <tr>
+                            <td>{{ secondFactor.secondFactorId }}</td>
+                            <td>{{ ('ra.second_factor.search.type.'~secondFactor.type)|trans }}</td>
+                            <td>{{ secondFactor.name }}</td>
+                            <td>{{ secondFactor.email }}</td>
+                            <td>{{ ('ra.second_factor.search.status.'~secondFactor.status)|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                {{ knp_pagination_render(pagination) }}
+            {% else %}
+                <p>
+                    {{ 'ra.second_factor.search.text.no_second_factors'|trans }}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
