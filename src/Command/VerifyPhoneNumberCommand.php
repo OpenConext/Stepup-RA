@@ -18,7 +18,6 @@
 
 namespace Surfnet\StepupRa\RaBundle\Command;
 
-use Surfnet\StepupRa\RaBundle\VettingProcedure;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class VerifyPhoneNumberCommand
@@ -30,4 +29,9 @@ class VerifyPhoneNumberCommand
      * @var string
      */
     public $challenge;
+
+    /**
+     * @var string
+     */
+    public $phoneNumber;
 }

@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use Surfnet\StepupMiddlewareClientBundle\Identity\Command\VetSecondFactorCommand;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
@@ -27,9 +28,7 @@ use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 use Surfnet\StepupRa\RaBundle\Exception\UnknownVettingProcedureException;
-use Surfnet\StepupRa\RaBundle\Identity\Command\VetSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
-use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\VerificationResult as SmsVerificationResult;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult as YubikeyVerificationResult;
 use Surfnet\StepupRa\RaBundle\VettingProcedure;
 

@@ -1881,12 +1881,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-bundle.git",
-                "reference": "8b35f2620dcce1bfda617e6e294fc652daa73677"
+                "reference": "8bcadae4f4da17157ad0eec99525d6600c3aace2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/8b35f2620dcce1bfda617e6e294fc652daa73677",
-                "reference": "8b35f2620dcce1bfda617e6e294fc652daa73677",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/8bcadae4f4da17157ad0eec99525d6600c3aace2",
+                "reference": "8bcadae4f4da17157ad0eec99525d6600c3aace2",
                 "shasum": ""
             },
             "require": {
@@ -1922,7 +1922,7 @@
                 "suaas",
                 "surfnet"
             ],
-            "time": "2015-02-23 14:40:11"
+            "time": "2015-02-10 10:10:30"
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
@@ -1930,12 +1930,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-Middleware-clientbundle.git",
-                "reference": "9b378e754467a8996089912793ae64e340eda8a5"
+                "reference": "a8f26101ac56d0a8b8ca9af5017c36a354f819c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/9b378e754467a8996089912793ae64e340eda8a5",
-                "reference": "9b378e754467a8996089912793ae64e340eda8a5",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/a8f26101ac56d0a8b8ca9af5017c36a354f819c1",
+                "reference": "a8f26101ac56d0a8b8ca9af5017c36a354f819c1",
                 "shasum": ""
             },
             "require": {
@@ -1971,7 +1971,7 @@
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "time": "2015-03-09 10:46:38"
+            "time": "2015-03-09 15:41:17"
         },
         {
             "name": "surfnet/stepup-saml-bundle",
@@ -2476,12 +2476,12 @@
             "version": "v1.16.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/twigphp/Twig.git",
+                "url": "https://github.com/fabpot/Twig.git",
                 "reference": "42f758d9fe2146d1f0470604fc05ee43580873fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/42f758d9fe2146d1f0470604fc05ee43580873fc",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/42f758d9fe2146d1f0470604fc05ee43580873fc",
                 "reference": "42f758d9fe2146d1f0470604fc05ee43580873fc",
                 "shasum": ""
             },
@@ -3024,12 +3024,12 @@
             "version": "v2.0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FriendsOfPHP/Goutte.git",
+                "url": "https://github.com/fabpot/Goutte.git",
                 "reference": "b12c3f7ec68d8814b50444cfe142fd0a056557f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/Goutte/zipball/b12c3f7ec68d8814b50444cfe142fd0a056557f9",
+                "url": "https://api.github.com/repos/fabpot/Goutte/zipball/b12c3f7ec68d8814b50444cfe142fd0a056557f9",
                 "reference": "b12c3f7ec68d8814b50444cfe142fd0a056557f9",
                 "shasum": ""
             },
