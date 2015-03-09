@@ -4,7 +4,7 @@
     "description": "The SURFnet Step-up Registration Authority application allows Registration Authorities to vet identities by combining a real-world identity, federated identity and a token.",
     "autoload": {
         "psr-4": {
-            "Surfnet\\StepupRa\\RaBundle\\": "src"
+            "Surfnet\\": "src\\Surfnet"
         }
     },
     "minimum-stability": "stable",
