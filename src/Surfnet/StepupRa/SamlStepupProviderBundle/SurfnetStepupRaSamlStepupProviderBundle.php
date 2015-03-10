@@ -16,23 +16,16 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle;
+namespace Surfnet\StepupRa\SamlStepupProviderBundle;
 
-use Surfnet\StepupRa\RaBundle\DependencyInjection\Compiler\GssfSessionBagSessionPass;
-use Surfnet\StepupRa\RaBundle\Security\Factory\SamlFactory;
+use Surfnet\StepupRa\SamlStepupProviderBundle\DependencyInjection\Compiler\StateHandlerSessionPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SurfnetStepupRaRaBundle extends Bundle
+class SurfnetStepupRaSamlStepupProviderBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
-        parent::build($container);
-
-        /** @var \Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension $extension */
-        $extension = $container->getExtension('security');
-        $extension->addSecurityListenerFactory(new SamlFactory());
-
-        $container->addCompilerPass(new GssfSessionBagSessionPass());
+        $container->addCompilerPass(new StateHandlerSessionPass());
     }
 }

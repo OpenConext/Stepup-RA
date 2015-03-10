@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Surfnet\StepupRa\RaBundle\SurfnetStepupRaRaBundle(),
+            new Surfnet\StepupRa\SamlStepupProviderBundle\SurfnetStepupRaSamlStepupProviderBundle(),
             new Nelmio\SecurityBundle\NelmioSecurityBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
             new Surfnet\StepupMiddlewareClientBundle\SurfnetStepupMiddlewareClientBundle(),
