@@ -29,6 +29,7 @@ use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 use Surfnet\StepupRa\RaBundle\Exception\UnknownVettingProcedureException;
 use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
+use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult as GssfVerificationResult;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult as YubikeyVerificationResult;
 use Surfnet\StepupRa\RaBundle\VettingProcedure;
 
@@ -48,6 +49,11 @@ class VettingService
     private $yubikeySecondFactorService;
 
     /**
+     * @var GssfService
+     */
+    private $gssfService;
+
+    /**
      * @var CommandService
      */
     private $commandService;
@@ -60,11 +66,13 @@ class VettingService
     public function __construct(
         SmsSecondFactorService $smsSecondFactorService,
         YubikeySecondFactorService $yubikeySecondFactorService,
+        GssfService $gssfService,
         CommandService $commandService,
         VettingProcedureRepository $vettingProcedureRepository
     ) {
         $this->smsSecondFactorService = $smsSecondFactorService;
         $this->yubikeySecondFactorService = $yubikeySecondFactorService;
+        $this->gssfService = $gssfService;
         $this->commandService = $commandService;
         $this->vettingProcedureRepository = $vettingProcedureRepository;
     }
@@ -149,6 +157,36 @@ class VettingService
 
             $this->vettingProcedureRepository->store($procedure);
         }
+
+        return $result;
+    }
+
+    /**
+     * @param string $procedureId
+     */
+    public function startGssfVerification($procedureId)
+    {
+        $procedure = $this->getProcedure($procedureId);
+
+        $this->gssfService->startVerification($procedure->getSecondFactor()->secondFactorIdentifier, $procedureId);
+    }
+
+    /**
+     * @param string $gssfId
+     * @return GssfVerificationResult
+     */
+    public function verifyGssfId($gssfId)
+    {
+        $result = $this->gssfService->verify($gssfId);
+
+        if (!$result->isSuccess()) {
+            return $result;
+        }
+
+        $procedure = $this->getProcedure($result->getProcedureId());
+        $procedure->verifySecondFactorIdentifier($gssfId);
+
+        $this->vettingProcedureRepository->store($procedure);
 
         return $result;
     }

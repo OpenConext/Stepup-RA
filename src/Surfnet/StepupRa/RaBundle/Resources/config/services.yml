@@ -34,6 +34,7 @@ services:
         arguments:
             - @ra.service.sms_second_factor
             - @ra.service.yubikey_second_factor
+            - @ra.service.gssf
             - @surfnet_stepup_middleware_client.service.command
             - @ra.repository.vetting_procedure
 
@@ -72,6 +73,25 @@ services:
         arguments:
             - @session
             - 'Surfnet/Ra/SecondFactor/Sms:challenge'
+
+    ra.service.gssf:
+        class: Surfnet\StepupRa\RaBundle\Service\GssfService
+        arguments:
+            - @ra.service.gssf.sessionbag
+
+    ra.service.gssf.sessionbag:
+        class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
+        factory: ['@session', 'getBag']
+        arguments: ['ra.service.gssf']
+
+    ra.service.gssf.namespaced_attribute_bag:
+        public: false
+        class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
+        arguments:
+            - '__ra.service.gssf__'
+            - '/'
+        calls:
+            - [setName, ['ra.service.gssf']]
 
     ra.guzzle.gateway_api:
         public: false

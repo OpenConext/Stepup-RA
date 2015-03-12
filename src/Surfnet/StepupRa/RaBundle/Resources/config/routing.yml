@@ -33,6 +33,26 @@ ra_vetting_sms_prove_possession:
     methods:  [GET,POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Sms:provePossession }
 
+ra_vetting_gssf_initiate:
+    path: /vetting-procedure/{procedureId}/gssf/{provider}/initiate-verification
+    methods: [GET]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Gssf:initiate }
+
+ra_vetting_gssf_authenticate:
+    path: /vetting-procedure/{procedureId}/gssf/{provider}/authenticate
+    methods: [POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Gssf:authenticate }
+
+ra_vetting_gssf_verify:
+    path: /vetting-procedure/gssf/{provider}/verify
+    methods: [POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Gssf:verify }
+
+ra_vetting_gssf_metadata:
+    path: /vetting-procedure/gssf/{provider}/metadata
+    methods: [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Gssf:metadata }
+
 ra_vetting_verify_identity:
     path:     /vetting-procedure/{procedureId}/verify-identity
     methods:  [GET, POST]

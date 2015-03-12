@@ -67,6 +67,11 @@ class VettingController extends Controller
                         'ra_vetting_sms_send_challenge',
                         ['procedureId' => $procedureId]
                     );
+                case 'tiqr':
+                    return $this->redirectToRoute(
+                        'ra_vetting_gssf_initiate',
+                        ['procedureId' => $procedureId, 'provider' => $secondFactor->type]
+                    );
             }
 
             throw new RuntimeException(

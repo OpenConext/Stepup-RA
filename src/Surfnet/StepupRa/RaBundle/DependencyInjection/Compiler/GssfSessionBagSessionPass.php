@@ -16,23 +16,22 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle;
+namespace Surfnet\StepupRa\RaBundle\DependencyInjection\Compiler;
 
-use Surfnet\StepupRa\RaBundle\DependencyInjection\Compiler\GssfSessionBagSessionPass;
-use Surfnet\StepupRa\RaBundle\Security\Factory\SamlFactory;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\Reference;
 
-class SurfnetStepupRaRaBundle extends Bundle
+class GssfSessionBagSessionPass implements CompilerPassInterface
 {
-    public function build(ContainerBuilder $container)
+    /**
+     * {@inheritdoc} This is required to ensure that our NamespacedAttributeBag is registered in the session handler
+     * before the session is started.
+     */
+    public function process(ContainerBuilder $container)
     {
-        parent::build($container);
-
-        /** @var \Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension $extension */
-        $extension = $container->getExtension('security');
-        $extension->addSecurityListenerFactory(new SamlFactory());
-
-        $container->addCompilerPass(new GssfSessionBagSessionPass());
+        $container
+            ->getDefinition('session')
+            ->addMethodCall('registerBag', [new Reference('ra.service.gssf.namespaced_attribute_bag')]);
     }
 }
