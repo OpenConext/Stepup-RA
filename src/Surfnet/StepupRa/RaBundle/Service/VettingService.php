@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\VetSecondFactorCommand;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
@@ -27,6 +28,7 @@ use Surfnet\StepupRa\RaBundle\Command\VerifyPhoneNumberCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
+use Surfnet\StepupRa\RaBundle\Exception\LoaTooLowException;
 use Surfnet\StepupRa\RaBundle\Exception\UnknownVettingProcedureException;
 use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
 use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult as GssfVerificationResult;
@@ -79,10 +81,31 @@ class VettingService
 
     /**
      * @param StartVettingProcedureCommand $command
+     * @return bool
+     */
+    public function isLoaSufficientToStartProcedure(StartVettingProcedureCommand $command)
+    {
+        $secondFactorType = new SecondFactorType($command->secondFactor->type);
+
+        return $secondFactorType->isSatisfiedBy($command->authorityLoa);
+    }
+
+    /**
+     * @param StartVettingProcedureCommand $command
      * @return string The procedure ID.
      */
     public function startProcedure(StartVettingProcedureCommand $command)
     {
+        if (!$this->isLoaSufficientToStartProcedure($command)) {
+            throw new LoaTooLowException(
+                sprintf(
+                    "Registration authority has LoA '%s', which is not enough to allow vetting of a '%s' second factor",
+                    $command->authorityLoa,
+                    $command->secondFactor->type
+                )
+            );
+        }
+
         $procedure = VettingProcedure::start(
             $command->secondFactor->id,
             $command->registrationCode,

@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Token;
 
+use Surfnet\StepupBundle\Value\Loa;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 class SamlToken extends AbstractToken
@@ -27,10 +28,16 @@ class SamlToken extends AbstractToken
      */
     public $assertion;
 
-    public function __construct(array $roles = array())
+    /**
+     * @var \Surfnet\StepupBundle\Value\Loa
+     */
+    private $loa;
+
+    public function __construct(Loa $loa, array $roles = array())
     {
         parent::__construct($roles);
 
+        $this->loa = $loa;
         $this->setAuthenticated(count($roles));
     }
 
@@ -42,5 +49,25 @@ class SamlToken extends AbstractToken
     public function getCredentials()
     {
         return '';
+    }
+
+    /**
+     * @return Loa
+     */
+    public function getLoa()
+    {
+        return $this->loa;
+    }
+
+    public function serialize()
+    {
+        return serialize([parent::serialize(), $this->loa,]);
+    }
+
+    public function unserialize($serialized)
+    {
+        list($parent, $this->loa) = unserialize($serialized);
+
+        parent::unserialize($parent);
     }
 }

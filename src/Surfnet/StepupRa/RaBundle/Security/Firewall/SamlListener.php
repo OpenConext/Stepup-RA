@@ -101,7 +101,10 @@ class SamlListener implements ListenerInterface
             throw new AuthenticationException('Unknown or unexpected InResponseTo in SAMLResponse');
         }
 
-        $token = new SamlToken();
+        $loaResolutionService = $this->container->get('surfnet_stepup.service.loa_resolution');
+        $loa = $loaResolutionService->getLoa($assertion->getAuthnContextClassRef());
+
+        $token = new SamlToken($loa);
         $token->assertion = $assertion;
 
         try {
