@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-03-13T15:31:04Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2015-03-13T15:50:43Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -181,6 +181,11 @@
       <trans-unit id="e79eeb815d177674e3eb22c7b0f58c27154f55ec" resname="middleware_client.dto.vetted_second_factor.type.must_not_be_blank">
         <source>middleware_client.dto.vetted_second_factor.type.must_not_be_blank</source>
         <target>Vetted second factor's type may not be blank.</target>
+      </trans-unit>
+      <trans-unit id="823c5d1536401e73cf7bda2e291fd21bdb207f96" resname="ra.form.start_vetting_procedure.loa_insufficient">
+        <jms:reference-file line="5">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.form.start_vetting_procedure.loa_insufficient</source>
+        <target>You don't have the security clearance to vet the token that matches this registration code.</target>
       </trans-unit>
       <trans-unit id="5bd6714db09c4a8b818081f114f12f7415a50e40" resname="ra.form.start_vetting_procedure.unknown_registration_code">
         <jms:reference-file line="4">Resources/views/translations.html.twig</jms:reference-file>

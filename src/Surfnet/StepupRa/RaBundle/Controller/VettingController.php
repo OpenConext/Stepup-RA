@@ -23,6 +23,7 @@ use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
+use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -53,7 +54,17 @@ class VettingController extends Controller
                 return ['form' => $form->createView()];
             }
 
+            /** @var SamlToken $token */
+            $token = $this->get('security.token_storage')->getToken();
+            $command->authorityLoa = $token->getLoa();
             $command->secondFactor = $secondFactor;
+
+            if (!$this->getVettingService()->isLoaSufficientToStartProcedure($command)) {
+                $form->addError(new FormError('ra.form.start_vetting_procedure.loa_insufficient'));
+
+                return ['form' => $form->createView()];
+            }
+
             $procedureId = $this->getVettingService()->startProcedure($command);
 
             switch ($secondFactor->type) {

@@ -24,6 +24,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 class StartVettingProcedureCommand
 {
     /**
+     * The LoA of the authority.
+     *
+     * @var \Surfnet\StepupBundle\Value\Loa
+     */
+    public $authorityLoa;
+
+    /**
      * @Assert\NotBlank(message="ra.start_vetting_procedure.registration_code.may_not_be_empty")
      * @Assert\Type(type="string", message="ra.start_vetting_procedure.registration_code.must_be_string")
      *

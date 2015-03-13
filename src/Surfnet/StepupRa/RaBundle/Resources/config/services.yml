@@ -141,15 +141,9 @@ services:
     ra.security.authentication.listener:
         class: Surfnet\StepupRa\RaBundle\Security\Firewall\SamlListener
         arguments:
-            - @security.context
-            - @security.authentication.manager
-            - @ra.security.authentication.saml
-            - @ra.security.authentication.session_handler
-            - @logger
-            - @twig
+            - @service_container
 
     ra.security.authentication.saml:
-        public: false
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\SamlInteractionProvider
         arguments:
             - @surfnet_saml.hosted.service_provider
@@ -167,7 +161,6 @@ services:
         arguments: [%surfnet_stepup_ra.security.required_loa%]
 
     ra.security.authentication.session_handler:
-        public: false
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\SessionHandler
         arguments:
             - @session
