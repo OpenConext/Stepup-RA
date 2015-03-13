@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-03-13T13:22:17Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2015-03-13T15:32:39Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -13,8 +13,8 @@
         <target>Step-up Registration Authority</target>
       </trans-unit>
       <trans-unit id="5a045b50111a6cdd614329837fa07cbf64d896a6" resname="ra.error.button.go_home">
-        <jms:reference-file line="9">views/Exception/error.html.twig</jms:reference-file>
         <jms:reference-file line="9">views/Exception/error404.html.twig</jms:reference-file>
+        <jms:reference-file line="9">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.button.go_home</source>
         <target>Terug naar Home</target>
       </trans-unit>
@@ -79,8 +79,8 @@
         <target>Rapporteer deze fout met bovenstaande foutcode bij SURFnet als je denkt dat deze foutmelding ongerechtvaardigd is.</target>
       </trans-unit>
       <trans-unit id="97cec45f4b04606121bd0a6613f2673f4e55eff7" resname="ra.error.text.your_art_code">
-        <jms:reference-file line="12">views/Exception/error.html.twig</jms:reference-file>
         <jms:reference-file line="12">views/Exception/error404.html.twig</jms:reference-file>
+        <jms:reference-file line="12">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.text.your_art_code</source>
         <target>De code voor deze foutmelding is</target>
       </trans-unit>
@@ -219,6 +219,57 @@
         <source>ra.registration.yubikey.title.enter_challenge</source>
         <target>Yubikey</target>
       </trans-unit>
+      <trans-unit id="800e5d0a1f57a8b4d3654ac7d173efe68c098f68" resname="ra.second_factor.revocation.could_not_revoke">
+        <jms:reference-file line="105">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <source>ra.second_factor.revocation.could_not_revoke</source>
+        <target>Het token kon niet ingetrokken worden.</target>
+      </trans-unit>
+      <trans-unit id="f70c06516166354cd4d8d3490cbd707941610ed9" resname="ra.second_factor.revocation.modal.are_you_sure">
+        <jms:reference-file line="67">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.revocation.modal.are_you_sure</source>
+        <target>Weet u zeker dat u onderstaand token wilt intrekken?</target>
+      </trans-unit>
+      <trans-unit id="441e4d7c6bece19e1a2a0008af6302443d36c7a4" resname="ra.second_factor.revocation.modal.cancel">
+        <jms:reference-file line="88">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.revocation.modal.cancel</source>
+        <target>annuleren</target>
+      </trans-unit>
+      <trans-unit id="4a0e93233ac08a0e08df4ccabdddb3183f0343ea" resname="ra.second_factor.revocation.modal.close">
+        <jms:reference-file line="63">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.revocation.modal.close</source>
+        <target>Sluiten</target>
+      </trans-unit>
+      <trans-unit id="c8ac97a99dfe2e9a93156f17db2ad4475372cd4a" resname="ra.second_factor.revocation.modal.confirm">
+        <jms:reference-file line="64">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="89">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.revocation.modal.confirm</source>
+        <target>Bevestig</target>
+      </trans-unit>
+      <trans-unit id="0a7020ade86510c9f2a60c58d10d539b92be2f4a" resname="ra.second_factor.revocation.modal.sf_email">
+        <jms:reference-file line="82">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.revocation.modal.sf_email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="e704ffd6983d5ec3776c1ad832c9cb9823dd3d0b" resname="ra.second_factor.revocation.modal.sf_identifier">
+        <jms:reference-file line="70">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.revocation.modal.sf_identifier</source>
+        <target>Token</target>
+      </trans-unit>
+      <trans-unit id="1d9dbf1e942ebc0614b14e5efef0dadc4f8073be" resname="ra.second_factor.revocation.modal.sf_name">
+        <jms:reference-file line="78">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.revocation.modal.sf_name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="153b9ee684f0de6cc27fc8b40d9b38da7477323b" resname="ra.second_factor.revocation.modal.sf_type">
+        <jms:reference-file line="74">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.revocation.modal.sf_type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="5c500a2dc008cbf1a8501593a2a50e518f6fe145" resname="ra.second_factor.revocation.revoked">
+        <jms:reference-file line="102">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <source>ra.second_factor.revocation.revoked</source>
+        <target>Het token is ingetrokken</target>
+      </trans-unit>
       <trans-unit id="e091076baef38f98898434eb2e98795a0c439a9e" resname="ra.second_factor.search.column.email">
         <jms:reference-file line="19">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.search.column.email</source>
@@ -245,27 +296,27 @@
         <target>Type</target>
       </trans-unit>
       <trans-unit id="5396da3d169284da408b7e41c919fc3cbb0a7789" resname="ra.second_factor.search.status.revoked">
-        <jms:reference-file line="23">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="24">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.status.revoked</source>
         <target>Ingetrokken</target>
       </trans-unit>
       <trans-unit id="b95f6a983c4cb565e06b2b444afd9e53737e41d7" resname="ra.second_factor.search.status.unverified">
-        <jms:reference-file line="20">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="21">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.status.unverified</source>
         <target>Ongeverifiëerd</target>
       </trans-unit>
       <trans-unit id="342a7ca495a8ab8baf8c65ca63c53558cb01688d" resname="ra.second_factor.search.status.verified">
-        <jms:reference-file line="21">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="22">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.status.verified</source>
         <target>Geverifiëerd</target>
       </trans-unit>
       <trans-unit id="876f09e852960f57e319006c49585af1bbd55a84" resname="ra.second_factor.search.status.vetted">
-        <jms:reference-file line="22">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="23">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.status.vetted</source>
         <target>Gekeurd</target>
       </trans-unit>
       <trans-unit id="b460113e39fffb71f86d0c0a9509b5c741924e99" resname="ra.second_factor.search.text.no_second_factors">
-        <jms:reference-file line="39">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="54">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.search.text.no_second_factors</source>
         <target>Er zijn op dit moment geen geregistreerde beveiligingstokens.</target>
       </trans-unit>
@@ -288,6 +339,11 @@
         <jms:reference-file line="19">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.type.yubikey</source>
         <target>Yubikey</target>
+      </trans-unit>
+      <trans-unit id="512d5614cc27358eb50068a1ba510983e3e0c620" resname="ra.secondfactor.revoke">
+        <jms:reference-file line="42">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.secondfactor.revoke</source>
+        <target>Intrekken</target>
       </trans-unit>
       <trans-unit id="485287b4d4e2f13a9df979601799e727821b9817" resname="ra.vetting.gssf.initiate.tiqr.button.initiate">
         <jms:reference-file line="29">Resources/views/translations.html.twig</jms:reference-file>
@@ -330,7 +386,7 @@
         <target>Identiteit natrekken</target>
       </trans-unit>
       <trans-unit id="8e4a356a46fe95b04ae1cbb201b8d62e15670b2e" resname="ra.vetting.sms.challenge_body">
-        <jms:reference-file line="100">src/Service/SmsSecondFactorService.php</jms:reference-file>
+        <jms:reference-file line="100">RaBundle/Service/SmsSecondFactorService.php</jms:reference-file>
         <source>ra.vetting.sms.challenge_body</source>
         <target>Uw SMS-code: %challenge%</target>
       </trans-unit>

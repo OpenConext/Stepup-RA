@@ -28,6 +28,10 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType
         tags: [{ name: form.type, alias: ra_search_ra_second_factors }]
 
+    ra.form.type.ra_revoke_second_factor:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType
+        tags: [{ name: form.type, alias: ra_revoke_second_factor }]
+
     # Services
     ra.service.vetting:
         class: Surfnet\StepupRa\RaBundle\Service\VettingService
