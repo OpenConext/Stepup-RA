@@ -78,13 +78,13 @@ class SamlInteractionProvider
         LoaResolutionService $loaResolutionService,
         Loa $requiredLoa
     ) {
-        $this->serviceProvider  = $serviceProvider;
-        $this->identityProvider = $identityProvider;
-        $this->redirectBinding  = $redirectBinding;
-        $this->postBinding      = $postBinding;
-        $this->sessionHandler   = $sessionHandler;
+        $this->serviceProvider      = $serviceProvider;
+        $this->identityProvider     = $identityProvider;
+        $this->redirectBinding      = $redirectBinding;
+        $this->postBinding          = $postBinding;
+        $this->sessionHandler       = $sessionHandler;
         $this->loaResolutionService = $loaResolutionService;
-        $this->requiredLoa      = $requiredLoa;
+        $this->requiredLoa          = $requiredLoa;
     }
 
     /**
