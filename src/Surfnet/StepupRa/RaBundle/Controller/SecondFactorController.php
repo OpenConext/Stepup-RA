@@ -19,7 +19,6 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -96,13 +95,14 @@ final class SecondFactorController extends Controller
             $command->currentUserId
         ));
 
+        $translator = $this->get('translator');
         $flashBag = $this->get('session')->getFlashBag();
         if ($this->getSecondFactorService()->revoke($command)) {
             $logger->info('Second Factor revocation Succeeded, notifying used and redirecting back to search page');
-            $flashBag->add('success', 'ra.second_factor.revocation.revoked');
+            $flashBag->add('success', $translator->trans('ra.second_factor.revocation.revoked'));
         } else {
             $logger->info('Second Factor revocation Failed, notifying used and redirecting back to search page');
-            $flashBag->add('error', 'ra.second_factor.revocation.could_not_revoke');
+            $flashBag->add('error', $translator->trans('ra.second_factor.revocation.could_not_revoke'));
         }
 
         return $this->redirectToRoute('ra_second_factors_search');
