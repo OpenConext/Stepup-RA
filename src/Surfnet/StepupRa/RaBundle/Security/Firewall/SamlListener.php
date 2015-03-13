@@ -27,6 +27,7 @@ use Surfnet\SamlBundle\SAML2\Response\Assertion\InResponseTo;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SamlInteractionProvider;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SessionHandler;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
+use Surfnet\StepupRa\RaBundle\Security\Exception\UnmetLoaException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -156,6 +157,8 @@ class SamlListener implements ListenerInterface
             $template = 'SurfnetStepupRaRaBundle:Saml/Exception:authnFailed.html.twig';
         } elseif ($exception instanceof NoAuthnContextSamlResponseException) {
             $template = 'SurfnetStepupRaRaBundle:Saml/Exception:noAuthnContext.html.twig';
+        } elseif ($exception instanceof UnmetLoaException) {
+            $template = 'SurfnetStepupRaRaBundle:Saml/Exception:unmetLoa.html.twig';
         } else {
             $template = 'SurfnetStepupRaRaBundle:Saml/Exception:preconditionNotMet.html.twig';
         }

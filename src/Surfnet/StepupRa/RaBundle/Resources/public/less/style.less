@@ -82,3 +82,12 @@ form[name="ra_search_ra_second_factors"] {
 .hidden {
     display: none;
 }
+
+.generate-progress(100);
+
+.generate-progress(@n, @i: 0) when (@i =< @n) {
+    .progress-@{i} {
+        width: (@i * 1%);
+    }
+    .generate-progress(@n, (@i + 5));
+}

@@ -55,7 +55,7 @@ ra_vetting_gssf_verify:
 
 ra_vetting_gssf_metadata:
     path: /vetting-procedure/gssf/{provider}/metadata
-    methods: [GET, POST]
+    methods: [GET]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Gssf:metadata }
 
 ra_vetting_verify_identity:
