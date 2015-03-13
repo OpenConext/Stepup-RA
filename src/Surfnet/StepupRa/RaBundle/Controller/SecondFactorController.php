@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,8 +35,8 @@ final class SecondFactorController extends Controller
      */
     public function searchAction(Request $request)
     {
-        /** @var Identity $identity */
-        $identity = $this->get('security.token_storage')->getToken()->getUser();
+        $identity = $this->getIdentity();
+        $this->get('logger')->info('Starting search for second factors');
 
         $command = new SearchRaSecondFactorsCommand();
         $command->institution = $identity->institution;
@@ -46,7 +47,7 @@ final class SecondFactorController extends Controller
         $form = $this->createForm('ra_search_ra_second_factors', $command, ['method' => 'get']);
         $form->handleRequest($request);
 
-        $secondFactors = $this->get('ra.service.ra_second_factor')->search($command);
+        $secondFactors = $this->getSecondFactorService()->search($command);
 
         $pagination = $this->get('knp_paginator')->paginate(
             array_fill(0, $secondFactors->getTotalItems(), 1),
@@ -54,13 +55,72 @@ final class SecondFactorController extends Controller
             $secondFactors->getItemsPerPage()
         );
 
+        $revocationForm = $this->createForm('ra_revoke_second_factor', new RevokeSecondFactorCommand());
+
+        $this->get('logger')->info(sprintf(
+            'Searching for second factors yielded "%d" results',
+            $secondFactors->getTotalItems()
+        ));
+
         return [
             'form'                  => $form->createView(),
+            'revocationForm'        => $revocationForm->createView(),
             'secondFactors'         => $secondFactors,
             'pagination'            => $pagination,
             'orderBy'               => $command->orderBy,
             'orderDirection'        => $command->orderDirection ?: 'asc',
             'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',
         ];
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function revokeAction(Request $request)
+    {
+        $logger = $this->get('logger');
+
+        $logger->info('Received request to revoke Second Factor');
+
+        $command = new RevokeSecondFactorCommand();
+        $command->currentUserId = $this->getIdentity()->id;
+
+        $form = $this->createForm('ra_revoke_second_factor', $command);
+        $form->handleRequest($request);
+
+        $logger->info(sprintf(
+            'Sending middleware request to revoke Second Factor "%s" belonging to "%s" on behalf of "%s"',
+            $command->secondFactorId,
+            $command->identityId,
+            $command->currentUserId
+        ));
+
+        $flashBag = $this->get('session')->getFlashBag();
+        if ($this->getSecondFactorService()->revoke($command)) {
+            $logger->info('Second Factor revocation Succeeded, notifying used and redirecting back to search page');
+            $flashBag->add('success', 'ra.second_factor.revocation.revoked');
+        } else {
+            $logger->info('Second Factor revocation Failed, notifying used and redirecting back to search page');
+            $flashBag->add('error', 'ra.second_factor.revocation.could_not_revoke');
+        }
+
+        return $this->redirectToRoute('ra_second_factors_search');
+    }
+
+    /**
+     * @return \Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService
+     */
+    private function getSecondFactorService()
+    {
+        return $this->get('ra.service.ra_second_factor');
+    }
+
+    /**
+     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
+     */
+    private function getIdentity()
+    {
+        return $this->get('security.token_storage')->getToken()->getUser();
     }
 }
