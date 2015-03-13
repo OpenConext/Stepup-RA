@@ -18,6 +18,11 @@ ra_second_factors_search:
     methods: [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:SecondFactor:search }
 
+ra_second_factor_revoke:
+    path:     /second-factors/revoke
+    methods:  [POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:SecondFactor:revoke }
+
 ra_vetting_yubikey_verify:
     path: /vetting-procedure/{procedureId}/verify-yubikey
     methods: [GET, POST]

@@ -20,9 +20,11 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaSecondFactorSearchQuery;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Command\RevokeRegistrantsSecondFactorCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaSecondFactorCollection;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaSecondFactorService as ApiRaSecondFactorService;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
+use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 
 class RaSecondFactorService
@@ -55,6 +57,28 @@ class RaSecondFactorService
         $this->apiRaSecondFactorService = $apiRaSecondFactorService;
         $this->commandService = $commandService;
         $this->logger = $logger;
+    }
+
+    public function revoke(RevokeSecondFactorCommand $command)
+    {
+        $middlewareCommand                 = new RevokeRegistrantsSecondFactorCommand();
+        $middlewareCommand->secondFactorId = $command->secondFactorId;
+        $middlewareCommand->identityId     = $command->identityId;
+        $middlewareCommand->authorityId    = $command->currentUserId;
+
+        $result = $this->commandService->execute($middlewareCommand);
+
+        if (!$result->isSuccessful()) {
+            $this->logger->critical(sprintf(
+                'Revocation of Second Factor "%s" of Identity "%s" by user "%s" failed: "%s"',
+                $middlewareCommand->secondFactorId,
+                $middlewareCommand->identityId,
+                $middlewareCommand->authorityId,
+                implode(", ", $result->getErrors())
+            ));
+        }
+
+        return $result->isSuccessful();
     }
 
     /**
