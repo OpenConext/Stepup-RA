@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-03-12T14:51:40Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2015-03-13T13:22:17Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -88,6 +88,16 @@
         <jms:reference-file line="3">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.title</source>
         <target>Foutmelding</target>
+      </trans-unit>
+      <trans-unit id="28d061ef54cfdd06c9284f6461482ade81c87f23" resname="ra.error.unmet_loa.text.authn_failed">
+        <jms:reference-file line="8">Saml/Exception/unmetLoa.html.twig</jms:reference-file>
+        <source>ra.error.unmet_loa.text.authn_failed</source>
+        <target>U heeft niet de benodigde veiligheidsmachtiging om in de Registration Authority-applicatie in te loggen.</target>
+      </trans-unit>
+      <trans-unit id="f1fabd4d39864e333c78da4ee8694fb2cd7661e9" resname="ra.error.unmet_loa.title">
+        <jms:reference-file line="3">Saml/Exception/unmetLoa.html.twig</jms:reference-file>
+        <source>ra.error.unmet_loa.title</source>
+        <target>Onvoldoende veiligheidsmachtiging</target>
       </trans-unit>
       <trans-unit id="7317a2726d1f0c5a5457e36c46f817004792dd9d" resname="ra.form.ra_search_ra_second_factors.button.search">
         <jms:reference-file line="57">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>

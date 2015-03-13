@@ -23,8 +23,15 @@ use Surfnet\SamlBundle\Entity\ServiceProvider;
 use Surfnet\SamlBundle\Http\PostBinding;
 use Surfnet\SamlBundle\Http\RedirectBinding;
 use Surfnet\SamlBundle\SAML2\AuthnRequestFactory;
+use Surfnet\StepupBundle\Service\LoaResolutionService;
+use Surfnet\StepupBundle\Value\Loa;
+use Surfnet\StepupRa\RaBundle\Security\Exception\UnmetLoaException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class SamlInteractionProvider
 {
     /**
@@ -48,12 +55,17 @@ class SamlInteractionProvider
     private $postBinding;
 
     /**
-     * @var SessionHandler
+     * @var \Surfnet\StepupRa\RaBundle\Security\Authentication\SessionHandler
      */
     private $sessionHandler;
 
     /**
-     * @var string
+     * @var \Surfnet\StepupBundle\Service\LoaResolutionService
+     */
+    private $loaResolutionService;
+
+    /**
+     * @var \Surfnet\StepupBundle\Value\Loa
      */
     private $requiredLoa;
 
@@ -63,14 +75,16 @@ class SamlInteractionProvider
         RedirectBinding $redirectBinding,
         PostBinding $postBinding,
         SessionHandler $sessionHandler,
-        $requiredLoa
+        LoaResolutionService $loaResolutionService,
+        Loa $requiredLoa
     ) {
-        $this->serviceProvider  = $serviceProvider;
-        $this->identityProvider = $identityProvider;
-        $this->redirectBinding  = $redirectBinding;
-        $this->postBinding      = $postBinding;
-        $this->sessionHandler   = $sessionHandler;
-        $this->requiredLoa      = $requiredLoa;
+        $this->serviceProvider      = $serviceProvider;
+        $this->identityProvider     = $identityProvider;
+        $this->redirectBinding      = $redirectBinding;
+        $this->postBinding          = $postBinding;
+        $this->sessionHandler       = $sessionHandler;
+        $this->loaResolutionService = $loaResolutionService;
+        $this->requiredLoa          = $requiredLoa;
     }
 
     /**
@@ -91,7 +105,7 @@ class SamlInteractionProvider
             $this->identityProvider
         );
 
-        $authnRequest->setAuthenticationContextClassRef($this->requiredLoa);
+        $authnRequest->setAuthenticationContextClassRef((string) $this->requiredLoa);
 
         $this->sessionHandler->setRequestId($authnRequest->getRequestId());
 
@@ -101,6 +115,9 @@ class SamlInteractionProvider
     /**
      * @param Request $request
      * @return \SAML2_Assertion
+     * @throws \Surfnet\StepupRa\RaBundle\Security\Exception\UnmetLoaException When required LoA is not met by response
+     * @throws \SAML2_Response_Exception_PreconditionNotMetException
+     * @throws \Symfony\Component\Security\Core\Exception\AuthenticationException When response LoA cannot be resolved
      */
     public function processSamlResponse(Request $request)
     {
@@ -112,6 +129,21 @@ class SamlInteractionProvider
         );
 
         $this->sessionHandler->clearRequestId();
+
+        $authnContextClassRef = $assertion->getAuthnContextClassRef();
+        if (!$this->loaResolutionService->hasLoa($authnContextClassRef)) {
+            throw new AuthenticationException('Received SAML response with unresolvable LoA');
+        }
+
+        if (!$this->loaResolutionService->getLoa($authnContextClassRef)->canSatisfyLoa($this->requiredLoa)) {
+            throw new UnmetLoaException(
+                sprintf(
+                    "Gateway responded with LoA '%s', which is lower than required LoA '%s'",
+                    $assertion->getAuthnContextClassRef(),
+                    (string) $this->requiredLoa
+                )
+            );
+        }
 
         return $assertion;
     }
