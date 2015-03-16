@@ -50,7 +50,7 @@ class SmsService
      */
     public function sendSms(SendSmsCommand $command)
     {
-        $this->logger->info('Sending SMS');
+        $this->logger->info('Requesting Gateway to send SMS');
 
         $body = [
             'requester' => ['institution' => $command->institution, 'identity' => $command->identity],
@@ -64,8 +64,10 @@ class SmsService
         $statusCode = $response->getStatusCode();
 
         if ($statusCode != 200) {
-            $type = $statusCode >= 400 && $statusCode < 500 ? 'client' : 'server';
-            $this->logger->info(sprintf('SMS sending failed; %s error', $type));
+            $this->logger->error(
+                sprintf('SMS sending failed, error: [%s] %s', $response->getStatusCode(), $response->getReasonPhrase()),
+                ['http-body' => $response->getBody() ? $response->getBody()->getContents() : '',]
+            );
 
             return false;
         }
