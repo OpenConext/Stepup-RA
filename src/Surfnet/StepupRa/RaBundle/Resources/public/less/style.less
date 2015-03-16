@@ -32,12 +32,22 @@ form[name="ra_verify_yubikey_public_id"] {
 div.form-ra-verify-identity {
     margin: 1em auto;
     padding: 0.75em 1em;
-    max-width: 525px;
+    max-width: 650px;
+
+    .left-aligned {
+        padding-left: 24px;
+        text-align: left;
+    }
+
+    table tbody tr th.half-width, table tbody tr td.half-width {
+      width: 50%;
+    }
 
     .form-group-verify-identity {
         text-align: center;
 
         label {
+
             font-weight: bold;
         }
     }
