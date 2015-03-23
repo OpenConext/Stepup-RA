@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\VetSecondFactorCommand;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
@@ -128,8 +129,12 @@ class VettingService
     {
         $procedure = $this->getProcedure($procedureId);
 
-        $command->phoneNumber = $procedure->getSecondFactor()->secondFactorIdentifier;
-        $command->identity = $procedure->getSecondFactor()->identityId;
+        $phoneNumber = InternationalPhoneNumber::fromStringFormat(
+            $procedure->getSecondFactor()->secondFactorIdentifier
+        );
+
+        $command->phoneNumber = $phoneNumber->toMSISDN();
+        $command->identity    = $procedure->getSecondFactor()->identityId;
         $command->institution = $procedure->getSecondFactor()->institution;
 
         return $this->smsSecondFactorService->sendChallenge($command);
