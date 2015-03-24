@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyPhoneNumberCommand;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
@@ -45,7 +46,9 @@ class SmsController extends Controller
         $form = $this->createForm('ra_send_sms_challenge', $command)->handleRequest($request);
 
         $vettingService = $this->getVettingService();
-        $phoneNumber = $vettingService->getSecondFactorIdentifier($procedureId);
+        $phoneNumber = InternationalPhoneNumber::fromStringFormat(
+            $vettingService->getSecondFactorIdentifier($procedureId)
+        );
 
         if (!$form->isValid()) {
             $logger->notice('Form has not been submitted, not sending SMS, rendering Send SMS Challenge page');
