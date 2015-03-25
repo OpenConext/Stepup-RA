@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-03-13T15:33:49Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2015-03-25T13:30:15Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -31,7 +31,7 @@
       <trans-unit id="175453c747d9009681e48b1fea3c1a5bb83077ad" resname="ra.error.saml_authn_failed.text.authn_failed">
         <jms:reference-file line="8">Saml/Exception/authnFailed.html.twig</jms:reference-file>
         <source>ra.error.saml_authn_failed.text.authn_failed</source>
-        <target>You were unable to sign in.</target>
+        <target>Sign in unsuccessful. Please try again.</target>
       </trans-unit>
       <trans-unit id="91796128309d18718b9a06d39bd0b24a705e8c4e" resname="ra.error.saml_authn_failed.title">
         <jms:reference-file line="3">Saml/Exception/authnFailed.html.twig</jms:reference-file>
@@ -41,48 +41,48 @@
       <trans-unit id="4c1a7f7aa6b9f7a2928e894933fac97b7d41198c" resname="ra.error.saml_no_authn_context.text.authn_failed">
         <jms:reference-file line="8">Saml/Exception/noAuthnContext.html.twig</jms:reference-file>
         <source>ra.error.saml_no_authn_context.text.authn_failed</source>
-        <target>You don't have the required security clearance to sign into the Registration Authority application.</target>
+        <target>You are not authorised to sign in.</target>
       </trans-unit>
       <trans-unit id="16cdeb502fd697b0179fb1a528fc59f216ba2184" resname="ra.error.saml_no_authn_context.title">
         <jms:reference-file line="3">Saml/Exception/noAuthnContext.html.twig</jms:reference-file>
         <source>ra.error.saml_no_authn_context.title</source>
-        <target>Security clearance too low</target>
+        <target>Not authorised to log in</target>
       </trans-unit>
       <trans-unit id="d480fbb8440eb4218358f6d448b7033e5ddf201c" resname="ra.error.saml_precondition_not_met.text.precondition_not_met">
         <jms:reference-file line="8">Saml/Exception/preconditionNotMet.html.twig</jms:reference-file>
         <source>ra.error.saml_precondition_not_met.text.precondition_not_met</source>
-        <target>You don't meet all the requirements to be able to sign into the Registration Authority application.</target>
+        <target>You are not authorised to sign in.</target>
       </trans-unit>
       <trans-unit id="b286c74078cb8da3bc0126dc1d888d9f445468b9" resname="ra.error.saml_precondition_not_met.title">
         <jms:reference-file line="3">Saml/Exception/preconditionNotMet.html.twig</jms:reference-file>
         <source>ra.error.saml_precondition_not_met.title</source>
-        <target>Sign in</target>
+        <target>Not authorised to log in</target>
       </trans-unit>
       <trans-unit id="40350a9cdf8f8964a6900f7dc524a91fa7b23df6" resname="ra.error.text.an_error_occurred">
         <jms:reference-file line="8">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.text.an_error_occurred</source>
-        <target>A error occurred due to an unknown cause. Go back and try again or go to the dashboard.</target>
+        <target>Oops, something went wrong. Please try again or go back to Home.</target>
       </trans-unit>
       <trans-unit id="e7e16bd377d6b3513aee56a7203224b1838b8876" resname="ra.error.text.if_you_think_this_is_incorrect_report">
         <jms:reference-file line="13">views/Exception/error404.html.twig</jms:reference-file>
         <source>ra.error.text.if_you_think_this_is_incorrect_report</source>
-        <target>If you think this error is a mistake, please report it to SURFnet, along with the above error code.</target>
+        <target>Please report this error + error code to the helpdesk via support@surfconext.nl</target>
       </trans-unit>
       <trans-unit id="cabba69d3aecedfc3535dd2b976519d1090290e2" resname="ra.error.text.page_not_found">
         <jms:reference-file line="8">views/Exception/error404.html.twig</jms:reference-file>
         <source>ra.error.text.page_not_found</source>
-        <target>The page you requested was not found. Go back to try again or go to the dashboard.</target>
+        <target>The page you requested was not found. Please try again or go back to Home.</target>
       </trans-unit>
       <trans-unit id="1e71b162b5df5571e03f1e5b4f89b366b0e60390" resname="ra.error.text.what_were_you_doing_well_fix_it">
         <jms:reference-file line="13">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.text.what_were_you_doing_well_fix_it</source>
-        <target>If you think this error is a mistake, please report it to SURFnet, along with the above error code.</target>
+        <target>Please report this error + error code to the helpdesk via support@surfconext.nl</target>
       </trans-unit>
       <trans-unit id="97cec45f4b04606121bd0a6613f2673f4e55eff7" resname="ra.error.text.your_art_code">
         <jms:reference-file line="12">views/Exception/error404.html.twig</jms:reference-file>
         <jms:reference-file line="12">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.text.your_art_code</source>
-        <target>The error code for the error is</target>
+        <target>The error code is:</target>
       </trans-unit>
       <trans-unit id="493e7aa4cac4a7f04f9fb3e933277ec6665e55b1" resname="ra.error.title">
         <jms:reference-file line="3">views/Exception/error.html.twig</jms:reference-file>
@@ -107,12 +107,12 @@
       <trans-unit id="48cd99661dd9a7766fe9b5819b2e6fc2b1777da6" resname="ra.form.ra_search_ra_second_factors.choice.status.revoked">
         <jms:reference-file line="52">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.choice.status.revoked</source>
-        <target>Revoked</target>
+        <target>Removed</target>
       </trans-unit>
       <trans-unit id="f5b1f76a7766a04fbbeda4fb456846fc1d82104a" resname="ra.form.ra_search_ra_second_factors.choice.status.unverified">
         <jms:reference-file line="49">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.choice.status.unverified</source>
-        <target>Unverified</target>
+        <target>Not verified</target>
       </trans-unit>
       <trans-unit id="ae89a5ba9082c547a4dda73b729559c3b5d7b463" resname="ra.form.ra_search_ra_second_factors.choice.status.verified">
         <jms:reference-file line="50">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
@@ -122,7 +122,7 @@
       <trans-unit id="c8a5fe4fab6c98758ca2bdab597d651fe6f6d782" resname="ra.form.ra_search_ra_second_factors.choice.status.vetted">
         <jms:reference-file line="51">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.choice.status.vetted</source>
-        <target>Vetted</target>
+        <target>Activated</target>
       </trans-unit>
       <trans-unit id="82620c7566024bc53940025d305ad74317ac5b42" resname="ra.form.ra_search_ra_second_factors.choice.type.sms">
         <jms:reference-file line="35">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
@@ -212,7 +212,7 @@
       <trans-unit id="1a955d4adfae2bc0a0c0177a672e95c7dcbb486d" resname="ra.menu.search">
         <jms:reference-file line="32">Resources/views/base.html.twig</jms:reference-file>
         <source>ra.menu.search</source>
-        <target>Security tokens</target>
+        <target>Tokens</target>
       </trans-unit>
       <trans-unit id="ee8b15d139dd5ba69eb2bfbc1c540b03894bafd7" resname="ra.registration.yubikey.title.enter_challenge">
         <jms:reference-file line="3">Vetting/Yubikey/verify.html.twig</jms:reference-file>
@@ -222,12 +222,12 @@
       <trans-unit id="800e5d0a1f57a8b4d3654ac7d173efe68c098f68" resname="ra.second_factor.revocation.could_not_revoke">
         <jms:reference-file line="105">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
         <source>ra.second_factor.revocation.could_not_revoke</source>
-        <target>The revocation of the token failed</target>
+        <target>The removal of the token failed</target>
       </trans-unit>
       <trans-unit id="f70c06516166354cd4d8d3490cbd707941610ed9" resname="ra.second_factor.revocation.modal.are_you_sure">
         <jms:reference-file line="67">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.are_you_sure</source>
-        <target>Are you sure you want to revoke the token listed below?</target>
+        <target>Are you sure you want to remove the token listed below?</target>
       </trans-unit>
       <trans-unit id="441e4d7c6bece19e1a2a0008af6302443d36c7a4" resname="ra.second_factor.revocation.modal.cancel">
         <jms:reference-file line="88">views/SecondFactor/search.html.twig</jms:reference-file>
@@ -268,7 +268,7 @@
       <trans-unit id="5c500a2dc008cbf1a8501593a2a50e518f6fe145" resname="ra.second_factor.revocation.revoked">
         <jms:reference-file line="102">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
         <source>ra.second_factor.revocation.revoked</source>
-        <target>The token has been successfully revoked</target>
+        <target>The token has been successfully removed</target>
       </trans-unit>
       <trans-unit id="e091076baef38f98898434eb2e98795a0c439a9e" resname="ra.second_factor.search.column.email">
         <jms:reference-file line="19">views/SecondFactor/search.html.twig</jms:reference-file>
@@ -298,12 +298,12 @@
       <trans-unit id="5396da3d169284da408b7e41c919fc3cbb0a7789" resname="ra.second_factor.search.status.revoked">
         <jms:reference-file line="24">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.status.revoked</source>
-        <target>Revoked</target>
+        <target>Removed</target>
       </trans-unit>
       <trans-unit id="b95f6a983c4cb565e06b2b444afd9e53737e41d7" resname="ra.second_factor.search.status.unverified">
         <jms:reference-file line="21">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.status.unverified</source>
-        <target>Unverified</target>
+        <target>Not verified</target>
       </trans-unit>
       <trans-unit id="342a7ca495a8ab8baf8c65ca63c53558cb01688d" resname="ra.second_factor.search.status.verified">
         <jms:reference-file line="22">Resources/views/translations.html.twig</jms:reference-file>
@@ -313,7 +313,7 @@
       <trans-unit id="876f09e852960f57e319006c49585af1bbd55a84" resname="ra.second_factor.search.status.vetted">
         <jms:reference-file line="23">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.status.vetted</source>
-        <target>Vetted</target>
+        <target>Activated</target>
       </trans-unit>
       <trans-unit id="b460113e39fffb71f86d0c0a9509b5c741924e99" resname="ra.second_factor.search.text.no_second_factors">
         <jms:reference-file line="54">views/SecondFactor/search.html.twig</jms:reference-file>
@@ -343,7 +343,7 @@
       <trans-unit id="512d5614cc27358eb50068a1ba510983e3e0c620" resname="ra.secondfactor.revoke">
         <jms:reference-file line="42">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.secondfactor.revoke</source>
-        <target>Revoke</target>
+        <target>Remove</target>
       </trans-unit>
       <trans-unit id="485287b4d4e2f13a9df979601799e727821b9817" resname="ra.vetting.gssf.initiate.tiqr.button.initiate">
         <jms:reference-file line="29">Resources/views/translations.html.twig</jms:reference-file>
@@ -428,7 +428,7 @@
       <trans-unit id="f67f9a1925f44474f600a9b2145828791fc3d8f7" resname="ra.vetting.start_procedure.title">
         <jms:reference-file line="3">views/Vetting/startProcedure.html.twig</jms:reference-file>
         <source>ra.vetting.start_procedure.title</source>
-        <target>Dashboard</target>
+        <target>Home</target>
       </trans-unit>
       <trans-unit id="a27cb1fbe67c5a7a112850e184104c6338e3266e" resname="ra.vetting.verify_identity.text.proceed_only_when_id_match_success">
         <jms:reference-file line="16">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
@@ -448,7 +448,7 @@
       <trans-unit id="08aec9430aaba5a2b7652c24582bbb0bb320d1f9" resname="ra.vetting.vetting_completed.button.back_to_dashboard">
         <jms:reference-file line="17">views/Vetting/vettingCompleted.html.twig</jms:reference-file>
         <source>ra.vetting.vetting_completed.button.back_to_dashboard</source>
-        <target>Back to the dashboard</target>
+        <target>Back to Home</target>
       </trans-unit>
       <trans-unit id="85f8a896e4fb57f2dd0a05049395117fe378df66" resname="ra.vetting.vetting_completed.text.vetting_completed">
         <jms:reference-file line="14">views/Vetting/vettingCompleted.html.twig</jms:reference-file>
