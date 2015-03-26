@@ -19,7 +19,6 @@
 namespace Surfnet\StepupRa\RaBundle;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
-use Surfnet\StepupMiddlewareClientBundle\Uuid\Uuid;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
