@@ -33,5 +33,10 @@ class RevokeSecondFactorCommand
     /**
      * @var string
      */
-    public $currentUserId;
+    public $authorityId;
+
+    /**
+     * @var string
+     */
+    public $authorityInstitution;
 }

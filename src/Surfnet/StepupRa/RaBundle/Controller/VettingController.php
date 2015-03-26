@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
@@ -56,7 +57,10 @@ class VettingController extends Controller
 
             /** @var SamlToken $token */
             $token = $this->get('security.token_storage')->getToken();
-            $command->authorityId = $this->getIdentity()->id;
+            $identity = $this->getIdentity();
+
+            $command->authorityId = $identity->id;
+            $command->authorityInstitution = $identity->institution;
             $command->authorityLoa = $token->getLoa();
             $command->secondFactor = $secondFactor;
 
@@ -165,7 +169,7 @@ class VettingController extends Controller
     }
 
     /**
-     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
+     * @return Identity
      */
     private function getIdentity()
     {

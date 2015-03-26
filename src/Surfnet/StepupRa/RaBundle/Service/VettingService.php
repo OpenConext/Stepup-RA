@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupBundle\Value\SecondFactorType;
+use Surfnet\StepupMiddlewareClientBundle\Command\Metadata;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\VetSecondFactorCommand;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
@@ -108,6 +109,8 @@ class VettingService
         }
 
         $procedure = VettingProcedure::start(
+            $command->authorityId,
+            $command->authorityInstitution,
             $command->secondFactor->id,
             $command->authorityId,
             $command->registrationCode,
@@ -255,7 +258,10 @@ class VettingService
         $command->documentNumber = $procedure->getDocumentNumber();
         $command->identityVerified = $procedure->isIdentityVerified();
 
-        $result = $this->commandService->execute($command);
+        $result = $this->commandService->execute(
+            $command,
+            new Metadata($procedure->getAuthorityId(), $procedure->getAuthorityInstitution())
+        );
 
         if (!$result->isSuccessful()) {
             return false;

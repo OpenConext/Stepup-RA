@@ -83,7 +83,8 @@ final class SecondFactorController extends Controller
         $logger->info('Received request to revoke Second Factor');
 
         $command = new RevokeSecondFactorCommand();
-        $command->currentUserId = $this->getIdentity()->id;
+        $command->authorityId = $this->getIdentity()->id;
+        $command->authorityInstitution = $this->getIdentity()->institution;
 
         $form = $this->createForm('ra_revoke_second_factor', $command);
         $form->handleRequest($request);
@@ -92,7 +93,7 @@ final class SecondFactorController extends Controller
             'Sending middleware request to revoke Second Factor "%s" belonging to "%s" on behalf of "%s"',
             $command->secondFactorId,
             $command->identityId,
-            $command->currentUserId
+            $command->authorityId
         ));
 
         $translator = $this->get('translator');
