@@ -109,6 +109,7 @@ class VettingService
 
         $procedure = VettingProcedure::start(
             $command->secondFactor->id,
+            $command->authorityId,
             $command->registrationCode,
             $command->secondFactor
         );
@@ -246,7 +247,9 @@ class VettingService
         $procedure->vet();
 
         $command = new VetSecondFactorCommand();
+        $command->authorityId = $procedure->getAuthorityId();
         $command->identityId = $procedure->getSecondFactor()->identityId;
+        $command->secondFactorId = $procedure->getSecondFactor()->id;
         $command->registrationCode = $procedure->getRegistrationCode();
         $command->secondFactorIdentifier = $procedure->getInputSecondFactorIdentifier();
         $command->documentNumber = $procedure->getDocumentNumber();

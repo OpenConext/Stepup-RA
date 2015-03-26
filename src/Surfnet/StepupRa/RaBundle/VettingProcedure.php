@@ -34,6 +34,11 @@ class VettingProcedure
     private $id;
 
     /**
+     * @var string
+     */
+    private $authorityId;
+
+    /**
      * @var string|null
      */
     private $registrationCode;
@@ -64,15 +69,20 @@ class VettingProcedure
     private $vetted;
 
     /**
-     * @param string $id
-     * @param string $registrationCode
+     * @param string               $id
+     * @param string               $authorityId
+     * @param string               $registrationCode
      * @param VerifiedSecondFactor $secondFactor
      * @return self
      */
-    public static function start($id, $registrationCode, VerifiedSecondFactor $secondFactor)
+    public static function start($id, $authorityId, $registrationCode, VerifiedSecondFactor $secondFactor)
     {
         if (!is_string($id)) {
             throw InvalidArgumentException::invalidType('string', 'id', $id);
+        }
+
+        if (!is_string($authorityId)) {
+            throw InvalidArgumentException::invalidType('string', 'authorityId', $authorityId);
         }
 
         if (!is_string($registrationCode)) {
@@ -81,6 +91,7 @@ class VettingProcedure
 
         $procedure = new self();
         $procedure->id = $id;
+        $procedure->authorityId = $authorityId;
         $procedure->registrationCode = $registrationCode;
         $procedure->secondFactor = $secondFactor;
 
@@ -174,6 +185,14 @@ class VettingProcedure
     public function getSecondFactor()
     {
         return $this->secondFactor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorityId()
+    {
+        return $this->authorityId;
     }
 
     /**

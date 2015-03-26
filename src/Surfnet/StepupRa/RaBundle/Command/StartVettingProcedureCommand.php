@@ -24,6 +24,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 class StartVettingProcedureCommand
 {
     /**
+     * The ID of the authority that will vet a second factor.
+     *
+     * @var string
+     */
+    public $authorityId;
+
+    /**
      * The LoA of the authority.
      *
      * @var \Surfnet\StepupBundle\Value\Loa
