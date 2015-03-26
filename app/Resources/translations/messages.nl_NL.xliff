@@ -465,7 +465,7 @@ Het token is nu geactiveerd en klaar voor gebruik.</target>
       <trans-unit id="da87c92a1202225a559ff2b66b96128cca9c2c29" resname="ra.vetting.yubikey.text.connect_yubikey_to_pc">
         <jms:reference-file line="15">Vetting/Yubikey/verify.html.twig</jms:reference-file>
         <source>ra.vetting.yubikey.text.connect_yubikey_to_pc</source>
-        <target>Stop de Yubikey van de gebruiker in de USB drive van je computer.</target>
+        <target>Stop de Yubikey van de gebruiker in de USB poort van je computer.</target>
       </trans-unit>
       <trans-unit id="6b09c6df1720b27892d03d1e92b5bda74366ee50" resname="ra.vetting.yubikey.text.ensure_form_field_focus">
         <jms:reference-file line="16">Vetting/Yubikey/verify.html.twig</jms:reference-file>
