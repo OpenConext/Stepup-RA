@@ -56,6 +56,7 @@ class VettingController extends Controller
 
             /** @var SamlToken $token */
             $token = $this->get('security.token_storage')->getToken();
+            $command->authorityId = $this->getIdentity()->id;
             $command->authorityLoa = $token->getLoa();
             $command->secondFactor = $secondFactor;
 
@@ -161,5 +162,13 @@ class VettingController extends Controller
     private function getVettingService()
     {
         return $this->get('ra.service.vetting');
+    }
+
+    /**
+     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
+     */
+    private function getIdentity()
+    {
+        return $this->get('security.token_storage')->getToken()->getUser();
     }
 }
