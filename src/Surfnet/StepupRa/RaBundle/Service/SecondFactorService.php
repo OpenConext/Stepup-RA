@@ -18,7 +18,6 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
-use Exception;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Exception\StepupMiddlewareClientException;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\VerifiedSecondFactorSearchQuery;
@@ -91,26 +90,5 @@ class SecondFactorService
         throw new RuntimeException(
             sprintf('Got an unexpected amount of identities, expected 0 or 1, got "%d"', $elementCount)
         );
-    }
-
-    public function processCommand($command)
-    {
-        $messageTemplate = 'Exception when executing command "%s", error: "%s"';
-
-        try {
-            $result = $this->commandService->execute($command);
-        } catch (Exception $e) {
-            $message = sprintf($messageTemplate, get_class($command), $e->getMessage());
-            $this->logger->critical($message);
-
-            throw new RuntimeException($message, 0, $e);
-        }
-
-        if (!$result->isSuccessful()) {
-            $note = sprintf($messageTemplate, get_class($command), implode('", "', $result->getErrors()));
-            $this->logger->critical($note);
-
-            throw new RuntimeException($note);
-        }
     }
 }
