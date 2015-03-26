@@ -21,8 +21,6 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 use Exception;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\IdentitySearchQuery;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Command\CreateIdentityCommand;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Command\UpdateIdentityCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService as ApiIdentityService;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
@@ -119,59 +117,6 @@ class IdentityService implements UserProviderInterface
             'Got an unexpected amount of identities, expected 0 or 1, got "%d"',
             count($elements)
         ));
-    }
-
-    /**
-     * Save or Update an existing Identity
-     *
-     * @param Identity $identity
-     */
-    public function createIdentity(Identity $identity)
-    {
-        $command = new CreateIdentityCommand();
-        $command->id          = $identity->id;
-        $command->nameId      = $identity->nameId;
-        $command->institution = $identity->institution;
-        $command->email       = $identity->email;
-        $command->commonName  = $identity->commonName;
-
-        $this->processCommand($command);
-    }
-
-    /**
-     * @param Identity $identity
-     */
-    public function updateIdentity(Identity $identity)
-    {
-        $command = new UpdateIdentityCommand($identity->id);
-        $command->email      = $identity->email;
-        $command->commonName = $identity->commonName;
-
-        $this->processCommand($command);
-    }
-
-    /**
-     * @param $command
-     */
-    public function processCommand($command)
-    {
-        $messageTemplate = 'Exception when saving Identity[%s]: with command "%s", error: "%s"';
-
-        try {
-            $result = $this->commandService->execute($command);
-        } catch (Exception $e) {
-            $message = sprintf($messageTemplate, $command->id, get_class($command), $e->getMessage());
-            $this->logger->critical($message);
-
-            throw new RuntimeException($message, 0, $e);
-        }
-
-        if (!$result->isSuccessful()) {
-            $note = sprintf($messageTemplate, $command->id, get_class($command), implode('", "', $result->getErrors()));
-            $this->logger->critical($note);
-
-            throw new RuntimeException($note);
-        }
     }
 
     /**

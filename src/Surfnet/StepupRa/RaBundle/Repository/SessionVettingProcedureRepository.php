@@ -18,8 +18,8 @@
 
 namespace Surfnet\StepupRa\RaBundle\Repository;
 
-use Surfnet\StepupRa\RaBundle\VettingProcedure;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
+use Surfnet\StepupRa\RaBundle\VettingProcedure;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SessionVettingProcedureRepository implements VettingProcedureRepository

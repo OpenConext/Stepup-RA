@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaSecondFactorSearchQuery;
+use Surfnet\StepupMiddlewareClientBundle\Command\Metadata;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\RevokeRegistrantsSecondFactorCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaSecondFactorCollection;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaSecondFactorService as ApiRaSecondFactorService;
@@ -64,9 +65,12 @@ class RaSecondFactorService
         $middlewareCommand                 = new RevokeRegistrantsSecondFactorCommand();
         $middlewareCommand->secondFactorId = $command->secondFactorId;
         $middlewareCommand->identityId     = $command->identityId;
-        $middlewareCommand->authorityId    = $command->currentUserId;
+        $middlewareCommand->authorityId    = $command->authorityId;
 
-        $result = $this->commandService->execute($middlewareCommand);
+        $result = $this->commandService->execute(
+            $middlewareCommand,
+            new Metadata($command->authorityId, $command->authorityInstitution)
+        );
 
         if (!$result->isSuccessful()) {
             $this->logger->critical(sprintf(

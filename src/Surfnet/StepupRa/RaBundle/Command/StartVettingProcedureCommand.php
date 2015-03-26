@@ -24,11 +24,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 class StartVettingProcedureCommand
 {
     /**
-     * The ID of the authority that will vet a second factor.
+     * The identity ID of the registration authority
      *
      * @var string
      */
     public $authorityId;
+
+    /**
+     * The institution of the registration authority
+     *
+     * @var string
+     */
+    public $authorityInstitution;
 
     /**
      * The LoA of the authority.

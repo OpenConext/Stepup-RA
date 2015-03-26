@@ -19,7 +19,6 @@
 namespace Surfnet\StepupRa\RaBundle;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
-use Surfnet\StepupMiddlewareClientBundle\Uuid\Uuid;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
@@ -31,12 +30,17 @@ class VettingProcedure
     /**
      * @var string
      */
-    private $id;
+    private $authorityId;
 
     /**
      * @var string
      */
-    private $authorityId;
+    private $authorityInstitution;
+
+    /**
+     * @var string
+     */
+    private $id;
 
     /**
      * @var string|null
@@ -69,14 +73,28 @@ class VettingProcedure
     private $vetted;
 
     /**
-     * @param string               $id
      * @param string               $authorityId
+     * @param string               $authorityInstitution
+     * @param string               $id
      * @param string               $registrationCode
      * @param VerifiedSecondFactor $secondFactor
      * @return self
      */
-    public static function start($id, $authorityId, $registrationCode, VerifiedSecondFactor $secondFactor)
-    {
+    public static function start(
+        $authorityId,
+        $authorityInstitution,
+        $id,
+        $registrationCode,
+        VerifiedSecondFactor $secondFactor
+    ) {
+        if (!is_string($authorityId)) {
+            throw InvalidArgumentException::invalidType('string', 'authorityId', $authorityId);
+        }
+
+        if (!is_string($authorityInstitution)) {
+            throw InvalidArgumentException::invalidType('string', 'authorityInstitution', $authorityInstitution);
+        }
+
         if (!is_string($id)) {
             throw InvalidArgumentException::invalidType('string', 'id', $id);
         }
@@ -90,6 +108,8 @@ class VettingProcedure
         }
 
         $procedure = new self();
+        $procedure->authorityId = $authorityId;
+        $procedure->authorityInstitution = $authorityInstitution;
         $procedure->id = $id;
         $procedure->authorityId = $authorityId;
         $procedure->registrationCode = $registrationCode;
@@ -174,6 +194,22 @@ class VettingProcedure
     /**
      * @return string
      */
+    public function getAuthorityId()
+    {
+        return $this->authorityId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAuthorityInstitution()
+    {
+        return $this->authorityInstitution;
+    }
+
+    /**
+     * @return string
+     */
     public function getId()
     {
         return $this->id;
@@ -185,14 +221,6 @@ class VettingProcedure
     public function getSecondFactor()
     {
         return $this->secondFactor;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAuthorityId()
-    {
-        return $this->authorityId;
     }
 
     /**
