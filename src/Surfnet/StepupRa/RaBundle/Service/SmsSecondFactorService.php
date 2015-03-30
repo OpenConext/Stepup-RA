@@ -47,11 +47,6 @@ class SmsSecondFactorService
     private $translator;
 
     /**
-     * @var CommandService
-     */
-    private $commandService;
-
-    /**
      * @var string
      */
     private $originator;
@@ -60,14 +55,12 @@ class SmsSecondFactorService
      * @param SmsService $smsService
      * @param SmsVerificationStateHandler $smsVerificationStateHandler
      * @param TranslatorInterface $translator
-     * @param CommandService $commandService
      * @param string $originator
      */
     public function __construct(
         SmsService $smsService,
         SmsVerificationStateHandler $smsVerificationStateHandler,
         TranslatorInterface $translator,
-        CommandService $commandService,
         $originator
     ) {
         if (!is_string($originator)) {
@@ -83,7 +76,6 @@ class SmsSecondFactorService
         $this->smsService = $smsService;
         $this->smsVerificationStateHandler = $smsVerificationStateHandler;
         $this->translator = $translator;
-        $this->commandService = $commandService;
         $this->originator = $originator;
     }
 

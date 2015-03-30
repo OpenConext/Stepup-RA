@@ -75,7 +75,6 @@ services:
             - @ra.service.sms
             - @ra.service.challenge_handler
             - @translator
-            - @ra.service.command
             - '' # Originator set in extension
 
     ra.service.challenge_handler:
@@ -116,14 +115,12 @@ services:
         class: Surfnet\StepupRa\RaBundle\Service\IdentityService
         arguments:
             - @surfnet_stepup_middleware_client.identity.service.identity
-            - @ra.service.command
             - @logger
 
     ra.service.second_factor:
         class: Surfnet\StepupRa\RaBundle\Service\SecondFactorService
         arguments:
             - @surfnet_stepup_middleware_client.identity.service.second_factor
-            - @ra.service.command
             - @logger
 
     ra.service.ra_second_factor:

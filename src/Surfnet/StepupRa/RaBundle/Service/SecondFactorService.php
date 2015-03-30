@@ -28,32 +28,24 @@ use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 class SecondFactorService
 {
     /**
-     * @var ApiSecondFactorService
+     * @var \Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService
      */
     private $apiSecondFactorService;
 
     /**
-     * @var CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
     /**
      * @param ApiSecondFactorService $apiSecondFactorService
-     * @param CommandService $commandService
-     * @param LoggerInterface $logger
+     * @param LoggerInterface        $logger
      */
     public function __construct(
         ApiSecondFactorService $apiSecondFactorService,
-        CommandService $commandService,
         LoggerInterface $logger
     ) {
         $this->apiSecondFactorService = $apiSecondFactorService;
-        $this->commandService = $commandService;
         $this->logger = $logger;
     }
 

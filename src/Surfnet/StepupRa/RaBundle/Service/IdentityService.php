@@ -35,22 +35,15 @@ class IdentityService implements UserProviderInterface
     private $apiIdentityService;
 
     /**
-     * @var \Surfnet\StepupMiddlewareClientBundle\Service\CommandService
-     */
-    private $commandService;
-
-    /**
      * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
     public function __construct(
         ApiIdentityService $apiIdentityService,
-        CommandService $commandService,
         LoggerInterface $logger
     ) {
         $this->apiIdentityService = $apiIdentityService;
-        $this->commandService = $commandService;
         $this->logger = $logger;
     }
 
