@@ -29,17 +29,17 @@ use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 class RaSecondFactorService
 {
     /**
-     * @var ApiRaSecondFactorService
+     * @var \Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaSecondFactorService
      */
     private $apiRaSecondFactorService;
 
     /**
-     * @var CommandService
+     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
      */
     private $commandService;
 
     /**
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 

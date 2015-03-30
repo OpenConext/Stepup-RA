@@ -26,13 +26,10 @@ use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\OtpVerification;
 use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SmsVerificationStateHandler;
 use Symfony\Component\Translation\TranslatorInterface;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class SmsSecondFactorService
 {
     /**
-     * @var SmsService
+     * @var \Surfnet\StepupRa\RaBundle\Service\SmsService
      */
     private $smsService;
 
@@ -42,7 +39,7 @@ class SmsSecondFactorService
     private $smsVerificationStateHandler;
 
     /**
-     * @var TranslatorInterface
+     * @var \Symfony\Component\Translation\TranslatorInterface
      */
     private $translator;
 

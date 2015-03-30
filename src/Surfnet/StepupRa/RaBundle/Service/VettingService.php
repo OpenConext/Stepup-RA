@@ -42,27 +42,27 @@ use Surfnet\StepupRa\RaBundle\VettingProcedure;
 class VettingService
 {
     /**
-     * @var SmsSecondFactorService
+     * @var \Surfnet\StepupRa\RaBundle\Service\SmsSecondFactorService
      */
     private $smsSecondFactorService;
 
     /**
-     * @var YubikeySecondFactorService
+     * @var \Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorService
      */
     private $yubikeySecondFactorService;
 
     /**
-     * @var GssfService
+     * @var \Surfnet\StepupRa\RaBundle\Service\GssfService
      */
     private $gssfService;
 
     /**
-     * @var CommandService
+     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
      */
     private $commandService;
 
     /**
-     * @var VettingProcedureRepository
+     * @var \Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository
      */
     private $vettingProcedureRepository;
 
