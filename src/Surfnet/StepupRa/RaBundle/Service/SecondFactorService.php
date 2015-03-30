@@ -23,7 +23,6 @@ use Surfnet\StepupMiddlewareClient\Exception\StepupMiddlewareClientException;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\VerifiedSecondFactorSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService as ApiSecondFactorService;
-use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 
 class SecondFactorService

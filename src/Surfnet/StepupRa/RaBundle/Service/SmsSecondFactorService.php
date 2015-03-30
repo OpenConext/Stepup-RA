@@ -18,7 +18,6 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
-use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyPhoneNumberCommand;
