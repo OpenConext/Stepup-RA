@@ -50,12 +50,16 @@ class SmsController extends Controller
             $vettingService->getSecondFactorIdentifier($procedureId)
         );
 
+        $otpRequestsRemaining = $vettingService->getSmsOtpRequestsRemainingCount();
+        $maximumOtpRequests = $vettingService->getSmsMaximumOtpRequestsCount();
+        $viewVariables = ['otpRequestsRemaining' => $otpRequestsRemaining, 'maximumOtpRequests' => $maximumOtpRequests];
+
         if (!$form->isValid()) {
             $logger->notice('Form has not been submitted, not sending SMS, rendering Send SMS Challenge page');
-            return [
-                'phoneNumber' => $phoneNumber,
-                'form'        => $form->createView()
-            ];
+            return array_merge(
+                $viewVariables,
+                ['phoneNumber' => $phoneNumber, 'form' => $form->createView()]
+            );
         }
 
         $logger->notice('Sending of SMS Challenge has been requested, sending OTP via SMS');
@@ -71,10 +75,10 @@ class SmsController extends Controller
         $logger->notice(
             'SMS Challenge could not be sent, added error to page to notify user and re-rendering send challenge page'
         );
-        return [
-            'phoneNumber' => $phoneNumber,
-            'form'        => $form->createView()
-        ];
+        return array_merge(
+            $viewVariables,
+            ['phoneNumber' => $phoneNumber, 'form' => $form->createView()]
+        );
     }
 
     /**

@@ -88,6 +88,22 @@ class SmsSecondFactorService
         $this->originator = $originator;
     }
 
+    /**
+     * @return int
+     */
+    public function getOtpRequestsRemainingCount()
+    {
+        return $this->smsVerificationStateHandler->getOtpRequestsRemainingCount();
+    }
+
+    /**
+     * @return int
+     */
+    public function getMaximumOtpRequestsCount()
+    {
+        return $this->smsVerificationStateHandler->getMaximumOtpRequestsCount();
+    }
+
     public function clearSmsVerificationState()
     {
         $this->smsVerificationStateHandler->clearState();

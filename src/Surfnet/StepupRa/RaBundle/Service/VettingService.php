@@ -123,6 +123,22 @@ class VettingService
     }
 
     /**
+     * @return int
+     */
+    public function getSmsOtpRequestsRemainingCount()
+    {
+        return $this->smsSecondFactorService->getOtpRequestsRemainingCount();
+    }
+
+    /**
+     * @return int
+     */
+    public function getSmsMaximumOtpRequestsCount()
+    {
+        return $this->smsSecondFactorService->getMaximumOtpRequestsCount();
+    }
+
+    /**
      * @param string $procedureId
      * @param SendSmsChallengeCommand $command
      * @return bool
