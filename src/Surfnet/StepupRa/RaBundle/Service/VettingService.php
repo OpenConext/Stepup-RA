@@ -162,8 +162,6 @@ class VettingService
             return false;
         }
 
-        $this->smsSecondFactorService->clearSmsVerificationState();
-
         $procedure->verifySecondFactorIdentifier($procedure->getSecondFactor()->secondFactorIdentifier);
         $this->vettingProcedureRepository->store($procedure);
 
