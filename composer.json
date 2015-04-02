@@ -26,7 +26,7 @@
         "surfnet/stepup-middleware-client-bundle": "0.2.*",
         "simplesamlphp/saml2": "dev-master",
         "surfnet/stepup-saml-bundle": "0.3.*",
-        "surfnet/stepup-bundle": "dev-develop",
+        "surfnet/stepup-bundle": "0.2.*",
         "guzzlehttp/guzzle": "~4",
         "symfony/swiftmailer-bundle": "~2.3",
         "knplabs/knp-paginator-bundle": "~2.4"
