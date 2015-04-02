@@ -89,6 +89,27 @@ class SmsSecondFactorService
     }
 
     /**
+     * @return int
+     */
+    public function getOtpRequestsRemainingCount()
+    {
+        return $this->smsVerificationStateHandler->getOtpRequestsRemainingCount();
+    }
+
+    /**
+     * @return int
+     */
+    public function getMaximumOtpRequestsCount()
+    {
+        return $this->smsVerificationStateHandler->getMaximumOtpRequestsCount();
+    }
+
+    public function clearSmsVerificationState()
+    {
+        $this->smsVerificationStateHandler->clearState();
+    }
+
+    /**
      * @param SendSmsChallengeCommand $command
      * @return bool
      */

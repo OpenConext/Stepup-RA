@@ -33,6 +33,7 @@ use Surfnet\StepupRa\RaBundle\Exception\LoaTooLowException;
 use Surfnet\StepupRa\RaBundle\Exception\UnknownVettingProcedureException;
 use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
 use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult as GssfVerificationResult;
+use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\OtpVerification;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult as YubikeyVerificationResult;
 use Surfnet\StepupRa\RaBundle\VettingProcedure;
 
@@ -122,6 +123,22 @@ class VettingService
     }
 
     /**
+     * @return int
+     */
+    public function getSmsOtpRequestsRemainingCount()
+    {
+        return $this->smsSecondFactorService->getOtpRequestsRemainingCount();
+    }
+
+    /**
+     * @return int
+     */
+    public function getSmsMaximumOtpRequestsCount()
+    {
+        return $this->smsSecondFactorService->getMaximumOtpRequestsCount();
+    }
+
+    /**
      * @param string $procedureId
      * @param SendSmsChallengeCommand $command
      * @return bool
@@ -144,9 +161,9 @@ class VettingService
     }
 
     /**
-     * @param $procedureId
+     * @param string                   $procedureId
      * @param VerifyPhoneNumberCommand $command
-     * @return bool
+     * @return OtpVerification
      * @throws UnknownVettingProcedureException
      * @throws DomainException
      */
@@ -159,13 +176,13 @@ class VettingService
         $verification = $this->smsSecondFactorService->verifyPossession($command);
 
         if (!$verification->wasSuccessful()) {
-            return false;
+            return $verification;
         }
 
         $procedure->verifySecondFactorIdentifier($procedure->getSecondFactor()->secondFactorIdentifier);
         $this->vettingProcedureRepository->store($procedure);
 
-        return true;
+        return $verification;
     }
 
     /**
