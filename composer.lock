@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "402884a0e83e995b26832beb1700c299",
+    "hash": "d4dcd2ab23e305c0e4b018092a9bd27a",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1878,16 +1878,16 @@
         },
         {
             "name": "surfnet/stepup-bundle",
-            "version": "dev-bugfix/secure-otps",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-bundle.git",
-                "reference": "a37502ea82d8283a8c25b4056f77396e7cf6d8da"
+                "reference": "cae60583cbb8907f5f2fa4730091765c59a4204a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/a37502ea82d8283a8c25b4056f77396e7cf6d8da",
-                "reference": "a37502ea82d8283a8c25b4056f77396e7cf6d8da",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/cae60583cbb8907f5f2fa4730091765c59a4204a",
+                "reference": "cae60583cbb8907f5f2fa4730091765c59a4204a",
                 "shasum": ""
             },
             "require": {
@@ -1924,7 +1924,7 @@
                 "suaas",
                 "surfnet"
             ],
-            "time": "2015-04-02 12:12:45"
+            "time": "2015-04-02 12:24:11"
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
