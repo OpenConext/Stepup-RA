@@ -23,9 +23,8 @@ use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyPhoneNumberCommand;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
-use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\ChallengeStore;
-use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SendChallengeResult;
-use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\VerificationResult;
+use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\OtpVerification;
+use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SmsVerificationStateHandler;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -39,9 +38,9 @@ class SmsSecondFactorService
     private $smsService;
 
     /**
-     * @var ChallengeStore
+     * @var \Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SmsVerificationStateHandler
      */
-    private $challengeStore;
+    private $smsVerificationStateHandler;
 
     /**
      * @var TranslatorInterface
@@ -60,14 +59,14 @@ class SmsSecondFactorService
 
     /**
      * @param SmsService $smsService
-     * @param ChallengeStore $challengeStore
+     * @param SmsVerificationStateHandler $smsVerificationStateHandler
      * @param TranslatorInterface $translator
      * @param CommandService $commandService
      * @param string $originator
      */
     public function __construct(
         SmsService $smsService,
-        ChallengeStore $challengeStore,
+        SmsVerificationStateHandler $smsVerificationStateHandler,
         TranslatorInterface $translator,
         CommandService $commandService,
         $originator
@@ -83,7 +82,7 @@ class SmsSecondFactorService
         }
 
         $this->smsService = $smsService;
-        $this->challengeStore = $challengeStore;
+        $this->smsVerificationStateHandler = $smsVerificationStateHandler;
         $this->translator = $translator;
         $this->commandService = $commandService;
         $this->originator = $originator;
@@ -95,7 +94,7 @@ class SmsSecondFactorService
      */
     public function sendChallenge(SendSmsChallengeCommand $command)
     {
-        $challenge = $this->challengeStore->generateChallenge();
+        $challenge = $this->smsVerificationStateHandler->requestNewOtp($command->phoneNumber);
 
         $body = $this->translator->trans('ra.vetting.sms.challenge_body', ['%challenge%' => $challenge]);
 
@@ -111,10 +110,15 @@ class SmsSecondFactorService
 
     /**
      * @param VerifyPhoneNumberCommand $command
-     * @return bool
+     * @return OtpVerification
      */
     public function verifyPossession(VerifyPhoneNumberCommand $command)
     {
-        return $this->challengeStore->verifyChallenge($command->challenge);
+        return $this->smsVerificationStateHandler->verify($command->challenge);
+    }
+
+    public function clearSmsVerificationState()
+    {
+        $this->smsVerificationStateHandler->clearState();
     }
 }

@@ -16,22 +16,22 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor;
+namespace Surfnet\StepupRa\RaBundle\Tests;
 
-interface ChallengeStore
+use DateTime;
+use ReflectionProperty;
+
+class DateTimeHelper
 {
     /**
-     * Generates a challenge, stores it and returns it.
+     * Fixes the `DateTime` returned by `DateTime::now()`.
      *
-     * @return string
+     * @param DateTime|null $now
      */
-    public function generateChallenge();
-
-    /**
-     * Verifies a previously generated challenge.
-     *
-     * @param string $challenge
-     * @return bool
-     */
-    public function verifyChallenge($challenge);
+    public static function setCurrentTime(DateTime $now = null)
+    {
+        $nowProperty = new ReflectionProperty('Surfnet\StepupRa\RaBundle\DateTime\DateTime', 'now');
+        $nowProperty->setAccessible(true);
+        $nowProperty->setValue($now);
+    }
 }

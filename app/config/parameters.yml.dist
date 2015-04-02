@@ -24,6 +24,7 @@ parameters:
     middleware_url_api: https://middleware.tld/
 
     sms_originator: SURFStepup
+    sms_otp_expiry_interval: 900 # 15 minutes
 
     saml_sp_publickey:
     saml_sp_privatekey:

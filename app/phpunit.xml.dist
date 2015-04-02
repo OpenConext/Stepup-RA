@@ -9,7 +9,8 @@
 >
     <testsuites>
         <testsuite name="Project Test Suite">
-            <directory>../src/Tests</directory>
+            <directory>../src/Surfnet/StepupRa/RaBundle/Tests</directory>
+            <directory>../src/Surfnet/StepupRa/SamlStepupProviderBundle/Tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>
