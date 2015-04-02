@@ -23,11 +23,8 @@ use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyPhoneNumberCommand;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
-use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\ChallengeStore;
 use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\OtpVerification;
-use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SendChallengeResult;
 use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SmsVerificationStateHandler;
-use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\VerificationResult;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
