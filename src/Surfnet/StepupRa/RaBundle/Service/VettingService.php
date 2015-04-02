@@ -33,6 +33,7 @@ use Surfnet\StepupRa\RaBundle\Exception\LoaTooLowException;
 use Surfnet\StepupRa\RaBundle\Exception\UnknownVettingProcedureException;
 use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
 use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult as GssfVerificationResult;
+use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\OtpVerification;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult as YubikeyVerificationResult;
 use Surfnet\StepupRa\RaBundle\VettingProcedure;
 
@@ -97,6 +98,8 @@ class VettingService
      */
     public function startProcedure(StartVettingProcedureCommand $command)
     {
+        $this->smsSecondFactorService->clearSmsVerificationState();
+
         if (!$this->isLoaSufficientToStartProcedure($command)) {
             throw new LoaTooLowException(
                 sprintf(
@@ -117,6 +120,22 @@ class VettingService
         $this->vettingProcedureRepository->store($procedure);
 
         return $procedure->getId();
+    }
+
+    /**
+     * @return int
+     */
+    public function getSmsOtpRequestsRemainingCount()
+    {
+        return $this->smsSecondFactorService->getOtpRequestsRemainingCount();
+    }
+
+    /**
+     * @return int
+     */
+    public function getSmsMaximumOtpRequestsCount()
+    {
+        return $this->smsSecondFactorService->getMaximumOtpRequestsCount();
     }
 
     /**
@@ -142,9 +161,9 @@ class VettingService
     }
 
     /**
-     * @param $procedureId
+     * @param string                   $procedureId
      * @param VerifyPhoneNumberCommand $command
-     * @return bool
+     * @return OtpVerification
      * @throws UnknownVettingProcedureException
      * @throws DomainException
      */
@@ -154,14 +173,16 @@ class VettingService
 
         $command->phoneNumber = $procedure->getSecondFactor()->secondFactorIdentifier;
 
-        if (!$this->smsSecondFactorService->verifyPossession($command)) {
-            return false;
+        $verification = $this->smsSecondFactorService->verifyPossession($command);
+
+        if (!$verification->wasSuccessful()) {
+            return $verification;
         }
 
         $procedure->verifySecondFactorIdentifier($procedure->getSecondFactor()->secondFactorIdentifier);
         $this->vettingProcedureRepository->store($procedure);
 
-        return true;
+        return $verification;
     }
 
     /**

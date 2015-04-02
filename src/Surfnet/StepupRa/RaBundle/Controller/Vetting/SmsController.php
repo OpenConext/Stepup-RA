@@ -50,12 +50,16 @@ class SmsController extends Controller
             $vettingService->getSecondFactorIdentifier($procedureId)
         );
 
+        $otpRequestsRemaining = $vettingService->getSmsOtpRequestsRemainingCount();
+        $maximumOtpRequests = $vettingService->getSmsMaximumOtpRequestsCount();
+        $viewVariables = ['otpRequestsRemaining' => $otpRequestsRemaining, 'maximumOtpRequests' => $maximumOtpRequests];
+
         if (!$form->isValid()) {
             $logger->notice('Form has not been submitted, not sending SMS, rendering Send SMS Challenge page');
-            return [
-                'phoneNumber' => $phoneNumber,
-                'form'        => $form->createView()
-            ];
+            return array_merge(
+                $viewVariables,
+                ['phoneNumber' => $phoneNumber, 'form' => $form->createView()]
+            );
         }
 
         $logger->notice('Sending of SMS Challenge has been requested, sending OTP via SMS');
@@ -71,10 +75,10 @@ class SmsController extends Controller
         $logger->notice(
             'SMS Challenge could not be sent, added error to page to notify user and re-rendering send challenge page'
         );
-        return [
-            'phoneNumber' => $phoneNumber,
-            'form'        => $form->createView()
-        ];
+        return array_merge(
+            $viewVariables,
+            ['phoneNumber' => $phoneNumber, 'form' => $form->createView()]
+        );
     }
 
     /**
@@ -100,15 +104,20 @@ class SmsController extends Controller
         }
 
         $logger->notice('SMS OTP has been entered, attempting to verify Proof of Possession');
-        if ($this->getVettingService()->verifyPhoneNumber($procedureId, $command)) {
+        $verification = $this->getVettingService()->verifyPhoneNumber($procedureId, $command);
+        if ($verification->wasSuccessful()) {
             $logger->notice('SMS OTP was valid, Proof of Possession given, redirecting to Identity Vetting page');
             return $this->redirectToRoute(
                 'ra_vetting_verify_identity',
                 ['procedureId' => $procedureId]
             );
+        } elseif ($verification->didOtpExpire()) {
+            $form->addError(new FormError('ra.prove_phone_possession.challenge_expired'));
+        } elseif ($verification->wasAttemptedTooManyTimes()) {
+            $form->addError(new FormError('ra.prove_phone_possession.too_many_attempts'));
+        } else {
+            $form->addError(new FormError('ra.prove_phone_possession.challenge_response_incorrect'));
         }
-
-        $form->addError(new FormError('ra.prove_phone_possession.challenge_response_incorrect'));
 
         $logger->notice(
             'SMS OTP verification failed, Proof of Possession denied, informing user through error on form'
