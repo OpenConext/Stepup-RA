@@ -16,28 +16,22 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Command;
+namespace Surfnet\StepupRa\RaBundle\DateTime;
 
-use Symfony\Component\Validator\Constraints as Assert;
+use DateTime as CoreDateTime;
 
-class SendSmsChallengeCommand
+class DateTime
 {
     /**
-     * @var string Filled in by the VettingService
+     * @var CoreDateTime|null
      */
-    public $phoneNumber;
+    private static $now;
 
     /**
-     * The requesting identity's ID (not name ID).
-     *
-     * @var string Filled in by the VettingService
+     * @return CoreDateTime
      */
-    public $identity;
-
-    /**
-     * The requesting identity's institution.
-     *
-     * @var string Filled in by the VettingService
-     */
-    public $institution;
+    public static function now()
+    {
+        return self::$now ?: new CoreDateTime;
+    }
 }
