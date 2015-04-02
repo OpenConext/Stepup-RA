@@ -88,6 +88,11 @@ class SmsSecondFactorService
         $this->originator = $originator;
     }
 
+    public function clearSmsVerificationState()
+    {
+        $this->smsVerificationStateHandler->clearState();
+    }
+
     /**
      * @param SendSmsChallengeCommand $command
      * @return bool
