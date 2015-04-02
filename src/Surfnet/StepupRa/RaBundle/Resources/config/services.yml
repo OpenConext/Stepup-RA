@@ -67,16 +67,19 @@ services:
         class: Surfnet\StepupRa\RaBundle\Service\SmsSecondFactorService
         arguments:
             - @ra.service.sms
-            - @ra.sms_challenge_store
+            - @ra.service.challenge_handler
             - @translator
             - @surfnet_stepup_middleware_client.service.command
             - '' # Originator set in extension
 
-    ra.sms_challenge_store:
-        class: Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SessionChallengeStore
+    ra.service.challenge_handler:
+        public: false
+        class: Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SessionSmsVerificationStateHandler
         arguments:
             - @session
             - 'Surfnet/Ra/SecondFactor/Sms:challenge'
+            - {} # OTP expiry interval
+            - 0  # Maximum OTP requests
 
     ra.service.gssf:
         class: Surfnet\StepupRa\RaBundle\Service\GssfService

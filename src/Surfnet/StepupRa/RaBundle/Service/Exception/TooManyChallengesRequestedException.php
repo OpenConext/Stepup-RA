@@ -16,22 +16,10 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor;
+namespace Surfnet\StepupRa\RaBundle\Service\Exception;
 
-interface ChallengeStore
+use Surfnet\StepupRa\RaBundle\Exception\DomainException;
+
+class TooManyChallengesRequestedException extends DomainException
 {
-    /**
-     * Generates a challenge, stores it and returns it.
-     *
-     * @return string
-     */
-    public function generateChallenge();
-
-    /**
-     * Verifies a previously generated challenge.
-     *
-     * @param string $challenge
-     * @return bool
-     */
-    public function verifyChallenge($challenge);
 }
