@@ -16,28 +16,10 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Command;
+namespace Surfnet\StepupRa\RaBundle\Service\Exception;
 
-use Symfony\Component\Validator\Constraints as Assert;
+use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 
-class SendSmsChallengeCommand
+class TooManyChallengesRequestedException extends DomainException
 {
-    /**
-     * @var string Filled in by the VettingService
-     */
-    public $phoneNumber;
-
-    /**
-     * The requesting identity's ID (not name ID).
-     *
-     * @var string Filled in by the VettingService
-     */
-    public $identity;
-
-    /**
-     * The requesting identity's institution.
-     *
-     * @var string Filled in by the VettingService
-     */
-    public $institution;
 }

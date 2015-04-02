@@ -1882,12 +1882,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-bundle.git",
-                "reference": "e3f8f03acc5f7ffc95c8bc4a73dd533c027d19f6"
+                "reference": "cae60583cbb8907f5f2fa4730091765c59a4204a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/e3f8f03acc5f7ffc95c8bc4a73dd533c027d19f6",
-                "reference": "e3f8f03acc5f7ffc95c8bc4a73dd533c027d19f6",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/cae60583cbb8907f5f2fa4730091765c59a4204a",
+                "reference": "cae60583cbb8907f5f2fa4730091765c59a4204a",
                 "shasum": ""
             },
             "require": {
@@ -1924,7 +1924,7 @@
                 "suaas",
                 "surfnet"
             ],
-            "time": "2015-03-26 11:23:59"
+            "time": "2015-04-02 12:24:11"
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",

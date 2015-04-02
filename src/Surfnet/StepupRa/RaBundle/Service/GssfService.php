@@ -20,7 +20,6 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 final class GssfService
 {

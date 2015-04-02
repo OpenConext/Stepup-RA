@@ -97,6 +97,8 @@ class VettingService
      */
     public function startProcedure(StartVettingProcedureCommand $command)
     {
+        $this->smsSecondFactorService->clearSmsVerificationState();
+
         if (!$this->isLoaSufficientToStartProcedure($command)) {
             throw new LoaTooLowException(
                 sprintf(
@@ -154,7 +156,9 @@ class VettingService
 
         $command->phoneNumber = $procedure->getSecondFactor()->secondFactorIdentifier;
 
-        if (!$this->smsSecondFactorService->verifyPossession($command)) {
+        $verification = $this->smsSecondFactorService->verifyPossession($command);
+
+        if (!$verification->wasSuccessful()) {
             return false;
         }
 
