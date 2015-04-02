@@ -60,7 +60,7 @@ class SmsVerificationStateTest extends TestCase
      */
     public function it_can_be_matched()
     {
-        $state = new SmsVerificationState(new DateInterval('PT15M'), 3);
+        $state = new SmsVerificationState(new DateInterval('PT15M'));
         $otp = $state->requestNewOtp('123');
 
         $this->assertTrue($state->verify($otp)->wasSuccessful(), 'OTP should have matched');
@@ -78,7 +78,7 @@ class SmsVerificationStateTest extends TestCase
             'Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException',
             'phoneNumber'
         );
-        $state = new SmsVerificationState(new DateInterval('PT15M'), 3);
+        $state = new SmsVerificationState(new DateInterval('PT15M'));
         $state->requestNewOtp($nonString);
     }
 
@@ -94,7 +94,7 @@ class SmsVerificationStateTest extends TestCase
             'Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException',
             'userOtp'
         );
-        $state = new SmsVerificationState(new DateInterval('PT15M'), 3);
+        $state = new SmsVerificationState(new DateInterval('PT15M'));
         $state->requestNewOtp('123');
         $state->verify($nonString);
     }
@@ -106,7 +106,7 @@ class SmsVerificationStateTest extends TestCase
     public function it_can_expire()
     {
         DateTimeHelper::setCurrentTime(new DateTime('@0'));
-        $state = new SmsVerificationState(new DateInterval('PT1S'), 3);
+        $state = new SmsVerificationState(new DateInterval('PT1S'));
         $otp = $state->requestNewOtp('123');
 
         DateTimeHelper::setCurrentTime(new DateTime('@1'));
@@ -125,7 +125,7 @@ class SmsVerificationStateTest extends TestCase
     {
         // Set a challenge
         DateTimeHelper::setCurrentTime(new DateTime('@0'));
-        $state = new SmsVerificationState(new DateInterval('PT5S'), 3);
+        $state = new SmsVerificationState(new DateInterval('PT5S'));
         $otp = $state->requestNewOtp('123');
 
         // Try after 3 seconds
@@ -144,57 +144,10 @@ class SmsVerificationStateTest extends TestCase
      * @test
      * @group sms
      */
-    public function the_consumer_can_request_too_many_otps_but_can_keep_track_of_remaining_requests()
-    {
-        $state = new SmsVerificationState(new DateInterval('PT10S'), 3);
-        $this->assertSame(3, $state->getOtpRequestsRemainingCount());
-
-        $state->requestNewOtp('123');
-        $this->assertSame(2, $state->getOtpRequestsRemainingCount());
-
-        $state->requestNewOtp('123');
-        $this->assertSame(1, $state->getOtpRequestsRemainingCount());
-
-        $state->requestNewOtp('123');
-        $this->assertSame(0, $state->getOtpRequestsRemainingCount());
-        $this->assertSame(0, $state->getOtpRequestsRemainingCount());
-
-        $this->setExpectedException(
-            'Surfnet\StepupRa\RaBundle\Service\Exception\TooManyChallengesRequestedException'
-        );
-        $state->requestNewOtp('123');
-        $this->assertSame(0, $state->getOtpRequestsRemainingCount());
-    }
-
-    public function lteZeroMaximumTries()
-    {
-        return [[0], [-1], [-1000]];
-    }
-
-    /**
-     * @test
-     * @group sms
-     * @dataProvider lteZeroMaximumTries
-     * @param int $maximumTries
-     */
-    public function maximum_challenges_must_be_gte_1($maximumTries)
-    {
-        $this->setExpectedException(
-            'Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException',
-            'maximum OTP requests'
-        );
-
-        new SmsVerificationState(new DateInterval('PT15M'), $maximumTries);
-    }
-
-    /**
-     * @test
-     * @group sms
-     */
     public function a_previous_otp_can_be_matched()
     {
         DateTimeHelper::setCurrentTime(new DateTime('@0'));
-        $state = new SmsVerificationState(new DateInterval('PT5S'), 3);
+        $state = new SmsVerificationState(new DateInterval('PT5S'));
         $otp1 = $state->requestNewOtp('123');
         $otp2 = $state->requestNewOtp('123');
 
@@ -209,7 +162,7 @@ class SmsVerificationStateTest extends TestCase
     public function otp_matching_is_case_insensitive()
     {
         DateTimeHelper::setCurrentTime(new DateTime('@0'));
-        $state = new SmsVerificationState(new DateInterval('PT5S'), 3);
+        $state = new SmsVerificationState(new DateInterval('PT5S'));
         $otp = $state->requestNewOtp('123');
 
         $this->assertTrue($state->verify(strtolower($otp))->wasSuccessful(), "OTP should've matched");
@@ -222,7 +175,7 @@ class SmsVerificationStateTest extends TestCase
      */
     public function requesting_an_otp_with_a_different_phone_number_clears_otps_for_other_phone_numbers()
     {
-        $state = new SmsVerificationState(new DateInterval('PT5S'), 3);
+        $state = new SmsVerificationState(new DateInterval('PT5S'));
 
         $otpForPhone1 = $state->requestNewOtp('1');
         $otpForPhone2 = $state->requestNewOtp('2');

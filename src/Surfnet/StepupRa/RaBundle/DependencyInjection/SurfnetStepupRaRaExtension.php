@@ -59,8 +59,7 @@ class SurfnetStepupRaRaExtension extends Extension
 
         $container
             ->getDefinition('ra.service.challenge_handler')
-            ->replaceArgument(2, $config['sms']['otp_expiry_interval'])
-            ->replaceArgument(3, $config['sms']['maximum_otp_requests']);
+            ->replaceArgument(2, $config['sms']['otp_expiry_interval']);
 
         // inject the required loa as parameter into the service container
         $container->setParameter('surfnet_stepup_ra.security.required_loa', $config['required_loa']);

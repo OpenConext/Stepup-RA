@@ -21,7 +21,6 @@ namespace Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor;
 use DateInterval;
 use Surfnet\StepupBundle\Security\OtpGenerator;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
-use Surfnet\StepupRa\RaBundle\Service\Exception\TooManyChallengesRequestedException;
 
 final class SmsVerificationState
 {
@@ -31,27 +30,16 @@ final class SmsVerificationState
     private $expiryInterval;
 
     /**
-     * @var int
-     */
-    private $maximumOtpRequests;
-
-    /**
      * @var Otp[]
      */
     private $otps;
 
     /**
      * @param DateInterval $expiryInterval
-     * @param int $maximumOtpRequests
      */
-    public function __construct(DateInterval $expiryInterval, $maximumOtpRequests)
+    public function __construct(DateInterval $expiryInterval)
     {
-        if ($maximumOtpRequests <= 0) {
-            throw new InvalidArgumentException('Expected greater-than-zero number of maximum OTP requests.');
-        }
-
         $this->expiryInterval = $expiryInterval;
-        $this->maximumOtpRequests= $maximumOtpRequests;
         $this->otps = [];
     }
 
@@ -63,16 +51,6 @@ final class SmsVerificationState
     {
         if (!is_string($phoneNumber) || empty($phoneNumber)) {
             throw InvalidArgumentException::invalidType('string', 'phoneNumber', $phoneNumber);
-        }
-
-        if (count($this->otps) >= $this->maximumOtpRequests) {
-            throw new TooManyChallengesRequestedException(
-                sprintf(
-                    '%d OTPs were requested, while only %d requests are allowed',
-                    count($this->otps) + 1,
-                    $this->maximumOtpRequests
-                )
-            );
         }
 
         $this->otps = array_filter($this->otps, function (Otp $otp) use ($phoneNumber) {
@@ -104,13 +82,5 @@ final class SmsVerificationState
         }
 
         return OtpVerification::noMatch();
-    }
-
-    /**
-     * @return int
-     */
-    public function getOtpRequestsRemainingCount()
-    {
-        return $this->maximumOtpRequests - count($this->otps);
     }
 }

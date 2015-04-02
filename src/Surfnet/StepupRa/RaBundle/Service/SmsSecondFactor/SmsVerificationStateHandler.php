@@ -28,23 +28,17 @@ interface SmsVerificationStateHandler
     public function hasState();
 
     /**
+     * @return void
+     */
+    public function clearState();
+
+    /**
      * Generates a new OTP and returns it.
      *
      * @param string $phoneNumber
      * @return string
-     * @throws TooManyChallengesRequestedException
      */
     public function requestNewOtp($phoneNumber);
-
-    /**
-     * @return int
-     */
-    public function getOtpRequestsRemainingCount();
-
-    /**
-     * @return int
-     */
-    public function getMaximumOtpRequestsCount();
 
     /**
      * Matches the given OTP with the currently stored SmsVerificationState. If it matches, the SmsVerificationState is

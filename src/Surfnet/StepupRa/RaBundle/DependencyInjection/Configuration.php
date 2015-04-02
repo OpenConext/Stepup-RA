@@ -134,18 +134,6 @@ class Configuration implements ConfigurationInterface
                                 )
                             ->end()
                         ->end()
-                        ->integerNode('maximum_otp_requests')
-                            ->info('How many challenges a user may request during a session')
-                            ->isRequired()
-                            ->validate()
-                                ->ifTrue(function ($value) {
-                                    return $value <= 0;
-                                })
-                                ->thenInvalid(
-                                    'Maximum OTP requests has a minimum of 1'
-                                )
-                            ->end()
-                        ->end()
                     ->end()
                 ->end()
             ->end();

@@ -101,7 +101,6 @@ surfnet_stepup_ra_ra:
     sms:
         originator: %sms_originator%
         otp_expiry_interval: %sms_otp_expiry_interval%
-        maximum_otp_requests: %sms_maximum_otp_requests%
     gateway_api:
         url: %gateway_api_url%
         credentials:

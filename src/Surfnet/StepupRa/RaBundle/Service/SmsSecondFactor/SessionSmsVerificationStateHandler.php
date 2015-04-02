@@ -39,31 +39,28 @@ final class SessionSmsVerificationStateHandler implements SmsVerificationStateHa
     private $otpExpiryInterval;
 
     /**
-     * @var int
-     */
-    private $otpRequestMaximum;
-
-    /**
      * @param SessionInterface $session
-     * @param string $sessionKey
-     * @param int $otpExpiryInterval OTP's expiry interval in seconds
-     * @param int $otpRequestMaximum
+     * @param string           $sessionKey
+     * @param int              $otpExpiryInterval OTP's expiry interval in seconds
      */
     public function __construct(
         SessionInterface $session,
         $sessionKey,
-        $otpExpiryInterval,
-        $otpRequestMaximum
+        $otpExpiryInterval
     ) {
         $this->session = $session;
         $this->sessionKey = $sessionKey;
         $this->otpExpiryInterval = new DateInterval(sprintf('PT%dS', $otpExpiryInterval));
-        $this->otpRequestMaximum = $otpRequestMaximum;
     }
 
     public function hasState()
     {
         return $this->session->has($this->sessionKey);
+    }
+
+    public function clearState()
+    {
+        $this->session->remove($this->sessionKey);
     }
 
     public function requestNewOtp($phoneNumber)
@@ -72,24 +69,11 @@ final class SessionSmsVerificationStateHandler implements SmsVerificationStateHa
         $state = $this->session->get($this->sessionKey);
 
         if (!$state) {
-            $state = new SmsVerificationState($this->otpExpiryInterval, $this->otpRequestMaximum);
+            $state = new SmsVerificationState($this->otpExpiryInterval);
             $this->session->set($this->sessionKey, $state);
         }
 
         return $state->requestNewOtp($phoneNumber);
-    }
-
-    public function getOtpRequestsRemainingCount()
-    {
-        /** @var SmsVerificationState|null $state */
-        $state = $this->session->get($this->sessionKey);
-
-        return $state ? $state->getOtpRequestsRemainingCount() : $this->otpRequestMaximum;
-    }
-
-    public function getMaximumOtpRequestsCount()
-    {
-        return $this->otpRequestMaximum;
     }
 
     public function verify($otp)

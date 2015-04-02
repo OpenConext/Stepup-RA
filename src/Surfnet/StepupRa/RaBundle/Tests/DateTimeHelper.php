@@ -16,10 +16,22 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Service\Exception;
+namespace Surfnet\StepupRa\RaBundle\Tests;
 
-use Surfnet\StepupRa\RaBundle\Exception\DomainException;
+use DateTime;
+use ReflectionProperty;
 
-class TooManyChallengesRequestedException extends DomainException
+class DateTimeHelper
 {
+    /**
+     * Fixes the `DateTime` returned by `DateTime::now()`.
+     *
+     * @param DateTime|null $now
+     */
+    public static function setCurrentTime(DateTime $now = null)
+    {
+        $nowProperty = new ReflectionProperty('Surfnet\StepupRa\RaBundle\DateTime\DateTime', 'now');
+        $nowProperty->setAccessible(true);
+        $nowProperty->setValue($now);
+    }
 }

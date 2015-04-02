@@ -79,7 +79,6 @@ services:
             - @session
             - 'Surfnet/Ra/SecondFactor/Sms:challenge'
             - {} # OTP expiry interval
-            - 0  # Maximum OTP requests
 
     ra.service.gssf:
         class: Surfnet\StepupRa\RaBundle\Service\GssfService

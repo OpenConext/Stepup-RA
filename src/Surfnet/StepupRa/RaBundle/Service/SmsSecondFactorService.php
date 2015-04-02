@@ -119,4 +119,9 @@ class SmsSecondFactorService
     {
         return $this->smsVerificationStateHandler->verify($command->challenge);
     }
+
+    public function clearSmsVerificationState()
+    {
+        $this->smsVerificationStateHandler->clearState();
+    }
 }
