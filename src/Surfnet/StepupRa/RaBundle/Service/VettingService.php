@@ -154,7 +154,9 @@ class VettingService
 
         $command->phoneNumber = $procedure->getSecondFactor()->secondFactorIdentifier;
 
-        if (!$this->smsSecondFactorService->verifyPossession($command)) {
+        $verification = $this->smsSecondFactorService->verifyPossession($command);
+
+        if (!$verification->wasSuccessful()) {
             return false;
         }
 

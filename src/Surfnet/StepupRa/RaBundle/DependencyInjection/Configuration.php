@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -31,7 +32,15 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('surfnet_stepup_ra_ra');
 
-        $rootNode
+        $this->createGatewayApiConfiguration($rootNode);
+        $this->createSmsConfiguration($rootNode);
+
+        return $treeBuilder;
+    }
+
+    private function createGatewayApiConfiguration(ArrayNodeDefinition $root)
+    {
+        $root
             ->children()
                 ->arrayNode('gateway_api')
                     ->info('Gateway API configuration')
@@ -79,18 +88,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-                ->scalarNode('sms_originator')
-                    ->info('Originator (sender) for SMS messages')
-                    ->isRequired()
-                    ->validate()
-                        ->ifTrue(function ($value) {
-                            return (!is_string($value) || !preg_match('~^[a-z0-9]{1,11}$~i', $value));
-                        })
-                        ->thenInvalid(
-                            'Invalid SMS originator specified: "%s". Must be a string matching "~^[a-z0-9]{1,11}$~i".'
-                        )
-                    ->end()
-                ->end()
                 ->scalarNode('required_loa')
                     ->info('The required LOA to be able to log in, should match the loa defined at the gateway')
                     ->isRequired()
@@ -102,7 +99,55 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end();
+    }
 
-        return $treeBuilder;
+    private function createSmsConfiguration(ArrayNodeDefinition $root)
+    {
+        $root
+            ->children()
+                ->arrayNode('sms')
+                    ->info('SMS configuration')
+                    ->isRequired()
+                    ->children()
+                        ->scalarNode('originator')
+                            ->info('Originator (sender) for SMS messages')
+                            ->isRequired()
+                            ->validate()
+                                ->ifTrue(function ($value) {
+                                    return (!is_string($value) || !preg_match('~^[a-z0-9]{1,11}$~i', $value));
+                                })
+                                ->thenInvalid(
+                                    'Invalid SMS originator specified: "%s". Must be a string matching '
+                                    . '"~^[a-z0-9]{1,11}$~i".'
+                                )
+                            ->end()
+                        ->end()
+                        ->integerNode('otp_expiry_interval')
+                            ->info('After how many seconds an SMS challenge OTP expires')
+                            ->isRequired()
+                            ->validate()
+                                ->ifTrue(function ($value) {
+                                    return $value <= 0;
+                                })
+                                ->thenInvalid(
+                                    'Invalid SMS challenge OTP expiry, must be one or more seconds.'
+                                )
+                            ->end()
+                        ->end()
+                        ->integerNode('maximum_otp_requests')
+                            ->info('How many challenges a user may request during a session')
+                            ->isRequired()
+                            ->validate()
+                                ->ifTrue(function ($value) {
+                                    return $value <= 0;
+                                })
+                                ->thenInvalid(
+                                    'Maximum OTP requests has a minimum of 1'
+                                )
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
     }
 }
