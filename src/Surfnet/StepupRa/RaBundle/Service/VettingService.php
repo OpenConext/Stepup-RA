@@ -97,6 +97,8 @@ class VettingService
      */
     public function startProcedure(StartVettingProcedureCommand $command)
     {
+        $this->smsSecondFactorService->clearSmsVerificationState();
+
         if (!$this->isLoaSufficientToStartProcedure($command)) {
             throw new LoaTooLowException(
                 sprintf(
