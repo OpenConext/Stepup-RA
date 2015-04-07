@@ -23,24 +23,23 @@ use Surfnet\StepupMiddlewareClient\Identity\Dto\RaSecondFactorSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\RevokeRegistrantsSecondFactorCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaSecondFactorCollection;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaSecondFactorService as ApiRaSecondFactorService;
-use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 
 class RaSecondFactorService
 {
     /**
-     * @var ApiRaSecondFactorService
+     * @var \Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaSecondFactorService
      */
     private $apiRaSecondFactorService;
 
     /**
-     * @var CommandService
+     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
      */
     private $commandService;
 
     /**
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 

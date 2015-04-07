@@ -21,7 +21,6 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\VetSecondFactorCommand;
-use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
@@ -43,27 +42,27 @@ use Surfnet\StepupRa\RaBundle\VettingProcedure;
 class VettingService
 {
     /**
-     * @var SmsSecondFactorService
+     * @var \Surfnet\StepupRa\RaBundle\Service\SmsSecondFactorService
      */
     private $smsSecondFactorService;
 
     /**
-     * @var YubikeySecondFactorService
+     * @var \Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorService
      */
     private $yubikeySecondFactorService;
 
     /**
-     * @var GssfService
+     * @var \Surfnet\StepupRa\RaBundle\Service\GssfService
      */
     private $gssfService;
 
     /**
-     * @var CommandService
+     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
      */
     private $commandService;
 
     /**
-     * @var VettingProcedureRepository
+     * @var \Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository
      */
     private $vettingProcedureRepository;
 
