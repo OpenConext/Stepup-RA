@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: samlstepupproviders.yml }
+    - { resource: logging.yml }
 
 framework:
     #esi:             ~
@@ -49,27 +50,6 @@ assetic:
         #    jar: "%kernel.root_dir%/Resources/java/compiler.jar"
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
-
-monolog:
-    handlers:
-        main:
-            type: group
-            members:
-                - main_graylog
-                - main_logfile
-        main_graylog:
-            type: buffer
-            handler: graylog
-            level: NOTICE
-        main_logfile:
-            type: stream
-            handler: logfile
-            level: NOTICE
-            path: %kernel.logs_dir%/%kernel.environment%.log
-        graylog:
-            type: gelf
-            publisher: { hostname: %graylog_hostname% }
-            formatter: surfnet_stepup.monolog.full_message_exception_gelf_message_formatter
 
 # Swiftmailer Configuration
 swiftmailer:
