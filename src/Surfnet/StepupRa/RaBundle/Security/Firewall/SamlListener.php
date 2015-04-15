@@ -73,31 +73,48 @@ class SamlListener implements ListenerInterface
 
         /** @var SamlInteractionProvider $samlInteractionProvider */
         $samlInteractionProvider = $this->container->get('ra.security.authentication.saml');
+        /** @var LoggerInterface $logger */
+        $logger = $this->container->get('logger');
 
         if (!$samlInteractionProvider->isSamlAuthenticationInitiated()) {
             $sessionHandler->setCurrentRequestUri($event->getRequest()->getUri());
             $event->setResponse($samlInteractionProvider->initiateSamlRequest());
 
+            $logger->notice('Sending AuthnRequest', ['sari' => $sessionHandler->getRequestId()]);
+
             return;
         }
-
-        /** @var LoggerInterface $logger */
-        $logger = $this->container->get('logger');
 
         $expectedInResponseTo = $sessionHandler->getRequestId();
         try {
             $assertion = $samlInteractionProvider->processSamlResponse($event->getRequest());
         } catch (PreconditionNotMetException $e) {
-            $logger->notice(sprintf('SAML response precondition not met: "%s"', $e->getMessage()));
+            $logger->notice(
+                sprintf('SAML response precondition not met: "%s"', $e->getMessage()),
+                ['sari' => $expectedInResponseTo]
+            );
             return $this->setPreconditionExceptionResponse($e, $event);
         } catch (Exception $e) {
-            $logger->error(sprintf('Failed SAMLResponse Parsing: "%s"', $e->getMessage()));
+            $logger->error(
+                sprintf('Failed SAMLResponse Parsing: "%s"', $e->getMessage()),
+                ['sari' => $expectedInResponseTo]
+            );
             throw new AuthenticationException('Failed SAMLResponse parsing', 0, $e);
         }
 
         if (!InResponseTo::assertEquals($assertion, $expectedInResponseTo)) {
+            $logger->error(
+                'Unknown or unexpected InResponseTo in SAMLResponse',
+                ['sari' => $expectedInResponseTo]
+            );
+
             throw new AuthenticationException('Unknown or unexpected InResponseTo in SAMLResponse');
         }
+
+        $logger->notice(
+            'Successfully processed SAMLResponse, attempting to authenticate',
+            ['sari' => $expectedInResponseTo]
+        );
 
         $loaResolutionService = $this->container->get('surfnet_stepup.service.loa_resolution');
         $loa = $loaResolutionService->getLoa($assertion->getAuthnContextClassRef());
@@ -105,25 +122,35 @@ class SamlListener implements ListenerInterface
         $token = new SamlToken($loa);
         $token->assertion = $assertion;
 
-        try {
-            /** @var AuthenticationProviderManager $authenticationManager */
-            $authenticationManager = $this->container->get('security.authentication.manager');
-            $authToken = $authenticationManager->authenticate($token);
-            // for the current request
-            $this->container->get('security.token_storage')->setToken($authToken);
-            // for future requests
-            $sessionHandler->setToken($authToken);
+        /** @var AuthenticationProviderManager $authenticationManager */
+        $authenticationManager = $this->container->get('security.authentication.manager');
 
-            $event->setResponse(new RedirectResponse($sessionHandler->getCurrentRequestUri()));
-            return;
+        try {
+            $authToken = $authenticationManager->authenticate($token);
         } catch (AuthenticationException $failed) {
-            $logger->error(sprintf('Authentication Failed, reason: "%s"', $failed->getMessage()));
+            $logger->error(
+                sprintf('Authentication Failed, reason: "%s"', $failed->getMessage()),
+                ['sari' => $expectedInResponseTo]
+            );
 
             // By default deny authorization
             $response = new Response();
             $response->setStatusCode(Response::HTTP_FORBIDDEN);
             $event->setResponse($response);
+            return;
         }
+
+        // for the current request
+        $this->container->get('security.token_storage')->setToken($authToken);
+        // for future requests
+        $sessionHandler->setToken($authToken);
+
+        $event->setResponse(new RedirectResponse($sessionHandler->getCurrentRequestUri()));
+
+        $logger->notice(
+            'Authentication succeeded, redirecting to original location',
+            ['sari' => $expectedInResponseTo]
+        );
     }
 
     private function setPreconditionExceptionResponse(PreconditionNotMetException $exception, GetResponseEvent $event)
