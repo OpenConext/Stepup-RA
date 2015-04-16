@@ -19,10 +19,10 @@
 namespace Surfnet\StepupRa\RaBundle\Security\Firewall;
 
 use Exception;
-use Psr\Log\LoggerInterface;
 use SAML2_Response_Exception_PreconditionNotMetException as PreconditionNotMetException;
 use Surfnet\SamlBundle\Http\Exception\AuthnFailedSamlResponseException;
 use Surfnet\SamlBundle\Http\Exception\NoAuthnContextSamlResponseException;
+use Surfnet\SamlBundle\Monolog\SamlAuthenticationLogger;
 use Surfnet\SamlBundle\SAML2\Response\Assertion\InResponseTo;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SamlInteractionProvider;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SessionHandler;
@@ -78,12 +78,15 @@ class SamlListener implements ListenerInterface
             $sessionHandler->setCurrentRequestUri($event->getRequest()->getUri());
             $event->setResponse($samlInteractionProvider->initiateSamlRequest());
 
+            /** @var SamlAuthenticationLogger $logger */
+            $logger = $this->container->get('surfnet_saml.logger')->forAuthentication($sessionHandler->getRequestId());
+            $logger->notice('Sending AuthnRequest');
+
             return;
         }
 
-        /** @var LoggerInterface $logger */
-        $logger = $this->container->get('logger');
-
+        /** @var SamlAuthenticationLogger $logger */
+        $logger = $this->container->get('surfnet_saml.logger')->forAuthentication($sessionHandler->getRequestId());
         $expectedInResponseTo = $sessionHandler->getRequestId();
         try {
             $assertion = $samlInteractionProvider->processSamlResponse($event->getRequest());
@@ -96,8 +99,12 @@ class SamlListener implements ListenerInterface
         }
 
         if (!InResponseTo::assertEquals($assertion, $expectedInResponseTo)) {
+            $logger->error('Unknown or unexpected InResponseTo in SAMLResponse');
+
             throw new AuthenticationException('Unknown or unexpected InResponseTo in SAMLResponse');
         }
+
+        $logger->notice('Successfully processed SAMLResponse, attempting to authenticate');
 
         $loaResolutionService = $this->container->get('surfnet_stepup.service.loa_resolution');
         $loa = $loaResolutionService->getLoa($assertion->getAuthnContextClassRef());
@@ -105,17 +112,11 @@ class SamlListener implements ListenerInterface
         $token = new SamlToken($loa);
         $token->assertion = $assertion;
 
-        try {
-            /** @var AuthenticationProviderManager $authenticationManager */
-            $authenticationManager = $this->container->get('security.authentication.manager');
-            $authToken = $authenticationManager->authenticate($token);
-            // for the current request
-            $this->container->get('security.token_storage')->setToken($authToken);
-            // for future requests
-            $sessionHandler->setToken($authToken);
+        /** @var AuthenticationProviderManager $authenticationManager */
+        $authenticationManager = $this->container->get('security.authentication.manager');
 
-            $event->setResponse(new RedirectResponse($sessionHandler->getCurrentRequestUri()));
-            return;
+        try {
+            $authToken = $authenticationManager->authenticate($token);
         } catch (AuthenticationException $failed) {
             $logger->error(sprintf('Authentication Failed, reason: "%s"', $failed->getMessage()));
 
@@ -123,7 +124,17 @@ class SamlListener implements ListenerInterface
             $response = new Response();
             $response->setStatusCode(Response::HTTP_FORBIDDEN);
             $event->setResponse($response);
+            return;
         }
+
+        // for the current request
+        $this->container->get('security.token_storage')->setToken($authToken);
+        // for future requests
+        $sessionHandler->setToken($authToken);
+
+        $event->setResponse(new RedirectResponse($sessionHandler->getCurrentRequestUri()));
+
+        $logger->notice('Authentication succeeded, redirecting to original location');
     }
 
     private function setPreconditionExceptionResponse(PreconditionNotMetException $exception, GetResponseEvent $event)
