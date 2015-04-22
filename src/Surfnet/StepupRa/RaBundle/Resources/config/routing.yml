@@ -67,3 +67,8 @@ ra_vetting_completed:
     path:     /vetting-procedure/{procedureId}/completed
     methods:  [GET]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:vettingCompleted }
+
+ra_management_manage:
+    path:     /management/ra
+    methods:  [GET]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:manage }

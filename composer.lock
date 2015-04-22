@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "941d4a98abb2c3508f01b9202baad563",
+    "hash": "9ea9cbc36019c0fbd0b6bf8de1255f2e",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1928,16 +1928,16 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "dev-develop",
+            "version": "dev-feature/search-sort-ra-raa",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-Middleware-clientbundle.git",
-                "reference": "c9c64643062c16452d9e3075850eee8436a82ec5"
+                "reference": "87fa0351eba4d66965961aa27eb0268e80e526d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/c9c64643062c16452d9e3075850eee8436a82ec5",
-                "reference": "c9c64643062c16452d9e3075850eee8436a82ec5",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/87fa0351eba4d66965961aa27eb0268e80e526d2",
+                "reference": "87fa0351eba4d66965961aa27eb0268e80e526d2",
                 "shasum": ""
             },
             "require": {
@@ -1973,7 +1973,7 @@
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "time": "2015-04-07 13:57:30"
+            "time": "2015-04-22 15:24:53"
         },
         {
             "name": "surfnet/stepup-saml-bundle",

@@ -30,6 +30,9 @@
                     <ul class="nav nav-pills">
                         <li><a href="{{ path('ra_vetting_search') }}">{{ 'ra.menu.registration'|trans }}</a></li>
                         <li><a href="{{ path('ra_second_factors_search') }}">{{ 'ra.menu.search'|trans }}</a></li>
+                    {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                        <li><a href="{{ path('ra_management_manage') }}">{{ 'ra.menu.ra_management'|trans }}</a></li>
+                    {% endif %}
                     </ul>
                     <hr>
                 </div>

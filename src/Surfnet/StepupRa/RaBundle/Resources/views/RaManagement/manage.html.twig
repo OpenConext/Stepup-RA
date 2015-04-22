@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <a href="#" class="btn btn-primary pull-right" role="button"><i class="fa fa-plus"></i> Add Ra(a)</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Institution !TRANS</th>
+                        <th>Name !TRANS</th>
+                        <th>Email !TRANS</th>
+                        <th>Role !TRANS</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for authority in raList %}
+                    <tr>
+                        <td>{{ authority.institution }}</td>
+                        <td>{{ authority.commonName }}</td>
+                        <td>{{ authority.email }}</td>
+                        <td>{{ authority.role }}</td>
+                        <td>
+                            <a href="#" class="btn btn-info btn-sm" role="button">Change Role !TRANS</a>
+                            <a href="#" class="btn btn-primary btn-sm" role="button">Update Information !TRANS</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
