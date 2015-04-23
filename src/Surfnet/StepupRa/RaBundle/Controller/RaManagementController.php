@@ -37,7 +37,19 @@ class RaManagementController extends Controller
         $service = $this->getRaService();
         $raList = $service->search($searchQuery);
 
-        return $this->render('SurfnetStepupRaRaBundle:RaManagement:manage.html.twig', ['raList' => $raList]);
+        $pagination = $this->get('knp_paginator')->paginate(
+            $raList->getTotalItems() > 0 ? array_fill(0, $raList->getTotalItems(), 1) : [],
+            $raList->getCurrentPage(),
+            $raList->getItemsPerPage()
+        );
+
+        return $this->render(
+            'SurfnetStepupRaRaBundle:RaManagement:manage.html.twig',
+            [
+                'raList'     => $raList,
+                'pagination' => $pagination
+            ]
+        );
     }
 
     /**
