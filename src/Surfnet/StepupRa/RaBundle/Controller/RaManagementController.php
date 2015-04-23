@@ -47,7 +47,7 @@ class RaManagementController extends Controller
         return $this->render(
             'SurfnetStepupRaRaBundle:RaManagement:manage.html.twig',
             [
-                'raList'     => $raList,
+                'raList'     => $raList->getElements(),
                 'pagination' => $pagination
             ]
         );
