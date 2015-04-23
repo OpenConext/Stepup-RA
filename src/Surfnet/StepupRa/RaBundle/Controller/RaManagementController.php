@@ -20,10 +20,11 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class RaManagementController extends Controller
 {
-    public function manageAction()
+    public function manageAction(Request $request)
     {
         $authenticator = $this->get('security.authorization_checker');
         if (!($authenticator->isGranted('ROLE_RAA') || $authenticator->isGranted('ROLE_SRAA'))) {
@@ -31,8 +32,8 @@ class RaManagementController extends Controller
         }
 
         $searchQuery = (new RaListingSearchQuery($this->getUser()->institution, 1))
-            ->setOrderBy('commonName')
-            ->setOrderDirection('asc');
+            ->setOrderBy($request->get('orderBy', 'commonName'))
+            ->setOrderDirection($request->get('orderDirection', 'asc'));
 
         $service = $this->getRaService();
         $raList = $service->search($searchQuery);
