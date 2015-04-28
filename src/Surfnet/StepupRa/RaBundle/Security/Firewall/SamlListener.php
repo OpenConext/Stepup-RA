@@ -37,6 +37,9 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 use Twig_Environment as Twig;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class SamlListener implements ListenerInterface
 {
     /**
@@ -66,8 +69,7 @@ class SamlListener implements ListenerInterface
         $sessionHandler = $this->container->get('ra.security.authentication.session_handler');
 
         // reinstate the token from the session. Could be expanded with logout check if needed
-        if ($sessionHandler->hasBeenAuthenticated()) {
-            $this->container->get('security.token_storage')->setToken($sessionHandler->getToken());
+        if ($this->getTokenStorage()->getToken()) {
             return;
         }
 
@@ -92,7 +94,8 @@ class SamlListener implements ListenerInterface
             $assertion = $samlInteractionProvider->processSamlResponse($event->getRequest());
         } catch (PreconditionNotMetException $e) {
             $logger->notice(sprintf('SAML response precondition not met: "%s"', $e->getMessage()));
-            return $this->setPreconditionExceptionResponse($e, $event);
+            $this->setPreconditionExceptionResponse($e, $event);
+            return;
         } catch (Exception $e) {
             $logger->error(sprintf('Failed SAMLResponse Parsing: "%s"', $e->getMessage()));
             throw new AuthenticationException('Failed SAMLResponse parsing', 0, $e);
@@ -128,9 +131,7 @@ class SamlListener implements ListenerInterface
         }
 
         // for the current request
-        $this->container->get('security.token_storage')->setToken($authToken);
-        // for future requests
-        $sessionHandler->setToken($authToken);
+        $this->getTokenStorage()->setToken($authToken);
 
         $event->setResponse(new RedirectResponse($sessionHandler->getCurrentRequestUri()));
 
@@ -155,5 +156,13 @@ class SamlListener implements ListenerInterface
         $twig = $this->container->get('twig');
         $html = $twig->render($template, ['exception' => $exception]);
         $event->setResponse(new Response($html, Response::HTTP_UNAUTHORIZED));
+    }
+
+    /**
+     * @return \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
+     */
+    private function getTokenStorage()
+    {
+        return $this->container->get('security.token_storage');
     }
 }
