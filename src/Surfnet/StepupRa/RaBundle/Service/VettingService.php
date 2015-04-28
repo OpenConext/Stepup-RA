@@ -33,7 +33,6 @@ use Surfnet\StepupRa\RaBundle\Exception\UnknownVettingProcedureException;
 use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
 use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult as GssfVerificationResult;
 use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\OtpVerification;
-use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult as YubikeyVerificationResult;
 use Surfnet\StepupRa\RaBundle\VettingProcedure;
 
 /**
@@ -185,11 +184,9 @@ class VettingService
     }
 
     /**
-     * @param string $procedureId
+     * @param string                       $procedureId
      * @param VerifyYubikeyPublicIdCommand $command
-     * @return YubikeyVerificationResult
-     * @throws UnknownVettingProcedureException
-     * @throws DomainException
+     * @return YubikeySecondFactor\VerificationResult
      */
     public function verifyYubikeyPublicId($procedureId, VerifyYubikeyPublicIdCommand $command)
     {
