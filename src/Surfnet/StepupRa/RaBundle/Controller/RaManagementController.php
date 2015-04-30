@@ -26,10 +26,7 @@ class RaManagementController extends Controller
 {
     public function manageAction(Request $request)
     {
-        $authenticator = $this->get('security.authorization_checker');
-        if (!($authenticator->isGranted('ROLE_RAA') || $authenticator->isGranted('ROLE_SRAA'))) {
-            $this->createAccessDeniedException(); //throw?
-        }
+        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
         $searchQuery = (new RaListingSearchQuery($this->getUser()->institution, 1))
             ->setOrderBy($request->get('orderBy', 'commonName'))
@@ -51,6 +48,13 @@ class RaManagementController extends Controller
                 'pagination' => $pagination
             ]
         );
+    }
+
+    public function searchForIdentityAction()
+    {
+        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+
+
     }
 
     /**

@@ -52,5 +52,11 @@
                 form.submit();
             });
         });
+
+        $(document).on('click', '.not-yet-implemented', function (event) {
+            event.preventDefault();
+
+            alert('Sorry, this functionality has not yet been implemented...');
+        })
     });
 })(jQuery);

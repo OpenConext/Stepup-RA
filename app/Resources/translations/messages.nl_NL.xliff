@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-04-28T10:51:13Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2015-04-30T13:48:09Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -13,13 +13,13 @@
         <target>Step-up Registration Authority</target>
       </trans-unit>
       <trans-unit id="ff6230b38fe127145d864f4d4920ceb4d857af18" resname="button.logout">
-        <jms:reference-file line="41">Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="47">Resources/views/base.html.twig</jms:reference-file>
         <source>button.logout</source>
         <target>Uitloggen</target>
       </trans-unit>
       <trans-unit id="5a045b50111a6cdd614329837fa07cbf64d896a6" resname="ra.error.button.go_home">
-        <jms:reference-file line="9">views/Exception/error404.html.twig</jms:reference-file>
-        <jms:reference-file line="9">views/Exception/error.html.twig</jms:reference-file>
+        <jms:reference-file line="12">views/Exception/error404.html.twig</jms:reference-file>
+        <jms:reference-file line="12">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.button.go_home</source>
         <target>Terug naar Home</target>
       </trans-unit>
@@ -64,28 +64,28 @@
         <target>Onvoldoende rechten om in te loggen</target>
       </trans-unit>
       <trans-unit id="40350a9cdf8f8964a6900f7dc524a91fa7b23df6" resname="ra.error.text.an_error_occurred">
-        <jms:reference-file line="8">views/Exception/error.html.twig</jms:reference-file>
+        <jms:reference-file line="11">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.text.an_error_occurred</source>
         <target>Oeps, er gaat iets fout. Probeer het nog eens of ga terug naar Home</target>
       </trans-unit>
       <trans-unit id="e7e16bd377d6b3513aee56a7203224b1838b8876" resname="ra.error.text.if_you_think_this_is_incorrect_report">
-        <jms:reference-file line="13">views/Exception/error404.html.twig</jms:reference-file>
+        <jms:reference-file line="16">views/Exception/error404.html.twig</jms:reference-file>
         <source>ra.error.text.if_you_think_this_is_incorrect_report</source>
         <target>Meld deze error code aan de helpdesk via support@surfconext.nl</target>
       </trans-unit>
       <trans-unit id="cabba69d3aecedfc3535dd2b976519d1090290e2" resname="ra.error.text.page_not_found">
-        <jms:reference-file line="8">views/Exception/error404.html.twig</jms:reference-file>
+        <jms:reference-file line="11">views/Exception/error404.html.twig</jms:reference-file>
         <source>ra.error.text.page_not_found</source>
         <target>De pagina die je zocht kan niet gevonden worden. Probeer het nog eens, of ga terug naar Home.</target>
       </trans-unit>
       <trans-unit id="1e71b162b5df5571e03f1e5b4f89b366b0e60390" resname="ra.error.text.what_were_you_doing_well_fix_it">
-        <jms:reference-file line="13">views/Exception/error.html.twig</jms:reference-file>
+        <jms:reference-file line="16">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.text.what_were_you_doing_well_fix_it</source>
         <target>Meld deze error code aan de helpdesk via support@surfconext.nl</target>
       </trans-unit>
       <trans-unit id="97cec45f4b04606121bd0a6613f2673f4e55eff7" resname="ra.error.text.your_art_code">
-        <jms:reference-file line="12">views/Exception/error404.html.twig</jms:reference-file>
-        <jms:reference-file line="12">views/Exception/error.html.twig</jms:reference-file>
+        <jms:reference-file line="15">views/Exception/error404.html.twig</jms:reference-file>
+        <jms:reference-file line="15">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.text.your_art_code</source>
         <target>De fout code is:</target>
       </trans-unit>
@@ -164,6 +164,16 @@
         <source>ra.form.ra_search_ra_second_factors.label.type</source>
         <target>Type</target>
       </trans-unit>
+      <trans-unit id="1ded9028f8d549daf4dfd7f37b472ee17e1beb0c" resname="ra.form.ra_select_institution.button.select_and_apply">
+        <jms:reference-file line="43">Form/Type/InstitutionSelectionType.php</jms:reference-file>
+        <source>ra.form.ra_select_institution.button.select_and_apply</source>
+        <target>Pas Toe</target>
+      </trans-unit>
+      <trans-unit id="aff72bc7d94c65f8b3dcf0b3b9bb3f5430ac28f6" resname="ra.form.ra_select_institution.label.institution">
+        <jms:reference-file line="40">Form/Type/InstitutionSelectionType.php</jms:reference-file>
+        <source>ra.form.ra_select_institution.label.institution</source>
+        <target>Instituut</target>
+      </trans-unit>
       <trans-unit id="b190a055ec0458747cdff543e6693c2433a6eb6b" resname="ra.form.ra_send_sms_challenge.button.send_challenge">
         <jms:reference-file line="30">Form/Type/SendSmsChallengeType.php</jms:reference-file>
         <source>ra.form.ra_send_sms_challenge.button.send_challenge</source>
@@ -209,15 +219,55 @@
         <source>ra.form.verify_identity.verify_identity.button</source>
         <target>Verifieer identiteit</target>
       </trans-unit>
+      <trans-unit id="65486b5669de95b6a49203f59af122ec56fdc5ba" resname="ra.management.overview.change_role">
+        <jms:reference-file line="25">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.change_role</source>
+        <target>Verander Rol</target>
+      </trans-unit>
+      <trans-unit id="249a6c69487c5477929e1dac383aa2d02fb25198" resname="ra.management.overview.common_name">
+        <jms:reference-file line="11">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.common_name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="f702b148afefffede0240eb3d7e4d4d902c23255" resname="ra.management.overview.email">
+        <jms:reference-file line="12">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="44ed8664990fcd8d55324dc98bfa3ac905bb9c0d" resname="ra.management.overview.institution">
+        <jms:reference-file line="10">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.institution</source>
+        <target>Instituut</target>
+      </trans-unit>
+      <trans-unit id="3405f2d5ec00142a5b1b5c0c1509b6aa2543473b" resname="ra.management.overview.role">
+        <jms:reference-file line="13">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.role</source>
+        <target>Rol</target>
+      </trans-unit>
+      <trans-unit id="3d101556c7d65068f5e964ba8c5a9b8709e23266" resname="ra.management.overview.update_information">
+        <jms:reference-file line="26">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.update_information</source>
+        <target>Wijzig</target>
+      </trans-unit>
+      <trans-unit id="08d2247eaaec4c6e898a3f3d01bda66d7c33731c" resname="ra.menu.ra_management">
+        <jms:reference-file line="40">Resources/views/base.html.twig</jms:reference-file>
+        <source>ra.menu.ra_management</source>
+        <target>RA Management</target>
+      </trans-unit>
       <trans-unit id="7d6a9d74b9561d924dc4411c3ceebc63a01c83ae" resname="ra.menu.registration">
-        <jms:reference-file line="32">Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="33">Resources/views/base.html.twig</jms:reference-file>
         <source>ra.menu.registration</source>
         <target>Registratie</target>
       </trans-unit>
       <trans-unit id="1a955d4adfae2bc0a0c0177a672e95c7dcbb486d" resname="ra.menu.search">
-        <jms:reference-file line="35">Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="36">Resources/views/base.html.twig</jms:reference-file>
         <source>ra.menu.search</source>
         <target>Tokens</target>
+      </trans-unit>
+      <trans-unit id="ea07c1ef2b8502f7457347223483d010ab427050" resname="ra.menu.sraa_change_institution">
+        <jms:reference-file line="53">Resources/views/base.html.twig</jms:reference-file>
+        <source>ra.menu.sraa_change_institution</source>
+        <target>verander</target>
       </trans-unit>
       <trans-unit id="f12e743e43bca49fe86f99db331ded47fb88f1da" resname="ra.registration.sms.text.otp_requests_remaining">
         <jms:reference-file line="23">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
@@ -354,6 +404,11 @@
         <jms:reference-file line="42">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.secondfactor.revoke</source>
         <target>Verwijderen</target>
+      </trans-unit>
+      <trans-unit id="e8ada95651cf644c6bbeeff32c330b4fde42f87d" resname="ra.sraa.changed_institution">
+        <jms:reference-file line="42">RaBundle/Controller/SraaController.php</jms:reference-file>
+        <source>ra.sraa.changed_institution</source>
+        <target>Je instituut is veranderd naar "%institution%"</target>
       </trans-unit>
       <trans-unit id="485287b4d4e2f13a9df979601799e727821b9817" resname="ra.vetting.gssf.initiate.tiqr.button.initiate">
         <jms:reference-file line="32">Resources/views/translations.html.twig</jms:reference-file>
