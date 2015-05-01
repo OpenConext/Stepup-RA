@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-05-01T11:16:18Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2015-05-01T15:53:26Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -275,6 +275,30 @@
         <jms:reference-file line="12">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.prove_yubikey_possession.different_yubikey_used</source>
         <target>A different Yubikey was used by the user during the registration process.</target>
+      </trans-unit>
+      <trans-unit id="63afbb9b99d8cd2a35f01ca455bd73b2994397c8" resname="ra.search_ra_candidates.institution.blank">
+        <source>ra.search_ra_candidates.institution.blank</source>
+        <target>Institution must be set</target>
+      </trans-unit>
+      <trans-unit id="768441c3e810f5a3e1b7dd5c57ea02e5066be253" resname="ra.search_ra_candidates.institution.type">
+        <source>ra.search_ra_candidates.institution.type</source>
+        <target>Institution must be a string</target>
+      </trans-unit>
+      <trans-unit id="f5896924bf34d44a4af698498d21d8732258b418" resname="ra.search_ra_candidates.order_by.invalid_choice">
+        <source>ra.search_ra_candidates.order_by.invalid_choice</source>
+        <target>Invalid choice for ordering column</target>
+      </trans-unit>
+      <trans-unit id="2ebebb5e9c799b9037f46652fec540c03d99dafc" resname="ra.search_ra_candidates.order_direction.invalid_choice">
+        <source>ra.search_ra_candidates.order_direction.invalid_choice</source>
+        <target>Invalid choice for ordering direction</target>
+      </trans-unit>
+      <trans-unit id="aa63a2e8f71fad302a0651f5116ea441804b425f" resname="ra.search_ra_candidates.page_number.greater_than_zero">
+        <source>ra.search_ra_candidates.page_number.greater_than_zero</source>
+        <target>The page number must be greater than zero</target>
+      </trans-unit>
+      <trans-unit id="1e5e921ec2fbeeb305e0c20d6e0c0a48fb38a8fe" resname="ra.search_ra_candidates.page_number.type">
+        <source>ra.search_ra_candidates.page_number.type</source>
+        <target>The page number must be an integer</target>
       </trans-unit>
       <trans-unit id="96fa6c297f7ae3acce042b0fe9a271753761c646" resname="ra.search_ra_second_factors.institution.blank">
         <source>ra.search_ra_second_factors.institution.blank</source>

@@ -30,6 +30,10 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\VerifyPhoneNumberType
         tags: [{ name: form.type, alias: ra_verify_phone_number }]
 
+    ra.form.type.search_ra_candidates:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType
+        tags: [{ name: form.type, alias: ra_search_ra_candidates }]
+
     ra.form.type.search_ra_second_factors:
         class: Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType
         tags: [{ name: form.type, alias: ra_search_ra_second_factors }]
@@ -134,6 +138,11 @@ services:
         arguments:
             - @surfnet_stepup_middleware_client.identity.service.second_factor
             - @logger
+
+    ra.service.ra_candidate:
+        class: Surfnet\StepupRa\RaBundle\Service\RaCandidateService
+        arguments:
+            - @surfnet_stepup_middleware_client.identity.service.ra_candidate
 
     ra.service.ra_second_factor:
         class: Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService

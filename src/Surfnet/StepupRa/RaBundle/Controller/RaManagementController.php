@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaCandidateSearchQuery;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
+use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -62,7 +63,7 @@ class RaManagementController extends Controller
         );
     }
 
-    public function searchForIdentityAction()
+    public function searchForIdentityAction(Request $request)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
@@ -71,11 +72,17 @@ class RaManagementController extends Controller
 
         $logger->notice(sprintf('Searching for RaCandidates within institution "%s"', $institution));
 
-        $searchQuery = new RaCandidateSearchQuery($institution, 1);
-        // commonName, email, orderBy, orderDirection
+        $command                 = new SearchRaCandidatesCommand();
+        $command->institution    = $institution;
+        $command->pageNumber     = $request->get('p', 1);
+        $command->orderBy        = $request->get('orderBy');
+        $command->orderDirection = $request->get('orderDirection');
+
+        $form = $this->createForm('ra_search_ra_candidates', $command, ['method' => 'get']);
+        $form->handleRequest($request);
 
         $service = $this->getRaCandidateService();
-        $raCandidateList = $service->search($searchQuery);
+        $raCandidateList = $service->search($command);
 
         $pagination = $this->getPaginator()->paginate(
             $raCandidateList->getTotalItems() > 0 ? array_fill(4, $raCandidateList->getTotalItems(), 1) : [],
@@ -92,8 +99,9 @@ class RaManagementController extends Controller
         return $this->render(
             'SurfnetStepupRaRaBundle:RaManagement:raCandidateOverview.html.twig',
             [
+                'form'         => $form->createView(),
                 'raCandidates' => $raCandidateList,
-                'pagination' => $pagination
+                'pagination'   => $pagination
             ]
         );
     }
@@ -107,11 +115,11 @@ class RaManagementController extends Controller
     }
 
     /**
-     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaCandidateService
+     * @return \Surfnet\StepupRa\RaBundle\Service\RaCandidateService
      */
     private function getRaCandidateService()
     {
-        return $this->get('surfnet_stepup_middleware_client.identity.service.ra_candidate');
+        return $this->get('ra.service.ra_candidate');
     }
 
     /**
