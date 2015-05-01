@@ -73,6 +73,11 @@ ra_management_manage:
     methods:  [GET]
     defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:manage }
 
+ra_management_search_identity:
+    path:     /management/search-identity
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:searchForIdentity }
+
 sraa_select_institution:
     path:     /sraa/select-institution
     methods:  [GET, POST]

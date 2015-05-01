@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
+use Surfnet\StepupMiddlewareClient\Identity\Dto\RaCandidateSearchQuery;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +29,11 @@ class RaManagementController extends Controller
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
+        $logger = $this->get('logger');
+        $institution = $this->getUser()->institution;
+
+        $logger->notice(sprintf('Loading overview of RA(A)s for institution "%s"', $institution));
+
         $searchQuery = (new RaListingSearchQuery($this->getUser()->institution, 1))
             ->setOrderBy($request->get('orderBy', 'commonName'))
             ->setOrderDirection($request->get('orderDirection', 'asc'));
@@ -35,11 +41,17 @@ class RaManagementController extends Controller
         $service = $this->getRaService();
         $raList = $service->search($searchQuery);
 
-        $pagination = $this->get('knp_paginator')->paginate(
+        $pagination = $this->getPaginator()->paginate(
             $raList->getTotalItems() > 0 ? array_fill(0, $raList->getTotalItems(), 1) : [],
             $raList->getCurrentPage(),
             $raList->getItemsPerPage()
         );
+
+        $logger->notice(sprintf(
+            'Created overview of "%d" RA(A)s for institution "%s"',
+            $raList->getTotalItems(),
+            $institution
+        ));
 
         return $this->render(
             'SurfnetStepupRaRaBundle:RaManagement:manage.html.twig',
@@ -54,7 +66,36 @@ class RaManagementController extends Controller
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
+        $logger = $this->get('logger');
+        $institution = $this->getUser()->institution;
 
+        $logger->notice(sprintf('Searching for RaCandidates within institution "%s"', $institution));
+
+        $searchQuery = new RaCandidateSearchQuery($institution, 1);
+        // commonName, email, orderBy, orderDirection
+
+        $service = $this->getRaCandidateService();
+        $raCandidateList = $service->search($searchQuery);
+
+        $pagination = $this->getPaginator()->paginate(
+            $raCandidateList->getTotalItems() > 0 ? array_fill(4, $raCandidateList->getTotalItems(), 1) : [],
+            $raCandidateList->getCurrentPage(),
+            $raCandidateList->getItemsPerPage()
+        );
+
+        $logger->notice(sprintf(
+            'Searching for RaCandidates within institution "%s" yielded "%s" results',
+            $institution,
+            $raCandidateList->getTotalItems()
+        ));
+
+        return $this->render(
+            'SurfnetStepupRaRaBundle:RaManagement:raCandidateOverview.html.twig',
+            [
+                'raCandidates' => $raCandidateList,
+                'pagination' => $pagination
+            ]
+        );
     }
 
     /**
@@ -63,5 +104,21 @@ class RaManagementController extends Controller
     private function getRaService()
     {
         return $this->get('surfnet_stepup_middleware_client.identity.service.ra_listing');
+    }
+
+    /**
+     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaCandidateService
+     */
+    private function getRaCandidateService()
+    {
+        return $this->get('surfnet_stepup_middleware_client.identity.service.ra_candidate');
+    }
+
+    /**
+     * @return \Knp\Component\Pager\Paginator
+     */
+    private function getPaginator()
+    {
+        return $this->get('knp_paginator');
     }
 }

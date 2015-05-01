@@ -182,3 +182,9 @@ services:
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\SessionHandler
         arguments:
             - @session
+
+    #Logger
+    ra.procedure_logger:
+        class: Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger
+        arguments:
+            - @logger

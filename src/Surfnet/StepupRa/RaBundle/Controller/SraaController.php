@@ -27,8 +27,13 @@ class SraaController extends Controller
 {
     public function selectInstitutionAction(Request $request)
     {
+        $this->denyAccessUnlessGranted(['ROLE_SRAA']);
+
+        $logger = $this->get('logger');
         /** @var Identity $identity */
         $identity = $this->get('security.token_storage')->getToken()->getUser();
+
+        $logger->notice(sprintf('Select Institution for SRAA "%s"', $identity->id));
 
         $command = new SelectInstitutionCommand();
         $command->institution = $identity->institution;
@@ -43,8 +48,17 @@ class SraaController extends Controller
                 ->trans('ra.sraa.changed_institution', ['%institution%' => $newInstitution]);
 
             $this->get('session')->getFlashBag()->add('success', $flashMessage);
+
+            $logger->notice(sprintf(
+                'SRAA "%s successfully switched to institution "%s"',
+                $identity->id,
+                $newInstitution
+            ));
+
             return $this->redirect($this->generateUrl('ra_vetting_search'));
         }
+
+        $logger->notice(sprintf('Showing select institution form for SRAA "%s"', $identity->id));
 
         return $this->render(
             'SurfnetStepupRaRaBundle:Sraa:selectInstitution.html.twig',

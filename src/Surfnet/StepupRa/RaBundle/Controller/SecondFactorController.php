@@ -35,7 +35,7 @@ final class SecondFactorController extends Controller
     public function searchAction(Request $request)
     {
         $identity = $this->getIdentity();
-        $this->get('logger')->info('Starting search for second factors');
+        $this->get('logger')->notice('Starting search for second factors');
 
         $command = new SearchRaSecondFactorsCommand();
         $command->institution = $identity->institution;
@@ -56,7 +56,7 @@ final class SecondFactorController extends Controller
 
         $revocationForm = $this->createForm('ra_revoke_second_factor', new RevokeSecondFactorCommand());
 
-        $this->get('logger')->info(sprintf(
+        $this->get('logger')->notice(sprintf(
             'Searching for second factors yielded "%d" results',
             $secondFactors->getTotalItems()
         ));
@@ -80,7 +80,7 @@ final class SecondFactorController extends Controller
     {
         $logger = $this->get('logger');
 
-        $logger->info('Received request to revoke Second Factor');
+        $logger->notice('Received request to revoke Second Factor');
 
         $command = new RevokeSecondFactorCommand();
         $command->currentUserId = $this->getIdentity()->id;
@@ -98,12 +98,14 @@ final class SecondFactorController extends Controller
         $translator = $this->get('translator');
         $flashBag = $this->get('session')->getFlashBag();
         if ($this->getSecondFactorService()->revoke($command)) {
-            $logger->info('Second Factor revocation Succeeded, notifying used and redirecting back to search page');
+            $logger->notice('Second Factor revocation Succeeded');
             $flashBag->add('success', $translator->trans('ra.second_factor.revocation.revoked'));
         } else {
-            $logger->info('Second Factor revocation Failed, notifying used and redirecting back to search page');
+            $logger->notice('Second Factor revocation Failed');
             $flashBag->add('error', $translator->trans('ra.second_factor.revocation.could_not_revoke'));
         }
+
+        $logger->notice('Redirecting back to Second Factor Search Page');
 
         return $this->redirectToRoute('ra_second_factors_search');
     }
