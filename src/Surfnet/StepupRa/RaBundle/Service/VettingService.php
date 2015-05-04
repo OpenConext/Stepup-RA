@@ -21,7 +21,6 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\VetSecondFactorCommand;
-use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
@@ -34,7 +33,6 @@ use Surfnet\StepupRa\RaBundle\Exception\UnknownVettingProcedureException;
 use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
 use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult as GssfVerificationResult;
 use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\OtpVerification;
-use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult as YubikeyVerificationResult;
 use Surfnet\StepupRa\RaBundle\VettingProcedure;
 
 /**
@@ -43,27 +41,27 @@ use Surfnet\StepupRa\RaBundle\VettingProcedure;
 class VettingService
 {
     /**
-     * @var SmsSecondFactorService
+     * @var \Surfnet\StepupRa\RaBundle\Service\SmsSecondFactorService
      */
     private $smsSecondFactorService;
 
     /**
-     * @var YubikeySecondFactorService
+     * @var \Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorService
      */
     private $yubikeySecondFactorService;
 
     /**
-     * @var GssfService
+     * @var \Surfnet\StepupRa\RaBundle\Service\GssfService
      */
     private $gssfService;
 
     /**
-     * @var CommandService
+     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
      */
     private $commandService;
 
     /**
-     * @var VettingProcedureRepository
+     * @var \Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository
      */
     private $vettingProcedureRepository;
 
@@ -186,11 +184,9 @@ class VettingService
     }
 
     /**
-     * @param string $procedureId
+     * @param string                       $procedureId
      * @param VerifyYubikeyPublicIdCommand $command
-     * @return YubikeyVerificationResult
-     * @throws UnknownVettingProcedureException
-     * @throws DomainException
+     * @return YubikeySecondFactor\VerificationResult
      */
     public function verifyYubikeyPublicId($procedureId, VerifyYubikeyPublicIdCommand $command)
     {

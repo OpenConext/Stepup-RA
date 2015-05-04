@@ -1,4 +1,10 @@
 services:
+    ra.service.command:
+        class: Surfnet\StepupRa\RaBundle\Service\CommandService
+        arguments:
+            - @surfnet_stepup_middleware_client.service.command
+            - @security.token_storage
+
     # Forms
     ra.form.type.anchor:
         class: Surfnet\StepupRa\RaBundle\Form\Type\AnchorType
@@ -39,7 +45,7 @@ services:
             - @ra.service.sms_second_factor
             - @ra.service.yubikey_second_factor
             - @ra.service.gssf
-            - @surfnet_stepup_middleware_client.service.command
+            - @ra.service.command
             - @ra.repository.vetting_procedure
 
     ra.service.yubikey:
@@ -69,7 +75,6 @@ services:
             - @ra.service.sms
             - @ra.service.challenge_handler
             - @translator
-            - @surfnet_stepup_middleware_client.service.command
             - '' # Originator set in extension
 
     ra.service.challenge_handler:
@@ -110,21 +115,19 @@ services:
         class: Surfnet\StepupRa\RaBundle\Service\IdentityService
         arguments:
             - @surfnet_stepup_middleware_client.identity.service.identity
-            - @surfnet_stepup_middleware_client.service.command
             - @logger
 
     ra.service.second_factor:
         class: Surfnet\StepupRa\RaBundle\Service\SecondFactorService
         arguments:
             - @surfnet_stepup_middleware_client.identity.service.second_factor
-            - @surfnet_stepup_middleware_client.service.command
             - @logger
 
     ra.service.ra_second_factor:
         class: Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService
         arguments:
             - @surfnet_stepup_middleware_client.identity.service.ra_second_factor
-            - @surfnet_stepup_middleware_client.service.command
+            - @ra.service.command
             - @logger
 
     # Repositories

@@ -18,7 +18,6 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
-use Surfnet\StepupMiddlewareClientBundle\Service\CommandService;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupRa\RaBundle\Command\SendSmsCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyPhoneNumberCommand;
@@ -27,13 +26,10 @@ use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\OtpVerification;
 use Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SmsVerificationStateHandler;
 use Symfony\Component\Translation\TranslatorInterface;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class SmsSecondFactorService
 {
     /**
-     * @var SmsService
+     * @var \Surfnet\StepupRa\RaBundle\Service\SmsService
      */
     private $smsService;
 
@@ -43,14 +39,9 @@ class SmsSecondFactorService
     private $smsVerificationStateHandler;
 
     /**
-     * @var TranslatorInterface
+     * @var \Symfony\Component\Translation\TranslatorInterface
      */
     private $translator;
-
-    /**
-     * @var CommandService
-     */
-    private $commandService;
 
     /**
      * @var string
@@ -61,14 +52,12 @@ class SmsSecondFactorService
      * @param SmsService $smsService
      * @param SmsVerificationStateHandler $smsVerificationStateHandler
      * @param TranslatorInterface $translator
-     * @param CommandService $commandService
      * @param string $originator
      */
     public function __construct(
         SmsService $smsService,
         SmsVerificationStateHandler $smsVerificationStateHandler,
         TranslatorInterface $translator,
-        CommandService $commandService,
         $originator
     ) {
         if (!is_string($originator)) {
@@ -84,7 +73,6 @@ class SmsSecondFactorService
         $this->smsService = $smsService;
         $this->smsVerificationStateHandler = $smsVerificationStateHandler;
         $this->translator = $translator;
-        $this->commandService = $commandService;
         $this->originator = $originator;
     }
 
