@@ -19,10 +19,10 @@
 namespace Surfnet\StepupRa\RaBundle\Security\Firewall;
 
 use Exception;
-use Psr\Log\LoggerInterface;
 use SAML2_Response_Exception_PreconditionNotMetException as PreconditionNotMetException;
 use Surfnet\SamlBundle\Http\Exception\AuthnFailedSamlResponseException;
 use Surfnet\SamlBundle\Http\Exception\NoAuthnContextSamlResponseException;
+use Surfnet\SamlBundle\Monolog\SamlAuthenticationLogger;
 use Surfnet\SamlBundle\SAML2\Response\Assertion\InResponseTo;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SamlInteractionProvider;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SessionHandler;
@@ -37,6 +37,9 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 use Twig_Environment as Twig;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class SamlListener implements ListenerInterface
 {
     /**
@@ -66,8 +69,7 @@ class SamlListener implements ListenerInterface
         $sessionHandler = $this->container->get('ra.security.authentication.session_handler');
 
         // reinstate the token from the session. Could be expanded with logout check if needed
-        if ($sessionHandler->hasBeenAuthenticated()) {
-            $this->container->get('security.token_storage')->setToken($sessionHandler->getToken());
+        if ($this->getTokenStorage()->getToken()) {
             return;
         }
 
@@ -78,26 +80,34 @@ class SamlListener implements ListenerInterface
             $sessionHandler->setCurrentRequestUri($event->getRequest()->getUri());
             $event->setResponse($samlInteractionProvider->initiateSamlRequest());
 
+            /** @var SamlAuthenticationLogger $logger */
+            $logger = $this->container->get('surfnet_saml.logger')->forAuthentication($sessionHandler->getRequestId());
+            $logger->notice('Sending AuthnRequest');
+
             return;
         }
 
-        /** @var LoggerInterface $logger */
-        $logger = $this->container->get('logger');
-
+        /** @var SamlAuthenticationLogger $logger */
+        $logger = $this->container->get('surfnet_saml.logger')->forAuthentication($sessionHandler->getRequestId());
         $expectedInResponseTo = $sessionHandler->getRequestId();
         try {
             $assertion = $samlInteractionProvider->processSamlResponse($event->getRequest());
         } catch (PreconditionNotMetException $e) {
             $logger->notice(sprintf('SAML response precondition not met: "%s"', $e->getMessage()));
-            return $this->setPreconditionExceptionResponse($e, $event);
+            $this->setPreconditionExceptionResponse($e, $event);
+            return;
         } catch (Exception $e) {
             $logger->error(sprintf('Failed SAMLResponse Parsing: "%s"', $e->getMessage()));
             throw new AuthenticationException('Failed SAMLResponse parsing', 0, $e);
         }
 
         if (!InResponseTo::assertEquals($assertion, $expectedInResponseTo)) {
+            $logger->error('Unknown or unexpected InResponseTo in SAMLResponse');
+
             throw new AuthenticationException('Unknown or unexpected InResponseTo in SAMLResponse');
         }
+
+        $logger->notice('Successfully processed SAMLResponse, attempting to authenticate');
 
         $loaResolutionService = $this->container->get('surfnet_stepup.service.loa_resolution');
         $loa = $loaResolutionService->getLoa($assertion->getAuthnContextClassRef());
@@ -105,17 +115,11 @@ class SamlListener implements ListenerInterface
         $token = new SamlToken($loa);
         $token->assertion = $assertion;
 
-        try {
-            /** @var AuthenticationProviderManager $authenticationManager */
-            $authenticationManager = $this->container->get('security.authentication.manager');
-            $authToken = $authenticationManager->authenticate($token);
-            // for the current request
-            $this->container->get('security.token_storage')->setToken($authToken);
-            // for future requests
-            $sessionHandler->setToken($authToken);
+        /** @var AuthenticationProviderManager $authenticationManager */
+        $authenticationManager = $this->container->get('security.authentication.manager');
 
-            $event->setResponse(new RedirectResponse($sessionHandler->getCurrentRequestUri()));
-            return;
+        try {
+            $authToken = $authenticationManager->authenticate($token);
         } catch (AuthenticationException $failed) {
             $logger->error(sprintf('Authentication Failed, reason: "%s"', $failed->getMessage()));
 
@@ -123,7 +127,15 @@ class SamlListener implements ListenerInterface
             $response = new Response();
             $response->setStatusCode(Response::HTTP_FORBIDDEN);
             $event->setResponse($response);
+            return;
         }
+
+        // for the current request
+        $this->getTokenStorage()->setToken($authToken);
+
+        $event->setResponse(new RedirectResponse($sessionHandler->getCurrentRequestUri()));
+
+        $logger->notice('Authentication succeeded, redirecting to original location');
     }
 
     private function setPreconditionExceptionResponse(PreconditionNotMetException $exception, GetResponseEvent $event)
@@ -144,5 +156,13 @@ class SamlListener implements ListenerInterface
         $twig = $this->container->get('twig');
         $html = $twig->render($template, ['exception' => $exception]);
         $event->setResponse(new Response($html, Response::HTTP_UNAUTHORIZED));
+    }
+
+    /**
+     * @return \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
+     */
+    private function getTokenStorage()
+    {
+        return $this->container->get('security.token_storage');
     }
 }

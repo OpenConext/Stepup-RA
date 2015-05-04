@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: samlstepupproviders.yml }
+    - { resource: logging.yml }
 
 framework:
     #esi:             ~
@@ -50,27 +51,6 @@ assetic:
         #yui_css:
         #    jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar"
 
-monolog:
-    handlers:
-        main:
-            type: group
-            members:
-                - main_graylog
-                - main_logfile
-        main_graylog:
-            type: buffer
-            handler: graylog
-            level: NOTICE
-        main_logfile:
-            type: stream
-            handler: logfile
-            level: NOTICE
-            path: %kernel.logs_dir%/%kernel.environment%.log
-        graylog:
-            type: gelf
-            publisher: { hostname: %graylog_hostname% }
-            formatter: surfnet_stepup.monolog.full_message_exception_gelf_message_formatter
-
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
@@ -87,10 +67,6 @@ nelmio_security:
         report_logger_service: monolog.logger.security
         # Content types: default, script, object, style, img, media, frame, font, connect
         default: [ self ]
-    signed_cookie:
-        names: ['*']
-    encrypted_cookie:
-        names: ['*']
 
 services:
     twig.extension.text: # Required by JMSTranslationBundle

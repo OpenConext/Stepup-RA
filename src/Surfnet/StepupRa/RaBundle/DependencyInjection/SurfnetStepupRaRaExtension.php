@@ -55,7 +55,7 @@ class SurfnetStepupRaRaExtension extends Extension
 
         $smsSecondFactorService =
             $container->getDefinition('ra.service.sms_second_factor');
-        $smsSecondFactorService->replaceArgument(4, $config['sms']['originator']);
+        $smsSecondFactorService->replaceArgument(3, $config['sms']['originator']);
 
         $container
             ->getDefinition('ra.service.challenge_handler')
