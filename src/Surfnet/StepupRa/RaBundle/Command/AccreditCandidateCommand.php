@@ -20,7 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Command;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateRaCommand
+class AccreditCandidateCommand
 {
     /**
      * @var string

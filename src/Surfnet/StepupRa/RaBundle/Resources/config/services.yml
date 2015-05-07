@@ -147,6 +147,8 @@ services:
         class: Surfnet\StepupRa\RaBundle\Service\RaCandidateService
         arguments:
             - @surfnet_stepup_middleware_client.identity.service.ra_candidate
+            - @ra.service.command
+            - @logger
 
     ra.service.ra_second_factor:
         class: Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService

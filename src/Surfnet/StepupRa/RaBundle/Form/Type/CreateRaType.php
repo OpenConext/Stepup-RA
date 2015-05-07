@@ -57,7 +57,7 @@ class CreateRaType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\CreateRaCommand'
+            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand'
         ]);
     }
 

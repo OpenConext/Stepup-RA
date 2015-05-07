@@ -18,8 +18,11 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaCandidateSearchQuery;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AccreditIdentityCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaCandidateService as ApiRaCandidateService;
+use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
@@ -30,9 +33,24 @@ class RaCandidateService
      */
     private $apiRaCandidateService;
 
-    public function __construct(ApiRaCandidateService $raCandidateService)
-    {
+    /**
+     * @var CommandService
+     */
+    private $commandService;
+
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(
+        ApiRaCandidateService $raCandidateService,
+        CommandService $commandService,
+        LoggerInterface $logger
+    ) {
         $this->apiRaCandidateService = $raCandidateService;
+        $this->commandService = $commandService;
+        $this->logger = $logger;
     }
 
     /**
@@ -73,5 +91,31 @@ class RaCandidateService
         }
 
         return $this->apiRaCandidateService->getByIdentityId($identityId);
+    }
+
+    public function accreditCandidate(AccreditCandidateCommand $command)
+    {
+        $apiCommand                     = new AccreditIdentityCommand();
+        $apiCommand->identityId         = $command->identityId;
+        $apiCommand->institution        = $command->institution;
+        $apiCommand->role               = $command->role;
+        $apiCommand->location           = $command->location ?: '';
+        $apiCommand->contactInformation = $command->contactInformation ?: '';
+
+        $result = $this->commandService->execute($apiCommand);
+
+        if (!$result->isSuccessful()) {
+            $this->logger->critical(
+                sprintf(
+                    'Accreditation of Identity "%s" of Institution "%s" with role "%s" failed: "%s"',
+                    $apiCommand->identityId,
+                    $apiCommand->institution,
+                    $apiCommand->role,
+                    implode(", ", $result->getErrors())
+                )
+            );
+        }
+
+        return $result->isSuccessful();
     }
 }

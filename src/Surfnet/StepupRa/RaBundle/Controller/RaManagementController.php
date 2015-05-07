@@ -19,9 +19,10 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
-use Surfnet\StepupRa\RaBundle\Command\CreateRaCommand;
+use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -126,13 +127,24 @@ class RaManagementController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-        $command              = new CreateRaCommand();
+        $command              = new AccreditCandidateCommand();
         $command->identityId  = $identityId;
-        $command->institution = $this->getUser()->institution;
+        $command->institution = $raCandidate->institution;
 
         $form = $this->createForm('ra_management_create_ra', $command)->handleRequest($request);
         if ($form->isValid()) {
-//            $this->getRaCandidateService()->createRa($command)
+            $success = $this->getRaCandidateService()->accreditCandidate($command);
+
+            if ($success) {
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans('ra.management.create_ra.identity_accredited')
+                );
+
+                return $this->redirectToRoute('ra_management_ra_candidate_search');
+            }
+
+            $form->addError(new FormError('ra.management.create_ra.error.middleware_command_failed'));
         }
 
         return $this->render('SurfnetStepupRaRaBundle:RaManagement:createRa.html.twig', [
