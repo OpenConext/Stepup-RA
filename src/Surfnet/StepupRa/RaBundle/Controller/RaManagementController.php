@@ -18,11 +18,12 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
-use Surfnet\StepupMiddlewareClient\Identity\Dto\RaCandidateSearchQuery;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
+use Surfnet\StepupRa\RaBundle\Command\CreateRaCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RaManagementController extends Controller
 {
@@ -63,7 +64,7 @@ class RaManagementController extends Controller
         );
     }
 
-    public function searchForIdentityAction(Request $request)
+    public function raCandidateSearchAction(Request $request)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
@@ -104,6 +105,40 @@ class RaManagementController extends Controller
                 'pagination'   => $pagination
             ]
         );
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function createRaAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+
+        $identityId = $request->get('identityId');
+        $raCandidate = $this->getRaCandidateService()->getRaCandidateByIdentityId($identityId);
+
+        if (!$raCandidate) {
+            throw new NotFoundHttpException();
+        }
+
+        if ($raCandidate->institution !== $this->getUser()->institution) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $command              = new CreateRaCommand();
+        $command->identityId  = $identityId;
+        $command->institution = $this->getUser()->institution;
+
+        $form = $this->createForm('ra_management_create_ra', $command)->handleRequest($request);
+        if ($form->isValid()) {
+//            $this->getRaCandidateService()->createRa($command)
+        }
+
+        return $this->render('SurfnetStepupRaRaBundle:RaManagement:createRa.html.twig', [
+            'raCandidate' => $raCandidate,
+            'form'        => $form->createView()
+        ]);
     }
 
     /**

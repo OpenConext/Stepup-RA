@@ -21,6 +21,7 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaCandidateSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaCandidateService as ApiRaCandidateService;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
+use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
 class RaCandidateService
 {
@@ -59,5 +60,18 @@ class RaCandidateService
         }
 
         return $this->apiRaCandidateService->search($query);
+    }
+
+    /**
+     * @param $identityId
+     * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidate
+     */
+    public function getRaCandidateByIdentityId($identityId)
+    {
+        if (!is_string($identityId)) {
+            throw InvalidArgumentException::invalidType('string', 'identityId', $identityId);
+        }
+
+        return $this->apiRaCandidateService->getByIdentityId($identityId);
     }
 }

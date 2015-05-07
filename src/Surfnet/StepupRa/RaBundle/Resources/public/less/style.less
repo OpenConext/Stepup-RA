@@ -54,6 +54,22 @@ div.form-ra-verify-identity {
     }
 }
 
+div.form-ra-create-ra {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 650px;
+
+    .control-text {
+        padding-top: 7px;
+    }
+}
+
+div#create_ra_confirmation_modal {
+    .question {
+        padding: 15px;
+    }
+}
+
 div.form-ra-send-sms-challenge {
     margin: 1em auto;
     padding: 0.75em 1em;
@@ -114,4 +130,8 @@ form[name="logout"] button {
         width: (@i * 1%);
     }
     .generate-progress(@n, (@i + 5));
+}
+
+.cancel {
+    color: @brand-danger;
 }

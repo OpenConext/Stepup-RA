@@ -21,7 +21,7 @@
                         <td>{{ candidate.commonName }}</td>
                         <td>{{ candidate.email }}</td>
                         <td>
-                            <a href="#" class="btn btn-info not-yet-implemented" role="button">
+                            <a href="{{ path('ra_management_create_ra', {identityId: candidate.identityId}) }}" class="btn btn-info " role="button">
                                 {{ 'ra.management.ra_candidate.create_ra'|trans }}
                             </a>
                         </td>

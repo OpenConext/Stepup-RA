@@ -29,11 +29,17 @@ class InstitutionListingChoiceList
      */
     private $institutionListingService;
 
+    /**
+     * @param InstitutionListingService $institutionListingService
+     */
     public function __construct(InstitutionListingService $institutionListingService)
     {
         $this->institutionListingService = $institutionListingService;
     }
 
+    /**
+     * @return SimpleChoiceList
+     */
     public function create()
     {
         $collection = $this->institutionListingService->getAll();

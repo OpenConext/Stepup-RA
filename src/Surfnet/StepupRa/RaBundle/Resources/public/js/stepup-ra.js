@@ -53,6 +53,39 @@
             });
         });
 
+        $(document).on('click', 'form[name="ra_management_create_ra"] button.create-ra', function (event) {
+            var form = $('form[name="ra_management_create_ra"]'),
+                modal = $('#create_ra_confirmation_modal');
+
+            event.preventDefault();
+
+            modal
+                .find('.modal-body td.location')
+                .text($('textarea#ra_management_create_ra_location').val());
+            modal
+                .find('.modal-body td.contact-information')
+                .text($('textarea#ra_management_create_ra_contactInformation').val());
+            modal
+                .find('.modal-body td.role')
+                .text($('select#ra_management_create_ra_role option:selected').text());
+
+            modal.modal();
+
+            modal.on('click', 'button.confirm', function (event) {
+                var confirmationButton = modal.find('button.confirm');
+                modal.on('hide.bs.modal', function (event) {
+                    event.preventDefault();
+                });
+
+                event.preventDefault();
+
+                modal.find('button').prop('disabled', true);
+                confirmationButton.html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+
+                form.submit();
+            })
+        });
+
         $(document).on('click', '.not-yet-implemented', function (event) {
             event.preventDefault();
 
