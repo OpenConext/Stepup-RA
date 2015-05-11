@@ -28,6 +28,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RaManagementController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function manageAction(Request $request)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
@@ -65,6 +69,10 @@ class RaManagementController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function raCandidateSearchAction(Request $request)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
@@ -115,15 +123,26 @@ class RaManagementController extends Controller
     public function createRaAction(Request $request)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+        $logger = $this->get('logger');
 
+        $logger->notice('Page for Accreditation of Identity to Ra or Raa requested');
         $identityId = $request->get('identityId');
         $raCandidate = $this->getRaCandidateService()->getRaCandidateByIdentityId($identityId);
 
         if (!$raCandidate) {
+            $logger->warning(sprintf('RaCandidate based on identity "%s" not found', $identityId));
             throw new NotFoundHttpException();
         }
 
         if ($raCandidate->institution !== $this->getUser()->institution) {
+            $user = $this->getUser();
+            $logger->warning(sprintf(
+                'Identity "%s" of "%s" illegally tried to accredit tried to accredit Identity "%s" of "%s"',
+                $user->id,
+                $user->institution,
+                $raCandidate->identityId,
+                $raCandidate->institution
+            ));
             throw $this->createAccessDeniedException();
         }
 
@@ -133,6 +152,8 @@ class RaManagementController extends Controller
 
         $form = $this->createForm('ra_management_create_ra', $command)->handleRequest($request);
         if ($form->isValid()) {
+            $logger->debug('Accreditation form submitted, start processing command');
+
             $success = $this->getRaCandidateService()->accreditCandidate($command);
 
             if ($success) {
@@ -141,9 +162,11 @@ class RaManagementController extends Controller
                     $this->get('translator')->trans('ra.management.create_ra.identity_accredited')
                 );
 
+                $logger->debug('Identity Accredited, redirecting to candidate overview');
                 return $this->redirectToRoute('ra_management_ra_candidate_search');
             }
 
+            $logger->debug('Identity Accreditation failed, adding error to form');
             $form->addError(new FormError('ra.management.create_ra.error.middleware_command_failed'));
         }
 
