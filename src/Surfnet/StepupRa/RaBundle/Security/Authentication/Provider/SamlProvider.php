@@ -76,10 +76,10 @@ class SamlProvider implements AuthenticationProviderInterface
         }
 
         // determine the role based on the credentials given
-        if ($raCredentials->isRaa) {
-            $roles = ['ROLE_RAA'];
-        } elseif ($raCredentials->isSraa) {
+        if ($raCredentials->isSraa) {
             $roles = ['ROLE_SRAA'];
+        } elseif ($raCredentials->isRaa) {
+            $roles = ['ROLE_RAA'];
         } else {
             $roles = ['ROLE_RA'];
         }

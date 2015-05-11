@@ -8,11 +8,6 @@ ra_serviceprovider_consume_assertion:
     methods: [POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Saml:consumeAssertion }
 
-ra_vetting_search:
-    path:     /
-    methods: [GET, POST]
-    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:startProcedure }
-
 ra_second_factors_search:
     path:     /second-factors
     methods: [GET, POST]
@@ -23,9 +18,14 @@ ra_second_factor_revoke:
     methods:  [POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:SecondFactor:revoke }
 
-ra_vetting_yubikey_verify:
-    path: /vetting-procedure/{procedureId}/verify-yubikey
+ra_vetting_search:
+    path:     /
     methods: [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:startProcedure }
+
+ra_vetting_yubikey_verify:
+    path:     /vetting-procedure/{procedureId}/verify-yubikey
+    methods:  [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Yubikey:verify }
 
 ra_vetting_sms_send_challenge:
@@ -67,3 +67,23 @@ ra_vetting_completed:
     path:     /vetting-procedure/{procedureId}/completed
     methods:  [GET]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:vettingCompleted }
+
+ra_management_manage:
+    path:     /management/ra
+    methods:  [GET]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:manage }
+
+ra_management_ra_candidate_search:
+    path:     /management/search-ra-candidate
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:raCandidateSearch }
+
+ra_management_create_ra:
+    path:     /management/create-ra/{identityId}
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:createRa }
+
+sraa_select_institution:
+    path:     /sraa/select-institution
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Sraa:selectInstitution }

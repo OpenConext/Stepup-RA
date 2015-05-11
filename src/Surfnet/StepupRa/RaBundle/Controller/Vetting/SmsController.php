@@ -38,8 +38,9 @@ class SmsController extends Controller
      */
     public function sendChallengeAction(Request $request, $procedureId)
     {
-        $logger = $this->get('logger');
+        $this->denyAccessUnlessGranted(['ROLE_RA']);
 
+        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
         $logger->notice('Received request for Send SMS Challenge page');
 
         $command = new SendSmsChallengeCommand();
@@ -56,6 +57,7 @@ class SmsController extends Controller
 
         if (!$form->isValid()) {
             $logger->notice('Form has not been submitted, not sending SMS, rendering Send SMS Challenge page');
+
             return array_merge(
                 $viewVariables,
                 ['phoneNumber' => $phoneNumber, 'form' => $form->createView()]
@@ -67,6 +69,7 @@ class SmsController extends Controller
             $logger->notice(
                 'SMS Challenge successfully sent, redirecting to Proof of Possession page to verify challenge'
             );
+
             return $this->redirectToRoute('ra_vetting_sms_prove_possession', ['procedureId' => $procedureId]);
         }
 
@@ -75,6 +78,7 @@ class SmsController extends Controller
         $logger->notice(
             'SMS Challenge could not be sent, added error to page to notify user and re-rendering send challenge page'
         );
+
         return array_merge(
             $viewVariables,
             ['phoneNumber' => $phoneNumber, 'form' => $form->createView()]
@@ -89,7 +93,8 @@ class SmsController extends Controller
      */
     public function provePossessionAction(Request $request, $procedureId)
     {
-        $logger = $this->get('logger');
+        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
 
         $logger->notice('Received request for Proof of Possession of SMS Second Factor page');
 
@@ -99,7 +104,10 @@ class SmsController extends Controller
             ->handleRequest($request);
 
         if (!$form->isValid()) {
-            $logger->notice('SMS OTP was not submitted, rendering Proof of Possession of SMS Second Factor page');
+            $logger->notice(
+                'SMS OTP was not submitted through form, rendering Proof of Possession of SMS Second Factor page'
+            );
+
             return ['form' => $form->createView()];
         }
 
@@ -107,6 +115,7 @@ class SmsController extends Controller
         $verification = $this->getVettingService()->verifyPhoneNumber($procedureId, $command);
         if ($verification->wasSuccessful()) {
             $logger->notice('SMS OTP was valid, Proof of Possession given, redirecting to Identity Vetting page');
+
             return $this->redirectToRoute(
                 'ra_vetting_verify_identity',
                 ['procedureId' => $procedureId]
@@ -119,9 +128,8 @@ class SmsController extends Controller
             $form->addError(new FormError('ra.prove_phone_possession.challenge_response_incorrect'));
         }
 
-        $logger->notice(
-            'SMS OTP verification failed, Proof of Possession denied, informing user through error on form'
-        );
+        $logger->notice('SMS OTP verification failed - Proof of Possession denied, added error to form');
+
         return ['form' => $form->createView()];
     }
 

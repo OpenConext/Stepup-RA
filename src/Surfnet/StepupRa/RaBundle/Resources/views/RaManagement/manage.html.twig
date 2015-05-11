@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <a href="{{ path('ra_management_ra_candidate_search') }}" class="btn btn-primary pull-right" role="button">
+                <i class="fa fa-plus"></i> {{ 'ra.management.overview.add_raa'|trans }}
+            </a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>{{ 'ra.management.overview.institution'|trans }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.management.overview.common_name'|trans, 'commonName') }}</th>
+                        <th>{{ 'ra.management.overview.email'|trans }}</th>
+                        <th>{{ 'ra.management.overview.role'|trans }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for authority in raList %}
+                    <tr>
+                        <td>{{ authority.institution }}</td>
+                        <td>{{ authority.commonName }}</td>
+                        <td>{{ authority.email }}</td>
+                        <td>{{ authority.role }}</td>
+                        <td>
+                            <a href="#" class="btn btn-info btn-sm not-yet-implemented" role="button">{{ 'ra.management.overview.change_role'|trans }}</a>
+                            <a href="#" class="btn btn-primary btn-sm not-yet-implemented" role="button">{{ 'ra.management.overview.update_information'|trans }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

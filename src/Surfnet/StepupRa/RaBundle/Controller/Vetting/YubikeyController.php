@@ -31,11 +31,16 @@ class YubikeyController extends Controller
     /**
      * @Template
      * @param Request $request
-     * @param $procedureId
+     * @param string  $procedureId
      * @return array|Response
      */
     public function verifyAction(Request $request, $procedureId)
     {
+        $this->denyAccessUnlessGranted(['ROLE_RA']);
+
+        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
+        $logger->notice('Requested Yubikey Verfication');
+
         $command = new VerifyYubikeyPublicIdCommand();
         $form = $this->createForm('ra_verify_yubikey_public_id', $command)->handleRequest($request);
 
@@ -43,16 +48,23 @@ class YubikeyController extends Controller
             $result = $this->getVettingService()->verifyYubikeyPublicId($procedureId, $command);
 
             if ($result->didPublicIdMatch()) {
+                $logger->notice('Yubikey Verified, redirecting to verify identity');
+
                 return $this->redirectToRoute('ra_vetting_verify_identity', ['procedureId' => $procedureId]);
-            } elseif ($result->wasOtpInvalid()) {
+            }
+
+            if ($result->wasOtpInvalid()) {
                 $form->get('otp')->addError(new FormError('ra.verify_yubikey_command.otp.otp_invalid'));
             } elseif ($result->didOtpVerificationFail()) {
                 $form->get('otp')->addError(new FormError('ra.verify_yubikey_command.otp.verification_error'));
             } else {
                 $form->addError(new FormError('ra.prove_yubikey_possession.different_yubikey_used'));
             }
+
+            $logger->notice('Yubikey could not be verified, added error to form');
         }
 
+        $logger->notice('Rendering Yubikey Verification Form');
         // OTP field is rendered empty in the template.
         return ['form' => $form->createView()];
     }

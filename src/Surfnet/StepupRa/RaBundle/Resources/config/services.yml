@@ -30,6 +30,10 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\VerifyPhoneNumberType
         tags: [{ name: form.type, alias: ra_verify_phone_number }]
 
+    ra.form.type.search_ra_candidates:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType
+        tags: [{ name: form.type, alias: ra_search_ra_candidates }]
+
     ra.form.type.search_ra_second_factors:
         class: Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType
         tags: [{ name: form.type, alias: ra_search_ra_second_factors }]
@@ -37,6 +41,22 @@ services:
     ra.form.type.ra_revoke_second_factor:
         class: Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType
         tags: [{ name: form.type, alias: ra_revoke_second_factor }]
+
+    ra.form.type.sraa_institution_select:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\InstitutionSelectionType
+        arguments:
+            - @ra.form.extension.institution_listing_choice_list
+        tags: [{ name: form.type, alias: sraa_institution_select }]
+
+    ra.form.type.management.create_ra:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType
+        tags: [{ name: form.type, alias: ra_management_create_ra }]
+
+    # Form Extensions
+    ra.form.extension.institution_listing_choice_list:
+        class: Surfnet\StepupRa\RaBundle\Form\Extension\InstitutionListingChoiceList
+        arguments:
+            - @surfnet_stepup_middleware_client.identity.service.institution_listing
 
     # Services
     ra.service.vetting:
@@ -123,6 +143,13 @@ services:
             - @surfnet_stepup_middleware_client.identity.service.second_factor
             - @logger
 
+    ra.service.ra_candidate:
+        class: Surfnet\StepupRa\RaBundle\Service\RaCandidateService
+        arguments:
+            - @surfnet_stepup_middleware_client.identity.service.ra_candidate
+            - @ra.service.command
+            - @logger
+
     ra.service.ra_second_factor:
         class: Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService
         arguments:
@@ -170,3 +197,9 @@ services:
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\SessionHandler
         arguments:
             - @session
+
+    #Logger
+    ra.procedure_logger:
+        class: Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger
+        arguments:
+            - @logger

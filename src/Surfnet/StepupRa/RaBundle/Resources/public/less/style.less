@@ -54,6 +54,22 @@ div.form-ra-verify-identity {
     }
 }
 
+div.form-ra-create-ra {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 650px;
+
+    .control-text {
+        padding-top: 7px;
+    }
+}
+
+div#create_ra_confirmation_modal {
+    .question {
+        padding: 15px;
+    }
+}
+
 div.form-ra-send-sms-challenge {
     margin: 1em auto;
     padding: 0.75em 1em;
@@ -90,6 +106,19 @@ form[name="ra_search_ra_second_factors"] {
     }
 }
 
+form[name="ra_search_ra_candidates"] {
+    input#ra_search_ra_candidates_name {
+        max-width: 300px;
+    }
+    input#ra_search_ra_candidates_email {
+        max-width: 300px;
+    }
+}
+
+form[name="logout"] button {
+    line-height: 26px;
+}
+
 .hidden {
     display: none;
 }
@@ -101,4 +130,8 @@ form[name="ra_search_ra_second_factors"] {
         width: (@i * 1%);
     }
     .generate-progress(@n, (@i + 5));
+}
+
+.cancel {
+    color: @brand-danger;
 }

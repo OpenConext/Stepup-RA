@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <div class="row">
+            {{ form(form) }}
+            <hr>
+        {% if raCandidates.elements|length > 0 %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>{{ 'ra.management.ra_candidate.institution'|trans }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.management.ra_candidate.common_name'|trans, 'commonName') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.management.ra_candidate.email'|trans, 'email') }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for candidate in raCandidates.elements %}
+                    <tr>
+                        <td>{{ candidate.institution }}</td>
+                        <td>{{ candidate.commonName }}</td>
+                        <td>{{ candidate.email }}</td>
+                        <td>
+                            <a href="{{ path('ra_management_create_ra', {identityId: candidate.identityId}) }}" class="btn btn-info " role="button">
+                                {{ 'ra.management.ra_candidate.create_ra'|trans }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {{ knp_pagination_render(pagination) }}
+        {% else %}
+            <p>
+                {{ 'ra.management.ra_candidate.no_candidates'|trans }}
+            </p>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
