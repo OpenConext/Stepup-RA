@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-05-08T10:36:16Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2015-05-18T17:12:33Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -16,6 +16,96 @@
         <jms:reference-file line="47">Resources/views/base.html.twig</jms:reference-file>
         <source>button.logout</source>
         <target>Uitloggen</target>
+      </trans-unit>
+      <trans-unit id="2c51bcecf7826f003b2e051e4176c14b46372263" resname="ra.auditlog.action">
+        <jms:reference-file line="24">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.action</source>
+        <target>Gebeurtenis</target>
+      </trans-unit>
+      <trans-unit id="9c05a55d8f3ef06afe4f9d81883c0cd6dc415933" resname="ra.auditlog.action.bootstrapped">
+        <jms:reference-file line="48">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.bootstrapped</source>
+        <target>bootstrapped</target>
+      </trans-unit>
+      <trans-unit id="c9199d83adb7c6ebeaa6cfe08d2fc57f308677a9" resname="ra.auditlog.action.created">
+        <jms:reference-file line="43">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.created</source>
+        <target>Identiteit aangemaakt</target>
+      </trans-unit>
+      <trans-unit id="f2264e8a139e432bc0b30abd24ab34750e944da0" resname="ra.auditlog.action.email_changed">
+        <jms:reference-file line="44">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.email_changed</source>
+        <target>Email gewijzigd</target>
+      </trans-unit>
+      <trans-unit id="8750a7f384fd2159c68613b478b283083c45f8fa" resname="ra.auditlog.action.email_verified">
+        <jms:reference-file line="41">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.email_verified</source>
+        <target>Email geverifieerd</target>
+      </trans-unit>
+      <trans-unit id="59b375a103f9bff34d2da25cb0563524354b357d" resname="ra.auditlog.action.possession_proven">
+        <jms:reference-file line="42">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.possession_proven</source>
+        <target>Bezit aangetoond</target>
+      </trans-unit>
+      <trans-unit id="6182cba621f2930f0600729d0cf846477b645851" resname="ra.auditlog.action.renamed">
+        <jms:reference-file line="45">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.renamed</source>
+        <target>Naam gewijzigd</target>
+      </trans-unit>
+      <trans-unit id="3b4520b328a4b841d468fd967962d674db2d2947" resname="ra.auditlog.action.revoked">
+        <jms:reference-file line="47">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.revoked</source>
+        <target>Token verwijderd</target>
+      </trans-unit>
+      <trans-unit id="cfa1707c5ee601824695a03199bac938cbac9a62" resname="ra.auditlog.action.revoked_by_ra">
+        <jms:reference-file line="40">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.revoked_by_ra</source>
+        <target>Token verwijderd door RA</target>
+      </trans-unit>
+      <trans-unit id="0685bbf771d00c304c5807c48e34ba0c8b73b3eb" resname="ra.auditlog.action.vetted">
+        <jms:reference-file line="46">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.vetted</source>
+        <target>Token gevet</target>
+      </trans-unit>
+      <trans-unit id="d2c7e70ded524ca93e7cadba4950ae1d2a22889a" resname="ra.auditlog.actor">
+        <jms:reference-file line="26">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.actor</source>
+        <target>Door</target>
+      </trans-unit>
+      <trans-unit id="c9c0a8094aed4936c18a61dfcbf86f72e2429ed1" resname="ra.auditlog.commonName">
+        <jms:reference-file line="10">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.commonName</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="6e6977aafa35381ed148394cb1313d9e8a0aeec3" resname="ra.auditlog.email">
+        <jms:reference-file line="14">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="8a542621cac70df8e15d200c8bd2f2b650663849" resname="ra.auditlog.no_entries">
+        <jms:reference-file line="44">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.no_entries</source>
+        <target>Er zijn geen records in de auditlog gevonden</target>
+      </trans-unit>
+      <trans-unit id="2624da444b36c4d337a4287b9150b40fbcd68cb6" resname="ra.auditlog.second_factor_id">
+        <jms:reference-file line="22">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.second_factor_id</source>
+        <target>Token identifier</target>
+      </trans-unit>
+      <trans-unit id="9d81b131675cde2dcecc00c77cdebcc85c55fb5b" resname="ra.auditlog.second_factor_type">
+        <jms:reference-file line="23">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.second_factor_type</source>
+        <target>Token type</target>
+      </trans-unit>
+      <trans-unit id="105a4be63fbc936f835b04568cbebd5ad7ec0534" resname="ra.auditlog.title">
+        <jms:reference-file line="3">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.title</source>
+        <target>Auditlog</target>
+      </trans-unit>
+      <trans-unit id="d3a72dffd0d2d209bd5948e6072af503c2ee360b" resname="ra.auditlog.when">
+        <jms:reference-file line="25">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.when</source>
+        <target>Datum</target>
       </trans-unit>
       <trans-unit id="5a045b50111a6cdd614329837fa07cbf64d896a6" resname="ra.error.button.go_home">
         <jms:reference-file line="12">views/Exception/error404.html.twig</jms:reference-file>
@@ -245,7 +335,7 @@
         <target>Verifieer identiteit</target>
       </trans-unit>
       <trans-unit id="4029e4383ef4a57077b346cc66f971c9cafb71c3" resname="ra.management.create_ra.identity_accredited">
-        <jms:reference-file line="141">RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="162">RaBundle/Controller/RaManagementController.php</jms:reference-file>
         <source>ra.management.create_ra.identity_accredited</source>
         <target>De Identiteit is de gekozen rol toegekend.</target>
       </trans-unit>
@@ -419,53 +509,53 @@
         <target>Yubikey</target>
       </trans-unit>
       <trans-unit id="800e5d0a1f57a8b4d3654ac7d173efe68c098f68" resname="ra.second_factor.revocation.could_not_revoke">
-        <jms:reference-file line="105">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <jms:reference-file line="111">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
         <source>ra.second_factor.revocation.could_not_revoke</source>
         <target>Het token kon niet verwijderd worden.</target>
       </trans-unit>
       <trans-unit id="f70c06516166354cd4d8d3490cbd707941610ed9" resname="ra.second_factor.revocation.modal.are_you_sure">
-        <jms:reference-file line="68">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="69">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.are_you_sure</source>
         <target>Weet u zeker dat u onderstaand token wilt verwijderen?</target>
       </trans-unit>
       <trans-unit id="441e4d7c6bece19e1a2a0008af6302443d36c7a4" resname="ra.second_factor.revocation.modal.cancel">
-        <jms:reference-file line="90">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="91">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.cancel</source>
         <target>annuleren</target>
       </trans-unit>
       <trans-unit id="4a0e93233ac08a0e08df4ccabdddb3183f0343ea" resname="ra.second_factor.revocation.modal.close">
-        <jms:reference-file line="63">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="64">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.close</source>
         <target>Sluiten</target>
       </trans-unit>
       <trans-unit id="c8ac97a99dfe2e9a93156f17db2ad4475372cd4a" resname="ra.second_factor.revocation.modal.confirm">
-        <jms:reference-file line="64">views/SecondFactor/search.html.twig</jms:reference-file>
-        <jms:reference-file line="91">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="65">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="92">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.confirm</source>
         <target>Bevestig</target>
       </trans-unit>
       <trans-unit id="0a7020ade86510c9f2a60c58d10d539b92be2f4a" resname="ra.second_factor.revocation.modal.sf_email">
-        <jms:reference-file line="84">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="85">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.sf_email</source>
         <target>Email</target>
       </trans-unit>
       <trans-unit id="e704ffd6983d5ec3776c1ad832c9cb9823dd3d0b" resname="ra.second_factor.revocation.modal.sf_identifier">
-        <jms:reference-file line="72">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="73">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.sf_identifier</source>
         <target>Token</target>
       </trans-unit>
       <trans-unit id="1d9dbf1e942ebc0614b14e5efef0dadc4f8073be" resname="ra.second_factor.revocation.modal.sf_name">
-        <jms:reference-file line="80">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="81">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.sf_name</source>
         <target>Naam</target>
       </trans-unit>
       <trans-unit id="153b9ee684f0de6cc27fc8b40d9b38da7477323b" resname="ra.second_factor.revocation.modal.sf_type">
-        <jms:reference-file line="76">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="77">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.sf_type</source>
         <target>Type</target>
       </trans-unit>
       <trans-unit id="5c500a2dc008cbf1a8501593a2a50e518f6fe145" resname="ra.second_factor.revocation.revoked">
-        <jms:reference-file line="102">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <jms:reference-file line="108">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
         <source>ra.second_factor.revocation.revoked</source>
         <target>Het token is verwijderd</target>
       </trans-unit>
@@ -515,7 +605,7 @@
         <target>Geactiveerd</target>
       </trans-unit>
       <trans-unit id="b460113e39fffb71f86d0c0a9509b5c741924e99" resname="ra.second_factor.search.text.no_second_factors">
-        <jms:reference-file line="54">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="55">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.search.text.no_second_factors</source>
         <target>Er zijn op dit moment geen geregistreerde tokens die voldoen aan uw zoekopdracht.</target>
       </trans-unit>
@@ -539,8 +629,13 @@
         <source>ra.second_factor.search.type.yubikey</source>
         <target>Yubikey</target>
       </trans-unit>
+      <trans-unit id="eac92ad5c53846aea116ad96b3f985d4c765088a" resname="ra.secondfactor.auditlog">
+        <jms:reference-file line="33">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.secondfactor.auditlog</source>
+        <target>Auditlog</target>
+      </trans-unit>
       <trans-unit id="512d5614cc27358eb50068a1ba510983e3e0c620" resname="ra.secondfactor.revoke">
-        <jms:reference-file line="42">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="43">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.secondfactor.revoke</source>
         <target>Verwijderen</target>
       </trans-unit>
