@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "331274e095487cdcc46fe21486b06bfb",
+    "hash": "e9f7beb00066aee435d69afd9b27a255",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1777,7 +1777,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/saml2/zipball/fb22b707c7a4705d2d54401715c8f6d229e88a74",
+                "url": "https://api.github.com/repos/SURFnet/saml2/zipball/b2d96e911d8e9348edd75bcd980f60a251fa5c28",
                 "reference": "fb22b707c7a4705d2d54401715c8f6d229e88a74",
                 "shasum": ""
             },
@@ -1927,16 +1927,16 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "dev-develop",
+            "version": "dev-feature/expose-auditlog-services",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-Middleware-clientbundle.git",
-                "reference": "77e491fb15b12e82654b16bf9b140f9f03ffa0f5"
+                "reference": "c7144911fa8ad93351cb212aa1d332283e713e01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/77e491fb15b12e82654b16bf9b140f9f03ffa0f5",
-                "reference": "77e491fb15b12e82654b16bf9b140f9f03ffa0f5",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/c7144911fa8ad93351cb212aa1d332283e713e01",
+                "reference": "c7144911fa8ad93351cb212aa1d332283e713e01",
                 "shasum": ""
             },
             "require": {
@@ -1972,7 +1972,7 @@
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "time": "2015-05-08 08:29:40"
+            "time": "2015-05-18 13:12:16"
         },
         {
             "name": "surfnet/stepup-saml-bundle",
