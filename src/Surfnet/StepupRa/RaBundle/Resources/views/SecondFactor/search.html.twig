@@ -30,6 +30,7 @@
                             <td>{{ secondFactor.email }}</td>
                             <td>{{ ('ra.second_factor.search.status.'~secondFactor.status)|trans }}</td>
                             <td>
+                                <a href="{{ path('ra_second_factor_auditlog', {identityId: secondFactor.identityId}) }}" class="btn btn-info audit-log">{{ 'ra.secondfactor.auditlog'|trans }}</a>
                                 {% if secondFactor.status != 'revoked' %}
                                 <button class="btn btn-warning revoke" data-toggle="modal" data-target="#revocationModal"
                                         data-sfid="{{ secondFactor.id }}"
