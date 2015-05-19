@@ -61,10 +61,13 @@ class RaManagementController extends Controller
             $institution
         ));
 
+        /** @var \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing[] $raListings */
+        $raListings = $raList->getElements();
+
         return $this->render(
             'SurfnetStepupRaRaBundle:RaManagement:manage.html.twig',
             [
-                'raList'     => $raList->getElements(),
+                'raList'     => $raListings,
                 'pagination' => $pagination
             ]
         );
