@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
+use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -45,7 +46,7 @@ class RaManagementController extends Controller
             ->setOrderBy($request->get('orderBy', 'commonName'))
             ->setOrderDirection($request->get('orderDirection', 'asc'));
 
-        $service = $this->getRaService();
+        $service = $this->getRaListingService();
         $raList = $service->search($searchQuery);
 
         $pagination = $this->getPaginator()->paginate(
@@ -176,10 +177,50 @@ class RaManagementController extends Controller
         ]);
     }
 
+    public function amendRaInformationAction(Request $request, $identityId)
+    {
+        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+
+        $logger = $this->get('logger');
+        $logger->notice(sprintf("Loading information amendment form for RA(A) '%s'", $identityId));
+
+        $raListing = $this->getRaListingService()->get($identityId);
+
+        if (!$raListing) {
+            $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
+            throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
+        }
+
+        $command = new AmendRegistrationAuthorityInformationCommand();
+        $command->identityId = $raListing->identityId;
+        $command->location = $raListing->location;
+        $command->contactInformation = $raListing->contactInformation;
+
+        $form = $this->createForm('ra_management_amend_ra_info', $command)->handleRequest($request);
+        if ($form->isValid()) {
+            $logger->notice(sprintf("RA(A) '%s' information amendment form submitted, processing", $identityId));
+
+            if ($this->get('ra.service.ra')->amendRegistrationAuthorityInformation($command)) {
+                $this->addFlash('success', $this->get('translator')->trans('ra.management.amend_ra_info.info_amended'));
+
+                $logger->notice(sprintf("RA(A) '%s' information successfully amended", $identityId));
+                return $this->redirectToRoute('ra_management_manage');
+            }
+
+            $logger->notice(sprintf("Information of RA(A) '%s' failed to be amended, informing user", $identityId));
+            $form->addError(new FormError('ra.management.amend_ra_info.error.middleware_command_failed'));
+        }
+
+        return $this->render('SurfnetStepupRaRaBundle:RaManagement:amendRaInformation.html.twig', [
+            'raListing' => $raListing,
+            'form' => $form->createView(),
+        ]);
+    }
+
     /**
      * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaListingService
      */
-    private function getRaService()
+    private function getRaListingService()
     {
         return $this->get('surfnet_stepup_middleware_client.identity.service.ra_listing');
     }
