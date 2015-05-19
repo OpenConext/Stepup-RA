@@ -18,6 +18,11 @@ ra_second_factor_revoke:
     methods:  [POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:SecondFactor:revoke }
 
+ra_second_factor_auditlog:
+    path:     /second-factors/{identityId}/auditlog
+    methods:  [GET]
+    defaults: { _controller: SurfnetStepupRaRaBundle:SecondFactor:auditLog }
+
 ra_vetting_search:
     path:     /
     methods: [GET, POST]

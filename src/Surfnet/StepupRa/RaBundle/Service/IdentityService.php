@@ -78,6 +78,15 @@ class IdentityService implements UserProviderInterface
     }
 
     /**
+     * @param string $identityId the UUID of the identity to find
+     * @return null|Identity
+     */
+    public function findById($identityId)
+    {
+        return $this->apiIdentityService->get($identityId);
+    }
+
+    /**
      * @param string $nameId
      * @param string $institution
      * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity

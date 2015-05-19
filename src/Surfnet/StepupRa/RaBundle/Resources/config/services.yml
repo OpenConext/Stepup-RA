@@ -131,6 +131,12 @@ services:
         arguments:
             - {} # Set from the extension
 
+    ra.service.audit_log:
+        class: Surfnet\StepupRa\RaBundle\Service\AuditLogService
+        arguments:
+            - @surfnet_stepup_middleware_client.identity.service.audit_log
+            - @logger
+
     ra.service.identity:
         class: Surfnet\StepupRa\RaBundle\Service\IdentityService
         arguments:
