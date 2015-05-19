@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-05-18T17:12:33Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2015-05-19T10:31:57Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -25,7 +25,7 @@
       <trans-unit id="9c05a55d8f3ef06afe4f9d81883c0cd6dc415933" resname="ra.auditlog.action.bootstrapped">
         <jms:reference-file line="48">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.bootstrapped</source>
-        <target>bootstrapped</target>
+        <target>Identiteit en Token gebootstrapped</target>
       </trans-unit>
       <trans-unit id="c9199d83adb7c6ebeaa6cfe08d2fc57f308677a9" resname="ra.auditlog.action.created">
         <jms:reference-file line="43">Resources/views/translations.html.twig</jms:reference-file>
@@ -85,7 +85,7 @@
       <trans-unit id="8a542621cac70df8e15d200c8bd2f2b650663849" resname="ra.auditlog.no_entries">
         <jms:reference-file line="44">views/SecondFactor/auditLog.html.twig</jms:reference-file>
         <source>ra.auditlog.no_entries</source>
-        <target>Er zijn geen records in de auditlog gevonden</target>
+        <target>Er zijn geen records in de audit log gevonden</target>
       </trans-unit>
       <trans-unit id="2624da444b36c4d337a4287b9150b40fbcd68cb6" resname="ra.auditlog.second_factor_id">
         <jms:reference-file line="22">views/SecondFactor/auditLog.html.twig</jms:reference-file>
@@ -100,7 +100,7 @@
       <trans-unit id="105a4be63fbc936f835b04568cbebd5ad7ec0534" resname="ra.auditlog.title">
         <jms:reference-file line="3">views/SecondFactor/auditLog.html.twig</jms:reference-file>
         <source>ra.auditlog.title</source>
-        <target>Auditlog</target>
+        <target>Audit log</target>
       </trans-unit>
       <trans-unit id="d3a72dffd0d2d209bd5948e6072af503c2ee360b" resname="ra.auditlog.when">
         <jms:reference-file line="25">views/SecondFactor/auditLog.html.twig</jms:reference-file>
@@ -632,7 +632,7 @@
       <trans-unit id="eac92ad5c53846aea116ad96b3f985d4c765088a" resname="ra.secondfactor.auditlog">
         <jms:reference-file line="33">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.secondfactor.auditlog</source>
-        <target>Auditlog</target>
+        <target>Audit log</target>
       </trans-unit>
       <trans-unit id="512d5614cc27358eb50068a1ba510983e3e0c620" resname="ra.secondfactor.revoke">
         <jms:reference-file line="43">views/SecondFactor/search.html.twig</jms:reference-file>

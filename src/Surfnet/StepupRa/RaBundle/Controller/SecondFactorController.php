@@ -132,7 +132,7 @@ final class SecondFactorController extends Controller
         $identity = $this->getIdentityService()->findById($identityId);
         if (!$identity) {
             $logger->notice(sprintf(
-                'User with Identity "%s" requested non-existant identity "%s"',
+                'User with Identity "%s" requested non-existent identity "%s"',
                 $this->getCurrentUser()->id,
                 $identityId
             ));
@@ -152,7 +152,7 @@ final class SecondFactorController extends Controller
             throw $this->createAccessDeniedException();
         }
 
-        $logger->info(sprintf('Retrieving auditlog for Identity "%s"', $identity->id));
+        $logger->info(sprintf('Retrieving audit log for Identity "%s"', $identity->id));
 
         $command                 = new SearchSecondFactorAuditLogCommand();
         $command->identityId     = $identity->id;
@@ -169,7 +169,7 @@ final class SecondFactorController extends Controller
             $auditLog->getItemsPerPage()
         );
 
-        $logger->notice(sprintf('Auditlog yielded "%d" results, rendering page', $auditLog->getTotalItems()));
+        $logger->notice(sprintf('Audit log yielded "%d" results, rendering page', $auditLog->getTotalItems()));
 
         return $this->render(
             'SurfnetStepupRaRaBundle:SecondFactor:auditLog.html.twig',
