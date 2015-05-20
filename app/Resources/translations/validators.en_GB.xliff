@@ -305,6 +305,11 @@
         <source>ra.management.amend_ra_info.error.middleware_command_failed</source>
         <target>The amendment of the RA's information failed due to a server error.</target>
       </trans-unit>
+      <trans-unit id="f2d212150076ce42ffe47d514f182ad5e7a6c9fe" resname="ra.management.create_ra.error.middleware_command_failed">
+        <jms:reference-file line="54">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.create_ra.error.middleware_command_failed</source>
+        <target>The identity could not be granted the chosen role due to a server error.</target>
+      </trans-unit>
       <trans-unit id="ff49fbf3684f01850a026abeff8b6f3cd6d89a98" resname="ra.prove_phone_possession.challenge_expired">
         <jms:reference-file line="17">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.prove_phone_possession.challenge_expired</source>

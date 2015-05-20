@@ -355,7 +355,7 @@
         <target>Naam</target>
       </trans-unit>
       <trans-unit id="4029e4383ef4a57077b346cc66f971c9cafb71c3" resname="ra.management.create_ra.identity_accredited">
-        <jms:reference-file line="162">RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="166">RaBundle/Controller/RaManagementController.php</jms:reference-file>
         <source>ra.management.create_ra.identity_accredited</source>
         <target>De Identiteit is de gekozen rol toegekend.</target>
       </trans-unit>
@@ -488,8 +488,23 @@
         <source>ra.management.overview.role</source>
         <target>Rol</target>
       </trans-unit>
+      <trans-unit id="64d8691325da6d2b996fd48f7da7a382fdeb22e7" resname="ra.management.overview.role.value.ra">
+        <jms:reference-file line="51">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.overview.role.value.ra</source>
+        <target>RA</target>
+      </trans-unit>
+      <trans-unit id="ac982ab35b7b5438a72cb6e243975c8ddd35e148" resname="ra.management.overview.role.value.raa">
+        <jms:reference-file line="52">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.overview.role.value.raa</source>
+        <target>RAA</target>
+      </trans-unit>
+      <trans-unit id="53c4452d09c417bfb728d1e738b2ae2bbff3c883" resname="ra.management.overview.role.value.sraa">
+        <jms:reference-file line="53">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.overview.role.value.sraa</source>
+        <target>SRAA</target>
+      </trans-unit>
       <trans-unit id="3d101556c7d65068f5e964ba8c5a9b8709e23266" resname="ra.management.overview.update_information">
-        <jms:reference-file line="28">views/RaManagement/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="29">views/RaManagement/manage.html.twig</jms:reference-file>
         <source>ra.management.overview.update_information</source>
         <target>Wijzig</target>
       </trans-unit>
