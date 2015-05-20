@@ -52,6 +52,10 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType
         tags: [{ name: form.type, alias: ra_management_create_ra }]
 
+    ra.form.type.management.amend_ra_info:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\AmendRegistrationAuthorityInformationType
+        tags: [{ name: form.type, alias: ra_management_amend_ra_info }]
+
     # Form Extensions
     ra.form.extension.institution_listing_choice_list:
         class: Surfnet\StepupRa\RaBundle\Form\Extension\InstitutionListingChoiceList
@@ -160,6 +164,12 @@ services:
         class: Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService
         arguments:
             - @surfnet_stepup_middleware_client.identity.service.ra_second_factor
+            - @ra.service.command
+            - @logger
+
+    ra.service.ra:
+        class: Surfnet\StepupRa\RaBundle\Service\RaService
+        arguments:
             - @ra.service.command
             - @logger
 

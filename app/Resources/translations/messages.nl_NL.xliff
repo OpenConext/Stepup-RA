@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-05-19T10:31:57Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2015-05-20T10:20:50Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -334,8 +334,28 @@
         <source>ra.form.verify_identity.verify_identity.button</source>
         <target>Verifieer identiteit</target>
       </trans-unit>
+      <trans-unit id="5fa5dfb0514d509432e81f5b2344b12d7351715b" resname="ra.management.amend_ra_info.info_amended">
+        <jms:reference-file line="207">RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <source>ra.management.amend_ra_info.info_amended</source>
+        <target>De informatie van de RA is gewijzigd.</target>
+      </trans-unit>
+      <trans-unit id="6492fd6bfd9bf1c89d052b3172d572e9df9e54e8" resname="ra.management.amend_ra_info.ra_listing.email">
+        <jms:reference-file line="11">views/RaManagement/amendRaInformation.html.twig</jms:reference-file>
+        <source>ra.management.amend_ra_info.ra_listing.email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="072b301901b5acd0d85dc66bf9f037af3b6682d1" resname="ra.management.amend_ra_info.ra_listing.institution">
+        <jms:reference-file line="15">views/RaManagement/amendRaInformation.html.twig</jms:reference-file>
+        <source>ra.management.amend_ra_info.ra_listing.institution</source>
+        <target>Instituut</target>
+      </trans-unit>
+      <trans-unit id="3a609438ddb4a93fe694bd72db998784551914b3" resname="ra.management.amend_ra_info.ra_listing.name">
+        <jms:reference-file line="7">views/RaManagement/amendRaInformation.html.twig</jms:reference-file>
+        <source>ra.management.amend_ra_info.ra_listing.name</source>
+        <target>Naam</target>
+      </trans-unit>
       <trans-unit id="4029e4383ef4a57077b346cc66f971c9cafb71c3" resname="ra.management.create_ra.identity_accredited">
-        <jms:reference-file line="162">RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="166">RaBundle/Controller/RaManagementController.php</jms:reference-file>
         <source>ra.management.create_ra.identity_accredited</source>
         <target>De Identiteit is de gekozen rol toegekend.</target>
       </trans-unit>
@@ -393,6 +413,26 @@
         <source>ra.management.create_ra.ra_candidate.role</source>
         <target>Rol</target>
       </trans-unit>
+      <trans-unit id="bd37603d0b4d61543e75f9903f0ea426e28de7e3" resname="ra.management.form.amend_ra_info.label.amend_ra_info">
+        <jms:reference-file line="38">Form/Type/AmendRegistrationAuthorityInformationType.php</jms:reference-file>
+        <source>ra.management.form.amend_ra_info.label.amend_ra_info</source>
+        <target>Wijzigen</target>
+      </trans-unit>
+      <trans-unit id="9db7b05461e7e9d929e0640cac2f4dcb6341e599" resname="ra.management.form.amend_ra_info.label.cancel">
+        <jms:reference-file line="45">Form/Type/AmendRegistrationAuthorityInformationType.php</jms:reference-file>
+        <source>ra.management.form.amend_ra_info.label.cancel</source>
+        <target>Annuleren</target>
+      </trans-unit>
+      <trans-unit id="f429d54f2edf491d61e4aa251ed53475db27e71a" resname="ra.management.form.amend_ra_info.label.contact_information">
+        <jms:reference-file line="35">Form/Type/AmendRegistrationAuthorityInformationType.php</jms:reference-file>
+        <source>ra.management.form.amend_ra_info.label.contact_information</source>
+        <target>Contactinformatie</target>
+      </trans-unit>
+      <trans-unit id="2377accfe1ff8b4976ff0403ddd37216f7ea73a6" resname="ra.management.form.amend_ra_info.label.location">
+        <jms:reference-file line="32">Form/Type/AmendRegistrationAuthorityInformationType.php</jms:reference-file>
+        <source>ra.management.form.amend_ra_info.label.location</source>
+        <target>Locatie</target>
+      </trans-unit>
       <trans-unit id="a7424b5f4032d810348b6f66b943b892fe80e8ec" resname="ra.management.form.create_ra.label.cancel">
         <jms:reference-file line="49">Form/Type/CreateRaType.php</jms:reference-file>
         <source>ra.management.form.create_ra.label.cancel</source>
@@ -448,8 +488,23 @@
         <source>ra.management.overview.role</source>
         <target>Rol</target>
       </trans-unit>
+      <trans-unit id="64d8691325da6d2b996fd48f7da7a382fdeb22e7" resname="ra.management.overview.role.value.ra">
+        <jms:reference-file line="51">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.overview.role.value.ra</source>
+        <target>RA</target>
+      </trans-unit>
+      <trans-unit id="ac982ab35b7b5438a72cb6e243975c8ddd35e148" resname="ra.management.overview.role.value.raa">
+        <jms:reference-file line="52">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.overview.role.value.raa</source>
+        <target>RAA</target>
+      </trans-unit>
+      <trans-unit id="53c4452d09c417bfb728d1e738b2ae2bbff3c883" resname="ra.management.overview.role.value.sraa">
+        <jms:reference-file line="53">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.overview.role.value.sraa</source>
+        <target>SRAA</target>
+      </trans-unit>
       <trans-unit id="3d101556c7d65068f5e964ba8c5a9b8709e23266" resname="ra.management.overview.update_information">
-        <jms:reference-file line="28">views/RaManagement/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="29">views/RaManagement/manage.html.twig</jms:reference-file>
         <source>ra.management.overview.update_information</source>
         <target>Wijzig</target>
       </trans-unit>
