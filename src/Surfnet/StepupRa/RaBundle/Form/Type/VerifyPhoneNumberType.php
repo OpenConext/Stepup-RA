@@ -48,7 +48,7 @@ class VerifyPhoneNumberType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\VerifyPhoneNumberCommand',
+            'data_class' => 'Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand',
             'procedureId' => null,
         ]);
 

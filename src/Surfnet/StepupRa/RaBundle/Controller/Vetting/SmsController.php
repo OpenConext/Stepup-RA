@@ -19,9 +19,10 @@
 namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Surfnet\StepupBundle\Command\SendSmsChallengeCommand;
+use Surfnet\StepupBundle\Command\VerifyPhoneNumberCommand;
+use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
-use Surfnet\StepupRa\RaBundle\Command\SendSmsChallengeCommand;
-use Surfnet\StepupRa\RaBundle\Command\VerifyPhoneNumberCommand;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -98,7 +99,7 @@ class SmsController extends Controller
 
         $logger->notice('Received request for Proof of Possession of SMS Second Factor page');
 
-        $command = new VerifyPhoneNumberCommand();
+        $command = new VerifyPossessionOfPhoneCommand();
         $form = $this
             ->createForm('ra_verify_phone_number', $command, ['procedureId' => $procedureId])
             ->handleRequest($request);
