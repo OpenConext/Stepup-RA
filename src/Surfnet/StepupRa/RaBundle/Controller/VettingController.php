@@ -100,6 +100,14 @@ class VettingController extends Controller
         }
     }
 
+    public function cancelProcedureAction($procedureId)
+    {
+        $this->getVettingService()->cancelProcedure($procedureId);
+        $this->addFlash('info', $this->get('translator')->trans('ra.vetting.flash.cancelled'));
+
+        return $this->redirectToRoute('ra_vetting_search');
+    }
+
     /**
      * @Template
      * @param Request $request
@@ -120,12 +128,12 @@ class VettingController extends Controller
         $vettingService = $this->getVettingService();
         $commonName = $vettingService->getIdentityCommonName($procedureId);
 
-        $showForm = function ($error = null) use ($form, $commonName) {
+        $showForm = function ($error = null) use ($form, $commonName, $procedureId) {
             if ($error) {
                 $form->addError(new FormError($error));
             }
 
-            return ['commonName' => $commonName, 'form' => $form->createView()];
+            return ['commonName' => $commonName, 'form' => $form->createView(), 'procedureId' => $procedureId];
         };
 
         if (!$form->isValid()) {

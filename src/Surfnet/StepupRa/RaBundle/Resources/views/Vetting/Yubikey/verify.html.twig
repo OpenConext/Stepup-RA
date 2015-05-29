@@ -26,4 +26,8 @@
 
     {{ form_end(form) }}
 
+    <hr>
+
+    {% include 'SurfnetStepupRaRaBundle:Vetting/partial:cancelVettingProcedure.html.twig' with { 'procedureId': procedureId } only %}
+
 {% endblock %}

@@ -66,7 +66,7 @@ class YubikeyController extends Controller
 
         $logger->notice('Rendering Yubikey Verification Form');
         // OTP field is rendered empty in the template.
-        return ['form' => $form->createView()];
+        return ['form' => $form->createView(), 'procedureId' => $procedureId];
     }
 
     /**

@@ -40,6 +40,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings(PHPMD.TooManyMethods)
  */
 class VettingService
 {
@@ -128,6 +129,27 @@ class VettingService
         $this->vettingProcedureRepository->store($procedure);
 
         return $procedure->getId();
+    }
+
+    /**
+     * @param string $procedureId
+     * @throws UnknownVettingProcedureException
+     */
+    public function cancelProcedure($procedureId)
+    {
+        if (!is_string($procedureId)) {
+            throw InvalidArgumentException::invalidType('string', 'procedureId', $procedureId);
+        }
+
+        $procedure = $this->vettingProcedureRepository->retrieve($procedureId);
+
+        if (!$procedure) {
+            throw new UnknownVettingProcedureException(
+                sprintf("No vetting procedure with id '%s' is known.", $procedureId)
+            );
+        }
+
+        $this->vettingProcedureRepository->remove($procedureId);
     }
 
     /**
@@ -332,5 +354,18 @@ class VettingService
         }
 
         return $procedure;
+    }
+
+    /**
+     * @param string $procedureId
+     * @return bool
+     */
+    public function hasProcedure($procedureId)
+    {
+        if (!is_string($procedureId)) {
+            throw InvalidArgumentException::invalidType('string', 'procedureId', $procedureId);
+        }
+
+        return $this->vettingProcedureRepository->retrieve($procedureId) !== null;
     }
 }
