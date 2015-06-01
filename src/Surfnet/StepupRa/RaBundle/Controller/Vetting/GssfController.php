@@ -47,9 +47,13 @@ final class GssfController extends Controller
     {
         $this->denyAccessUnlessGranted(['ROLE_RA']);
 
-        $this->get('ra.procedure_logger')
-            ->forProcedure($procedureId)
-            ->notice('Showing Initiate GSSF Verification Screen', ['provider' => $provider]);
+        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
+        $logger->notice('Showing Initiate GSSF Verification Screen', ['provider' => $provider]);
+
+        if (!$this->getVettingService()->hasProcedure($procedureId)) {
+            $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
+            throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
+        }
 
         return ['procedureId' => $procedureId, 'provider' => $this->getProvider($provider)->getName()];
     }
@@ -62,9 +66,14 @@ final class GssfController extends Controller
     public function authenticateAction($procedureId, $provider)
     {
         $this->denyAccessUnlessGranted(['ROLE_RA']);
-        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
 
+        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
         $logger->notice('Generating GSSF verification request', ['provider' => $provider]);
+
+        if (!$this->getVettingService()->hasProcedure($procedureId)) {
+            $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
+            throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
+        }
 
         $provider = $this->getProvider($provider);
 

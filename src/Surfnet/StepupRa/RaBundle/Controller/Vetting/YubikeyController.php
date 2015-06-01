@@ -25,6 +25,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class YubikeyController extends Controller
 {
@@ -40,6 +41,11 @@ class YubikeyController extends Controller
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
         $logger->notice('Requested Yubikey Verfication');
+
+        if (!$this->getVettingService()->hasProcedure($procedureId)) {
+            $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
+            throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
+        }
 
         $command = new VerifyYubikeyPublicIdCommand();
         $form = $this->createForm('ra_verify_yubikey_public_id', $command)->handleRequest($request);

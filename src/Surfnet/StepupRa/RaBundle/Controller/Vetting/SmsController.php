@@ -28,6 +28,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SmsController extends Controller
 {
@@ -43,6 +44,11 @@ class SmsController extends Controller
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
         $logger->notice('Received request for Send SMS Challenge page');
+
+        if (!$this->getVettingService()->hasProcedure($procedureId)) {
+            $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
+            throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
+        }
 
         $command = new SendSmsChallengeCommand();
         $form = $this->createForm('ra_send_sms_challenge', $command)->handleRequest($request);
