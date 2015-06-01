@@ -60,11 +60,7 @@ class SmsController extends Controller
 
         $otpRequestsRemaining = $vettingService->getSmsOtpRequestsRemainingCount();
         $maximumOtpRequests = $vettingService->getSmsMaximumOtpRequestsCount();
-        $viewVariables = [
-            'otpRequestsRemaining' => $otpRequestsRemaining,
-            'maximumOtpRequests'   => $maximumOtpRequests,
-            'procedureId'          => $procedureId
-        ];
+        $viewVariables = ['otpRequestsRemaining' => $otpRequestsRemaining, 'maximumOtpRequests' => $maximumOtpRequests];
 
         if (!$form->isValid()) {
             $logger->notice('Form has not been submitted, not sending SMS, rendering Send SMS Challenge page');
@@ -119,7 +115,7 @@ class SmsController extends Controller
                 'SMS OTP was not submitted through form, rendering Proof of Possession of SMS Second Factor page'
             );
 
-            return ['form' => $form->createView(), 'procedureId' => $procedureId];
+            return ['form' => $form->createView()];
         }
 
         $logger->notice('SMS OTP has been entered, attempting to verify Proof of Possession');
@@ -141,7 +137,7 @@ class SmsController extends Controller
 
         $logger->notice('SMS OTP verification failed - Proof of Possession denied, added error to form');
 
-        return ['form' => $form->createView(), 'procedureId' => $procedureId];
+        return ['form' => $form->createView()];
     }
 
     /**

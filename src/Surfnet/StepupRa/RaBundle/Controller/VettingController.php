@@ -140,12 +140,12 @@ class VettingController extends Controller
         $vettingService = $this->getVettingService();
         $commonName = $vettingService->getIdentityCommonName($procedureId);
 
-        $showForm = function ($error = null) use ($form, $commonName, $procedureId) {
+        $showForm = function ($error = null) use ($form, $commonName) {
             if ($error) {
                 $form->addError(new FormError($error));
             }
 
-            return ['commonName' => $commonName, 'form' => $form->createView(), 'procedureId' => $procedureId];
+            return ['commonName' => $commonName, 'form' => $form->createView()];
         };
 
         if (!$form->isValid()) {
