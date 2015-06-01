@@ -1,0 +1,8 @@
+<div class="container-cancel-vetting">
+    <form action="{{ path('ra_vetting_cancel', { procedureId: procedureId }) }}" method="post">
+        <button type="submit" class="btn btn-danger">
+            <i class="fa fa-chevron-left"></i>
+            {{ 'ra.vetting.button.cancel_procedure'|trans }}
+        </button>
+    </form>
+</div>
