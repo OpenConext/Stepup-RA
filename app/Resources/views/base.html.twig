@@ -7,7 +7,9 @@
 {% endblock title %}
 {% block head_style %}
     {% stylesheets
-    '@SurfnetStepupRaRaBundle/Resources/public/less/style.less' filter='less'
+    filter='less'
+    '@SurfnetStepupRaRaBundle/Resources/public/less/style.less'
+    '@SurfnetStepupBundle/Resources/public/less/stepup.less'
     %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
     {% endstylesheets %}
@@ -46,6 +48,13 @@
                     <form name="logout" method="post" action="{{ path('logout') }}" class="pull-right">
                         <button type="submit" class="btn btn-link"><i class="fa fa-sign-out"></i> {{ 'button.logout'|trans }}</button>
                     </form>
+                    {% if app.user %}
+                        {% set locale_switcher = stepup_locale_switcher('ra_switch_locale', {'return-url': app.request.uri}) %}
+                        {{ form_start(locale_switcher, { attr: { class: 'form-inline' }}) }}
+                        {{ form_widget(locale_switcher.locale) }}
+                        {{ form_widget(locale_switcher.switch) }}
+                        {{ form_end(locale_switcher) }}
+                    {% endif %}
                 {% if is_granted('ROLE_SRAA') %}
                     <ul class="nav nav-pills pull-right">
                         <li role="presentation"{% if app.request.attributes.get('_route') == 'sraa_select_institution' %} class="active"{% endif %}>

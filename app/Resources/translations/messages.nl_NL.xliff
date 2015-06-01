@@ -17,6 +17,16 @@
         <source>button.logout</source>
         <target>Uitloggen</target>
       </trans-unit>
+      <trans-unit id="a08764057e3607049e3495943676b29f7baefba9" resname="locale.en_GB">
+        <jms:reference-file line="2">Resources/views/translations.twig</jms:reference-file>
+        <source>locale.en_GB</source>
+        <target>English</target>
+      </trans-unit>
+      <trans-unit id="169792c2b812adec2ddf0b47e7be0a56c1b892ae" resname="locale.nl_NL">
+        <jms:reference-file line="3">Resources/views/translations.twig</jms:reference-file>
+        <source>locale.nl_NL</source>
+        <target>Nederlands</target>
+      </trans-unit>
       <trans-unit id="2c51bcecf7826f003b2e051e4176c14b46372263" resname="ra.auditlog.action">
         <jms:reference-file line="24">views/SecondFactor/auditLog.html.twig</jms:reference-file>
         <source>ra.auditlog.action</source>
@@ -193,6 +203,16 @@
         <jms:reference-file line="3">Saml/Exception/unmetLoa.html.twig</jms:reference-file>
         <source>ra.error.unmet_loa.title</source>
         <target>Onvoldoende veiligheidsmachtiging</target>
+      </trans-unit>
+      <trans-unit id="b172512ee794631a6aecb48e9188443e5ed7a6c3" resname="ra.flash.error_while_switching_locale">
+        <jms:reference-file line="59">RaBundle/Controller/LocaleController.php</jms:reference-file>
+        <source>ra.flash.error_while_switching_locale</source>
+        <target>Het wisselen van taal is mislukt wegens een onbekende reden.</target>
+      </trans-unit>
+      <trans-unit id="f627bfabca402ae4730b846bf772dda85f7130c9" resname="ra.flash.invalid_switch_locale_form">
+        <jms:reference-file line="53">RaBundle/Controller/LocaleController.php</jms:reference-file>
+        <source>ra.flash.invalid_switch_locale_form</source>
+        <target>Het wisselen van taal is mislukt wegens een onbekende reden.</target>
       </trans-unit>
       <trans-unit id="c73b11f71b8ad5d46b3e42e649919aee4bc9ece5" resname="ra.form.extension.ra_role_choice.ra">
         <jms:reference-file line="36">Resources/views/translations.html.twig</jms:reference-file>
@@ -830,6 +850,11 @@ Het token is nu geactiveerd en klaar voor gebruik.</target>
         <jms:reference-file line="17">Vetting/Yubikey/verify.html.twig</jms:reference-file>
         <source>ra.vetting.yubikey.text.press_once_form_auto_submitted</source>
         <target>Druk op de knop van de Yubikey en houd even vast. Er verschijnt automatisch een eenmalig wachtwoord in het invulveld.</target>
+      </trans-unit>
+      <trans-unit id="fcbfd9e643bb8d8f3fcf3ca0380a73bb9dffee2b" resname="stepup_middleware_client.form.switch_locale.switch">
+        <jms:reference-file line="58">Form/Type/SwitchLocaleType.php</jms:reference-file>
+        <source>stepup_middleware_client.form.switch_locale.switch</source>
+        <target>Vertalen</target>
       </trans-unit>
     </body>
   </file>

@@ -97,3 +97,10 @@ sraa_select_institution:
     path:     /sraa/select-institution
     methods:  [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Sraa:selectInstitution }
+
+ra_switch_locale:
+    path:     /switch-locale
+    methods:  [POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Locale:switchLocale }
+    requirements:
+        'return-url': '.+'
