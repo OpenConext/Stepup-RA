@@ -56,6 +56,10 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\AmendRegistrationAuthorityInformationType
         tags: [{ name: form.type, alias: ra_management_amend_ra_info }]
 
+    ra.form.type.management.change_role:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaRoleType
+        tags: [{ name: form.type, alias: ra_management_change_ra_role }]
+
     # Form Extensions
     ra.form.extension.institution_listing_choice_list:
         class: Surfnet\StepupRa\RaBundle\Form\Extension\InstitutionListingChoiceList

@@ -93,6 +93,11 @@ ra_management_amend_ra_information:
     methods:  [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:amendRaInformation }
 
+ra_management_change_ra_role:
+    path:     /management/change-role/{identityId}
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:changeRaRole }
+
 sraa_select_institution:
     path:     /sraa/select-institution
     methods:  [GET, POST]

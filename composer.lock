@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "331274e095487cdcc46fe21486b06bfb",
+    "hash": "51294be9f064cdfc5feae1d48b202f8b",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1317,7 +1317,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/a5573423b7d029d65bf85e3eba336d5d85d695f1",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/6df7486cd7181be4e4649e1c7303fc3041a37ae5",
                 "reference": "818b0f47ebd352559950e9a64431ff9472e8a9dd",
                 "shasum": ""
             },
@@ -1885,7 +1885,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/cae60583cbb8907f5f2fa4730091765c59a4204a",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/a6be11e04572c485a9b7225d946cc481a9987563",
                 "reference": "cae60583cbb8907f5f2fa4730091765c59a4204a",
                 "shasum": ""
             },
@@ -1927,16 +1927,16 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "dev-develop",
+            "version": "dev-feature/change-remove-ra-role",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-Middleware-clientbundle.git",
-                "reference": "4eafa9f46ec0e79acd0104b49e316bbbb6c128ba"
+                "reference": "afa0811f32db65c7a6bc81b9b9efee520138e2d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/4eafa9f46ec0e79acd0104b49e316bbbb6c128ba",
-                "reference": "4eafa9f46ec0e79acd0104b49e316bbbb6c128ba",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/afa0811f32db65c7a6bc81b9b9efee520138e2d7",
+                "reference": "afa0811f32db65c7a6bc81b9b9efee520138e2d7",
                 "shasum": ""
             },
             "require": {
@@ -1972,7 +1972,7 @@
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "time": "2015-05-20 10:09:50"
+            "time": "2015-06-01 12:54:42"
         },
         {
             "name": "surfnet/stepup-saml-bundle",

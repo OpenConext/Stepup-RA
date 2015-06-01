@@ -21,7 +21,9 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AmendRegistrationAuthorityInformationCommand
     as AmendRegistrationAuthorityInformationApiCommand;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AppointRoleCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
+use Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand;
 
 final class RaService
 {
@@ -54,6 +56,26 @@ final class RaService
             $this->logger->error(sprintf(
                 "Amending of registration authority %s's information failed: '%s'",
                 $apiCommand->identityId,
+                implode("', '", $result->getErrors())
+            ));
+        }
+
+        return $result->isSuccessful();
+    }
+
+    public function changeRegistrationAuthorityRole(ChangeRaRoleCommand $command)
+    {
+        $apiCommand             = new AppointRoleCommand();
+        $apiCommand->identityId = $command->identityId;
+        $apiCommand->role       = $command->role;
+
+        $result = $this->commandService->execute($apiCommand);
+
+        if (!$result->isSuccessful()) {
+            $this->logger->error(sprintf(
+                'Could not change Identity "%s" role to "%s": "%s"',
+                $apiCommand->identityId,
+                $apiCommand->role,
                 implode("', '", $result->getErrors())
             ));
         }

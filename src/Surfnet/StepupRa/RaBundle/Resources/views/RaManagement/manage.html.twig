@@ -24,9 +24,14 @@
                         <td>{{ authority.email }}</td>
                         <td>{{ ('ra.management.overview.role.value.'~authority.role)|trans }}</td>
                         <td>
-                            <a href="#" class="btn btn-info not-yet-implemented" role="button">{{ 'ra.management.overview.change_role'|trans }}</a>
+                            <a href="{{ path('ra_management_change_ra_role', {identityId: authority.identityId}) }}" class="btn btn-info" role="button">
+                                {{ 'ra.management.overview.change_role'|trans }}
+                            </a>
                             <a href="{{ path('ra_management_amend_ra_information', {identityId: authority.identityId}) }}" class="btn btn-primary" role="button">
                                 {{ 'ra.management.overview.update_information'|trans }}
+                            </a>
+                            <a href="#" class="btn btn-warning not-yet-implemented" role="button">
+                                {{ 'ra.management.overview.remove_as_ra'|trans }}
                             </a>
                         </td>
                     </tr>
