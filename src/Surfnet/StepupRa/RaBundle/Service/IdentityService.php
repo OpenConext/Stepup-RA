@@ -20,10 +20,14 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Exception;
 use Psr\Log\LoggerInterface;
+use Surfnet\StepupBundle\Command\SwitchLocaleCommand;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\IdentitySearchQuery;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Command\ExpressLocalePreferenceCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService as ApiIdentityService;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -35,15 +39,29 @@ class IdentityService implements UserProviderInterface
     private $apiIdentityService;
 
     /**
+     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
+     */
+    private $commandService;
+
+    /**
+     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+     */
+    private $tokenStorage;
+
+    /**
      * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
     public function __construct(
         ApiIdentityService $apiIdentityService,
+        CommandService $commandService,
+        TokenStorageInterface $tokenStorage,
         LoggerInterface $logger
     ) {
         $this->apiIdentityService = $apiIdentityService;
+        $this->commandService = $commandService;
+        $this->tokenStorage = $tokenStorage;
         $this->logger = $logger;
     }
 
@@ -136,5 +154,34 @@ class IdentityService implements UserProviderInterface
         }
 
         return $credentials;
+    }
+
+    /**
+     * @param SwitchLocaleCommand $command
+     * @return bool
+     */
+    public function switchLocale(SwitchLocaleCommand $command)
+    {
+        /** @var TokenInterface|null */
+        $token = $this->tokenStorage->getToken();
+
+        if (!$token) {
+            throw new RuntimeException('Cannot switch locales when unauthenticated');
+        }
+
+        /** @var Identity $identity */
+        $identity = $token->getUser();
+
+        $expressLocalePreferenceCommand = new ExpressLocalePreferenceCommand();
+        $expressLocalePreferenceCommand->identityId = $command->identityId;
+        $expressLocalePreferenceCommand->preferredLocale = $command->locale;
+
+        $result = $this->commandService->execute($expressLocalePreferenceCommand);
+
+        if ($result->isSuccessful()) {
+            $identity->preferredLocale = $command->locale;
+        }
+
+        return $result->isSuccessful();
     }
 }

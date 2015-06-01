@@ -116,6 +116,8 @@ services:
         class: Surfnet\StepupRa\RaBundle\Service\IdentityService
         arguments:
             - @surfnet_stepup_middleware_client.identity.service.identity
+            - @ra.service.command
+            - @security.token_storage
             - @logger
 
     ra.service.second_factor:
@@ -190,3 +192,9 @@ services:
         class: Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger
         arguments:
             - @logger
+
+    # Listeners
+    ra.event_listener.locale:
+        class: Surfnet\StepupRa\RaBundle\EventListener\LocaleListener
+        arguments: [ @security.token_storage, @translator ]
+        tags: [{ name: kernel.event_subscriber }]
