@@ -66,17 +66,18 @@ services:
     ra.service.vetting:
         class: Surfnet\StepupRa\RaBundle\Service\VettingService
         arguments:
-            - @ra.service.sms_second_factor
+            - @surfnet_stepup.service.sms_second_factor
             - @ra.service.yubikey_second_factor
             - @ra.service.gssf
             - @ra.service.command
             - @ra.repository.vetting_procedure
+            - @translator
 
     ra.service.yubikey:
         public: false
         class: Surfnet\StepupRa\RaBundle\Service\YubikeyService
         arguments:
-            - @ra.guzzle.gateway_api
+            - @surfnet_stepup.guzzle.gateway_api
             - @logger
 
     ra.service.yubikey_second_factor:
@@ -85,30 +86,6 @@ services:
         arguments:
             - @ra.service.yubikey
             - @logger
-
-    ra.service.sms:
-        public: false
-        class: Surfnet\StepupRa\RaBundle\Service\SmsService
-        arguments:
-            - @ra.guzzle.gateway_api
-            - @logger
-
-    ra.service.sms_second_factor:
-        class: Surfnet\StepupRa\RaBundle\Service\SmsSecondFactorService
-        arguments:
-            - @ra.service.sms
-            - @ra.service.challenge_handler
-            - @translator
-            - '' # Originator set in extension
-
-    ra.service.challenge_handler:
-        public: false
-        class: Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SessionSmsVerificationStateHandler
-        arguments:
-            - @session
-            - 'Surfnet/Ra/SecondFactor/Sms:challenge'
-            - {} # OTP expiry interval
-            - 0  # Maximum OTP requests
 
     ra.service.gssf:
         class: Surfnet\StepupRa\RaBundle\Service\GssfService
@@ -128,12 +105,6 @@ services:
             - '/'
         calls:
             - [setName, ['ra.service.gssf']]
-
-    ra.guzzle.gateway_api:
-        public: false
-        class: GuzzleHttp\Client
-        arguments:
-            - {} # Set from the extension
 
     ra.service.audit_log:
         class: Surfnet\StepupRa\RaBundle\Service\AuditLogService

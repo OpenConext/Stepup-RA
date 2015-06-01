@@ -18,7 +18,6 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
-use Surfnet\StepupRa\RaBundle\Form\Extension\RaRoleChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
