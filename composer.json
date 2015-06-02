@@ -25,8 +25,8 @@
         "jms/di-extra-bundle": "~1.4.0",
         "surfnet/stepup-middleware-client-bundle": "dev-develop",
         "simplesamlphp/saml2": "dev-master",
-        "surfnet/stepup-saml-bundle": "dev-develop",
-        "surfnet/stepup-bundle": "dev-develop",
+        "surfnet/stepup-saml-bundle": "dev-maintenance/symfony-2.7",
+        "surfnet/stepup-bundle": "dev-maintenance/symfony-2.7",
         "guzzlehttp/guzzle": "~4",
         "symfony/swiftmailer-bundle": "~2.3",
         "knplabs/knp-paginator-bundle": "~2.4"
