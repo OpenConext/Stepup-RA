@@ -29,6 +29,9 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class RaManagementController extends Controller
 {
     /**
@@ -182,6 +185,11 @@ class RaManagementController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param         $identityId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function amendRaInformationAction(Request $request, $identityId)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
@@ -222,6 +230,11 @@ class RaManagementController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param         $identityId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function changeRaRoleAction(Request $request, $identityId)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
@@ -261,6 +274,11 @@ class RaManagementController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param         $identityId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function retractRegistrationAuthorityAction(Request $request, $identityId)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
