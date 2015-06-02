@@ -60,6 +60,10 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaRoleType
         tags: [{ name: form.type, alias: ra_management_change_ra_role }]
 
+    ra.form.type.management.retract_registration_authority:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType
+        tags: [{ name: form.type, alias: ra_management_retract_registration_authority }]
+
     # Form Extensions
     ra.form.extension.institution_listing_choice_list:
         class: Surfnet\StepupRa\RaBundle\Form\Extension\InstitutionListingChoiceList

@@ -22,6 +22,7 @@ use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
 use Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand;
+use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
@@ -244,7 +245,7 @@ class RaManagementController extends Controller
             $logger->notice(sprintf('RA(A) "%s" Change Role form submitted, processing', $identityId));
 
             if ($this->get('ra.service.ra')->changeRegistrationAuthorityRole($command)) {
-                $logger->info('Role successfully changed');
+                $logger->notice('Role successfully changed');
 
                 $this->addFlash('success', $this->get('translator')->trans('ra.management.change_ra_role_changed'));
                 return $this->redirectToRoute('ra_management_manage');
@@ -255,6 +256,51 @@ class RaManagementController extends Controller
         }
 
         return $this->render('SurfnetStepupRaRaBundle:RaManagement:changeRaRole.html.twig', [
+            'raListing' => $raListing,
+            'form'      => $form->createView()
+        ]);
+    }
+
+    public function retractRegistrationAuthorityAction(Request $request, $identityId)
+    {
+        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+        $logger = $this->get('logger');
+
+        $logger->notice(sprintf("Loading retract registration authority form for RA(A) '%s'", $identityId));
+
+        $raListing = $this->getRaListingService()->get($identityId);
+        if (!$raListing) {
+            $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
+            throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
+        }
+
+        $command = new RetractRegistrationAuthorityCommand();
+        $command->identityId = $identityId;
+
+        $form = $this->createForm('ra_management_retract_registration_authority', $command)->handleRequest($request);
+        if ($form->isValid()) {
+            if ($form->get('cancel')->isClicked()) {
+                $logger->notice('Retraction of registration authority cancelled');
+                return $this->redirectToRoute('ra_management_manage');
+            }
+
+            $logger->notice(sprintf('Confirmed retraction of RA credentials for identity "%s"', $identityId));
+
+            if ($this->get('ra.service.ra')->retractRegistrationAuthority($command)) {
+                $logger->notice(sprintf('Registration authority for identity "%s" retracted', $identityId));
+
+                $this->addFlash('success', $this->get('translator')->trans('ra.management.retract_ra.success'));
+                return $this->redirectToRoute('ra_management_manage');
+            }
+
+            $logger->notice(sprintf(
+                'Could not retract Registration Authority credentials for identity "%s"',
+                $identityId
+            ));
+            $form->addError(new FormError('ra.management.retract_ra.middleware_command_failed'));
+        }
+
+        return $this->render('SurfnetStepupRaRaBundle:RaManagement:confirmRetractRa.html.twig', [
             'raListing' => $raListing,
             'form'      => $form->createView()
         ]);
