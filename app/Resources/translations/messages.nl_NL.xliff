@@ -719,6 +719,16 @@
         <source>ra.sraa.changed_institution</source>
         <target>Je instituut is veranderd naar "%institution%"</target>
       </trans-unit>
+      <trans-unit id="28ff860b3260f99aeb7268aa31f5edcfbc10b531" resname="ra.vetting.button.cancel_procedure">
+        <jms:reference-file line="4">Vetting/partial/cancelVettingProcedure.html.twig</jms:reference-file>
+        <source>ra.vetting.button.cancel_procedure</source>
+        <target>Activatieprocedure afbreken</target>
+      </trans-unit>
+      <trans-unit id="32b7bc724e0d07eac8325753ae89605966b495c7" resname="ra.vetting.flash.cancelled">
+        <jms:reference-file line="56">RaBundle/Controller/VettingController.php</jms:reference-file>
+        <source>ra.vetting.flash.cancelled</source>
+        <target>De activatieprocedure is afgebroken.</target>
+      </trans-unit>
       <trans-unit id="485287b4d4e2f13a9df979601799e727821b9817" resname="ra.vetting.gssf.initiate.tiqr.button.initiate">
         <jms:reference-file line="32">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.gssf.initiate.tiqr.button.initiate</source>
