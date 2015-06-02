@@ -383,12 +383,12 @@
       <trans-unit id="3773fbc17a37a56eef350fbe58c5c40a3ceb2351" resname="ra.management.change_ra_role.modal.cancel">
         <jms:reference-file line="61">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
         <source>ra.management.change_ra_role.modal.cancel</source>
-        <target>cancel</target>
+        <target>Cancel</target>
       </trans-unit>
       <trans-unit id="0356cc55079c008d72965c6d7a408ece50d70d41" resname="ra.management.change_ra_role.modal.confirm">
         <jms:reference-file line="64">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
         <source>ra.management.change_ra_role.modal.confirm</source>
-        <target>confirm</target>
+        <target>Confirm</target>
       </trans-unit>
       <trans-unit id="c77ebb65643463518cd8d885aa70f169bcb6525d" resname="ra.management.change_ra_role.modal.please_confirm">
         <jms:reference-file line="36">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
@@ -451,7 +451,7 @@
       <trans-unit id="8457ba89c1eb274f6a896fd8d6f1db494a6c7a4d" resname="ra.management.create_ra.modal.cancel">
         <jms:reference-file line="60">views/RaManagement/createRa.html.twig</jms:reference-file>
         <source>ra.management.create_ra.modal.cancel</source>
-        <target>cancel</target>
+        <target>Cancel</target>
       </trans-unit>
       <trans-unit id="b99ac9b5e2a6faf946855face236dff8027dc455" resname="ra.management.create_ra.modal.confirm">
         <jms:reference-file line="61">views/RaManagement/createRa.html.twig</jms:reference-file>
@@ -916,7 +916,7 @@
       <trans-unit id="85f8a896e4fb57f2dd0a05049395117fe378df66" resname="ra.vetting.vetting_completed.text.vetting_completed">
         <jms:reference-file line="14">views/Vetting/vettingCompleted.html.twig</jms:reference-file>
         <source>ra.vetting.vetting_completed.text.vetting_completed</source>
-        <target>The user has proven posession of his token, and has proven both his digital and physical identity. 
+        <target>The user has proven posession of his token, and has proven both his digital and physical identity.
 
 The token is now activated and ready to be used.</target>
       </trans-unit>

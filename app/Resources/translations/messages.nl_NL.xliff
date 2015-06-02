@@ -383,12 +383,12 @@
       <trans-unit id="3773fbc17a37a56eef350fbe58c5c40a3ceb2351" resname="ra.management.change_ra_role.modal.cancel">
         <jms:reference-file line="61">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
         <source>ra.management.change_ra_role.modal.cancel</source>
-        <target>annuleer</target>
+        <target>Annuleer</target>
       </trans-unit>
       <trans-unit id="0356cc55079c008d72965c6d7a408ece50d70d41" resname="ra.management.change_ra_role.modal.confirm">
         <jms:reference-file line="64">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
         <source>ra.management.change_ra_role.modal.confirm</source>
-        <target>bevestig</target>
+        <target>Bevestig</target>
       </trans-unit>
       <trans-unit id="c77ebb65643463518cd8d885aa70f169bcb6525d" resname="ra.management.change_ra_role.modal.please_confirm">
         <jms:reference-file line="36">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
@@ -530,7 +530,7 @@
         <jms:reference-file line="40">Form/Type/ChangeRaRoleType.php</jms:reference-file>
         <jms:reference-file line="49">Form/Type/CreateRaType.php</jms:reference-file>
         <source>ra.management.form.create_ra.label.cancel</source>
-        <target>annuleer</target>
+        <target>Annuleer</target>
       </trans-unit>
       <trans-unit id="edea5e3071445a321b5063fe5108b8cc48e7510f" resname="ra.management.form.create_ra.label.contact_information">
         <jms:reference-file line="35">Form/Type/CreateRaType.php</jms:reference-file>
@@ -916,7 +916,7 @@
       <trans-unit id="85f8a896e4fb57f2dd0a05049395117fe378df66" resname="ra.vetting.vetting_completed.text.vetting_completed">
         <jms:reference-file line="14">views/Vetting/vettingCompleted.html.twig</jms:reference-file>
         <source>ra.vetting.vetting_completed.text.vetting_completed</source>
-        <target>De gebruiker heeft bewezen in het bezit te zijn van zijn token, en heeft zowel zijn digitale als fysieke identiteit aangetoond.  
+        <target>De gebruiker heeft bewezen in het bezit te zijn van zijn token, en heeft zowel zijn digitale als fysieke identiteit aangetoond.
 
 Het token is nu geactiveerd en klaar voor gebruik.</target>
       </trans-unit>
