@@ -26,4 +26,45 @@
         </div>
         {{ form(form) }}
     </div>
+
+    <div class="modal" id="change_ra_role_confirmation_modal" tabindex="-1" role="dialog" aria-hidden="true"
+         aria-labelledby="{{ 'ra.management.change_ra_role.modal.please_confirm' }}"
+         aria-describedby="{{ 'ra.management.change_ra_role.modal.are_you_sure'|trans }}">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ 'ra.management.change_ra_role.modal.please_confirm'|trans }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="question bg-info">
+                        {{ 'ra.management.change_ra_role.modal.are_you_sure'|trans }}
+                    </p>
+                    <p>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th scope="row">{{ 'ra.management.change_ra_role.ra_listing.name'|trans }}</th>
+                            <td class="name">{{ raListing.commonName }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{ 'ra.management.change_ra_role.ra_listing.email'|trans }}</th>
+                            <td class="email">{{ raListing.email }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{ 'ra.management.change_ra_role.ra_listing.role'|trans }}</th>
+                            <td class="role"></td>
+                        </tr>
+                    </table>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link cancel" data-dismiss="modal">
+                        {{ 'ra.management.change_ra_role.modal.cancel'|trans }}
+                    </button>
+                    <button type="button" class="btn btn-primary confirm">
+                        {{ 'ra.management.change_ra_role.modal.confirm'|trans }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
