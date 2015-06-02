@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-05-20T10:17:53Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2015-06-02T16:42:56Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -45,6 +45,14 @@
       <trans-unit id="7174eff8bbc2102aee4f3af7e3a73e7681fe9abc" resname="middleware_client.dto.identity.name_id.must_not_be_blank">
         <source>middleware_client.dto.identity.name_id.must_not_be_blank</source>
         <target>Remote identity's NameID may not be blank.</target>
+      </trans-unit>
+      <trans-unit id="b074c72aaf61bc15e1d3057af3fda654e748ead0" resname="middleware_client.dto.identity.preferred_locale.must_be_string">
+        <source>middleware_client.dto.identity.preferred_locale.must_be_string</source>
+        <target>Preferred Locale must be a string</target>
+      </trans-unit>
+      <trans-unit id="43b5d0688d43579b026c74e6ca9eba07aa59afba" resname="middleware_client.dto.identity.preferred_locale.must_not_be_blank">
+        <source>middleware_client.dto.identity.preferred_locale.must_not_be_blank</source>
+        <target>Preferred Locale must be set</target>
       </trans-unit>
       <trans-unit id="33bd5ec3715508eab3a8b95f463328fe885852d6" resname="middleware_client.dto.institution_listing.institution.must_be_string">
         <source>middleware_client.dto.institution_listing.institution.must_be_string</source>
@@ -386,18 +394,6 @@
         <source>ra.search_ra_second_factors.type.invalid_choice</source>
         <target>Cannot filter by given token type.</target>
       </trans-unit>
-      <trans-unit id="0facb08a0b6d9cecff3d2f842519b3cada5837a0" resname="ra.send_sms_command.recipient.may_not_be_empty">
-        <source>ra.send_sms_command.recipient.may_not_be_empty</source>
-        <target>The recipient may not be empty.</target>
-      </trans-unit>
-      <trans-unit id="4b75382ce22497b1b3594c084506543201ac2566" resname="ra.send_sms_command.recipient.must_be_string">
-        <source>ra.send_sms_command.recipient.must_be_string</source>
-        <target>The recipient must be a string.</target>
-      </trans-unit>
-      <trans-unit id="c461437c8f242f1e43956844601a499f20f189e7" resname="ra.send_sms_command.recipient.must_consist_of_digits">
-        <source>ra.send_sms_command.recipient.must_consist_of_digits</source>
-        <target>The recipient must be the telephone number with country code and without plus sign.</target>
-      </trans-unit>
       <trans-unit id="a718fae8b5a05ddfe4f55f3ed1a4bb8b365ea12c" resname="ra.sms_send_challenge.send_sms_challenge_failed">
         <jms:reference-file line="15">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.sms_send_challenge.send_sms_challenge_failed</source>
@@ -433,14 +429,6 @@
         <source>ra.verify_identity_command.identity_verified.must_be_checked</source>
         <target>Please check this box only if you have successfully verified the users's identity, then click 'Verify identity'</target>
       </trans-unit>
-      <trans-unit id="9113def6d7bffe1a7a21db09b2abc36b1f16c725" resname="ra.verify_phone_number_command.challenge.may_not_be_empty">
-        <source>ra.verify_phone_number_command.challenge.may_not_be_empty</source>
-        <target>SMS challenge may not be empty.</target>
-      </trans-unit>
-      <trans-unit id="f53b75b19d67e02f4c017785d731c792598605da" resname="ra.verify_phone_number_command.challenge.must_be_string">
-        <source>ra.verify_phone_number_command.challenge.must_be_string</source>
-        <target>SMS challenge must be a string.</target>
-      </trans-unit>
       <trans-unit id="462445b93a181d615ec47505462f69bf13f4af7a" resname="ra.verify_yubikey_command.otp.may_not_be_empty">
         <source>ra.verify_yubikey_command.otp.may_not_be_empty</source>
         <target>Press and hold the button on the personal Yubikey of the user once; a OTP will be generated in the field below.</target>
@@ -458,6 +446,26 @@
         <jms:reference-file line="11">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.verify_yubikey_command.otp.verification_error</source>
         <target>The Yubikey code could not be verified due to unknown reasons.</target>
+      </trans-unit>
+      <trans-unit id="049f2b52bc9cf777280bbfc8b787f6e69a701beb" resname="stepup.send_sms_command.recipient.may_not_be_empty">
+        <source>stepup.send_sms_command.recipient.may_not_be_empty</source>
+        <target>Recipient may not be empty</target>
+      </trans-unit>
+      <trans-unit id="9e988968acb8506939fa9b6c5d15b6e65cdcdb9f" resname="stepup.send_sms_command.recipient.must_be_string">
+        <source>stepup.send_sms_command.recipient.must_be_string</source>
+        <target>Recipient must be a string</target>
+      </trans-unit>
+      <trans-unit id="f40a78148c674a1d7961ef7ca5d048664caf70b7" resname="stepup.send_sms_command.recipient.must_consist_of_digits">
+        <source>stepup.send_sms_command.recipient.must_consist_of_digits</source>
+        <target>Recipient must consist of digits</target>
+      </trans-unit>
+      <trans-unit id="b7bcb89ad4b6ed61daa138541702c67ce7dd63c9" resname="stepup.verify_possession_of_phone_command.challenge.may_not_be_empty">
+        <source>stepup.verify_possession_of_phone_command.challenge.may_not_be_empty</source>
+        <target>Challenge may not be empty</target>
+      </trans-unit>
+      <trans-unit id="8b87f20ba80c487ed07070e32d031343571d34b9" resname="stepup.verify_possession_of_phone_command.challenge.must_be_string">
+        <source>stepup.verify_possession_of_phone_command.challenge.must_be_string</source>
+        <target>Challenge must be a string</target>
       </trans-unit>
     </body>
   </file>
