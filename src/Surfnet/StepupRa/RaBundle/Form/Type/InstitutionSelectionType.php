@@ -36,7 +36,8 @@ class InstitutionSelectionType extends AbstractType
     {
         $builder
             ->add('institution', 'choice', [
-                'choice_list' => $this->institutionListingChoiceList->create(),
+                'choices' => $this->institutionListingChoiceList->create(),
+                'choices_as_values' => true,
                 'label' => 'ra.form.ra_select_institution.label.institution',
             ])
             ->add('select_and_apply', 'submit', [

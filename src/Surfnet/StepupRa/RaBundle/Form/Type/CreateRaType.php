@@ -36,7 +36,8 @@ class CreateRaType extends AbstractType
             ])
             ->add('role', 'choice', [
                 'label' => 'ra.management.form.create_ra.label.role',
-                'choice_list' => RaRoleChoiceList::createChoiceList()
+                'choices' => RaRoleChoiceList::create(),
+                'choices_as_values' => true,
             ])
             ->add('create_ra', 'submit', [
                 'label' => 'ra.management.form.create_ra.label.create_ra',
