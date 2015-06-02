@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "51294be9f064cdfc5feae1d48b202f8b",
+    "hash": "331274e095487cdcc46fe21486b06bfb",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1317,7 +1317,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/6df7486cd7181be4e4649e1c7303fc3041a37ae5",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/0b467cf9e3de5b80cb7830dc758265204a5fcde5",
                 "reference": "818b0f47ebd352559950e9a64431ff9472e8a9dd",
                 "shasum": ""
             },
@@ -1929,16 +1929,16 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "dev-feature/change-remove-ra-role",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-Middleware-clientbundle.git",
-                "reference": "7090ecc08e2ef8ce7102dcaf18ff4617775f6818"
+                "reference": "28d2bef9b51c4eb89b02d6850cff564b2764b5b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/7090ecc08e2ef8ce7102dcaf18ff4617775f6818",
-                "reference": "7090ecc08e2ef8ce7102dcaf18ff4617775f6818",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/28d2bef9b51c4eb89b02d6850cff564b2764b5b5",
+                "reference": "28d2bef9b51c4eb89b02d6850cff564b2764b5b5",
                 "shasum": ""
             },
             "require": {
@@ -1974,7 +1974,7 @@
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "time": "2015-06-01 15:13:41"
+            "time": "2015-06-02 15:30:00"
         },
         {
             "name": "surfnet/stepup-saml-bundle",
