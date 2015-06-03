@@ -21,12 +21,17 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
+use Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand;
+use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class RaManagementController extends Controller
 {
     /**
@@ -180,6 +185,11 @@ class RaManagementController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param         $identityId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function amendRaInformationAction(Request $request, $identityId)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
@@ -217,6 +227,100 @@ class RaManagementController extends Controller
         return $this->render('SurfnetStepupRaRaBundle:RaManagement:amendRaInformation.html.twig', [
             'raListing' => $raListing,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param         $identityId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function changeRaRoleAction(Request $request, $identityId)
+    {
+        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+        $logger = $this->get('logger');
+
+        $logger->notice(sprintf("Loading change Ra Role form for RA(A) '%s'", $identityId));
+
+        $raListing = $this->getRaListingService()->get($identityId);
+        if (!$raListing) {
+            $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
+            throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
+        }
+
+        $command              = new ChangeRaRoleCommand();
+        $command->identityId  = $raListing->identityId;
+        $command->institution = $raListing->institution;
+        $command->role        = $raListing->role;
+
+        $form = $this->createForm('ra_management_change_ra_role', $command)->handleRequest($request);
+        if ($form->isValid()) {
+            $logger->notice(sprintf('RA(A) "%s" Change Role form submitted, processing', $identityId));
+
+            if ($this->get('ra.service.ra')->changeRegistrationAuthorityRole($command)) {
+                $logger->notice('Role successfully changed');
+
+                $this->addFlash('success', $this->get('translator')->trans('ra.management.change_ra_role_changed'));
+                return $this->redirectToRoute('ra_management_manage');
+            }
+
+            $logger->notice(sprintf('Role of RA(A) "%s" could not be changed, informing user', $identityId));
+            $form->addError(new FormError('ra.management.change_ra_role.middleware_command_failed'));
+        }
+
+        return $this->render('SurfnetStepupRaRaBundle:RaManagement:changeRaRole.html.twig', [
+            'raListing' => $raListing,
+            'form'      => $form->createView()
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param         $identityId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function retractRegistrationAuthorityAction(Request $request, $identityId)
+    {
+        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+        $logger = $this->get('logger');
+
+        $logger->notice(sprintf("Loading retract registration authority form for RA(A) '%s'", $identityId));
+
+        $raListing = $this->getRaListingService()->get($identityId);
+        if (!$raListing) {
+            $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
+            throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
+        }
+
+        $command = new RetractRegistrationAuthorityCommand();
+        $command->identityId = $identityId;
+
+        $form = $this->createForm('ra_management_retract_registration_authority', $command)->handleRequest($request);
+        if ($form->isValid()) {
+            if ($form->get('cancel')->isClicked()) {
+                $logger->notice('Retraction of registration authority cancelled');
+                return $this->redirectToRoute('ra_management_manage');
+            }
+
+            $logger->notice(sprintf('Confirmed retraction of RA credentials for identity "%s"', $identityId));
+
+            if ($this->get('ra.service.ra')->retractRegistrationAuthority($command)) {
+                $logger->notice(sprintf('Registration authority for identity "%s" retracted', $identityId));
+
+                $this->addFlash('success', $this->get('translator')->trans('ra.management.retract_ra.success'));
+                return $this->redirectToRoute('ra_management_manage');
+            }
+
+            $logger->notice(sprintf(
+                'Could not retract Registration Authority credentials for identity "%s"',
+                $identityId
+            ));
+            $form->addError(new FormError('ra.management.retract_ra.middleware_command_failed'));
+        }
+
+        return $this->render('SurfnetStepupRaRaBundle:RaManagement:confirmRetractRa.html.twig', [
+            'raListing' => $raListing,
+            'form'      => $form->createView()
         ]);
     }
 

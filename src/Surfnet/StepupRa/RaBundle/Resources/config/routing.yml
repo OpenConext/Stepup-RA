@@ -28,6 +28,11 @@ ra_vetting_search:
     methods: [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:startProcedure }
 
+ra_vetting_cancel:
+    path:     /vetting-procedure/{procedureId}/cancel
+    methods: [POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:cancelProcedure }
+
 ra_vetting_yubikey_verify:
     path:     /vetting-procedure/{procedureId}/verify-yubikey
     methods:  [GET, POST]
@@ -92,6 +97,16 @@ ra_management_amend_ra_information:
     path:     /management/amend-ra-information/{identityId}
     methods:  [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:amendRaInformation }
+
+ra_management_change_ra_role:
+    path:     /management/change-role/{identityId}
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:changeRaRole }
+
+ra_management_retract_registration_authority:
+    path:     /management/retract-registration-authority/{identityId}
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:retractRegistrationAuthority }
 
 sraa_select_institution:
     path:     /sraa/select-institution

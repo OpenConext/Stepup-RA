@@ -27,6 +27,11 @@ form[name="ra_verify_yubikey_public_id"] {
     margin: 1em auto;
     padding: 0.75em 1em;
     max-width: 525px;
+
+    > .form-group > .col-sm-9 {
+        float: none;
+        margin: 0 auto;
+    }
 }
 
 div.form-ra-verify-identity {
@@ -54,7 +59,7 @@ div.form-ra-verify-identity {
     }
 }
 
-div.form-ra-create-ra, div.form-ra-amend-ra-info {
+div.form-ra-create-ra, div.form-ra-amend-ra-info, div.form-ra-change-role {
     margin: 1em auto;
     padding: 0.75em 1em;
     max-width: 650px;
@@ -70,10 +75,8 @@ div.emulate-form-layout {
     }
 }
 
-div#create_ra_confirmation_modal {
-    .question {
-        padding: 15px;
-    }
+.question {
+    padding: 15px;
 }
 
 div.form-ra-send-sms-challenge {
@@ -83,6 +86,16 @@ div.form-ra-send-sms-challenge {
 
     form {
         text-align: center;
+    }
+}
+
+div.form-retract-registration-authority {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 650px;
+
+    button {
+        margin-left: 1em;
     }
 }
 
@@ -134,6 +147,10 @@ select[name="stepup_switch_locale[locale]"] {
 
 .hidden {
     display: none;
+}
+
+.container-cancel-vetting {
+    text-align: center;
 }
 
 .generate-progress(100);

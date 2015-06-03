@@ -30,6 +30,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class VettingController extends Controller
 {
@@ -100,6 +101,21 @@ class VettingController extends Controller
         }
     }
 
+    public function cancelProcedureAction($procedureId)
+    {
+        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
+
+        if (!$this->getVettingService()->hasProcedure($procedureId)) {
+            $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
+            throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
+        }
+
+        $this->getVettingService()->cancelProcedure($procedureId);
+        $this->addFlash('info', $this->get('translator')->trans('ra.vetting.flash.cancelled'));
+
+        return $this->redirectToRoute('ra_vetting_search');
+    }
+
     /**
      * @Template
      * @param Request $request
@@ -111,8 +127,12 @@ class VettingController extends Controller
         $this->denyAccessUnlessGranted(['ROLE_RA']);
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
-
         $logger->notice('Verify Identity Form requested');
+
+        if (!$this->getVettingService()->hasProcedure($procedureId)) {
+            $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
+            throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
+        }
 
         $command = new VerifyIdentityCommand();
 

@@ -21,7 +21,11 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AmendRegistrationAuthorityInformationCommand
     as AmendRegistrationAuthorityInformationApiCommand;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AppointRoleCommand;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Command\RetractRegistrationAuthorityCommand as ApiRetractRegistrationAuthorityCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
+use Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand;
+use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 
 final class RaService
 {
@@ -53,6 +57,44 @@ final class RaService
         if (!$result->isSuccessful()) {
             $this->logger->error(sprintf(
                 "Amending of registration authority %s's information failed: '%s'",
+                $apiCommand->identityId,
+                implode("', '", $result->getErrors())
+            ));
+        }
+
+        return $result->isSuccessful();
+    }
+
+    public function changeRegistrationAuthorityRole(ChangeRaRoleCommand $command)
+    {
+        $apiCommand             = new AppointRoleCommand();
+        $apiCommand->identityId = $command->identityId;
+        $apiCommand->role       = $command->role;
+
+        $result = $this->commandService->execute($apiCommand);
+
+        if (!$result->isSuccessful()) {
+            $this->logger->error(sprintf(
+                'Could not change Identity "%s" role to "%s": "%s"',
+                $apiCommand->identityId,
+                $apiCommand->role,
+                implode("', '", $result->getErrors())
+            ));
+        }
+
+        return $result->isSuccessful();
+    }
+
+    public function retractRegistrationAuthority(RetractRegistrationAuthorityCommand $command)
+    {
+        $apiCommand             = new ApiRetractRegistrationAuthorityCommand();
+        $apiCommand->identityId = $command->identityId;
+
+        $result = $this->commandService->execute($apiCommand);
+
+        if (!$result->isSuccessful()) {
+            $this->logger->error(sprintf(
+                'Could not retract registration authority for identity "%s": "%s"',
                 $apiCommand->identityId,
                 implode("', '", $result->getErrors())
             ));
