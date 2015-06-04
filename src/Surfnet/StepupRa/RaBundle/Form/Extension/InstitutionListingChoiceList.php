@@ -20,7 +20,6 @@ namespace Surfnet\StepupRa\RaBundle\Form\Extension;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\InstitutionListing;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\InstitutionListingService;
-use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
 class InstitutionListingChoiceList
 {
@@ -38,7 +37,7 @@ class InstitutionListingChoiceList
     }
 
     /**
-     * @return SimpleChoiceList
+     * @return array
      */
     public function create()
     {
@@ -50,6 +49,7 @@ class InstitutionListingChoiceList
         }, $listings);
 
         $selectOptions = array_combine($options, $options);
-        return new SimpleChoiceList($selectOptions);
+
+        return $selectOptions;
     }
 }

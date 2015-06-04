@@ -21,7 +21,7 @@ namespace Surfnet\StepupRa\RaBundle\Form\Type;
 use Surfnet\StepupRa\RaBundle\Form\Extension\InstitutionListingChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class InstitutionSelectionType extends AbstractType
 {
@@ -36,7 +36,8 @@ class InstitutionSelectionType extends AbstractType
     {
         $builder
             ->add('institution', 'choice', [
-                'choice_list' => $this->institutionListingChoiceList->create(),
+                'choices' => $this->institutionListingChoiceList->create(),
+                'choices_as_values' => true,
                 'label' => 'ra.form.ra_select_institution.label.institution',
             ])
             ->add('select_and_apply', 'submit', [
@@ -45,7 +46,7 @@ class InstitutionSelectionType extends AbstractType
             ]);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand'

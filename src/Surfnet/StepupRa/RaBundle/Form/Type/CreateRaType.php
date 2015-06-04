@@ -21,7 +21,7 @@ namespace Surfnet\StepupRa\RaBundle\Form\Type;
 use Surfnet\StepupRa\RaBundle\Form\Extension\RaRoleChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CreateRaType extends AbstractType
 {
@@ -36,7 +36,8 @@ class CreateRaType extends AbstractType
             ])
             ->add('role', 'choice', [
                 'label' => 'ra.management.form.create_ra.label.role',
-                'choice_list' => RaRoleChoiceList::createChoiceList()
+                'choices' => RaRoleChoiceList::create(),
+                'choices_as_values' => true,
             ])
             ->add('create_ra', 'submit', [
                 'label' => 'ra.management.form.create_ra.label.create_ra',
@@ -54,7 +55,7 @@ class CreateRaType extends AbstractType
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand'

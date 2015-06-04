@@ -18,22 +18,21 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Extension;
 
-use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
-
 class RaRoleChoiceList
 {
     /**
-     * @return SimpleChoiceList
+     * @return array
      */
-    public static function createChoiceList()
+    public static function create()
     {
         $choices = self::getChoices();
         $labels = array_map(function ($choice) {
             return 'ra.form.extension.ra_role_choice.' . $choice;
         }, $choices);
 
-        $combined = array_combine($choices, $labels);
-        return new SimpleChoiceList($combined);
+        $combined = array_combine($labels, $choices);
+
+        return $combined;
     }
 
     /**
