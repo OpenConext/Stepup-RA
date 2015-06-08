@@ -1317,7 +1317,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/0b467cf9e3de5b80cb7830dc758265204a5fcde5",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/22bc280b9a254caa42c5b44b55f43eb33ab15426",
                 "reference": "818b0f47ebd352559950e9a64431ff9472e8a9dd",
                 "shasum": ""
             },
@@ -1892,7 +1892,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/543596b5a3fa294e89a2b47dc53d8ecceb21ce36",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/23f703e235cf2408311d359754bd767432dcb5b1",
                 "reference": "543596b5a3fa294e89a2b47dc53d8ecceb21ce36",
                 "shasum": ""
             },
@@ -1940,12 +1940,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-Middleware-clientbundle.git",
-                "reference": "28d2bef9b51c4eb89b02d6850cff564b2764b5b5"
+                "reference": "541df9564a8680b6001b0c18a8b01b74f6013158"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/28d2bef9b51c4eb89b02d6850cff564b2764b5b5",
-                "reference": "28d2bef9b51c4eb89b02d6850cff564b2764b5b5",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/541df9564a8680b6001b0c18a8b01b74f6013158",
+                "reference": "541df9564a8680b6001b0c18a8b01b74f6013158",
                 "shasum": ""
             },
             "require": {
@@ -1981,7 +1981,7 @@
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "time": "2015-06-02 15:30:00"
+            "time": "2015-06-10 09:52:50"
         },
         {
             "name": "surfnet/stepup-saml-bundle",
