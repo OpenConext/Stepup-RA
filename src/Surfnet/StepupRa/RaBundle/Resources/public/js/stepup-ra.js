@@ -57,6 +57,11 @@
             var form = $('form[name="ra_management_create_ra"]'),
                 modal = $('#create_ra_confirmation_modal');
 
+            if (typeof form[0].checkValidity === 'function' && !form[0].checkValidity()) {
+                // Allow native validation behaviour.
+                return;
+            }
+
             event.preventDefault();
 
             modal
@@ -89,6 +94,11 @@
         $(document).on('click', 'form[name="ra_management_change_ra_role"] button.change-ra-role', function (event) {
             var form = $('form[name="ra_management_change_ra_role"]'),
                 modal = $('#change_ra_role_confirmation_modal');
+
+            if (typeof form[0].checkValidity === 'function' && !form[0].checkValidity()) {
+                // Allow native validation behaviour.
+                return;
+            }
 
             event.preventDefault();
 
