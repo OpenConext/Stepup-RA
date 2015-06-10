@@ -34,6 +34,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 use Twig_Environment as Twig;
 
@@ -94,7 +95,7 @@ class SamlListener implements ListenerInterface
             $assertion = $samlInteractionProvider->processSamlResponse($event->getRequest());
         } catch (PreconditionNotMetException $e) {
             $logger->notice(sprintf('SAML response precondition not met: "%s"', $e->getMessage()));
-            $this->setPreconditionExceptionResponse($e, $event);
+            $event->setResponse($this->renderPreconditionExceptionResponse($e));
             return;
         } catch (Exception $e) {
             $logger->error(sprintf('Failed SAMLResponse Parsing: "%s"', $e->getMessage()));
@@ -120,13 +121,21 @@ class SamlListener implements ListenerInterface
 
         try {
             $authToken = $authenticationManager->authenticate($token);
-        } catch (AuthenticationException $failed) {
-            $logger->error(sprintf('Authentication Failed, reason: "%s"', $failed->getMessage()));
+        } catch (BadCredentialsException $exception) {
+            $logger->error(
+                sprintf('Bad credentials, reason: "%s"', $exception->getMessage()),
+                ['exception' => $exception]
+            );
 
-            // By default deny authorization
-            $response = new Response();
-            $response->setStatusCode(Response::HTTP_FORBIDDEN);
-            $event->setResponse($response);
+            $event->setResponse($this->renderBadCredentialsResponse($exception));
+            return;
+        } catch (AuthenticationException $failed) {
+            $logger->error(
+                sprintf('Authentication Failed, reason: "%s"', $failed->getMessage()),
+                ['exception' => $failed]
+            );
+
+            $event->setResponse($this->renderAuthenticationExceptionResponse($failed));
             return;
         }
 
@@ -138,10 +147,8 @@ class SamlListener implements ListenerInterface
         $logger->notice('Authentication succeeded, redirecting to original location');
     }
 
-    private function setPreconditionExceptionResponse(PreconditionNotMetException $exception, GetResponseEvent $event)
+    private function renderPreconditionExceptionResponse(PreconditionNotMetException $exception)
     {
-        $template = null;
-
         if ($exception instanceof AuthnFailedSamlResponseException) {
             $template = 'SurfnetStepupRaRaBundle:Saml/Exception:authnFailed.html.twig';
         } elseif ($exception instanceof NoAuthnContextSamlResponseException) {
@@ -152,10 +159,37 @@ class SamlListener implements ListenerInterface
             $template = 'SurfnetStepupRaRaBundle:Saml/Exception:preconditionNotMet.html.twig';
         }
 
+        return $this->renderTemplate($template, ['exception' => $exception]);
+    }
+
+    private function renderBadCredentialsResponse(BadCredentialsException $exception)
+    {
+        return $this->renderTemplate(
+            'SurfnetStepupRaRaBundle:Saml/Exception:badCredentials.html.twig',
+            ['exception' => $exception]
+        );
+    }
+
+    private function renderAuthenticationExceptionResponse(AuthenticationException $exception)
+    {
+        return $this->renderTemplate(
+            'SurfnetStepupRaRaBundle:Saml/Exception:authenticationException.html.twig',
+            ['exception' => $exception]
+        );
+    }
+
+    /**
+     * @param       $template
+     * @param array $context
+     * @return Response
+     */
+    private function renderTemplate($template, array $context)
+    {
         /** @var Twig $twig */
         $twig = $this->container->get('twig');
-        $html = $twig->render($template, ['exception' => $exception]);
-        $event->setResponse(new Response($html, Response::HTTP_UNAUTHORIZED));
+        $html = $twig->render($template, $context);
+
+        return new Response($html, Response::HTTP_UNAUTHORIZED);
     }
 
     /**

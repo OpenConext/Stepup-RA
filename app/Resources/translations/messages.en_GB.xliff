@@ -153,6 +153,21 @@
         <source>ra.error.page_not_found.title</source>
         <target>Page not found</target>
       </trans-unit>
+      <trans-unit id="bc635e1d511d5493da1d62205474b9b528a909e7" resname="ra.error.saml_authentication_exception.button.try_again">
+        <jms:reference-file line="10">Saml/Exception/authenticationException.html.twig</jms:reference-file>
+        <source>ra.error.saml_authentication_exception.button.try_again</source>
+        <target>Retry sign-in</target>
+      </trans-unit>
+      <trans-unit id="807a7c0d931d6c921d28cc278b1fabe039da6aca" resname="ra.error.saml_authentication_exception.text.authentication_exception">
+        <jms:reference-file line="8">Saml/Exception/authenticationException.html.twig</jms:reference-file>
+        <source>ra.error.saml_authentication_exception.text.authentication_exception</source>
+        <target>Sign in unsuccessful. Please try again.</target>
+      </trans-unit>
+      <trans-unit id="c2f8bdc515213137f633b8d91ebe6f4f43692f92" resname="ra.error.saml_authentication_exception.title">
+        <jms:reference-file line="3">Saml/Exception/authenticationException.html.twig</jms:reference-file>
+        <source>ra.error.saml_authentication_exception.title</source>
+        <target>Sign in</target>
+      </trans-unit>
       <trans-unit id="47315f10d842cd2eebc6edd15f7fc5fa5bdeb631" resname="ra.error.saml_authn_failed.button.try_again">
         <jms:reference-file line="10">Saml/Exception/authnFailed.html.twig</jms:reference-file>
         <source>ra.error.saml_authn_failed.button.try_again</source>
@@ -166,6 +181,21 @@
       <trans-unit id="91796128309d18718b9a06d39bd0b24a705e8c4e" resname="ra.error.saml_authn_failed.title">
         <jms:reference-file line="3">Saml/Exception/authnFailed.html.twig</jms:reference-file>
         <source>ra.error.saml_authn_failed.title</source>
+        <target>Sign in</target>
+      </trans-unit>
+      <trans-unit id="04f2844e0bcb0107e26422ea7817be4493b00b41" resname="ra.error.saml_bad_credentials.button.try_again">
+        <jms:reference-file line="10">Saml/Exception/badCredentialsException.html.twig</jms:reference-file>
+        <source>ra.error.saml_bad_credentials.button.try_again</source>
+        <target>Retry sign-in</target>
+      </trans-unit>
+      <trans-unit id="30a8b063d31913d070d6f0c8ff823512cb1f6dd2" resname="ra.error.saml_bad_credentials.text.bad_credentials">
+        <jms:reference-file line="8">Saml/Exception/badCredentialsException.html.twig</jms:reference-file>
+        <source>ra.error.saml_bad_credentials.text.bad_credentials</source>
+        <target>You are not authorised to sign in.</target>
+      </trans-unit>
+      <trans-unit id="f439b5301a358a31defda15db12d38a35cf1a3bb" resname="ra.error.saml_bad_credentials.title">
+        <jms:reference-file line="3">Saml/Exception/badCredentialsException.html.twig</jms:reference-file>
+        <source>ra.error.saml_bad_credentials.title</source>
         <target>Sign in</target>
       </trans-unit>
       <trans-unit id="4c1a7f7aa6b9f7a2928e894933fac97b7d41198c" resname="ra.error.saml_no_authn_context.text.authn_failed">
