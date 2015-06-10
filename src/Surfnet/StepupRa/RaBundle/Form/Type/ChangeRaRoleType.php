@@ -30,7 +30,8 @@ class ChangeRaRoleType extends AbstractType
         $builder
             ->add('role', 'choice', [
                 'label'       => 'ra.management.form.change_ra_role.label.role',
-                'choice_list' => RaRoleChoiceList::createChoiceList()
+                'choices' => RaRoleChoiceList::create(),
+                'choices_as_values' => true,
             ])
             ->add('create_ra', 'submit', [
                 'label' => 'ra.management.form.change_ra_role.label.save',
