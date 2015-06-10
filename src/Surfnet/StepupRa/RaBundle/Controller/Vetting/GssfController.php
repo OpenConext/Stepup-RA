@@ -24,6 +24,7 @@ use Surfnet\SamlBundle\Http\XMLResponse;
 use Surfnet\SamlBundle\SAML2\AuthnRequestFactory;
 use Surfnet\SamlBundle\SAML2\Response\Assertion\InResponseTo;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
+use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -225,5 +226,13 @@ final class GssfController extends Controller
     private function getLogger()
     {
         return $this->get('logger');
+    }
+
+    /**
+     * @return VettingService
+     */
+    private function getVettingService()
+    {
+        return $this->get('ra.service.vetting');
     }
 }
