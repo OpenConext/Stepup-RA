@@ -299,6 +299,7 @@ class VettingService
         $command->identityId = $procedure->getSecondFactor()->identityId;
         $command->secondFactorId = $procedure->getSecondFactor()->id;
         $command->registrationCode = $procedure->getRegistrationCode();
+        $command->secondFactorType = $procedure->getSecondFactor()->type;
         $command->secondFactorIdentifier = $procedure->getInputSecondFactorIdentifier();
         $command->documentNumber = $procedure->getDocumentNumber();
         $command->identityVerified = $procedure->isIdentityVerified();
