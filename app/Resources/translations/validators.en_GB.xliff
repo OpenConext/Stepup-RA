@@ -294,6 +294,22 @@
         <source>middleware_client.dto.vetted_second_factor.type.must_not_be_blank</source>
         <target>Vetted second factor's type may not be blank.</target>
       </trans-unit>
+      <trans-unit id="bcdfe3ce9a1c207e6cefccc3b20bdcbeb2370a62" resname="ra.accredit_candidate.contact_information.may_not_be_blank">
+        <source>ra.accredit_candidate.contact_information.may_not_be_blank</source>
+        <target>Contact information may not be blank</target>
+      </trans-unit>
+      <trans-unit id="aaa6ef853fef543fd67b8f5845de82e5cb214e98" resname="ra.accredit_candidate.location.may_not_be_blank">
+        <source>ra.accredit_candidate.location.may_not_be_blank</source>
+        <target>Location may not be blank</target>
+      </trans-unit>
+      <trans-unit id="75ad2fe7e5198417f56219c84b35bcefe6c21be1" resname="ra.amend_ra_information.contact_information">
+        <source>ra.amend_ra_information.contact_information</source>
+        <target>Contact information may not be blank</target>
+      </trans-unit>
+      <trans-unit id="eb93c9798d8f0004d45cd3adf417803ce93ac05b" resname="ra.amend_ra_information.location">
+        <source>ra.amend_ra_information.location</source>
+        <target>Location may not be blank</target>
+      </trans-unit>
       <trans-unit id="095af319676e1135c06bbe6bb8501816ca49fc33" resname="ra.form.extension.ra_role.must_be_valid_choice">
         <source>ra.form.extension.ra_role.must_be_valid_choice</source>
         <target>The selected role is not a valid choice</target>

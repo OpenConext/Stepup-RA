@@ -28,11 +28,17 @@ class AmendRegistrationAuthorityInformationCommand
     public $identityId;
 
     /**
+     * @Assert\NotBlank(message="ra.amend_ra_information.location")
+     * @Assert\Type(type="string")
+     *
      * @var string
      */
     public $location;
 
     /**
+     * @Assert\NotBlank(message="ra.amend_ra_information.contact_information")
+     * @Assert\Type(type="string")
+     *
      * @var string
      */
     public $contactInformation;

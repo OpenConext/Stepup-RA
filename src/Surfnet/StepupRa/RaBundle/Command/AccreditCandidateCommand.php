@@ -33,11 +33,17 @@ class AccreditCandidateCommand
     public $institution;
 
     /**
+     * @Assert\NotBlank(message="ra.accredit_candidate.location.may_not_be_blank")
+     * @Assert\Type(type="string")
+     *
      * @var string
      */
     public $location;
 
     /**
+     * @Assert\NotBlank(message="ra.accredit_candidate.contact_information.may_not_be_blank")
+     * @Assert\Type(type="string")
+     *
      * @var string
      */
     public $contactInformation;
