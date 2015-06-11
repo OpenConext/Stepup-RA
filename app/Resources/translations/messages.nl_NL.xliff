@@ -359,10 +359,20 @@
         <source>ra.form.ra_verify_phone_number.text.challenge</source>
         <target>Code</target>
       </trans-unit>
+      <trans-unit id="823c5d1536401e73cf7bda2e291fd21bdb207f96" resname="ra.form.start_vetting_procedure.loa_insufficient">
+        <jms:reference-file line="5">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.form.start_vetting_procedure.loa_insufficient</source>
+        <target>U voldoet niet aan de veiligheidsvoorwaarden om dit token te activeren.</target>
+      </trans-unit>
       <trans-unit id="e73181ada31381965b99c58914199f626edb7ec9" resname="ra.form.start_vetting_procedure.search">
         <jms:reference-file line="42">Form/Type/StartVettingProcedureType.php</jms:reference-file>
         <source>ra.form.start_vetting_procedure.search</source>
         <target>Zoeken</target>
+      </trans-unit>
+      <trans-unit id="5bd6714db09c4a8b818081f114f12f7415a50e40" resname="ra.form.start_vetting_procedure.unknown_registration_code">
+        <jms:reference-file line="4">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.form.start_vetting_procedure.unknown_registration_code</source>
+        <target>Onbekende registratiecode</target>
       </trans-unit>
       <trans-unit id="d6e1e4afd83a6b390c24762cee6939338734afc5" resname="ra.form.verify_identity.document_number.label">
         <jms:reference-file line="30">Form/Type/VerifyIdentityType.php</jms:reference-file>
@@ -378,6 +388,11 @@
         <jms:reference-file line="44">Form/Type/VerifyIdentityType.php</jms:reference-file>
         <source>ra.form.verify_identity.verify_identity.button</source>
         <target>Verifieer identiteit</target>
+      </trans-unit>
+      <trans-unit id="584ef35d6af2f2917e708a1a6092f0b0938151e4" resname="ra.management.amend_ra_info.error.middleware_command_failed">
+        <jms:reference-file line="60">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.amend_ra_info.error.middleware_command_failed</source>
+        <target>Het wijzigen van de gegevens van de RA is mislukt vanwege een serverfout.</target>
       </trans-unit>
       <trans-unit id="5fa5dfb0514d509432e81f5b2344b12d7351715b" resname="ra.management.amend_ra_info.info_amended">
         <jms:reference-file line="217">RaBundle/Controller/RaManagementController.php</jms:reference-file>
@@ -461,6 +476,11 @@
         <jms:reference-file line="263">RaBundle/Controller/RaManagementController.php</jms:reference-file>
         <source>ra.management.change_ra_role_changed</source>
         <target>De Registratie Authoriteit heeft de gekozen rol toegewezen gekregen</target>
+      </trans-unit>
+      <trans-unit id="f2d212150076ce42ffe47d514f182ad5e7a6c9fe" resname="ra.management.create_ra.error.middleware_command_failed">
+        <jms:reference-file line="59">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.create_ra.error.middleware_command_failed</source>
+        <target>De gekozen rol kon niet aan de identiteit toegekend worden vanwege een serverfout.</target>
       </trans-unit>
       <trans-unit id="4029e4383ef4a57077b346cc66f971c9cafb71c3" resname="ra.management.create_ra.identity_accredited">
         <jms:reference-file line="171">RaBundle/Controller/RaManagementController.php</jms:reference-file>
@@ -687,6 +707,26 @@
         <source>ra.menu.sraa_change_institution</source>
         <target>verander</target>
       </trans-unit>
+      <trans-unit id="ff49fbf3684f01850a026abeff8b6f3cd6d89a98" resname="ra.prove_phone_possession.challenge_expired">
+        <jms:reference-file line="17">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.prove_phone_possession.challenge_expired</source>
+        <target>Uw code is verlopen. Vraag een nieuwe code aan.</target>
+      </trans-unit>
+      <trans-unit id="f4e4a44fa84430b2d144a6dee71c69e914a963dd" resname="ra.prove_phone_possession.challenge_response_incorrect">
+        <jms:reference-file line="16">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.prove_phone_possession.challenge_response_incorrect</source>
+        <target>Deze code is niet juist. Probeer het nog eens, of vraag een nieuwe code op.</target>
+      </trans-unit>
+      <trans-unit id="0d9cb3b18021e2899cf1031812da9a489b60093d" resname="ra.prove_phone_possession.too_many_attempts">
+        <jms:reference-file line="18">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.prove_phone_possession.too_many_attempts</source>
+        <target>U heeft de limiet van tien pogingen bereikt; u kunt geen codes meer verifiëren. Neem contact op met uw helpdesk of probeer het later nog eens.</target>
+      </trans-unit>
+      <trans-unit id="06ada20a09df4484b41e75a58e813b54d4904f33" resname="ra.prove_yubikey_possession.different_yubikey_used">
+        <jms:reference-file line="12">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.prove_yubikey_possession.different_yubikey_used</source>
+        <target>Tijdens het registratieproces heeft de gebruiker een andere Yubikey gebruikt.</target>
+      </trans-unit>
       <trans-unit id="f12e743e43bca49fe86f99db331ded47fb88f1da" resname="ra.registration.sms.text.otp_requests_remaining">
         <jms:reference-file line="23">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
         <source>ra.registration.sms.text.otp_requests_remaining</source>
@@ -828,10 +868,35 @@
         <source>ra.secondfactor.revoke</source>
         <target>Verwijderen</target>
       </trans-unit>
+      <trans-unit id="a718fae8b5a05ddfe4f55f3ed1a4bb8b365ea12c" resname="ra.sms_send_challenge.send_sms_challenge_failed">
+        <jms:reference-file line="15">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.sms_send_challenge.send_sms_challenge_failed</source>
+        <target>Het versturen van de SMS-code is mislukt.</target>
+      </trans-unit>
       <trans-unit id="e8ada95651cf644c6bbeeff32c330b4fde42f87d" resname="ra.sraa.changed_institution">
         <jms:reference-file line="47">RaBundle/Controller/SraaController.php</jms:reference-file>
         <source>ra.sraa.changed_institution</source>
         <target>Je instituut is veranderd naar "%institution%"</target>
+      </trans-unit>
+      <trans-unit id="abe2e824031a2393db11918365a49cf65d3ec585" resname="ra.verify_identity.identity_verification_failed">
+        <jms:reference-file line="7">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.verify_identity.identity_verification_failed</source>
+        <target>De verificatie van de identiteit is mislukt</target>
+      </trans-unit>
+      <trans-unit id="ba1980036b712688f6681fb8f86ac6925a1cba5a" resname="ra.verify_identity.second_factor_vetting_failed">
+        <jms:reference-file line="6">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.verify_identity.second_factor_vetting_failed</source>
+        <target>Het beveiligingstoken kon om onbekende redenen niet gekeurd worden.</target>
+      </trans-unit>
+      <trans-unit id="7b8f4a813ad65c5f70c2f28e3459db2300aa11d8" resname="ra.verify_yubikey_command.otp.otp_invalid">
+        <jms:reference-file line="10">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.verify_yubikey_command.otp.otp_invalid</source>
+        <target>De Yubikey code is ongeldig. Probeer het nog eens</target>
+      </trans-unit>
+      <trans-unit id="669fe8c5f63adab894fc62f2bbf036f2fe9e8b6c" resname="ra.verify_yubikey_command.otp.verification_error">
+        <jms:reference-file line="11">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.verify_yubikey_command.otp.verification_error</source>
+        <target>De Yubikey-code kon om onbekende redenen niet geverifiëerd worden.</target>
       </trans-unit>
       <trans-unit id="28ff860b3260f99aeb7268aa31f5edcfbc10b531" resname="ra.vetting.button.cancel_procedure">
         <jms:reference-file line="5">Vetting/partial/cancelVettingProcedure.html.twig</jms:reference-file>
