@@ -314,46 +314,6 @@
         <source>ra.form.extension.ra_role.must_be_valid_choice</source>
         <target>The selected role is not a valid choice</target>
       </trans-unit>
-      <trans-unit id="823c5d1536401e73cf7bda2e291fd21bdb207f96" resname="ra.form.start_vetting_procedure.loa_insufficient">
-        <jms:reference-file line="5">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.form.start_vetting_procedure.loa_insufficient</source>
-        <target>You don't have the security clearance to vet the token that matches this registration code.</target>
-      </trans-unit>
-      <trans-unit id="5bd6714db09c4a8b818081f114f12f7415a50e40" resname="ra.form.start_vetting_procedure.unknown_registration_code">
-        <jms:reference-file line="4">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.form.start_vetting_procedure.unknown_registration_code</source>
-        <target>Unknown registration code</target>
-      </trans-unit>
-      <trans-unit id="584ef35d6af2f2917e708a1a6092f0b0938151e4" resname="ra.management.amend_ra_info.error.middleware_command_failed">
-        <jms:reference-file line="60">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.management.amend_ra_info.error.middleware_command_failed</source>
-        <target>The amendment of the RA's information failed due to a server error.</target>
-      </trans-unit>
-      <trans-unit id="f2d212150076ce42ffe47d514f182ad5e7a6c9fe" resname="ra.management.create_ra.error.middleware_command_failed">
-        <jms:reference-file line="59">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.management.create_ra.error.middleware_command_failed</source>
-        <target>The identity could not be granted the chosen role due to a server error.</target>
-      </trans-unit>
-      <trans-unit id="ff49fbf3684f01850a026abeff8b6f3cd6d89a98" resname="ra.prove_phone_possession.challenge_expired">
-        <jms:reference-file line="17">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.prove_phone_possession.challenge_expired</source>
-        <target>Your code has expired. Please request a new code.</target>
-      </trans-unit>
-      <trans-unit id="f4e4a44fa84430b2d144a6dee71c69e914a963dd" resname="ra.prove_phone_possession.challenge_response_incorrect">
-        <jms:reference-file line="16">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.prove_phone_possession.challenge_response_incorrect</source>
-        <target>This code is not correct. Please try again or request a new code.</target>
-      </trans-unit>
-      <trans-unit id="0d9cb3b18021e2899cf1031812da9a489b60093d" resname="ra.prove_phone_possession.too_many_attempts">
-        <jms:reference-file line="18">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.prove_phone_possession.too_many_attempts</source>
-        <target>You have exceeded the limit of ten attempts; you can no longer attempt verification of any more codes. Contact your helpdesk or try again later.</target>
-      </trans-unit>
-      <trans-unit id="06ada20a09df4484b41e75a58e813b54d4904f33" resname="ra.prove_yubikey_possession.different_yubikey_used">
-        <jms:reference-file line="12">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.prove_yubikey_possession.different_yubikey_used</source>
-        <target>A different Yubikey was used by the user during the registration process.</target>
-      </trans-unit>
       <trans-unit id="63afbb9b99d8cd2a35f01ca455bd73b2994397c8" resname="ra.search_ra_candidates.institution.blank">
         <source>ra.search_ra_candidates.institution.blank</source>
         <target>Institution must be set</target>
@@ -410,11 +370,6 @@
         <source>ra.search_ra_second_factors.type.invalid_choice</source>
         <target>Cannot filter by given token type.</target>
       </trans-unit>
-      <trans-unit id="a718fae8b5a05ddfe4f55f3ed1a4bb8b365ea12c" resname="ra.sms_send_challenge.send_sms_challenge_failed">
-        <jms:reference-file line="15">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.sms_send_challenge.send_sms_challenge_failed</source>
-        <target>The sending of the code via SMS failed.</target>
-      </trans-unit>
       <trans-unit id="25f28c755234f7056ca31e9a493447c1f328fbfd" resname="ra.start_vetting_procedure.registration_code.may_not_be_empty">
         <source>ra.start_vetting_procedure.registration_code.may_not_be_empty</source>
         <target>Please enter the registration code the user has received by e-mail</target>
@@ -422,16 +377,6 @@
       <trans-unit id="0891f5e98021a5c756bc410f56c1450858d0d621" resname="ra.start_vetting_procedure.registration_code.must_be_string">
         <source>ra.start_vetting_procedure.registration_code.must_be_string</source>
         <target>Please enter the registration code the user has received by e-mail</target>
-      </trans-unit>
-      <trans-unit id="abe2e824031a2393db11918365a49cf65d3ec585" resname="ra.verify_identity.identity_verification_failed">
-        <jms:reference-file line="7">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.verify_identity.identity_verification_failed</source>
-        <target>Identity verification failed</target>
-      </trans-unit>
-      <trans-unit id="ba1980036b712688f6681fb8f86ac6925a1cba5a" resname="ra.verify_identity.second_factor_vetting_failed">
-        <jms:reference-file line="6">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.verify_identity.second_factor_vetting_failed</source>
-        <target>The security token could not be vetted due to unknown reasons.</target>
       </trans-unit>
       <trans-unit id="fe4c3e776f7b06d80ac6f0a4ac29013337290fe6" resname="ra.verify_identity_command.document_number.may_not_be_empty">
         <source>ra.verify_identity_command.document_number.may_not_be_empty</source>
@@ -452,16 +397,6 @@
       <trans-unit id="3c1d0889a1f01c377dd4d50a3b29b2ec634be91d" resname="ra.verify_yubikey_command.otp.must_be_string">
         <source>ra.verify_yubikey_command.otp.must_be_string</source>
         <target>Press and hold the button on the personal Yubikey of the user once; a OTP will be generated in the field below.</target>
-      </trans-unit>
-      <trans-unit id="7b8f4a813ad65c5f70c2f28e3459db2300aa11d8" resname="ra.verify_yubikey_command.otp.otp_invalid">
-        <jms:reference-file line="10">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.verify_yubikey_command.otp.otp_invalid</source>
-        <target>The Yubikey code was invalid. Please try again.</target>
-      </trans-unit>
-      <trans-unit id="669fe8c5f63adab894fc62f2bbf036f2fe9e8b6c" resname="ra.verify_yubikey_command.otp.verification_error">
-        <jms:reference-file line="11">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.verify_yubikey_command.otp.verification_error</source>
-        <target>The Yubikey code could not be verified due to unknown reasons.</target>
       </trans-unit>
       <trans-unit id="049f2b52bc9cf777280bbfc8b787f6e69a701beb" resname="stepup.send_sms_command.recipient.may_not_be_empty">
         <source>stepup.send_sms_command.recipient.may_not_be_empty</source>
