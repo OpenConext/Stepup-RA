@@ -28,6 +28,7 @@
                 <h1>{{ 'app.name'|trans }}</h1>
             </div>
             {% block menu %}
+            {% if app.user %}
             <div class="row-fluid">
                 <div class="col-sm-6">
                     <ul class="nav nav-pills">
@@ -48,13 +49,11 @@
                     <form name="logout" method="post" action="{{ path('logout') }}" class="pull-right">
                         <button type="submit" class="btn btn-link"><i class="fa fa-sign-out"></i> {{ 'button.logout'|trans }}</button>
                     </form>
-                    {% if app.user %}
                         {% set locale_switcher = stepup_locale_switcher(app.request.locale, 'ra_switch_locale', {'return-url': app.request.uri}) %}
                         {{ form_start(locale_switcher, { attr: { class: 'form-inline' }}) }}
                         {{ form_widget(locale_switcher.locale) }}
                         {{ form_widget(locale_switcher.switch) }}
                         {{ form_end(locale_switcher) }}
-                    {% endif %}
                 {% if is_granted('ROLE_SRAA') %}
                     <ul class="nav nav-pills pull-right">
                         <li role="presentation"{% if app.request.attributes.get('_route') == 'sraa_select_institution' %} class="active"{% endif %}>
@@ -68,6 +67,7 @@
             </div>
             <div class="clearfix"></div>
             <hr>
+            {% endif %}
             {% endblock menu %}
         {% endblock page_header %}
 
