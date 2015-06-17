@@ -1317,7 +1317,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/22bc280b9a254caa42c5b44b55f43eb33ab15426",
+                "url": "https://api.github.com/repos/phiamo/MopaBootstrapBundle/zipball/4d4b6291b47fc70491a4f92105be39d6bcccbb95",
                 "reference": "818b0f47ebd352559950e9a64431ff9472e8a9dd",
                 "shasum": ""
             },
@@ -1553,12 +1553,12 @@
             "version": "2.8.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ramsey/uuid.git",
+                "url": "https://github.com/ramsey/rhumsaa-uuid.git",
                 "reference": "cca98c652cac412c9c2f109c69e5532f313435fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/cca98c652cac412c9c2f109c69e5532f313435fc",
+                "url": "https://api.github.com/repos/ramsey/rhumsaa-uuid/zipball/cca98c652cac412c9c2f109c69e5532f313435fc",
                 "reference": "cca98c652cac412c9c2f109c69e5532f313435fc",
                 "shasum": ""
             },
@@ -1888,12 +1888,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-bundle.git",
-                "reference": "543596b5a3fa294e89a2b47dc53d8ecceb21ce36"
+                "reference": "b11ce75c7f00b64b8b000846db6ef1d56dcd490c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/23f703e235cf2408311d359754bd767432dcb5b1",
-                "reference": "543596b5a3fa294e89a2b47dc53d8ecceb21ce36",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/b11ce75c7f00b64b8b000846db6ef1d56dcd490c",
+                "reference": "b11ce75c7f00b64b8b000846db6ef1d56dcd490c",
                 "shasum": ""
             },
             "require": {
@@ -1932,7 +1932,7 @@
                 "suaas",
                 "surfnet"
             ],
-            "time": "2015-06-03 16:28:41"
+            "time": "2015-06-17 08:48:36"
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
@@ -1993,7 +1993,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-saml-bundle/zipball/410f74d707053162ff043f57fbc114ddfdb65cab",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-saml-bundle/zipball/05e7adbb0ae123b8b433948aa564a187486b1c64",
                 "reference": "410f74d707053162ff043f57fbc114ddfdb65cab",
                 "shasum": ""
             },
