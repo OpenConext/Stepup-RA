@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
+use Surfnet\StepupBundle\Value\YubikeyPublicId;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyOtpCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult;
@@ -58,7 +59,12 @@ class YubikeySecondFactorService
         $verifyOtpCommand->institution = $command->institution;
 
         $verificationResult = $this->yubikeyService->verify($verifyOtpCommand);
-        $publicId = Otp::isValid($command->otp) ? Otp::fromString($command->otp)->publicId : null;
+
+        if (Otp::isValid($command->otp)) {
+            $publicId = YubikeyPublicId::fromModHex(Otp::fromString($command->otp)->publicId)->getYubikeyPublicId();
+        } else {
+            $publicId = null;
+        }
 
         if ($verificationResult->isServerError()) {
             return new VerificationResult(VerificationResult::RESULT_OTP_VERIFICATION_FAILED, $publicId);

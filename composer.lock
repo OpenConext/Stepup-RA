@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cad14c3f0ab3334c1de2773a9791dd30",
+    "hash": "24d9b6d58a747fdc54a916793ef0c91c",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1884,19 +1884,20 @@
         },
         {
             "name": "surfnet/stepup-bundle",
-            "version": "dev-develop",
+            "version": "dev-feature/numeric-yubikey-ids",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-bundle.git",
-                "reference": "b11ce75c7f00b64b8b000846db6ef1d56dcd490c"
+                "reference": "7b9564d18e7426a52d2c4c80c3350e2a3ec1803d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/b11ce75c7f00b64b8b000846db6ef1d56dcd490c",
-                "reference": "b11ce75c7f00b64b8b000846db6ef1d56dcd490c",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/7b9564d18e7426a52d2c4c80c3350e2a3ec1803d",
+                "reference": "7b9564d18e7426a52d2c4c80c3350e2a3ec1803d",
                 "shasum": ""
             },
             "require": {
+                "ext-gmp": "*",
                 "ext-openssl": "*",
                 "graylog2/gelf-php": "~1.1",
                 "guzzlehttp/guzzle": "~4",
@@ -1932,7 +1933,7 @@
                 "suaas",
                 "surfnet"
             ],
-            "time": "2015-06-17 08:48:36"
+            "time": "2015-06-18 15:10:25"
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
@@ -1944,7 +1945,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/541df9564a8680b6001b0c18a8b01b74f6013158",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/1cd3513f26a6df7dbce83188e6aa92fcba51bcc7",
                 "reference": "541df9564a8680b6001b0c18a8b01b74f6013158",
                 "shasum": ""
             },

@@ -26,7 +26,7 @@
         "surfnet/stepup-middleware-client-bundle": "dev-develop",
         "simplesamlphp/saml2": "dev-master",
         "surfnet/stepup-saml-bundle": "dev-develop",
-        "surfnet/stepup-bundle": "dev-develop",
+        "surfnet/stepup-bundle": "dev-feature/numeric-yubikey-ids",
         "guzzlehttp/guzzle": "~4",
         "symfony/swiftmailer-bundle": "~2.3",
         "knplabs/knp-paginator-bundle": "~2.4"
