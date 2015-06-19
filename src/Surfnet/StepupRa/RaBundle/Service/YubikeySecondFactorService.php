@@ -78,13 +78,13 @@ class YubikeySecondFactorService
                 'Yubikey used by registrant during vetting did not match the one used during registration.'
             );
 
-            return new VerificationResult(VerificationResult::RESULT_PUBLIC_ID_DID_NOT_MATCH, $publicId->getYubikeyPublicId());
+            return new VerificationResult(VerificationResult::RESULT_PUBLIC_ID_DID_NOT_MATCH, $publicId);
         }
 
         $this->logger->info(
             'Yubikey used by registrant during vetting matches the one used during registration.'
         );
 
-        return new VerificationResult(VerificationResult::RESULT_PUBLIC_ID_MATCHED, $publicId->getYubikeyPublicId());
+        return new VerificationResult(VerificationResult::RESULT_PUBLIC_ID_MATCHED, $publicId);
     }
 }
