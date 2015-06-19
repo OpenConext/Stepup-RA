@@ -1888,15 +1888,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-bundle.git",
-                "reference": "b11ce75c7f00b64b8b000846db6ef1d56dcd490c"
+                "reference": "38e51b79287948932774ce44942a0877b1aeb23e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/b11ce75c7f00b64b8b000846db6ef1d56dcd490c",
-                "reference": "b11ce75c7f00b64b8b000846db6ef1d56dcd490c",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/38e51b79287948932774ce44942a0877b1aeb23e",
+                "reference": "38e51b79287948932774ce44942a0877b1aeb23e",
                 "shasum": ""
             },
             "require": {
+                "ext-gmp": "*",
                 "ext-openssl": "*",
                 "graylog2/gelf-php": "~1.1",
                 "guzzlehttp/guzzle": "~4",
@@ -1932,7 +1933,7 @@
                 "suaas",
                 "surfnet"
             ],
-            "time": "2015-06-17 08:48:36"
+            "time": "2015-06-19 11:32:32"
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
@@ -1944,7 +1945,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/541df9564a8680b6001b0c18a8b01b74f6013158",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/1cd3513f26a6df7dbce83188e6aa92fcba51bcc7",
                 "reference": "541df9564a8680b6001b0c18a8b01b74f6013158",
                 "shasum": ""
             },
@@ -1993,7 +1994,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-saml-bundle/zipball/05e7adbb0ae123b8b433948aa564a187486b1c64",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-saml-bundle/zipball/cdad0d6597f2577ec7c0c69bb3099a6d2ddc45ad",
                 "reference": "410f74d707053162ff043f57fbc114ddfdb65cab",
                 "shasum": ""
             },
