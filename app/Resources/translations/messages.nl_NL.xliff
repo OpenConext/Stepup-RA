@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-04-28T10:51:13Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2015-06-03T13:28:35Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -8,18 +8,143 @@
     <body>
       <trans-unit id="0c3112826a8c897ac0b6a3d3a8432059b74dd996" resname="app.name">
         <jms:reference-file line="6">Resources/views/base.html.twig</jms:reference-file>
-        <jms:reference-file line="26">Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="28">Resources/views/base.html.twig</jms:reference-file>
         <source>app.name</source>
         <target>Step-up Registration Authority</target>
       </trans-unit>
       <trans-unit id="ff6230b38fe127145d864f4d4920ceb4d857af18" resname="button.logout">
-        <jms:reference-file line="41">Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="49">Resources/views/base.html.twig</jms:reference-file>
         <source>button.logout</source>
         <target>Uitloggen</target>
       </trans-unit>
+      <trans-unit id="a08764057e3607049e3495943676b29f7baefba9" resname="locale.en_GB">
+        <jms:reference-file line="2">Resources/views/translations.twig</jms:reference-file>
+        <source>locale.en_GB</source>
+        <target>English</target>
+      </trans-unit>
+      <trans-unit id="169792c2b812adec2ddf0b47e7be0a56c1b892ae" resname="locale.nl_NL">
+        <jms:reference-file line="3">Resources/views/translations.twig</jms:reference-file>
+        <source>locale.nl_NL</source>
+        <target>Nederlands</target>
+      </trans-unit>
+      <trans-unit id="2c51bcecf7826f003b2e051e4176c14b46372263" resname="ra.auditlog.action">
+        <jms:reference-file line="24">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.action</source>
+        <target>Gebeurtenis</target>
+      </trans-unit>
+      <trans-unit id="37836182b3260cbaf343a44bfb622776839666cc" resname="ra.auditlog.action.accredited_as_ra">
+        <jms:reference-file line="49">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.accredited_as_ra</source>
+        <target>Geaccrediteerd als RA</target>
+      </trans-unit>
+      <trans-unit id="66b320bfe1f15eabe6e0baa04e94b71c2152f8e2" resname="ra.auditlog.action.accredited_as_raa">
+        <jms:reference-file line="50">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.accredited_as_raa</source>
+        <target>Geaccrediteerd als RAA</target>
+      </trans-unit>
+      <trans-unit id="ba50c2f5a7066cd14d8ae1f33c5f4decc892d0b7" resname="ra.auditlog.action.appointed_as_ra">
+        <jms:reference-file line="51">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.appointed_as_ra</source>
+        <target>RA rol toegewezen gekregen</target>
+      </trans-unit>
+      <trans-unit id="f1a9c08794cd9c91a7f63841cc1c9ff61c3da452" resname="ra.auditlog.action.appointed_as_raa">
+        <jms:reference-file line="52">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.appointed_as_raa</source>
+        <target>RAA rol toegewezen gekregen</target>
+      </trans-unit>
+      <trans-unit id="9c05a55d8f3ef06afe4f9d81883c0cd6dc415933" resname="ra.auditlog.action.bootstrapped">
+        <jms:reference-file line="48">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.bootstrapped</source>
+        <target>Identiteit en Token gebootstrapped</target>
+      </trans-unit>
+      <trans-unit id="c9199d83adb7c6ebeaa6cfe08d2fc57f308677a9" resname="ra.auditlog.action.created">
+        <jms:reference-file line="43">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.created</source>
+        <target>Identiteit aangemaakt</target>
+      </trans-unit>
+      <trans-unit id="f2264e8a139e432bc0b30abd24ab34750e944da0" resname="ra.auditlog.action.email_changed">
+        <jms:reference-file line="44">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.email_changed</source>
+        <target>Email gewijzigd</target>
+      </trans-unit>
+      <trans-unit id="8750a7f384fd2159c68613b478b283083c45f8fa" resname="ra.auditlog.action.email_verified">
+        <jms:reference-file line="41">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.email_verified</source>
+        <target>Email geverifieerd</target>
+      </trans-unit>
+      <trans-unit id="59b375a103f9bff34d2da25cb0563524354b357d" resname="ra.auditlog.action.possession_proven">
+        <jms:reference-file line="42">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.possession_proven</source>
+        <target>Bezit aangetoond</target>
+      </trans-unit>
+      <trans-unit id="6182cba621f2930f0600729d0cf846477b645851" resname="ra.auditlog.action.renamed">
+        <jms:reference-file line="45">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.renamed</source>
+        <target>Naam gewijzigd</target>
+      </trans-unit>
+      <trans-unit id="625f464c28c526a1fb856c5c6c8387e8d4c49518" resname="ra.auditlog.action.retracted_as_ra">
+        <jms:reference-file line="53">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.retracted_as_ra</source>
+        <target>Verwijderd als RA(A)</target>
+      </trans-unit>
+      <trans-unit id="3b4520b328a4b841d468fd967962d674db2d2947" resname="ra.auditlog.action.revoked">
+        <jms:reference-file line="47">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.revoked</source>
+        <target>Token verwijderd</target>
+      </trans-unit>
+      <trans-unit id="cfa1707c5ee601824695a03199bac938cbac9a62" resname="ra.auditlog.action.revoked_by_ra">
+        <jms:reference-file line="40">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.revoked_by_ra</source>
+        <target>Token verwijderd door RA</target>
+      </trans-unit>
+      <trans-unit id="0685bbf771d00c304c5807c48e34ba0c8b73b3eb" resname="ra.auditlog.action.vetted">
+        <jms:reference-file line="46">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.auditlog.action.vetted</source>
+        <target>Token gevet</target>
+      </trans-unit>
+      <trans-unit id="d2c7e70ded524ca93e7cadba4950ae1d2a22889a" resname="ra.auditlog.actor">
+        <jms:reference-file line="26">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.actor</source>
+        <target>Door</target>
+      </trans-unit>
+      <trans-unit id="c9c0a8094aed4936c18a61dfcbf86f72e2429ed1" resname="ra.auditlog.commonName">
+        <jms:reference-file line="10">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.commonName</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="6e6977aafa35381ed148394cb1313d9e8a0aeec3" resname="ra.auditlog.email">
+        <jms:reference-file line="14">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="8a542621cac70df8e15d200c8bd2f2b650663849" resname="ra.auditlog.no_entries">
+        <jms:reference-file line="44">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.no_entries</source>
+        <target>Er zijn geen records in de audit log gevonden</target>
+      </trans-unit>
+      <trans-unit id="2624da444b36c4d337a4287b9150b40fbcd68cb6" resname="ra.auditlog.second_factor_id">
+        <jms:reference-file line="22">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.second_factor_id</source>
+        <target>Token identifier</target>
+      </trans-unit>
+      <trans-unit id="9d81b131675cde2dcecc00c77cdebcc85c55fb5b" resname="ra.auditlog.second_factor_type">
+        <jms:reference-file line="23">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.second_factor_type</source>
+        <target>Token type</target>
+      </trans-unit>
+      <trans-unit id="105a4be63fbc936f835b04568cbebd5ad7ec0534" resname="ra.auditlog.title">
+        <jms:reference-file line="3">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.title</source>
+        <target>Audit log</target>
+      </trans-unit>
+      <trans-unit id="d3a72dffd0d2d209bd5948e6072af503c2ee360b" resname="ra.auditlog.when">
+        <jms:reference-file line="25">views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <source>ra.auditlog.when</source>
+        <target>Datum</target>
+      </trans-unit>
       <trans-unit id="5a045b50111a6cdd614329837fa07cbf64d896a6" resname="ra.error.button.go_home">
-        <jms:reference-file line="9">views/Exception/error404.html.twig</jms:reference-file>
-        <jms:reference-file line="9">views/Exception/error.html.twig</jms:reference-file>
+        <jms:reference-file line="12">views/Exception/error404.html.twig</jms:reference-file>
+        <jms:reference-file line="12">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.button.go_home</source>
         <target>Terug naar Home</target>
       </trans-unit>
@@ -27,6 +152,21 @@
         <jms:reference-file line="3">views/Exception/error404.html.twig</jms:reference-file>
         <source>ra.error.page_not_found.title</source>
         <target>Pagina niet gevonden</target>
+      </trans-unit>
+      <trans-unit id="bc635e1d511d5493da1d62205474b9b528a909e7" resname="ra.error.saml_authentication_exception.button.try_again">
+        <jms:reference-file line="10">Saml/Exception/authenticationException.html.twig</jms:reference-file>
+        <source>ra.error.saml_authentication_exception.button.try_again</source>
+        <target>Probeer nogmaals in te loggen</target>
+      </trans-unit>
+      <trans-unit id="807a7c0d931d6c921d28cc278b1fabe039da6aca" resname="ra.error.saml_authentication_exception.text.authentication_exception">
+        <jms:reference-file line="8">Saml/Exception/authenticationException.html.twig</jms:reference-file>
+        <source>ra.error.saml_authentication_exception.text.authentication_exception</source>
+        <target>Inloggen mislukt. Probeer het nog eens.</target>
+      </trans-unit>
+      <trans-unit id="c2f8bdc515213137f633b8d91ebe6f4f43692f92" resname="ra.error.saml_authentication_exception.title">
+        <jms:reference-file line="3">Saml/Exception/authenticationException.html.twig</jms:reference-file>
+        <source>ra.error.saml_authentication_exception.title</source>
+        <target>Inloggen</target>
       </trans-unit>
       <trans-unit id="47315f10d842cd2eebc6edd15f7fc5fa5bdeb631" resname="ra.error.saml_authn_failed.button.try_again">
         <jms:reference-file line="10">Saml/Exception/authnFailed.html.twig</jms:reference-file>
@@ -41,6 +181,21 @@
       <trans-unit id="91796128309d18718b9a06d39bd0b24a705e8c4e" resname="ra.error.saml_authn_failed.title">
         <jms:reference-file line="3">Saml/Exception/authnFailed.html.twig</jms:reference-file>
         <source>ra.error.saml_authn_failed.title</source>
+        <target>Inloggen</target>
+      </trans-unit>
+      <trans-unit id="04f2844e0bcb0107e26422ea7817be4493b00b41" resname="ra.error.saml_bad_credentials.button.try_again">
+        <jms:reference-file line="10">Saml/Exception/badCredentialsException.html.twig</jms:reference-file>
+        <source>ra.error.saml_bad_credentials.button.try_again</source>
+        <target>Probeer nogmaals in te loggen</target>
+      </trans-unit>
+      <trans-unit id="30a8b063d31913d070d6f0c8ff823512cb1f6dd2" resname="ra.error.saml_bad_credentials.text.bad_credentials">
+        <jms:reference-file line="8">Saml/Exception/badCredentialsException.html.twig</jms:reference-file>
+        <source>ra.error.saml_bad_credentials.text.bad_credentials</source>
+        <target>Je hebt niet de juiste rechten om in te mogen loggen.</target>
+      </trans-unit>
+      <trans-unit id="f439b5301a358a31defda15db12d38a35cf1a3bb" resname="ra.error.saml_bad_credentials.title">
+        <jms:reference-file line="3">Saml/Exception/badCredentialsException.html.twig</jms:reference-file>
+        <source>ra.error.saml_bad_credentials.title</source>
         <target>Inloggen</target>
       </trans-unit>
       <trans-unit id="4c1a7f7aa6b9f7a2928e894933fac97b7d41198c" resname="ra.error.saml_no_authn_context.text.authn_failed">
@@ -64,28 +219,28 @@
         <target>Onvoldoende rechten om in te loggen</target>
       </trans-unit>
       <trans-unit id="40350a9cdf8f8964a6900f7dc524a91fa7b23df6" resname="ra.error.text.an_error_occurred">
-        <jms:reference-file line="8">views/Exception/error.html.twig</jms:reference-file>
+        <jms:reference-file line="11">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.text.an_error_occurred</source>
         <target>Oeps, er gaat iets fout. Probeer het nog eens of ga terug naar Home</target>
       </trans-unit>
       <trans-unit id="e7e16bd377d6b3513aee56a7203224b1838b8876" resname="ra.error.text.if_you_think_this_is_incorrect_report">
-        <jms:reference-file line="13">views/Exception/error404.html.twig</jms:reference-file>
+        <jms:reference-file line="16">views/Exception/error404.html.twig</jms:reference-file>
         <source>ra.error.text.if_you_think_this_is_incorrect_report</source>
         <target>Meld deze error code aan de helpdesk via support@surfconext.nl</target>
       </trans-unit>
       <trans-unit id="cabba69d3aecedfc3535dd2b976519d1090290e2" resname="ra.error.text.page_not_found">
-        <jms:reference-file line="8">views/Exception/error404.html.twig</jms:reference-file>
+        <jms:reference-file line="11">views/Exception/error404.html.twig</jms:reference-file>
         <source>ra.error.text.page_not_found</source>
         <target>De pagina die je zocht kan niet gevonden worden. Probeer het nog eens, of ga terug naar Home.</target>
       </trans-unit>
       <trans-unit id="1e71b162b5df5571e03f1e5b4f89b366b0e60390" resname="ra.error.text.what_were_you_doing_well_fix_it">
-        <jms:reference-file line="13">views/Exception/error.html.twig</jms:reference-file>
+        <jms:reference-file line="16">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.text.what_were_you_doing_well_fix_it</source>
         <target>Meld deze error code aan de helpdesk via support@surfconext.nl</target>
       </trans-unit>
       <trans-unit id="97cec45f4b04606121bd0a6613f2673f4e55eff7" resname="ra.error.text.your_art_code">
-        <jms:reference-file line="12">views/Exception/error404.html.twig</jms:reference-file>
-        <jms:reference-file line="12">views/Exception/error.html.twig</jms:reference-file>
+        <jms:reference-file line="15">views/Exception/error404.html.twig</jms:reference-file>
+        <jms:reference-file line="15">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.text.your_art_code</source>
         <target>De fout code is:</target>
       </trans-unit>
@@ -103,6 +258,41 @@
         <jms:reference-file line="3">Saml/Exception/unmetLoa.html.twig</jms:reference-file>
         <source>ra.error.unmet_loa.title</source>
         <target>Onvoldoende veiligheidsmachtiging</target>
+      </trans-unit>
+      <trans-unit id="b172512ee794631a6aecb48e9188443e5ed7a6c3" resname="ra.flash.error_while_switching_locale">
+        <jms:reference-file line="60">RaBundle/Controller/LocaleController.php</jms:reference-file>
+        <source>ra.flash.error_while_switching_locale</source>
+        <target>Het wisselen van taal is mislukt wegens een onbekende reden.</target>
+      </trans-unit>
+      <trans-unit id="f627bfabca402ae4730b846bf772dda85f7130c9" resname="ra.flash.invalid_switch_locale_form">
+        <jms:reference-file line="53">RaBundle/Controller/LocaleController.php</jms:reference-file>
+        <source>ra.flash.invalid_switch_locale_form</source>
+        <target>Het wisselen van taal is mislukt wegens een onbekende reden.</target>
+      </trans-unit>
+      <trans-unit id="c73b11f71b8ad5d46b3e42e649919aee4bc9ece5" resname="ra.form.extension.ra_role_choice.ra">
+        <jms:reference-file line="36">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.form.extension.ra_role_choice.ra</source>
+        <target>RA</target>
+      </trans-unit>
+      <trans-unit id="e55aa3fd11b0cd43d84e2e3e41be6729e7fc35f0" resname="ra.form.extension.ra_role_choice.raa">
+        <jms:reference-file line="37">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.form.extension.ra_role_choice.raa</source>
+        <target>RAA</target>
+      </trans-unit>
+      <trans-unit id="2ddc6712364551204f635e4718e015e682fd208c" resname="ra.form.ra_search_ra_candidates.button.search">
+        <jms:reference-file line="37">Form/Type/SearchRaCandidatesType.php</jms:reference-file>
+        <source>ra.form.ra_search_ra_candidates.button.search</source>
+        <target>Zoeken</target>
+      </trans-unit>
+      <trans-unit id="543a02dfd360a01fa0c9076da584e3f8d69394b4" resname="ra.form.ra_search_ra_candidates.label.email">
+        <jms:reference-file line="34">Form/Type/SearchRaCandidatesType.php</jms:reference-file>
+        <source>ra.form.ra_search_ra_candidates.label.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="9f4c34138ef487cdf008770c1257b06291343831" resname="ra.form.ra_search_ra_candidates.label.name">
+        <jms:reference-file line="31">Form/Type/SearchRaCandidatesType.php</jms:reference-file>
+        <source>ra.form.ra_search_ra_candidates.label.name</source>
+        <target>Naam</target>
       </trans-unit>
       <trans-unit id="7317a2726d1f0c5a5457e36c46f817004792dd9d" resname="ra.form.ra_search_ra_second_factors.button.search">
         <jms:reference-file line="57">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
@@ -164,6 +354,16 @@
         <source>ra.form.ra_search_ra_second_factors.label.type</source>
         <target>Type</target>
       </trans-unit>
+      <trans-unit id="1ded9028f8d549daf4dfd7f37b472ee17e1beb0c" resname="ra.form.ra_select_institution.button.select_and_apply">
+        <jms:reference-file line="43">Form/Type/InstitutionSelectionType.php</jms:reference-file>
+        <source>ra.form.ra_select_institution.button.select_and_apply</source>
+        <target>Pas Toe</target>
+      </trans-unit>
+      <trans-unit id="aff72bc7d94c65f8b3dcf0b3b9bb3f5430ac28f6" resname="ra.form.ra_select_institution.label.institution">
+        <jms:reference-file line="40">Form/Type/InstitutionSelectionType.php</jms:reference-file>
+        <source>ra.form.ra_select_institution.label.institution</source>
+        <target>Instituut</target>
+      </trans-unit>
       <trans-unit id="b190a055ec0458747cdff543e6693c2433a6eb6b" resname="ra.form.ra_send_sms_challenge.button.send_challenge">
         <jms:reference-file line="30">Form/Type/SendSmsChallengeType.php</jms:reference-file>
         <source>ra.form.ra_send_sms_challenge.button.send_challenge</source>
@@ -189,10 +389,20 @@
         <source>ra.form.ra_verify_phone_number.text.challenge</source>
         <target>Code</target>
       </trans-unit>
+      <trans-unit id="823c5d1536401e73cf7bda2e291fd21bdb207f96" resname="ra.form.start_vetting_procedure.loa_insufficient">
+        <jms:reference-file line="5">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.form.start_vetting_procedure.loa_insufficient</source>
+        <target>U voldoet niet aan de veiligheidsvoorwaarden om dit token te activeren.</target>
+      </trans-unit>
       <trans-unit id="e73181ada31381965b99c58914199f626edb7ec9" resname="ra.form.start_vetting_procedure.search">
         <jms:reference-file line="42">Form/Type/StartVettingProcedureType.php</jms:reference-file>
         <source>ra.form.start_vetting_procedure.search</source>
         <target>Zoeken</target>
+      </trans-unit>
+      <trans-unit id="5bd6714db09c4a8b818081f114f12f7415a50e40" resname="ra.form.start_vetting_procedure.unknown_registration_code">
+        <jms:reference-file line="4">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.form.start_vetting_procedure.unknown_registration_code</source>
+        <target>Onbekende registratiecode</target>
       </trans-unit>
       <trans-unit id="d6e1e4afd83a6b390c24762cee6939338734afc5" resname="ra.form.verify_identity.document_number.label">
         <jms:reference-file line="30">Form/Type/VerifyIdentityType.php</jms:reference-file>
@@ -209,15 +419,343 @@
         <source>ra.form.verify_identity.verify_identity.button</source>
         <target>Verifieer identiteit</target>
       </trans-unit>
+      <trans-unit id="584ef35d6af2f2917e708a1a6092f0b0938151e4" resname="ra.management.amend_ra_info.error.middleware_command_failed">
+        <jms:reference-file line="60">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.amend_ra_info.error.middleware_command_failed</source>
+        <target>Het wijzigen van de gegevens van de RA is mislukt vanwege een serverfout.</target>
+      </trans-unit>
+      <trans-unit id="5fa5dfb0514d509432e81f5b2344b12d7351715b" resname="ra.management.amend_ra_info.info_amended">
+        <jms:reference-file line="217">RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <source>ra.management.amend_ra_info.info_amended</source>
+        <target>De informatie van de RA is gewijzigd.</target>
+      </trans-unit>
+      <trans-unit id="6492fd6bfd9bf1c89d052b3172d572e9df9e54e8" resname="ra.management.amend_ra_info.ra_listing.email">
+        <jms:reference-file line="11">views/RaManagement/amendRaInformation.html.twig</jms:reference-file>
+        <source>ra.management.amend_ra_info.ra_listing.email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="072b301901b5acd0d85dc66bf9f037af3b6682d1" resname="ra.management.amend_ra_info.ra_listing.institution">
+        <jms:reference-file line="15">views/RaManagement/amendRaInformation.html.twig</jms:reference-file>
+        <source>ra.management.amend_ra_info.ra_listing.institution</source>
+        <target>Instituut</target>
+      </trans-unit>
+      <trans-unit id="3a609438ddb4a93fe694bd72db998784551914b3" resname="ra.management.amend_ra_info.ra_listing.name">
+        <jms:reference-file line="7">views/RaManagement/amendRaInformation.html.twig</jms:reference-file>
+        <source>ra.management.amend_ra_info.ra_listing.name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="66b3d0fa2ccade8a1fedf425c1300623ce937ff9" resname="ra.management.change_ra_role.modal.are_you_sure">
+        <jms:reference-file line="32">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
+        <jms:reference-file line="40">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
+        <source>ra.management.change_ra_role.modal.are_you_sure</source>
+        <target>Weet u zeker dat u de Registratie Authoriteit die hieronder staat de gekozen rol wilt geven?</target>
+      </trans-unit>
+      <trans-unit id="3773fbc17a37a56eef350fbe58c5c40a3ceb2351" resname="ra.management.change_ra_role.modal.cancel">
+        <jms:reference-file line="61">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
+        <source>ra.management.change_ra_role.modal.cancel</source>
+        <target>Annuleer</target>
+      </trans-unit>
+      <trans-unit id="0356cc55079c008d72965c6d7a408ece50d70d41" resname="ra.management.change_ra_role.modal.confirm">
+        <jms:reference-file line="64">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
+        <source>ra.management.change_ra_role.modal.confirm</source>
+        <target>Bevestig</target>
+      </trans-unit>
+      <trans-unit id="c77ebb65643463518cd8d885aa70f169bcb6525d" resname="ra.management.change_ra_role.modal.please_confirm">
+        <jms:reference-file line="36">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
+        <source>ra.management.change_ra_role.modal.please_confirm</source>
+        <target>Bevestig uw actie alstublieft</target>
+      </trans-unit>
+      <trans-unit id="8fb6ed44c986cffa22bea41b4dc83927e35dcf69" resname="ra.management.change_ra_role.ra_listing.contact_information">
+        <jms:reference-file line="23">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
+        <jms:reference-file line="30">views/RaManagement/confirmRetractRa.html.twig</jms:reference-file>
+        <source>ra.management.change_ra_role.ra_listing.contact_information</source>
+        <target>Contact Informatie</target>
+      </trans-unit>
+      <trans-unit id="6514b3567fff7ba497cd04c5afdb35024c0f92b6" resname="ra.management.change_ra_role.ra_listing.email">
+        <jms:reference-file line="11">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
+        <jms:reference-file line="49">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
+        <jms:reference-file line="15">views/RaManagement/confirmRetractRa.html.twig</jms:reference-file>
+        <source>ra.management.change_ra_role.ra_listing.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="84d802a13574d12ff20b6227331e196fde4c97fc" resname="ra.management.change_ra_role.ra_listing.institution">
+        <jms:reference-file line="15">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
+        <jms:reference-file line="20">views/RaManagement/confirmRetractRa.html.twig</jms:reference-file>
+        <source>ra.management.change_ra_role.ra_listing.institution</source>
+        <target>Instituut</target>
+      </trans-unit>
+      <trans-unit id="6b9035a87c590052ea3b7f0d836d8142d1cf4b2b" resname="ra.management.change_ra_role.ra_listing.location">
+        <jms:reference-file line="19">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
+        <jms:reference-file line="25">views/RaManagement/confirmRetractRa.html.twig</jms:reference-file>
+        <source>ra.management.change_ra_role.ra_listing.location</source>
+        <target>Locatie</target>
+      </trans-unit>
+      <trans-unit id="64bc389d5144ad32db9564527d6bd211477e9dbe" resname="ra.management.change_ra_role.ra_listing.name">
+        <jms:reference-file line="7">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
+        <jms:reference-file line="45">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
+        <jms:reference-file line="10">views/RaManagement/confirmRetractRa.html.twig</jms:reference-file>
+        <source>ra.management.change_ra_role.ra_listing.name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="30d83d9aa34c30ac73ccfddb6106a5f278452e02" resname="ra.management.change_ra_role.ra_listing.role">
+        <jms:reference-file line="53">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
+        <source>ra.management.change_ra_role.ra_listing.role</source>
+        <target>Rol</target>
+      </trans-unit>
+      <trans-unit id="011f64144e98b72e6a4ec42919ceb12298f059ef" resname="ra.management.change_ra_role_changed">
+        <jms:reference-file line="263">RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <source>ra.management.change_ra_role_changed</source>
+        <target>De Registratie Authoriteit heeft de gekozen rol toegewezen gekregen</target>
+      </trans-unit>
+      <trans-unit id="f2d212150076ce42ffe47d514f182ad5e7a6c9fe" resname="ra.management.create_ra.error.middleware_command_failed">
+        <jms:reference-file line="59">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.create_ra.error.middleware_command_failed</source>
+        <target>De gekozen rol kon niet aan de identiteit toegekend worden vanwege een serverfout.</target>
+      </trans-unit>
+      <trans-unit id="4029e4383ef4a57077b346cc66f971c9cafb71c3" resname="ra.management.create_ra.identity_accredited">
+        <jms:reference-file line="171">RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <source>ra.management.create_ra.identity_accredited</source>
+        <target>De Identiteit is de gekozen rol toegekend.</target>
+      </trans-unit>
+      <trans-unit id="62bc099c53662e393741f519a15503dcb4d6c77f" resname="ra.management.create_ra.modal.are_you_sure">
+        <jms:reference-file line="22">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <jms:reference-file line="29">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <source>ra.management.create_ra.modal.are_you_sure</source>
+        <target>Weet u zeker dat u de onderstaande identiteit de geselecteerde rol wilt toekennen?</target>
+      </trans-unit>
+      <trans-unit id="8457ba89c1eb274f6a896fd8d6f1db494a6c7a4d" resname="ra.management.create_ra.modal.cancel">
+        <jms:reference-file line="60">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <source>ra.management.create_ra.modal.cancel</source>
+        <target>annuleren</target>
+      </trans-unit>
+      <trans-unit id="b99ac9b5e2a6faf946855face236dff8027dc455" resname="ra.management.create_ra.modal.confirm">
+        <jms:reference-file line="61">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <source>ra.management.create_ra.modal.confirm</source>
+        <target>Bevestig</target>
+      </trans-unit>
+      <trans-unit id="e6ba109857c7c953b6a6c7ce8df5569b02aba9a0" resname="ra.management.create_ra.modal.please_confirm">
+        <jms:reference-file line="26">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <source>ra.management.create_ra.modal.please_confirm</source>
+        <target>Bevestig alstublieft</target>
+      </trans-unit>
+      <trans-unit id="354be94829e909d2a4f9cf4688487e7d550e4be6" resname="ra.management.create_ra.ra_candidate.conctact_information">
+        <jms:reference-file line="49">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <source>ra.management.create_ra.ra_candidate.conctact_information</source>
+        <target>Contact Informatie</target>
+      </trans-unit>
+      <trans-unit id="a8afb4e6e99ac70f862e750ae915d94575e2609f" resname="ra.management.create_ra.ra_candidate.email">
+        <jms:reference-file line="11">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <jms:reference-file line="37">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <source>ra.management.create_ra.ra_candidate.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="08684398fc31faa6cdddc3e171d5fa85d2468975" resname="ra.management.create_ra.ra_candidate.institution">
+        <jms:reference-file line="15">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <jms:reference-file line="41">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <source>ra.management.create_ra.ra_candidate.institution</source>
+        <target>Instituut</target>
+      </trans-unit>
+      <trans-unit id="4be9795921acb1c2346a91b4423bcb05b80107fd" resname="ra.management.create_ra.ra_candidate.location">
+        <jms:reference-file line="45">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <source>ra.management.create_ra.ra_candidate.location</source>
+        <target>Locatie</target>
+      </trans-unit>
+      <trans-unit id="132eea7a795fe6171e333c747b5d34a63fd84bb3" resname="ra.management.create_ra.ra_candidate.name">
+        <jms:reference-file line="7">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <jms:reference-file line="33">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <source>ra.management.create_ra.ra_candidate.name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="7aeee15cdefaafe4f571f97a9264393fd09ec4d3" resname="ra.management.create_ra.ra_candidate.role">
+        <jms:reference-file line="53">views/RaManagement/createRa.html.twig</jms:reference-file>
+        <source>ra.management.create_ra.ra_candidate.role</source>
+        <target>Rol</target>
+      </trans-unit>
+      <trans-unit id="bd37603d0b4d61543e75f9903f0ea426e28de7e3" resname="ra.management.form.amend_ra_info.label.amend_ra_info">
+        <jms:reference-file line="37">Form/Type/AmendRegistrationAuthorityInformationType.php</jms:reference-file>
+        <source>ra.management.form.amend_ra_info.label.amend_ra_info</source>
+        <target>Wijzigen</target>
+      </trans-unit>
+      <trans-unit id="9db7b05461e7e9d929e0640cac2f4dcb6341e599" resname="ra.management.form.amend_ra_info.label.cancel">
+        <jms:reference-file line="44">Form/Type/AmendRegistrationAuthorityInformationType.php</jms:reference-file>
+        <source>ra.management.form.amend_ra_info.label.cancel</source>
+        <target>Annuleren</target>
+      </trans-unit>
+      <trans-unit id="f429d54f2edf491d61e4aa251ed53475db27e71a" resname="ra.management.form.amend_ra_info.label.contact_information">
+        <jms:reference-file line="34">Form/Type/AmendRegistrationAuthorityInformationType.php</jms:reference-file>
+        <source>ra.management.form.amend_ra_info.label.contact_information</source>
+        <target>Contactinformatie</target>
+      </trans-unit>
+      <trans-unit id="2377accfe1ff8b4976ff0403ddd37216f7ea73a6" resname="ra.management.form.amend_ra_info.label.location">
+        <jms:reference-file line="31">Form/Type/AmendRegistrationAuthorityInformationType.php</jms:reference-file>
+        <source>ra.management.form.amend_ra_info.label.location</source>
+        <target>Locatie</target>
+      </trans-unit>
+      <trans-unit id="c46b2115a26b03ef1c8eb69d299b537486003056" resname="ra.management.form.change_ra_role.label.role">
+        <jms:reference-file line="32">Form/Type/ChangeRaRoleType.php</jms:reference-file>
+        <source>ra.management.form.change_ra_role.label.role</source>
+        <target>Rol</target>
+      </trans-unit>
+      <trans-unit id="790d0a2816d1ea0103191745c8fbe866f088b7ba" resname="ra.management.form.change_ra_role.label.save">
+        <jms:reference-file line="36">Form/Type/ChangeRaRoleType.php</jms:reference-file>
+        <source>ra.management.form.change_ra_role.label.save</source>
+        <target>Opslaan</target>
+      </trans-unit>
+      <trans-unit id="a7424b5f4032d810348b6f66b943b892fe80e8ec" resname="ra.management.form.create_ra.label.cancel">
+        <jms:reference-file line="40">Form/Type/ChangeRaRoleType.php</jms:reference-file>
+        <jms:reference-file line="49">Form/Type/CreateRaType.php</jms:reference-file>
+        <source>ra.management.form.create_ra.label.cancel</source>
+        <target>Annuleer</target>
+      </trans-unit>
+      <trans-unit id="edea5e3071445a321b5063fe5108b8cc48e7510f" resname="ra.management.form.create_ra.label.contact_information">
+        <jms:reference-file line="35">Form/Type/CreateRaType.php</jms:reference-file>
+        <source>ra.management.form.create_ra.label.contact_information</source>
+        <target>Contact Informatie</target>
+      </trans-unit>
+      <trans-unit id="dae5acb09640e99da945664cf4e40423e1f2be03" resname="ra.management.form.create_ra.label.create_ra">
+        <jms:reference-file line="42">Form/Type/CreateRaType.php</jms:reference-file>
+        <source>ra.management.form.create_ra.label.create_ra</source>
+        <target>Maak RA(A)</target>
+      </trans-unit>
+      <trans-unit id="1cd95428cf58450eacda8b31a4fe09b542ea94b8" resname="ra.management.form.create_ra.label.location">
+        <jms:reference-file line="32">Form/Type/CreateRaType.php</jms:reference-file>
+        <source>ra.management.form.create_ra.label.location</source>
+        <target>Locatie</target>
+      </trans-unit>
+      <trans-unit id="26fef5899c09cd8915216fb81f6238d1ec3cc504" resname="ra.management.form.create_ra.label.role">
+        <jms:reference-file line="38">Form/Type/CreateRaType.php</jms:reference-file>
+        <source>ra.management.form.create_ra.label.role</source>
+        <target>Rol</target>
+      </trans-unit>
+      <trans-unit id="9047bdb896ecfb86395ffb69ac79180588b8d265" resname="ra.management.overview.add_raa">
+        <jms:reference-file line="7">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.add_raa</source>
+        <target>Voeg RA(A) toe</target>
+      </trans-unit>
+      <trans-unit id="65486b5669de95b6a49203f59af122ec56fdc5ba" resname="ra.management.overview.change_role">
+        <jms:reference-file line="28">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.change_role</source>
+        <target>Verander Rol</target>
+      </trans-unit>
+      <trans-unit id="249a6c69487c5477929e1dac383aa2d02fb25198" resname="ra.management.overview.common_name">
+        <jms:reference-file line="13">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.common_name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="f702b148afefffede0240eb3d7e4d4d902c23255" resname="ra.management.overview.email">
+        <jms:reference-file line="14">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="44ed8664990fcd8d55324dc98bfa3ac905bb9c0d" resname="ra.management.overview.institution">
+        <jms:reference-file line="12">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.institution</source>
+        <target>Instituut</target>
+      </trans-unit>
+      <trans-unit id="e6f5ea2d06110a1b436b1814e53f99aeae92c867" resname="ra.management.overview.remove_as_ra">
+        <jms:reference-file line="34">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.remove_as_ra</source>
+        <target>Verwijder als RA(A)</target>
+      </trans-unit>
+      <trans-unit id="3405f2d5ec00142a5b1b5c0c1509b6aa2543473b" resname="ra.management.overview.role">
+        <jms:reference-file line="15">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.role</source>
+        <target>Rol</target>
+      </trans-unit>
+      <trans-unit id="64d8691325da6d2b996fd48f7da7a382fdeb22e7" resname="ra.management.overview.role.value.ra">
+        <jms:reference-file line="56">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.overview.role.value.ra</source>
+        <target>RA</target>
+      </trans-unit>
+      <trans-unit id="ac982ab35b7b5438a72cb6e243975c8ddd35e148" resname="ra.management.overview.role.value.raa">
+        <jms:reference-file line="57">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.overview.role.value.raa</source>
+        <target>RAA</target>
+      </trans-unit>
+      <trans-unit id="53c4452d09c417bfb728d1e738b2ae2bbff3c883" resname="ra.management.overview.role.value.sraa">
+        <jms:reference-file line="58">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.management.overview.role.value.sraa</source>
+        <target>SRAA</target>
+      </trans-unit>
+      <trans-unit id="3d101556c7d65068f5e964ba8c5a9b8709e23266" resname="ra.management.overview.update_information">
+        <jms:reference-file line="31">views/RaManagement/manage.html.twig</jms:reference-file>
+        <source>ra.management.overview.update_information</source>
+        <target>Wijzig</target>
+      </trans-unit>
+      <trans-unit id="114a1fc30fec7da3d1a7dc2b9a55d2b5dd78c8ce" resname="ra.management.ra_candidate.common_name">
+        <jms:reference-file line="12">views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
+        <source>ra.management.ra_candidate.common_name</source>
+        <target>Naam</target>
+      </trans-unit>
+      <trans-unit id="8108bf5ef1a111214faee15630b8ff0c0549bc66" resname="ra.management.ra_candidate.create_ra">
+        <jms:reference-file line="25">views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
+        <source>ra.management.ra_candidate.create_ra</source>
+        <target>Maak RA(A)</target>
+      </trans-unit>
+      <trans-unit id="ffb5905d1d08ea222cf82aacc96649f90730af92" resname="ra.management.ra_candidate.email">
+        <jms:reference-file line="13">views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
+        <source>ra.management.ra_candidate.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="d983bd416823b073f0ce5d3a76f2ae6717818613" resname="ra.management.ra_candidate.institution">
+        <jms:reference-file line="11">views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
+        <source>ra.management.ra_candidate.institution</source>
+        <target>Instituut</target>
+      </trans-unit>
+      <trans-unit id="12c64b6bb6b6b53d7f385978810b8a6058a30899" resname="ra.management.ra_candidate.no_candidates">
+        <jms:reference-file line="35">views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
+        <source>ra.management.ra_candidate.no_candidates</source>
+        <target>Geen gebruikers gevonden die RA(A) gemaakt kunnen worden.</target>
+      </trans-unit>
+      <trans-unit id="1a03ce1515132785c884129598c2cb52db461cd0" resname="ra.management.retract_ra.success">
+        <jms:reference-file line="310">RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <source>ra.management.retract_ra.success</source>
+        <target>De Identiteit is geen RA(A) meer</target>
+      </trans-unit>
+      <trans-unit id="a973963d22345656dc73a28876fe2a9e481c6d3a" resname="ra.management.retract_registration_authority.are_you_sure">
+        <jms:reference-file line="6">views/RaManagement/confirmRetractRa.html.twig</jms:reference-file>
+        <source>ra.management.retract_registration_authority.are_you_sure</source>
+        <target>Weet u zeker dat u de RA(A) hieronder as RA(A) wilt verwijderen?</target>
+      </trans-unit>
+      <trans-unit id="08d2247eaaec4c6e898a3f3d01bda66d7c33731c" resname="ra.menu.ra_management">
+        <jms:reference-file line="42">Resources/views/base.html.twig</jms:reference-file>
+        <source>ra.menu.ra_management</source>
+        <target>RA Management</target>
+      </trans-unit>
       <trans-unit id="7d6a9d74b9561d924dc4411c3ceebc63a01c83ae" resname="ra.menu.registration">
-        <jms:reference-file line="32">Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="35">Resources/views/base.html.twig</jms:reference-file>
         <source>ra.menu.registration</source>
         <target>Registratie</target>
       </trans-unit>
       <trans-unit id="1a955d4adfae2bc0a0c0177a672e95c7dcbb486d" resname="ra.menu.search">
-        <jms:reference-file line="35">Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="38">Resources/views/base.html.twig</jms:reference-file>
         <source>ra.menu.search</source>
         <target>Tokens</target>
+      </trans-unit>
+      <trans-unit id="ea07c1ef2b8502f7457347223483d010ab427050" resname="ra.menu.sraa_change_institution">
+        <jms:reference-file line="62">Resources/views/base.html.twig</jms:reference-file>
+        <source>ra.menu.sraa_change_institution</source>
+        <target>verander</target>
+      </trans-unit>
+      <trans-unit id="ff49fbf3684f01850a026abeff8b6f3cd6d89a98" resname="ra.prove_phone_possession.challenge_expired">
+        <jms:reference-file line="17">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.prove_phone_possession.challenge_expired</source>
+        <target>Uw code is verlopen. Vraag een nieuwe code aan.</target>
+      </trans-unit>
+      <trans-unit id="f4e4a44fa84430b2d144a6dee71c69e914a963dd" resname="ra.prove_phone_possession.challenge_response_incorrect">
+        <jms:reference-file line="16">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.prove_phone_possession.challenge_response_incorrect</source>
+        <target>Deze code is niet juist. Probeer het nog eens, of vraag een nieuwe code op.</target>
+      </trans-unit>
+      <trans-unit id="0d9cb3b18021e2899cf1031812da9a489b60093d" resname="ra.prove_phone_possession.too_many_attempts">
+        <jms:reference-file line="18">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.prove_phone_possession.too_many_attempts</source>
+        <target>U heeft de limiet van tien pogingen bereikt; u kunt geen codes meer verifiëren. Neem contact op met uw helpdesk of probeer het later nog eens.</target>
+      </trans-unit>
+      <trans-unit id="06ada20a09df4484b41e75a58e813b54d4904f33" resname="ra.prove_yubikey_possession.different_yubikey_used">
+        <jms:reference-file line="12">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.prove_yubikey_possession.different_yubikey_used</source>
+        <target>Tijdens het registratieproces heeft de gebruiker een andere Yubikey gebruikt.</target>
       </trans-unit>
       <trans-unit id="f12e743e43bca49fe86f99db331ded47fb88f1da" resname="ra.registration.sms.text.otp_requests_remaining">
         <jms:reference-file line="23">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
@@ -230,53 +768,53 @@
         <target>Yubikey</target>
       </trans-unit>
       <trans-unit id="800e5d0a1f57a8b4d3654ac7d173efe68c098f68" resname="ra.second_factor.revocation.could_not_revoke">
-        <jms:reference-file line="105">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <jms:reference-file line="111">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
         <source>ra.second_factor.revocation.could_not_revoke</source>
         <target>Het token kon niet verwijderd worden.</target>
       </trans-unit>
       <trans-unit id="f70c06516166354cd4d8d3490cbd707941610ed9" resname="ra.second_factor.revocation.modal.are_you_sure">
-        <jms:reference-file line="68">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="69">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.are_you_sure</source>
         <target>Weet u zeker dat u onderstaand token wilt verwijderen?</target>
       </trans-unit>
       <trans-unit id="441e4d7c6bece19e1a2a0008af6302443d36c7a4" resname="ra.second_factor.revocation.modal.cancel">
-        <jms:reference-file line="90">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="91">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.cancel</source>
         <target>annuleren</target>
       </trans-unit>
       <trans-unit id="4a0e93233ac08a0e08df4ccabdddb3183f0343ea" resname="ra.second_factor.revocation.modal.close">
-        <jms:reference-file line="63">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="64">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.close</source>
         <target>Sluiten</target>
       </trans-unit>
       <trans-unit id="c8ac97a99dfe2e9a93156f17db2ad4475372cd4a" resname="ra.second_factor.revocation.modal.confirm">
-        <jms:reference-file line="64">views/SecondFactor/search.html.twig</jms:reference-file>
-        <jms:reference-file line="91">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="65">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="92">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.confirm</source>
         <target>Bevestig</target>
       </trans-unit>
       <trans-unit id="0a7020ade86510c9f2a60c58d10d539b92be2f4a" resname="ra.second_factor.revocation.modal.sf_email">
-        <jms:reference-file line="84">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="85">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.sf_email</source>
         <target>Email</target>
       </trans-unit>
       <trans-unit id="e704ffd6983d5ec3776c1ad832c9cb9823dd3d0b" resname="ra.second_factor.revocation.modal.sf_identifier">
-        <jms:reference-file line="72">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="73">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.sf_identifier</source>
         <target>Token</target>
       </trans-unit>
       <trans-unit id="1d9dbf1e942ebc0614b14e5efef0dadc4f8073be" resname="ra.second_factor.revocation.modal.sf_name">
-        <jms:reference-file line="80">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="81">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.sf_name</source>
         <target>Naam</target>
       </trans-unit>
       <trans-unit id="153b9ee684f0de6cc27fc8b40d9b38da7477323b" resname="ra.second_factor.revocation.modal.sf_type">
-        <jms:reference-file line="76">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="77">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.sf_type</source>
         <target>Type</target>
       </trans-unit>
       <trans-unit id="5c500a2dc008cbf1a8501593a2a50e518f6fe145" resname="ra.second_factor.revocation.revoked">
-        <jms:reference-file line="102">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <jms:reference-file line="108">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
         <source>ra.second_factor.revocation.revoked</source>
         <target>Het token is verwijderd</target>
       </trans-unit>
@@ -326,7 +864,7 @@
         <target>Geactiveerd</target>
       </trans-unit>
       <trans-unit id="b460113e39fffb71f86d0c0a9509b5c741924e99" resname="ra.second_factor.search.text.no_second_factors">
-        <jms:reference-file line="54">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="55">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.search.text.no_second_factors</source>
         <target>Er zijn op dit moment geen geregistreerde tokens die voldoen aan uw zoekopdracht.</target>
       </trans-unit>
@@ -350,10 +888,55 @@
         <source>ra.second_factor.search.type.yubikey</source>
         <target>Yubikey</target>
       </trans-unit>
+      <trans-unit id="eac92ad5c53846aea116ad96b3f985d4c765088a" resname="ra.secondfactor.auditlog">
+        <jms:reference-file line="33">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.secondfactor.auditlog</source>
+        <target>Audit log</target>
+      </trans-unit>
       <trans-unit id="512d5614cc27358eb50068a1ba510983e3e0c620" resname="ra.secondfactor.revoke">
-        <jms:reference-file line="42">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="43">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.secondfactor.revoke</source>
         <target>Verwijderen</target>
+      </trans-unit>
+      <trans-unit id="a718fae8b5a05ddfe4f55f3ed1a4bb8b365ea12c" resname="ra.sms_send_challenge.send_sms_challenge_failed">
+        <jms:reference-file line="15">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.sms_send_challenge.send_sms_challenge_failed</source>
+        <target>Het versturen van de SMS-code is mislukt.</target>
+      </trans-unit>
+      <trans-unit id="e8ada95651cf644c6bbeeff32c330b4fde42f87d" resname="ra.sraa.changed_institution">
+        <jms:reference-file line="47">RaBundle/Controller/SraaController.php</jms:reference-file>
+        <source>ra.sraa.changed_institution</source>
+        <target>Je instituut is veranderd naar "%institution%"</target>
+      </trans-unit>
+      <trans-unit id="abe2e824031a2393db11918365a49cf65d3ec585" resname="ra.verify_identity.identity_verification_failed">
+        <jms:reference-file line="7">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.verify_identity.identity_verification_failed</source>
+        <target>De verificatie van de identiteit is mislukt</target>
+      </trans-unit>
+      <trans-unit id="ba1980036b712688f6681fb8f86ac6925a1cba5a" resname="ra.verify_identity.second_factor_vetting_failed">
+        <jms:reference-file line="6">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.verify_identity.second_factor_vetting_failed</source>
+        <target>Het beveiligingstoken kon om onbekende redenen niet gekeurd worden.</target>
+      </trans-unit>
+      <trans-unit id="7b8f4a813ad65c5f70c2f28e3459db2300aa11d8" resname="ra.verify_yubikey_command.otp.otp_invalid">
+        <jms:reference-file line="10">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.verify_yubikey_command.otp.otp_invalid</source>
+        <target>De Yubikey code is ongeldig. Probeer het nog eens</target>
+      </trans-unit>
+      <trans-unit id="669fe8c5f63adab894fc62f2bbf036f2fe9e8b6c" resname="ra.verify_yubikey_command.otp.verification_error">
+        <jms:reference-file line="11">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.verify_yubikey_command.otp.verification_error</source>
+        <target>De Yubikey-code kon om onbekende redenen niet geverifiëerd worden.</target>
+      </trans-unit>
+      <trans-unit id="28ff860b3260f99aeb7268aa31f5edcfbc10b531" resname="ra.vetting.button.cancel_procedure">
+        <jms:reference-file line="5">Vetting/partial/cancelVettingProcedure.html.twig</jms:reference-file>
+        <source>ra.vetting.button.cancel_procedure</source>
+        <target>Activatieprocedure afbreken</target>
+      </trans-unit>
+      <trans-unit id="32b7bc724e0d07eac8325753ae89605966b495c7" resname="ra.vetting.flash.cancelled">
+        <jms:reference-file line="114">RaBundle/Controller/VettingController.php</jms:reference-file>
+        <source>ra.vetting.flash.cancelled</source>
+        <target>De activatieprocedure is afgebroken.</target>
       </trans-unit>
       <trans-unit id="485287b4d4e2f13a9df979601799e727821b9817" resname="ra.vetting.gssf.initiate.tiqr.button.initiate">
         <jms:reference-file line="32">Resources/views/translations.html.twig</jms:reference-file>
@@ -396,7 +979,7 @@
         <target>Identiteit controleren</target>
       </trans-unit>
       <trans-unit id="8e4a356a46fe95b04ae1cbb201b8d62e15670b2e" resname="ra.vetting.sms.challenge_body">
-        <jms:reference-file line="108">RaBundle/Service/SmsSecondFactorService.php</jms:reference-file>
+        <jms:reference-file line="187">RaBundle/Service/VettingService.php</jms:reference-file>
         <source>ra.vetting.sms.challenge_body</source>
         <target>Uw SMS-code: %challenge%</target>
       </trans-unit>
@@ -463,7 +1046,7 @@
       <trans-unit id="85f8a896e4fb57f2dd0a05049395117fe378df66" resname="ra.vetting.vetting_completed.text.vetting_completed">
         <jms:reference-file line="14">views/Vetting/vettingCompleted.html.twig</jms:reference-file>
         <source>ra.vetting.vetting_completed.text.vetting_completed</source>
-        <target>De gebruiker heeft bewezen in het bezit te zijn van zijn token, en heeft zowel zijn digitale als fysieke identiteit aangetoond.  
+        <target>De gebruiker heeft bewezen in het bezit te zijn van zijn token, en heeft zowel zijn digitale als fysieke identiteit aangetoond.
 
 Het token is nu geactiveerd en klaar voor gebruik.</target>
       </trans-unit>
@@ -486,6 +1069,11 @@ Het token is nu geactiveerd en klaar voor gebruik.</target>
         <jms:reference-file line="17">Vetting/Yubikey/verify.html.twig</jms:reference-file>
         <source>ra.vetting.yubikey.text.press_once_form_auto_submitted</source>
         <target>Druk op de knop van de Yubikey en houd even vast. Er verschijnt automatisch een eenmalig wachtwoord in het invulveld.</target>
+      </trans-unit>
+      <trans-unit id="fcbfd9e643bb8d8f3fcf3ca0380a73bb9dffee2b" resname="stepup_middleware_client.form.switch_locale.switch">
+        <jms:reference-file line="58">Form/Type/SwitchLocaleType.php</jms:reference-file>
+        <source>stepup_middleware_client.form.switch_locale.switch</source>
+        <target>Vertalen</target>
       </trans-unit>
     </body>
   </file>

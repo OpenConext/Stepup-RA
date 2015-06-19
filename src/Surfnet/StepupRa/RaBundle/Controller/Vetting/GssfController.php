@@ -24,6 +24,7 @@ use Surfnet\SamlBundle\Http\XMLResponse;
 use Surfnet\SamlBundle\SAML2\AuthnRequestFactory;
 use Surfnet\SamlBundle\SAML2\Response\Assertion\InResponseTo;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
+use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,6 +46,16 @@ final class GssfController extends Controller
      */
     public function initiateAction($procedureId, $provider)
     {
+        $this->denyAccessUnlessGranted(['ROLE_RA']);
+
+        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
+        $logger->notice('Showing Initiate GSSF Verification Screen', ['provider' => $provider]);
+
+        if (!$this->getVettingService()->hasProcedure($procedureId)) {
+            $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
+            throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
+        }
+
         return ['procedureId' => $procedureId, 'provider' => $this->getProvider($provider)->getName()];
     }
 
@@ -55,6 +66,16 @@ final class GssfController extends Controller
      */
     public function authenticateAction($procedureId, $provider)
     {
+        $this->denyAccessUnlessGranted(['ROLE_RA']);
+
+        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
+        $logger->notice('Generating GSSF verification request', ['provider' => $provider]);
+
+        if (!$this->getVettingService()->hasProcedure($procedureId)) {
+            $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
+            throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
+        }
+
         $provider = $this->getProvider($provider);
 
         $authnRequest = AuthnRequestFactory::createNewRequest(
@@ -72,12 +93,15 @@ final class GssfController extends Controller
         /** @var \Surfnet\SamlBundle\Http\RedirectBinding $redirectBinding */
         $redirectBinding = $this->get('surfnet_saml.http.redirect_binding');
 
-        $this->getLogger()->notice(sprintf(
-            'Sending AuthnRequest with request ID: "%s" to GSSP "%s" at "%s"',
-            $authnRequest->getRequestId(),
-            $provider->getName(),
-            $provider->getRemoteIdentityProvider()->getSsoUrl()
-        ));
+        $logger->notice(
+            sprintf(
+                'Sending AuthnRequest with request ID: "%s" to GSSP "%s" at "%s"',
+                $authnRequest->getRequestId(),
+                $provider->getName(),
+                $provider->getRemoteIdentityProvider()->getSsoUrl()
+            ),
+            ['provider' => $provider]
+        );
 
         $vettingService->startGssfVerification($procedureId);
 
@@ -202,5 +226,13 @@ final class GssfController extends Controller
     private function getLogger()
     {
         return $this->get('logger');
+    }
+
+    /**
+     * @return VettingService
+     */
+    private function getVettingService()
+    {
+        return $this->get('ra.service.vetting');
     }
 }

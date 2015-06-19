@@ -36,32 +36,6 @@ class SurfnetStepupRaRaExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $gatewayGuzzleOptions = [
-            'base_url' => $config['gateway_api']['url'],
-            'defaults' => [
-                'auth' => [
-                    $config['gateway_api']['credentials']['username'],
-                    $config['gateway_api']['credentials']['password'],
-                    'basic'
-                ],
-                'headers' => [
-                    'Accept' => 'application/json'
-                ]
-            ]
-        ];
-
-        $gatewayGuzzle = $container->getDefinition('ra.guzzle.gateway_api');
-        $gatewayGuzzle->replaceArgument(0, $gatewayGuzzleOptions);
-
-        $smsSecondFactorService =
-            $container->getDefinition('ra.service.sms_second_factor');
-        $smsSecondFactorService->replaceArgument(3, $config['sms']['originator']);
-
-        $container
-            ->getDefinition('ra.service.challenge_handler')
-            ->replaceArgument(2, $config['sms']['otp_expiry_interval'])
-            ->replaceArgument(3, $config['sms']['maximum_otp_requests']);
-
         // inject the required loa as parameter into the service container
         $container->setParameter('surfnet_stepup_ra.security.required_loa', $config['required_loa']);
     }

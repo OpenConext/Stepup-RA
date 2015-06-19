@@ -21,9 +21,11 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
+use Surfnet\StepupRa\RaBundle\Command\SearchSecondFactorAuditLogCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class SecondFactorController extends Controller
 {
@@ -34,8 +36,10 @@ final class SecondFactorController extends Controller
      */
     public function searchAction(Request $request)
     {
-        $identity = $this->getIdentity();
-        $this->get('logger')->info('Starting search for second factors');
+        $this->denyAccessUnlessGranted(['ROLE_RA']);
+
+        $identity = $this->getCurrentUser();
+        $this->get('logger')->notice('Starting search for second factors');
 
         $command = new SearchRaSecondFactorsCommand();
         $command->institution = $identity->institution;
@@ -56,7 +60,7 @@ final class SecondFactorController extends Controller
 
         $revocationForm = $this->createForm('ra_revoke_second_factor', new RevokeSecondFactorCommand());
 
-        $this->get('logger')->info(sprintf(
+        $this->get('logger')->notice(sprintf(
             'Searching for second factors yielded "%d" results',
             $secondFactors->getTotalItems()
         ));
@@ -78,12 +82,14 @@ final class SecondFactorController extends Controller
      */
     public function revokeAction(Request $request)
     {
+        $this->denyAccessUnlessGranted(['ROLE_RA']);
+
         $logger = $this->get('logger');
 
-        $logger->info('Received request to revoke Second Factor');
+        $logger->notice('Received request to revoke Second Factor');
 
         $command = new RevokeSecondFactorCommand();
-        $command->currentUserId = $this->getIdentity()->id;
+        $command->currentUserId = $this->getCurrentUser()->id;
 
         $form = $this->createForm('ra_revoke_second_factor', $command);
         $form->handleRequest($request);
@@ -98,14 +104,81 @@ final class SecondFactorController extends Controller
         $translator = $this->get('translator');
         $flashBag = $this->get('session')->getFlashBag();
         if ($this->getSecondFactorService()->revoke($command)) {
-            $logger->info('Second Factor revocation Succeeded, notifying used and redirecting back to search page');
+            $logger->notice('Second Factor revocation Succeeded');
             $flashBag->add('success', $translator->trans('ra.second_factor.revocation.revoked'));
         } else {
-            $logger->info('Second Factor revocation Failed, notifying used and redirecting back to search page');
+            $logger->notice('Second Factor revocation Failed');
             $flashBag->add('error', $translator->trans('ra.second_factor.revocation.could_not_revoke'));
         }
 
+        $logger->notice('Redirecting back to Second Factor Search Page');
+
         return $this->redirectToRoute('ra_second_factors_search');
+    }
+
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function auditLogAction(Request $request)
+    {
+        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $logger = $this->get('logger');
+
+        $identityId = $request->get('identityId');
+
+        $logger->notice(sprintf('Requested AuditLog for SecondFactors of identity "%s"', $identityId));
+
+        $identity = $this->getIdentityService()->findById($identityId);
+        if (!$identity) {
+            $logger->notice(sprintf(
+                'User with Identity "%s" requested non-existent identity "%s"',
+                $this->getCurrentUser()->id,
+                $identityId
+            ));
+
+            throw new NotFoundHttpException();
+        }
+
+        if ($identity->institution !== $this->getCurrentUser()->institution) {
+            $logger->warning(sprintf(
+                'User with Identity "%s" (%s) requested Identity "%s" (%s) of another institution, denying access',
+                $this->getCurrentUser()->id,
+                $this->getCurrentUser()->institution,
+                $identity->id,
+                $identity->institution
+            ));
+
+            throw $this->createAccessDeniedException();
+        }
+
+        $logger->info(sprintf('Retrieving audit log for Identity "%s"', $identity->id));
+
+        $command                 = new SearchSecondFactorAuditLogCommand();
+        $command->identityId     = $identity->id;
+        $command->institution    = $identity->institution;
+        $command->pageNumber     = (int) $request->get('p', 1);
+        $command->orderBy        = $request->get('orderBy', 'recordedOn');
+        $command->orderDirection = $request->get('orderDirection', 'desc');
+
+        $auditLog = $this->getAuditLogService()->getAuditlog($command);
+
+        $pagination = $this->get('knp_paginator')->paginate(
+            $auditLog->getTotalItems() > 0 ? array_fill(0, $auditLog->getTotalItems(), 1) : [],
+            $auditLog->getCurrentPage(),
+            $auditLog->getItemsPerPage()
+        );
+
+        $logger->notice(sprintf('Audit log yielded "%d" results, rendering page', $auditLog->getTotalItems()));
+
+        return $this->render(
+            'SurfnetStepupRaRaBundle:SecondFactor:auditLog.html.twig',
+            [
+                'pagination' => $pagination,
+                'auditLog'   => $auditLog,
+                'identity'   => $identity
+            ]
+        );
     }
 
     /**
@@ -117,9 +190,25 @@ final class SecondFactorController extends Controller
     }
 
     /**
+     * @return \Surfnet\StepupRa\RaBundle\Service\IdentityService
+     */
+    private function getIdentityService()
+    {
+        return $this->get('ra.service.identity');
+    }
+
+    /**
+     * @return \Surfnet\StepupRa\RaBundle\Service\AuditLogService
+     */
+    private function getAuditLogService()
+    {
+        return $this->get('ra.service.audit_log');
+    }
+
+    /**
      * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
      */
-    private function getIdentity()
+    private function getCurrentUser()
     {
         return $this->get('security.token_storage')->getToken()->getUser();
     }

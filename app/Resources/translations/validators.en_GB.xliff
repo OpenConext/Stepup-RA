@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-04-28T10:49:02Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2015-06-03T13:27:08Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -46,6 +46,62 @@
         <source>middleware_client.dto.identity.name_id.must_not_be_blank</source>
         <target>Remote identity's NameID may not be blank.</target>
       </trans-unit>
+      <trans-unit id="b074c72aaf61bc15e1d3057af3fda654e748ead0" resname="middleware_client.dto.identity.preferred_locale.must_be_string">
+        <source>middleware_client.dto.identity.preferred_locale.must_be_string</source>
+        <target>Preferred Locale must be a string</target>
+      </trans-unit>
+      <trans-unit id="43b5d0688d43579b026c74e6ca9eba07aa59afba" resname="middleware_client.dto.identity.preferred_locale.must_not_be_blank">
+        <source>middleware_client.dto.identity.preferred_locale.must_not_be_blank</source>
+        <target>Preferred Locale must be set</target>
+      </trans-unit>
+      <trans-unit id="33bd5ec3715508eab3a8b95f463328fe885852d6" resname="middleware_client.dto.institution_listing.institution.must_be_string">
+        <source>middleware_client.dto.institution_listing.institution.must_be_string</source>
+        <target>Institution name must be a string</target>
+      </trans-unit>
+      <trans-unit id="3680cf893efe43b282f3cadd6dc32f62196c18a6" resname="middleware_client.dto.institution_listing.institution.must_not_be_blank">
+        <source>middleware_client.dto.institution_listing.institution.must_not_be_blank</source>
+        <target>Institution name must be set</target>
+      </trans-unit>
+      <trans-unit id="79cdb3bec33a3a765c962196593132e701f8ffb4" resname="middleware_client.dto.ra_candidate.common_name.must_be_string">
+        <source>middleware_client.dto.ra_candidate.common_name.must_be_string</source>
+        <target>Common Name must be a string</target>
+      </trans-unit>
+      <trans-unit id="aeee15876dd87f7f18498b24c0106aa03d96080f" resname="middleware_client.dto.ra_candidate.common_name.must_not_be_blank">
+        <source>middleware_client.dto.ra_candidate.common_name.must_not_be_blank</source>
+        <target>Common Name must be set</target>
+      </trans-unit>
+      <trans-unit id="dd61c195be95f732e33b63814d55cec6c0eba7ec" resname="middleware_client.dto.ra_candidate.email.must_be_string">
+        <source>middleware_client.dto.ra_candidate.email.must_be_string</source>
+        <target>Email must be a string</target>
+      </trans-unit>
+      <trans-unit id="e8b7092d7baaa47c7edfb71dda3313ca8aa8ae34" resname="middleware_client.dto.ra_candidate.email.must_not_be_blank">
+        <source>middleware_client.dto.ra_candidate.email.must_not_be_blank</source>
+        <target>Email must be a set</target>
+      </trans-unit>
+      <trans-unit id="cc12f819fb2c5a603acceaad7a0cd4536d364dd0" resname="middleware_client.dto.ra_candidate.identity_id.must_be_string">
+        <source>middleware_client.dto.ra_candidate.identity_id.must_be_string</source>
+        <target>IdentityID must be a string</target>
+      </trans-unit>
+      <trans-unit id="296d81bfc855dec2a2cefa5b4ab97ea00da6f05b" resname="middleware_client.dto.ra_candidate.identity_id.must_not_be_blank">
+        <source>middleware_client.dto.ra_candidate.identity_id.must_not_be_blank</source>
+        <target>IdentityID must be a set</target>
+      </trans-unit>
+      <trans-unit id="339791a7845ab54fc88d683b72cbf805fe0eb738" resname="middleware_client.dto.ra_candidate.institution.must_be_string">
+        <source>middleware_client.dto.ra_candidate.institution.must_be_string</source>
+        <target>Institution must be a string</target>
+      </trans-unit>
+      <trans-unit id="f6b3dd5b639c2bd3efdbefe2c95a02519995abbd" resname="middleware_client.dto.ra_candidate.institution.must_not_be_blank">
+        <source>middleware_client.dto.ra_candidate.institution.must_not_be_blank</source>
+        <target>Institution must be set</target>
+      </trans-unit>
+      <trans-unit id="bcca60b6dae5f5f8bc9560539fc5dbeabd83d339" resname="middleware_client.dto.ra_candidate.name_id.must_be_string">
+        <source>middleware_client.dto.ra_candidate.name_id.must_be_string</source>
+        <target>NameID must be a string</target>
+      </trans-unit>
+      <trans-unit id="3186e64abbdfdf7cf9d05f12eaa24c80ec39bb1b" resname="middleware_client.dto.ra_candidate.name_id.must_not_be_blank">
+        <source>middleware_client.dto.ra_candidate.name_id.must_not_be_blank</source>
+        <target>NameID must be set</target>
+      </trans-unit>
       <trans-unit id="92fbc58313ab0a848a53c1f0c6f0e282b44ab7d1" resname="middleware_client.dto.ra_credentials.common_name.must_be_null_or_string">
         <source>middleware_client.dto.ra_credentials.common_name.must_be_null_or_string</source>
         <target>Common Name must be null or a string</target>
@@ -77,6 +133,62 @@
       <trans-unit id="f115ed3f04af646e2cbd2f0a1ad74f1cf47bd817" resname="middleware_client.dto.ra_credentials.location.must_be_null_or_string">
         <source>middleware_client.dto.ra_credentials.location.must_be_null_or_string</source>
         <target>The RA's location must be null or string.</target>
+      </trans-unit>
+      <trans-unit id="d4215edd4bb26abd8d980b7e1a838b150c171cce" resname="middleware_client.dto.ra_listing.common_name.must_be_string">
+        <source>middleware_client.dto.ra_listing.common_name.must_be_string</source>
+        <target>RA Listing commonName must be a string</target>
+      </trans-unit>
+      <trans-unit id="3087b385210786422ef98fc143fb4191ad32cfe9" resname="middleware_client.dto.ra_listing.common_name.must_not_be_blank">
+        <source>middleware_client.dto.ra_listing.common_name.must_not_be_blank</source>
+        <target>RA Listing commonName must be set</target>
+      </trans-unit>
+      <trans-unit id="5c522a3c6b70f7aa012dbbaf4dee3a324d8aca02" resname="middleware_client.dto.ra_listing.contact_information.must_be_string">
+        <source>middleware_client.dto.ra_listing.contact_information.must_be_string</source>
+        <target>RA Listing contact information must be a string</target>
+      </trans-unit>
+      <trans-unit id="1cbe9cd68385054f53c23a62913fe9f8211dbaa7" resname="middleware_client.dto.ra_listing.contact_information.must_not_be_blank">
+        <source>middleware_client.dto.ra_listing.contact_information.must_not_be_blank</source>
+        <target>RA Listing contact information must be set</target>
+      </trans-unit>
+      <trans-unit id="88647a974aff70159d89b268370685723aa4cb6e" resname="middleware_client.dto.ra_listing.email.must_be_string">
+        <source>middleware_client.dto.ra_listing.email.must_be_string</source>
+        <target>RA Listing email must be a string</target>
+      </trans-unit>
+      <trans-unit id="811d82fb3bc12f1d5857614ec541b85b5453b302" resname="middleware_client.dto.ra_listing.email.must_not_be_blank">
+        <source>middleware_client.dto.ra_listing.email.must_not_be_blank</source>
+        <target>RA Listing email must be set</target>
+      </trans-unit>
+      <trans-unit id="f24b744988580b92235cd819446047a13c9b9ad4" resname="middleware_client.dto.ra_listing.id.must_be_string">
+        <source>middleware_client.dto.ra_listing.id.must_be_string</source>
+        <target>RA Listing ID must be a string</target>
+      </trans-unit>
+      <trans-unit id="3ea11fef8c3c1bbc11279336b871c68f61f84eff" resname="middleware_client.dto.ra_listing.id.must_not_be_blank">
+        <source>middleware_client.dto.ra_listing.id.must_not_be_blank</source>
+        <target>RA Listing ID must be set</target>
+      </trans-unit>
+      <trans-unit id="40166ab1f9bf3ead271d990bf4dfa753473962ec" resname="middleware_client.dto.ra_listing.institution.must_be_string">
+        <source>middleware_client.dto.ra_listing.institution.must_be_string</source>
+        <target>RA Listing Institution must be a string</target>
+      </trans-unit>
+      <trans-unit id="42c9bb9adaca7b10cefab0d642fccc14aa24cbc1" resname="middleware_client.dto.ra_listing.institution.must_not_be_blank">
+        <source>middleware_client.dto.ra_listing.institution.must_not_be_blank</source>
+        <target>RA Listing Institution must be set</target>
+      </trans-unit>
+      <trans-unit id="5b38208d5ddbb279a440b769159a63a9c3dff47b" resname="middleware_client.dto.ra_listing.location.must_be_string">
+        <source>middleware_client.dto.ra_listing.location.must_be_string</source>
+        <target>RA Listing Location must be a string</target>
+      </trans-unit>
+      <trans-unit id="401384ae8cafceb8c96a8c2145122c15221fb775" resname="middleware_client.dto.ra_listing.location.must_not_be_blank">
+        <source>middleware_client.dto.ra_listing.location.must_not_be_blank</source>
+        <target>RA Listing Institution must be set</target>
+      </trans-unit>
+      <trans-unit id="e3c42da3a152e0a52701c755be712ce8767a5882" resname="middleware_client.dto.ra_listing.role.must_be_string">
+        <source>middleware_client.dto.ra_listing.role.must_be_string</source>
+        <target>RA Listing Role must be a string</target>
+      </trans-unit>
+      <trans-unit id="57bebc32449d51a6f948b7a55dfde7574d081c9e" resname="middleware_client.dto.ra_listing.role.must_not_be_blank">
+        <source>middleware_client.dto.ra_listing.role.must_not_be_blank</source>
+        <target>RA Listing Institution must be set</target>
       </trans-unit>
       <trans-unit id="4f314988de33fb4e4a1700e530247565d7d2a65b" resname="middleware_client.dto.unverified_second_factor.id.must_be_string">
         <source>middleware_client.dto.unverified_second_factor.id.must_be_string</source>
@@ -182,35 +294,49 @@
         <source>middleware_client.dto.vetted_second_factor.type.must_not_be_blank</source>
         <target>Vetted second factor's type may not be blank.</target>
       </trans-unit>
-      <trans-unit id="823c5d1536401e73cf7bda2e291fd21bdb207f96" resname="ra.form.start_vetting_procedure.loa_insufficient">
-        <jms:reference-file line="5">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.form.start_vetting_procedure.loa_insufficient</source>
-        <target>You don't have the security clearance to vet the token that matches this registration code.</target>
+      <trans-unit id="bcdfe3ce9a1c207e6cefccc3b20bdcbeb2370a62" resname="ra.accredit_candidate.contact_information.may_not_be_blank">
+        <source>ra.accredit_candidate.contact_information.may_not_be_blank</source>
+        <target>Contact information may not be blank</target>
       </trans-unit>
-      <trans-unit id="5bd6714db09c4a8b818081f114f12f7415a50e40" resname="ra.form.start_vetting_procedure.unknown_registration_code">
-        <jms:reference-file line="4">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.form.start_vetting_procedure.unknown_registration_code</source>
-        <target>Unknown registration code</target>
+      <trans-unit id="aaa6ef853fef543fd67b8f5845de82e5cb214e98" resname="ra.accredit_candidate.location.may_not_be_blank">
+        <source>ra.accredit_candidate.location.may_not_be_blank</source>
+        <target>Location may not be blank</target>
       </trans-unit>
-      <trans-unit id="ff49fbf3684f01850a026abeff8b6f3cd6d89a98" resname="ra.prove_phone_possession.challenge_expired">
-        <jms:reference-file line="17">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.prove_phone_possession.challenge_expired</source>
-        <target>Your code has expired. Please request a new code.</target>
+      <trans-unit id="75ad2fe7e5198417f56219c84b35bcefe6c21be1" resname="ra.amend_ra_information.contact_information">
+        <source>ra.amend_ra_information.contact_information</source>
+        <target>Contact information may not be blank</target>
       </trans-unit>
-      <trans-unit id="f4e4a44fa84430b2d144a6dee71c69e914a963dd" resname="ra.prove_phone_possession.challenge_response_incorrect">
-        <jms:reference-file line="16">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.prove_phone_possession.challenge_response_incorrect</source>
-        <target>This code is not correct. Please try again or request a new code.</target>
+      <trans-unit id="eb93c9798d8f0004d45cd3adf417803ce93ac05b" resname="ra.amend_ra_information.location">
+        <source>ra.amend_ra_information.location</source>
+        <target>Location may not be blank</target>
       </trans-unit>
-      <trans-unit id="0d9cb3b18021e2899cf1031812da9a489b60093d" resname="ra.prove_phone_possession.too_many_attempts">
-        <jms:reference-file line="18">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.prove_phone_possession.too_many_attempts</source>
-        <target>You have exceeded the limit of ten attempts; you can no longer attempt verification of any more codes. Contact your helpdesk or try again later.</target>
+      <trans-unit id="095af319676e1135c06bbe6bb8501816ca49fc33" resname="ra.form.extension.ra_role.must_be_valid_choice">
+        <source>ra.form.extension.ra_role.must_be_valid_choice</source>
+        <target>The selected role is not a valid choice</target>
       </trans-unit>
-      <trans-unit id="06ada20a09df4484b41e75a58e813b54d4904f33" resname="ra.prove_yubikey_possession.different_yubikey_used">
-        <jms:reference-file line="12">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.prove_yubikey_possession.different_yubikey_used</source>
-        <target>A different Yubikey was used by the user during the registration process.</target>
+      <trans-unit id="63afbb9b99d8cd2a35f01ca455bd73b2994397c8" resname="ra.search_ra_candidates.institution.blank">
+        <source>ra.search_ra_candidates.institution.blank</source>
+        <target>Institution must be set</target>
+      </trans-unit>
+      <trans-unit id="768441c3e810f5a3e1b7dd5c57ea02e5066be253" resname="ra.search_ra_candidates.institution.type">
+        <source>ra.search_ra_candidates.institution.type</source>
+        <target>Institution must be a string</target>
+      </trans-unit>
+      <trans-unit id="f5896924bf34d44a4af698498d21d8732258b418" resname="ra.search_ra_candidates.order_by.invalid_choice">
+        <source>ra.search_ra_candidates.order_by.invalid_choice</source>
+        <target>Invalid choice for ordering column</target>
+      </trans-unit>
+      <trans-unit id="2ebebb5e9c799b9037f46652fec540c03d99dafc" resname="ra.search_ra_candidates.order_direction.invalid_choice">
+        <source>ra.search_ra_candidates.order_direction.invalid_choice</source>
+        <target>Invalid choice for ordering direction</target>
+      </trans-unit>
+      <trans-unit id="aa63a2e8f71fad302a0651f5116ea441804b425f" resname="ra.search_ra_candidates.page_number.greater_than_zero">
+        <source>ra.search_ra_candidates.page_number.greater_than_zero</source>
+        <target>The page number must be greater than zero</target>
+      </trans-unit>
+      <trans-unit id="1e5e921ec2fbeeb305e0c20d6e0c0a48fb38a8fe" resname="ra.search_ra_candidates.page_number.type">
+        <source>ra.search_ra_candidates.page_number.type</source>
+        <target>The page number must be an integer</target>
       </trans-unit>
       <trans-unit id="96fa6c297f7ae3acce042b0fe9a271753761c646" resname="ra.search_ra_second_factors.institution.blank">
         <source>ra.search_ra_second_factors.institution.blank</source>
@@ -244,23 +370,6 @@
         <source>ra.search_ra_second_factors.type.invalid_choice</source>
         <target>Cannot filter by given token type.</target>
       </trans-unit>
-      <trans-unit id="0facb08a0b6d9cecff3d2f842519b3cada5837a0" resname="ra.send_sms_command.recipient.may_not_be_empty">
-        <source>ra.send_sms_command.recipient.may_not_be_empty</source>
-        <target>The recipient may not be empty.</target>
-      </trans-unit>
-      <trans-unit id="4b75382ce22497b1b3594c084506543201ac2566" resname="ra.send_sms_command.recipient.must_be_string">
-        <source>ra.send_sms_command.recipient.must_be_string</source>
-        <target>The recipient must be a string.</target>
-      </trans-unit>
-      <trans-unit id="c461437c8f242f1e43956844601a499f20f189e7" resname="ra.send_sms_command.recipient.must_consist_of_digits">
-        <source>ra.send_sms_command.recipient.must_consist_of_digits</source>
-        <target>The recipient must be the telephone number with country code and without plus sign.</target>
-      </trans-unit>
-      <trans-unit id="a718fae8b5a05ddfe4f55f3ed1a4bb8b365ea12c" resname="ra.sms_send_challenge.send_sms_challenge_failed">
-        <jms:reference-file line="15">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.sms_send_challenge.send_sms_challenge_failed</source>
-        <target>The sending of the code via SMS failed.</target>
-      </trans-unit>
       <trans-unit id="25f28c755234f7056ca31e9a493447c1f328fbfd" resname="ra.start_vetting_procedure.registration_code.may_not_be_empty">
         <source>ra.start_vetting_procedure.registration_code.may_not_be_empty</source>
         <target>Please enter the registration code the user has received by e-mail</target>
@@ -268,16 +377,6 @@
       <trans-unit id="0891f5e98021a5c756bc410f56c1450858d0d621" resname="ra.start_vetting_procedure.registration_code.must_be_string">
         <source>ra.start_vetting_procedure.registration_code.must_be_string</source>
         <target>Please enter the registration code the user has received by e-mail</target>
-      </trans-unit>
-      <trans-unit id="abe2e824031a2393db11918365a49cf65d3ec585" resname="ra.verify_identity.identity_verification_failed">
-        <jms:reference-file line="7">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.verify_identity.identity_verification_failed</source>
-        <target>Identity verification failed</target>
-      </trans-unit>
-      <trans-unit id="ba1980036b712688f6681fb8f86ac6925a1cba5a" resname="ra.verify_identity.second_factor_vetting_failed">
-        <jms:reference-file line="6">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.verify_identity.second_factor_vetting_failed</source>
-        <target>The security token could not be vetted due to unknown reasons.</target>
       </trans-unit>
       <trans-unit id="fe4c3e776f7b06d80ac6f0a4ac29013337290fe6" resname="ra.verify_identity_command.document_number.may_not_be_empty">
         <source>ra.verify_identity_command.document_number.may_not_be_empty</source>
@@ -291,14 +390,6 @@
         <source>ra.verify_identity_command.identity_verified.must_be_checked</source>
         <target>Please check this box only if you have successfully verified the users's identity, then click 'Verify identity'</target>
       </trans-unit>
-      <trans-unit id="9113def6d7bffe1a7a21db09b2abc36b1f16c725" resname="ra.verify_phone_number_command.challenge.may_not_be_empty">
-        <source>ra.verify_phone_number_command.challenge.may_not_be_empty</source>
-        <target>SMS challenge may not be empty.</target>
-      </trans-unit>
-      <trans-unit id="f53b75b19d67e02f4c017785d731c792598605da" resname="ra.verify_phone_number_command.challenge.must_be_string">
-        <source>ra.verify_phone_number_command.challenge.must_be_string</source>
-        <target>SMS challenge must be a string.</target>
-      </trans-unit>
       <trans-unit id="462445b93a181d615ec47505462f69bf13f4af7a" resname="ra.verify_yubikey_command.otp.may_not_be_empty">
         <source>ra.verify_yubikey_command.otp.may_not_be_empty</source>
         <target>Press and hold the button on the personal Yubikey of the user once; a OTP will be generated in the field below.</target>
@@ -307,15 +398,25 @@
         <source>ra.verify_yubikey_command.otp.must_be_string</source>
         <target>Press and hold the button on the personal Yubikey of the user once; a OTP will be generated in the field below.</target>
       </trans-unit>
-      <trans-unit id="7b8f4a813ad65c5f70c2f28e3459db2300aa11d8" resname="ra.verify_yubikey_command.otp.otp_invalid">
-        <jms:reference-file line="10">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.verify_yubikey_command.otp.otp_invalid</source>
-        <target>The Yubikey code was invalid. Please try again.</target>
+      <trans-unit id="049f2b52bc9cf777280bbfc8b787f6e69a701beb" resname="stepup.send_sms_command.recipient.may_not_be_empty">
+        <source>stepup.send_sms_command.recipient.may_not_be_empty</source>
+        <target>Recipient may not be empty</target>
       </trans-unit>
-      <trans-unit id="669fe8c5f63adab894fc62f2bbf036f2fe9e8b6c" resname="ra.verify_yubikey_command.otp.verification_error">
-        <jms:reference-file line="11">Resources/views/translations.html.twig</jms:reference-file>
-        <source>ra.verify_yubikey_command.otp.verification_error</source>
-        <target>The Yubikey code could not be verified due to unknown reasons.</target>
+      <trans-unit id="9e988968acb8506939fa9b6c5d15b6e65cdcdb9f" resname="stepup.send_sms_command.recipient.must_be_string">
+        <source>stepup.send_sms_command.recipient.must_be_string</source>
+        <target>Recipient must be a string</target>
+      </trans-unit>
+      <trans-unit id="f40a78148c674a1d7961ef7ca5d048664caf70b7" resname="stepup.send_sms_command.recipient.must_consist_of_digits">
+        <source>stepup.send_sms_command.recipient.must_consist_of_digits</source>
+        <target>Recipient must consist of digits</target>
+      </trans-unit>
+      <trans-unit id="b7bcb89ad4b6ed61daa138541702c67ce7dd63c9" resname="stepup.verify_possession_of_phone_command.challenge.may_not_be_empty">
+        <source>stepup.verify_possession_of_phone_command.challenge.may_not_be_empty</source>
+        <target>Challenge may not be empty</target>
+      </trans-unit>
+      <trans-unit id="8b87f20ba80c487ed07070e32d031343571d34b9" resname="stepup.verify_possession_of_phone_command.challenge.must_be_string">
+        <source>stepup.verify_possession_of_phone_command.challenge.must_be_string</source>
+        <target>Challenge must be a string</target>
       </trans-unit>
     </body>
   </file>

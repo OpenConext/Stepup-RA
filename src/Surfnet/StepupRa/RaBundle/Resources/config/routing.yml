@@ -8,11 +8,6 @@ ra_serviceprovider_consume_assertion:
     methods: [POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Saml:consumeAssertion }
 
-ra_vetting_search:
-    path:     /
-    methods: [GET, POST]
-    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:startProcedure }
-
 ra_second_factors_search:
     path:     /second-factors
     methods: [GET, POST]
@@ -23,9 +18,24 @@ ra_second_factor_revoke:
     methods:  [POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:SecondFactor:revoke }
 
-ra_vetting_yubikey_verify:
-    path: /vetting-procedure/{procedureId}/verify-yubikey
+ra_second_factor_auditlog:
+    path:     /second-factors/{identityId}/auditlog
+    methods:  [GET]
+    defaults: { _controller: SurfnetStepupRaRaBundle:SecondFactor:auditLog }
+
+ra_vetting_search:
+    path:     /
     methods: [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:startProcedure }
+
+ra_vetting_cancel:
+    path:     /vetting-procedure/{procedureId}/cancel
+    methods: [POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:cancelProcedure }
+
+ra_vetting_yubikey_verify:
+    path:     /vetting-procedure/{procedureId}/verify-yubikey
+    methods:  [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting/Yubikey:verify }
 
 ra_vetting_sms_send_challenge:
@@ -67,3 +77,45 @@ ra_vetting_completed:
     path:     /vetting-procedure/{procedureId}/completed
     methods:  [GET]
     defaults: { _controller: SurfnetStepupRaRaBundle:Vetting:vettingCompleted }
+
+ra_management_manage:
+    path:     /management/ra
+    methods:  [GET]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:manage }
+
+ra_management_ra_candidate_search:
+    path:     /management/search-ra-candidate
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:raCandidateSearch }
+
+ra_management_create_ra:
+    path:     /management/create-ra/{identityId}
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:createRa }
+
+ra_management_amend_ra_information:
+    path:     /management/amend-ra-information/{identityId}
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:amendRaInformation }
+
+ra_management_change_ra_role:
+    path:     /management/change-role/{identityId}
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:changeRaRole }
+
+ra_management_retract_registration_authority:
+    path:     /management/retract-registration-authority/{identityId}
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:retractRegistrationAuthority }
+
+sraa_select_institution:
+    path:     /sraa/select-institution
+    methods:  [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Sraa:selectInstitution }
+
+ra_switch_locale:
+    path:     /switch-locale
+    methods:  [POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:Locale:switchLocale }
+    requirements:
+        'return-url': '.+'

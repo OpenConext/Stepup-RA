@@ -16,22 +16,12 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Tests;
+namespace Surfnet\StepupRa\RaBundle\Command;
 
-use DateTime;
-use ReflectionProperty;
-
-class DateTimeHelper
+class RetractRegistrationAuthorityCommand
 {
     /**
-     * Fixes the `DateTime` returned by `DateTime::now()`.
-     *
-     * @param DateTime|null $now
+     * @var string
      */
-    public static function setCurrentTime(DateTime $now = null)
-    {
-        $nowProperty = new ReflectionProperty('Surfnet\StepupRa\RaBundle\DateTime\DateTime', 'now');
-        $nowProperty->setAccessible(true);
-        $nowProperty->setValue($now);
-    }
+    public $identityId;
 }

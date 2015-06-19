@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<div class="form-retract-registration-authority emulate-form-layout">
+    <p class="question bg-info">
+        {{ 'ra.management.retract_registration_authority.are_you_sure'|trans }}
+    </p>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-sm-3">{{ 'ra.management.change_ra_role.ra_listing.name'|trans }}</label>
+
+            <div class="control-text col-sm-9">{{ raListing.commonName }}</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3">{{ 'ra.management.change_ra_role.ra_listing.email'|trans }}</label>
+
+            <div class="control-text col-sm-9">{{ raListing.email }}</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3">{{ 'ra.management.change_ra_role.ra_listing.institution'|trans }}</label>
+
+            <div class="control-text col-sm-9">{{ raListing.institution }}</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3">{{ 'ra.management.change_ra_role.ra_listing.location'|trans }}</label>
+
+            <div class="control-text col-sm-9">{{ raListing.location }}</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3">{{ 'ra.management.change_ra_role.ra_listing.contact_information'|trans }}</label>
+
+            <div class="control-text col-sm-9">{{ raListing.contactInformation }}</div>
+        </div>
+    </div>
+    {{ form(form) }}
+</div>
+{% endblock %}

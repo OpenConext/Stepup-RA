@@ -18,26 +18,20 @@
 
 namespace Surfnet\StepupRa\RaBundle\Command;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
-class SendSmsChallengeCommand
+class ChangeRaRoleCommand
 {
     /**
-     * @var string Filled in by the VettingService
+     * @var string
      */
-    public $phoneNumber;
+    public $identityId;
 
     /**
-     * The requesting identity's ID (not name ID).
-     *
-     * @var string Filled in by the VettingService
-     */
-    public $identity;
-
-    /**
-     * The requesting identity's institution.
-     *
-     * @var string Filled in by the VettingService
+     * @var string
      */
     public $institution;
+
+    /**
+     * @var string|null
+     */
+    public $role;
 }

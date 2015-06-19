@@ -30,6 +30,10 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\VerifyPhoneNumberType
         tags: [{ name: form.type, alias: ra_verify_phone_number }]
 
+    ra.form.type.search_ra_candidates:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType
+        tags: [{ name: form.type, alias: ra_search_ra_candidates }]
+
     ra.form.type.search_ra_second_factors:
         class: Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType
         tags: [{ name: form.type, alias: ra_search_ra_second_factors }]
@@ -38,21 +42,50 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType
         tags: [{ name: form.type, alias: ra_revoke_second_factor }]
 
+    ra.form.type.sraa_institution_select:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\InstitutionSelectionType
+        arguments:
+            - @ra.form.extension.institution_listing_choice_list
+        tags: [{ name: form.type, alias: sraa_institution_select }]
+
+    ra.form.type.management.create_ra:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType
+        tags: [{ name: form.type, alias: ra_management_create_ra }]
+
+    ra.form.type.management.amend_ra_info:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\AmendRegistrationAuthorityInformationType
+        tags: [{ name: form.type, alias: ra_management_amend_ra_info }]
+
+    ra.form.type.management.change_role:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaRoleType
+        tags: [{ name: form.type, alias: ra_management_change_ra_role }]
+
+    ra.form.type.management.retract_registration_authority:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType
+        tags: [{ name: form.type, alias: ra_management_retract_registration_authority }]
+
+    # Form Extensions
+    ra.form.extension.institution_listing_choice_list:
+        class: Surfnet\StepupRa\RaBundle\Form\Extension\InstitutionListingChoiceList
+        arguments:
+            - @surfnet_stepup_middleware_client.identity.service.institution_listing
+
     # Services
     ra.service.vetting:
         class: Surfnet\StepupRa\RaBundle\Service\VettingService
         arguments:
-            - @ra.service.sms_second_factor
+            - @surfnet_stepup.service.sms_second_factor
             - @ra.service.yubikey_second_factor
             - @ra.service.gssf
             - @ra.service.command
             - @ra.repository.vetting_procedure
+            - @translator
 
     ra.service.yubikey:
         public: false
         class: Surfnet\StepupRa\RaBundle\Service\YubikeyService
         arguments:
-            - @ra.guzzle.gateway_api
+            - @surfnet_stepup.guzzle.gateway_api
             - @logger
 
     ra.service.yubikey_second_factor:
@@ -61,30 +94,6 @@ services:
         arguments:
             - @ra.service.yubikey
             - @logger
-
-    ra.service.sms:
-        public: false
-        class: Surfnet\StepupRa\RaBundle\Service\SmsService
-        arguments:
-            - @ra.guzzle.gateway_api
-            - @logger
-
-    ra.service.sms_second_factor:
-        class: Surfnet\StepupRa\RaBundle\Service\SmsSecondFactorService
-        arguments:
-            - @ra.service.sms
-            - @ra.service.challenge_handler
-            - @translator
-            - '' # Originator set in extension
-
-    ra.service.challenge_handler:
-        public: false
-        class: Surfnet\StepupRa\RaBundle\Service\SmsSecondFactor\SessionSmsVerificationStateHandler
-        arguments:
-            - @session
-            - 'Surfnet/Ra/SecondFactor/Sms:challenge'
-            - {} # OTP expiry interval
-            - 0  # Maximum OTP requests
 
     ra.service.gssf:
         class: Surfnet\StepupRa\RaBundle\Service\GssfService
@@ -105,16 +114,18 @@ services:
         calls:
             - [setName, ['ra.service.gssf']]
 
-    ra.guzzle.gateway_api:
-        public: false
-        class: GuzzleHttp\Client
+    ra.service.audit_log:
+        class: Surfnet\StepupRa\RaBundle\Service\AuditLogService
         arguments:
-            - {} # Set from the extension
+            - @surfnet_stepup_middleware_client.identity.service.audit_log
+            - @logger
 
     ra.service.identity:
         class: Surfnet\StepupRa\RaBundle\Service\IdentityService
         arguments:
             - @surfnet_stepup_middleware_client.identity.service.identity
+            - @ra.service.command
+            - @security.token_storage
             - @logger
 
     ra.service.second_factor:
@@ -123,10 +134,23 @@ services:
             - @surfnet_stepup_middleware_client.identity.service.second_factor
             - @logger
 
+    ra.service.ra_candidate:
+        class: Surfnet\StepupRa\RaBundle\Service\RaCandidateService
+        arguments:
+            - @surfnet_stepup_middleware_client.identity.service.ra_candidate
+            - @ra.service.command
+            - @logger
+
     ra.service.ra_second_factor:
         class: Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService
         arguments:
             - @surfnet_stepup_middleware_client.identity.service.ra_second_factor
+            - @ra.service.command
+            - @logger
+
+    ra.service.ra:
+        class: Surfnet\StepupRa\RaBundle\Service\RaService
+        arguments:
             - @ra.service.command
             - @logger
 
@@ -170,3 +194,15 @@ services:
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\SessionHandler
         arguments:
             - @session
+
+    #Logger
+    ra.procedure_logger:
+        class: Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger
+        arguments:
+            - @logger
+
+    # Listeners
+    ra.event_listener.locale:
+        class: Surfnet\StepupRa\RaBundle\EventListener\LocaleListener
+        arguments: [ @security.token_storage, @translator ]
+        tags: [{ name: kernel.event_subscriber }]

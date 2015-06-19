@@ -39,4 +39,8 @@
 
     </div>
 
+    <hr>
+
+    {% include 'SurfnetStepupRaRaBundle:Vetting/partial:cancelVettingProcedure.html.twig' with { 'procedureId': app.request.attributes.get('procedureId') } only %}
+
 {% endblock %}

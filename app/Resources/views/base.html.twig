@@ -7,7 +7,9 @@
 {% endblock title %}
 {% block head_style %}
     {% stylesheets
-    '@SurfnetStepupRaRaBundle/Resources/public/less/style.less' filter='less'
+    filter='less'
+    '@SurfnetStepupRaRaBundle/Resources/public/less/style.less'
+    '@SurfnetStepupBundle/Resources/public/less/stepup.less'
     %}
     <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
     {% endstylesheets %}
@@ -25,25 +27,48 @@
                 <img src="/images/surfnet.jpg" class="pull-right" alt="SURFnet">
                 <h1>{{ 'app.name'|trans }}</h1>
             </div>
+            {% block menu %}
+            {% if app.user %}
             <div class="row-fluid">
                 <div class="col-sm-6">
                     <ul class="nav nav-pills">
-                        <li role="presentation"{% if app.request.attributes.get('_route') == 'ra_vetting_search' %} class="active"{% endif %}>
+                        <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_vetting' %} class="active"{% endif %}>
                             <a href="{{ path('ra_vetting_search') }}">{{ 'ra.menu.registration'|trans }}</a>
                         </li>
-                        <li role="presentation"{% if app.request.attributes.get('_route') == 'ra_second_factors_search' %} class="active"{% endif %}>
+                        <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_second_factors' %} class="active"{% endif %}>
                             <a href="{{ path('ra_second_factors_search') }}">{{ 'ra.menu.search'|trans }}</a>
                         </li>
+                    {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                        <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_management' %} class="active"{% endif %}>
+                            <a href="{{ path('ra_management_manage') }}">{{ 'ra.menu.ra_management'|trans }}</a>
+                        </li>
+                    {% endif %}
                     </ul>
                 </div>
                 <div class="col-sm-6">
-                    <form method="post" action="{{ path('logout') }}" class="pull-right">
+                    <form name="logout" method="post" action="{{ path('logout') }}" class="pull-right">
                         <button type="submit" class="btn btn-link"><i class="fa fa-sign-out"></i> {{ 'button.logout'|trans }}</button>
                     </form>
+                        {% set locale_switcher = stepup_locale_switcher(app.request.locale, 'ra_switch_locale', {'return-url': app.request.uri}) %}
+                        {{ form_start(locale_switcher, { attr: { class: 'form-inline' }}) }}
+                        {{ form_widget(locale_switcher.locale) }}
+                        {{ form_widget(locale_switcher.switch) }}
+                        {{ form_end(locale_switcher) }}
+                {% if is_granted('ROLE_SRAA') %}
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation"{% if app.request.attributes.get('_route') == 'sraa_select_institution' %} class="active"{% endif %}>
+                            <a href="{{ path('sraa_select_institution') }}">
+                                {{ app.user.institution }} <i class="fa fa-exchange"></i> {{ 'ra.menu.sraa_change_institution'|trans }}
+                            </a>
+                        </li>
+                    </ul>
+                {% endif %}
                 </div>
             </div>
             <div class="clearfix"></div>
             <hr>
+            {% endif %}
+            {% endblock menu %}
         {% endblock page_header %}
 
         {% block flashes %}

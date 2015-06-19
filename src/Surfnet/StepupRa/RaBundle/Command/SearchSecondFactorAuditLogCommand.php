@@ -18,42 +18,30 @@
 
 namespace Surfnet\StepupRa\RaBundle\Command;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
-class SendSmsCommand
+class SearchSecondFactorAuditLogCommand
 {
     /**
-     * @Assert\NotBlank(message="ra.send_sms_command.recipient.may_not_be_empty")
-     * @Assert\Type(type="string", message="ra.send_sms_command.recipient.must_be_string")
-     * @Assert\Regex(pattern="~^\d+$~", message="ra.send_sms_command.recipient.must_consist_of_digits")
-     *
-     * The recipient as a string of digits (31612345678 for +31 6 1234 5678).
-     *
-     * @var string
-     */
-    public $recipient;
-
-    /**
-     * @var string
-     */
-    public $originator;
-
-    /**
-     * @var string
-     */
-    public $body;
-
-    /**
-     * The requesting identity's ID (not name ID).
-     *
-     * @var string
-     */
-    public $identity;
-
-    /**
-     * The requesting identity's institution.
-     *
      * @var string
      */
     public $institution;
+
+    /**
+     * @var string
+     */
+    public $identityId;
+
+    /**
+     * @var string|null
+     */
+    public $orderBy;
+
+    /**
+     * @var string|null
+     */
+    public $orderDirection;
+
+    /**
+     * @var int
+     */
+    public $pageNumber;
 }

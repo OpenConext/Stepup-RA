@@ -16,10 +16,12 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Service\Exception;
+namespace Surfnet\StepupRa\RaBundle\Command;
 
-use Surfnet\StepupRa\RaBundle\Exception\DomainException;
-
-class TooManyChallengesRequestedException extends DomainException
+class SelectInstitutionCommand
 {
+    /**
+     * @var string
+     */
+    public $institution;
 }

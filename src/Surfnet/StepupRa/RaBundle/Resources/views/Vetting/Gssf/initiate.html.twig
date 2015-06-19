@@ -37,4 +37,8 @@
         <button type="submit" class="btn btn-primary">{{ ('ra.vetting.gssf.initiate.' ~ provider ~ '.button.initiate')|trans }}</button>
     </form>
 
+    <hr>
+
+    {% include 'SurfnetStepupRaRaBundle:Vetting/partial:cancelVettingProcedure.html.twig' with { 'procedureId': app.request.attributes.get('procedureId') } only %}
+
 {% endblock %}

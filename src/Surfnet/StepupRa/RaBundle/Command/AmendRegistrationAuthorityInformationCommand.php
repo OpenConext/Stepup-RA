@@ -20,18 +20,26 @@ namespace Surfnet\StepupRa\RaBundle\Command;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class VerifyPhoneNumberCommand
+class AmendRegistrationAuthorityInformationCommand
 {
     /**
-     * @Assert\NotBlank(message="ra.verify_phone_number_command.challenge.may_not_be_empty")
-     * @Assert\Type(type="string", message="ra.verify_phone_number_command.challenge.must_be_string")
+     * @var string
+     */
+    public $identityId;
+
+    /**
+     * @Assert\NotBlank(message="ra.amend_ra_information.location")
+     * @Assert\Type(type="string")
      *
      * @var string
      */
-    public $challenge;
+    public $location;
 
     /**
+     * @Assert\NotBlank(message="ra.amend_ra_information.contact_information")
+     * @Assert\Type(type="string")
+     *
      * @var string
      */
-    public $phoneNumber;
+    public $contactInformation;
 }

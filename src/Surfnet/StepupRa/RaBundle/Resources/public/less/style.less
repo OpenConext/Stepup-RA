@@ -27,6 +27,11 @@ form[name="ra_verify_yubikey_public_id"] {
     margin: 1em auto;
     padding: 0.75em 1em;
     max-width: 525px;
+
+    > .form-group > .col-sm-9 {
+        float: none;
+        margin: 0 auto;
+    }
 }
 
 div.form-ra-verify-identity {
@@ -54,6 +59,26 @@ div.form-ra-verify-identity {
     }
 }
 
+div.form-ra-create-ra, div.form-ra-amend-ra-info, div.form-ra-change-role {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 650px;
+
+    .control-text {
+        padding-top: 7px;
+    }
+}
+
+div.emulate-form-layout {
+    .control-text {
+        padding-top: 7px;
+    }
+}
+
+.question {
+    padding: 15px;
+}
+
 div.form-ra-send-sms-challenge {
     margin: 1em auto;
     padding: 0.75em 1em;
@@ -61,6 +86,16 @@ div.form-ra-send-sms-challenge {
 
     form {
         text-align: center;
+    }
+}
+
+div.form-retract-registration-authority {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 650px;
+
+    button {
+        margin-left: 1em;
     }
 }
 
@@ -90,8 +125,32 @@ form[name="ra_search_ra_second_factors"] {
     }
 }
 
+form[name="ra_search_ra_candidates"] {
+    input#ra_search_ra_candidates_name {
+        max-width: 300px;
+    }
+    input#ra_search_ra_candidates_email {
+        max-width: 300px;
+    }
+}
+
+form[name="logout"] button {
+    line-height: 26px;
+}
+
+form[name="stepup_switch_locale"] {
+        .pull-right();
+}
+select[name="stepup_switch_locale[locale]"] {
+    min-width: 150px;
+}
+
 .hidden {
     display: none;
+}
+
+.container-cancel-vetting {
+    text-align: center;
 }
 
 .generate-progress(100);
@@ -101,4 +160,8 @@ form[name="ra_search_ra_second_factors"] {
         width: (@i * 1%);
     }
     .generate-progress(@n, (@i + 5));
+}
+
+.cancel {
+    color: @brand-danger;
 }

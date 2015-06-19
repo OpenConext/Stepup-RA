@@ -5,7 +5,7 @@
 {% block page_header %}
     {{ parent() }}
 
-    {% include 'SurfnetStepupRaRaBundle:Vetting/partial:progressBar.html.twig' with {'progress': 50, 'step': 3} only %}
+    {% include 'SurfnetStepupRaRaBundle:Vetting/partial:progressBar.html.twig' with {'progress': 60, 'step': 3} only %}
 {% endblock %}
 
 {% block content %}
@@ -31,4 +31,9 @@
 
         {{ form(form) }}
     </div>
+
+    <hr>
+
+    {% include 'SurfnetStepupRaRaBundle:Vetting/partial:cancelVettingProcedure.html.twig' with { 'procedureId': app.request.attributes.get('procedureId') } only %}
+
 {% endblock %}

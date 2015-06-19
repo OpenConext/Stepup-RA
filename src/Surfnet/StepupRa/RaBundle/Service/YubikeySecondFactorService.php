@@ -19,10 +19,11 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
+use Surfnet\StepupBundle\Value\YubikeyOtp;
+use Surfnet\StepupBundle\Value\YubikeyPublicId;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyOtpCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult;
-use Surfnet\StepupRa\RaBundle\Value\Otp;
 
 class YubikeySecondFactorService
 {
@@ -58,7 +59,13 @@ class YubikeySecondFactorService
         $verifyOtpCommand->institution = $command->institution;
 
         $verificationResult = $this->yubikeyService->verify($verifyOtpCommand);
-        $publicId = Otp::isValid($command->otp) ? Otp::fromString($command->otp)->publicId : null;
+
+        if (YubikeyOtp::isValid($command->otp)) {
+            $otp      = YubikeyOtp::fromString($command->otp);
+            $publicId = YubikeyPublicId::fromOtp($otp);
+        } else {
+            $publicId = null;
+        }
 
         if ($verificationResult->isServerError()) {
             return new VerificationResult(VerificationResult::RESULT_OTP_VERIFICATION_FAILED, $publicId);
@@ -66,7 +73,7 @@ class YubikeySecondFactorService
             return new VerificationResult(VerificationResult::RESULT_OTP_INVALID, $publicId);
         }
 
-        if ($publicId !== $command->expectedPublicId) {
+        if ($publicId->getYubikeyPublicId() !== $command->expectedPublicId) {
             $this->logger->notice(
                 'Yubikey used by registrant during vetting did not match the one used during registration.'
             );

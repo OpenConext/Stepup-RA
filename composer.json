@@ -10,7 +10,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.4",
-        "symfony/symfony": "~2.6,>=2.6.6",
+        "symfony/symfony": "^2.7",
         "twig/extensions": "~1.0",
         "symfony/assetic-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
@@ -23,10 +23,10 @@
         "fortawesome/font-awesome": "~4.2.0",
         "jms/translation-bundle": "~1.1.0",
         "jms/di-extra-bundle": "~1.4.0",
-        "surfnet/stepup-middleware-client-bundle": "0.3.*",
+        "surfnet/stepup-middleware-client-bundle": "^1.0",
         "simplesamlphp/saml2": "dev-master",
-        "surfnet/stepup-saml-bundle": "0.4.*",
-        "surfnet/stepup-bundle": "0.2.*",
+        "surfnet/stepup-saml-bundle": "^1.0",
+        "surfnet/stepup-bundle": "^1.0",
         "guzzlehttp/guzzle": "~4",
         "symfony/swiftmailer-bundle": "~2.3",
         "knplabs/knp-paginator-bundle": "~2.4"
@@ -63,7 +63,7 @@
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
-        "symfony-assets-install": "symlink",
+        "symfony-assets-install": "relative",
         "incenteev-parameters": [
             {
                 "file": "app/config/parameters.yml"
