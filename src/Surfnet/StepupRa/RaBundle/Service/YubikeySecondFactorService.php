@@ -19,11 +19,11 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
+use Surfnet\StepupBundle\Value\YubikeyOtp;
 use Surfnet\StepupBundle\Value\YubikeyPublicId;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyOtpCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult;
-use Surfnet\StepupRa\RaBundle\Value\Otp;
 
 class YubikeySecondFactorService
 {
@@ -60,8 +60,9 @@ class YubikeySecondFactorService
 
         $verificationResult = $this->yubikeyService->verify($verifyOtpCommand);
 
-        if (Otp::isValid($command->otp)) {
-            $publicId = YubikeyPublicId::fromModHex(Otp::fromString($command->otp)->publicId)->getYubikeyPublicId();
+        if (YubikeyOtp::isValid($command->otp)) {
+            $otp      = YubikeyOtp::fromString($command->otp);
+            $publicId = YubikeyPublicId::fromOtp($otp);
         } else {
             $publicId = null;
         }
@@ -72,18 +73,18 @@ class YubikeySecondFactorService
             return new VerificationResult(VerificationResult::RESULT_OTP_INVALID, $publicId);
         }
 
-        if ($publicId !== $command->expectedPublicId) {
+        if ($publicId->getYubikeyPublicId() !== $command->expectedPublicId) {
             $this->logger->notice(
                 'Yubikey used by registrant during vetting did not match the one used during registration.'
             );
 
-            return new VerificationResult(VerificationResult::RESULT_PUBLIC_ID_DID_NOT_MATCH, $publicId);
+            return new VerificationResult(VerificationResult::RESULT_PUBLIC_ID_DID_NOT_MATCH, $publicId->getYubikeyPublicId());
         }
 
         $this->logger->info(
             'Yubikey used by registrant during vetting matches the one used during registration.'
         );
 
-        return new VerificationResult(VerificationResult::RESULT_PUBLIC_ID_MATCHED, $publicId);
+        return new VerificationResult(VerificationResult::RESULT_PUBLIC_ID_MATCHED, $publicId->getYubikeyPublicId());
     }
 }
