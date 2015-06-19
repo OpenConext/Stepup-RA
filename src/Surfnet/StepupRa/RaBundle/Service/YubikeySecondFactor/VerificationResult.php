@@ -18,8 +18,8 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor;
 
+use Surfnet\StepupBundle\Value\YubikeyPublicId;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
-use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
 class VerificationResult
 {
@@ -29,7 +29,7 @@ class VerificationResult
     const RESULT_OTP_INVALID = 3;
 
     /**
-     * @var string|null
+     * @var \Surfnet\StepupBundle\Value\YubikeyPublicId|null
      */
     private $publicId;
 
@@ -40,9 +40,9 @@ class VerificationResult
 
     /**
      * @param int $result
-     * @param string|null $publicId
+     * @param YubikeyPublicId|null $publicId
      */
-    public function __construct($result, $publicId)
+    public function __construct($result, YubikeyPublicId $publicId = null)
     {
         $acceptableResults = [
             self::RESULT_PUBLIC_ID_MATCHED,
@@ -55,17 +55,13 @@ class VerificationResult
             throw new DomainException('Public ID verification result is not one of the RESULT constants.');
         }
 
-        if (!is_string($publicId) && $publicId !== null) {
-            throw new InvalidArgumentException('Public ID must be string or null.');
-        }
-
         $this->result = $result;
         $this->publicId = $publicId;
     }
 
     public function didPublicIdMatch()
     {
-        return $this->result === self::RESULT_PUBLIC_ID_MATCHED && is_string($this->publicId);
+        return $this->result === self::RESULT_PUBLIC_ID_MATCHED && $this->publicId !== null;
     }
 
     public function wasOtpInvalid()
@@ -79,7 +75,7 @@ class VerificationResult
     }
 
     /**
-     * @return string|null
+     * @return YubikeyPublicId|null
      */
     public function getPublicId()
     {

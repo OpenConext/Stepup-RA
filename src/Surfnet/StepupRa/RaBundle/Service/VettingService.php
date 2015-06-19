@@ -230,7 +230,7 @@ class VettingService
         $result = $this->yubikeySecondFactorService->verifyYubikeyPublicId($command);
 
         if ($result->didPublicIdMatch()) {
-            $procedure->verifySecondFactorIdentifier($result->getPublicId());
+            $procedure->verifySecondFactorIdentifier($result->getPublicId()->getYubikeyPublicId());
 
             $this->vettingProcedureRepository->store($procedure);
         }
