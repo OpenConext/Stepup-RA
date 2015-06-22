@@ -132,6 +132,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
 
         $hostedDefinition = new Definition('Surfnet\SamlBundle\Entity\HostedEntities', [
             new Reference('router'),
+            new Reference('request_stack'),
             $serviceProvider,
             $identityProvider
         ]);
