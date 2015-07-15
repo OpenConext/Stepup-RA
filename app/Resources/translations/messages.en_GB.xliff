@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-06-03T13:29:07Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2015-07-15T11:18:27Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -13,7 +13,7 @@
         <target>Step-up Registration Authority</target>
       </trans-unit>
       <trans-unit id="ff6230b38fe127145d864f4d4920ceb4d857af18" resname="button.logout">
-        <jms:reference-file line="49">Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="50">Resources/views/base.html.twig</jms:reference-file>
         <source>button.logout</source>
         <target>Sign out</target>
       </trans-unit>
@@ -183,18 +183,18 @@
         <source>ra.error.saml_authn_failed.title</source>
         <target>Sign in</target>
       </trans-unit>
-      <trans-unit id="04f2844e0bcb0107e26422ea7817be4493b00b41" resname="ra.error.saml_bad_credentials.button.try_again">
-        <jms:reference-file line="10">Saml/Exception/badCredentialsException.html.twig</jms:reference-file>
+      <trans-unit id="094983ff15ab9ea7225a84ee667c97942dabbfa2" resname="ra.error.saml_bad_credentials.button.try_again">
+        <jms:reference-file line="10">Saml/Exception/badCredentials.html.twig</jms:reference-file>
         <source>ra.error.saml_bad_credentials.button.try_again</source>
         <target>Retry sign-in</target>
       </trans-unit>
-      <trans-unit id="30a8b063d31913d070d6f0c8ff823512cb1f6dd2" resname="ra.error.saml_bad_credentials.text.bad_credentials">
-        <jms:reference-file line="8">Saml/Exception/badCredentialsException.html.twig</jms:reference-file>
+      <trans-unit id="83d803b3353c85c34b15bd10ae8554abe2555d57" resname="ra.error.saml_bad_credentials.text.bad_credentials">
+        <jms:reference-file line="8">Saml/Exception/badCredentials.html.twig</jms:reference-file>
         <source>ra.error.saml_bad_credentials.text.bad_credentials</source>
         <target>You are not authorised to sign in.</target>
       </trans-unit>
-      <trans-unit id="f439b5301a358a31defda15db12d38a35cf1a3bb" resname="ra.error.saml_bad_credentials.title">
-        <jms:reference-file line="3">Saml/Exception/badCredentialsException.html.twig</jms:reference-file>
+      <trans-unit id="402d763ae88db9b93672b7c8ba3decb12144d0f3" resname="ra.error.saml_bad_credentials.title">
+        <jms:reference-file line="3">Saml/Exception/badCredentials.html.twig</jms:reference-file>
         <source>ra.error.saml_bad_credentials.title</source>
         <target>Sign in</target>
       </trans-unit>
@@ -224,7 +224,7 @@
         <target>Oops, something went wrong. Please try again or go back to Home.</target>
       </trans-unit>
       <trans-unit id="e7e16bd377d6b3513aee56a7203224b1838b8876" resname="ra.error.text.if_you_think_this_is_incorrect_report">
-        <jms:reference-file line="16">views/Exception/error404.html.twig</jms:reference-file>
+        <jms:reference-file line="17">views/Exception/error404.html.twig</jms:reference-file>
         <source>ra.error.text.if_you_think_this_is_incorrect_report</source>
         <target>Please report this error + error code to the helpdesk via support@surfconext.nl</target>
       </trans-unit>
@@ -234,13 +234,13 @@
         <target>The page you requested was not found. Please try again or go back to Home.</target>
       </trans-unit>
       <trans-unit id="1e71b162b5df5571e03f1e5b4f89b366b0e60390" resname="ra.error.text.what_were_you_doing_well_fix_it">
-        <jms:reference-file line="16">views/Exception/error.html.twig</jms:reference-file>
+        <jms:reference-file line="17">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.text.what_were_you_doing_well_fix_it</source>
         <target>Please report this error + error code to the helpdesk via support@surfconext.nl</target>
       </trans-unit>
       <trans-unit id="97cec45f4b04606121bd0a6613f2673f4e55eff7" resname="ra.error.text.your_art_code">
-        <jms:reference-file line="15">views/Exception/error404.html.twig</jms:reference-file>
-        <jms:reference-file line="15">views/Exception/error.html.twig</jms:reference-file>
+        <jms:reference-file line="16">views/Exception/error404.html.twig</jms:reference-file>
+        <jms:reference-file line="16">views/Exception/error.html.twig</jms:reference-file>
         <source>ra.error.text.your_art_code</source>
         <target>The error code is:</target>
       </trans-unit>
@@ -260,12 +260,12 @@
         <target>Security clearance too low</target>
       </trans-unit>
       <trans-unit id="b172512ee794631a6aecb48e9188443e5ed7a6c3" resname="ra.flash.error_while_switching_locale">
-        <jms:reference-file line="60">RaBundle/Controller/LocaleController.php</jms:reference-file>
+        <jms:reference-file line="71">RaBundle/Controller/LocaleController.php</jms:reference-file>
         <source>ra.flash.error_while_switching_locale</source>
         <target>Due to an unknown reason, switching locales failed.</target>
       </trans-unit>
       <trans-unit id="f627bfabca402ae4730b846bf772dda85f7130c9" resname="ra.flash.invalid_switch_locale_form">
-        <jms:reference-file line="53">RaBundle/Controller/LocaleController.php</jms:reference-file>
+        <jms:reference-file line="64">RaBundle/Controller/LocaleController.php</jms:reference-file>
         <source>ra.flash.invalid_switch_locale_form</source>
         <target>Due to an unknown reason, switching locales failed.</target>
       </trans-unit>
@@ -295,27 +295,27 @@
         <target>Name</target>
       </trans-unit>
       <trans-unit id="7317a2726d1f0c5a5457e36c46f817004792dd9d" resname="ra.form.ra_search_ra_second_factors.button.search">
-        <jms:reference-file line="57">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="58">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.button.search</source>
         <target>Search</target>
       </trans-unit>
       <trans-unit id="48cd99661dd9a7766fe9b5819b2e6fc2b1777da6" resname="ra.form.ra_search_ra_second_factors.choice.status.revoked">
-        <jms:reference-file line="52">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="53">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.choice.status.revoked</source>
         <target>Removed</target>
       </trans-unit>
       <trans-unit id="f5b1f76a7766a04fbbeda4fb456846fc1d82104a" resname="ra.form.ra_search_ra_second_factors.choice.status.unverified">
-        <jms:reference-file line="49">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="50">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.choice.status.unverified</source>
         <target>Not verified</target>
       </trans-unit>
       <trans-unit id="ae89a5ba9082c547a4dda73b729559c3b5d7b463" resname="ra.form.ra_search_ra_second_factors.choice.status.verified">
-        <jms:reference-file line="50">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="51">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.choice.status.verified</source>
         <target>Verified</target>
       </trans-unit>
       <trans-unit id="c8a5fe4fab6c98758ca2bdab597d651fe6f6d782" resname="ra.form.ra_search_ra_second_factors.choice.status.vetted">
-        <jms:reference-file line="51">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="52">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.choice.status.vetted</source>
         <target>Activated</target>
       </trans-unit>
@@ -324,13 +324,18 @@
         <source>ra.form.ra_search_ra_second_factors.choice.type.sms</source>
         <target>SMS</target>
       </trans-unit>
+      <trans-unit id="e606aafcc164c852b02dc75b342cc095f1651476" resname="ra.form.ra_search_ra_second_factors.choice.type.tiqr">
+        <jms:reference-file line="37">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <source>ra.form.ra_search_ra_second_factors.choice.type.tiqr</source>
+        <target>Tiqr</target>
+      </trans-unit>
       <trans-unit id="bcf762515b0675a4cf9296ce0b4d538de8ec05c5" resname="ra.form.ra_search_ra_second_factors.choice.type.yubikey">
         <jms:reference-file line="36">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.choice.type.yubikey</source>
         <target>Yubikey</target>
       </trans-unit>
       <trans-unit id="3bd13a55b07cf257fe610075cfcb65c04feca493" resname="ra.form.ra_search_ra_second_factors.label.email">
-        <jms:reference-file line="44">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="45">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.label.email</source>
         <target>E-mail</target>
       </trans-unit>
@@ -340,12 +345,12 @@
         <target>Name</target>
       </trans-unit>
       <trans-unit id="52a654d4baa15139647f3963ffb3d232a0aeb7c1" resname="ra.form.ra_search_ra_second_factors.label.second_factor_id">
-        <jms:reference-file line="41">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="42">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.label.second_factor_id</source>
         <target>Token ID</target>
       </trans-unit>
       <trans-unit id="cbdcec845d02a58a733a2aae110144ecaff67e8f" resname="ra.form.ra_search_ra_second_factors.label.status">
-        <jms:reference-file line="47">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="48">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.label.status</source>
         <target>Status</target>
       </trans-unit>
@@ -355,12 +360,12 @@
         <target>Type</target>
       </trans-unit>
       <trans-unit id="1ded9028f8d549daf4dfd7f37b472ee17e1beb0c" resname="ra.form.ra_select_institution.button.select_and_apply">
-        <jms:reference-file line="43">Form/Type/InstitutionSelectionType.php</jms:reference-file>
+        <jms:reference-file line="44">Form/Type/InstitutionSelectionType.php</jms:reference-file>
         <source>ra.form.ra_select_institution.button.select_and_apply</source>
         <target>Apply</target>
       </trans-unit>
       <trans-unit id="aff72bc7d94c65f8b3dcf0b3b9bb3f5430ac28f6" resname="ra.form.ra_select_institution.label.institution">
-        <jms:reference-file line="40">Form/Type/InstitutionSelectionType.php</jms:reference-file>
+        <jms:reference-file line="41">Form/Type/InstitutionSelectionType.php</jms:reference-file>
         <source>ra.form.ra_select_institution.label.institution</source>
         <target>Institution</target>
       </trans-unit>
@@ -597,13 +602,13 @@
         <target>Role</target>
       </trans-unit>
       <trans-unit id="790d0a2816d1ea0103191745c8fbe866f088b7ba" resname="ra.management.form.change_ra_role.label.save">
-        <jms:reference-file line="36">Form/Type/ChangeRaRoleType.php</jms:reference-file>
+        <jms:reference-file line="37">Form/Type/ChangeRaRoleType.php</jms:reference-file>
         <source>ra.management.form.change_ra_role.label.save</source>
         <target>Save</target>
       </trans-unit>
       <trans-unit id="a7424b5f4032d810348b6f66b943b892fe80e8ec" resname="ra.management.form.create_ra.label.cancel">
-        <jms:reference-file line="40">Form/Type/ChangeRaRoleType.php</jms:reference-file>
-        <jms:reference-file line="49">Form/Type/CreateRaType.php</jms:reference-file>
+        <jms:reference-file line="41">Form/Type/ChangeRaRoleType.php</jms:reference-file>
+        <jms:reference-file line="50">Form/Type/CreateRaType.php</jms:reference-file>
         <source>ra.management.form.create_ra.label.cancel</source>
         <target>Cancel</target>
       </trans-unit>
@@ -613,7 +618,7 @@
         <target>Contact Information</target>
       </trans-unit>
       <trans-unit id="dae5acb09640e99da945664cf4e40423e1f2be03" resname="ra.management.form.create_ra.label.create_ra">
-        <jms:reference-file line="42">Form/Type/CreateRaType.php</jms:reference-file>
+        <jms:reference-file line="43">Form/Type/CreateRaType.php</jms:reference-file>
         <source>ra.management.form.create_ra.label.create_ra</source>
         <target>Create RA(A)</target>
       </trans-unit>
@@ -718,22 +723,22 @@
         <target>Are you sure you want to remove the RA(A) below as RA(A)?</target>
       </trans-unit>
       <trans-unit id="08d2247eaaec4c6e898a3f3d01bda66d7c33731c" resname="ra.menu.ra_management">
-        <jms:reference-file line="42">Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="43">Resources/views/base.html.twig</jms:reference-file>
         <source>ra.menu.ra_management</source>
         <target>RA Management</target>
       </trans-unit>
       <trans-unit id="7d6a9d74b9561d924dc4411c3ceebc63a01c83ae" resname="ra.menu.registration">
-        <jms:reference-file line="35">Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="36">Resources/views/base.html.twig</jms:reference-file>
         <source>ra.menu.registration</source>
         <target>Registration</target>
       </trans-unit>
       <trans-unit id="1a955d4adfae2bc0a0c0177a672e95c7dcbb486d" resname="ra.menu.search">
-        <jms:reference-file line="38">Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="39">Resources/views/base.html.twig</jms:reference-file>
         <source>ra.menu.search</source>
         <target>Tokens</target>
       </trans-unit>
       <trans-unit id="ea07c1ef2b8502f7457347223483d010ab427050" resname="ra.menu.sraa_change_institution">
-        <jms:reference-file line="62">Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="61">Resources/views/base.html.twig</jms:reference-file>
         <source>ra.menu.sraa_change_institution</source>
         <target>change</target>
       </trans-unit>
@@ -1071,7 +1076,7 @@ The token is now activated and ready to be used.</target>
         <target>Press and hold the button on the personal Yubikey of the user once; a OTP will be generated in the field below.</target>
       </trans-unit>
       <trans-unit id="fcbfd9e643bb8d8f3fcf3ca0380a73bb9dffee2b" resname="stepup_middleware_client.form.switch_locale.switch">
-        <jms:reference-file line="58">Form/Type/SwitchLocaleType.php</jms:reference-file>
+        <jms:reference-file line="59">Form/Type/SwitchLocaleType.php</jms:reference-file>
         <source>stepup_middleware_client.form.switch_locale.switch</source>
         <target>Switch</target>
       </trans-unit>
