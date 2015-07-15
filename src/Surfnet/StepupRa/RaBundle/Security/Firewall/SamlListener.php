@@ -142,6 +142,9 @@ class SamlListener implements ListenerInterface
         // for the current request
         $this->getTokenStorage()->setToken($authToken);
 
+        // migrate the session to prevent session hijacking
+        $sessionHandler->migrate();
+
         $event->setResponse(new RedirectResponse($sessionHandler->getCurrentRequestUri()));
 
         $logger->notice('Authentication succeeded, redirecting to original location');

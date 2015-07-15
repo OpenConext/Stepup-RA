@@ -46,7 +46,7 @@
                     </ul>
                 </div>
                 <div class="col-sm-6">
-                    <form name="logout" method="post" action="{{ path('logout') }}" class="pull-right">
+                    <form name="logout" method="post" action="{{ logout_url('saml_based') }}" class="pull-right">
                         <button type="submit" class="btn btn-link"><i class="fa fa-sign-out"></i> {{ 'button.logout'|trans }}</button>
                     </form>
                         {% set locale_switcher = stepup_locale_switcher(app.request.locale, 'ra_switch_locale', {'return-url': app.request.uri}) %}

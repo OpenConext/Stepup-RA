@@ -34,6 +34,7 @@ class SearchRaSecondFactorsType extends AbstractType
             'choices' => [
                 'sms'     => 'ra.form.ra_search_ra_second_factors.choice.type.sms',
                 'yubikey' => 'ra.form.ra_search_ra_second_factors.choice.type.yubikey',
+                'tiqr'    => 'ra.form.ra_search_ra_second_factors.choice.type.tiqr',
             ],
             'required' => false,
         ]);
