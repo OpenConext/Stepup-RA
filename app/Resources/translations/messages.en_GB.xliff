@@ -394,6 +394,11 @@
         <source>ra.form.ra_verify_phone_number.text.challenge</source>
         <target>Code</target>
       </trans-unit>
+      <trans-unit id="bc646760865688482dd10d1f7bf383e3cf68b349" resname="ra.form.start_vetting_procedure.enter_activation_code_here">
+        <jms:reference-file line="6">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.form.start_vetting_procedure.enter_activation_code_here</source>
+        <target>Activation code...</target>
+      </trans-unit>
       <trans-unit id="823c5d1536401e73cf7bda2e291fd21bdb207f96" resname="ra.form.start_vetting_procedure.loa_insufficient">
         <jms:reference-file line="5">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.form.start_vetting_procedure.loa_insufficient</source>
