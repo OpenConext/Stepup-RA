@@ -10,7 +10,7 @@
         <jms:reference-file line="6">Resources/views/base.html.twig</jms:reference-file>
         <jms:reference-file line="28">Resources/views/base.html.twig</jms:reference-file>
         <source>app.name</source>
-        <target>Step-up Registration Authority</target>
+        <target>RA Management Portal</target>
       </trans-unit>
       <trans-unit id="ff6230b38fe127145d864f4d4920ceb4d857af18" resname="button.logout">
         <jms:reference-file line="50">Resources/views/base.html.twig</jms:reference-file>
