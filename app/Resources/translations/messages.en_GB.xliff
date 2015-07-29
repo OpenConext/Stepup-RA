@@ -65,12 +65,12 @@
       <trans-unit id="f2264e8a139e432bc0b30abd24ab34750e944da0" resname="ra.auditlog.action.email_changed">
         <jms:reference-file line="45">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.email_changed</source>
-        <target>Email changed</target>
+        <target>E-mail changed</target>
       </trans-unit>
       <trans-unit id="8750a7f384fd2159c68613b478b283083c45f8fa" resname="ra.auditlog.action.email_verified">
         <jms:reference-file line="42">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.email_verified</source>
-        <target>Email verified</target>
+        <target>E-mail verified</target>
       </trans-unit>
       <trans-unit id="59b375a103f9bff34d2da25cb0563524354b357d" resname="ra.auditlog.action.possession_proven">
         <jms:reference-file line="43">Resources/views/translations.html.twig</jms:reference-file>
@@ -115,7 +115,7 @@
       <trans-unit id="6e6977aafa35381ed148394cb1313d9e8a0aeec3" resname="ra.auditlog.email">
         <jms:reference-file line="14">views/SecondFactor/auditLog.html.twig</jms:reference-file>
         <source>ra.auditlog.email</source>
-        <target>Email</target>
+        <target>E-mail</target>
       </trans-unit>
       <trans-unit id="8a542621cac70df8e15d200c8bd2f2b650663849" resname="ra.auditlog.no_entries">
         <jms:reference-file line="44">views/SecondFactor/auditLog.html.twig</jms:reference-file>
@@ -287,7 +287,7 @@
       <trans-unit id="543a02dfd360a01fa0c9076da584e3f8d69394b4" resname="ra.form.ra_search_ra_candidates.label.email">
         <jms:reference-file line="34">Form/Type/SearchRaCandidatesType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_candidates.label.email</source>
-        <target>Email</target>
+        <target>E-mail</target>
       </trans-unit>
       <trans-unit id="9f4c34138ef487cdf008770c1257b06291343831" resname="ra.form.ra_search_ra_candidates.label.name">
         <jms:reference-file line="31">Form/Type/SearchRaCandidatesType.php</jms:reference-file>
@@ -362,7 +362,7 @@
       <trans-unit id="1ded9028f8d549daf4dfd7f37b472ee17e1beb0c" resname="ra.form.ra_select_institution.button.select_and_apply">
         <jms:reference-file line="44">Form/Type/InstitutionSelectionType.php</jms:reference-file>
         <source>ra.form.ra_select_institution.button.select_and_apply</source>
-        <target>Apply</target>
+        <target>Opslaan</target>
       </trans-unit>
       <trans-unit id="aff72bc7d94c65f8b3dcf0b3b9bb3f5430ac28f6" resname="ra.form.ra_select_institution.label.institution">
         <jms:reference-file line="41">Form/Type/InstitutionSelectionType.php</jms:reference-file>
@@ -412,7 +412,7 @@
       <trans-unit id="5bd6714db09c4a8b818081f114f12f7415a50e40" resname="ra.form.start_vetting_procedure.unknown_registration_code">
         <jms:reference-file line="4">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.form.start_vetting_procedure.unknown_registration_code</source>
-        <target>Unknown registration code</target>
+        <target>Unknown activation code</target>
       </trans-unit>
       <trans-unit id="d6e1e4afd83a6b390c24762cee6939338734afc5" resname="ra.form.verify_identity.document_number.label">
         <jms:reference-file line="30">Form/Type/VerifyIdentityType.php</jms:reference-file>
@@ -486,7 +486,7 @@
         <jms:reference-file line="49">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
         <jms:reference-file line="15">views/RaManagement/confirmRetractRa.html.twig</jms:reference-file>
         <source>ra.management.change_ra_role.ra_listing.email</source>
-        <target>Email</target>
+        <target>E-mail</target>
       </trans-unit>
       <trans-unit id="84d802a13574d12ff20b6227331e196fde4c97fc" resname="ra.management.change_ra_role.ra_listing.institution">
         <jms:reference-file line="15">views/RaManagement/changeRaRole.html.twig</jms:reference-file>
@@ -525,13 +525,13 @@
       <trans-unit id="4029e4383ef4a57077b346cc66f971c9cafb71c3" resname="ra.management.create_ra.identity_accredited">
         <jms:reference-file line="171">RaBundle/Controller/RaManagementController.php</jms:reference-file>
         <source>ra.management.create_ra.identity_accredited</source>
-        <target>The Identity has been granted the chosen role</target>
+        <target>The rol of this user has been changed.</target>
       </trans-unit>
       <trans-unit id="62bc099c53662e393741f519a15503dcb4d6c77f" resname="ra.management.create_ra.modal.are_you_sure">
         <jms:reference-file line="22">views/RaManagement/createRa.html.twig</jms:reference-file>
         <jms:reference-file line="29">views/RaManagement/createRa.html.twig</jms:reference-file>
         <source>ra.management.create_ra.modal.are_you_sure</source>
-        <target>Are you sure you want to give the identity below the selected role?</target>
+        <target>Are you sure you want to give the user below the selected role?</target>
       </trans-unit>
       <trans-unit id="8457ba89c1eb274f6a896fd8d6f1db494a6c7a4d" resname="ra.management.create_ra.modal.cancel">
         <jms:reference-file line="60">views/RaManagement/createRa.html.twig</jms:reference-file>
@@ -546,7 +546,7 @@
       <trans-unit id="e6ba109857c7c953b6a6c7ce8df5569b02aba9a0" resname="ra.management.create_ra.modal.please_confirm">
         <jms:reference-file line="26">views/RaManagement/createRa.html.twig</jms:reference-file>
         <source>ra.management.create_ra.modal.please_confirm</source>
-        <target>Please confirm your action</target>
+        <target>Please confirm</target>
       </trans-unit>
       <trans-unit id="354be94829e909d2a4f9cf4688487e7d550e4be6" resname="ra.management.create_ra.ra_candidate.conctact_information">
         <jms:reference-file line="49">views/RaManagement/createRa.html.twig</jms:reference-file>
@@ -557,7 +557,7 @@
         <jms:reference-file line="11">views/RaManagement/createRa.html.twig</jms:reference-file>
         <jms:reference-file line="37">views/RaManagement/createRa.html.twig</jms:reference-file>
         <source>ra.management.create_ra.ra_candidate.email</source>
-        <target>Email</target>
+        <target>E-mail</target>
       </trans-unit>
       <trans-unit id="08684398fc31faa6cdddc3e171d5fa85d2468975" resname="ra.management.create_ra.ra_candidate.institution">
         <jms:reference-file line="15">views/RaManagement/createRa.html.twig</jms:reference-file>
@@ -655,7 +655,7 @@
       <trans-unit id="f702b148afefffede0240eb3d7e4d4d902c23255" resname="ra.management.overview.email">
         <jms:reference-file line="14">views/RaManagement/manage.html.twig</jms:reference-file>
         <source>ra.management.overview.email</source>
-        <target>Email</target>
+        <target>E-mail</target>
       </trans-unit>
       <trans-unit id="44ed8664990fcd8d55324dc98bfa3ac905bb9c0d" resname="ra.management.overview.institution">
         <jms:reference-file line="12">views/RaManagement/manage.html.twig</jms:reference-file>
@@ -665,7 +665,7 @@
       <trans-unit id="e6f5ea2d06110a1b436b1814e53f99aeae92c867" resname="ra.management.overview.remove_as_ra">
         <jms:reference-file line="34">views/RaManagement/manage.html.twig</jms:reference-file>
         <source>ra.management.overview.remove_as_ra</source>
-        <target>Remove as RA(A)</target>
+        <target>Remove role</target>
       </trans-unit>
       <trans-unit id="3405f2d5ec00142a5b1b5c0c1509b6aa2543473b" resname="ra.management.overview.role">
         <jms:reference-file line="15">views/RaManagement/manage.html.twig</jms:reference-file>
@@ -700,12 +700,12 @@
       <trans-unit id="8108bf5ef1a111214faee15630b8ff0c0549bc66" resname="ra.management.ra_candidate.create_ra">
         <jms:reference-file line="25">views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
         <source>ra.management.ra_candidate.create_ra</source>
-        <target>Make RA(A)</target>
+        <target>Save</target>
       </trans-unit>
       <trans-unit id="ffb5905d1d08ea222cf82aacc96649f90730af92" resname="ra.management.ra_candidate.email">
         <jms:reference-file line="13">views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
         <source>ra.management.ra_candidate.email</source>
-        <target>Email</target>
+        <target>E-mail</target>
       </trans-unit>
       <trans-unit id="d983bd416823b073f0ce5d3a76f2ae6717818613" resname="ra.management.ra_candidate.institution">
         <jms:reference-file line="11">views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
@@ -725,7 +725,7 @@
       <trans-unit id="a973963d22345656dc73a28876fe2a9e481c6d3a" resname="ra.management.retract_registration_authority.are_you_sure">
         <jms:reference-file line="6">views/RaManagement/confirmRetractRa.html.twig</jms:reference-file>
         <source>ra.management.retract_registration_authority.are_you_sure</source>
-        <target>Are you sure you want to remove the RA(A) below as RA(A)?</target>
+        <target>Are you sure you want to remove the user below as RA(A)?</target>
       </trans-unit>
       <trans-unit id="08d2247eaaec4c6e898a3f3d01bda66d7c33731c" resname="ra.menu.ra_management">
         <jms:reference-file line="43">Resources/views/base.html.twig</jms:reference-file>
@@ -735,7 +735,7 @@
       <trans-unit id="7d6a9d74b9561d924dc4411c3ceebc63a01c83ae" resname="ra.menu.registration">
         <jms:reference-file line="36">Resources/views/base.html.twig</jms:reference-file>
         <source>ra.menu.registration</source>
-        <target>Registration</target>
+        <target>Token activation</target>
       </trans-unit>
       <trans-unit id="1a955d4adfae2bc0a0c0177a672e95c7dcbb486d" resname="ra.menu.search">
         <jms:reference-file line="39">Resources/views/base.html.twig</jms:reference-file>
@@ -941,7 +941,7 @@
       <trans-unit id="28ff860b3260f99aeb7268aa31f5edcfbc10b531" resname="ra.vetting.button.cancel_procedure">
         <jms:reference-file line="5">Vetting/partial/cancelVettingProcedure.html.twig</jms:reference-file>
         <source>ra.vetting.button.cancel_procedure</source>
-        <target>Cancel vetting procedure</target>
+        <target>Cancel</target>
       </trans-unit>
       <trans-unit id="32b7bc724e0d07eac8325753ae89605966b495c7" resname="ra.vetting.flash.cancelled">
         <jms:reference-file line="114">RaBundle/Controller/VettingController.php</jms:reference-file>
@@ -971,7 +971,7 @@
       <trans-unit id="3f708a1089bb9a75621006456174cd658d18b541" resname="ra.vetting.progress_bar.enter_registration_code">
         <jms:reference-file line="2">Vetting/partial/progressBar.html.twig</jms:reference-file>
         <source>ra.vetting.progress_bar.enter_registration_code</source>
-        <target>Enter registration code</target>
+        <target>Enter activation code</target>
       </trans-unit>
       <trans-unit id="02d4c777e02e931dbd3ea7679b63fef94c6a4568" resname="ra.vetting.progress_bar.prove_possession">
         <jms:reference-file line="3">Vetting/partial/progressBar.html.twig</jms:reference-file>
