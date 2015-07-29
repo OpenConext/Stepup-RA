@@ -525,7 +525,7 @@
       <trans-unit id="4029e4383ef4a57077b346cc66f971c9cafb71c3" resname="ra.management.create_ra.identity_accredited">
         <jms:reference-file line="171">RaBundle/Controller/RaManagementController.php</jms:reference-file>
         <source>ra.management.create_ra.identity_accredited</source>
-        <target>The rol of this user has been changed.</target>
+        <target>The role of this user has been changed.</target>
       </trans-unit>
       <trans-unit id="62bc099c53662e393741f519a15503dcb4d6c77f" resname="ra.management.create_ra.modal.are_you_sure">
         <jms:reference-file line="22">views/RaManagement/createRa.html.twig</jms:reference-file>
