@@ -35,7 +35,7 @@ class StartVettingProcedureType extends AbstractType
             'attr' => array(
                 'autofocus' => true,
                 'autocomplete' => 'off',
-                'placeholder' => 'Enter registration code here...',
+                'placeholder' => 'ra.form.start_vetting_procedure.enter_activation_code_here',
             )
         ]);
         $builder->add('search', 'submit', [
