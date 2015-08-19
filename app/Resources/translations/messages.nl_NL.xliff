@@ -307,12 +307,12 @@
       <trans-unit id="f5b1f76a7766a04fbbeda4fb456846fc1d82104a" resname="ra.form.ra_search_ra_second_factors.choice.status.unverified">
         <jms:reference-file line="50">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.choice.status.unverified</source>
-        <target>Niet geverifiëerd</target>
+        <target>Niet geverifieerd</target>
       </trans-unit>
       <trans-unit id="ae89a5ba9082c547a4dda73b729559c3b5d7b463" resname="ra.form.ra_search_ra_second_factors.choice.status.verified">
         <jms:reference-file line="51">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
         <source>ra.form.ra_search_ra_second_factors.choice.status.verified</source>
-        <target>Geverifiëerd</target>
+        <target>Geverifieerd</target>
       </trans-unit>
       <trans-unit id="c8a5fe4fab6c98758ca2bdab597d651fe6f6d782" resname="ra.form.ra_search_ra_second_factors.choice.status.vetted">
         <jms:reference-file line="52">Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
@@ -387,7 +387,7 @@
       <trans-unit id="6f8bd23ca2d1b8a9908d9d9ecbb3f8f4e4f9486e" resname="ra.form.ra_verify_phone_number.button.verify_challenge">
         <jms:reference-file line="37">Form/Type/VerifyPhoneNumberType.php</jms:reference-file>
         <source>ra.form.ra_verify_phone_number.button.verify_challenge</source>
-        <target>Verifiëer code</target>
+        <target>Verifieer code</target>
       </trans-unit>
       <trans-unit id="3404f2a8bad599af84df03bcfc68fbe9888e7df1" resname="ra.form.ra_verify_phone_number.text.challenge">
         <jms:reference-file line="30">Form/Type/VerifyPhoneNumberType.php</jms:reference-file>
@@ -861,12 +861,12 @@
       <trans-unit id="b95f6a983c4cb565e06b2b444afd9e53737e41d7" resname="ra.second_factor.search.status.unverified">
         <jms:reference-file line="25">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.status.unverified</source>
-        <target>Niet geverifiëerd</target>
+        <target>Niet geverifieerd</target>
       </trans-unit>
       <trans-unit id="342a7ca495a8ab8baf8c65ca63c53558cb01688d" resname="ra.second_factor.search.status.verified">
         <jms:reference-file line="26">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.status.verified</source>
-        <target>Geverifiëerd</target>
+        <target>Geverifieerd</target>
       </trans-unit>
       <trans-unit id="876f09e852960f57e319006c49585af1bbd55a84" resname="ra.second_factor.search.status.vetted">
         <jms:reference-file line="27">Resources/views/translations.html.twig</jms:reference-file>
@@ -936,7 +936,7 @@
       <trans-unit id="669fe8c5f63adab894fc62f2bbf036f2fe9e8b6c" resname="ra.verify_yubikey_command.otp.verification_error">
         <jms:reference-file line="12">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.verify_yubikey_command.otp.verification_error</source>
-        <target>De Yubikey-code kon om onbekende redenen niet geverifiëerd worden.</target>
+        <target>De Yubikey-code kon om onbekende redenen niet geverifieerd worden.</target>
       </trans-unit>
       <trans-unit id="28ff860b3260f99aeb7268aa31f5edcfbc10b531" resname="ra.vetting.button.cancel_procedure">
         <jms:reference-file line="5">Vetting/partial/cancelVettingProcedure.html.twig</jms:reference-file>
