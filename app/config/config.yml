@@ -79,6 +79,7 @@ services:
 
 surfnet_stepup_ra_ra:
     required_loa: %loa_required_for_login%
+    enabled_second_factors: %enabled_second_factors%
 
 mopa_bootstrap:
     form:

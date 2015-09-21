@@ -25,7 +25,6 @@ use Surfnet\SamlBundle\SAML2\AuthnRequestFactory;
 use Surfnet\SamlBundle\SAML2\Response\Assertion\InResponseTo;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -34,7 +33,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Orchestrates verification of GSSFs (Generic SAML Second Factors) through GSSPs (Generic SAML Stepup Providers).
  */
-final class GssfController extends Controller
+final class GssfController extends SecondFactorController
 {
     /**
      * Initiates verification of a GSSF.
@@ -46,6 +45,8 @@ final class GssfController extends Controller
      */
     public function initiateAction($procedureId, $provider)
     {
+        $this->assertSecondFactorEnabled($provider);
+
         $this->denyAccessUnlessGranted(['ROLE_RA']);
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
@@ -66,6 +67,8 @@ final class GssfController extends Controller
      */
     public function authenticateAction($procedureId, $provider)
     {
+        $this->assertSecondFactorEnabled($provider);
+
         $this->denyAccessUnlessGranted(['ROLE_RA']);
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
@@ -115,6 +118,8 @@ final class GssfController extends Controller
      */
     public function verifyAction(Request $httpRequest, $provider)
     {
+        $this->assertSecondFactorEnabled($provider);
+
         $provider = $this->getProvider($provider);
 
         $this->get('logger')->notice(
@@ -193,6 +198,8 @@ final class GssfController extends Controller
      */
     public function metadataAction($provider)
     {
+        $this->assertSecondFactorEnabled($provider);
+
         $provider = $this->getProvider($provider);
 
         /** @var \Surfnet\SamlBundle\Metadata\MetadataFactory $factory */
