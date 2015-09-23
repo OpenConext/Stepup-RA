@@ -988,6 +988,31 @@
         <source>ra.vetting.progress_bar.verify_identity</source>
         <target>Verify identity</target>
       </trans-unit>
+      <trans-unit id="f264bf655086664d56fe4803d21b31286b15d6ec" resname="ra.vetting.second_factor_type_disabled.text.explanation.sms">
+        <jms:reference-file line="11">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.vetting.second_factor_type_disabled.text.explanation.sms</source>
+        <target>The token type SMS is currently disabled. Please contact your helpdesk to correct this problem.</target>
+      </trans-unit>
+      <trans-unit id="ef613fe71984bbd610ab57eaa7c0e99bf780ac4b" resname="ra.vetting.second_factor_type_disabled.text.explanation.tiqr">
+        <jms:reference-file line="13">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.vetting.second_factor_type_disabled.text.explanation.tiqr</source>
+        <target>The token type Tiqr is currently disabled. Please contact your helpdesk to correct this problem.</target>
+      </trans-unit>
+      <trans-unit id="81f416a526dd1635fe0d3c1db52d1f4c2cb99b8a" resname="ra.vetting.second_factor_type_disabled.text.explanation.u2f">
+        <jms:reference-file line="14">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.vetting.second_factor_type_disabled.text.explanation.u2f</source>
+        <target>The token type U2F is currently disabled. Please contact your helpdesk to correct this problem.</target>
+      </trans-unit>
+      <trans-unit id="cf1e0f5a486105a8a24c5039a153454148398375" resname="ra.vetting.second_factor_type_disabled.text.explanation.yubikey">
+        <jms:reference-file line="12">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.vetting.second_factor_type_disabled.text.explanation.yubikey</source>
+        <target>The token type Yubikey is currently disabled. Please contact your helpdesk to correct this problem.</target>
+      </trans-unit>
+      <trans-unit id="f0337d112754854c20399930ae9c4a3b3f2fb01e" resname="ra.vetting.second_factor_type_disabled.title">
+        <jms:reference-file line="3">views/Vetting/secondFactorTypeDisabled.html.twig</jms:reference-file>
+        <source>ra.vetting.second_factor_type_disabled.title</source>
+        <target>Token type disabled</target>
+      </trans-unit>
       <trans-unit id="8e4a356a46fe95b04ae1cbb201b8d62e15670b2e" resname="ra.vetting.sms.challenge_body">
         <jms:reference-file line="187">RaBundle/Service/VettingService.php</jms:reference-file>
         <source>ra.vetting.sms.challenge_body</source>

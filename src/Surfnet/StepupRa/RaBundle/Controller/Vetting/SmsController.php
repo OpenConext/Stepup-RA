@@ -24,13 +24,12 @@ use Surfnet\StepupBundle\Command\VerifyPhoneNumberCommand;
 use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class SmsController extends Controller
+class SmsController extends SecondFactorController
 {
     /**
      * @Template
@@ -40,6 +39,8 @@ class SmsController extends Controller
      */
     public function sendChallengeAction(Request $request, $procedureId)
     {
+        $this->assertSecondFactorEnabled('sms');
+
         $this->denyAccessUnlessGranted(['ROLE_RA']);
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
@@ -100,6 +101,7 @@ class SmsController extends Controller
      */
     public function provePossessionAction(Request $request, $procedureId)
     {
+        $this->assertSecondFactorEnabled('sms');
         $this->denyAccessUnlessGranted(['ROLE_RA']);
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
 

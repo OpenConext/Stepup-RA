@@ -66,6 +66,24 @@ class VettingController extends Controller
             return ['form' => $form->createView()];
         }
 
+        $enabledSecondFactors = $this->container->getParameter('surfnet_stepup_ra.enabled_second_factors');
+        if (!in_array($secondFactor->type, $enabledSecondFactors, true)) {
+            $logger->warning(
+                sprintf(
+                    'An RA attempted vetting of disabled second factor "%s" of type "%s"',
+                    $secondFactor->id,
+                    $secondFactor->type
+                )
+            );
+
+            return $this
+                ->render(
+                    'SurfnetStepupRaRaBundle:Vetting:secondFactorTypeDisabled.html.twig',
+                    ['secondFactorType' => $secondFactor->type]
+                )
+                ->setStatusCode(Response::HTTP_BAD_REQUEST);
+        }
+
         /** @var SamlToken $token */
         $token = $this->get('security.token_storage')->getToken();
         $command->authorityId = $this->getIdentity()->id;
