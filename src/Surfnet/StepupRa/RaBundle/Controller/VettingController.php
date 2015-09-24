@@ -114,6 +114,8 @@ class VettingController extends Controller
                     'procedureId' => $procedureId,
                     'provider' => $secondFactor->type
                 ]);
+            case 'u2f':
+                return $this->redirectToRoute('ra_vetting_u2f_start_authentication', ['procedureId' => $procedureId]);
             default:
                 throw new RuntimeException(sprintf("Unexpected second factor type '%s'", $secondFactor->type));
         }
