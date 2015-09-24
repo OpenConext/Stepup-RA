@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3df1214d4ad1b56930073497e6ec7863",
-    "content-hash": "fed83495f3e3a49beb01ecb6a71b1740",
+    "hash": "cadbf357cdc590738918372bca49d3d2",
+    "content-hash": "faf51499b05e53217e7efa40b3cbcf55",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2030,6 +2030,48 @@
             "time": "2015-08-26 09:24:49"
         },
         {
+            "name": "surfnet/stepup-u2f-bundle",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SURFnet/Stepup-u2f-bundle.git",
+                "reference": "b28737d7b8df5ecbdf7a1e952ecfb530a2951c05"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-u2f-bundle/zipball/b28737d7b8df5ecbdf7a1e952ecfb530a2951c05",
+                "reference": "b28737d7b8df5ecbdf7a1e952ecfb530a2951c05",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4|^7",
+                "symfony/config": "^2.7",
+                "symfony/dependency-injection": "^2.7",
+                "symfony/form": "^2.7",
+                "symfony/http-kernel": "^2.7",
+                "symfony/validator": "^2.7",
+                "yubico/u2flib-server": "^0.1.0"
+            },
+            "require-dev": {
+                "ibuildings/qa-tools": "~1.1,>=1.1.27",
+                "liip/rmt": "1.1.*",
+                "matthiasnoback/symfony-config-test": "^1.2",
+                "mockery/mockery": "~0.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Surfnet\\StepupU2fBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "The SURFnet Step-up U2F bundle contains server-side device verification, and the necessary forms and resources to enable client-side U2F interaction with Step-up Identities",
+            "time": "2015-09-17 15:02:04"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.1",
             "source": {
@@ -2544,6 +2586,37 @@
                 "templating"
             ],
             "time": "2015-06-06 23:31:24"
+        },
+        {
+            "name": "yubico/u2flib-server",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Yubico/php-u2flib-server.git",
+                "reference": "71ad5f0b7c796966da356eecd5b583ac852e92a1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Yubico/php-u2flib-server/zipball/71ad5f0b7c796966da356eecd5b583ac852e92a1",
+                "reference": "71ad5f0b7c796966da356eecd5b583ac852e92a1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "Library for U2F implementation",
+            "homepage": "https://developers.yubico.com/php-u2flib-server",
+            "time": "2015-03-03 08:05:16"
         }
     ],
     "packages-dev": [
@@ -4563,7 +4636,8 @@
         "mopa/bootstrap-bundle": 20,
         "surfnet/stepup-middleware-client-bundle": 20,
         "surfnet/stepup-saml-bundle": 20,
-        "surfnet/stepup-bundle": 20
+        "surfnet/stepup-bundle": 20,
+        "surfnet/stepup-u2f-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

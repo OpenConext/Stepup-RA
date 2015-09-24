@@ -43,6 +43,7 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             // Replace with Pagerfanta https://www.pivotaltracker.com/story/show/89688680
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new Surfnet\StepupU2fBundle\SurfnetStepupU2fBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

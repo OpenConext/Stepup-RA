@@ -46,3 +46,5 @@ parameters:
     stepup_loa_loa3: https://gateway.tld/authentication/loa3
 
     logout_redirect_url: https://www.surf.nl/over-surf/werkmaatschappijen/surfnet
+
+    u2f_app_id: https://gateway.tld/u2f/app-id
