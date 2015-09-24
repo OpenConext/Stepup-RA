@@ -26,6 +26,8 @@ use Surfnet\StepupRa\RaBundle\Command\VerifyU2fAuthenticationCommand;
 use Surfnet\StepupRa\RaBundle\Service\U2f\AuthenticationVerificationResult;
 use Surfnet\StepupRa\RaBundle\Service\U2f\SignRequestCreationResult;
 use Surfnet\StepupU2fBundle\Dto\SignRequest;
+use Symfony\Component\Validator\ConstraintViolationInterface;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -56,6 +58,10 @@ final class U2fService
         $this->logger       = $logger;
     }
 
+    /**
+     * @param CreateU2fSignRequestCommand $command
+     * @return SignRequestCreationResult
+     */
     public function createSignRequest(CreateU2fSignRequestCommand $command)
     {
         $this->logger->info('Create U2F sign request');
@@ -121,12 +127,16 @@ final class U2fService
                 ['errors' => $this->mapViolationsToErrorStrings($violations, 'sign_request')]
             );
 
-            return RegisterRequestCreationResult::apiError();
+            return SignRequestCreationResult::apiError();
         }
 
         return SignRequestCreationResult::success($signRequest);
     }
 
+    /**
+     * @param VerifyU2fAuthenticationCommand $command
+     * @return AuthenticationVerificationResult
+     */
     public function verifyAuthentication(VerifyU2fAuthenticationCommand $command)
     {
         $this->logger->info('Create U2F sign request');
