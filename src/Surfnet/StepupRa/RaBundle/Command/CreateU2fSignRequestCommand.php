@@ -20,8 +20,18 @@ namespace Surfnet\StepupRa\RaBundle\Command;
 
 final class CreateU2fSignRequestCommand
 {
-    // FIXME
+    /**
+     * @var string
+     */
     public $institution;
+
+    /**
+     * @var string
+     */
     public $identityId;
+
+    /**
+     * @var string
+     */
     public $keyHandle;
 }
