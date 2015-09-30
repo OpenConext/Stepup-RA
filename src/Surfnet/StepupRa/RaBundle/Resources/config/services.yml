@@ -64,6 +64,12 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType
         tags: [{ name: form.type, alias: ra_management_retract_registration_authority }]
 
+    ra.form.type.initiate_gssf:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\InitiateGssfType
+        arguments:
+            - @router
+        tags: [{ name: form.type, alias: ra_initiate_gssf }]
+
     # Form Extensions
     ra.form.extension.institution_listing_choice_list:
         class: Surfnet\StepupRa\RaBundle\Form\Extension\InstitutionListingChoiceList

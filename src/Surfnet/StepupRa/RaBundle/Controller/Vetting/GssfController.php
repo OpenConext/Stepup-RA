@@ -57,7 +57,7 @@ final class GssfController extends SecondFactorController
             throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
         }
 
-        return ['procedureId' => $procedureId, 'provider' => $this->getProvider($provider)->getName()];
+        return $this->renderInitiateForm($procedureId, $this->getProvider($provider)->getName());
     }
 
     /**
@@ -186,9 +186,10 @@ final class GssfController extends SecondFactorController
             'GSSF ID registered in Self-Service does not match current GSSF ID'
         );
 
-        return $this->render(
-            'SurfnetStepupRaRaBundle:Vetting/Gssf:initiate.html.twig',
-            ['provider' => $provider->getName(), 'procedureId' => $result->getProcedureId(), 'gssfIdMismatch' => true]
+        return $this->renderInitiateForm(
+            $result->getProcedureId(),
+            $this->getProvider($provider)->getName(),
+            ['gssfIdMismatch' => true]
         );
     }
 
@@ -241,5 +242,23 @@ final class GssfController extends SecondFactorController
     private function getVettingService()
     {
         return $this->get('ra.service.vetting');
+    }
+
+    /**
+     * @param string $procedureId
+     * @param string $provider
+     * @param array  $parameters
+     * @return Response
+     */
+    private function renderInitiateForm($procedureId, $provider, array $parameters = [])
+    {
+        $form = $this->createForm('ra_initiate_gssf', null, ['procedureId' => $procedureId, 'provider' => $provider]);
+
+        $templateParameters = array_merge(
+            $parameters,
+            ['form' => $form->createView(), 'procedureId' => $procedureId, 'provider' => $provider]
+        );
+
+        return $this->render('SurfnetStepupRaRaBundle:Vetting/Gssf:initiate.html.twig', $templateParameters);
     }
 }
