@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block page_title %}{{ 'ra.vetting.second_factor_type_disabled.title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>{{ block('page_title') }}</h2>
+
+            <p>{{ ('ra.vetting.second_factor_type_disabled.text.explanation.' ~ secondFactorType)|trans }}</p>
+        </div>
+    </div>
+{% endblock %}

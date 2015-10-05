@@ -79,6 +79,7 @@ services:
 
 surfnet_stepup_ra_ra:
     required_loa: %loa_required_for_login%
+    enabled_second_factors: %enabled_second_factors%
 
 mopa_bootstrap:
     form:
@@ -154,3 +155,6 @@ knp_paginator:
     template:
         pagination: MopaBootstrapBundle:Pagination:sliding.html.twig
         sortable: SurfnetStepupRaRaBundle:Pagination:sortable_link.html.twig
+
+surfnet_stepup_u2f:
+    app_id: %u2f_app_id%

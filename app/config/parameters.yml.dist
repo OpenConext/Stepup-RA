@@ -35,6 +35,9 @@ parameters:
     saml_remote_idp_sso_url:
     saml_remote_idp_certificate:
     loa_required_for_login: 'https://gateway.tld/authentication/loa3'
+    enabled_second_factors:
+        - sms
+        - yubikey
     graylog_hostname: 'g2-dev.stepup.coin.surf.net'
     asset_version: 1
 
@@ -43,3 +46,5 @@ parameters:
     stepup_loa_loa3: https://gateway.tld/authentication/loa3
 
     logout_redirect_url: https://www.surf.nl/over-surf/werkmaatschappijen/surfnet
+
+    u2f_app_id: https://gateway.tld/u2f/app-id
