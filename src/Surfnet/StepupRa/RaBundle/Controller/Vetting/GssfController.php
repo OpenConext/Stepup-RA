@@ -25,7 +25,6 @@ use Surfnet\SamlBundle\SAML2\AuthnRequestFactory;
 use Surfnet\SamlBundle\SAML2\Response\Assertion\InResponseTo;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -34,7 +33,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Orchestrates verification of GSSFs (Generic SAML Second Factors) through GSSPs (Generic SAML Stepup Providers).
  */
-final class GssfController extends Controller
+final class GssfController extends SecondFactorController
 {
     /**
      * Initiates verification of a GSSF.
@@ -46,6 +45,8 @@ final class GssfController extends Controller
      */
     public function initiateAction($procedureId, $provider)
     {
+        $this->assertSecondFactorEnabled($provider);
+
         $this->denyAccessUnlessGranted(['ROLE_RA']);
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
@@ -56,7 +57,7 @@ final class GssfController extends Controller
             throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
         }
 
-        return ['procedureId' => $procedureId, 'provider' => $this->getProvider($provider)->getName()];
+        return $this->renderInitiateForm($procedureId, $this->getProvider($provider)->getName());
     }
 
     /**
@@ -66,6 +67,8 @@ final class GssfController extends Controller
      */
     public function authenticateAction($procedureId, $provider)
     {
+        $this->assertSecondFactorEnabled($provider);
+
         $this->denyAccessUnlessGranted(['ROLE_RA']);
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
@@ -115,6 +118,8 @@ final class GssfController extends Controller
      */
     public function verifyAction(Request $httpRequest, $provider)
     {
+        $this->assertSecondFactorEnabled($provider);
+
         $provider = $this->getProvider($provider);
 
         $this->get('logger')->notice(
@@ -181,9 +186,10 @@ final class GssfController extends Controller
             'GSSF ID registered in Self-Service does not match current GSSF ID'
         );
 
-        return $this->render(
-            'SurfnetStepupRaRaBundle:Vetting/Gssf:initiate.html.twig',
-            ['provider' => $provider->getName(), 'procedureId' => $result->getProcedureId(), 'gssfIdMismatch' => true]
+        return $this->renderInitiateForm(
+            $result->getProcedureId(),
+            $provider->getName(),
+            ['gssfIdMismatch' => true]
         );
     }
 
@@ -193,6 +199,8 @@ final class GssfController extends Controller
      */
     public function metadataAction($provider)
     {
+        $this->assertSecondFactorEnabled($provider);
+
         $provider = $this->getProvider($provider);
 
         /** @var \Surfnet\SamlBundle\Metadata\MetadataFactory $factory */
@@ -234,5 +242,23 @@ final class GssfController extends Controller
     private function getVettingService()
     {
         return $this->get('ra.service.vetting');
+    }
+
+    /**
+     * @param string $procedureId
+     * @param string $provider
+     * @param array  $parameters
+     * @return Response
+     */
+    private function renderInitiateForm($procedureId, $provider, array $parameters = [])
+    {
+        $form = $this->createForm('ra_initiate_gssf', null, ['procedureId' => $procedureId, 'provider' => $provider]);
+
+        $templateParameters = array_merge(
+            $parameters,
+            ['form' => $form->createView(), 'procedureId' => $procedureId, 'provider' => $provider]
+        );
+
+        return $this->render('SurfnetStepupRaRaBundle:Vetting/Gssf:initiate.html.twig', $templateParameters);
     }
 }

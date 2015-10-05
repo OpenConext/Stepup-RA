@@ -29,13 +29,10 @@
 
     <hr>
 
-    <form action="{{ path('ra_vetting_gssf_authenticate', {'procedureId': procedureId, 'provider': provider}) }}" method="post">
-        {% if gssfIdMismatch is defined %}
-            <div class="alert alert-danger">{{ ('ra.vetting.gssf.initiate.' ~ provider ~ '.error.gssf_id_mismatch')|trans }}</div>
-        {% endif %}
-
-        <button type="submit" class="btn btn-primary">{{ ('ra.vetting.gssf.initiate.' ~ provider ~ '.button.initiate')|trans }}</button>
-    </form>
+    {% if gssfIdMismatch is defined %}
+        <div class="alert alert-danger">{{ ('ra.vetting.gssf.initiate.' ~ provider ~ '.error.gssf_id_mismatch')|trans }}</div>
+    {% endif %}
+    {{ form(form) }}
 
     <hr>
 

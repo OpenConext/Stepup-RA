@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle;
 
 use Surfnet\StepupRa\RaBundle\DependencyInjection\Compiler\GssfSessionBagSessionPass;
+use Surfnet\StepupRa\RaBundle\DependencyInjection\Compiler\U2fSessionBagSessionPass;
 use Surfnet\StepupRa\RaBundle\Security\Factory\SamlFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -34,5 +35,6 @@ class SurfnetStepupRaRaBundle extends Bundle
         $extension->addSecurityListenerFactory(new SamlFactory());
 
         $container->addCompilerPass(new GssfSessionBagSessionPass());
+        $container->addCompilerPass(new U2fSessionBagSessionPass());
     }
 }

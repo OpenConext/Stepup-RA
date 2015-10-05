@@ -18,6 +18,9 @@
 
 namespace Surfnet\StepupRa\RaBundle\DependencyInjection;
 
+use Surfnet\StepupBundle\Exception\DomainException;
+use Surfnet\StepupBundle\Exception\InvalidArgumentException;
+use Surfnet\StepupBundle\Value\SecondFactorType;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -49,6 +52,25 @@ class Configuration implements ConfigurationInterface
                         return !is_string($value);
                     })
                         ->thenInvalid('the required loa must be a string')
+                    ->end()
+                ->end()
+                ->arrayNode('enabled_second_factors')
+                    ->isRequired()
+                    ->prototype('scalar')
+                        ->validate()
+                            ->ifTrue(function ($type) {
+                                try {
+                                    new SecondFactorType($type);
+                                } catch (InvalidArgumentException $e) {
+                                    return true;
+                                } catch (DomainException $e) {
+                                    return true;
+                                }
+                            })
+                            ->thenInvalid(
+                                'Enabled second factor type "%s" is not one of the valid types. See SecondFactorType'
+                            )
+                        ->end()
                     ->end()
                 ->end()
             ->end();

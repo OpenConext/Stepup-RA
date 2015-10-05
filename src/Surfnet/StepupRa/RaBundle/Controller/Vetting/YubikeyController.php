@@ -21,13 +21,12 @@ namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class YubikeyController extends Controller
+class YubikeyController extends SecondFactorController
 {
     /**
      * @Template
@@ -37,6 +36,8 @@ class YubikeyController extends Controller
      */
     public function verifyAction(Request $request, $procedureId)
     {
+        $this->assertSecondFactorEnabled('yubikey');
+
         $this->denyAccessUnlessGranted(['ROLE_RA']);
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);

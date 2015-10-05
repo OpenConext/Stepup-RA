@@ -64,6 +64,12 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType
         tags: [{ name: form.type, alias: ra_management_retract_registration_authority }]
 
+    ra.form.type.initiate_gssf:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\InitiateGssfType
+        arguments:
+            - @router
+        tags: [{ name: form.type, alias: ra_initiate_gssf }]
+
     # Form Extensions
     ra.form.extension.institution_listing_choice_list:
         class: Surfnet\StepupRa\RaBundle\Form\Extension\InstitutionListingChoiceList
@@ -77,6 +83,7 @@ services:
             - @surfnet_stepup.service.sms_second_factor
             - @ra.service.yubikey_second_factor
             - @ra.service.gssf
+            - @ra.service.u2f
             - @ra.service.command
             - @ra.repository.vetting_procedure
             - @translator
@@ -113,6 +120,27 @@ services:
             - '/'
         calls:
             - [setName, ['ra.service.gssf']]
+
+    ra.service.u2f:
+        class: Surfnet\StepupRa\RaBundle\Service\U2fService
+        arguments:
+            - @surfnet_stepup.guzzle.gateway_api
+            - @validator
+            - @logger
+
+    ra.session.u2f:
+        class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
+        factory: ['@session', 'getBag']
+        arguments: ['ra.service.u2f']
+
+    ra.session.u2f.namespaced_attribute_bag:
+        public: false
+        class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
+        arguments:
+            - '__ra.service.u2f__'
+            - '/'
+        calls:
+            - [setName, ['ra.service.u2f']]
 
     ra.service.audit_log:
         class: Surfnet\StepupRa\RaBundle\Service\AuditLogService
