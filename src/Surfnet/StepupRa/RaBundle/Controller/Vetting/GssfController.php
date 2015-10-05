@@ -188,7 +188,7 @@ final class GssfController extends SecondFactorController
 
         return $this->renderInitiateForm(
             $result->getProcedureId(),
-            $this->getProvider($provider)->getName(),
+            $provider->getName(),
             ['gssfIdMismatch' => true]
         );
     }
