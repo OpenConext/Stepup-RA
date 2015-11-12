@@ -29,7 +29,8 @@
         "surfnet/stepup-u2f-bundle": "dev-develop",
         "guzzlehttp/guzzle": "~4",
         "symfony/swiftmailer-bundle": "~2.3",
-        "knplabs/knp-paginator-bundle": "~2.4"
+        "knplabs/knp-paginator-bundle": "~2.4",
+        "mopa/composer-bridge": "dev-master as v1.5.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
