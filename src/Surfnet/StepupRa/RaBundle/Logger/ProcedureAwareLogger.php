@@ -24,6 +24,7 @@ use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 final class ProcedureAwareLogger implements LoggerInterface
 {
