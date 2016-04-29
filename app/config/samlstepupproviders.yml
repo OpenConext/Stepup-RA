@@ -3,8 +3,8 @@ imports:
 
 surfnet_stepup_ra_saml_stepup_provider:
     routes:
-        consume_assertion: %gssp_routes_consume_assertion%
-        metadata: %gssp_routes_metadata%
+        consume_assertion: ra_vetting_gssf_verify
+        metadata: ra_vetting_gssf_metadata
     providers:
         tiqr:
             hosted:
