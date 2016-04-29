@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
@@ -104,20 +105,25 @@ class VettingController extends Controller
             ->forProcedure($procedureId)
             ->notice(sprintf('Starting new Vetting Procedure for second factor of type "%s"', $secondFactor->type));
 
-        switch ($secondFactor->type) {
-            case 'yubikey':
-                return $this->redirectToRoute('ra_vetting_yubikey_verify', ['procedureId' => $procedureId]);
-            case 'sms':
-                return $this->redirectToRoute('ra_vetting_sms_send_challenge', ['procedureId' => $procedureId]);
-            case 'tiqr':
-                return $this->redirectToRoute('ra_vetting_gssf_initiate', [
+        $secondFactorType = new SecondFactorType($secondFactor->type);
+        if ($secondFactorType->isYubikey()) {
+            return $this->redirectToRoute('ra_vetting_yubikey_verify', ['procedureId' => $procedureId]);
+        } elseif ($secondFactorType->isSms()) {
+            return $this->redirectToRoute('ra_vetting_sms_send_challenge', ['procedureId' => $procedureId]);
+        } elseif ($secondFactorType->isGssf()) {
+            return $this->redirectToRoute(
+                'ra_vetting_gssf_initiate',
+                [
                     'procedureId' => $procedureId,
-                    'provider' => $secondFactor->type
-                ]);
-            case 'u2f':
-                return $this->redirectToRoute('ra_vetting_u2f_start_authentication', ['procedureId' => $procedureId]);
-            default:
-                throw new RuntimeException(sprintf("Unexpected second factor type '%s'", $secondFactor->type));
+                    'provider'    => $secondFactor->type
+                ]
+            );
+        } elseif ($secondFactorType->isU2f()) {
+            return $this->redirectToRoute('ra_vetting_u2f_start_authentication', ['procedureId' => $procedureId]);
+        } else {
+            throw new RuntimeException(
+                sprintf('RA does not support vetting procedure for second factor type "%s"', $secondFactor->type)
+            );
         }
     }
 
