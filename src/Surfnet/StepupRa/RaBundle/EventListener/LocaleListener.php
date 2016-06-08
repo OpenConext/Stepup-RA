@@ -54,6 +54,10 @@ final class LocaleListener implements EventSubscriberInterface
         /** @var Identity $identity */
         $identity = $token->getUser();
 
+        if (!$identity instanceof Identity) {
+            return;
+        }
+
         $request = $event->getRequest();
         $request->setLocale($identity->preferredLocale);
 
