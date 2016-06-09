@@ -32,7 +32,7 @@
                     <td>{{ logEntry.secondFactorIdentifier }}</td>
                     <td>{{ logEntry.secondFactorType }}</td>
                     <td>{{ ('ra.auditlog.action.' ~ logEntry.action)|trans }}</td>
-                    <td>{{ logEntry.recordedOn|date("Y-m-d H:i") }}</td>
+                    <td><time datetime="{{ logEntry.recordedOn.format('c') }}">{{ logEntry.recordedOn.format("Y-m-d H:i") }}</time></td>
                     <td>{{ logEntry.actorCommonName }}</td>
                 </tr>
             {% endfor %}
