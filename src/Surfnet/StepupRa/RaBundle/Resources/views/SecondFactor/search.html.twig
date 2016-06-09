@@ -29,7 +29,7 @@
                             <td>{{ ('ra.second_factor.search.type.'~secondFactor.type)|trans }}</td>
                             <td>{{ secondFactor.name }}</td>
                             <td>{{ secondFactor.email }}</td>
-                            <td>{{ secondFactor.documentNumber }}</td>
+                            <td>{% if is not secondFactor.documentNumber %}{{ secondFactor.documentNumber}}{% else %}&mdash;{% endif %}</td>
                             <td>{{ ('ra.second_factor.search.status.'~secondFactor.status)|trans }}</td>
                             <td>
                                 <a href="{{ path('ra_second_factor_auditlog', {identityId: secondFactor.identityId}) }}" class="btn btn-info audit-log">{{ 'ra.secondfactor.auditlog'|trans }}</a>
