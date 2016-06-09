@@ -55,9 +55,21 @@ class SamlProvider implements AuthenticationProviderInterface
         $translatedAssertion = $this->attributeDictionary->translate($token->assertion);
 
         $nameId      = $translatedAssertion->getNameID();
-        $institution = $translatedAssertion->getAttribute('schacHomeOrganization');
+        $institutions = $translatedAssertion->getAttributeValue('schacHomeOrganization');
 
-        $identity = $this->identityService->findByNameIdAndInstitution($nameId, $institution);
+        if (empty($institutions)) {
+            throw new BadCredentialsException(
+                'No schacHomeOrganization provided'
+            );
+        }
+
+        if (count($institutions) > 1) {
+            throw new BadCredentialsException(
+                'Multiple schacHomeOrganizations provided'
+            );
+        }
+
+        $identity = $this->identityService->findByNameIdAndInstitution($nameId, $institutions[0]);
 
         // if no identity can be found, we're done.
         if ($identity === null) {
