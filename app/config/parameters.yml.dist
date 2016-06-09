@@ -8,6 +8,7 @@ parameters:
 
     default_locale:    en_GB
     locales:           [nl_NL, en_GB]
+    locale_cookie_domain:   surfconext.nl
     secret:            NotSoSecretReplaceMe!
 
     debug_toolbar:          true
