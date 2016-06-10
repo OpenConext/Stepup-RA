@@ -206,7 +206,7 @@ class VettingService
         $identity = $this->identityService->get($procedure->getSecondFactor()->identityId);
 
         $command->phoneNumber = $phoneNumber;
-        $command->body        = $this->translator->trans('ra.vetting.sms.challenge_body', [], null, $identity->preferredLocale);
+        $command->body        = $this->translator->trans('ra.vetting.sms.challenge_body', [], 'messages', $identity->preferredLocale);
         $command->identity    = $procedure->getSecondFactor()->identityId;
         $command->institution = $procedure->getSecondFactor()->institution;
 
