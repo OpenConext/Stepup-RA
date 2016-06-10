@@ -127,6 +127,13 @@
             event.preventDefault();
 
             alert('Sorry, this functionality has not yet been implemented...');
-        })
+        });
+
+        // Format all <time> elements to local timezone.
+        $("time[datetime]").each(function () {
+            $(this).text(
+                moment($(this).attr("datetime")).format('Y-MM-DD HH:mm')
+            );
+        });
     });
 })(jQuery);
