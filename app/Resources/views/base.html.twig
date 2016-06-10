@@ -88,6 +88,9 @@
 
         {% block footer %}
             <hr>
+            <ul id="footerLinks">
+                <li class="footer-link"><a href="{{ footer_link_url }}">{{ 'footer.documentation'|trans }}</a></li>
+            </ul>
         {% endblock footer %}
 
 {% block foot_script %}
