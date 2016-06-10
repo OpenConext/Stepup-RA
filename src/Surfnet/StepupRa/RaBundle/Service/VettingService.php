@@ -25,6 +25,7 @@ use Surfnet\StepupBundle\Service\SmsSecondFactorService;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\VetSecondFactorCommand;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService;
 use Surfnet\StepupRa\RaBundle\Command\CreateU2fSignRequestCommand;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
@@ -84,6 +85,11 @@ class VettingService
      */
     private $translator;
 
+    /**
+     * @var \Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService
+     */
+    private $identityService;
+
     public function __construct(
         SmsSecondFactorService $smsSecondFactorService,
         YubikeySecondFactorService $yubikeySecondFactorService,
@@ -91,7 +97,8 @@ class VettingService
         U2fService $u2fService,
         CommandService $commandService,
         VettingProcedureRepository $vettingProcedureRepository,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        IdentityService $identityService
     ) {
         $this->smsSecondFactorService = $smsSecondFactorService;
         $this->yubikeySecondFactorService = $yubikeySecondFactorService;
@@ -100,6 +107,7 @@ class VettingService
         $this->commandService = $commandService;
         $this->vettingProcedureRepository = $vettingProcedureRepository;
         $this->translator = $translator;
+        $this->identityService = $identityService;
     }
 
     /**
@@ -195,8 +203,10 @@ class VettingService
             $procedure->getSecondFactor()->secondFactorIdentifier
         );
 
+        $identity = $this->identityService->get($procedure->getSecondFactor()->identityId);
+
         $command->phoneNumber = $phoneNumber;
-        $command->body        = $this->translator->trans('ra.vetting.sms.challenge_body');
+        $command->body        = $this->translator->trans('ra.vetting.sms.challenge_body', [], null, $identity->preferredLocale);
         $command->identity    = $procedure->getSecondFactor()->identityId;
         $command->institution = $procedure->getSecondFactor()->institution;
 
