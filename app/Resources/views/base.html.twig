@@ -38,11 +38,12 @@
                         <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_second_factors' %} class="active"{% endif %}>
                             <a href="{{ path('ra_second_factors_search') }}">{{ 'ra.menu.search'|trans }}</a>
                         </li>
-                    {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                        {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
                         <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_management' %} class="active"{% endif %}>
                             <a href="{{ path('ra_management_manage') }}">{{ 'ra.menu.ra_management'|trans }}</a>
                         </li>
-                    {% endif %}
+                        {% endif %}
+                        <li role="presentation"><a href="{{ footer_link_url }}">{{ 'footer.documentation'|trans }}</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-6">
@@ -88,9 +89,6 @@
 
         {% block footer %}
             <hr>
-            <ul id="footerLinks">
-                <li class="footer-link"><a href="{{ footer_link_url }}">{{ 'footer.documentation'|trans }}</a></li>
-            </ul>
         {% endblock footer %}
 
 {% block foot_script %}
