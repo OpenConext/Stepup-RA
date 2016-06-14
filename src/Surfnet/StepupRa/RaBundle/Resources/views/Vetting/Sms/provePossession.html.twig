@@ -20,10 +20,35 @@
 
     <hr>
 
-    {{ form(form) }}
+    {{ form_start(form) }}
+    <div class="row">
+        {{ form_errors(form) }}
+        <div class="col-md-4">
+            {{ form_label(form.challenge, null, {'label_attr': {'class': 'pull-right'}}) }}
+        </div>
+        <div class="col-md-8">
+            {{ form_widget(form.challenge) }}
+        </div>
+    </div>
+    <div class="row">&nbsp;</div>
+    <div class="row offset-top">
+        <div class="col-md-1">
+            &nbsp;
+        </div>
+        <div class="col-md-5">
+            {{ form_row(form.resendChallenge) }}
+        </div>
+        <div class="col-md-3">
+            <button onclick="redirectWithPostTo({{ path('ra_vetting_cancel', { procedureId: app.request.attributes.get('procedureId') })|json_encode }}); return false" class="btn btn-danger pull-right" formnovalidate="formnovalidate">
+                <i class="fa fa-chevron-left"></i>
+                {{ 'ra.vetting.button.cancel_procedure'|trans }}
+            </button>
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.verifyChallenge) }}
+        </div>
+    </div>
+    {{ form_rest(form) }}
 
-    <hr>
-
-    {% include 'SurfnetStepupRaRaBundle:Vetting/partial:cancelVettingProcedure.html.twig' with { 'procedureId': app.request.attributes.get('procedureId') } only %}
 
 {% endblock %}
