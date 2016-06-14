@@ -87,7 +87,14 @@
         {% endblock content_row %}
 
         {% block footer %}
-            <hr>
+            <div class="row-fluid">
+                <div class="span8 offset2">
+                    <hr>
+                    <ul class="nav nav-pills">
+                        <li><a href="{{ footer_link_url }}">{{ 'footer.documentation'|trans }}</a></li>
+                    </ul>
+                </div>
+            </div>
         {% endblock footer %}
 
 {% block foot_script %}

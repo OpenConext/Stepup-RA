@@ -49,3 +49,5 @@ parameters:
     logout_redirect_url: https://www.surf.nl/over-surf/werkmaatschappijen/surfnet
 
     u2f_app_id: https://gateway.tld/u2f/app-id
+
+    footer_link_url: https://wiki.surfnet.nl/display/surfconextdev/Handleiding+RA+Management+portal

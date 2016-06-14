@@ -35,6 +35,8 @@ twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     exception_controller:  SurfnetStepupBundle:Exception:show
+    globals:
+        footer_link_url: %footer_link_url%
 
 # Assetic Configuration
 assetic:
