@@ -25,7 +25,6 @@ use Surfnet\StepupBundle\Service\SmsSecondFactorService;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\VetSecondFactorCommand;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService;
 use Surfnet\StepupRa\RaBundle\Command\CreateU2fSignRequestCommand;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
@@ -86,7 +85,7 @@ class VettingService
     private $translator;
 
     /**
-     * @var \Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService
+     * @var \Surfnet\StepupRa\RaBundle\Service\IdentityService
      */
     private $identityService;
 
@@ -203,7 +202,11 @@ class VettingService
             $procedure->getSecondFactor()->secondFactorIdentifier
         );
 
-        $identity = $this->identityService->get($procedure->getSecondFactor()->identityId);
+        $identity = $this->identityService->findById($procedure->getSecondFactor()->identityId);
+
+        if (!$identity) {
+            throw new DomainException("Second factor is coupled to an identity that doesn't exist");
+        }
 
         $command->phoneNumber = $phoneNumber;
         $command->body        = $this->translator->trans('ra.vetting.sms.challenge_body', [], 'messages', $identity->preferredLocale);
