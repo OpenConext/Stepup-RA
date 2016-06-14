@@ -39,15 +39,16 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <form class="pull-left" action="{{ path('ra_vetting_cancel', { procedureId: app.request.attributes.get('procedureId') }) }}" method="post">
+            <div class="col-md-6"></div>
+            <div class="col-md-3">
+                <form class="pull-right" action="{{ path('ra_vetting_cancel', { procedureId: app.request.attributes.get('procedureId') }) }}" method="post">
                     <button type="submit" class="btn btn-danger">
                         <i class="fa fa-chevron-left"></i>
                         {{ 'ra.vetting.button.cancel_procedure'|trans }}
                     </button>
                 </form>
             </div>
-            <div class="col-md-6 pull-right">
+            <div class="col-md-3">
                 {{ form(form,  {'attr': {'class': 'pull-right'}}) }}
             </div>
         </div>
