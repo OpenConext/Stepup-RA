@@ -23,17 +23,37 @@
         <table class="table table-bordered table-hover">
             <tbody>
             <tr>
-                <th scope="row" class="half-width">Name</th>
+                <th scope="row" class="half-width">{{ 'ra.management.overview.common_name'|trans }}</th>
                 <td class="half-width">{{ commonName }}</td>
             </tr>
             </tbody>
         </table>
 
-        {{ form(form) }}
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_row(form.documentNumber) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_row(form.identityVerified) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6"></div>
+            <div class="col-md-3">
+                <button onclick="redirectWithPostTo({{ path('ra_vetting_cancel', { procedureId: app.request.attributes.get('procedureId') })|json_encode }}); return false" type="submit" class="btn btn-danger">
+                    <i class="fa fa-chevron-left"></i>
+                    {{ 'ra.vetting.button.cancel_procedure'|trans }}
+                </button>
+            </div>
+            <div class="col-md-3">
+                {{ form_row(form.verifyIdentity) }}
+            </div>
+        </div>
+
+        {{ form_rest(form) }}
     </div>
-
-    <hr>
-
-    {% include 'SurfnetStepupRaRaBundle:Vetting/partial:cancelVettingProcedure.html.twig' with { 'procedureId': app.request.attributes.get('procedureId') } only %}
 
 {% endblock %}
