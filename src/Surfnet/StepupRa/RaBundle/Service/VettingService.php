@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use RuntimeException;
 use Surfnet\StepupBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
 use Surfnet\StepupBundle\Service\SmsSecondFactor\OtpVerification;
@@ -84,6 +85,11 @@ class VettingService
      */
     private $translator;
 
+    /**
+     * @var \Surfnet\StepupRa\RaBundle\Service\IdentityService
+     */
+    private $identityService;
+
     public function __construct(
         SmsSecondFactorService $smsSecondFactorService,
         YubikeySecondFactorService $yubikeySecondFactorService,
@@ -91,7 +97,8 @@ class VettingService
         U2fService $u2fService,
         CommandService $commandService,
         VettingProcedureRepository $vettingProcedureRepository,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        IdentityService $identityService
     ) {
         $this->smsSecondFactorService = $smsSecondFactorService;
         $this->yubikeySecondFactorService = $yubikeySecondFactorService;
@@ -100,6 +107,7 @@ class VettingService
         $this->commandService = $commandService;
         $this->vettingProcedureRepository = $vettingProcedureRepository;
         $this->translator = $translator;
+        $this->identityService = $identityService;
     }
 
     /**
@@ -185,7 +193,7 @@ class VettingService
      * @param SendSmsChallengeCommand $command
      * @return bool
      * @throws UnknownVettingProcedureException
-     * @throws DomainException
+     * @throws RuntimeException
      */
     public function sendSmsChallenge($procedureId, SendSmsChallengeCommand $command)
     {
@@ -195,8 +203,14 @@ class VettingService
             $procedure->getSecondFactor()->secondFactorIdentifier
         );
 
+        $identity = $this->identityService->findById($procedure->getSecondFactor()->identityId);
+
+        if (!$identity) {
+            throw new RuntimeException("Second factor is coupled to an identity that doesn't exist");
+        }
+
         $command->phoneNumber = $phoneNumber;
-        $command->body        = $this->translator->trans('ra.vetting.sms.challenge_body');
+        $command->body        = $this->translator->trans('ra.vetting.sms.challenge_body', [], 'messages', $identity->preferredLocale);
         $command->identity    = $procedure->getSecondFactor()->identityId;
         $command->institution = $procedure->getSecondFactor()->institution;
 

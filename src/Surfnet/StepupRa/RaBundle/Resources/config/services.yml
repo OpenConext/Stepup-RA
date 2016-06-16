@@ -87,6 +87,7 @@ services:
             - @ra.service.command
             - @ra.repository.vetting_procedure
             - @translator
+            - @ra.service.identity
 
     ra.service.yubikey:
         public: false
