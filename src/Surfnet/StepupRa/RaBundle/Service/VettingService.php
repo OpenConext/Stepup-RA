@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use RuntimeException;
 use Surfnet\StepupBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
 use Surfnet\StepupBundle\Service\SmsSecondFactor\OtpVerification;
@@ -192,7 +193,7 @@ class VettingService
      * @param SendSmsChallengeCommand $command
      * @return bool
      * @throws UnknownVettingProcedureException
-     * @throws DomainException
+     * @throws RuntimeException
      */
     public function sendSmsChallenge($procedureId, SendSmsChallengeCommand $command)
     {
@@ -205,7 +206,7 @@ class VettingService
         $identity = $this->identityService->findById($procedure->getSecondFactor()->identityId);
 
         if (!$identity) {
-            throw new DomainException("Second factor is coupled to an identity that doesn't exist");
+            throw new RuntimeException("Second factor is coupled to an identity that doesn't exist");
         }
 
         $command->phoneNumber = $phoneNumber;
