@@ -21,8 +21,8 @@
     <hr>
 
     {{ form_start(form) }}
+    {{ form_errors(form) }}
     <div class="row">
-        {{ form_errors(form) }}
         <div class="col-md-4">
             {{ form_label(form.challenge, null, {'label_attr': {'class': 'pull-right'}}) }}
         </div>
