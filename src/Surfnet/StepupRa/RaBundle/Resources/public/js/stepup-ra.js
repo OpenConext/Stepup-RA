@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-(function ($, window) {
+(function ($) {
     'use strict';
     $(document).ready(function() {
         $('#revocationModal').on('show.bs.modal', function (event) {
@@ -135,13 +135,5 @@
                 moment($(this).attr("datetime")).format('Y-MM-DD HH:mm')
             );
         });
-
-        /**
-         * Global utility method to 'redirect with an HTTP POST' to a given URL.
-         * @param {String} action
-         */
-        window.redirectWithPostTo = function(action) {
-            $('<form action="' + action + '" method="post"></form>').appendTo($(document.body)).submit();
-        };
     });
-})(jQuery, window);
+})(jQuery);
