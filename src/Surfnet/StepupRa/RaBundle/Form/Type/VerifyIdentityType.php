@@ -44,6 +44,10 @@ class VerifyIdentityType extends AbstractType
             'label' => 'ra.form.verify_identity.verify_identity.button',
             'attr' => [ 'class' => 'btn btn-primary pull-right' ],
         ]);
+        $builder->add('cancel', 'submit', [
+            'label' => 'ra.vetting.button.cancel_procedure',
+            'attr' => [ 'class' => 'btn btn-danger' ],
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
