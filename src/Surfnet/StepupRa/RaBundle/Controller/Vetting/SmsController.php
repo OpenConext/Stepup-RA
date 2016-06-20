@@ -116,7 +116,10 @@ class SmsController extends SecondFactorController
         /** @var SubmitButton $cancelButton */
         $cancelButton = $form->get('cancel');
         if ($cancelButton->isClicked()) {
-            return $this->forward('SurfnetStepupRaRaBundle:Vetting:cancelProcedure', ['procedureId' => $procedureId]);
+            $this->getVettingService()->cancelProcedure($procedureId);
+            $this->addFlash('info', $this->get('translator')->trans('ra.vetting.flash.cancelled'));
+
+            return $this->redirectToRoute('ra_vetting_search');
         }
 
         if (!$form->isValid()) {
