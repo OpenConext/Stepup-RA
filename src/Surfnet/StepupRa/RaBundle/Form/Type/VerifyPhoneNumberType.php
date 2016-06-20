@@ -31,17 +31,21 @@ class VerifyPhoneNumberType extends AbstractType
             'required' => true,
             'attr' => array(
                 'autofocus' => true,
-            )
+            ),
         ]);
-        $builder->add('verify-challenge', 'submit', [
+        $builder->add('verifyChallenge', 'submit', [
             'label' => 'ra.form.ra_verify_phone_number.button.verify_challenge',
             'attr' => [ 'class' => 'btn btn-primary pull-right' ],
         ]);
-        $builder->add('resend-challenge', 'anchor', [
+        $builder->add('resendChallenge', 'anchor', [
             'label' => 'ra.form.ra_verify_phone_number.button.resend_challenge',
             'attr' => [ 'class' => 'btn btn-default' ],
             'route' => 'ra_vetting_sms_send_challenge',
             'route_parameters' => ['procedureId' => $options['procedureId']],
+        ]);
+        $builder->add('cancel', 'submit', [
+            'label' => 'ra.vetting.button.cancel_procedure',
+            'attr' => [ 'class' => 'btn btn-danger' ],
         ]);
     }
 

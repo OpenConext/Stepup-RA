@@ -25,6 +25,7 @@ use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -111,6 +112,15 @@ class SmsController extends SecondFactorController
         $form = $this
             ->createForm('ra_verify_phone_number', $command, ['procedureId' => $procedureId])
             ->handleRequest($request);
+
+        /** @var SubmitButton $cancelButton */
+        $cancelButton = $form->get('cancel');
+        if ($cancelButton->isClicked()) {
+            $this->getVettingService()->cancelProcedure($procedureId);
+            $this->addFlash('info', $this->get('translator')->trans('ra.vetting.flash.cancelled'));
+
+            return $this->redirectToRoute('ra_vetting_search');
+        }
 
         if (!$form->isValid()) {
             $logger->notice(
