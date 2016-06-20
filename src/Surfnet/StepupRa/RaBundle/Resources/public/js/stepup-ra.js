@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-(function ($, window) {
+(function ($) {
     'use strict';
     $(document).ready(function() {
         $('#revocationModal').on('show.bs.modal', function (event) {
@@ -136,4 +136,4 @@
             );
         });
     });
-})(jQuery, window);
+})(jQuery);
