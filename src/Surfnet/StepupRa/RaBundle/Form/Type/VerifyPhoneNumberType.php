@@ -43,6 +43,10 @@ class VerifyPhoneNumberType extends AbstractType
             'route' => 'ra_vetting_sms_send_challenge',
             'route_parameters' => ['procedureId' => $options['procedureId']],
         ]);
+        $builder->add('cancel', 'submit', [
+            'label' => 'ra.vetting.button.cancel_procedure',
+            'attr' => [ 'class' => 'btn btn-danger' ],
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

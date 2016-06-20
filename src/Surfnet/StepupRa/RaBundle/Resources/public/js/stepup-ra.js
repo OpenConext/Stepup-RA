@@ -135,13 +135,5 @@
                 moment($(this).attr("datetime")).format('Y-MM-DD HH:mm')
             );
         });
-
-        /**
-         * Global utility method to 'redirect with an HTTP POST' to a given URL.
-         * @param {String} action
-         */
-        window.redirectWithPostTo = function(action) {
-            $('<form action="' + action + '" method="post"></form>').appendTo($(document.body)).submit();
-        };
     });
 })(jQuery, window);

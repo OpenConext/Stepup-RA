@@ -39,10 +39,11 @@
             {{ form_row(form.resendChallenge) }}
         </div>
         <div class="col-md-3">
-            <button onclick="redirectWithPostTo({{ path('ra_vetting_cancel', { procedureId: app.request.attributes.get('procedureId') })|json_encode }}); return false" class="btn btn-danger pull-right" formnovalidate="formnovalidate">
+            <button name="ra_verify_phone_number[cancel]" class="btn btn-danger pull-right" formnovalidate="formnovalidate">
                 <i class="fa fa-chevron-left"></i>
                 {{ 'ra.vetting.button.cancel_procedure'|trans }}
             </button>
+            {% do form.cancel.setRendered %}
         </div>
         <div class="col-md-3">
             {{ form_row(form.verifyChallenge) }}
