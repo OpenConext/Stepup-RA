@@ -43,7 +43,7 @@
         <div class="row">
             <div class="col-md-6"></div>
             <div class="col-md-3">
-                <button name="ra_verify_identity[cancel]" type="submit" class="btn btn-danger" formnovalidate="formnovalidate">
+                <button name="{{ form.vars.name }}[{{ form.cancel.vars.name }}]" type="submit" class="btn btn-danger" formnovalidate="formnovalidate">
                     <i class="fa fa-chevron-left"></i>
                     {{ 'ra.vetting.button.cancel_procedure'|trans }}
                 </button>
