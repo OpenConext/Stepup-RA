@@ -29,6 +29,7 @@ use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -161,8 +162,14 @@ class VettingController extends Controller
         }
 
         $command = new VerifyIdentityCommand();
-
         $form = $this->createForm('ra_verify_identity', $command)->handleRequest($request);
+
+        /** @var SubmitButton $cancelButton */
+        $cancelButton = $form->get('cancel');
+        if ($cancelButton->isClicked()) {
+            return $this->forward('SurfnetStepupRaRaBundle:Vetting:cancelProcedure', ['procedureId' => $procedureId]);
+        }
+
         $vettingService = $this->getVettingService();
         $commonName = $vettingService->getIdentityCommonName($procedureId);
 
