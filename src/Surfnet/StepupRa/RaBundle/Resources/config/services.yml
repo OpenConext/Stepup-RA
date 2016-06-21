@@ -34,6 +34,18 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType
         tags: [{ name: form.type, alias: ra_search_ra_candidates }]
 
+    ra.form.type.ra_create_ra_location:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\CreateRaLocationType
+        tags: [{ name: form.type, alias: ra_create_ra_location }]
+
+    ra.form.type.ra_change_ra_location:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaLocationType
+        tags: [{ name: form.type, alias: ra_change_ra_location }]
+
+    ra.form.type.ra_remove_ra_location:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\RemoveRaLocationType
+        tags: [{ name: form.type, alias: ra_remove_ra_location }]
+
     ra.form.type.search_ra_second_factors:
         class: Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType
         tags: [{ name: form.type, alias: ra_search_ra_second_factors }]
@@ -155,6 +167,13 @@ services:
             - @surfnet_stepup_middleware_client.identity.service.identity
             - @ra.service.command
             - @security.token_storage
+            - @logger
+
+    ra.service.ra_location:
+        class: Surfnet\StepupRa\RaBundle\Service\RaLocationService
+        arguments:
+            - @surfnet_stepup_middleware_client.configuration.service.ra_location
+            - @ra.service.command
             - @logger
 
     ra.service.second_factor:
