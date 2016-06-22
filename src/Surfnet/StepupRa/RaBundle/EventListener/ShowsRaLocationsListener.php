@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\SecurityContext;
 use Twig_Environment;
 
-final class HasPersonalRaLocationsListener implements EventSubscriberInterface
+final class ShowsRaLocationsListener implements EventSubscriberInterface
 {
     /**
      * @var Twig_Environment
@@ -52,8 +52,8 @@ final class HasPersonalRaLocationsListener implements EventSubscriberInterface
             return;
         }
 
-        $hasPersonalRaLocations = $this->service->institutionHasPersonalRaLocations($user->institution);
-        $this->twig->addGlobal('hasPersonalRaLocations', $hasPersonalRaLocations);
+        $showsRaLocations = $this->service->institutionShowsRaLocations($user->institution);
+        $this->twig->addGlobal('showsRaLocations', $showsRaLocations);
     }
 
     public static function getSubscribedEvents()

@@ -21,8 +21,8 @@ class InstitutionWithPersonalRaLocationsService
      * @param string $institution
      * @return bool
      */
-    public function institutionHasPersonalRaLocations($institution)
+    public function institutionShowsRaLocations($institution)
     {
-        return $this->service->institutionHasPersonalRaLocations($institution);
+        return $this->service->institutionShowsRaLocations($institution);
     }
 }
