@@ -150,12 +150,12 @@
       <trans-unit id="dae6a1cc0ab3be03b10145c4af4996c87111e961" resname="ra.create_ra_location.changed">
         <jms:reference-file line="151">RaBundle/Controller/RaLocationController.php</jms:reference-file>
         <source>ra.create_ra_location.changed</source>
-        <target>RA Locatie succesvol bijgewerkt</target>
+        <target>RA-locatie succesvol bijgewerkt</target>
       </trans-unit>
       <trans-unit id="47eb17b091e09fe597bd854607d8397cbeb96718" resname="ra.create_ra_location.created">
         <jms:reference-file line="90">RaBundle/Controller/RaLocationController.php</jms:reference-file>
         <source>ra.create_ra_location.created</source>
-        <target>RA Locatie succesvol aangemaakt</target>
+        <target>RA-locatie succesvol aangemaakt</target>
       </trans-unit>
       <trans-unit id="5a045b50111a6cdd614329837fa07cbf64d896a6" resname="ra.error.button.go_home">
         <jms:reference-file line="12">views/Exception/error.html.twig</jms:reference-file>
@@ -307,7 +307,7 @@
       <trans-unit id="8a72daea02c0ad7fd2b4a8182c961f58ffda08e6" resname="ra.form.ra_create_ra_location.label.create_ra_location">
         <jms:reference-file line="40">Form/Type/CreateRaLocationType.php</jms:reference-file>
         <source>ra.form.ra_create_ra_location.label.create_ra_location</source>
-        <target>Maak RA Locatie aan</target>
+        <target>Maak RA-locatie aan</target>
       </trans-unit>
       <trans-unit id="c2f748e6668c8df08679f41a0b4733faa909b4f9" resname="ra.form.ra_create_ra_location.label.location">
         <jms:reference-file line="34">Form/Type/CreateRaLocationType.php</jms:reference-file>
@@ -792,7 +792,7 @@
       <trans-unit id="b4a82e0141a37a71ca4197275026c666429430cc" resname="ra.menu.ra_locations">
         <jms:reference-file line="48">Resources/views/base.html.twig</jms:reference-file>
         <source>ra.menu.ra_locations</source>
-        <target>RA Locaties</target>
+        <target>RA-locaties</target>
       </trans-unit>
       <trans-unit id="08d2247eaaec4c6e898a3f3d01bda66d7c33731c" resname="ra.menu.ra_management">
         <jms:reference-file line="43">Resources/views/base.html.twig</jms:reference-file>
@@ -837,17 +837,17 @@
       <trans-unit id="583f0db43bd01641a979a5f39634716dea1f0553" resname="ra.ra_location.change.title">
         <jms:reference-file line="3">views/RaLocation/change.html.twig</jms:reference-file>
         <source>ra.ra_location.change.title</source>
-        <target>Bewerk RA Locatie</target>
+        <target>Bewerk RA-locatie</target>
       </trans-unit>
       <trans-unit id="0a321074e7857d0aa697afc20b221584edfef400" resname="ra.ra_location.create.title">
         <jms:reference-file line="3">views/RaLocation/create.html.twig</jms:reference-file>
         <source>ra.ra_location.create.title</source>
-        <target>Maak een nieuwe RA Locatie aan</target>
+        <target>Maak een nieuwe RA-locatie aan</target>
       </trans-unit>
       <trans-unit id="f51a51a5a16addea4c78a1bd7421c9b6ede4099d" resname="ra.ra_location.manage.add">
         <jms:reference-file line="10">views/RaLocation/manage.html.twig</jms:reference-file>
         <source>ra.ra_location.manage.add</source>
-        <target>Voeg een RA Locatie toe</target>
+        <target>Voeg een RA-locatie toe</target>
       </trans-unit>
       <trans-unit id="ed0ff61d09551e39abfb8de3c221d24b51bef31a" resname="ra.ra_location.manage.column.contactInformation">
         <jms:reference-file line="22">views/RaLocation/manage.html.twig</jms:reference-file>
@@ -877,17 +877,17 @@
       <trans-unit id="b98d29d711e4ee19c0f1c9bf7d0177edb32931d9" resname="ra.ra_location.manage.text.no_locations">
         <jms:reference-file line="54">views/RaLocation/manage.html.twig</jms:reference-file>
         <source>ra.ra_location.manage.text.no_locations</source>
-        <target>Geen RA Locaties gevonden voor de huidige instelling.</target>
+        <target>Geen RA-locaties gevonden voor de huidige instelling.</target>
       </trans-unit>
       <trans-unit id="90ed6b1e90e5184a97b345152a7595cf3f2749d6" resname="ra.ra_location.manage.title">
         <jms:reference-file line="3">views/RaLocation/manage.html.twig</jms:reference-file>
         <source>ra.ra_location.manage.title</source>
-        <target>Beheer RA Locaties</target>
+        <target>Beheer RA-locaties</target>
       </trans-unit>
       <trans-unit id="a0de3018a71080cea47623b831bd7474c93d7897" resname="ra.ra_location.removal.modal.are_you_sure">
         <jms:reference-file line="69">views/RaLocation/manage.html.twig</jms:reference-file>
         <source>ra.ra_location.removal.modal.are_you_sure</source>
-        <target>Weet je zeker dat je deze RA Locatie wilt verwijderen?</target>
+        <target>Weet je zeker dat je deze RA-locatie wilt verwijderen?</target>
       </trans-unit>
       <trans-unit id="5b31c8c74471e08aef9e67df823bf34704ee8287" resname="ra.ra_location.removal.modal.cancel">
         <jms:reference-file line="87">views/RaLocation/manage.html.twig</jms:reference-file>
@@ -923,12 +923,12 @@
       <trans-unit id="d0907a66b13be6d313d3abc5eac13e02156492e5" resname="ra.ra_location.revocation.could_not_remove">
         <jms:reference-file line="199">RaBundle/Controller/RaLocationController.php</jms:reference-file>
         <source>ra.ra_location.revocation.could_not_remove</source>
-        <target>Kon de RA Locatie niet verwijderen</target>
+        <target>Kon de RA-locatie niet verwijderen</target>
       </trans-unit>
       <trans-unit id="15e5cbcc209a9265cad52d14bd8809401043404c" resname="ra.ra_location.revocation.removed">
         <jms:reference-file line="196">RaBundle/Controller/RaLocationController.php</jms:reference-file>
         <source>ra.ra_location.revocation.removed</source>
-        <target>RA Locatie verwijderd</target>
+        <target>RA-locatie verwijderd</target>
       </trans-unit>
       <trans-unit id="f12e743e43bca49fe86f99db331ded47fb88f1da" resname="ra.registration.sms.text.otp_requests_remaining">
         <jms:reference-file line="23">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
