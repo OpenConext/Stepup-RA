@@ -57,11 +57,11 @@
             var button = $(event.relatedTarget),
                 data = button.data(),
                 sf = {
-                    id: data.sfid,
-                    institution: data.sfinstitution,
-                    name: data.sfname,
-                    location: data.sflocation,
-                    contactInformation: data.sfcontactinformation
+                    id: data.locationid,
+                    institution: data.locationinstitution,
+                    name: data.locationname,
+                    location: data.locationlocation,
+                    contactInformation: data.locationcontactinformation
                 },
                 modal = $(this);
 
