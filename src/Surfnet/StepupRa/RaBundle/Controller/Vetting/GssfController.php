@@ -32,6 +32,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Orchestrates verification of GSSFs (Generic SAML Second Factors) through GSSPs (Generic SAML Stepup Providers).
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 final class GssfController extends SecondFactorController
 {

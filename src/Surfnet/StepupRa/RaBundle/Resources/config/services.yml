@@ -34,6 +34,18 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType
         tags: [{ name: form.type, alias: ra_search_ra_candidates }]
 
+    ra.form.type.ra_create_ra_location:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\CreateRaLocationType
+        tags: [{ name: form.type, alias: ra_create_ra_location }]
+
+    ra.form.type.ra_change_ra_location:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaLocationType
+        tags: [{ name: form.type, alias: ra_change_ra_location }]
+
+    ra.form.type.ra_remove_ra_location:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\RemoveRaLocationType
+        tags: [{ name: form.type, alias: ra_remove_ra_location }]
+
     ra.form.type.search_ra_second_factors:
         class: Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType
         tags: [{ name: form.type, alias: ra_search_ra_second_factors }]
@@ -157,16 +169,22 @@ services:
             - @security.token_storage
             - @logger
 
-    ra.service.second_factor:
-        class: Surfnet\StepupRa\RaBundle\Service\SecondFactorService
+    ra.service.institution_with_personal_ra_locations:
+        class: Surfnet\StepupRa\RaBundle\Service\InstitutionWithPersonalRaLocationsService
         arguments:
-            - @surfnet_stepup_middleware_client.identity.service.second_factor
-            - @logger
+            - '@surfnet_stepup_middleware_client.configuration.service.institution_with_personal_ra_locations'
 
     ra.service.ra_candidate:
         class: Surfnet\StepupRa\RaBundle\Service\RaCandidateService
         arguments:
             - @surfnet_stepup_middleware_client.identity.service.ra_candidate
+            - @ra.service.command
+            - @logger
+
+    ra.service.ra_location:
+        class: Surfnet\StepupRa\RaBundle\Service\RaLocationService
+        arguments:
+            - @surfnet_stepup_middleware_client.configuration.service.ra_location
             - @ra.service.command
             - @logger
 
@@ -181,6 +199,12 @@ services:
         class: Surfnet\StepupRa\RaBundle\Service\RaService
         arguments:
             - @ra.service.command
+            - @logger
+
+    ra.service.second_factor:
+        class: Surfnet\StepupRa\RaBundle\Service\SecondFactorService
+        arguments:
+            - @surfnet_stepup_middleware_client.identity.service.second_factor
             - @logger
 
     # Repositories
@@ -234,4 +258,9 @@ services:
     ra.event_listener.locale:
         class: Surfnet\StepupRa\RaBundle\EventListener\LocaleListener
         arguments: [ @security.token_storage, @translator ]
+        tags: [{ name: kernel.event_subscriber }]
+
+    ra.event_listener.shows_ra_locations:
+        class: Surfnet\StepupRa\RaBundle\EventListener\ShowsRaLocationsListener
+        arguments: ['@twig', '@ra.service.institution_with_personal_ra_locations', '@security.context']
         tags: [{ name: kernel.event_subscriber }]
