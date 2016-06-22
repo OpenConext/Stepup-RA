@@ -29,7 +29,6 @@ use Surfnet\StepupMiddlewareClientBundle\Uuid\Uuid;
 use Surfnet\StepupRa\RaBundle\Command\ChangeRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\CreateRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\RemoveRaLocationCommand;
-use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaLocationsCommand;
 
 class RaLocationService
@@ -143,7 +142,6 @@ class RaLocationService
     {
         $middlewareCommand = new MiddlewareRemoveRaLocationCommand();
         $middlewareCommand->institution = $command->institution;
-        $middlewareCommand->authorityId = $command->currentUserId;
         $middlewareCommand->raLocationId = $command->locationId;
         $result = $this->commandService->execute($middlewareCommand);
 
@@ -152,7 +150,7 @@ class RaLocationService
                 'Removal of RA location "%s" of institution "%s" by user "%s" failed: "%s"',
                 $middlewareCommand->raLocationId,
                 $middlewareCommand->institution,
-                $middlewareCommand->authorityId,
+                $command->currentUserId,
                 implode(", ", $result->getErrors())
             ));
         }
