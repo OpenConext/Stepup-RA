@@ -169,23 +169,22 @@ services:
             - @security.token_storage
             - @logger
 
-    ra.service.ra_location:
-        class: Surfnet\StepupRa\RaBundle\Service\RaLocationService
+    ra.service.institution_with_personal_ra_locations:
+        class: Surfnet\StepupRa\RaBundle\Service\InstitutionWithPersonalRaLocationsService
         arguments:
-            - @surfnet_stepup_middleware_client.configuration.service.ra_location
-            - @ra.service.command
-            - @logger
-
-    ra.service.second_factor:
-        class: Surfnet\StepupRa\RaBundle\Service\SecondFactorService
-        arguments:
-            - @surfnet_stepup_middleware_client.identity.service.second_factor
-            - @logger
+            - '@surfnet_stepup_middleware_client.configuration.service.institution_with_personal_ra_locations'
 
     ra.service.ra_candidate:
         class: Surfnet\StepupRa\RaBundle\Service\RaCandidateService
         arguments:
             - @surfnet_stepup_middleware_client.identity.service.ra_candidate
+            - @ra.service.command
+            - @logger
+
+    ra.service.ra_location:
+        class: Surfnet\StepupRa\RaBundle\Service\RaLocationService
+        arguments:
+            - @surfnet_stepup_middleware_client.configuration.service.ra_location
             - @ra.service.command
             - @logger
 
@@ -200,6 +199,12 @@ services:
         class: Surfnet\StepupRa\RaBundle\Service\RaService
         arguments:
             - @ra.service.command
+            - @logger
+
+    ra.service.second_factor:
+        class: Surfnet\StepupRa\RaBundle\Service\SecondFactorService
+        arguments:
+            - @surfnet_stepup_middleware_client.identity.service.second_factor
             - @logger
 
     # Repositories
@@ -253,4 +258,9 @@ services:
     ra.event_listener.locale:
         class: Surfnet\StepupRa\RaBundle\EventListener\LocaleListener
         arguments: [ @security.token_storage, @translator ]
+        tags: [{ name: kernel.event_subscriber }]
+
+    ra.event_listener.has_personal_ra_locations:
+        class: Surfnet\StepupRa\RaBundle\EventListener\HasPersonalRaLocationsListener
+        arguments: ['@twig', '@ra.service.institution_with_personal_ra_locations', '@security.context']
         tags: [{ name: kernel.event_subscriber }]

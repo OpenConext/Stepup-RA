@@ -35,21 +35,6 @@ use Surfnet\StepupRa\RaBundle\Command\SearchRaLocationsCommand;
 class RaLocationService
 {
     /**
-     * @param ApiRaLocationService $apiRaLocationService
-     * @param CommandService $commandService
-     * @param LoggerInterface $logger
-     */
-    public function __construct(
-        ApiRaLocationService $apiRaLocationService,
-        CommandService $commandService,
-        LoggerInterface $logger
-    ) {
-        $this->apiRaLocationService = $apiRaLocationService;
-        $this->commandService = $commandService;
-        $this->logger = $logger;
-    }
-
-    /**
      * @var \Surfnet\StepupMiddlewareClientBundle\Configuration\Service\RaLocationService
      */
     private $apiRaLocationService;
@@ -63,6 +48,16 @@ class RaLocationService
      * @var \Psr\Log\LoggerInterface
      */
     private $logger;
+
+    public function __construct(
+        ApiRaLocationService $apiRaLocationService,
+        CommandService $commandService,
+        LoggerInterface $logger
+    ) {
+        $this->apiRaLocationService = $apiRaLocationService;
+        $this->commandService = $commandService;
+        $this->logger = $logger;
+    }
 
     /**
      * @param string $id

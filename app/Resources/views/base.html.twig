@@ -43,9 +43,11 @@
                             <a href="{{ path('ra_management_manage') }}">{{ 'ra.menu.ra_management'|trans }}</a>
                         </li>
                     {% endif %}
+                    {% if hasPersonalRaLocations %}
                         <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_locations' %} class="active"{% endif %}>
                             <a href="{{ path('ra_locations_manage') }}">{{ 'ra.menu.ra_locations'|trans }}</a>
                         </li>
+                    {% endif %}
                     </ul>
                 </div>
                 <div class="col-sm-6">
