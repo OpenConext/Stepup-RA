@@ -2,7 +2,8 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
-use Surfnet\StepupMiddlewareClientBundle\Configuration\Service\InstitutionWithPersonalRaLocationsService as ApiInstitutionWithPersonalRaLocationsService;
+use Surfnet\StepupMiddlewareClientBundle\Configuration\Service\InstitutionWithPersonalRaLocationsService
+    as ApiInstitutionWithPersonalRaLocationsService;
 
 class InstitutionWithPersonalRaLocationsService
 {
