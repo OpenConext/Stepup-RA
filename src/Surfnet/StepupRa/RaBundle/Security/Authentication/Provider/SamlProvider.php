@@ -61,7 +61,7 @@ class SamlProvider implements AuthenticationProviderInterface
     {
         $translatedAssertion = $this->attributeDictionary->translate($token->assertion);
 
-        $nameId      = $translatedAssertion->getNameID();
+        $nameId       = $translatedAssertion->getNameID();
         $institutions = $translatedAssertion->getAttributeValue('schacHomeOrganization');
 
         if (empty($institutions)) {
