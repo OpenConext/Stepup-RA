@@ -169,11 +169,6 @@ services:
             - @security.token_storage
             - @logger
 
-    ra.service.institution_with_personal_ra_locations:
-        class: Surfnet\StepupRa\RaBundle\Service\InstitutionWithPersonalRaLocationsService
-        arguments:
-            - '@surfnet_stepup_middleware_client.configuration.service.institution_with_personal_ra_locations'
-
     ra.service.ra_candidate:
         class: Surfnet\StepupRa\RaBundle\Service\RaCandidateService
         arguments:
