@@ -18,10 +18,10 @@
 
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Provider;
 
-
 use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
+use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
@@ -38,12 +38,19 @@ class SamlProvider implements AuthenticationProviderInterface
      */
     private $attributeDictionary;
 
+    /**
+     * @var InstitutionConfigurationOptionsService
+     */
+    private $institutionConfigurationOptionsService;
+
     public function __construct(
         IdentityService $identityService,
-        AttributeDictionary $attributeDictionary
+        AttributeDictionary $attributeDictionary,
+        InstitutionConfigurationOptionsService $institutionConfigurationOptionsService
     ) {
-        $this->identityService = $identityService;
-        $this->attributeDictionary = $attributeDictionary;
+        $this->identityService                        = $identityService;
+        $this->attributeDictionary                    = $attributeDictionary;
+        $this->institutionConfigurationOptionsService = $institutionConfigurationOptionsService;
     }
 
     /**
@@ -99,8 +106,11 @@ class SamlProvider implements AuthenticationProviderInterface
             $roles[] = 'ROLE_RA';
         }
 
+        $institutionConfigurationOptions = $this->institutionConfigurationOptionsService
+            ->getInstitutionConfigurationOptionsFor($identity->institution);
+
         // set the token
-        $authenticatedToken = new SamlToken($token->getLoa(), $roles);
+        $authenticatedToken = new SamlToken($token->getLoa(), $roles, $institutionConfigurationOptions);
         $authenticatedToken->setUser($identity);
 
         return $authenticatedToken;
