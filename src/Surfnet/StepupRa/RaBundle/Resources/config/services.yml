@@ -259,8 +259,3 @@ services:
         class: Surfnet\StepupRa\RaBundle\EventListener\LocaleListener
         arguments: [ @security.token_storage, @translator ]
         tags: [{ name: kernel.event_subscriber }]
-
-    ra.event_listener.shows_ra_locations:
-        class: Surfnet\StepupRa\RaBundle\EventListener\ShowsRaLocationsListener
-        arguments: ['@twig', '@ra.service.institution_with_personal_ra_locations', '@security.context']
-        tags: [{ name: kernel.event_subscriber }]
