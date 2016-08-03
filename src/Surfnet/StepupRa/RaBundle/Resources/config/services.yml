@@ -271,6 +271,13 @@ services:
         arguments: ['@twig', '@ra.service.institution_with_personal_ra_locations', '@security.context']
         tags: [{ name: kernel.event_subscriber }]
 
+    ra.exception_listener.inconsistent_state:
+        class: Surfnet\StepupRa\RaBundle\EventListener\InconsistentStateListener
+        arguments:
+            - "@logger"
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
     # Twig
     ra.twig.institution_configuration_options:
         class: Surfnet\StepupRa\RaBundle\Twig\InstitutionConfigurationOptions
