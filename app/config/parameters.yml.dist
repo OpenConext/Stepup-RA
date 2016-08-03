@@ -34,7 +34,7 @@ parameters:
     saml_metadata_privatekey:
     saml_remote_idp_entity_id:
     saml_remote_idp_sso_url:
-    saml_remote_idp_certificate:
+    saml_remote_idp_certificate: 'FOR CI ONLY, REPLACE WITH ACTUAL VALUE'
     loa_required_for_login: 'https://gateway.tld/authentication/loa3'
     enabled_second_factors:
         - sms
