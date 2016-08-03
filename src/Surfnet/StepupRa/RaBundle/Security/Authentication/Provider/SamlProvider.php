@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Provider;
 
 use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
+use Surfnet\StepupRa\RaBundle\Exception\InconsistentStateException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
@@ -108,6 +109,15 @@ class SamlProvider implements AuthenticationProviderInterface
 
         $institutionConfigurationOptions = $this->institutionConfigurationOptionsService
             ->getInstitutionConfigurationOptionsFor($identity->institution);
+
+        if ($institutionConfigurationOptions === null) {
+            throw new InconsistentStateException(
+                sprintf(
+                    'No institution configuration options can be found for institution "%s"',
+                    $identity->institution
+                )
+            );
+        }
 
         // set the token
         $authenticatedToken = new SamlToken($token->getLoa(), $roles, $institutionConfigurationOptions);
