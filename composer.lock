@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bc65a476fe59f5fcab47fed67f44edcd",
-    "content-hash": "5eacd80da0e658b283a34eb4bf244f26",
+    "hash": "736a3f2b49062e95497f818eb821e15a",
+    "content-hash": "8a680e1fb3513ea71ae471d6b5ef2820",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2076,16 +2076,16 @@
         },
         {
             "name": "surfnet/stepup-saml-bundle",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-saml-bundle.git",
-                "reference": "9e201f4514f6be6073c98c4303a7299ccb11c94b"
+                "reference": "3ee050d16f76bf63b48fa01af3e75e1b42668d72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-saml-bundle/zipball/9e201f4514f6be6073c98c4303a7299ccb11c94b",
-                "reference": "9e201f4514f6be6073c98c4303a7299ccb11c94b",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-saml-bundle/zipball/3ee050d16f76bf63b48fa01af3e75e1b42668d72",
+                "reference": "3ee050d16f76bf63b48fa01af3e75e1b42668d72",
                 "shasum": ""
             },
             "require": {
@@ -2120,7 +2120,7 @@
                 "stepup",
                 "surfnet"
             ],
-            "time": "2016-05-31 11:01:39"
+            "time": "2016-07-01 09:33:44"
         },
         {
             "name": "surfnet/stepup-u2f-bundle",
