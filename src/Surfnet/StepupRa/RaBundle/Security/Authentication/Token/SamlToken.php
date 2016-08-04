@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Token;
 
 use Surfnet\StepupBundle\Value\Loa;
+use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurationOptions;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 
 class SamlToken extends AbstractToken
@@ -33,12 +34,29 @@ class SamlToken extends AbstractToken
      */
     private $loa;
 
-    public function __construct(Loa $loa, array $roles = array())
-    {
+    /**
+     * @var InstitutionConfigurationOptions
+     */
+    private $institutionConfigurationOptions;
+
+    public function __construct(
+        Loa $loa,
+        array $roles = [],
+        InstitutionConfigurationOptions $institutionConfigurationOptions = null
+    ) {
         parent::__construct($roles);
 
         $this->loa = $loa;
+        $this->institutionConfigurationOptions = $institutionConfigurationOptions;
         $this->setAuthenticated(count($roles));
+    }
+
+    /**
+     * @return InstitutionConfigurationOptions
+     */
+    public function getInstitutionConfigurationOptions()
+    {
+        return $this->institutionConfigurationOptions;
     }
 
     /**
@@ -61,12 +79,12 @@ class SamlToken extends AbstractToken
 
     public function serialize()
     {
-        return serialize([parent::serialize(), $this->loa,]);
+        return serialize([parent::serialize(), $this->loa, $this->institutionConfigurationOptions]);
     }
 
     public function unserialize($serialized)
     {
-        list($parent, $this->loa) = unserialize($serialized);
+        list($parent, $this->loa, $this->institutionConfigurationOptions) = unserialize($serialized);
 
         parent::unserialize($parent);
     }
