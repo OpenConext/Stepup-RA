@@ -113,8 +113,10 @@ class SamlProvider implements AuthenticationProviderInterface
         if ($institutionConfigurationOptions === null) {
             throw new InconsistentStateException(
                 sprintf(
-                    'No institution configuration options can be found for institution "%s"',
-                    $identity->institution
+                    'InstitutionConfigurationOptions for institution "%s" '
+                    . 'must exist but cannot be found after authenticating Identity "%s"',
+                    $identity->institution,
+                    $identity->id
                 )
             );
         }
