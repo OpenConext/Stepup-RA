@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d2a4bbb917127514e2337e34efe506a7",
-    "content-hash": "a66779ce155c2f670486f1659a994b0b",
+    "hash": "736a3f2b49062e95497f818eb821e15a",
+    "content-hash": "8a680e1fb3513ea71ae471d6b5ef2820",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1636,46 +1636,55 @@
             "time": "2012-12-21 11:40:51"
         },
         {
-            "name": "rhumsaa/uuid",
-            "version": "2.8.2",
+            "name": "ramsey/uuid",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ramsey/rhumsaa-uuid.git",
-                "reference": "9c1e2d34bdefd42608c612e08d6e1da1e13a3530"
+                "url": "https://github.com/ramsey/uuid.git",
+                "reference": "a6d15c8618ea3951fd54d34e326b68d3d0bc0786"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/rhumsaa-uuid/zipball/9c1e2d34bdefd42608c612e08d6e1da1e13a3530",
-                "reference": "9c1e2d34bdefd42608c612e08d6e1da1e13a3530",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/a6d15c8618ea3951fd54d34e326b68d3d0bc0786",
+                "reference": "a6d15c8618ea3951fd54d34e326b68d3d0bc0786",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "paragonie/random_compat": "^1.0|^2.0",
+                "php": ">=5.4"
             },
             "replace": {
                 "rhumsaa/uuid": "self.version"
             },
             "require-dev": {
-                "doctrine/dbal": ">=2.3",
+                "apigen/apigen": "^4.1",
+                "codeception/aspect-mock": "1.0.0",
+                "goaop/framework": "1.0.0-alpha.2",
+                "ircmaxell/random-lib": "^1.1",
                 "jakub-onderka/php-parallel-lint": "^0.9.0",
-                "moontoast/math": "~1.1",
-                "phpunit/phpunit": "~4.1",
-                "satooshi/php-coveralls": "~0.6",
-                "squizlabs/php_codesniffer": "^2.3",
-                "symfony/console": "~2.3"
+                "mockery/mockery": "^0.9.4",
+                "moontoast/math": "^1.1",
+                "phpunit/phpunit": "^4.7|>=5.0 <5.4",
+                "satooshi/php-coveralls": "^0.6.1",
+                "squizlabs/php_codesniffer": "^2.3"
             },
             "suggest": {
-                "doctrine/dbal": "Allow the use of a UUID as doctrine field type.",
-                "moontoast/math": "Support for converting UUID to 128-bit integer (in string form).",
-                "symfony/console": "Support for use of the bin/uuid command line tool."
+                "ext-libsodium": "Provides the PECL libsodium extension for use with the SodiumRandomGenerator",
+                "ext-uuid": "Provides the PECL UUID extension for use with the PeclUuidTimeGenerator and PeclUuidRandomGenerator",
+                "ircmaxell/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
+                "moontoast/math": "Provides support for converting UUID to 128-bit integer (in string form).",
+                "ramsey/uuid-console": "A console application for generating UUIDs with ramsey/uuid",
+                "ramsey/uuid-doctrine": "Allows the use of Ramsey\\Uuid\\Uuid as Doctrine field type."
             },
-            "bin": [
-                "bin/uuid"
-            ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
-                    "Rhumsaa\\Uuid\\": "src/"
+                    "Ramsey\\Uuid\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1688,19 +1697,23 @@
                     "email": "marijn.huizendveld@gmail.com"
                 },
                 {
+                    "name": "Thibaud Fabre",
+                    "email": "thibaud@aztech.io"
+                },
+                {
                     "name": "Ben Ramsey",
-                    "homepage": "http://benramsey.com"
+                    "email": "ben@benramsey.com",
+                    "homepage": "https://benramsey.com"
                 }
             ],
-            "description": "NO LONGER MAINTAINED. Use ramsey/uuid instead. A PHP 5.3+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
-            "homepage": "https://github.com/ramsey/rhumsaa-uuid",
+            "description": "Formerly rhumsaa/uuid. A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
+            "homepage": "https://github.com/ramsey/uuid",
             "keywords": [
                 "guid",
                 "identifier",
                 "uuid"
             ],
-            "abandoned": "ramsey/uuid",
-            "time": "2015-07-23 19:00:41"
+            "time": "2016-08-02 18:39:32"
         },
         {
             "name": "robrichards/xmlseclibs",
@@ -1961,25 +1974,25 @@
         },
         {
             "name": "surfnet/stepup-bundle",
-            "version": "1.4.0",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-bundle.git",
-                "reference": "0d29ea86a1fe6523fc5697796e59af28c9580fe3"
+                "reference": "4ad7ebe9f9075ec39c5d1fc8449fe8fef33e60d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/0d29ea86a1fe6523fc5697796e59af28c9580fe3",
-                "reference": "0d29ea86a1fe6523fc5697796e59af28c9580fe3",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-bundle/zipball/4ad7ebe9f9075ec39c5d1fc8449fe8fef33e60d2",
+                "reference": "4ad7ebe9f9075ec39c5d1fc8449fe8fef33e60d2",
                 "shasum": ""
             },
             "require": {
                 "ext-gmp": "*",
                 "ext-openssl": "*",
-                "graylog2/gelf-php": "~1.1",
+                "graylog2/gelf-php": "^1.5",
                 "guzzlehttp/guzzle": "~4",
                 "monolog/monolog": "~1.11",
-                "php": ">=5.4,<8.0-dev",
+                "php": "^5.6|^7.0",
                 "sensio/framework-extra-bundle": "~3",
                 "symfony/config": "^2.7",
                 "symfony/dependency-injection": "^2.7",
@@ -2010,29 +2023,29 @@
                 "suaas",
                 "surfnet"
             ],
-            "time": "2016-06-08 13:02:43"
+            "time": "2016-08-03 07:45:32"
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "1.2.2",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-Middleware-clientbundle.git",
-                "reference": "cf3f068060ac0086075fe6a94bfd566eb63f9ddd"
+                "reference": "ee1dbf1664ca959500609793ec8c185a367cb9ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/cf3f068060ac0086075fe6a94bfd566eb63f9ddd",
-                "reference": "cf3f068060ac0086075fe6a94bfd566eb63f9ddd",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-Middleware-clientbundle/zipball/ee1dbf1664ca959500609793ec8c185a367cb9ca",
+                "reference": "ee1dbf1664ca959500609793ec8c185a367cb9ca",
                 "shasum": ""
             },
             "require": {
                 "beberlei/assert": "~2.0",
                 "guzzlehttp/guzzle": "~4",
                 "moontoast/math": "~1.1",
-                "php": ">=5.4,<8.0-dev",
+                "php": "^5.6|^7.0",
                 "psr/log": "~1.0",
-                "rhumsaa/uuid": "~2.7",
+                "ramsey/uuid": "^3.4",
                 "symfony/config": "^2.7",
                 "symfony/dependency-injection": "^2.7",
                 "symfony/http-kernel": "^2.7",
@@ -2059,20 +2072,20 @@
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "time": "2016-06-22 14:14:59"
+            "time": "2016-08-03 08:56:12"
         },
         {
             "name": "surfnet/stepup-saml-bundle",
-            "version": "2.4.0",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SURFnet/Stepup-saml-bundle.git",
-                "reference": "9e201f4514f6be6073c98c4303a7299ccb11c94b"
+                "reference": "3ee050d16f76bf63b48fa01af3e75e1b42668d72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SURFnet/Stepup-saml-bundle/zipball/9e201f4514f6be6073c98c4303a7299ccb11c94b",
-                "reference": "9e201f4514f6be6073c98c4303a7299ccb11c94b",
+                "url": "https://api.github.com/repos/SURFnet/Stepup-saml-bundle/zipball/3ee050d16f76bf63b48fa01af3e75e1b42668d72",
+                "reference": "3ee050d16f76bf63b48fa01af3e75e1b42668d72",
                 "shasum": ""
             },
             "require": {
@@ -2107,7 +2120,7 @@
                 "stepup",
                 "surfnet"
             ],
-            "time": "2016-05-31 11:01:39"
+            "time": "2016-07-01 09:33:44"
         },
         {
             "name": "surfnet/stepup-u2f-bundle",

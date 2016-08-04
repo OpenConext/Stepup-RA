@@ -5,7 +5,7 @@ Step-up Registration Authority
 
 ## Requirements
 
- * PHP 5.4+
+ * PHP 5.6+ or PHP7
  * [Composer](https://getcomposer.org/)
  * A web server (Apache, Nginx)
  * Graylog2 (or disable this Monolog handler)
