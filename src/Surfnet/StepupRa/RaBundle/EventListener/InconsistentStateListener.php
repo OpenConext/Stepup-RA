@@ -38,11 +38,13 @@ class InconsistentStateListener
     {
         $exception = $event->getException();
 
-        if ($exception instanceof InconsistentStateException) {
-            $this->logger->critical(
-                sprintf('An inconsistent state has been reached: "%s"', $exception->getMessage()),
-                ['exception' => $exception]
-            );
+        if (!$exception instanceof InconsistentStateException) {
+            return;
         }
+
+        $this->logger->critical(
+            sprintf('An inconsistent state has been reached: "%s"', $exception->getMessage()),
+            ['exception' => $exception]
+        );
     }
 }
