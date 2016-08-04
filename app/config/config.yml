@@ -37,7 +37,7 @@ twig:
     exception_controller:  SurfnetStepupBundle:Exception:show
     globals:
         footer_link_url: %footer_link_url%
-        institution_configuration_options: "@ra.twig.institution_configuration_options"
+        institutionConfigurationOptions: "@ra.twig.institution_configuration_options"
 
 # Assetic Configuration
 assetic:

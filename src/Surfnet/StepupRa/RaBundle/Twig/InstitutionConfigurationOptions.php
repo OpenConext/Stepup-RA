@@ -23,21 +23,30 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 final class InstitutionConfigurationOptions
 {
-    /**
-     * @var TokenStorageInterface
-     */
-    private $tokenStorage;
-
     public function __construct(TokenStorageInterface $tokenStorage)
     {
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function getInstitutionConfigurationOptions()
+    /**
+     * @return boolean
+     */
+    public function useRaLocations()
     {
         /** @var SamlToken $token */
         $token = $this->tokenStorage->getToken();
 
-        return $token->getInstitutionConfigurationOptions();
+        return $token->getInstitutionConfigurationOptions()->useRaLocations;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function showRaaContactInformation()
+    {
+        /** @var SamlToken $token */
+        $token = $this->tokenStorage->getToken();
+
+        return $token->getInstitutionConfigurationOptions()->showRaaContactInformation;
     }
 }
