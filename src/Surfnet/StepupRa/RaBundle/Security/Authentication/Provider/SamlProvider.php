@@ -18,10 +18,11 @@
 
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Provider;
 
-
 use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
+use Surfnet\StepupRa\RaBundle\Exception\InconsistentStateException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
+use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
@@ -38,12 +39,19 @@ class SamlProvider implements AuthenticationProviderInterface
      */
     private $attributeDictionary;
 
+    /**
+     * @var InstitutionConfigurationOptionsService
+     */
+    private $institutionConfigurationOptionsService;
+
     public function __construct(
         IdentityService $identityService,
-        AttributeDictionary $attributeDictionary
+        AttributeDictionary $attributeDictionary,
+        InstitutionConfigurationOptionsService $institutionConfigurationOptionsService
     ) {
-        $this->identityService = $identityService;
-        $this->attributeDictionary = $attributeDictionary;
+        $this->identityService                        = $identityService;
+        $this->attributeDictionary                    = $attributeDictionary;
+        $this->institutionConfigurationOptionsService = $institutionConfigurationOptionsService;
     }
 
     /**
@@ -54,10 +62,22 @@ class SamlProvider implements AuthenticationProviderInterface
     {
         $translatedAssertion = $this->attributeDictionary->translate($token->assertion);
 
-        $nameId      = $translatedAssertion->getNameID();
-        $institution = $translatedAssertion->getAttribute('schacHomeOrganization');
+        $nameId       = $translatedAssertion->getNameID();
+        $institutions = $translatedAssertion->getAttributeValue('schacHomeOrganization');
 
-        $identity = $this->identityService->findByNameIdAndInstitution($nameId, $institution);
+        if (empty($institutions)) {
+            throw new BadCredentialsException(
+                'No schacHomeOrganization provided'
+            );
+        }
+
+        if (count($institutions) > 1) {
+            throw new BadCredentialsException(
+                'Multiple schacHomeOrganizations provided'
+            );
+        }
+
+        $identity = $this->identityService->findByNameIdAndInstitution($nameId, $institutions[0]);
 
         // if no identity can be found, we're done.
         if ($identity === null) {
@@ -87,8 +107,22 @@ class SamlProvider implements AuthenticationProviderInterface
             $roles[] = 'ROLE_RA';
         }
 
+        $institutionConfigurationOptions = $this->institutionConfigurationOptionsService
+            ->getInstitutionConfigurationOptionsFor($identity->institution);
+
+        if ($institutionConfigurationOptions === null) {
+            throw new InconsistentStateException(
+                sprintf(
+                    'InstitutionConfigurationOptions for institution "%s" '
+                    . 'must exist but cannot be found after authenticating Identity "%s"',
+                    $identity->institution,
+                    $identity->id
+                )
+            );
+        }
+
         // set the token
-        $authenticatedToken = new SamlToken($token->getLoa(), $roles);
+        $authenticatedToken = new SamlToken($token->getLoa(), $roles, $institutionConfigurationOptions);
         $authenticatedToken->setUser($identity);
 
         return $authenticatedToken;

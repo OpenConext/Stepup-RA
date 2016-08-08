@@ -53,6 +53,40 @@
             });
         });
 
+        $('#removalModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget),
+                data = button.data(),
+                sf = {
+                    id: data.locationid,
+                    institution: data.locationinstitution,
+                    name: data.locationname,
+                    location: data.locationlocation,
+                    contactInformation: data.locationcontactinformation
+                },
+                modal = $(this);
+
+            modal.find('.modal-body td.name').text(sf.name);
+            modal.find('.modal-body td.location').text(sf.location);
+            modal.find('.modal-body td.contactInformation').text(sf.contactInformation);
+
+            modal.on('click', 'button.remove', function (event) {
+                var form = $('form[name="ra_remove_ra_location"]'),
+                    locationIdInput = $('#ra_remove_ra_location_locationId'),
+                    intitutionInput = $('#ra_remove_ra_location_institution');
+
+                modal.find('button').prop('disabled', true);
+                modal.on('hide.bs.modal', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                });
+
+                locationIdInput.val(sf.id);
+                intitutionInput.val(sf.institution);
+
+                form.submit();
+            });
+        });
+
         $(document).on('click', 'form[name="ra_management_create_ra"] button.create-ra', function (event) {
             var form = $('form[name="ra_management_create_ra"]'),
                 modal = $('#create_ra_confirmation_modal');
@@ -127,6 +161,13 @@
             event.preventDefault();
 
             alert('Sorry, this functionality has not yet been implemented...');
-        })
+        });
+
+        // Format all <time> elements to local timezone.
+        $("time[datetime]").each(function () {
+            $(this).text(
+                moment($(this).attr("datetime")).format('Y-MM-DD HH:mm')
+            );
+        });
     });
 })(jQuery);

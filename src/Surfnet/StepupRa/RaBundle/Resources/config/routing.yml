@@ -8,6 +8,26 @@ ra_serviceprovider_consume_assertion:
     methods: [POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Saml:consumeAssertion }
 
+ra_locations_manage:
+    path:     /locations
+    methods: [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaLocation:manage }
+
+ra_location_create:
+    path:     /locations/create
+    methods: [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaLocation:create }
+
+ra_location_change:
+    path:     /locations/{locationId}/change
+    methods: [GET, POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaLocation:change }
+
+ra_location_remove:
+    path:     /locations/remove
+    methods: [POST]
+    defaults: { _controller: SurfnetStepupRaRaBundle:RaLocation:remove }
+
 ra_second_factors_search:
     path:     /second-factors
     methods: [GET, POST]
