@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-06-22T10:22:52Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2016-08-08T12:34:40Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -762,7 +762,7 @@
       <trans-unit id="8108bf5ef1a111214faee15630b8ff0c0549bc66" resname="ra.management.ra_candidate.create_ra">
         <jms:reference-file line="25">views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
         <source>ra.management.ra_candidate.create_ra</source>
-        <target>Save</target>
+        <target>Change role</target>
       </trans-unit>
       <trans-unit id="ffb5905d1d08ea222cf82aacc96649f90730af92" resname="ra.management.ra_candidate.email">
         <jms:reference-file line="13">views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
