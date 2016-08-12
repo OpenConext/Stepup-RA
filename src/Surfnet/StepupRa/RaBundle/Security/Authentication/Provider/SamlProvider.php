@@ -119,8 +119,9 @@ class SamlProvider implements AuthenticationProviderInterface
         }
 
         // set the token
-        $authenticatedToken = new SamlToken($token->getLoa(), $roles, $institutionConfigurationOptions);
+        $authenticatedToken = new SamlToken($token->getLoa(), $roles);
         $authenticatedToken->setUser($identity);
+        $authenticatedToken->setInstitutionConfigurationOptions($institutionConfigurationOptions);
 
         return $authenticatedToken;
     }
