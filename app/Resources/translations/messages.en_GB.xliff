@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-08-08T12:34:40Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2016-08-12T13:47:42Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -1081,6 +1081,21 @@
         <source>ra.secondfactor.revoke</source>
         <target>Remove</target>
       </trans-unit>
+      <trans-unit id="a93a34cbd8a46054c58610a840809f4be0a3360a" resname="ra.security.session_expired.click_to_login">
+        <jms:reference-file line="11">views/Security/sessionExpired.html.twig</jms:reference-file>
+        <source>ra.security.session_expired.click_to_login</source>
+        <target>Click here to log in again</target>
+      </trans-unit>
+      <trans-unit id="61fabe8b58928dca00c16c847c78bc831314c953" resname="ra.security.session_expired.explanation">
+        <jms:reference-file line="8">views/Security/sessionExpired.html.twig</jms:reference-file>
+        <source>ra.security.session_expired.explanation</source>
+        <target>Your session has expired due to either prolonged inactivity or being logged in for too long. You have been automatically logged out and are required to log in again to be able to continue.</target>
+      </trans-unit>
+      <trans-unit id="47131ef94d88272d90104221b5649006d8efc916" resname="ra.security.session_expired.page_title">
+        <jms:reference-file line="3">views/Security/sessionExpired.html.twig</jms:reference-file>
+        <source>ra.security.session_expired.page_title</source>
+        <target>Session Expired</target>
+      </trans-unit>
       <trans-unit id="a718fae8b5a05ddfe4f55f3ed1a4bb8b365ea12c" resname="ra.sms_send_challenge.send_sms_challenge_failed">
         <jms:reference-file line="22">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.sms_send_challenge.send_sms_challenge_failed</source>
@@ -1114,17 +1129,17 @@
       <trans-unit id="28ff860b3260f99aeb7268aa31f5edcfbc10b531" resname="ra.vetting.button.cancel_procedure">
         <jms:reference-file line="48">Form/Type/VerifyIdentityType.php</jms:reference-file>
         <jms:reference-file line="47">Form/Type/VerifyPhoneNumberType.php</jms:reference-file>
+        <jms:reference-file line="5">Vetting/partial/cancelVettingProcedure.html.twig</jms:reference-file>
         <jms:reference-file line="44">Vetting/Sms/provePossession.html.twig</jms:reference-file>
         <jms:reference-file line="47">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
-        <jms:reference-file line="5">Vetting/partial/cancelVettingProcedure.html.twig</jms:reference-file>
         <jms:reference-file line="48">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
         <source>ra.vetting.button.cancel_procedure</source>
         <target>Cancel</target>
       </trans-unit>
       <trans-unit id="32b7bc724e0d07eac8325753ae89605966b495c7" resname="ra.vetting.flash.cancelled">
         <jms:reference-file line="120">Controller/Vetting/SmsController.php</jms:reference-file>
-        <jms:reference-file line="141">RaBundle/Controller/VettingController.php</jms:reference-file>
-        <jms:reference-file line="171">RaBundle/Controller/VettingController.php</jms:reference-file>
+        <jms:reference-file line="144">RaBundle/Controller/VettingController.php</jms:reference-file>
+        <jms:reference-file line="174">RaBundle/Controller/VettingController.php</jms:reference-file>
         <source>ra.vetting.flash.cancelled</source>
         <target>The vetting procedure was cancelled.</target>
       </trans-unit>
