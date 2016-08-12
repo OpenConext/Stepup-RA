@@ -32,7 +32,53 @@ final class ConfigurationTest extends TestCase
      */
     public function it_requires_second_factors_to_be_configured()
     {
-        $this->assertConfigurationIsInvalid([['required_loa' => '']], 'must be configured');
+        $configuration = [
+            'session_lifetimes'      => [
+                'max_absolute_lifetime' => 3600,
+                'max_relative_lifetime' => 600
+            ]
+        ];
+
+        $this->assertConfigurationIsInvalid([$configuration], 'must be configured');
+    }
+
+    /**
+     * @test
+     * @group configuration
+     */
+    public function it_requires_session_timeout_configuration()
+    {
+        $configuration = ['enabled_second_factors' => ['sms']];
+
+        $this->assertConfigurationIsInvalid([$configuration], 'must be configured');
+    }
+
+    /**
+     * @test
+     * @group configuration
+     */
+    public function it_requires_maximum_absolute_timeout_to_be_configured()
+    {
+        $configuration = [
+            'enabled_second_factors' => ['sms'],
+            'session_lifetimes' => ['max_relative_lifetime' => 600]
+        ];
+
+        $this->assertConfigurationIsInvalid([$configuration], 'must be configured');
+    }
+
+    /**
+     * @test
+     * @group configuration
+     */
+    public function it_requires_maximum_relative_timeout_to_be_configured()
+    {
+        $configuration = [
+            'enabled_second_factors' => ['sms'],
+            'session_lifetimes' => ['max_absolute_lifetime' => 3600]
+        ];
+
+        $this->assertConfigurationIsInvalid([$configuration], 'must be configured');
     }
 
     /**

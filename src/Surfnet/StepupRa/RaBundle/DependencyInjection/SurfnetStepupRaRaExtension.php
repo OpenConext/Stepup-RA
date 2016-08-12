@@ -35,10 +35,20 @@ class SurfnetStepupRaRaExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('security.yml');
 
         // inject the required loa as parameter into the service container
         $container->setParameter('surfnet_stepup_ra.security.required_loa', $config['required_loa']);
 
         $container->setParameter('surfnet_stepup_ra.enabled_second_factors', $config['enabled_second_factors']);
+
+        $container->setParameter(
+            'ra.security.authentication.session.maximum_absolute_lifetime_in_seconds',
+            $config['session_lifetimes']['max_absolute_lifetime']
+        );
+        $container->setParameter(
+            'ra.security.authentication.session.maximum_relative_lifetime_in_seconds',
+            $config['session_lifetimes']['max_relative_lifetime']
+        );
     }
 }
