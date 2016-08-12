@@ -3,6 +3,7 @@ VERSION 2  RELEASE 2.0.0
 ========================
 
    Version 2.1 - Configurable explicit absolute and relative session timeouts have been added.
+      12/08/2016 17:03  2.1.1  Fixed appearance of RA locations button and institution configuration options when changing institution as SRAA
       12/08/2016 14:43  2.1.0  initial release
 
    Version 2.0 - Release 2.0.0
