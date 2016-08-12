@@ -2,8 +2,8 @@ services:
     ra.service.command:
         class: Surfnet\StepupRa\RaBundle\Service\CommandService
         arguments:
-            - @surfnet_stepup_middleware_client.service.command
-            - @security.token_storage
+            - "@surfnet_stepup_middleware_client.service.command"
+            - "@security.token_storage"
 
     # Forms
     ra.form.type.anchor:
@@ -57,7 +57,7 @@ services:
     ra.form.type.sraa_institution_select:
         class: Surfnet\StepupRa\RaBundle\Form\Type\InstitutionSelectionType
         arguments:
-            - @ra.form.extension.institution_listing_choice_list
+            - "@ra.form.extension.institution_listing_choice_list"
         tags: [{ name: form.type, alias: sraa_institution_select }]
 
     ra.form.type.management.create_ra:
@@ -79,46 +79,46 @@ services:
     ra.form.type.initiate_gssf:
         class: Surfnet\StepupRa\RaBundle\Form\Type\InitiateGssfType
         arguments:
-            - @router
+            - "@router"
         tags: [{ name: form.type, alias: ra_initiate_gssf }]
 
     # Form Extensions
     ra.form.extension.institution_listing_choice_list:
         class: Surfnet\StepupRa\RaBundle\Form\Extension\InstitutionListingChoiceList
         arguments:
-            - @surfnet_stepup_middleware_client.identity.service.institution_listing
+            - "@surfnet_stepup_middleware_client.identity.service.institution_listing"
 
     # Services
     ra.service.vetting:
         class: Surfnet\StepupRa\RaBundle\Service\VettingService
         arguments:
-            - @surfnet_stepup.service.sms_second_factor
-            - @ra.service.yubikey_second_factor
-            - @ra.service.gssf
-            - @ra.service.u2f
-            - @ra.service.command
-            - @ra.repository.vetting_procedure
-            - @translator
-            - @ra.service.identity
+            - "@surfnet_stepup.service.sms_second_factor"
+            - "@ra.service.yubikey_second_factor"
+            - "@ra.service.gssf"
+            - "@ra.service.u2f"
+            - "@ra.service.command"
+            - "@ra.repository.vetting_procedure"
+            - "@translator"
+            - "@ra.service.identity"
 
     ra.service.yubikey:
         public: false
         class: Surfnet\StepupRa\RaBundle\Service\YubikeyService
         arguments:
-            - @surfnet_stepup.guzzle.gateway_api
-            - @logger
+            - "@surfnet_stepup.guzzle.gateway_api"
+            - "@logger"
 
     ra.service.yubikey_second_factor:
         public: true
         class: Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorService
         arguments:
-            - @ra.service.yubikey
-            - @logger
+            - "@ra.service.yubikey"
+            - "@logger"
 
     ra.service.gssf:
         class: Surfnet\StepupRa\RaBundle\Service\GssfService
         arguments:
-            - @ra.service.gssf.sessionbag
+            - "@ra.service.gssf.sessionbag"
 
     ra.service.gssf.sessionbag:
         class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
@@ -137,9 +137,9 @@ services:
     ra.service.u2f:
         class: Surfnet\StepupRa\RaBundle\Service\U2fService
         arguments:
-            - @surfnet_stepup.guzzle.gateway_api
-            - @validator
-            - @logger
+            - "@surfnet_stepup.guzzle.gateway_api"
+            - "@validator"
+            - "@logger"
 
     ra.session.u2f:
         class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
@@ -158,16 +158,16 @@ services:
     ra.service.audit_log:
         class: Surfnet\StepupRa\RaBundle\Service\AuditLogService
         arguments:
-            - @surfnet_stepup_middleware_client.identity.service.audit_log
-            - @logger
+            - "@surfnet_stepup_middleware_client.identity.service.audit_log"
+            - "@logger"
 
     ra.service.identity:
         class: Surfnet\StepupRa\RaBundle\Service\IdentityService
         arguments:
-            - @surfnet_stepup_middleware_client.identity.service.identity
-            - @ra.service.command
-            - @security.token_storage
-            - @logger
+            - "@surfnet_stepup_middleware_client.identity.service.identity"
+            - "@ra.service.command"
+            - "@security.token_storage"
+            - "@logger"
 
     ra.service.institution_configuration_options:
         class: Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService
@@ -177,88 +177,53 @@ services:
     ra.service.ra_candidate:
         class: Surfnet\StepupRa\RaBundle\Service\RaCandidateService
         arguments:
-            - @surfnet_stepup_middleware_client.identity.service.ra_candidate
-            - @ra.service.command
-            - @logger
+            - "@surfnet_stepup_middleware_client.identity.service.ra_candidate"
+            - "@ra.service.command"
+            - "@logger"
 
     ra.service.ra_location:
         class: Surfnet\StepupRa\RaBundle\Service\RaLocationService
         arguments:
-            - @surfnet_stepup_middleware_client.configuration.service.ra_location
-            - @ra.service.command
-            - @logger
+            - "@surfnet_stepup_middleware_client.configuration.service.ra_location"
+            - "@ra.service.command"
+            - "@logger"
 
     ra.service.ra_second_factor:
         class: Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService
         arguments:
-            - @surfnet_stepup_middleware_client.identity.service.ra_second_factor
-            - @ra.service.command
-            - @logger
+            - "@surfnet_stepup_middleware_client.identity.service.ra_second_factor"
+            - "@ra.service.command"
+            - "@logger"
 
     ra.service.ra:
         class: Surfnet\StepupRa\RaBundle\Service\RaService
         arguments:
-            - @ra.service.command
-            - @logger
+            - "@ra.service.command"
+            - "@logger"
 
     ra.service.second_factor:
         class: Surfnet\StepupRa\RaBundle\Service\SecondFactorService
         arguments:
-            - @surfnet_stepup_middleware_client.identity.service.second_factor
-            - @logger
+            - "@surfnet_stepup_middleware_client.identity.service.second_factor"
+            - "@logger"
 
     # Repositories
     ra.repository.vetting_procedure:
         class: Surfnet\StepupRa\RaBundle\Repository\SessionVettingProcedureRepository
         arguments:
-            - @session
+            - "@session"
             - 'Surfnet/StepupRa/RaBundle/Repository/VettingProcedureRepository'
-
-    # SAML login
-    ra.security.authentication.provider:
-        class: Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider
-        arguments:
-            - @ra.service.identity
-            - @surfnet_saml.saml.attribute_dictionary
-            - @ra.service.institution_configuration_options
-
-    ra.security.authentication.listener:
-        class: Surfnet\StepupRa\RaBundle\Security\Firewall\SamlListener
-        arguments:
-            - @service_container
-
-    ra.security.authentication.saml:
-        class: Surfnet\StepupRa\RaBundle\Security\Authentication\SamlInteractionProvider
-        arguments:
-            - @surfnet_saml.hosted.service_provider
-            - @surfnet_saml.remote.idp
-            - @surfnet_saml.http.redirect_binding
-            - @surfnet_saml.http.post_binding
-            - @ra.security.authentication.session_handler
-            - @surfnet_stepup.service.loa_resolution
-            - @ra.security.required_loa
-
-    ra.security.required_loa:
-        public: false
-        class: Surfnet\StepupBundle\Value\Loa
-        factory: [@surfnet_stepup.service.loa_resolution, getLoa]
-        arguments: [%surfnet_stepup_ra.security.required_loa%]
-
-    ra.security.authentication.session_handler:
-        class: Surfnet\StepupRa\RaBundle\Security\Authentication\SessionHandler
-        arguments:
-            - @session
 
     #Logger
     ra.procedure_logger:
         class: Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger
         arguments:
-            - @logger
+            - "@logger"
 
     # Listeners
     ra.event_listener.locale:
         class: Surfnet\StepupRa\RaBundle\EventListener\LocaleListener
-        arguments: [ @security.token_storage, @translator ]
+        arguments: [ "@security.token_storage", "@translator" ]
         tags: [{ name: kernel.event_subscriber }]
 
     ra.exception_listener.inconsistent_state:
