@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
+use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -44,6 +45,20 @@ class SraaController extends Controller
         if ($form->isValid()) {
             $newInstitution = $command->institution;
             $identity->institution = $newInstitution;
+
+            /** @var SamlToken $token */
+            $tokenStorage = $this->get('security.token_storage');
+            $token        = $tokenStorage->getToken();
+
+            $institutionConfigurationOptionsService = $this->get('ra.service.institution_configuration_options');
+            $institutionConfigurationOptions = $institutionConfigurationOptionsService
+                ->getInstitutionConfigurationOptionsFor($newInstitution);
+
+            // The institution configuration options need to be updated to correctly acquire the context of the
+            // selected institution
+            $token->setInstitutionConfigurationOptions($institutionConfigurationOptions);
+            $tokenStorage->setToken($token);
+
             $flashMessage = $this->get('translator')
                 ->trans('ra.sraa.changed_institution', ['%institution%' => $newInstitution]);
 
