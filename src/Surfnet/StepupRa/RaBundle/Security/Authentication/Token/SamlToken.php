@@ -39,16 +39,17 @@ class SamlToken extends AbstractToken
      */
     private $institutionConfigurationOptions;
 
-    public function __construct(
-        Loa $loa,
-        array $roles = [],
-        InstitutionConfigurationOptions $institutionConfigurationOptions = null
-    ) {
+    public function __construct(Loa $loa, array $roles = [])
+    {
         parent::__construct($roles);
 
         $this->loa = $loa;
-        $this->institutionConfigurationOptions = $institutionConfigurationOptions;
         $this->setAuthenticated(count($roles));
+    }
+
+    public function setInstitutionConfigurationOptions(InstitutionConfigurationOptions $institutionConfigurationOptions)
+    {
+        $this->institutionConfigurationOptions = $institutionConfigurationOptions;
     }
 
     /**

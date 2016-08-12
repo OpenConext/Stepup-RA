@@ -30,7 +30,7 @@
             {% block menu %}
             {% if app.user %}
             <div class="row-fluid">
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <ul class="nav nav-pills">
                         <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_vetting' %} class="active"{% endif %}>
                             <a href="{{ path('ra_vetting_search') }}">{{ 'ra.menu.registration'|trans }}</a>
@@ -50,7 +50,7 @@
                     {% endif %}
                     </ul>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <form name="logout" method="post" action="{{ logout_url('saml_based') }}" class="pull-right">
                         <button type="submit" class="btn btn-link"><i class="fa fa-sign-out"></i> {{ 'button.logout'|trans }}</button>
                     </form>
