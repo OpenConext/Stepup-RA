@@ -55,9 +55,9 @@ class SamlInteractionProvider
     private $postBinding;
 
     /**
-     * @var \Surfnet\StepupRa\RaBundle\Security\Authentication\SessionHandler
+     * @var \Surfnet\StepupRa\RaBundle\Security\Authentication\SamlAuthenticationStateHandler
      */
-    private $sessionHandler;
+    private $samlAuthenticationStateHandler;
 
     /**
      * @var \Surfnet\StepupBundle\Service\LoaResolutionService
@@ -74,17 +74,17 @@ class SamlInteractionProvider
         IdentityProvider $identityProvider,
         RedirectBinding $redirectBinding,
         PostBinding $postBinding,
-        SessionHandler $sessionHandler,
+        SamlAuthenticationStateHandler $samlAuthenticationStateHandler,
         LoaResolutionService $loaResolutionService,
         Loa $requiredLoa
     ) {
-        $this->serviceProvider      = $serviceProvider;
-        $this->identityProvider     = $identityProvider;
-        $this->redirectBinding      = $redirectBinding;
-        $this->postBinding          = $postBinding;
-        $this->sessionHandler       = $sessionHandler;
-        $this->loaResolutionService = $loaResolutionService;
-        $this->requiredLoa          = $requiredLoa;
+        $this->serviceProvider                = $serviceProvider;
+        $this->identityProvider               = $identityProvider;
+        $this->redirectBinding                = $redirectBinding;
+        $this->postBinding                    = $postBinding;
+        $this->loaResolutionService           = $loaResolutionService;
+        $this->requiredLoa                    = $requiredLoa;
+        $this->samlAuthenticationStateHandler = $samlAuthenticationStateHandler;
     }
 
     /**
@@ -92,7 +92,7 @@ class SamlInteractionProvider
      */
     public function isSamlAuthenticationInitiated()
     {
-        return $this->sessionHandler->hasRequestId();
+        return $this->samlAuthenticationStateHandler->hasRequestId();
     }
 
     /**
@@ -107,7 +107,7 @@ class SamlInteractionProvider
 
         $authnRequest->setAuthenticationContextClassRef((string) $this->requiredLoa);
 
-        $this->sessionHandler->setRequestId($authnRequest->getRequestId());
+        $this->samlAuthenticationStateHandler->setRequestId($authnRequest->getRequestId());
 
         return $this->redirectBinding->createRedirectResponseFor($authnRequest);
     }
@@ -128,7 +128,7 @@ class SamlInteractionProvider
             $this->serviceProvider
         );
 
-        $this->sessionHandler->clearRequestId();
+        $this->samlAuthenticationStateHandler->clearRequestId();
 
         $authnContextClassRef = $assertion->getAuthnContextClassRef();
         if (!$this->loaResolutionService->hasLoa($authnContextClassRef)) {
@@ -153,6 +153,6 @@ class SamlInteractionProvider
      */
     public function reset()
     {
-        $this->sessionHandler->clearRequestId();
+        $this->samlAuthenticationStateHandler->clearRequestId();
     }
 }

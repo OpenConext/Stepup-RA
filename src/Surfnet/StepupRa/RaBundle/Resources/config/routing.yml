@@ -154,3 +154,9 @@ ra_switch_locale:
     defaults: { _controller: SurfnetStepupRaRaBundle:Locale:switchLocale }
     requirements:
         'return-url': '.+'
+
+ra_security_session_expired:
+    path: /authentication/session-expired
+    methods: [GET]
+    defaults:
+        _controller: SurfnetStepupRaRaBundle:Security:sessionExpired

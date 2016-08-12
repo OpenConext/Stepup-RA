@@ -18,7 +18,9 @@
 
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Provider;
 
+use Psr\Log\LoggerInterface;
 use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
+use Surfnet\SamlBundle\SAML2\Response\AssertionAdapter;
 use Surfnet\StepupRa\RaBundle\Exception\InconsistentStateException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
@@ -44,14 +46,21 @@ class SamlProvider implements AuthenticationProviderInterface
      */
     private $institutionConfigurationOptionsService;
 
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
     public function __construct(
         IdentityService $identityService,
         AttributeDictionary $attributeDictionary,
-        InstitutionConfigurationOptionsService $institutionConfigurationOptionsService
+        InstitutionConfigurationOptionsService $institutionConfigurationOptionsService,
+        LoggerInterface $logger
     ) {
         $this->identityService                        = $identityService;
         $this->attributeDictionary                    = $attributeDictionary;
         $this->institutionConfigurationOptionsService = $institutionConfigurationOptionsService;
+        $this->logger                                 = $logger;
     }
 
     /**
@@ -62,22 +71,10 @@ class SamlProvider implements AuthenticationProviderInterface
     {
         $translatedAssertion = $this->attributeDictionary->translate($token->assertion);
 
-        $nameId       = $translatedAssertion->getNameID();
-        $institutions = $translatedAssertion->getAttributeValue('schacHomeOrganization');
+        $nameId      = $translatedAssertion->getNameID();
+        $institution = $this->getSingleStringValue('schacHomeOrganization', $translatedAssertion);
 
-        if (empty($institutions)) {
-            throw new BadCredentialsException(
-                'No schacHomeOrganization provided'
-            );
-        }
-
-        if (count($institutions) > 1) {
-            throw new BadCredentialsException(
-                'Multiple schacHomeOrganizations provided'
-            );
-        }
-
-        $identity = $this->identityService->findByNameIdAndInstitution($nameId, $institutions[0]);
+        $identity = $this->identityService->findByNameIdAndInstitution($nameId, $institution);
 
         // if no identity can be found, we're done.
         if ($identity === null) {
@@ -126,6 +123,40 @@ class SamlProvider implements AuthenticationProviderInterface
         $authenticatedToken->setUser($identity);
 
         return $authenticatedToken;
+    }
+
+    private function getSingleStringValue($attribute, AssertionAdapter $translatedAssertion)
+    {
+        $values = $translatedAssertion->getAttributeValue($attribute);
+
+        if (empty($values)) {
+            throw new BadCredentialsException(sprintf('Missing value for required attribute "%s"', $attribute));
+        }
+
+        // see https://www.pivotaltracker.com/story/show/121296389
+        if (count($values) > 1) {
+            $this->logger->warning(sprintf(
+                'Found "%d" values for attribute "%s", using first value',
+                count($values),
+                $attribute
+            ));
+        }
+
+        $value = reset($values);
+
+        if (!is_string($value)) {
+            $message = sprintf(
+                'First value of attribute "%s" must be a string, "%s" given',
+                $attribute,
+                is_object($value) ? get_class($value) : gettype($value)
+            );
+
+            $this->logger->warning($message);
+
+            throw new BadCredentialsException($message);
+        }
+
+        return $value;
     }
 
     public function supports(TokenInterface $token)
