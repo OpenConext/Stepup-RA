@@ -21,6 +21,9 @@ namespace Surfnet\StepupRa\RaBundle\Tests\Security\Authentication\Token;
 use PHPUnit_Framework_TestCase as TestCase;
 use Surfnet\StepupBundle\Value\Loa;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurationOptions;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupRa\RaBundle\Exception\LogicException;
+use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 
 class SamlTokenTest extends TestCase
@@ -28,6 +31,7 @@ class SamlTokenTest extends TestCase
     /**
      * @test
      * @group saml
+     * @group security
      * @group serialization
      */
     public function saml_token_is_correctly_serialized_and_unserialized()
@@ -48,5 +52,85 @@ class SamlTokenTest extends TestCase
         $deserialized->unserialize($serialized);
 
         $this->assertEquals($samlToken, $deserialized);
+    }
+
+    /**
+     * @test
+     * @group authorization
+     * @group security
+     * @group sraa
+     */
+    public function institution_scope_of_saml_token_cannot_be_changed_when_not_sraa()
+    {
+        $this->setExpectedException(RuntimeException::class, 'Unauthorized to change institution scope');
+
+        $identity = new Identity();
+
+        $samlToken = new SamlToken(
+            new Loa(Loa::LOA_1, 'http://some.url.tld/authentication/loa1'),
+            ['ROLE_RAA', 'ROLE_RA']
+        );
+        $samlToken->setUser($identity);
+
+        $newInstitutionConfigurationOptions                            = new InstitutionConfigurationOptions();
+        $newInstitutionConfigurationOptions->useRaLocations            = false;
+        $newInstitutionConfigurationOptions->showRaaContactInformation = false;
+
+        $samlToken->changeInstitutionScope('surfnet.nl', $newInstitutionConfigurationOptions);
+    }
+
+    /**
+     * @test
+     * @group authorization
+     * @group security
+     * @group sraa
+     */
+    public function institution_scope_of_saml_token_can_be_changed_when_sraa()
+    {
+        $expectedInstitution = 'surfnet.nl';
+
+        $oldInstitutionConfigurationOptions                            = new InstitutionConfigurationOptions();
+        $oldInstitutionConfigurationOptions->useRaLocations            = true;
+        $oldInstitutionConfigurationOptions->showRaaContactInformation = true;
+
+        $identity = new Identity();
+        $identity->institution = 'old-institution.nl';
+
+        $samlToken = new SamlToken(
+            new Loa(Loa::LOA_1, 'http://some.url.tld/authentication/loa1'),
+            ['ROLE_SRAA'],
+            $oldInstitutionConfigurationOptions
+        );
+        $samlToken->setUser($identity);
+
+        $newInstitutionConfigurationOptions                            = new InstitutionConfigurationOptions();
+        $newInstitutionConfigurationOptions->useRaLocations            = false;
+        $newInstitutionConfigurationOptions->showRaaContactInformation = false;
+
+        $samlToken->changeInstitutionScope($expectedInstitution, $newInstitutionConfigurationOptions);
+
+        $this->assertSame($expectedInstitution, $samlToken->getUser()->institution);
+        $this->assertSame($newInstitutionConfigurationOptions, $samlToken->getInstitutionConfigurationOptions());
+    }
+
+    /**
+     * @test
+     * @group authorization
+     * @group security
+     */
+    public function institution_scope_of_saml_token_cannot_be_changed_if_it_has_no_user()
+    {
+        $this->setExpectedException(LogicException::class, 'token does not contain a user');
+
+        $samlToken = new SamlToken(
+            new Loa(Loa::LOA_1, 'http://some.url.tld/authentication/loa1'),
+            ['ROLE_SRAA']
+        );
+
+        $newInstitutionConfigurationOptions                            = new InstitutionConfigurationOptions();
+        $newInstitutionConfigurationOptions->useRaLocations            = false;
+        $newInstitutionConfigurationOptions->showRaaContactInformation = false;
+
+        $samlToken->changeInstitutionScope('surfnet.nl', $newInstitutionConfigurationOptions);
     }
 }
