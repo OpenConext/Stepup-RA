@@ -20,8 +20,8 @@ namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Token;
 
 use Surfnet\StepupBundle\Value\Loa;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurationOptions;
-use Surfnet\StepupRa\RaBundle\Exception\ForbiddenException;
 use Surfnet\StepupRa\RaBundle\Exception\LogicException;
+use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 use Symfony\Component\Security\Core\Role\RoleInterface;
 
@@ -79,7 +79,7 @@ class SamlToken extends AbstractToken
         }, $this->getRoles());
 
         if (!in_array('ROLE_SRAA', $roles)) {
-            throw new ForbiddenException(sprintf(
+            throw new RuntimeException(sprintf(
                 'Unauthorized to change institution scope to "%s": role SRAA required, found roles "%s"',
                 $institution,
                 implode(', ', $roles)

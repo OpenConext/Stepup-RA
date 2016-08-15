@@ -22,8 +22,8 @@ use PHPUnit_Framework_TestCase as TestCase;
 use Surfnet\StepupBundle\Value\Loa;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurationOptions;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
-use Surfnet\StepupRa\RaBundle\Exception\ForbiddenException;
 use Surfnet\StepupRa\RaBundle\Exception\LogicException;
+use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 
 class SamlTokenTest extends TestCase
@@ -56,11 +56,12 @@ class SamlTokenTest extends TestCase
     /**
      * @test
      * @group authorization
+     * @group security
      * @group sraa
      */
     public function institution_scope_of_saml_token_cannot_be_changed_when_not_sraa()
     {
-        $this->setExpectedException(ForbiddenException::class, 'Unauthorized to change institution scope');
+        $this->setExpectedException(RuntimeException::class, 'Unauthorized to change institution scope');
 
         $identity = new Identity();
 
