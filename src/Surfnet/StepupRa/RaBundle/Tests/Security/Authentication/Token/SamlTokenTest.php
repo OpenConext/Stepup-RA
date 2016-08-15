@@ -31,6 +31,7 @@ class SamlTokenTest extends TestCase
     /**
      * @test
      * @group saml
+     * @group security
      * @group serialization
      */
     public function saml_token_is_correctly_serialized_and_unserialized()
@@ -81,6 +82,7 @@ class SamlTokenTest extends TestCase
     /**
      * @test
      * @group authorization
+     * @group security
      * @group sraa
      */
     public function institution_scope_of_saml_token_can_be_changed_when_sraa()
@@ -114,6 +116,7 @@ class SamlTokenTest extends TestCase
     /**
      * @test
      * @group authorization
+     * @group security
      */
     public function institution_scope_of_saml_token_cannot_be_changed_if_it_has_no_user()
     {
