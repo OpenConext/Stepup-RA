@@ -20,7 +20,10 @@ namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Token;
 
 use Surfnet\StepupBundle\Value\Loa;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurationOptions;
+use Surfnet\StepupRa\RaBundle\Exception\LogicException;
+use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
+use Symfony\Component\Security\Core\Role\RoleInterface;
 
 class SamlToken extends AbstractToken
 {
@@ -39,16 +42,15 @@ class SamlToken extends AbstractToken
      */
     private $institutionConfigurationOptions;
 
-    public function __construct(Loa $loa, array $roles = [])
-    {
+    public function __construct(
+        Loa $loa,
+        array $roles = [],
+        InstitutionConfigurationOptions $institutionConfigurationOptions = null
+    ) {
         parent::__construct($roles);
 
         $this->loa = $loa;
         $this->setAuthenticated(count($roles));
-    }
-
-    public function setInstitutionConfigurationOptions(InstitutionConfigurationOptions $institutionConfigurationOptions)
-    {
         $this->institutionConfigurationOptions = $institutionConfigurationOptions;
     }
 
@@ -58,6 +60,34 @@ class SamlToken extends AbstractToken
     public function getInstitutionConfigurationOptions()
     {
         return $this->institutionConfigurationOptions;
+    }
+
+    /**
+     * @param string $institution
+     * @param InstitutionConfigurationOptions $institutionConfigurationOptions
+     */
+    public function changeInstitutionScope(
+        $institution,
+        InstitutionConfigurationOptions $institutionConfigurationOptions
+    ) {
+        if ($this->getUser() === null) {
+            throw new LogicException('Cannot change institution scope: token does not contain a user');
+        }
+
+        $roles = array_map(function (RoleInterface $role) {
+            return $role->getRole();
+        }, $this->getRoles());
+
+        if (!in_array('ROLE_SRAA', $roles)) {
+            throw new RuntimeException(sprintf(
+                'Unauthorized to change institution scope to "%s": role SRAA required, found roles "%s"',
+                $institution,
+                implode(', ', $roles)
+            ));
+        }
+
+        $this->getUser()->institution = $institution;
+        $this->institutionConfigurationOptions = $institutionConfigurationOptions;
     }
 
     /**
