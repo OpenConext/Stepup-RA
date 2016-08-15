@@ -30,9 +30,12 @@ class SraaController extends Controller
     {
         $this->denyAccessUnlessGranted(['ROLE_SRAA']);
 
+        /** @var SamlToken $token */
+        $token  = $this->get('security.token_storage')->getToken();
         $logger = $this->get('logger');
+
         /** @var Identity $identity */
-        $identity = $this->get('security.token_storage')->getToken()->getUser();
+        $identity = $token->getUser();
 
         $logger->notice(sprintf('Select Institution for SRAA "%s"', $identity->id));
 
@@ -43,31 +46,18 @@ class SraaController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $newInstitution = $command->institution;
-            $identity->institution = $newInstitution;
-
-            /** @var SamlToken $token */
-            $tokenStorage = $this->get('security.token_storage');
-            $token        = $tokenStorage->getToken();
-
-            $institutionConfigurationOptionsService = $this->get('ra.service.institution_configuration_options');
-            $institutionConfigurationOptions = $institutionConfigurationOptionsService
-                ->getInstitutionConfigurationOptionsFor($newInstitution);
-
-            // The institution configuration options need to be updated to correctly acquire the context of the
-            // selected institution
-            $token->setInstitutionConfigurationOptions($institutionConfigurationOptions);
-            $tokenStorage->setToken($token);
+            $institutionConfigurationOptions = $this->get('ra.service.institution_configuration_options')
+                ->getInstitutionConfigurationOptionsFor($command->institution);
+            $token->changeInstitutionScope($command->institution, $institutionConfigurationOptions);
 
             $flashMessage = $this->get('translator')
-                ->trans('ra.sraa.changed_institution', ['%institution%' => $newInstitution]);
-
+                ->trans('ra.sraa.changed_institution', ['%institution%' => $command->institution]);
             $this->get('session')->getFlashBag()->add('success', $flashMessage);
 
             $logger->notice(sprintf(
-                'SRAA "%s successfully switched to institution "%s"',
+                'SRAA "%s" successfully switched to institution "%s"',
                 $identity->id,
-                $newInstitution
+                $command->institution
             ));
 
             return $this->redirect($this->generateUrl('ra_vetting_search'));
