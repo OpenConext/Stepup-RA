@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-08-12T13:48:20Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2016-10-06T11:53:53Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -953,7 +953,7 @@
       <trans-unit id="441e4d7c6bece19e1a2a0008af6302443d36c7a4" resname="ra.second_factor.revocation.modal.cancel">
         <jms:reference-file line="93">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.cancel</source>
-        <target>annuleren</target>
+        <target>Annuleren</target>
       </trans-unit>
       <trans-unit id="4a0e93233ac08a0e08df4ccabdddb3183f0343ea" resname="ra.second_factor.revocation.modal.close">
         <jms:reference-file line="66">views/SecondFactor/search.html.twig</jms:reference-file>
