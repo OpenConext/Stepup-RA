@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
+use Assert\Assertion;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
@@ -91,9 +92,12 @@ class RaManagementController extends Controller
 
         $logger->notice(sprintf('Searching for RaCandidates within institution "%s"', $institution));
 
+        $pageNumber = $request->get('p', 1);
+        Assertion::digit($pageNumber, 'Expected page number to be an integer, got "%s"');
+
         $command                 = new SearchRaCandidatesCommand();
         $command->institution    = $institution;
-        $command->pageNumber     = (integer) $request->get('p', 1);
+        $command->pageNumber     = $pageNumber;
         $command->orderBy        = $request->get('orderBy');
         $command->orderDirection = $request->get('orderDirection');
 
