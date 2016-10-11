@@ -231,6 +231,15 @@ services:
         arguments: [ "@security.token_storage", "@translator" ]
         tags: [{ name: kernel.event_subscriber }]
 
+    ra.event_listener.locale_cookie:
+        class: Surfnet\StepupBundle\EventListener\LocaleCookieListener
+        arguments:
+            - "@surfnet_stepup.locale_cookie_helper"
+            - "@ra.service.locale_provider"
+            - "@logger"
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 6 }
+
     ra.exception_listener.inconsistent_state:
         class: Surfnet\StepupRa\RaBundle\EventListener\InconsistentStateListener
         arguments:
