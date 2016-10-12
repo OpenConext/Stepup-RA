@@ -92,12 +92,9 @@ class RaManagementController extends Controller
 
         $logger->notice(sprintf('Searching for RaCandidates within institution "%s"', $institution));
 
-        $pageNumber = $request->get('p', 1);
-        Assertion::digit($pageNumber, 'Expected page number to be an integer, got "%s"');
-
         $command                 = new SearchRaCandidatesCommand();
         $command->institution    = $institution;
-        $command->pageNumber     = $pageNumber;
+        $command->pageNumber     = (int) $request->get('p', 1);
         $command->orderBy        = $request->get('orderBy');
         $command->orderDirection = $request->get('orderDirection');
 
