@@ -18,7 +18,6 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
-use Assert\Assertion;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
