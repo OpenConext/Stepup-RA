@@ -93,7 +93,7 @@ class RaManagementController extends Controller
 
         $command                 = new SearchRaCandidatesCommand();
         $command->institution    = $institution;
-        $command->pageNumber     = $request->get('p', 1);
+        $command->pageNumber     = (int) $request->get('p', 1);
         $command->orderBy        = $request->get('orderBy');
         $command->orderDirection = $request->get('orderDirection');
 
