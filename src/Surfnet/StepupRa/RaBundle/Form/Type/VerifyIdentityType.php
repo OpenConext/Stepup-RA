@@ -21,6 +21,7 @@ namespace Surfnet\StepupRa\RaBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 
 class VerifyIdentityType extends AbstractType
 {
@@ -28,6 +29,7 @@ class VerifyIdentityType extends AbstractType
     {
         $builder->add('documentNumber', 'text', [
             'label' => 'ra.form.verify_identity.document_number.label',
+            'constraints' => new Length(6),
             'horizontal_label_class' => 'col-sm-6 left-aligned',
             'horizontal_input_wrapper_class' => 'col-sm-6',
             'attr' => [
