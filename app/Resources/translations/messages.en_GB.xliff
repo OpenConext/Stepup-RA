@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-08-12T13:47:42Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2016-11-01T15:18:05Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -779,6 +779,16 @@
         <source>ra.management.ra_candidate.no_candidates</source>
         <target>No users that can be made RA(A) are found.</target>
       </trans-unit>
+      <trans-unit id="aab8e288cda5ac834345cb59f487525914df06c8" resname="ra.management.retract_ra.modal.cancel">
+        <jms:reference-file line="37">Form/Type/RetractRegistrationAuthorityType.php</jms:reference-file>
+        <source>ra.management.retract_ra.modal.cancel</source>
+        <target>Cancel</target>
+      </trans-unit>
+      <trans-unit id="70a2e1f55142950ee793403dca2cbff3907af0da" resname="ra.management.retract_ra.modal.confirm">
+        <jms:reference-file line="32">Form/Type/RetractRegistrationAuthorityType.php</jms:reference-file>
+        <source>ra.management.retract_ra.modal.confirm</source>
+        <target>Confirm</target>
+      </trans-unit>
       <trans-unit id="1a03ce1515132785c884129598c2cb52db461cd0" resname="ra.management.retract_ra.success">
         <jms:reference-file line="310">RaBundle/Controller/RaManagementController.php</jms:reference-file>
         <source>ra.management.retract_ra.success</source>
@@ -1102,7 +1112,7 @@
         <target>The sending of the code via SMS failed.</target>
       </trans-unit>
       <trans-unit id="e8ada95651cf644c6bbeeff32c330b4fde42f87d" resname="ra.sraa.changed_institution">
-        <jms:reference-file line="47">RaBundle/Controller/SraaController.php</jms:reference-file>
+        <jms:reference-file line="53">RaBundle/Controller/SraaController.php</jms:reference-file>
         <source>ra.sraa.changed_institution</source>
         <target>Your institution has been changed to "%institution%"</target>
       </trans-unit>
@@ -1130,9 +1140,9 @@
         <jms:reference-file line="48">Form/Type/VerifyIdentityType.php</jms:reference-file>
         <jms:reference-file line="47">Form/Type/VerifyPhoneNumberType.php</jms:reference-file>
         <jms:reference-file line="5">Vetting/partial/cancelVettingProcedure.html.twig</jms:reference-file>
-        <jms:reference-file line="44">Vetting/Sms/provePossession.html.twig</jms:reference-file>
+        <jms:reference-file line="47">Vetting/Sms/provePossession.html.twig</jms:reference-file>
         <jms:reference-file line="47">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
-        <jms:reference-file line="48">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
+        <jms:reference-file line="51">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
         <source>ra.vetting.button.cancel_procedure</source>
         <target>Cancel</target>
       </trans-unit>
