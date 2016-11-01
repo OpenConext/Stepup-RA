@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-10-06T11:53:53Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2016-11-01T14:23:00Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -1102,7 +1102,7 @@
         <target>Het versturen van de SMS-code is mislukt.</target>
       </trans-unit>
       <trans-unit id="e8ada95651cf644c6bbeeff32c330b4fde42f87d" resname="ra.sraa.changed_institution">
-        <jms:reference-file line="47">RaBundle/Controller/SraaController.php</jms:reference-file>
+        <jms:reference-file line="53">RaBundle/Controller/SraaController.php</jms:reference-file>
         <source>ra.sraa.changed_institution</source>
         <target>Je instituut is veranderd naar "%institution%"</target>
       </trans-unit>
@@ -1130,9 +1130,9 @@
         <jms:reference-file line="48">Form/Type/VerifyIdentityType.php</jms:reference-file>
         <jms:reference-file line="47">Form/Type/VerifyPhoneNumberType.php</jms:reference-file>
         <jms:reference-file line="5">Vetting/partial/cancelVettingProcedure.html.twig</jms:reference-file>
-        <jms:reference-file line="44">Vetting/Sms/provePossession.html.twig</jms:reference-file>
+        <jms:reference-file line="47">Vetting/Sms/provePossession.html.twig</jms:reference-file>
         <jms:reference-file line="47">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
-        <jms:reference-file line="48">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
+        <jms:reference-file line="51">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
         <source>ra.vetting.button.cancel_procedure</source>
         <target>Annuleren</target>
       </trans-unit>
@@ -1267,6 +1267,11 @@
         <jms:reference-file line="18">Vetting/Sms/provePossession.html.twig</jms:reference-file>
         <source>ra.vetting.sms.text.retry_if_not_received</source>
         <target>Verstuur een nieuwe code als de gebruiker niet binnen één minuut een SMS-je heeft ontvangen met de code </target>
+      </trans-unit>
+      <trans-unit id="1130f1804add2157181cff877e9c1a8cc1a1cc77" resname="ra.vetting.start_procedure.information">
+        <jms:reference-file line="8">views/Vetting/startProcedure.html.twig</jms:reference-file>
+        <source>ra.vetting.start_procedure.information</source>
+        <target>Voer de activatiecode van de te activeren gebruiker in of kies voor een van de bovenstaande tabs.</target>
       </trans-unit>
       <trans-unit id="f67f9a1925f44474f600a9b2145828791fc3d8f7" resname="ra.vetting.start_procedure.title">
         <jms:reference-file line="3">views/Vetting/startProcedure.html.twig</jms:reference-file>

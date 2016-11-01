@@ -5,6 +5,9 @@
 {% block content %}
     <div class="row">
         <div class="col-sm-12">
+            <p>{{ 'ra.vetting.start_procedure.information'|trans }}</p>
+        </div>
+        <div class="col-sm-12">
             {{ form_start(form, {'attr': {'class': 'form-inline'}}) }}
             {{ form_errors(form) }}
             {{ form_widget(form.registrationCode) }}
