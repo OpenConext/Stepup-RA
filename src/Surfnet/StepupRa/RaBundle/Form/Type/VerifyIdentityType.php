@@ -35,6 +35,8 @@ class VerifyIdentityType extends AbstractType
             'attr' => [
                 'autofocus' => true,
                 'autocomplete' => 'off',
+                'minlength' => 6,
+                'maxlength' => 6
             ]
         ]);
         $builder->add('identityVerified', 'checkbox', [
