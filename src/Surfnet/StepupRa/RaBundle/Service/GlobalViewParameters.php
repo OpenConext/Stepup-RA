@@ -34,10 +34,15 @@ final class GlobalViewParameters
     private $locales;
 
     /**
-     * @var array
+     * @var string[]
      */
     private $manualUrl;
 
+    /**
+     * @param TranslatorInterface $translator
+     * @param string[] $locales
+     * @param string[] $manualUrl
+     */
     public function __construct(TranslatorInterface $translator, array $locales, array $manualUrl)
     {
         Assert::keysAre($manualUrl, $locales);
