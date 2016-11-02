@@ -23,7 +23,7 @@ use Surfnet\StepupRa\RaBundle\Exception\AssertionFailedException;
 
 final class Assert extends Assertion
 {
-    protected static $exceptionClass = AssertionFailedException::class;
+    protected static $exceptionClass = '\Surfnet\StepupRa\RaBundle\Exception\AssertionFailedException';
 
     public static function keysAre(array $array, array $expectedKeys, $propertyPath = null)
     {
