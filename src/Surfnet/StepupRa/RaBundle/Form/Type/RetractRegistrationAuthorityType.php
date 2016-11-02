@@ -30,12 +30,10 @@ class RetractRegistrationAuthorityType extends AbstractType
             ->add('confirm', 'submit', [
                 'attr' => ['class' => 'btn btn-warning pull-right'],
                 'label' => 'ra.management.retract_ra.modal.confirm',
-                'translation_domain' => 'messages'
             ])
             ->add('cancel', 'submit', [
                 'attr' => ['class' => 'btn btn-info pull-right'],
                 'label' => 'ra.management.retract_ra.modal.cancel',
-                'translation_domain' => 'messages'
             ]);
     }
 
