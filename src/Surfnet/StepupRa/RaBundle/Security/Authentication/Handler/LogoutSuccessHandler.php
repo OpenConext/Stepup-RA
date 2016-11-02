@@ -20,15 +20,15 @@ namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Handler;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 final class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 {
     /**
-     * @var TranslatorInterface
+     * @var TokenStorageInterface
      */
-    private $translator;
+    private $tokenStorage;
 
     /**
      * @var string[]
@@ -36,18 +36,21 @@ final class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     private $logoutRedirectUrl;
 
     /**
-     * @param TranslatorInterface $translator
+     * @param TokenStorageInterface $tokenStorage
      * @param string[] $locales
      * @param string[] $logoutRedirectUrl
      */
-    public function __construct(TranslatorInterface $translator, array $locales, array $logoutRedirectUrl)
+    public function __construct(TokenStorageInterface $tokenStorage, array $locales, array $logoutRedirectUrl)
     {
-        $this->translator = $translator;
+        $this->tokenStorage = $tokenStorage;
         $this->logoutRedirectUrl = $logoutRedirectUrl;
     }
 
     public function onLogoutSuccess(Request $request)
     {
-        return new RedirectResponse($this->logoutRedirectUrl[$this->translator->getLocale()]);
+        $token    = $this->tokenStorage->getToken();
+        $identity = $token->getUser();
+
+        return new RedirectResponse($this->logoutRedirectUrl[$identity->preferredLocale]);
     }
 }

@@ -90,7 +90,7 @@ services:
         public: false
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\Handler\LogoutSuccessHandler
         arguments:
-            - "@translator"
+            - "@security.token_storage"
             - "%locales%"
             - "%logout_redirect_url%"
 
