@@ -89,6 +89,7 @@ surfnet_stepup_ra_ra:
 
 mopa_bootstrap:
     form:
+        render_optional_text: false
         show_legend: false
         templating: SurfnetStepupRaRaBundle:Form:fields.html.twig
     icons:

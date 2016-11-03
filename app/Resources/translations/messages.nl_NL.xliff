@@ -779,6 +779,16 @@
         <source>ra.management.ra_candidate.no_candidates</source>
         <target>Geen gebruikers gevonden die RA(A) gemaakt kunnen worden.</target>
       </trans-unit>
+      <trans-unit id="aab8e288cda5ac834345cb59f487525914df06c8" resname="ra.management.retract_ra.modal.cancel">
+        <jms:reference-file line="37">Form/Type/RetractRegistrationAuthorityType.php</jms:reference-file>
+        <source>ra.management.retract_ra.modal.cancel</source>
+        <target>Annuleer</target>
+      </trans-unit>
+      <trans-unit id="70a2e1f55142950ee793403dca2cbff3907af0da" resname="ra.management.retract_ra.modal.confirm">
+        <jms:reference-file line="32">Form/Type/RetractRegistrationAuthorityType.php</jms:reference-file>
+        <source>ra.management.retract_ra.modal.confirm</source>
+        <target>Bevestig</target>
+      </trans-unit>
       <trans-unit id="1a03ce1515132785c884129598c2cb52db461cd0" resname="ra.management.retract_ra.success">
         <jms:reference-file line="310">RaBundle/Controller/RaManagementController.php</jms:reference-file>
         <source>ra.management.retract_ra.success</source>
