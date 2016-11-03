@@ -32,9 +32,9 @@
         <source>locale.nl_NL</source>
         <target>Nederlands</target>
       </trans-unit>
-      <trans-unit id="2c51bcecf7826f003b2e051e4176c14b46372263" resname="ra.auditlog.action">
+      <trans-unit id="2c51bcecf7826f003b2e051e4176c14b46372263" resname="ra.auditlog.event">
         <jms:reference-file line="24">views/SecondFactor/auditLog.html.twig</jms:reference-file>
-        <source>ra.auditlog.action</source>
+        <source>ra.auditlog.event</source>
         <target>Event</target>
       </trans-unit>
       <trans-unit id="37836182b3260cbaf343a44bfb622776839666cc" resname="ra.auditlog.action.accredited_as_ra">
