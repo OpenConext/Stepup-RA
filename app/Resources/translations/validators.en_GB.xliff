@@ -430,6 +430,14 @@
         <source>ra.verify_identity_command.document_number.may_not_be_empty</source>
         <target>Enter the last 6 characters of document number</target>
       </trans-unit>
+      <trans-unit id="94785a2a9091f214657771372fcb4a61d47948bd" resname="ra.verify_identity_command.document_number.must_be_higher_than_minimum">
+        <source>ra.verify_identity_command.document_number.must_be_higher_than_minimum</source>
+        <target>Document number must consist of at least {{ limit }} character.|Document number must consist of at least {{ limit }} characters.</target>
+      </trans-unit>
+      <trans-unit id="5b10a05ddf6d1e4e7073de3dbbde2c7a095870ff" resname="ra.verify_identity_command.document_number.must_be_lower_than_maximum">
+        <source>ra.verify_identity_command.document_number.must_be_lower_than_maximum</source>
+        <target>Document number must consist of at most {{ limit }} character.|Document number must consist of at most {{ limit }} characters.</target>
+      </trans-unit>
       <trans-unit id="6a7721edc1618980a3d081cf8df1585ec10018ec" resname="ra.verify_identity_command.document_number.must_be_string">
         <source>ra.verify_identity_command.document_number.must_be_string</source>
         <target>Enter the last 6 characters of document number</target>
