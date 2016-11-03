@@ -15,19 +15,28 @@ div.page-header {
     }
 }
 
-form[name="ra_start_vetting_procedure"] {
-    max-width: 500px;
+.ra-start-vetting-procedure-container {
     margin: 3em auto;
+    max-width: 500px;
 
-    input[name="ra_start_vetting_procedure[registrationCode]"] {
-        min-width: 220px;
-        text-transform: uppercase;
+    form[name="ra_start_vetting_procedure"] {
+
+        margin-bottom: 1em;
+
+        input[name="ra_start_vetting_procedure[registrationCode]"] {
+            min-width: 220px;
+            text-transform: uppercase;
+        }
+
+        ::-webkit-input-placeholder { text-transform: none; }
+        :-moz-placeholder { text-transform: none; }
+        ::-moz-placeholder { text-transform: none; }
+        :-ms-input-placeholder { text-transform: none; }
     }
 
-    ::-webkit-input-placeholder { text-transform: none; }
-    :-moz-placeholder { text-transform: none; }
-    ::-moz-placeholder { text-transform: none; }
-    :-ms-input-placeholder { text-transform: none; }
+    p {
+        color: #999999;
+    }
 }
 
 form[name="ra_verify_yubikey_public_id"] {
