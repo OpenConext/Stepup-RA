@@ -127,9 +127,9 @@
         <source>ra.auditlog.no_entries</source>
         <target>No records have been found in the audit log</target>
       </trans-unit>
-      <trans-unit id="2624da444b36c4d337a4287b9150b40fbcd68cb6" resname="ra.auditlog.second_factor_id">
+      <trans-unit id="2624da444b36c4d337a4287b9150b40fbcd68cb6" resname="ra.auditlog.second_factor_identifier">
         <jms:reference-file line="22">views/SecondFactor/auditLog.html.twig</jms:reference-file>
-        <source>ra.auditlog.second_factor_id</source>
+        <source>ra.auditlog.second_factor_identifier</source>
         <target>Token Identifier</target>
       </trans-unit>
       <trans-unit id="9d81b131675cde2dcecc00c77cdebcc85c55fb5b" resname="ra.auditlog.second_factor_type">
