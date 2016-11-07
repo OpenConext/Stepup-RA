@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-11-01T15:18:05Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2016-11-01T14:22:50Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -1277,6 +1277,11 @@
         <jms:reference-file line="18">Vetting/Sms/provePossession.html.twig</jms:reference-file>
         <source>ra.vetting.sms.text.retry_if_not_received</source>
         <target>Request another code if the user does not receive a text message within one minute.</target>
+      </trans-unit>
+      <trans-unit id="1130f1804add2157181cff877e9c1a8cc1a1cc77" resname="ra.vetting.start_procedure.information">
+        <jms:reference-file line="8">views/Vetting/startProcedure.html.twig</jms:reference-file>
+        <source>ra.vetting.start_procedure.information</source>
+        <target>Enter activation code of the user to be activated or choose one of the options above. </target>
       </trans-unit>
       <trans-unit id="f67f9a1925f44474f600a9b2145828791fc3d8f7" resname="ra.vetting.start_procedure.title">
         <jms:reference-file line="3">views/Vetting/startProcedure.html.twig</jms:reference-file>
