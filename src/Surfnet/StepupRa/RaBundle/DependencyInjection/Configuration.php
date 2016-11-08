@@ -40,7 +40,7 @@ class Configuration implements ConfigurationInterface
         $this->appendLoaConfiguration($childNodes);
         $this->appendSecondFactorTypesConfiguration($childNodes);
         $this->appendSessionConfiguration($childNodes);
-
+        $this->appendUrlConfiguration($childNodes);
 
         return $treeBuilder;
     }
@@ -132,6 +132,21 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+            ->end();
+    }
+
+    private function appendUrlConfiguration(NodeBuilder $childNodes)
+    {
+        $childNodes
+            ->scalarNode('self_service_url')
+                ->info('The URL of Self Service, where a user can register and revoke second factors')
+                ->validate()
+                    ->ifTrue(
+                        function ($url) {
+                            return filter_var($url, FILTER_VALIDATE_URL) === false;
+                        }
+                    )
+                    ->thenInvalid('self_service_url must be a valid url')
             ->end();
     }
 }
