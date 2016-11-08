@@ -205,8 +205,8 @@ class VettingController extends Controller
         }
 
         try {
-            $vetted = $vettingService->vet($procedureId);
-            if ($vetted) {
+            $vetting = $vettingService->vet($procedureId);
+            if ($vetting->isSuccessful()) {
                 $logger->notice('Identity Verified, vetting completed');
 
                 return $this->redirectToRoute('ra_vetting_completed', ['procedureId' => $procedureId]);
