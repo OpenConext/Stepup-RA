@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2016-11-01T14:22:50Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2016-11-08T14:19:10Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -38,72 +38,72 @@
         <target>Event</target>
       </trans-unit>
       <trans-unit id="37836182b3260cbaf343a44bfb622776839666cc" resname="ra.auditlog.action.accredited_as_ra">
-        <jms:reference-file line="61">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="62">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.accredited_as_ra</source>
         <target>Accredited as RA</target>
       </trans-unit>
       <trans-unit id="66b320bfe1f15eabe6e0baa04e94b71c2152f8e2" resname="ra.auditlog.action.accredited_as_raa">
-        <jms:reference-file line="62">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="63">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.accredited_as_raa</source>
         <target>Accredited as RAA</target>
       </trans-unit>
       <trans-unit id="ba50c2f5a7066cd14d8ae1f33c5f4decc892d0b7" resname="ra.auditlog.action.appointed_as_ra">
-        <jms:reference-file line="63">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="64">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.appointed_as_ra</source>
         <target>Appointed as RA</target>
       </trans-unit>
       <trans-unit id="f1a9c08794cd9c91a7f63841cc1c9ff61c3da452" resname="ra.auditlog.action.appointed_as_raa">
-        <jms:reference-file line="64">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="65">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.appointed_as_raa</source>
         <target>Appointed as RAA</target>
       </trans-unit>
       <trans-unit id="9c05a55d8f3ef06afe4f9d81883c0cd6dc415933" resname="ra.auditlog.action.bootstrapped">
-        <jms:reference-file line="60">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="61">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.bootstrapped</source>
         <target>Identity and Token bootstrapped</target>
       </trans-unit>
       <trans-unit id="c9199d83adb7c6ebeaa6cfe08d2fc57f308677a9" resname="ra.auditlog.action.created">
-        <jms:reference-file line="55">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="56">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.created</source>
         <target>Identity Created</target>
       </trans-unit>
       <trans-unit id="f2264e8a139e432bc0b30abd24ab34750e944da0" resname="ra.auditlog.action.email_changed">
-        <jms:reference-file line="56">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="57">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.email_changed</source>
         <target>E-mail changed</target>
       </trans-unit>
       <trans-unit id="8750a7f384fd2159c68613b478b283083c45f8fa" resname="ra.auditlog.action.email_verified">
-        <jms:reference-file line="53">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="54">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.email_verified</source>
         <target>E-mail verified</target>
       </trans-unit>
       <trans-unit id="59b375a103f9bff34d2da25cb0563524354b357d" resname="ra.auditlog.action.possession_proven">
-        <jms:reference-file line="54">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="55">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.possession_proven</source>
         <target>Token possession proven</target>
       </trans-unit>
       <trans-unit id="6182cba621f2930f0600729d0cf846477b645851" resname="ra.auditlog.action.renamed">
-        <jms:reference-file line="57">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="58">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.renamed</source>
         <target>Name changed</target>
       </trans-unit>
       <trans-unit id="625f464c28c526a1fb856c5c6c8387e8d4c49518" resname="ra.auditlog.action.retracted_as_ra">
-        <jms:reference-file line="65">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="66">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.retracted_as_ra</source>
         <target>Removed as RA(A)</target>
       </trans-unit>
       <trans-unit id="3b4520b328a4b841d468fd967962d674db2d2947" resname="ra.auditlog.action.revoked">
-        <jms:reference-file line="59">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="60">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.revoked</source>
         <target>Token revoked</target>
       </trans-unit>
       <trans-unit id="cfa1707c5ee601824695a03199bac938cbac9a62" resname="ra.auditlog.action.revoked_by_ra">
-        <jms:reference-file line="52">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="53">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.revoked_by_ra</source>
         <target>Token revoked by RA</target>
       </trans-unit>
       <trans-unit id="0685bbf771d00c304c5807c48e34ba0c8b73b3eb" resname="ra.auditlog.action.vetted">
-        <jms:reference-file line="58">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="59">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.auditlog.action.vetted</source>
         <target>Token vetted</target>
       </trans-unit>
@@ -285,12 +285,12 @@
         <target>Due to an unknown reason, switching locales failed.</target>
       </trans-unit>
       <trans-unit id="c73b11f71b8ad5d46b3e42e649919aee4bc9ece5" resname="ra.form.extension.ra_role_choice.ra">
-        <jms:reference-file line="48">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="49">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.form.extension.ra_role_choice.ra</source>
         <target>RA</target>
       </trans-unit>
       <trans-unit id="e55aa3fd11b0cd43d84e2e3e41be6729e7fc35f0" resname="ra.form.extension.ra_role_choice.raa">
-        <jms:reference-file line="49">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="50">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.form.extension.ra_role_choice.raa</source>
         <target>RAA</target>
       </trans-unit>
@@ -456,22 +456,22 @@
         <target>Unknown activation code</target>
       </trans-unit>
       <trans-unit id="d6e1e4afd83a6b390c24762cee6939338734afc5" resname="ra.form.verify_identity.document_number.label">
-        <jms:reference-file line="30">Form/Type/VerifyIdentityType.php</jms:reference-file>
+        <jms:reference-file line="31">Form/Type/VerifyIdentityType.php</jms:reference-file>
         <source>ra.form.verify_identity.document_number.label</source>
         <target>Last 6 characters of document number</target>
       </trans-unit>
       <trans-unit id="7a8ae994c21e499a1774bc81190c90f6cd7a16d5" resname="ra.form.verify_identity.identity_verified.label">
-        <jms:reference-file line="39">Form/Type/VerifyIdentityType.php</jms:reference-file>
+        <jms:reference-file line="42">Form/Type/VerifyIdentityType.php</jms:reference-file>
         <source>ra.form.verify_identity.identity_verified.label</source>
         <target>I have succesfully verified the user's identity.</target>
       </trans-unit>
       <trans-unit id="975e2aa48fa95999ba9438d5f377e097fad24d17" resname="ra.form.verify_identity.verify_identity.button">
-        <jms:reference-file line="44">Form/Type/VerifyIdentityType.php</jms:reference-file>
+        <jms:reference-file line="47">Form/Type/VerifyIdentityType.php</jms:reference-file>
         <source>ra.form.verify_identity.verify_identity.button</source>
         <target>Verify identity</target>
       </trans-unit>
       <trans-unit id="584ef35d6af2f2917e708a1a6092f0b0938151e4" resname="ra.management.amend_ra_info.error.middleware_command_failed">
-        <jms:reference-file line="72">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="73">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.management.amend_ra_info.error.middleware_command_failed</source>
         <target>The amendment of the RA's information failed due to a server error.</target>
       </trans-unit>
@@ -559,7 +559,7 @@
         <target>The Registration Authority has been granted the selected role</target>
       </trans-unit>
       <trans-unit id="f2d212150076ce42ffe47d514f182ad5e7a6c9fe" resname="ra.management.create_ra.error.middleware_command_failed">
-        <jms:reference-file line="71">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="72">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.management.create_ra.error.middleware_command_failed</source>
         <target>The identity could not be granted the chosen role due to a server error.</target>
       </trans-unit>
@@ -735,17 +735,17 @@
         <target>Role</target>
       </trans-unit>
       <trans-unit id="64d8691325da6d2b996fd48f7da7a382fdeb22e7" resname="ra.management.overview.role.value.ra">
-        <jms:reference-file line="68">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="69">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.management.overview.role.value.ra</source>
         <target>RA</target>
       </trans-unit>
       <trans-unit id="ac982ab35b7b5438a72cb6e243975c8ddd35e148" resname="ra.management.overview.role.value.raa">
-        <jms:reference-file line="69">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="70">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.management.overview.role.value.raa</source>
         <target>RAA</target>
       </trans-unit>
       <trans-unit id="53c4452d09c417bfb728d1e738b2ae2bbff3c883" resname="ra.management.overview.role.value.sraa">
-        <jms:reference-file line="70">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="71">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.management.overview.role.value.sraa</source>
         <target>SRAA</target>
       </trans-unit>
@@ -780,7 +780,7 @@
         <target>No users that can be made RA(A) are found.</target>
       </trans-unit>
       <trans-unit id="aab8e288cda5ac834345cb59f487525914df06c8" resname="ra.management.retract_ra.modal.cancel">
-        <jms:reference-file line="37">Form/Type/RetractRegistrationAuthorityType.php</jms:reference-file>
+        <jms:reference-file line="36">Form/Type/RetractRegistrationAuthorityType.php</jms:reference-file>
         <source>ra.management.retract_ra.modal.cancel</source>
         <target>Cancel</target>
       </trans-unit>
@@ -825,22 +825,22 @@
         <target>change</target>
       </trans-unit>
       <trans-unit id="ff49fbf3684f01850a026abeff8b6f3cd6d89a98" resname="ra.prove_phone_possession.challenge_expired">
-        <jms:reference-file line="24">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="25">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.prove_phone_possession.challenge_expired</source>
         <target>Your code has expired. Please request a new code.</target>
       </trans-unit>
       <trans-unit id="f4e4a44fa84430b2d144a6dee71c69e914a963dd" resname="ra.prove_phone_possession.challenge_response_incorrect">
-        <jms:reference-file line="23">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="24">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.prove_phone_possession.challenge_response_incorrect</source>
         <target>This code is not correct. Please try again or request a new code.</target>
       </trans-unit>
       <trans-unit id="0d9cb3b18021e2899cf1031812da9a489b60093d" resname="ra.prove_phone_possession.too_many_attempts">
-        <jms:reference-file line="25">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="26">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.prove_phone_possession.too_many_attempts</source>
         <target>You have exceeded the limit of ten attempts; you can no longer attempt verification of any more codes. Contact your helpdesk or try again later.</target>
       </trans-unit>
       <trans-unit id="06ada20a09df4484b41e75a58e813b54d4904f33" resname="ra.prove_yubikey_possession.different_yubikey_used">
-        <jms:reference-file line="19">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="20">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.prove_yubikey_possession.different_yubikey_used</source>
         <target>A different Yubikey was used by the user during the registration process.</target>
       </trans-unit>
@@ -1032,22 +1032,22 @@
         <target>Type</target>
       </trans-unit>
       <trans-unit id="5396da3d169284da408b7e41c919fc3cbb0a7789" resname="ra.second_factor.search.status.revoked">
-        <jms:reference-file line="35">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="36">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.status.revoked</source>
         <target>Removed</target>
       </trans-unit>
       <trans-unit id="b95f6a983c4cb565e06b2b444afd9e53737e41d7" resname="ra.second_factor.search.status.unverified">
-        <jms:reference-file line="32">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="33">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.status.unverified</source>
         <target>Not verified</target>
       </trans-unit>
       <trans-unit id="342a7ca495a8ab8baf8c65ca63c53558cb01688d" resname="ra.second_factor.search.status.verified">
-        <jms:reference-file line="33">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="34">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.status.verified</source>
         <target>Verified</target>
       </trans-unit>
       <trans-unit id="876f09e852960f57e319006c49585af1bbd55a84" resname="ra.second_factor.search.status.vetted">
-        <jms:reference-file line="34">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="35">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.status.vetted</source>
         <target>Activated</target>
       </trans-unit>
@@ -1062,22 +1062,22 @@
         <target>Security tokens</target>
       </trans-unit>
       <trans-unit id="e806f4c23b643c67a31167df8119efee18fae7a6" resname="ra.second_factor.search.type.sms">
-        <jms:reference-file line="28">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="29">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.type.sms</source>
         <target>SMS</target>
       </trans-unit>
       <trans-unit id="681292ebf2622b5e28a501e75394f550688e0ee4" resname="ra.second_factor.search.type.tiqr">
-        <jms:reference-file line="30">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="31">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.type.tiqr</source>
         <target>Tiqr</target>
       </trans-unit>
       <trans-unit id="7c92f246db43cf7cf51f891825e9ac95422ec7ef" resname="ra.second_factor.search.type.u2f">
-        <jms:reference-file line="31">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="32">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.type.u2f</source>
         <target>U2F</target>
       </trans-unit>
       <trans-unit id="85d8e5c7803600b08c39830c29a12bee3aa97146" resname="ra.second_factor.search.type.yubikey">
-        <jms:reference-file line="29">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="30">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.second_factor.search.type.yubikey</source>
         <target>Yubikey</target>
       </trans-unit>
@@ -1107,7 +1107,7 @@
         <target>Session Expired</target>
       </trans-unit>
       <trans-unit id="a718fae8b5a05ddfe4f55f3ed1a4bb8b365ea12c" resname="ra.sms_send_challenge.send_sms_challenge_failed">
-        <jms:reference-file line="22">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="23">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.sms_send_challenge.send_sms_challenge_failed</source>
         <target>The sending of the code via SMS failed.</target>
       </trans-unit>
@@ -1121,28 +1121,33 @@
         <source>ra.verify_identity.identity_verification_failed</source>
         <target>Identity verification failed</target>
       </trans-unit>
+      <trans-unit id="eff2ebc67229b22b80526799953593c40a2c6ef9" resname="ra.verify_identity.registration_code_expired">
+        <jms:reference-file line="9">Resources/views/translations.html.twig</jms:reference-file>
+        <source>ra.verify_identity.registration_code_expired</source>
+        <target>The activation code has expired. First, delete the current token registration of the user (by RA or user). The user then starts a new registration and will receive a new activation code that is valid for 14 days.</target>
+      </trans-unit>
       <trans-unit id="ba1980036b712688f6681fb8f86ac6925a1cba5a" resname="ra.verify_identity.second_factor_vetting_failed">
         <jms:reference-file line="7">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.verify_identity.second_factor_vetting_failed</source>
         <target>The security token could not be vetted due to unknown reasons.</target>
       </trans-unit>
       <trans-unit id="7b8f4a813ad65c5f70c2f28e3459db2300aa11d8" resname="ra.verify_yubikey_command.otp.otp_invalid">
-        <jms:reference-file line="17">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="18">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.verify_yubikey_command.otp.otp_invalid</source>
         <target>The Yubikey code was invalid. Please try again.</target>
       </trans-unit>
       <trans-unit id="669fe8c5f63adab894fc62f2bbf036f2fe9e8b6c" resname="ra.verify_yubikey_command.otp.verification_error">
-        <jms:reference-file line="18">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="19">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.verify_yubikey_command.otp.verification_error</source>
         <target>The Yubikey code could not be verified due to unknown reasons.</target>
       </trans-unit>
       <trans-unit id="28ff860b3260f99aeb7268aa31f5edcfbc10b531" resname="ra.vetting.button.cancel_procedure">
-        <jms:reference-file line="48">Form/Type/VerifyIdentityType.php</jms:reference-file>
+        <jms:reference-file line="51">Form/Type/VerifyIdentityType.php</jms:reference-file>
         <jms:reference-file line="47">Form/Type/VerifyPhoneNumberType.php</jms:reference-file>
         <jms:reference-file line="5">Vetting/partial/cancelVettingProcedure.html.twig</jms:reference-file>
         <jms:reference-file line="47">Vetting/Sms/provePossession.html.twig</jms:reference-file>
         <jms:reference-file line="47">Vetting/Sms/sendChallenge.html.twig</jms:reference-file>
-        <jms:reference-file line="51">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
+        <jms:reference-file line="56">views/Vetting/verifyIdentity.html.twig</jms:reference-file>
         <source>ra.vetting.button.cancel_procedure</source>
         <target>Cancel</target>
       </trans-unit>
@@ -1154,42 +1159,42 @@
         <target>The vetting procedure was cancelled.</target>
       </trans-unit>
       <trans-unit id="1dec0b54fa1739f15b995a5a8a3acb03adeff07d" resname="ra.vetting.gssf.initiate.biometric.button.initiate">
-        <jms:reference-file line="44">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="45">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.gssf.initiate.biometric.button.initiate</source>
         <target>Verify biometrics</target>
       </trans-unit>
       <trans-unit id="94b9f4e4392a0b3cdf5cff65cf8951cb2ee4b3ba" resname="ra.vetting.gssf.initiate.biometric.error.gssf_id_mismatch">
-        <jms:reference-file line="45">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="46">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.gssf.initiate.biometric.error.gssf_id_mismatch</source>
         <target>The biometric device returned a different ID than was registered in the Self-Service application.</target>
       </trans-unit>
       <trans-unit id="900abec75af2dfb739b1f7a9e73695385893b0d0" resname="ra.vetting.gssf.initiate.biometric.text.explanation">
-        <jms:reference-file line="43">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="44">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.gssf.initiate.biometric.text.explanation</source>
         <target>Click the button below to verify the registrant biometrically.</target>
       </trans-unit>
       <trans-unit id="ee546154768e6aa0c5075029912a2b01d7cd5ab6" resname="ra.vetting.gssf.initiate.biometric.title.page">
-        <jms:reference-file line="42">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="43">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.gssf.initiate.biometric.title.page</source>
         <target>Verify biometrics</target>
       </trans-unit>
       <trans-unit id="485287b4d4e2f13a9df979601799e727821b9817" resname="ra.vetting.gssf.initiate.tiqr.button.initiate">
-        <jms:reference-file line="40">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="41">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.gssf.initiate.tiqr.button.initiate</source>
         <target>Verify with Tiqr</target>
       </trans-unit>
       <trans-unit id="e6ca047d4a5ae812276be6e8ece30cc7d6102af2" resname="ra.vetting.gssf.initiate.tiqr.error.gssf_id_mismatch">
-        <jms:reference-file line="41">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="42">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.gssf.initiate.tiqr.error.gssf_id_mismatch</source>
         <target>The Tiqr server responded with an ID that doesn't match the requested ID the registrant registered with using the Self-Service application.</target>
       </trans-unit>
       <trans-unit id="a5ec286b6d7f1ba6056eb720211d748ca9e8844c" resname="ra.vetting.gssf.initiate.tiqr.text.explanation">
-        <jms:reference-file line="39">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="40">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.gssf.initiate.tiqr.text.explanation</source>
         <target>Click the button below to verify the registrant owns the Tiqr account he or she registered with in the Self-Service application.</target>
       </trans-unit>
       <trans-unit id="cb3ffa7493a6cbda2c134ee5c2b80f193f822737" resname="ra.vetting.gssf.initiate.tiqr.title.page">
-        <jms:reference-file line="38">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="39">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.gssf.initiate.tiqr.title.page</source>
         <target>Verify with Tiqr</target>
       </trans-unit>
@@ -1214,22 +1219,22 @@
         <target>Verify identity</target>
       </trans-unit>
       <trans-unit id="f264bf655086664d56fe4803d21b31286b15d6ec" resname="ra.vetting.second_factor_type_disabled.text.explanation.sms">
-        <jms:reference-file line="11">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="12">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.second_factor_type_disabled.text.explanation.sms</source>
         <target>The token type SMS is currently disabled. Please contact your helpdesk to correct this problem.</target>
       </trans-unit>
       <trans-unit id="ef613fe71984bbd610ab57eaa7c0e99bf780ac4b" resname="ra.vetting.second_factor_type_disabled.text.explanation.tiqr">
-        <jms:reference-file line="13">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="14">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.second_factor_type_disabled.text.explanation.tiqr</source>
         <target>The token type Tiqr is currently disabled. Please contact your helpdesk to correct this problem.</target>
       </trans-unit>
       <trans-unit id="81f416a526dd1635fe0d3c1db52d1f4c2cb99b8a" resname="ra.vetting.second_factor_type_disabled.text.explanation.u2f">
-        <jms:reference-file line="14">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="15">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.second_factor_type_disabled.text.explanation.u2f</source>
         <target>The token type U2F is currently disabled. Please contact your helpdesk to correct this problem.</target>
       </trans-unit>
       <trans-unit id="cf1e0f5a486105a8a24c5039a153454148398375" resname="ra.vetting.second_factor_type_disabled.text.explanation.yubikey">
-        <jms:reference-file line="12">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="13">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.second_factor_type_disabled.text.explanation.yubikey</source>
         <target>The token type Yubikey is currently disabled. Please contact your helpdesk to correct this problem.</target>
       </trans-unit>
@@ -1239,7 +1244,7 @@
         <target>Token type disabled</target>
       </trans-unit>
       <trans-unit id="8e4a356a46fe95b04ae1cbb201b8d62e15670b2e" resname="ra.vetting.sms.challenge_body">
-        <jms:reference-file line="213">RaBundle/Service/VettingService.php</jms:reference-file>
+        <jms:reference-file line="216">RaBundle/Service/VettingService.php</jms:reference-file>
         <source>ra.vetting.sms.challenge_body</source>
         <target>Your code: %challenge%</target>
       </trans-unit>
@@ -1279,7 +1284,7 @@
         <target>Request another code if the user does not receive a text message within one minute.</target>
       </trans-unit>
       <trans-unit id="1130f1804add2157181cff877e9c1a8cc1a1cc77" resname="ra.vetting.start_procedure.information">
-        <jms:reference-file line="8">views/Vetting/startProcedure.html.twig</jms:reference-file>
+        <jms:reference-file line="14">views/Vetting/startProcedure.html.twig</jms:reference-file>
         <source>ra.vetting.start_procedure.information</source>
         <target>Enter activation code of the user to be activated or choose one of the options above. </target>
       </trans-unit>
@@ -1289,12 +1294,12 @@
         <target>Home</target>
       </trans-unit>
       <trans-unit id="385d56fffaf0e844dcd7b164b18741f050ba28e7" resname="ra.vetting.u2f.alert.device_reported_an_error">
-        <jms:reference-file line="75">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="76">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.u2f.alert.device_reported_an_error</source>
         <target>The U2F device reported an error. Try again or visit your IT helpdesk.</target>
       </trans-unit>
       <trans-unit id="467eb86ef7b096d0e14386714ef1b120c3f6b834" resname="ra.vetting.u2f.alert.error">
-        <jms:reference-file line="76">Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="77">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.vetting.u2f.alert.error</source>
         <target>The authentication using the U2F device failed. Try again or visit your IT helpdesk.</target>
       </trans-unit>
