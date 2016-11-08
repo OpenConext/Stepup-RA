@@ -1124,7 +1124,7 @@
       <trans-unit id="eff2ebc67229b22b80526799953593c40a2c6ef9" resname="ra.verify_identity.registration_code_expired">
         <jms:reference-file line="9">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.verify_identity.registration_code_expired</source>
-        <target>The activation code has expired. First, delete the current token registration of the user (by RA or user). The user then starts a new registration and will receive a new activation code that is valid for 14 days.</target>
+        <target>The activation code has expired. First, delete the current token registration of the user (by RA or user). The user then starts a new registration on %self_service_url% and will receive a new activation code that is valid for 14 days.</target>
       </trans-unit>
       <trans-unit id="ba1980036b712688f6681fb8f86ac6925a1cba5a" resname="ra.verify_identity.second_factor_vetting_failed">
         <jms:reference-file line="7">Resources/views/translations.html.twig</jms:reference-file>

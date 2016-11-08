@@ -33,6 +33,7 @@ use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -215,7 +216,15 @@ class VettingController extends Controller
             $logger->error('RA attempted to vet second factor, but the command failed');
 
             if (in_array(VettingService::REGISTRATION_CODE_EXPIRED_ERROR, $vetting->getErrors())) {
-                return $showForm('ra.verify_identity.registration_code_expired');
+                $registrationCodeExpiredError = $this->getTranslator()
+                    ->trans(
+                        'ra.verify_identity.registration_code_expired',
+                        [
+                            '%self_service_url%' => $this->getParameter('surfnet_stepup_ra.self_service_url'),
+                        ]
+                    );
+
+                return $showForm($registrationCodeExpiredError);
             }
 
             return $showForm('ra.verify_identity.second_factor_vetting_failed');
@@ -259,5 +268,13 @@ class VettingController extends Controller
     private function getIdentity()
     {
         return $this->get('security.token_storage')->getToken()->getUser();
+    }
+
+    /**
+     * @return TranslatorInterface
+     */
+    private function getTranslator()
+    {
+        return $this->get('translator');
     }
 }
