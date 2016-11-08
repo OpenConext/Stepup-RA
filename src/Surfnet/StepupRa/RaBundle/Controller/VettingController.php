@@ -214,6 +214,10 @@ class VettingController extends Controller
 
             $logger->error('RA attempted to vet second factor, but the command failed');
 
+            if (in_array(VettingService::REGISTRATION_CODE_EXPIRED_ERROR, $vetting->getErrors())) {
+                return $showForm('ra.verify_identity.registration_code_expired');
+            }
+
             return $showForm('ra.verify_identity.second_factor_vetting_failed');
         } catch (DomainException $e) {
             $logger->error(
