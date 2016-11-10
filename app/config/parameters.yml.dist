@@ -52,3 +52,4 @@ parameters:
 
     session_max_absolute_lifetime: 28800 # 8 hours * 60 minutes * 60 seconds
     session_max_relative_lifetime: 1800  # 30 minutes * 60 seconds
+    self_service_url: 'https://selfservice.tld/'

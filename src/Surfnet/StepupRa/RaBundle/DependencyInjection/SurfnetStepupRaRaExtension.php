@@ -50,5 +50,7 @@ class SurfnetStepupRaRaExtension extends Extension
             'ra.security.authentication.session.maximum_relative_lifetime_in_seconds',
             $config['session_lifetimes']['max_relative_lifetime']
         );
+
+        $container->setParameter('surfnet_stepup_ra.self_service_url', $config['self_service_url']);
     }
 }
