@@ -21,7 +21,9 @@ namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Provider;
 use Psr\Log\LoggerInterface;
 use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
 use Surfnet\SamlBundle\SAML2\Response\AssertionAdapter;
+use Surfnet\StepupRa\RaBundle\Assert;
 use Surfnet\StepupRa\RaBundle\Exception\InconsistentStateException;
+use Surfnet\StepupRa\RaBundle\Exception\UnexpectedIssuerException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
@@ -51,16 +53,25 @@ class SamlProvider implements AuthenticationProviderInterface
      */
     private $logger;
 
+    /**
+     * @var string
+     */
+    private $remoteIdp;
+
     public function __construct(
         IdentityService $identityService,
         AttributeDictionary $attributeDictionary,
         InstitutionConfigurationOptionsService $institutionConfigurationOptionsService,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        $remoteIdp
     ) {
+        Assert::string($remoteIdp);
+
         $this->identityService                        = $identityService;
         $this->attributeDictionary                    = $attributeDictionary;
         $this->institutionConfigurationOptionsService = $institutionConfigurationOptionsService;
         $this->logger                                 = $logger;
+        $this->remoteIdp                              = $remoteIdp;
     }
 
     /**
@@ -69,6 +80,14 @@ class SamlProvider implements AuthenticationProviderInterface
      */
     public function authenticate(TokenInterface $token)
     {
+        if ($token->assertion->getIssuer() !== $this->remoteIdp) {
+            throw new UnexpectedIssuerException(sprintf(
+                'Expected issuer to be remote IdP "%s", got "%s"',
+                $this->remoteIdp,
+                $token->assertion->getIssuer()
+            ));
+        }
+
         $translatedAssertion = $this->attributeDictionary->translate($token->assertion);
 
         $nameId      = $translatedAssertion->getNameID();
