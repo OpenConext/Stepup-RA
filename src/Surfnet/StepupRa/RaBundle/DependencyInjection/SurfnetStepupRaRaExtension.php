@@ -52,7 +52,5 @@ class SurfnetStepupRaRaExtension extends Extension
         );
 
         $container->setParameter('surfnet_stepup_ra.self_service_url', $config['self_service_url']);
-
-        $container->setParameter('surfnet_stepup_ra.remote_idp', $config['remote_idp']);
     }
 }

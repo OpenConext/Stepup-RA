@@ -40,7 +40,6 @@ class Configuration implements ConfigurationInterface
         $this->appendSecondFactorTypesConfiguration($childNodes);
         $this->appendSessionConfiguration($childNodes);
         $this->appendUrlConfiguration($childNodes);
-        $this->appendRemoteIdpConfiguration($childNodes);
 
         return $treeBuilder;
     }
@@ -66,7 +65,6 @@ class Configuration implements ConfigurationInterface
     private function appendSecondFactorTypesConfiguration(NodeBuilder $childNodes)
     {
         $childNodes
-
             ->arrayNode('enabled_second_factors')
                 ->isRequired()
                 ->prototype('scalar')
@@ -147,14 +145,6 @@ class Configuration implements ConfigurationInterface
                         }
                     )
                     ->thenInvalid('self_service_url must be a valid url')
-            ->end();
-    }
-
-    private function appendRemoteIdpConfiguration(NodeBuilder $childNodes)
-    {
-        $childNodes
-            ->scalarNode('remote_idp')
-            ->info('The EntityID of the remote Idp that act as an issuer (Gateway)')
             ->end();
     }
 }

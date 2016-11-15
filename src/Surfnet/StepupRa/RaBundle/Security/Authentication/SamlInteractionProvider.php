@@ -25,6 +25,7 @@ use Surfnet\SamlBundle\Http\RedirectBinding;
 use Surfnet\SamlBundle\SAML2\AuthnRequestFactory;
 use Surfnet\StepupBundle\Service\LoaResolutionService;
 use Surfnet\StepupBundle\Value\Loa;
+use Surfnet\StepupRa\RaBundle\Exception\UnexpectedIssuerException;
 use Surfnet\StepupRa\RaBundle\Security\Exception\UnmetLoaException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -129,6 +130,14 @@ class SamlInteractionProvider
         );
 
         $this->samlAuthenticationStateHandler->clearRequestId();
+
+        if ($assertion->getIssuer() !== $this->identityProvider->getEntityId()) {
+            throw new UnexpectedIssuerException(sprintf(
+                'Expected issuer to be configured remote IdP "%s", got "%s"',
+                $this->identityProvider->getEntityId(),
+                $assertion->getIssuer()
+            ));
+        }
 
         $authnContextClassRef = $assertion->getAuthnContextClassRef();
         if (!$this->loaResolutionService->hasLoa($authnContextClassRef)) {
