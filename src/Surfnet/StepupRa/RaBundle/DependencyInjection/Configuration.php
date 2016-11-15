@@ -65,7 +65,6 @@ class Configuration implements ConfigurationInterface
     private function appendSecondFactorTypesConfiguration(NodeBuilder $childNodes)
     {
         $childNodes
-
             ->arrayNode('enabled_second_factors')
                 ->isRequired()
                 ->prototype('scalar')
