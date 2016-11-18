@@ -21,6 +21,7 @@ namespace Surfnet\StepupRa\RaBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 
 class VerifyIdentityType extends AbstractType
 {
@@ -33,6 +34,8 @@ class VerifyIdentityType extends AbstractType
             'attr' => [
                 'autofocus' => true,
                 'autocomplete' => 'off',
+                'maxlength' => 6,
+                'novalidate' => true
             ]
         ]);
         $builder->add('identityVerified', 'checkbox', [

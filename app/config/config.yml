@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: samlstepupproviders.yml }
+    - { resource: global_view_parameters.yml }
     - { resource: logging.yml }
 
 framework:
@@ -36,7 +37,7 @@ twig:
     strict_variables: "%kernel.debug%"
     exception_controller:  SurfnetStepupBundle:Exception:show
     globals:
-        footer_link_url: %footer_link_url%
+        global_view_parameters: "@ra.service.global_view_parameters"
         institutionConfigurationOptions: "@ra.twig.institution_configuration_options"
 
 # Assetic Configuration
@@ -86,9 +87,11 @@ surfnet_stepup_ra_ra:
     session_lifetimes:
         max_absolute_lifetime: "%session_max_absolute_lifetime%"
         max_relative_lifetime: "%session_max_relative_lifetime%"
+    self_service_url: "%self_service_url%"
 
 mopa_bootstrap:
     form:
+        render_optional_text: false
         show_legend: false
         templating: SurfnetStepupRaRaBundle:Form:fields.html.twig
     icons:

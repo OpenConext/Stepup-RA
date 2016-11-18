@@ -50,6 +50,9 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class VettingService
 {
+    const REGISTRATION_CODE_EXPIRED_ERROR =
+        'Surfnet\Stepup\Exception\DomainException: Cannot vet second factor, the registration window is closed.';
+
     /**
      * @var \Surfnet\StepupBundle\Service\SmsSecondFactorService
      */
@@ -353,7 +356,7 @@ class VettingService
 
     /**
      * @param string $procedureId
-     * @return bool
+     * @return \Surfnet\StepupMiddlewareClient\Service\ExecutionResult
      * @throws UnknownVettingProcedureException
      * @throws DomainException
      */
@@ -374,13 +377,11 @@ class VettingService
 
         $result = $this->commandService->execute($command);
 
-        if (!$result->isSuccessful()) {
-            return false;
+        if ($result->isSuccessful()) {
+            $this->vettingProcedureRepository->remove($procedureId);
         }
 
-        $this->vettingProcedureRepository->remove($procedureId);
-
-        return true;
+        return $result;
     }
 
     /**
