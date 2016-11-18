@@ -32,6 +32,11 @@
         {{ form_start(form) }}
         <div class="row">
             <div class="col-md-12">
+                {{ form_errors(form) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 {{ form_row(form.documentNumber) }}
             </div>
         </div>

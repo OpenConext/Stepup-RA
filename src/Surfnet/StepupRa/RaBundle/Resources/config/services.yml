@@ -212,6 +212,13 @@ services:
             - "@surfnet_stepup_middleware_client.identity.service.second_factor"
             - "@logger"
 
+    ra.service.global_view_parameters:
+        class: Surfnet\StepupRa\RaBundle\Service\GlobalViewParameters
+        arguments:
+            - "@translator"
+            - "%locales%"
+            - "%manual_url%"
+
     # Repositories
     ra.repository.vetting_procedure:
         class: Surfnet\StepupRa\RaBundle\Repository\SessionVettingProcedureRepository
