@@ -152,6 +152,10 @@ class VettingController extends Controller
      * @param Request $request
      * @param string $procedureId
      * @return array|Response
+     *
+     * The complexity should be reduced when refactoring cross-application error messaging
+     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function verifyIdentityAction(Request $request, $procedureId)
     {
@@ -215,16 +219,18 @@ class VettingController extends Controller
 
             $logger->error('RA attempted to vet second factor, but the command failed');
 
-            if (in_array(VettingService::REGISTRATION_CODE_EXPIRED_ERROR, $vetting->getErrors())) {
-                $registrationCodeExpiredError = $this->getTranslator()
-                    ->trans(
-                        'ra.verify_identity.registration_code_expired',
-                        [
-                            '%self_service_url%' => $this->getParameter('surfnet_stepup_ra.self_service_url'),
-                        ]
-                    );
+            foreach ($vetting->getErrors() as $error) {
+                if (strpos($error, VettingService::REGISTRATION_CODE_EXPIRED_ERROR_FRAGMENT) !== false) {
+                    $registrationCodeExpiredError = $this->getTranslator()
+                        ->trans(
+                            'ra.verify_identity.registration_code_expired',
+                            [
+                                '%self_service_url%' => $this->getParameter('surfnet_stepup_ra.self_service_url'),
+                            ]
+                        );
 
-                return $showForm($registrationCodeExpiredError);
+                    return $showForm($registrationCodeExpiredError);
+                }
             }
 
             return $showForm('ra.verify_identity.second_factor_vetting_failed');
