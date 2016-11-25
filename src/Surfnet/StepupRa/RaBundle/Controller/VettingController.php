@@ -44,6 +44,9 @@ class VettingController extends Controller
      * @Template
      * @param Request $request
      * @return array|Response
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity) Form validation and error handling
+     * @SuppressWarnings(PHPMD.NPathComplexity) Form validation and error handling
      */
     public function startProcedureAction(Request $request)
     {
@@ -68,6 +71,15 @@ class VettingController extends Controller
         if ($secondFactor === null) {
             $form->addError(new FormError('ra.form.start_vetting_procedure.unknown_registration_code'));
             $logger->notice('Cannot start new vetting procedure, no second factor found');
+
+            return ['form' => $form->createView()];
+        }
+
+        if (!$this->isGranted('ROLE_SRAA') && $secondFactor->institution !== $this->getIdentity()->institution) {
+            $form->addError(new FormError('ra.form.start_vetting_procedure.different_institution_error'));
+            $logger->notice(
+                'Cannot start new vetting procedure, registrant belongs to a different institution than RA'
+            );
 
             return ['form' => $form->createView()];
         }
