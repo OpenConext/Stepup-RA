@@ -231,13 +231,6 @@ class VettingController extends Controller
 
                     return $showForm($registrationCodeExpiredError);
                 }
-
-                if (strpos($error, VettingService::DIFFERENT_INSTITUTION_ERROR_FRAGMENT) > -1) {
-                    $differentInstitutionError = $this->getTranslator()
-                        ->trans('ra.verify_identity.different_institution_error');
-
-                    return $showForm($differentInstitutionError);
-                }
             }
 
             return $showForm('ra.verify_identity.second_factor_vetting_failed');

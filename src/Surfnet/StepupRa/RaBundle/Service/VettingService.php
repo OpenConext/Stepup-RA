@@ -52,8 +52,6 @@ class VettingService
 {
     const REGISTRATION_CODE_EXPIRED_ERROR_FRAGMENT = 'the registration window is closed';
 
-    const DIFFERENT_INSTITUTION_ERROR_FRAGMENT = 'the RA belongs to a different institution';
-
     /**
      * @var \Surfnet\StepupBundle\Service\SmsSecondFactorService
      */
