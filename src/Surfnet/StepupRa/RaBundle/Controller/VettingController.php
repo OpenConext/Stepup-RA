@@ -45,8 +45,8 @@ class VettingController extends Controller
      * @param Request $request
      * @return array|Response
      *
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity) Form validation and error handling
-     * @SuppressWarnings(PHPMD.NPathComplexity) Form validation and error handling
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity) https://www.pivotaltracker.com/story/show/135045063
+     * @SuppressWarnings(PHPMD.NPathComplexity)      https://www.pivotaltracker.com/story/show/135045063
      */
     public function startProcedureAction(Request $request)
     {
