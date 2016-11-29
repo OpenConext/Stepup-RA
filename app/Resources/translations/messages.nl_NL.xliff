@@ -438,7 +438,7 @@
       <trans-unit id="a585bcd548874097afa817682427ed94ce28ab10" resname="ra.form.start_vetting_procedure.different_institution_error">
         <jms:reference-file line="5">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.form.start_vetting_procedure.different_institution_error</source>
-        <target>De gevonden verificatiecode hoort bij een gebruiker met een ander instituut dan die van de RA.</target>
+        <target>Deze activatiecode hoort bij een gebruiker van een andere instelling. U bent niet geautoriseerd om het token van deze gebruiker te activeren. Verwijs de gebruiker voor activatie van zijn token door naar de Service Desk van zijn eigen instelling.</target>
       </trans-unit>
       <trans-unit id="bc646760865688482dd10d1f7bf383e3cf68b349" resname="ra.form.start_vetting_procedure.enter_activation_code_here">
         <jms:reference-file line="7">Resources/views/translations.html.twig</jms:reference-file>

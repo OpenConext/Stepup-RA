@@ -438,7 +438,7 @@
       <trans-unit id="a585bcd548874097afa817682427ed94ce28ab10" resname="ra.form.start_vetting_procedure.different_institution_error">
         <jms:reference-file line="5">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.form.start_vetting_procedure.different_institution_error</source>
-        <target>The found registration code belongs to a user with a different institution than the RA's.</target>
+        <target>This activation code belongs to a user from another home institution. You are not authorized to activate the token of this user. Please refer the user to the Service Desk of his home institution to have his token activated.</target>
       </trans-unit>
       <trans-unit id="bc646760865688482dd10d1f7bf383e3cf68b349" resname="ra.form.start_vetting_procedure.enter_activation_code_here">
         <jms:reference-file line="7">Resources/views/translations.html.twig</jms:reference-file>
