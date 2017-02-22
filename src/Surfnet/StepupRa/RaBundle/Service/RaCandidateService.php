@@ -28,23 +28,20 @@ use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class RaCandidateService
 {
     /**
-     * @var ApiRaCandidateService
+     * @var \Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaCandidateService
      */
     private $apiRaCandidateService;
 
     /**
-     * @var CommandService
+     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
      */
     private $commandService;
 
     /**
-     * @var LoggerInterface
+     * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
