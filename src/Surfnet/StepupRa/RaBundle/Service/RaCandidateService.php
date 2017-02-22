@@ -19,6 +19,8 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
+use Surfnet\StepupBundle\Value\Loa;
+use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaCandidateSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AccreditIdentityCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaCandidateService as ApiRaCandidateService;
@@ -77,6 +79,8 @@ class RaCandidateService
             $query->setOrderDirection($command->orderDirection);
         }
 
+        $query->setSecondFactorTypes($this->getLoa3SecondFactorTypes());
+
         return $this->apiRaCandidateService->search($query);
     }
 
@@ -117,5 +121,22 @@ class RaCandidateService
         }
 
         return $result->isSuccessful();
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getLoa3SecondFactorTypes()
+    {
+        $loa3 = new Loa(Loa::LOA_3, 'LOA3');
+
+        return array_filter(
+            SecondFactorType::getAvailableSecondFactorTypes(),
+            function ($secondFactorType) use ($loa3) {
+                $secondFactorType = new SecondFactorType($secondFactorType);
+
+                return $secondFactorType->canSatisfy($loa3);
+            }
+        );
     }
 }
