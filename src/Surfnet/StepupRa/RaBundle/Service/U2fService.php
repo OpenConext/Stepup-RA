@@ -18,9 +18,10 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
-use GuzzleHttp\ClientInterface as GuzzleClient;
+use GuzzleHttp\Client;
 use Psr\Log\LoggerInterface;
 use RuntimeException as CoreRuntimeException;
+use Surfnet\StepupBundle\Http\JsonHelper;
 use Surfnet\StepupRa\RaBundle\Command\CreateU2fSignRequestCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyU2fAuthenticationCommand;
 use Surfnet\StepupRa\RaBundle\Service\U2f\AuthenticationVerificationResult;
@@ -37,7 +38,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 final class U2fService
 {
     /**
-     * @var \GuzzleHttp\ClientInterface
+     * @var \GuzzleHttp\Client
      */
     private $guzzleClient;
 
@@ -51,7 +52,7 @@ final class U2fService
      */
     private $logger;
 
-    public function __construct(GuzzleClient $guzzleClient, ValidatorInterface $validator, LoggerInterface $logger)
+    public function __construct(Client $guzzleClient, ValidatorInterface $validator, LoggerInterface $logger)
     {
         $this->guzzleClient = $guzzleClient;
         $this->validator    = $validator;
@@ -71,11 +72,11 @@ final class U2fService
             'key_handle' => ['value' => $command->keyHandle],
         ];
 
-        $response = $this->guzzleClient->post('api/u2f/create-sign-request', ['json' => $body, 'exceptions' => false]);
+        $response = $this->guzzleClient->post('api/u2f/create-sign-request', ['json' => $body, 'http_errors' => false]);
         $statusCode = $response->getStatusCode();
 
         try {
-            $result = $response->json();
+            $result = JsonHelper::decode((string) $response->getBody());
         } catch (CoreRuntimeException $e) {
             $this->logger->error('U2F sign request creation failed; JSON decoding failed.');
 
@@ -161,12 +162,12 @@ final class U2fService
 
         $response = $this->guzzleClient->post(
             'api/u2f/verify-authentication',
-            ['json' => $body, 'exceptions' => false]
+            ['json' => $body, 'http_errors' => false]
         );
         $statusCode = $response->getStatusCode();
 
         try {
-            $result = $response->json();
+            $result = JsonHelper::decode((string) $response->getBody());
         } catch (CoreRuntimeException $e) {
             $this->logger->error('U2F authentication verification failed; JSON decoding failed.');
 
