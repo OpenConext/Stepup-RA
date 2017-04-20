@@ -86,6 +86,14 @@ services:
             - "@surfnet_saml.logger"
             - "@templating"
 
+    ra.security.authentication.handler.logout_success:
+        public: false
+        class: Surfnet\StepupRa\RaBundle\Security\Authentication\Handler\LogoutSuccessHandler
+        arguments:
+            - "@security.token_storage"
+            - "%locales%"
+            - "%logout_redirect_url%"
+
     # Session
     ra.security.authentication.session.session_storage:
         public: false
