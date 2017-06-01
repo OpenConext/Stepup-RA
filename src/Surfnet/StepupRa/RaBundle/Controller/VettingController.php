@@ -19,7 +19,6 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
@@ -122,7 +121,8 @@ class VettingController extends Controller
             ->forProcedure($procedureId)
             ->notice(sprintf('Starting new Vetting Procedure for second factor of type "%s"', $secondFactor->type));
 
-        $secondFactorType = new SecondFactorType($secondFactor->type);
+        $secondFactorTypeFactory = $this->get('surfnet_stepup.service.second_factor_type_factory');
+        $secondFactorType = $secondFactorTypeFactory->build($secondFactor->type);
         if ($secondFactorType->isYubikey()) {
             return $this->redirectToRoute('ra_vetting_yubikey_verify', ['procedureId' => $procedureId]);
         } elseif ($secondFactorType->isSms()) {
