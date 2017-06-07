@@ -19,8 +19,9 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
-use Surfnet\StepupBundle\Service\SecondFactorType\SecondFactorTypeService;
+use Surfnet\StepupBundle\Service\SecondFactorTypeService;
 use Surfnet\StepupBundle\Value\Loa;
+use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaCandidateSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AccreditIdentityCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaCandidateService as ApiRaCandidateService;
@@ -53,23 +54,16 @@ class RaCandidateService
      */
     private $secondFactorTypeService;
 
-    /**
-     * @var SecondFactorTypeFactory
-     */
-    private $secondFactorTypeFactory;
-
     public function __construct(
         ApiRaCandidateService $raCandidateService,
         CommandService $commandService,
         LoggerInterface $logger,
-        SecondFactorTypeService $secondFactorTypeService,
-        SecondFactorTypeFactory $secondFactorTypeFactory
+        SecondFactorTypeService $secondFactorTypeService
     ) {
         $this->apiRaCandidateService = $raCandidateService;
         $this->commandService = $commandService;
         $this->logger = $logger;
         $this->secondFactorTypeService = $secondFactorTypeService;
-        $this->secondFactorTypeFactory = $secondFactorTypeFactory;
     }
 
     /**
@@ -146,13 +140,11 @@ class RaCandidateService
     private function getLoa3SecondFactorTypes()
     {
         $loa3 = new Loa(Loa::LOA_3, 'LOA3');
-        $factory = $this->secondFactorTypeFactory;
         return array_filter(
             $this->secondFactorTypeService->getAvailableSecondFactorTypes(),
-            function ($secondFactorType) use ($loa3, $factory) {
-                $secondFactorType = $factory->build($secondFactorType);
-
-                return $secondFactorType->canSatisfy($loa3);
+            function ($secondFactorType) use ($loa3) {
+                $secondFactorType = new SecondFactorType($secondFactorType);
+                return $this->secondFactorTypeService->canSatisfy($secondFactorType, $loa3);
             }
         );
     }

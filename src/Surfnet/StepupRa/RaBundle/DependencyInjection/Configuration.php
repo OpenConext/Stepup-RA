@@ -65,8 +65,17 @@ class Configuration implements ConfigurationInterface
             ->arrayNode('enabled_second_factors')
                 ->isRequired()
                 ->prototype('scalar')
-            ->end()
-        ->end();
+            ->end();
+        $childNodes
+            ->arrayNode('enabled_generic_second_factors')
+                ->isRequired()
+                ->prototype('array')
+                ->children()
+                    ->scalarNode('loa')
+                    ->isRequired()
+                    ->info('The lao level of the Gssf')
+                ->end()
+            ->end();
     }
 
     /**

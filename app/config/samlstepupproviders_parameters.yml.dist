@@ -37,9 +37,3 @@ parameters:
     gssp_biometric_gssf_id_mismatch:
         en_GB: 'EN ra.vetting.gssf.initiate.biometric.error.gssf_id_mismatch'
         nl_NL: 'NL ra.vetting.gssf.initiate.biometric.error.gssf_id_mismatch'
-
-    surfnet_stepup_gssf:
-        biometric:
-            loa: 3
-        tiqr:
-            loa: 3

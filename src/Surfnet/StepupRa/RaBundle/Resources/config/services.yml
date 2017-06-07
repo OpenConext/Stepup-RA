@@ -186,7 +186,6 @@ services:
             - "@ra.service.command"
             - "@logger"
             - "@surfnet_stepup.service.second_factor_type"
-            - "@surfnet_stepup.service.second_factor_type_factory"
 
     ra.service.ra_location:
         class: Surfnet\StepupRa\RaBundle\Service\RaLocationService
