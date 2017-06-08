@@ -28,7 +28,6 @@
         "surfnet/stepup-bundle": "^2.0",
         "surfnet/stepup-u2f-bundle": "dev-develop",
         "guzzlehttp/guzzle": "^6",
-        "symfony/swiftmailer-bundle": "~2.3",
         "knplabs/knp-paginator-bundle": "~2.4",
         "mopa/composer-bridge": "~1.5",
         "ramsey/uuid": "^3.5"
