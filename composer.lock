@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3aa6c3ba125a0d8d07cf999fecd8b157",
+    "content-hash": "a58e344cdaaa088e470fbaae634e9ed7",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2092,16 +2092,16 @@
         },
         {
             "name": "surfnet/stepup-bundle",
-            "version": "1.7.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-bundle.git",
-                "reference": "084b1e11781ca3f526e32a486f75a7e6a953e5fc"
+                "reference": "0ea9b1d5b661b28b8819fc2c9008ec8c71701183"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-bundle/zipball/084b1e11781ca3f526e32a486f75a7e6a953e5fc",
-                "reference": "084b1e11781ca3f526e32a486f75a7e6a953e5fc",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-bundle/zipball/0ea9b1d5b661b28b8819fc2c9008ec8c71701183",
+                "reference": "0ea9b1d5b661b28b8819fc2c9008ec8c71701183",
                 "shasum": ""
             },
             "require": {
@@ -2145,7 +2145,7 @@
                 "suaas",
                 "surfnet"
             ],
-            "time": "2017-03-07T13:44:04+00:00"
+            "time": "2017-06-08T13:26:09+00:00"
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
@@ -3121,12 +3121,12 @@
             "version": "0.9.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/padraic/mockery.git",
+                "url": "https://github.com/mockery/mockery.git",
                 "reference": "4db079511a283e5aba1b3c2fb19037c645e70fc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/4db079511a283e5aba1b3c2fb19037c645e70fc2",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/4db079511a283e5aba1b3c2fb19037c645e70fc2",
                 "reference": "4db079511a283e5aba1b3c2fb19037c645e70fc2",
                 "shasum": ""
             },
