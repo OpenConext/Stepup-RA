@@ -80,6 +80,17 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         $providerDefinition->setPublic(false);
         $container->setDefinition('gssp.provider.' . $provider, $providerDefinition);
 
+        $viewConfigDefinition = new Definition('Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig', [
+            new Reference('request'),
+            $configuration['view_config']['page_title'],
+            $configuration['view_config']['explanation'],
+            $configuration['view_config']['initiate'],
+            $configuration['view_config']['gssf_id_mismatch'],
+        ]);
+        $viewConfigDefinition->setScope('request');
+
+        $container->setDefinition('gssp.view_config.' . $provider, $viewConfigDefinition);
+
         $container
             ->getDefinition('gssp.provider_repository')
             ->addMethodCall('addProvider', [new Reference('gssp.provider.' . $provider)]);
