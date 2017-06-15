@@ -1,6 +1,6 @@
 {% extends "::base.html.twig" %}
 
-{% block page_title %}{{ ('ra.vetting.gssf.initiate.' ~ provider ~ '.title.page')|trans }}{% endblock %}
+{% block page_title %}{{ secondFactorConfig.getPageTitle() }}{% endblock %}
 
 {% block page_header %}
     {{ parent() }}
@@ -11,12 +11,12 @@
 {% block content %}
     <h2>{{ block('page_title') }}</h2>
 
-    <p>{{ ('ra.vetting.gssf.initiate.' ~ provider ~ '.text.explanation')|trans }}</p>
+    <p>{{ secondFactorConfig.getExplanation() }}</p>
 
     <hr>
 
     {% if gssfIdMismatch is defined %}
-        <div class="alert alert-danger">{{ ('ra.vetting.gssf.initiate.' ~ provider ~ '.error.gssf_id_mismatch')|trans }}</div>
+        <div class="alert alert-danger">{{ secondFactorConfig.getGssfIdMismatch() }}</div>
     {% endif %}
     {{ form(form) }}
 
