@@ -45,7 +45,8 @@ class InitiateGssfType extends AbstractType
         $builder
             ->add('submit', 'submit', [
                 'attr'  => ['class' => 'btn btn-primary'],
-                'label' => /** @Ignore */ 'ra.vetting.gssf.initiate.' . $options['provider'] . '.button.initiate'
+                /** @Ignore */
+                'label' => $options['label']
             ])
             ->setAction($action);
     }

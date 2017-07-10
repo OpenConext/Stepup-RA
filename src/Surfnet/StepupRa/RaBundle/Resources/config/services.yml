@@ -100,6 +100,7 @@ services:
             - "@ra.repository.vetting_procedure"
             - "@translator"
             - "@ra.service.identity"
+            - "@surfnet_stepup.service.second_factor_type"
 
     ra.service.yubikey:
         public: false
@@ -185,6 +186,7 @@ services:
             - "@surfnet_stepup_middleware_client.identity.service.ra_candidate"
             - "@ra.service.command"
             - "@logger"
+            - "@surfnet_stepup.service.second_factor_type"
 
     ra.service.ra_location:
         class: Surfnet\StepupRa\RaBundle\Service\RaLocationService

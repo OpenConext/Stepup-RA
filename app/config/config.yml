@@ -76,6 +76,7 @@ services:
 surfnet_stepup_ra_ra:
     required_loa: %loa_required_for_login%
     enabled_second_factors: %enabled_second_factors%
+    enabled_generic_second_factors: %enabled_generic_second_factors%
     session_lifetimes:
         max_absolute_lifetime: "%session_max_absolute_lifetime%"
         max_relative_lifetime: "%session_max_relative_lifetime%"

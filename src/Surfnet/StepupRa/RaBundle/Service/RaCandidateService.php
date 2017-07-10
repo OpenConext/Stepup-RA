@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
+use Surfnet\StepupBundle\Service\SecondFactorTypeService;
 use Surfnet\StepupBundle\Value\Loa;
 use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaCandidateSearchQuery;
@@ -28,6 +29,9 @@ use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class RaCandidateService
 {
     /**
@@ -45,14 +49,21 @@ class RaCandidateService
      */
     private $logger;
 
+    /**
+     * @var SecondFactorTypeService
+     */
+    private $secondFactorTypeService;
+
     public function __construct(
         ApiRaCandidateService $raCandidateService,
         CommandService $commandService,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        SecondFactorTypeService $secondFactorTypeService
     ) {
         $this->apiRaCandidateService = $raCandidateService;
         $this->commandService = $commandService;
         $this->logger = $logger;
+        $this->secondFactorTypeService = $secondFactorTypeService;
     }
 
     /**
@@ -129,13 +140,11 @@ class RaCandidateService
     private function getLoa3SecondFactorTypes()
     {
         $loa3 = new Loa(Loa::LOA_3, 'LOA3');
-
         return array_filter(
-            SecondFactorType::getAvailableSecondFactorTypes(),
+            $this->secondFactorTypeService->getAvailableSecondFactorTypes(),
             function ($secondFactorType) use ($loa3) {
                 $secondFactorType = new SecondFactorType($secondFactorType);
-
-                return $secondFactorType->canSatisfy($loa3);
+                return $this->secondFactorTypeService->canSatisfy($secondFactorType, $loa3);
             }
         );
     }

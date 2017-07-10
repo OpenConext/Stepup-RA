@@ -18,6 +18,11 @@ surfnet_stepup_ra_saml_stepup_provider:
                 entity_id: %gssp_tiqr_remote_entity_id%
                 sso_url: %gssp_tiqr_remote_sso_url%
                 certificate: %gssp_tiqr_remote_certificate%
+            view_config:
+                page_title: %gssp_tiqr_page_title%
+                explanation: %gssp_tiqr_explanation%
+                initiate: %gssp_tiqr_initiate%
+                gssf_id_mismatch: %gssp_tiqr_gssf_id_mismatch%
         biometric:
             hosted:
                 service_provider:
@@ -30,3 +35,8 @@ surfnet_stepup_ra_saml_stepup_provider:
                 entity_id: %gssp_biometric_remote_entity_id%
                 sso_url: %gssp_biometric_remote_sso_url%
                 certificate: %gssp_biometric_remote_certificate%
+            view_config:
+                page_title: %gssp_biometric_page_title%
+                explanation: %gssp_biometric_explanation%
+                initiate: %gssp_biometric_initiate%
+                gssf_id_mismatch: %gssp_biometric_gssf_id_mismatch%
