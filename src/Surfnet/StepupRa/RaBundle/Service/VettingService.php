@@ -21,6 +21,7 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 use RuntimeException;
 use Surfnet\StepupBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
+use Surfnet\StepupBundle\Service\SecondFactorTypeService;
 use Surfnet\StepupBundle\Service\SmsSecondFactor\OtpVerification;
 use Surfnet\StepupBundle\Service\SmsSecondFactorService;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
@@ -93,6 +94,11 @@ class VettingService
      */
     private $identityService;
 
+    /**
+     * @var \Surfnet\StepupBundle\Service\SecondFactorTypeService
+     */
+    private $secondFactorTypeService;
+
     public function __construct(
         SmsSecondFactorService $smsSecondFactorService,
         YubikeySecondFactorService $yubikeySecondFactorService,
@@ -101,7 +107,8 @@ class VettingService
         CommandService $commandService,
         VettingProcedureRepository $vettingProcedureRepository,
         TranslatorInterface $translator,
-        IdentityService $identityService
+        IdentityService $identityService,
+        SecondFactorTypeService $secondFactorTypeService
     ) {
         $this->smsSecondFactorService = $smsSecondFactorService;
         $this->yubikeySecondFactorService = $yubikeySecondFactorService;
@@ -111,6 +118,7 @@ class VettingService
         $this->vettingProcedureRepository = $vettingProcedureRepository;
         $this->translator = $translator;
         $this->identityService = $identityService;
+        $this->secondFactorTypeService = $secondFactorTypeService;
     }
 
     /**
@@ -121,7 +129,7 @@ class VettingService
     {
         $secondFactorType = new SecondFactorType($command->secondFactor->type);
 
-        return $secondFactorType->isSatisfiedBy($command->authorityLoa);
+        return $this->secondFactorTypeService->isSatisfiedBy($secondFactorType, $command->authorityLoa);
     }
 
     /**

@@ -25,6 +25,7 @@ use Surfnet\SamlBundle\SAML2\AuthnRequestFactory;
 use Surfnet\SamlBundle\SAML2\Response\Assertion\InResponseTo;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
+use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -253,11 +254,28 @@ final class GssfController extends SecondFactorController
      */
     private function renderInitiateForm($procedureId, $provider, array $parameters = [])
     {
-        $form = $this->createForm('ra_initiate_gssf', null, ['procedureId' => $procedureId, 'provider' => $provider]);
+        /** @var ViewConfig $secondFactorConfig */
+        $secondFactorConfig = $this->get("gssp.view_config.{$provider}");
+
+        $form = $this->createForm(
+            'ra_initiate_gssf',
+            null,
+            [
+                'procedureId' => $procedureId,
+                'provider' => $provider,
+                /** @Ignore from translation message extraction */
+                'label' => $secondFactorConfig->getInitiate()
+            ]
+        );
 
         $templateParameters = array_merge(
             $parameters,
-            ['form' => $form->createView(), 'procedureId' => $procedureId, 'provider' => $provider]
+            [
+                'form' => $form->createView(),
+                'procedureId' => $procedureId,
+                'provider' => $provider,
+                'secondFactorConfig' => $secondFactorConfig
+            ]
         );
 
         return $this->render('SurfnetStepupRaRaBundle:Vetting/Gssf:initiate.html.twig', $templateParameters);
