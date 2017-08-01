@@ -39,6 +39,11 @@ parameters:
     enabled_second_factors:
         - sms
         - yubikey
+    enabled_generic_second_factors:
+            biometric:
+                loa: 3
+            tiqr:
+                loa: 3
     graylog_hostname: 'g2-dev.stepup.coin.surf.net'
     asset_version: 1
 

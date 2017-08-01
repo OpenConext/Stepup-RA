@@ -40,7 +40,11 @@ class SurfnetStepupRaRaExtension extends Extension
         // inject the required loa as parameter into the service container
         $container->setParameter('surfnet_stepup_ra.security.required_loa', $config['required_loa']);
 
-        $container->setParameter('surfnet_stepup_ra.enabled_second_factors', $config['enabled_second_factors']);
+        $gssfSecondFactors = array_keys($config['enabled_generic_second_factors']);
+        $container->setParameter(
+            'surfnet_stepup_ra.enabled_second_factors',
+            array_merge($config['enabled_second_factors'], $gssfSecondFactors)
+        );
 
         $container->setParameter(
             'ra.security.authentication.session.maximum_absolute_lifetime_in_seconds',
