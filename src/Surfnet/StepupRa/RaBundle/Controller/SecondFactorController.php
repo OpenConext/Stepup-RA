@@ -51,6 +51,7 @@ final class SecondFactorController extends Controller
         $form->handleRequest($request);
 
         $secondFactors = $this->getSecondFactorService()->search($command);
+        $secondFactorCount = $secondFactors->getTotalItems();
 
         $pagination = $this->get('knp_paginator')->paginate(
             $secondFactors->getTotalItems() > 0 ? array_fill(0, $secondFactors->getTotalItems(), 1) : [],
@@ -70,6 +71,7 @@ final class SecondFactorController extends Controller
             'revocationForm'        => $revocationForm->createView(),
             'secondFactors'         => $secondFactors,
             'pagination'            => $pagination,
+            'numberOfSecondFactors' => $secondFactorCount,
             'orderBy'               => $command->orderBy,
             'orderDirection'        => $command->orderDirection ?: 'asc',
             'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',

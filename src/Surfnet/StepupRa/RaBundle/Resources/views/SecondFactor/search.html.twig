@@ -7,6 +7,10 @@
         <div class="col-sm-12">
             {{ form(form) }}
 
+            {% if secondFactors.elements|length > 0 %}
+            <div class="result-count">{{ 'ra.second_factor.search.text.number_of_second_factors'|transchoice(numberOfSecondFactors, {'count': numberOfSecondFactors}) }}</div>
+            {% endif %}
+
             <hr>
 
             {% if secondFactors.elements|length > 0 %}
