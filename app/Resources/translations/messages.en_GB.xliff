@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-06-15T15:47:58Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2017-11-16T13:22:55Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -956,53 +956,53 @@
         <target>Yubikey</target>
       </trans-unit>
       <trans-unit id="800e5d0a1f57a8b4d3654ac7d173efe68c098f68" resname="ra.second_factor.revocation.could_not_revoke">
-        <jms:reference-file line="111">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <jms:reference-file line="113">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
         <source>ra.second_factor.revocation.could_not_revoke</source>
         <target>The removal of the token failed</target>
       </trans-unit>
       <trans-unit id="f70c06516166354cd4d8d3490cbd707941610ed9" resname="ra.second_factor.revocation.modal.are_you_sure">
-        <jms:reference-file line="71">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="74">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.are_you_sure</source>
         <target>Are you sure you want to remove the token listed below?</target>
       </trans-unit>
       <trans-unit id="441e4d7c6bece19e1a2a0008af6302443d36c7a4" resname="ra.second_factor.revocation.modal.cancel">
-        <jms:reference-file line="93">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="96">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.cancel</source>
         <target>Cancel</target>
       </trans-unit>
       <trans-unit id="4a0e93233ac08a0e08df4ccabdddb3183f0343ea" resname="ra.second_factor.revocation.modal.close">
-        <jms:reference-file line="66">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="69">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.close</source>
         <target>Close</target>
       </trans-unit>
       <trans-unit id="c8ac97a99dfe2e9a93156f17db2ad4475372cd4a" resname="ra.second_factor.revocation.modal.confirm">
-        <jms:reference-file line="67">views/SecondFactor/search.html.twig</jms:reference-file>
-        <jms:reference-file line="94">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="70">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="97">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.confirm</source>
         <target>Confirm</target>
       </trans-unit>
       <trans-unit id="0a7020ade86510c9f2a60c58d10d539b92be2f4a" resname="ra.second_factor.revocation.modal.sf_email">
-        <jms:reference-file line="87">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="90">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.sf_email</source>
         <target>E-mail</target>
       </trans-unit>
       <trans-unit id="e704ffd6983d5ec3776c1ad832c9cb9823dd3d0b" resname="ra.second_factor.revocation.modal.sf_identifier">
-        <jms:reference-file line="75">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="78">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.sf_identifier</source>
         <target>Token ID</target>
       </trans-unit>
       <trans-unit id="1d9dbf1e942ebc0614b14e5efef0dadc4f8073be" resname="ra.second_factor.revocation.modal.sf_name">
-        <jms:reference-file line="83">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="86">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.sf_name</source>
         <target>Name</target>
       </trans-unit>
       <trans-unit id="153b9ee684f0de6cc27fc8b40d9b38da7477323b" resname="ra.second_factor.revocation.modal.sf_type">
-        <jms:reference-file line="79">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="82">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.revocation.modal.sf_type</source>
         <target>Type</target>
       </trans-unit>
       <trans-unit id="5c500a2dc008cbf1a8501593a2a50e518f6fe145" resname="ra.second_factor.revocation.revoked">
-        <jms:reference-file line="108">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <jms:reference-file line="110">RaBundle/Controller/SecondFactorController.php</jms:reference-file>
         <source>ra.second_factor.revocation.revoked</source>
         <target>The token has been successfully removed</target>
       </trans-unit>
@@ -1057,9 +1057,14 @@
         <target>Activated</target>
       </trans-unit>
       <trans-unit id="b460113e39fffb71f86d0c0a9509b5c741924e99" resname="ra.second_factor.search.text.no_second_factors">
-        <jms:reference-file line="57">views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="60">views/SecondFactor/search.html.twig</jms:reference-file>
         <source>ra.second_factor.search.text.no_second_factors</source>
         <target>There are currently no tokens registered that match your query.</target>
+      </trans-unit>
+      <trans-unit id="2e427c59176d431e47b67cbc0bd137a328979a16" resname="ra.second_factor.search.text.number_of_second_factors">
+        <jms:reference-file line="56">views/SecondFactor/search.html.twig</jms:reference-file>
+        <source>ra.second_factor.search.text.number_of_second_factors</source>
+        <target>{0}no results found.|{1}%count% result found.|]1,Inf]%count% results found.</target>
       </trans-unit>
       <trans-unit id="eb850d6b26e216bb475d931bd9d785fde606299d" resname="ra.second_factor.search.title">
         <jms:reference-file line="3">views/SecondFactor/search.html.twig</jms:reference-file>
@@ -1127,7 +1132,8 @@
         <target>Identity verification failed</target>
       </trans-unit>
       <trans-unit id="eff2ebc67229b22b80526799953593c40a2c6ef9" resname="ra.verify_identity.registration_code_expired">
-        <jms:reference-file line="231">RaBundle/Controller/VettingController.php</jms:reference-file>
+        <jms:reference-file line="115">RaBundle/Controller/VettingController.php</jms:reference-file>
+        <jms:reference-file line="253">RaBundle/Controller/VettingController.php</jms:reference-file>
         <jms:reference-file line="10">Resources/views/translations.html.twig</jms:reference-file>
         <source>ra.verify_identity.registration_code_expired</source>
         <target>The activation code has expired. First, delete the current token registration of the user (by RA or user). The user then starts a new registration on %self_service_url% and will receive a new activation code that is valid for 14 days.</target>
@@ -1158,8 +1164,8 @@
         <target>Cancel</target>
       </trans-unit>
       <trans-unit id="32b7bc724e0d07eac8325753ae89605966b495c7" resname="ra.vetting.flash.cancelled">
-        <jms:reference-file line="157">RaBundle/Controller/VettingController.php</jms:reference-file>
-        <jms:reference-file line="187">RaBundle/Controller/VettingController.php</jms:reference-file>
+        <jms:reference-file line="179">RaBundle/Controller/VettingController.php</jms:reference-file>
+        <jms:reference-file line="209">RaBundle/Controller/VettingController.php</jms:reference-file>
         <jms:reference-file line="120">Controller/Vetting/SmsController.php</jms:reference-file>
         <source>ra.vetting.flash.cancelled</source>
         <target>The vetting procedure was cancelled.</target>
@@ -1210,7 +1216,7 @@
         <target>Token type disabled</target>
       </trans-unit>
       <trans-unit id="8e4a356a46fe95b04ae1cbb201b8d62e15670b2e" resname="ra.vetting.sms.challenge_body">
-        <jms:reference-file line="224">RaBundle/Service/VettingService.php</jms:reference-file>
+        <jms:reference-file line="241">RaBundle/Service/VettingService.php</jms:reference-file>
         <source>ra.vetting.sms.challenge_body</source>
         <target>Your code: %challenge%</target>
       </trans-unit>
