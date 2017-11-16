@@ -46,11 +46,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6"></div>
-            <div class="col-md-3 col-md-push-3">
+            <div class="col-md-6 hidden-xs"></div>
+            <div class="col-md-3 col-xs-6 pull-right">
                 {{ form_row(form.verifyIdentity) }}
             </div>
-            <div class="col-md-3 col-md-pull-3">
+            <div class="col-md-3 col-xs-6 pull-right">
                 <button name="{{ form.vars.name }}[{{ form.cancel.vars.name }}]" type="submit" class="btn btn-danger" formnovalidate="formnovalidate">
                     <i class="fa fa-chevron-left"></i>
                     {{ 'ra.vetting.button.cancel_procedure'|trans }}
