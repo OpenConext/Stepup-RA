@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Surfnet\StepupRa\RaBundle\Command\ExportRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchSecondFactorAuditLogCommand;
@@ -53,6 +54,11 @@ final class SecondFactorController extends Controller
         $secondFactors = $this->getSecondFactorService()->search($command);
         $secondFactorCount = $secondFactors->getTotalItems();
 
+        if ($form->isSubmitted() && $form->getClickedButton()->getName() == 'export') {
+            $this->get('logger')->notice('Forwarding to export second factors action');
+            return $this->forward('SurfnetStepupRaRaBundle:SecondFactor:export', ['command' => $command]);
+        }
+
         $pagination = $this->get('knp_paginator')->paginate(
             $secondFactors->getTotalItems() > 0 ? array_fill(0, $secondFactors->getTotalItems(), 1) : [],
             $secondFactors->getCurrentPage(),
@@ -76,6 +82,18 @@ final class SecondFactorController extends Controller
             'orderDirection'        => $command->orderDirection ?: 'asc',
             'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',
         ];
+    }
+
+    public function exportAction(SearchRaSecondFactorsCommand $command)
+    {
+        $this->denyAccessUnlessGranted(['ROLE_RA']);
+
+        $this->get('logger')->notice('Starting export of searched second factors');
+
+        $identity = $this->getCurrentUser();
+        $exportCommand = ExportRaSecondFactorsCommand::fromSearchCommand($command, $identity->institution);
+
+        return $this->getSecondFactorService()->export($exportCommand);
     }
 
     /**
@@ -178,7 +196,7 @@ final class SecondFactorController extends Controller
             [
                 'pagination' => $pagination,
                 'auditLog'   => $auditLog,
-                'identity'   => $identity
+                'identity'   => $identity,
             ]
         );
     }
