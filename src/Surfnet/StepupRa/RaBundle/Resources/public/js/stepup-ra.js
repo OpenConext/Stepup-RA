@@ -16,6 +16,7 @@
 
 (function ($) {
     'use strict';
+
     $(document).ready(function() {
         $('#revocationModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget),
@@ -169,5 +170,23 @@
                 moment($(this).attr("datetime")).format('Y-MM-DD HH:mm')
             );
         });
+
+        // Prevent form elements from being disabled when the export button is clicked.
+        $(document).on('submit', function () {
+            var $clickedButton = $(document.activeElement),
+                $form = $(this);
+
+            if ($clickedButton.attr('id') === 'ra_search_ra_second_factors_export') {
+                setTimeout(function () {
+                    $form.find('button, input, textarea, select').prop('disabled', false);
+                }, 0);
+            }
+        });
+
+        // Hide the export button when no search results found on the second factor screen
+        if (!$('.search-second-factors table.table-striped').length) {
+            $('button#ra_search_ra_second_factors_export').hide();
+        }
+
     });
 })(jQuery);
