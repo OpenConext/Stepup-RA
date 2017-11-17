@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a58e344cdaaa088e470fbaae634e9ed7",
+    "content-hash": "72d77a3f3d1c43bb678feb9752744c1f",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -456,6 +456,59 @@
                 "parser"
             ],
             "time": "2014-09-09T13:34:57+00:00"
+        },
+        {
+            "name": "ee/dataexporter-bundle",
+            "version": "v0.4.2",
+            "target-dir": "EE/DataExporterBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/EE/DataExporter.git",
+                "reference": "c0f78ab21dc1752ff9232b8f24d0976459b6330d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/EE/DataExporter/zipball/c0f78ab21dc1752ff9232b8f24d0976459b6330d",
+                "reference": "c0f78ab21dc1752ff9232b8f24d0976459b6330d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.1",
+                "symfony/http-foundation": "~2.1",
+                "symfony/property-access": "~2.1"
+            },
+            "require-dev": {
+                "symfony/yaml": "~2.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "EE\\DataExporterBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Piotr Antosik",
+                    "email": "mail@piotrantosik.com",
+                    "homepage": "http://piotrantosik.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easy export data to CSV, XML, HTML, JSON or XLS",
+            "homepage": "http://laboratorium.ee",
+            "keywords": [
+                "csv",
+                "exporter",
+                "json",
+                "xls",
+                "xml"
+            ],
+            "time": "2013-06-27T18:50:02+00:00"
         },
         {
             "name": "fortawesome/font-awesome",
@@ -2288,7 +2341,7 @@
                 "Apache-2.0"
             ],
             "description": "The SURFnet Step-up U2F bundle contains server-side device verification, and the necessary forms and resources to enable client-side U2F interaction with Step-up Identities",
-            "time": "2015-09-17T15:02:04+00:00"
+            "time": "2015-09-17 15:02:04"
         },
         {
             "name": "symfony/assetic-bundle",

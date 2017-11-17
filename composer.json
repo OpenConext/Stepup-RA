@@ -30,7 +30,8 @@
         "guzzlehttp/guzzle": "^6",
         "knplabs/knp-paginator-bundle": "~2.4",
         "mopa/composer-bridge": "~1.5",
-        "ramsey/uuid": "^3.5"
+        "ramsey/uuid": "^3.5",
+        "ee/dataexporter-bundle": "^0.4.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
