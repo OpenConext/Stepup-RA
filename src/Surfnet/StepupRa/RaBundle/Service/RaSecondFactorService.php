@@ -19,10 +19,12 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
+use Surfnet\StepupMiddlewareClient\Identity\Dto\RaSecondFactorExportQuery;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaSecondFactorSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\RevokeRegistrantsSecondFactorCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaSecondFactorCollection;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaSecondFactorService as ApiRaSecondFactorService;
+use Surfnet\StepupRa\RaBundle\Command\ExportRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 
@@ -39,6 +41,11 @@ class RaSecondFactorService
     private $commandService;
 
     /**
+     * @var RaSecondFactorExport
+     */
+    private $exporter;
+
+    /**
      * @var \Psr\Log\LoggerInterface
      */
     private $logger;
@@ -46,15 +53,18 @@ class RaSecondFactorService
     /**
      * @param ApiRaSecondFactorService $apiRaSecondFactorService
      * @param CommandService $commandService
+     * @param RaSecondFactorExport $exporter
      * @param LoggerInterface $logger
      */
     public function __construct(
         ApiRaSecondFactorService $apiRaSecondFactorService,
         CommandService $commandService,
+        RaSecondFactorExport $exporter,
         LoggerInterface $logger
     ) {
         $this->apiRaSecondFactorService = $apiRaSecondFactorService;
         $this->commandService = $commandService;
+        $this->exporter = $exporter;
         $this->logger = $logger;
     }
 
@@ -117,5 +127,49 @@ class RaSecondFactorService
         }
 
         return $this->apiRaSecondFactorService->search($query);
+    }
+
+    /**
+     * Searches for a collection of second factor tokens and returns a Http response with an attachment
+     * Content-Disposition.
+     *
+     * @param ExportRaSecondFactorsCommand $command
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function export(ExportRaSecondFactorsCommand $command)
+    {
+        $query = new RaSecondFactorExportQuery($command->institution);
+
+        if ($command->name) {
+            $query->setName($command->name);
+        }
+
+        if ($command->type) {
+            $query->setType($command->type);
+        }
+
+        if ($command->secondFactorId) {
+            $query->setSecondFactorId($command->secondFactorId);
+        }
+
+        if ($command->email) {
+            $query->setEmail($command->email);
+        }
+
+        if ($command->status) {
+            $query->setStatus($command->status);
+        }
+
+        if ($command->orderBy) {
+            $query->setOrderBy($command->orderBy);
+        }
+
+        if ($command->orderDirection) {
+            $query->setOrderDirection($command->orderDirection);
+        }
+
+        $collection = $this->apiRaSecondFactorService->searchForExport($query);
+
+        return $this->exporter->export($collection, $query->getFileName());
     }
 }

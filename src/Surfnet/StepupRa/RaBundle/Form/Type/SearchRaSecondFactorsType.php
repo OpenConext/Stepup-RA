@@ -56,7 +56,12 @@ class SearchRaSecondFactorsType extends AbstractType
         ]);
         $builder->add('search', 'submit', [
             'label' => 'ra.form.ra_search_ra_second_factors.button.search',
-            'attr' => [ 'class' => 'btn btn-primary' ],
+            'attr' => [ 'class' => 'btn btn-primary pull-left' ],
+        ]);
+
+        $builder->add('export', 'submit', [
+            'label' => 'ra.form.ra_search_ra_second_factors.button.export',
+            'attr' => [ 'class' => 'btn btn-secondary pull-left' ],
         ]);
     }
 
