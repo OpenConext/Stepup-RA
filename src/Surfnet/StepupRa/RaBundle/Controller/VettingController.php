@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Surfnet\StepupBundle\Service\SecondFactorTypeService;
 use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
@@ -127,7 +128,7 @@ class VettingController extends Controller
             return $this->redirectToRoute('ra_vetting_yubikey_verify', ['procedureId' => $procedureId]);
         } elseif ($secondFactorType->isSms()) {
             return $this->redirectToRoute('ra_vetting_sms_send_challenge', ['procedureId' => $procedureId]);
-        } elseif ($secondFactorType->isGssf()) {
+        } elseif ($this->getSecondFactorTypeService()->isGssf($secondFactorType)) {
             return $this->redirectToRoute(
                 'ra_vetting_gssf_initiate',
                 [
@@ -264,6 +265,14 @@ class VettingController extends Controller
     private function getSecondFactorService()
     {
         return $this->get('ra.service.second_factor');
+    }
+
+    /**
+     * @return SecondFactorTypeService
+     */
+    private function getSecondFactorTypeService()
+    {
+        return $this->get('surfnet_stepup.service.second_factor_type');
     }
 
     /**
