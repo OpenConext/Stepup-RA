@@ -25,13 +25,14 @@
         "jms/di-extra-bundle": "~1.4.0",
         "surfnet/stepup-middleware-client-bundle": "^2.0",
         "surfnet/stepup-saml-bundle": "^2.5",
-        "surfnet/stepup-bundle": "^2.0",
+        "surfnet/stepup-bundle": "^3.0",
         "surfnet/stepup-u2f-bundle": "dev-develop",
         "guzzlehttp/guzzle": "^6",
         "knplabs/knp-paginator-bundle": "~2.4",
         "mopa/composer-bridge": "~1.5",
         "ramsey/uuid": "^3.5",
-        "ee/dataexporter-bundle": "^0.4.2"
+        "ee/dataexporter-bundle": "^0.4.2",
+        "openconext/monitor-bundle": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
