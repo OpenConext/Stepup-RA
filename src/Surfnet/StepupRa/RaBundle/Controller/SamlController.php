@@ -33,7 +33,7 @@ class SamlController extends Controller
         /** @var \Surfnet\SamlBundle\Http\PostBinding $postBinding */
         $postBinding = $this->get('surfnet_saml.http.post_binding');
 
-        /** @var \SAML2_Assertion $assertion */
+        /** @var \SAML2\Assertion $assertion */
         $assertion = $postBinding->processResponse(
             $httpRequest,
             $this->get('surfnet_saml.remote.idp'),
