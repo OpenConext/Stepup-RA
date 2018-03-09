@@ -254,8 +254,8 @@ final class GssfController extends SecondFactorController
      */
     private function renderInitiateForm($procedureId, $provider, array $parameters = [])
     {
-        /** @var ViewConfig $secondFactorConfig */
-        $secondFactorConfig = $this->get("gssp.view_config.{$provider}");
+        $collection = $this->get("gssp.provider.collection");
+        $secondFactorConfig = $collection->getByIdentifier($provider);
 
         $form = $this->createForm(
             'ra_initiate_gssf',
