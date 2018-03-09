@@ -6,6 +6,9 @@ parameters:
     gssp_tiqr_remote_entity_id: 'https://actual-gssp.entity-id.tld'
     gssp_tiqr_remote_sso_url: 'https://actual-gssp.entity-id.tld/single-sign-on/url'
     gssp_tiqr_remote_certificate: 'The contents of the certificate published by the gssp'
+    gssp_tiqr_name:
+        en_GB: 'Tiqr'
+        nl_NL: 'Tiqr'
     gssp_tiqr_page_title:
         en_GB: 'EN ra.vetting.gssf.initiate.tiqr.title.page'
         nl_NL: 'NL ra.vetting.gssf.initiate.tiqr.title.page'
@@ -25,6 +28,9 @@ parameters:
     gssp_biometric_remote_entity_id: 'https://actual-gssp.entity-id.tld'
     gssp_biometric_remote_sso_url: 'https://actual-gssp.entity-id.tld/single-sign-on/url'
     gssp_biometric_remote_certificate: 'The contents of the certificate published by the gssp'
+    gssp_biometric_name:
+        en_GB: 'Biometric'
+        nl_NL: 'Biometrisch'
     gssp_biometric_page_title:
         en_GB: 'EN ra.vetting.gssf.initiate.biometric.title.page'
         nl_NL: 'NL ra.vetting.gssf.initiate.biometric.title.page'

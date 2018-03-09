@@ -23,6 +23,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ViewConfig
 {
+    /**
+     * @var array
+     */
+    public $name;
 
     /**
      * @var array
@@ -53,6 +57,7 @@ class ViewConfig
      * The arrays are arrays of translated text, indexed on locale.
      *
      * @param Request $request
+     * @param array $name
      * @param array $pageTitle
      * @param array $explanation
      * @param array $initiate
@@ -61,16 +66,26 @@ class ViewConfig
      */
     public function __construct(
         Request $request,
+        array $name,
         array $pageTitle,
         array $explanation,
         array $initiate,
         array $gssfIdMismatch
     ) {
         $this->request = $request;
+        $this->name = $name;
         $this->pageTitle = $pageTitle;
         $this->explanation = $explanation;
         $this->initiate = $initiate;
         $this->gssfIdMismatch = $gssfIdMismatch;
+    }
+
+    /**
+     * @return array
+     */
+    public function getName()
+    {
+        return $this->getTranslation($this->name);
     }
 
     /**
