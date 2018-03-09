@@ -48,7 +48,10 @@ services:
 
     ra.form.type.search_ra_second_factors:
         class: Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType
+        arguments:
+            - "@ra.form.extension.second_factor_type_choice_list"
         tags: [{ name: form.type, alias: ra_search_ra_second_factors }]
+        scope: request
 
     ra.form.type.ra_revoke_second_factor:
         class: Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType
@@ -87,6 +90,15 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Extension\InstitutionListingChoiceList
         arguments:
             - "@surfnet_stepup_middleware_client.identity.service.institution_listing"
+
+    ra.form.extension.second_factor_type_choice_list:
+        class: Surfnet\StepupRa\RaBundle\Form\Extension\SecondFactorTypeChoiceList
+        arguments:
+            - "@surfnet_stepup.service.second_factor_type"
+            - "@gssp.provider.collection"
+            - "@translator"
+            - "@logger"
+        scope: request
 
     # Services
     ra.service.vetting:
