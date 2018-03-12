@@ -51,7 +51,6 @@ services:
         arguments:
             - "@ra.form.extension.second_factor_type_choice_list"
         tags: [{ name: form.type, alias: ra_search_ra_second_factors }]
-        scope: request
 
     ra.form.type.ra_revoke_second_factor:
         class: Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType
@@ -95,10 +94,8 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Extension\SecondFactorTypeChoiceList
         arguments:
             - "@surfnet_stepup.service.second_factor_type"
-            - "@gssp.provider.collection"
-            - "@translator"
+            - "@ra.service.second_factor_type_translator"
             - "@logger"
-        scope: request
 
     # Services
     ra.service.vetting:
@@ -233,6 +230,12 @@ services:
             - "@surfnet_stepup_middleware_client.identity.service.second_factor"
             - "@logger"
 
+    ra.service.second_factor_type_translator:
+        class: Surfnet\StepupRa\RaBundle\Service\SecondFactorTypeTranslationService
+        arguments:
+            - "@gssp.provider.collection"
+            - "@translator"
+
     ra.service.global_view_parameters:
         class: Surfnet\StepupRa\RaBundle\Service\GlobalViewParameters
         arguments:
@@ -280,3 +283,10 @@ services:
         class: Surfnet\StepupRa\RaBundle\Twig\InstitutionConfigurationOptions
         arguments:
             - "@security.token_storage"
+
+    ra.twig.second_factor_type:
+        class: Surfnet\StepupRa\RaBundle\Twig\Extensions\Extension\SecondFactorType
+        arguments:
+            - "@ra.service.second_factor_type_translator"
+        tags:
+            - { name : twig.extension }
