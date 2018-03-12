@@ -30,7 +30,7 @@
                     {% for secondFactor in secondFactors.elements %}
                         <tr>
                             <td>{{ secondFactor.secondFactorId }}</td>
-                            <td>{{ ('ra.second_factor.search.type.'~secondFactor.type)|trans }}</td>
+                            <td>{{ secondFactor.type|trans_second_factor_type }}</td>
                             <td>{{ secondFactor.name }}</td>
                             <td>{{ secondFactor.email }}</td>
                             <td>{% if secondFactor.documentNumber is not empty %}{{ secondFactor.documentNumber}}{% else %}&mdash;{% endif %}</td>
