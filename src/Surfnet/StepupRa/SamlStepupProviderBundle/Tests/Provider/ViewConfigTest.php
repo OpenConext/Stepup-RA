@@ -22,6 +22,7 @@ use Mockery as m;
 use PHPUnit_Framework_TestCase as TestCase;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Tests the ViewConfig class
@@ -82,8 +83,8 @@ final class ViewConfigTest extends TestCase
      */
     private function buildViewConfig($locale = '')
     {
-        $request = m::mock(Request::class);
-        $request->shouldReceive('getLocale')->andReturn($locale)->byDefault();
+        $request = m::mock(RequestStack::class);
+        $request->shouldReceive('getCurrentRequest->getLocale')->andReturn($locale)->byDefault();
         return new ViewConfig(
             $request,
             $this->getTranslationsArray('title'),

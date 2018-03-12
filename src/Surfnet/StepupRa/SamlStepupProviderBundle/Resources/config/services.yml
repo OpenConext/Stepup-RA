@@ -18,4 +18,3 @@ services:
 
     gssp.provider.collection:
         class: Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfigCollection
-        scope: request
