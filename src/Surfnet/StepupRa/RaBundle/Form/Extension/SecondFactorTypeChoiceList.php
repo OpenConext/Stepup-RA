@@ -18,12 +18,9 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Extension;
 
-
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupBundle\Service\SecondFactorTypeService;
-use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig;
-use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfigCollection;
-use Symfony\Component\Translation\TranslatorInterface;
+use Surfnet\StepupRa\RaBundle\Service\SecondFactorTypeTranslationService;
 
 /**
  * Used to build a choice list of second factor types
@@ -38,27 +35,18 @@ use Symfony\Component\Translation\TranslatorInterface;
  *     'tiqr' => 'Tiqr'
  * ]
  *
- * Translations should be provided in the translations file for this project and should follow the format specified in
- * the 'translationIdFormat' field.
- *
  * A message is logged when the second factor type id cannot be translated. Second factor type id's that cannot be
  * translated, are not added to the choice list.
  */
 class SecondFactorTypeChoiceList
 {
-    private $translationIdFormat = 'ra.form.ra_search_ra_second_factors.choice.type.%s';
     /**
      * @var SecondFactorTypeService
      */
     private $secondFactorTypeService;
 
     /**
-     * @var ViewConfig
-     */
-    private $gsspConfigCollection;
-
-    /**
-     * @var TranslatorInterface
+     * @var SecondFactorTypeTranslationService
      */
     private $translator;
 
@@ -67,14 +55,16 @@ class SecondFactorTypeChoiceList
      */
     private $logger;
 
+    /**
+     * @param SecondFactorTypeService $service
+     * @param SecondFactorTypeTranslationService $translator
+     */
     public function __construct(
         SecondFactorTypeService $service,
-        ViewConfigCollection $gsspConfigCollection,
-        TranslatorInterface $translator,
+        SecondFactorTypeTranslationService $translator,
         LoggerInterface $logger
     ) {
         $this->secondFactorTypeService = $service;
-        $this->gsspConfigCollection = $gsspConfigCollection;
         $this->translator = $translator;
         $this->logger = $logger;
     }
@@ -90,18 +80,14 @@ class SecondFactorTypeChoiceList
         sort($collection);
 
         foreach ($collection as $sfTypeIdentifier) {
-            $translationId = sprintf($this->translationIdFormat, $sfTypeIdentifier);
 
-            if ($this->gsspConfigCollection->isGssp($sfTypeIdentifier)) {
-                $translation = $this->gsspConfigCollection
-                    ->getByIdentifier($sfTypeIdentifier)
-                    ->getTitle();
-            } else {
-                $translation = $this->translator->trans($translationId);
-            }
+            $translation = $this->translator->translate(
+                $sfTypeIdentifier,
+                'ra.form.ra_search_ra_second_factors.choice.type.%s'
+            );
 
             // Test if the translator was able to translate the second factor type
-            if ($translationId === $translation) {
+            if ($sfTypeIdentifier === $translation) {
                 $this->logger->warning(
                     sprintf(
                         'Unable to add a filter option on the second factor type select list for type: "%s"',
