@@ -240,7 +240,7 @@
       </trans-unit>
       <trans-unit id="e7e16bd377d6b3513aee56a7203224b1838b8876" resname="ra.error.text.if_you_think_this_is_incorrect_report">
         <source>ra.error.text.if_you_think_this_is_incorrect_report</source>
-        <target>Please report this error + error code to the helpdesk via support@surfconext.nl</target>
+        <target>Please report this error + error code to the helpdesk via support@example.org</target>
         <jms:reference-file line="17">/Resources/SurfnetStepupBundle/views/Exception/error404.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cabba69d3aecedfc3535dd2b976519d1090290e2" resname="ra.error.text.page_not_found">
@@ -250,7 +250,7 @@
       </trans-unit>
       <trans-unit id="1e71b162b5df5571e03f1e5b4f89b366b0e60390" resname="ra.error.text.what_were_you_doing_well_fix_it">
         <source>ra.error.text.what_were_you_doing_well_fix_it</source>
-        <target>Please report this error + error code to the helpdesk via support@surfconext.nl</target>
+        <target>Please report this error + error code to the helpdesk via support@example.org</target>
         <jms:reference-file line="17">/Resources/SurfnetStepupBundle/views/Exception/error.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="97cec45f4b04606121bd0a6613f2673f4e55eff7" resname="ra.error.text.your_art_code">
