@@ -37,14 +37,14 @@ final class ViewConfigTest extends TestCase
     {
         $viewConfig = $this->buildViewConfig('nl_NL');
 
-        $this->assertEquals('NL name', $viewConfig->getName());
+        $this->assertEquals('NL title', $viewConfig->getTitle());
         $this->assertEquals('NL pageTitle', $viewConfig->getPageTitle());
         $this->assertEquals('NL explanation', $viewConfig->getExplanation());
         $this->assertEquals('NL initiate', $viewConfig->getInitiate());
         $this->assertEquals('NL gssfIdMismatch', $viewConfig->getGssfIdMismatch());
 
         $viewConfig = $this->buildViewConfig('en_GB');
-        $this->assertEquals('EN name', $viewConfig->getName());
+        $this->assertEquals('EN title', $viewConfig->getTitle());
         $this->assertEquals('EN pageTitle', $viewConfig->getPageTitle());
         $this->assertEquals('EN explanation', $viewConfig->getExplanation());
         $this->assertEquals('EN initiate', $viewConfig->getInitiate());
@@ -86,7 +86,7 @@ final class ViewConfigTest extends TestCase
         $request->shouldReceive('getLocale')->andReturn($locale)->byDefault();
         return new ViewConfig(
             $request,
-            $this->getTranslationsArray('name'),
+            $this->getTranslationsArray('title'),
             $this->getTranslationsArray('pageTitle'),
             $this->getTranslationsArray('explanation'),
             $this->getTranslationsArray('initiate'),

@@ -85,7 +85,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
 
         $viewConfigDefinition = new Definition('Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig', [
             new Reference('request'),
-            $configuration['view_config']['name'],
+            $configuration['view_config']['title'],
             $configuration['view_config']['page_title'],
             $configuration['view_config']['explanation'],
             $configuration['view_config']['initiate'],

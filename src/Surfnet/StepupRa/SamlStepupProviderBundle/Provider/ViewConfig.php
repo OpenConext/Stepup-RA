@@ -26,7 +26,7 @@ class ViewConfig
     /**
      * @var array
      */
-    public $name;
+    public $title;
 
     /**
      * @var array
@@ -57,7 +57,7 @@ class ViewConfig
      * The arrays are arrays of translated text, indexed on locale.
      *
      * @param Request $request
-     * @param array $name
+     * @param array $title
      * @param array $pageTitle
      * @param array $explanation
      * @param array $initiate
@@ -66,14 +66,14 @@ class ViewConfig
      */
     public function __construct(
         Request $request,
-        array $name,
+        array $title,
         array $pageTitle,
         array $explanation,
         array $initiate,
         array $gssfIdMismatch
     ) {
         $this->request = $request;
-        $this->name = $name;
+        $this->title = $title;
         $this->pageTitle = $pageTitle;
         $this->explanation = $explanation;
         $this->initiate = $initiate;
@@ -83,9 +83,9 @@ class ViewConfig
     /**
      * @return array
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->getTranslation($this->name);
+        return $this->getTranslation($this->title);
     }
 
     /**

@@ -95,7 +95,7 @@ class SecondFactorTypeChoiceList
             if ($this->gsspConfigCollection->isGssp($sfTypeIdentifier)) {
                 $translation = $this->gsspConfigCollection
                     ->getByIdentifier($sfTypeIdentifier)
-                    ->getName();
+                    ->getTitle();
             } else {
                 $translation = $this->translator->trans($translationId);
             }
