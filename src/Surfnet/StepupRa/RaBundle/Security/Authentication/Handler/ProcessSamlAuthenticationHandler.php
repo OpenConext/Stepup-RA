@@ -18,9 +18,6 @@
 
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Handler;
 
-use Exception;
-use SAML2\Response\Exception\PreconditionNotMetException;
-use Surfnet\SamlBundle\Http\Exception\AuthnFailedSamlResponseException;
 use Surfnet\SamlBundle\Monolog\SamlAuthenticationLogger;
 use Surfnet\SamlBundle\SAML2\Response\Assertion\InResponseTo;
 use Surfnet\StepupBundle\Service\LoaResolutionService;
@@ -30,7 +27,6 @@ use Surfnet\StepupRa\RaBundle\Security\Authentication\SamlInteractionProvider;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -117,33 +113,7 @@ class ProcessSamlAuthenticationHandler implements AuthenticationHandler
 
             $logger->notice('No authenticated user and AuthnRequest pending, attempting to process SamlResponse');
 
-            try {
-                $assertion = $this->samlInteractionProvider->processSamlResponse($event->getRequest());
-            } catch (AuthnFailedSamlResponseException $exception) {
-                $logger->notice(sprintf('SAML Authentication failed at IdP: "%s"', $exception->getMessage()));
-                $responseBody = $this->templating->render(
-                    'SurfnetStepupRaRaBundle:Saml/Exception:authnFailed.html.twig',
-                    ['exception' => $exception]
-                );
-
-                $event->setResponse(new Response($responseBody, Response::HTTP_UNAUTHORIZED));
-
-                return;
-            } catch (PreconditionNotMetException $exception) {
-                $logger->notice(sprintf('SAMLResponse precondition not met: "%s"', $exception->getMessage()));
-                $responseBody = $this->templating->render(
-                    'SurfnetStepupRaRaBundle:Saml/Exception:preconditionNotMet.html.twig',
-                    ['exception' => $exception]
-                );
-
-                $event->setResponse(new Response($responseBody, Response::HTTP_UNAUTHORIZED));
-
-                return;
-            } catch (Exception $exception) {
-                $logger->error(sprintf('Failed SAMLResponse Parsing: "%s"', $exception->getMessage()));
-
-                throw new AuthenticationException('Failed SAMLResponse parsing', 0, $exception);
-            }
+            $assertion = $this->samlInteractionProvider->processSamlResponse($event->getRequest());
 
             if (!InResponseTo::assertEquals($assertion, $expectedInResponseTo)) {
                 $logger->error('Unknown or unexpected InResponseTo in SAMLResponse');
@@ -158,16 +128,7 @@ class ProcessSamlAuthenticationHandler implements AuthenticationHandler
             $token            = new SamlToken($loa);
             $token->assertion = $assertion;
 
-            try {
-                $authToken = $this->authenticationManager->authenticate($token);
-            } catch (AuthenticationException $failed) {
-                $logger->error(sprintf('Authentication Failed, reason: "%s"', $failed->getMessage()));
-
-                // By default deny authorization
-                $event->setResponse(new Response('', Response::HTTP_FORBIDDEN));
-
-                return;
-            }
+            $authToken = $this->authenticationManager->authenticate($token);
 
             $this->authenticatedSession->logAuthenticationMoment();
             $this->tokenStorage->setToken($authToken);

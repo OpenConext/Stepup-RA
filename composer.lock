@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5fdbb5035000e4cae20883bfafddff76",
+    "content-hash": "a93550b8d13790843cab7752e24733a1",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2210,16 +2210,16 @@
         },
         {
             "name": "surfnet/stepup-bundle",
-            "version": "3.2.0",
+            "version": "dev-feature/specific-error-pages",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-bundle.git",
-                "reference": "547c5bcb8fe1841fa657bbf43c5ea4b8e575ec3a"
+                "reference": "ece8c34dfdefa24f266b11ae9afadc595429ba3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-bundle/zipball/547c5bcb8fe1841fa657bbf43c5ea4b8e575ec3a",
-                "reference": "547c5bcb8fe1841fa657bbf43c5ea4b8e575ec3a",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-bundle/zipball/ece8c34dfdefa24f266b11ae9afadc595429ba3b",
+                "reference": "ece8c34dfdefa24f266b11ae9afadc595429ba3b",
                 "shasum": ""
             },
             "require": {
@@ -2230,6 +2230,7 @@
                 "monolog/monolog": "~1.11",
                 "php": "^5.6|^7.0",
                 "sensio/framework-extra-bundle": "~3",
+                "surfnet/stepup-saml-bundle": "dev-feature/specific-error-pages as 3.0.0",
                 "symfony/config": "^2.7",
                 "symfony/dependency-injection": "^2.7",
                 "symfony/form": "^2.7",
@@ -2263,7 +2264,7 @@
                 "suaas",
                 "surfnet"
             ],
-            "time": "2018-03-14T13:11:17+00:00"
+            "time": "2018-03-15T14:23:07+00:00"
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
@@ -2321,16 +2322,16 @@
         },
         {
             "name": "surfnet/stepup-saml-bundle",
-            "version": "3.0.0",
+            "version": "dev-feature/specific-error-pages",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-saml-bundle.git",
-                "reference": "67e24599a6402fdf602304851bfff915c0c4609c"
+                "reference": "322378f48a168d8d1eb9281af4772ba61c63ca6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-saml-bundle/zipball/67e24599a6402fdf602304851bfff915c0c4609c",
-                "reference": "67e24599a6402fdf602304851bfff915c0c4609c",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-saml-bundle/zipball/322378f48a168d8d1eb9281af4772ba61c63ca6a",
+                "reference": "322378f48a168d8d1eb9281af4772ba61c63ca6a",
                 "shasum": ""
             },
             "require": {
@@ -2365,7 +2366,7 @@
                 "stepup",
                 "surfnet"
             ],
-            "time": "2018-01-17T12:59:03+00:00"
+            "time": "2018-03-15T08:14:44+00:00"
         },
         {
             "name": "surfnet/stepup-u2f-bundle",
@@ -2373,12 +2374,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-u2f-bundle.git",
-                "reference": "b28737d7b8df5ecbdf7a1e952ecfb530a2951c05"
+                "reference": "67d8400160c5c9048cdd4354303d59243edbb7bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-u2f-bundle/zipball/b28737d7b8df5ecbdf7a1e952ecfb530a2951c05",
-                "reference": "b28737d7b8df5ecbdf7a1e952ecfb530a2951c05",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-u2f-bundle/zipball/67d8400160c5c9048cdd4354303d59243edbb7bf",
+                "reference": "67d8400160c5c9048cdd4354303d59243edbb7bf",
                 "shasum": ""
             },
             "require": {
@@ -2407,7 +2408,7 @@
                 "Apache-2.0"
             ],
             "description": "The SURFnet Step-up U2F bundle contains server-side device verification, and the necessary forms and resources to enable client-side U2F interaction with Step-up Identities",
-            "time": "2015-09-17T15:02:04+00:00"
+            "time": "2017-01-27T08:45:00+00:00"
         },
         {
             "name": "symfony/assetic-bundle",
@@ -4608,11 +4609,26 @@
             "time": "2015-05-27T22:58:02+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "3.0.0",
+            "alias_normalized": "3.0.0.0",
+            "version": "dev-feature/specific-error-pages",
+            "package": "surfnet/stepup-bundle"
+        },
+        {
+            "alias": "3.0.0",
+            "alias_normalized": "3.0.0.0",
+            "version": "dev-feature/specific-error-pages",
+            "package": "surfnet/stepup-saml-bundle"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "mopa/bootstrap-bundle": 5,
-        "surfnet/stepup-u2f-bundle": 20
+        "surfnet/stepup-bundle": 20,
+        "surfnet/stepup-u2f-bundle": 20,
+        "surfnet/stepup-saml-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

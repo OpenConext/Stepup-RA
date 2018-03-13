@@ -18,6 +18,8 @@
 
 namespace Surfnet\StepupRa\RaBundle\Exception;
 
-final class LoaTooLowException extends RuntimeException
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
+final class LoaTooLowException extends AccessDeniedException
 {
 }

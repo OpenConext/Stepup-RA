@@ -16,10 +16,10 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Security\Exception;
+namespace Surfnet\StepupRa\RaBundle\Exception;
 
-use SAML2\Response\Exception\PreconditionNotMetException;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
-class UnmetLoaException extends PreconditionNotMetException
+final class MissingRequiredAttributeException extends AuthenticationException
 {
 }
