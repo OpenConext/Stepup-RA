@@ -94,7 +94,7 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Extension\SecondFactorTypeChoiceList
         arguments:
             - "@surfnet_stepup.service.second_factor_type"
-            - "@ra.service.second_factor_type_translator"
+            - "@surfnet_stepup.service.second_factor_type_translator"
             - "@logger"
 
     # Services
@@ -230,12 +230,6 @@ services:
             - "@surfnet_stepup_middleware_client.identity.service.second_factor"
             - "@logger"
 
-    ra.service.second_factor_type_translator:
-        class: Surfnet\StepupRa\RaBundle\Service\SecondFactorTypeTranslationService
-        arguments:
-            - "@surfnet_stepup.provider.collection"
-            - "@translator"
-
     ra.service.global_view_parameters:
         class: Surfnet\StepupRa\RaBundle\Service\GlobalViewParameters
         arguments:
@@ -287,6 +281,6 @@ services:
     ra.twig.second_factor_type:
         class: Surfnet\StepupRa\RaBundle\Twig\Extensions\Extension\SecondFactorType
         arguments:
-            - "@ra.service.second_factor_type_translator"
+            - "@surfnet_stepup.service.second_factor_type_translator"
         tags:
             - { name : twig.extension }

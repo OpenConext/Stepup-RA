@@ -18,7 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Twig\Extensions\Extension;
 
-use Surfnet\StepupRa\RaBundle\Service\SecondFactorTypeTranslationService;
+use Surfnet\StepupBundle\Service\SecondFactorTypeTranslationService;
 use Twig_Extension;
 use Twig_SimpleFilter;
 

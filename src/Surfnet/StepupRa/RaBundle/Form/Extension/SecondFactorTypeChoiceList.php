@@ -20,7 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Form\Extension;
 
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupBundle\Service\SecondFactorTypeService;
-use Surfnet\StepupRa\RaBundle\Service\SecondFactorTypeTranslationService;
+use Surfnet\StepupBundle\Service\SecondFactorTypeTranslationService;
 
 /**
  * Used to build a choice list of second factor types
