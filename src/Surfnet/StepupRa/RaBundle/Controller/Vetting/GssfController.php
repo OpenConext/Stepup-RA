@@ -254,7 +254,7 @@ final class GssfController extends SecondFactorController
      */
     private function renderInitiateForm($procedureId, $provider, array $parameters = [])
     {
-        $collection = $this->get("gssp.provider.collection");
+        $collection = $this->get("surfnet_stepup.provider.collection");
         $secondFactorConfig = $collection->getByIdentifier($provider);
 
         $form = $this->createForm(

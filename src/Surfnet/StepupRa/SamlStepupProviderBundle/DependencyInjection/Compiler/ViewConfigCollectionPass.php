@@ -31,11 +31,11 @@ class ViewConfigCollectionPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has('gssp.provider.collection')) {
+        if (!$container->has('surfnet_stepup.provider.collection')) {
             return;
         }
 
-        $definition = $container->findDefinition('gssp.provider.collection');
+        $definition = $container->findDefinition('surfnet_stepup.provider.collection');
         $taggedServices = $container->findTaggedServiceIds(
             SurfnetStepupRaSamlStepupProviderExtension::VIEW_CONFIG_TAG_NAME
         );

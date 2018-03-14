@@ -18,11 +18,11 @@
 
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\Provider;
 
+use Surfnet\StepupBundle\Value\Provider\ViewConfigInterface;
 use Surfnet\StepupRa\RaBundle\Exception\LogicException;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class ViewConfig
+class ViewConfig implements ViewConfigInterface
 {
     /**
      * @var array

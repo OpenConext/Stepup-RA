@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2018 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
-use Surfnet\StepupRa\RaBundle\Exception\ImpossibleTranslationException;
-use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfigCollection;
+use Surfnet\StepupBundle\Value\Provider\ViewConfigCollection;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**

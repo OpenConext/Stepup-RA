@@ -233,7 +233,7 @@ services:
     ra.service.second_factor_type_translator:
         class: Surfnet\StepupRa\RaBundle\Service\SecondFactorTypeTranslationService
         arguments:
-            - "@gssp.provider.collection"
+            - "@surfnet_stepup.provider.collection"
             - "@translator"
 
     ra.service.global_view_parameters:

@@ -15,6 +15,3 @@ services:
             - '/'
         calls:
             - [setName, ['gssp']]
-
-    gssp.provider.collection:
-        class: Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfigCollection
