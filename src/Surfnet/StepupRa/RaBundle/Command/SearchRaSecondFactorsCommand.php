@@ -41,8 +41,6 @@ final class SearchRaSecondFactorsCommand
     public $name;
 
     /**
-     * @Assert\Choice({"sms", "yubikey", "tiqr"}, message="ra.search_ra_second_factors.type.invalid_choice")
-     *
      * @var string|null
      */
     public $type;
