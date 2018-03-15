@@ -20,7 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Command;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class SearchRaSecondFactorsCommand
+final class ExportRaSecondFactorsCommand
 {
     const STATUS_UNVERIFIED = 'unverified';
     const STATUS_VERIFIED = 'verified';
@@ -83,10 +83,24 @@ final class SearchRaSecondFactorsCommand
     public $orderDirection;
 
     /**
-     * @Assert\Type("integer", message="ra.search_ra_second_factors.page_number.type")
-     * @Assert\GreaterThan(0, message="ra.search_ra_second_factors.page_number.greater_than_zero")
-     *
-     * @var int
+     * Builds the command from a SearchRaSecondFactorsCommand
+     * @param SearchRaSecondFactorsCommand $command
+     * @param string $institution
+     * @return ExportRaSecondFactorsCommand
      */
-    public $pageNumber;
+    public static function fromSearchCommand(SearchRaSecondFactorsCommand $command, $institution)
+    {
+        $exportCommand = new self;
+
+        $exportCommand->name = $command->name;
+        $exportCommand->type = $command->type;
+        $exportCommand->secondFactorId = $command->secondFactorId;
+        $exportCommand->email = $command->email;
+        $exportCommand->status = $command->status;
+        $exportCommand->orderBy = $command->orderBy;
+        $exportCommand->orderDirection = $command->orderDirection;
+        $exportCommand->institution = $institution;
+
+        return $exportCommand;
+    }
 }

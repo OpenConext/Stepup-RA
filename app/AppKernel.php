@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new Surfnet\StepupRa\SamlStepupProviderBundle\SurfnetStepupRaSamlStepupProviderBundle(),
             new Nelmio\SecurityBundle\NelmioSecurityBundle(),
             new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
+            new OpenConext\MonitorBundle\OpenConextMonitorBundle(),
             new Surfnet\StepupMiddlewareClientBundle\SurfnetStepupMiddlewareClientBundle(),
             new Surfnet\SamlBundle\SurfnetSamlBundle(),
             new Surfnet\StepupBundle\SurfnetStepupBundle(),
@@ -43,6 +44,7 @@ class AppKernel extends Kernel
             // Replace with Pagerfanta https://www.pivotaltracker.com/story/show/89688680
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Surfnet\StepupU2fBundle\SurfnetStepupU2fBundle(),
+            new EE\DataExporterBundle\EEDataExporterBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

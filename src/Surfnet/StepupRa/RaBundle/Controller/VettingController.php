@@ -38,6 +38,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
  */
 class VettingController extends Controller
 {
@@ -108,6 +109,27 @@ class VettingController extends Controller
         $command->authorityId = $this->getIdentity()->id;
         $command->authorityLoa = $token->getLoa();
         $command->secondFactor = $secondFactor;
+
+        if ($this->getVettingService()->isExpiredRegistrationCode($command)) {
+            $form->addError(
+                new FormError(
+                    $this->getTranslator()
+                        ->trans(
+                            'ra.verify_identity.registration_code_expired',
+                            [
+                                '%self_service_url%' => $this->getParameter('surfnet_stepup_ra.self_service_url'),
+                            ]
+                        )
+                )
+            );
+
+            $logger->notice(
+                'Second factor registration code is expired',
+                ['registration_requested_at' => $secondFactor->registrationRequestedAt->format('Y-m-d')]
+            );
+
+            return ['form' => $form->createView()];
+        }
 
         if (!$this->getVettingService()->isLoaSufficientToStartProcedure($command)) {
             $form->addError(new FormError('ra.form.start_vetting_procedure.loa_insufficient'));

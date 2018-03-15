@@ -3,9 +3,13 @@
 {% block page_title %}{{ 'ra.second_factor.search.title'|trans }}{% endblock %}
 
 {% block content %}
-    <div class="row">
+    <div class="search-second-factors row">
         <div class="col-sm-12">
             {{ form(form) }}
+
+            {% if secondFactors.elements|length > 0 %}
+            <div class="result-count">{{ 'ra.second_factor.search.text.number_of_second_factors'|transchoice(numberOfSecondFactors, {'count': numberOfSecondFactors}) }}</div>
+            {% endif %}
 
             <hr>
 
@@ -26,7 +30,7 @@
                     {% for secondFactor in secondFactors.elements %}
                         <tr>
                             <td>{{ secondFactor.secondFactorId }}</td>
-                            <td>{{ ('ra.second_factor.search.type.'~secondFactor.type)|trans }}</td>
+                            <td>{{ secondFactor.type|trans_second_factor_type }}</td>
                             <td>{{ secondFactor.name }}</td>
                             <td>{{ secondFactor.email }}</td>
                             <td>{% if secondFactor.documentNumber is not empty %}{{ secondFactor.documentNumber}}{% else %}&mdash;{% endif %}</td>

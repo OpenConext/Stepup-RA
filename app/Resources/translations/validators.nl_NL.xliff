@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2017-06-15T15:47:50Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2018-03-12T10:12:23Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -16,8 +16,12 @@
       </trans-unit>
       <trans-unit id="53ef4f54259698cee5e0aaba2d7f20417cd8e9fb" resname="middleware_client.dto.configuration.use_ra_locations.must_be_boolean">
         <source>middleware_client.dto.configuration.use_ra_locations.must_be_boolean</source>
-        <target>Use RA locations option must be boolean.
+        <target xml:space="preserve">Use RA locations option must be boolean.
 </target>
+      </trans-unit>
+      <trans-unit id="77ed46e12521792cd4b8d2040443b43b6df3dc25" resname="middleware_client.dto.configuration.verify_email.must_be_boolean">
+        <source>middleware_client.dto.configuration.verify_email.must_be_boolean</source>
+        <target state="new">middleware_client.dto.configuration.verify_email.must_be_boolean</target>
       </trans-unit>
       <trans-unit id="f033a6177f4f371fbc302f07a6b8c67ec8b46549" resname="middleware_client.dto.identity.common_name.must_be_string">
         <source>middleware_client.dto.identity.common_name.must_be_string</source>
@@ -418,10 +422,6 @@
       <trans-unit id="748937a659d4aa99dc50f581104a1d507d2ce2da" resname="ra.search_ra_second_factors.status.invalid_choice">
         <source>ra.search_ra_second_factors.status.invalid_choice</source>
         <target>Kan niet filteren op de opgegeven status.</target>
-      </trans-unit>
-      <trans-unit id="35adfd1c62274a4757400abb4c2cb8a4d7d295c6" resname="ra.search_ra_second_factors.type.invalid_choice">
-        <source>ra.search_ra_second_factors.type.invalid_choice</source>
-        <target>Kan niet filteren op het opgegeven tokentype.</target>
       </trans-unit>
       <trans-unit id="25f28c755234f7056ca31e9a493447c1f328fbfd" resname="ra.start_vetting_procedure.registration_code.may_not_be_empty">
         <source>ra.start_vetting_procedure.registration_code.may_not_be_empty</source>

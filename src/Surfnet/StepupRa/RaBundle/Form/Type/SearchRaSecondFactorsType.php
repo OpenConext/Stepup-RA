@@ -18,12 +18,23 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use Surfnet\StepupRa\RaBundle\Form\Extension\SecondFactorTypeChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchRaSecondFactorsType extends AbstractType
 {
+    /**
+     * @var SecondFactorTypeChoiceList
+     */
+    private $secondFactorTypeChoiseList;
+
+    public function __construct(SecondFactorTypeChoiceList $secondFactorTypeChoiceList)
+    {
+        $this->secondFactorTypeChoiseList = $secondFactorTypeChoiceList;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', null, [
@@ -31,11 +42,7 @@ class SearchRaSecondFactorsType extends AbstractType
         ]);
         $builder->add('type', 'choice', [
             'label' => 'ra.form.ra_search_ra_second_factors.label.type',
-            'choices' => [
-                'sms'     => 'ra.form.ra_search_ra_second_factors.choice.type.sms',
-                'yubikey' => 'ra.form.ra_search_ra_second_factors.choice.type.yubikey',
-                'tiqr'    => 'ra.form.ra_search_ra_second_factors.choice.type.tiqr',
-            ],
+            'choices' => $this->secondFactorTypeChoiseList->create(),
             'required' => false,
         ]);
         $builder->add('secondFactorId', null, [
@@ -56,7 +63,12 @@ class SearchRaSecondFactorsType extends AbstractType
         ]);
         $builder->add('search', 'submit', [
             'label' => 'ra.form.ra_search_ra_second_factors.button.search',
-            'attr' => [ 'class' => 'btn btn-primary' ],
+            'attr' => [ 'class' => 'btn btn-primary pull-left' ],
+        ]);
+
+        $builder->add('export', 'submit', [
+            'label' => 'ra.form.ra_search_ra_second_factors.button.export',
+            'attr' => [ 'class' => 'btn btn-secondary pull-left' ],
         ]);
     }
 

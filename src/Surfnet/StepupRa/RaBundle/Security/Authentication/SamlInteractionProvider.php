@@ -115,14 +115,14 @@ class SamlInteractionProvider
 
     /**
      * @param Request $request
-     * @return \SAML2_Assertion
+     * @return \SAML2\Assertion
      * @throws \Surfnet\StepupRa\RaBundle\Security\Exception\UnmetLoaException When required LoA is not met by response
-     * @throws \SAML2_Response_Exception_PreconditionNotMetException
+     * @throws \SAML2\Response\Exception\PreconditionNotMetException
      * @throws \Symfony\Component\Security\Core\Exception\AuthenticationException When response LoA cannot be resolved
      */
     public function processSamlResponse(Request $request)
     {
-        /** @var \SAML2_Assertion $assertion */
+        /** @var \SAML2\Assertion $assertion */
         $assertion = $this->postBinding->processResponse(
             $request,
             $this->identityProvider,

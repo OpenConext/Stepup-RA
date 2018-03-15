@@ -18,11 +18,16 @@
 
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\Provider;
 
+use Surfnet\StepupBundle\Value\Provider\ViewConfigInterface;
 use Surfnet\StepupRa\RaBundle\Exception\LogicException;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-class ViewConfig
+class ViewConfig implements ViewConfigInterface
 {
+    /**
+     * @var array
+     */
+    public $title;
 
     /**
      * @var array
@@ -45,14 +50,15 @@ class ViewConfig
     public $gssfIdMismatch;
 
     /**
-     * @var Request
+     * @var RequestStack
      */
-    private $request;
+    private $requestStack;
 
     /**
      * The arrays are arrays of translated text, indexed on locale.
      *
-     * @param Request $request
+     * @param RequestStack $requestStack
+     * @param array $title
      * @param array $pageTitle
      * @param array $explanation
      * @param array $initiate
@@ -60,17 +66,27 @@ class ViewConfig
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        Request $request,
+        RequestStack $requestStack,
+        array $title,
         array $pageTitle,
         array $explanation,
         array $initiate,
         array $gssfIdMismatch
     ) {
-        $this->request = $request;
+        $this->requestStack = $requestStack;
+        $this->title = $title;
         $this->pageTitle = $pageTitle;
         $this->explanation = $explanation;
         $this->initiate = $initiate;
         $this->gssfIdMismatch = $gssfIdMismatch;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTitle()
+    {
+        return $this->getTranslation($this->title);
     }
 
     /**
@@ -112,7 +128,7 @@ class ViewConfig
      */
     private function getTranslation(array $translations)
     {
-        $currentLocale = $this->request->getLocale();
+        $currentLocale = $this->requestStack->getCurrentRequest()->getLocale();
         if (is_null($currentLocale)) {
             throw new LogicException('The current language is not set');
         }

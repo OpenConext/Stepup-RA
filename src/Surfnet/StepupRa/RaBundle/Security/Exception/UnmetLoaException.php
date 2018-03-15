@@ -18,7 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Security\Exception;
 
-use SAML2_Response_Exception_PreconditionNotMetException as PreconditionNotMetException;
+use SAML2\Response\Exception\PreconditionNotMetException;
 
 class UnmetLoaException extends PreconditionNotMetException
 {
