@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a93550b8d13790843cab7752e24733a1",
+    "content-hash": "65d9cb397911a6def65fbd1fda971d55",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2210,16 +2210,16 @@
         },
         {
             "name": "surfnet/stepup-bundle",
-            "version": "dev-feature/specific-error-pages",
+            "version": "3.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-bundle.git",
-                "reference": "ece8c34dfdefa24f266b11ae9afadc595429ba3b"
+                "reference": "6ac86cdcf6bbc2e0c50408fff7cafa7a5445a8fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-bundle/zipball/ece8c34dfdefa24f266b11ae9afadc595429ba3b",
-                "reference": "ece8c34dfdefa24f266b11ae9afadc595429ba3b",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-bundle/zipball/6ac86cdcf6bbc2e0c50408fff7cafa7a5445a8fb",
+                "reference": "6ac86cdcf6bbc2e0c50408fff7cafa7a5445a8fb",
                 "shasum": ""
             },
             "require": {
@@ -2230,7 +2230,7 @@
                 "monolog/monolog": "~1.11",
                 "php": "^5.6|^7.0",
                 "sensio/framework-extra-bundle": "~3",
-                "surfnet/stepup-saml-bundle": "dev-feature/specific-error-pages as 3.0.0",
+                "surfnet/stepup-saml-bundle": "^4.0",
                 "symfony/config": "^2.7",
                 "symfony/dependency-injection": "^2.7",
                 "symfony/form": "^2.7",
@@ -2264,7 +2264,7 @@
                 "suaas",
                 "surfnet"
             ],
-            "time": "2018-03-15T14:23:07+00:00"
+            "time": "2018-03-22T14:15:12+00:00"
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
@@ -2322,16 +2322,16 @@
         },
         {
             "name": "surfnet/stepup-saml-bundle",
-            "version": "dev-feature/specific-error-pages",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-saml-bundle.git",
-                "reference": "322378f48a168d8d1eb9281af4772ba61c63ca6a"
+                "reference": "9bb7098248c7b60c8b2cbc74d996b027de69e68a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-saml-bundle/zipball/322378f48a168d8d1eb9281af4772ba61c63ca6a",
-                "reference": "322378f48a168d8d1eb9281af4772ba61c63ca6a",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-saml-bundle/zipball/9bb7098248c7b60c8b2cbc74d996b027de69e68a",
+                "reference": "9bb7098248c7b60c8b2cbc74d996b027de69e68a",
                 "shasum": ""
             },
             "require": {
@@ -2366,7 +2366,7 @@
                 "stepup",
                 "surfnet"
             ],
-            "time": "2018-03-15T08:14:44+00:00"
+            "time": "2018-03-21T09:35:58+00:00"
         },
         {
             "name": "surfnet/stepup-u2f-bundle",
@@ -4609,26 +4609,11 @@
             "time": "2015-05-27T22:58:02+00:00"
         }
     ],
-    "aliases": [
-        {
-            "alias": "3.0.0",
-            "alias_normalized": "3.0.0.0",
-            "version": "dev-feature/specific-error-pages",
-            "package": "surfnet/stepup-bundle"
-        },
-        {
-            "alias": "3.0.0",
-            "alias_normalized": "3.0.0.0",
-            "version": "dev-feature/specific-error-pages",
-            "package": "surfnet/stepup-saml-bundle"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "mopa/bootstrap-bundle": 5,
-        "surfnet/stepup-bundle": 20,
-        "surfnet/stepup-u2f-bundle": 20,
-        "surfnet/stepup-saml-bundle": 20
+        "surfnet/stepup-u2f-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
