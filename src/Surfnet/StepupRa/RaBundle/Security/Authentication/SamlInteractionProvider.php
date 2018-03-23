@@ -25,8 +25,8 @@ use Surfnet\SamlBundle\Http\RedirectBinding;
 use Surfnet\SamlBundle\SAML2\AuthnRequestFactory;
 use Surfnet\StepupBundle\Service\LoaResolutionService;
 use Surfnet\StepupBundle\Value\Loa;
+use Surfnet\StepupRa\RaBundle\Exception\LoaTooLowException;
 use Surfnet\StepupRa\RaBundle\Exception\UnexpectedIssuerException;
-use Surfnet\StepupRa\RaBundle\Security\Exception\UnmetLoaException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
@@ -116,9 +116,9 @@ class SamlInteractionProvider
     /**
      * @param Request $request
      * @return \SAML2\Assertion
-     * @throws \Surfnet\StepupRa\RaBundle\Security\Exception\UnmetLoaException When required LoA is not met by response
-     * @throws \SAML2\Response\Exception\PreconditionNotMetException
-     * @throws \Symfony\Component\Security\Core\Exception\AuthenticationException When response LoA cannot be resolved
+     * @throws LoaTooLowException When required LoA is not met by response
+     * @throws AuthenticationException When response LoA cannot be resolved
+     * @throws UnexpectedIssuerException
      */
     public function processSamlResponse(Request $request)
     {
@@ -145,7 +145,7 @@ class SamlInteractionProvider
         }
 
         if (!$this->loaResolutionService->getLoa($authnContextClassRef)->canSatisfyLoa($this->requiredLoa)) {
-            throw new UnmetLoaException(
+            throw new LoaTooLowException(
                 sprintf(
                     "Gateway responded with LoA '%s', which is lower than required LoA '%s'",
                     $assertion->getAuthnContextClassRef(),

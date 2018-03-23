@@ -20,6 +20,17 @@ namespace Surfnet\StepupRa\RaBundle\Exception;
 
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
-final class UnexpectedIssuerException extends AuthenticationException
+/**
+ * Exception for the case where a user is not granted RA privileges.
+ *
+ * This exception extends AuthenticationException, while technically this is
+ * an authorization error. This exception is thrown from inside the SAML
+ * authentication handler components, and Symfony does not allow authorization
+ * there. This could be refactored but for now we accept an authentication
+ * exception while it should actually be an authorization exception.
+ *
+ * @package Surfnet\StepupRa\RaBundle\Exception
+ */
+final class UserNotRaException extends AuthenticationException
 {
 }
