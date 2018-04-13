@@ -100,6 +100,8 @@ surfnet_stepup_middleware_client:
 
 surfnet_saml:
     hosted:
+        attribute_dictionary:
+            ignore_unknown_attributes: true
         service_provider:
             enabled: true
             assertion_consumer_route: ra_serviceprovider_consume_assertion
