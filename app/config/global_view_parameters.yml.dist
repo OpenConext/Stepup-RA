@@ -2,6 +2,6 @@
 # A typical example would be showing locale-dependent external URLs
 # Strings containing '%' should be escaped by prepending '%'
 parameters:
-    manual_url:
-        en_GB: "https://wiki.surfnet.nl/display/surfconextdev/Manual+RA+Management+portal"
-        nl_NL: "https://wiki.surfnet.nl/display/surfconextdev/Handleiding+RA+Management+portal"
+    support_url:
+        en_GB: "https://support.example.org"
+        nl_NL: "https://support.example.org"

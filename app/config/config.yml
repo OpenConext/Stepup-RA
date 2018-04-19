@@ -35,7 +35,7 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    exception_controller:  SurfnetStepupBundle:Exception:show
+    exception_controller: SurfnetStepupRaRaBundle:Exception:show
     globals:
         global_view_parameters: "@ra.service.global_view_parameters"
         institutionConfigurationOptions: "@ra.twig.institution_configuration_options"
@@ -100,6 +100,8 @@ surfnet_stepup_middleware_client:
 
 surfnet_saml:
     hosted:
+        attribute_dictionary:
+            ignore_unknown_attributes: true
         service_provider:
             enabled: true
             assertion_consumer_route: ra_serviceprovider_consume_assertion

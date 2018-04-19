@@ -235,7 +235,7 @@ services:
         arguments:
             - "@translator"
             - "%locales%"
-            - "%manual_url%"
+            - "%support_url%"
 
     # Repositories
     ra.repository.vetting_procedure:

@@ -23,7 +23,8 @@ use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
 use Surfnet\SamlBundle\SAML2\Response\AssertionAdapter;
 use Surfnet\StepupRa\RaBundle\Assert;
 use Surfnet\StepupRa\RaBundle\Exception\InconsistentStateException;
-use Surfnet\StepupRa\RaBundle\Exception\UnexpectedIssuerException;
+use Surfnet\StepupRa\RaBundle\Exception\MissingRequiredAttributeException;
+use Surfnet\StepupRa\RaBundle\Exception\UserNotRaException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
@@ -89,7 +90,7 @@ class SamlProvider implements AuthenticationProviderInterface
 
         // if no credentials can be found, we're done.
         if (!$raCredentials) {
-            throw new BadCredentialsException(
+            throw new AccessDeniedException(
                 'The Identity is not registered as (S)RA(A) and therefor does not have access to this application'
             );
         }
@@ -132,7 +133,12 @@ class SamlProvider implements AuthenticationProviderInterface
         $values = $translatedAssertion->getAttributeValue($attribute);
 
         if (empty($values)) {
-            throw new BadCredentialsException(sprintf('Missing value for required attribute "%s"', $attribute));
+            throw new MissingRequiredAttributeException(
+                sprintf(
+                    'Missing a required SAML attribute. This application requires the "%s" attribute to function.',
+                    $attribute
+                )
+            );
         }
 
         // see https://www.pivotaltracker.com/story/show/121296389
@@ -155,7 +161,7 @@ class SamlProvider implements AuthenticationProviderInterface
 
             $this->logger->warning($message);
 
-            throw new BadCredentialsException($message);
+            throw new MissingRequiredAttributeException($message);
         }
 
         return $value;

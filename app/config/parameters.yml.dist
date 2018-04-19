@@ -8,7 +8,7 @@ parameters:
 
     default_locale:    en_GB
     locales:           [nl_NL, en_GB]
-    locale_cookie_domain:   surfconext.nl
+    locale_cookie_domain:   example.org
     secret:            NotSoSecretReplaceMe!
 
     debug_toolbar:          true
@@ -44,7 +44,6 @@ parameters:
                 loa: 3
             tiqr:
                 loa: 3
-    graylog_hostname: 'g2-dev.stepup.coin.surf.net'
     asset_version: 1
 
     stepup_loa_loa1: https://gateway.tld/authentication/loa1
