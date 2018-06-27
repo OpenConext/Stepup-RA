@@ -30,6 +30,7 @@ use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 class SamlProvider implements AuthenticationProviderInterface
