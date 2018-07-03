@@ -61,9 +61,9 @@ class YubikeyController extends SecondFactorController
             }
 
             if ($result->wasOtpInvalid()) {
-                $form->get('otp')->addError(new FormError('ra.verify_yubikey_command.otp.otp_invalid'));
+                $form->addError(new FormError('ra.verify_yubikey_command.otp.otp_invalid'));
             } elseif ($result->didOtpVerificationFail()) {
-                $form->get('otp')->addError(new FormError('ra.verify_yubikey_command.otp.verification_error'));
+                $form->addError(new FormError('ra.verify_yubikey_command.otp.verification_error'));
             } else {
                 $form->addError(new FormError('ra.prove_yubikey_possession.different_yubikey_used'));
             }
