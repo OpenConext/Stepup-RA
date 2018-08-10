@@ -1362,7 +1362,7 @@ The token is now activated and ready to be used.</target>
       </trans-unit>
       <trans-unit id="e3fdeb24bc6d32318d6612b0c02d8a4c9cc28863" resname="stepup.error.user_not_ra.description">
         <source>stepup.error.user_not_ra.description</source>
-        <target>You are not authorised to sign in. You are fully authenticated but not granted RA privileges.</target>
+        <target>Authentication was successful, but you are not authorised to use the RA management portal.</target>
         <jms:reference-file line="39">/../src/Surfnet/StepupRa/RaBundle/Controller/ExceptionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c32d6032c1e192b50f5ecbdfc12a7970a402a386" resname="stepup.error.user_not_ra.title">

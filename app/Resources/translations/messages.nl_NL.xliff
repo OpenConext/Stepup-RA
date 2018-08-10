@@ -1362,7 +1362,7 @@ Het token is nu geactiveerd en klaar voor gebruik.</target>
       </trans-unit>
       <trans-unit id="e3fdeb24bc6d32318d6612b0c02d8a4c9cc28863" resname="stepup.error.user_not_ra.description">
         <source>stepup.error.user_not_ra.description</source>
-        <target>Je hebt niet de juiste rechten om in te mogen loggen. Je account is niet gemachtigd om in te loggen als registration authority (RA).</target>
+        <target>Het inloggen is geslaagd, maar je bent niet geautoriseerd om het RA management portal te gebruiken.</target>
         <jms:reference-file line="39">/../src/Surfnet/StepupRa/RaBundle/Controller/ExceptionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c32d6032c1e192b50f5ecbdfc12a7970a402a386" resname="stepup.error.user_not_ra.title">
