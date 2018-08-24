@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
+use Surfnet\StepupRa\RaBundle\Form\Type\VerifyYubikeyPublicIdType;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +50,7 @@ class YubikeyController extends SecondFactorController
         }
 
         $command = new VerifyYubikeyPublicIdCommand();
-        $form = $this->createForm('ra_verify_yubikey_public_id', $command)->handleRequest($request);
+        $form = $this->createForm(VerifyYubikeyPublicIdType::class, $command)->handleRequest($request);
 
         if ($form->isValid()) {
             $result = $this->getVettingService()->verifyYubikeyPublicId($procedureId, $command);

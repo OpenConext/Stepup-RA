@@ -26,6 +26,7 @@ use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Form\Type\StartVettingProcedureType;
+use Surfnet\StepupRa\RaBundle\Form\Type\VerifyIdentityType;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
@@ -202,7 +203,7 @@ class VettingController extends Controller
         }
 
         $command = new VerifyIdentityCommand();
-        $form = $this->createForm('ra_verify_identity', $command)->handleRequest($request);
+        $form = $this->createForm(VerifyIdentityType::class, $command)->handleRequest($request);
 
         /** @var SubmitButton $cancelButton */
         $cancelButton = $form->get('cancel');

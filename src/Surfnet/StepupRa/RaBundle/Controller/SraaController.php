@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
+use Surfnet\StepupRa\RaBundle\Form\Type\InstitutionSelectionType;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,7 +43,7 @@ class SraaController extends Controller
         $command = new SelectInstitutionCommand();
         $command->institution = $identity->institution;
 
-        $form = $this->createForm('sraa_institution_select', $command);
+        $form = $this->createForm(InstitutionSelectionType::class, $command);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

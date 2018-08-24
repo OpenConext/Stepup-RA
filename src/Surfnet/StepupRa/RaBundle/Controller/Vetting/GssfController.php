@@ -24,8 +24,8 @@ use Surfnet\SamlBundle\Http\XMLResponse;
 use Surfnet\SamlBundle\SAML2\AuthnRequestFactory;
 use Surfnet\SamlBundle\SAML2\Response\Assertion\InResponseTo;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
+use Surfnet\StepupRa\RaBundle\Form\Type\InitiateGssfType;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
-use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -258,7 +258,7 @@ final class GssfController extends SecondFactorController
         $secondFactorConfig = $collection->getByIdentifier($provider);
 
         $form = $this->createForm(
-            'ra_initiate_gssf',
+            InitiateGssfType::class,
             null,
             [
                 'procedureId' => $procedureId,

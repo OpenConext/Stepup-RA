@@ -23,6 +23,8 @@ use Surfnet\StepupBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupBundle\Command\VerifyPhoneNumberCommand;
 use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
+use Surfnet\StepupRa\RaBundle\Form\Type\SendSmsChallengeType;
+use Surfnet\StepupRa\RaBundle\Form\Type\VerifyPhoneNumberType;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\SubmitButton;
@@ -53,7 +55,7 @@ class SmsController extends SecondFactorController
         }
 
         $command = new SendSmsChallengeCommand();
-        $form = $this->createForm('ra_send_sms_challenge', $command)->handleRequest($request);
+        $form = $this->createForm(SendSmsChallengeType::class, $command)->handleRequest($request);
 
         $vettingService = $this->getVettingService();
         $phoneNumber = InternationalPhoneNumber::fromStringFormat(
@@ -110,7 +112,7 @@ class SmsController extends SecondFactorController
 
         $command = new VerifyPossessionOfPhoneCommand();
         $form = $this
-            ->createForm('ra_verify_phone_number', $command, ['procedureId' => $procedureId])
+            ->createForm(VerifyPhoneNumberType::class, $command, ['procedureId' => $procedureId])
             ->handleRequest($request);
 
         /** @var SubmitButton $cancelButton */
