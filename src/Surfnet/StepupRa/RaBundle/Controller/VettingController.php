@@ -25,6 +25,7 @@ use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
+use Surfnet\StepupRa\RaBundle\Form\Type\StartVettingProcedureType;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
@@ -59,7 +60,7 @@ class VettingController extends Controller
 
         $command = new StartVettingProcedureCommand();
 
-        $form = $this->createForm('ra_start_vetting_procedure', $command)->handleRequest($request);
+        $form = $this->createForm(StartVettingProcedureType::class, $command)->handleRequest($request);
 
         if (!$form->isValid()) {
             $logger->notice('No search submitted, displaying search by registration code form');

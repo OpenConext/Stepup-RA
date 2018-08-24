@@ -19,6 +19,8 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,13 +32,13 @@ class CreateRaLocationType extends AbstractType
             ->add('name', null, [
                 'label' => 'ra.form.ra_create_ra_location.label.name',
             ])
-            ->add('location', 'textarea', [
+            ->add('location', TextareaType::class, [
                 'label' => 'ra.form.ra_create_ra_location.label.location'
             ])
-            ->add('contactInformation', 'textarea', [
+            ->add('contactInformation', TextareaType::class, [
                 'label' => 'ra.form.ra_create_ra_location.label.contact_information'
             ])
-            ->add('create_ra_location', 'submit', [
+            ->add('create_ra_location', SubmitType::class, [
                 'label' => 'ra.form.ra_create_ra_location.label.create_ra_location',
                 'attr' => ['class' => 'btn btn-primary pull-right create-ra-location']
             ])
@@ -59,7 +61,7 @@ class CreateRaLocationType extends AbstractType
         ]);
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ra_create_ra_location';
     }

@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,8 +28,8 @@ class RevokeSecondFactorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('secondFactorId', 'hidden')
-            ->add('identityId', 'hidden');
+            ->add('secondFactorId', HiddenType::class)
+            ->add('identityId', HiddenType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -38,7 +39,7 @@ class RevokeSecondFactorType extends AbstractType
         ]);
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ra_revoke_second_factor';
     }

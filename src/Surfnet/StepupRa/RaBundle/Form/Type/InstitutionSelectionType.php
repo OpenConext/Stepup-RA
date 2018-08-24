@@ -20,6 +20,8 @@ namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Surfnet\StepupRa\RaBundle\Form\Extension\InstitutionListingChoiceList;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -35,12 +37,12 @@ class InstitutionSelectionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('institution', 'choice', [
+            ->add('institution', ChoiceType::class, [
                 'choices' => $this->institutionListingChoiceList->create(),
                 'choices_as_values' => true,
                 'label' => 'ra.form.ra_select_institution.label.institution',
             ])
-            ->add('select_and_apply', 'submit', [
+            ->add('select_and_apply', SubmitType::class, [
                 'label' => 'ra.form.ra_select_institution.button.select_and_apply',
                 'attr'  => ['class' => 'btn btn-primary pull-right'],
             ]);
@@ -58,7 +60,7 @@ class InstitutionSelectionType extends AbstractType
      *
      * @return string The name of this type
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sraa_institution_select';
     }

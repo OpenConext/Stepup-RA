@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
@@ -43,7 +44,7 @@ class InitiateGssfType extends AbstractType
         );
 
         $builder
-            ->add('submit', 'submit', [
+            ->add('submit', SubmitType::class, [
                 'attr'  => ['class' => 'btn btn-primary'],
                 /** @Ignore */
                 'label' => $options['label']
@@ -58,7 +59,7 @@ class InitiateGssfType extends AbstractType
         $resolver->setAllowedTypes('provider', 'string');
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ra_initiate_gssf';
     }

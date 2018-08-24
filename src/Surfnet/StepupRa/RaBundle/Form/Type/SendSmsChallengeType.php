@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,7 +27,7 @@ class SendSmsChallengeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('send-challenge', 'submit', [
+        $builder->add('send-challenge', SubmitType::class, [
             'label' => 'ra.form.ra_send_sms_challenge.button.send_challenge',
             'attr' => [ 'class' => 'btn btn-primary' ],
         ]);
@@ -39,7 +40,7 @@ class SendSmsChallengeType extends AbstractType
         ]);
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ra_send_sms_challenge';
     }

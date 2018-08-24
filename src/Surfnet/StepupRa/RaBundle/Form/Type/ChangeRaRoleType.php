@@ -20,20 +20,22 @@ namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Surfnet\StepupRa\RaBundle\Form\Extension\RaRoleChoiceList;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ChangeRaRoleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('role', 'choice', [
+            ->add('role', ChoiceType::class, [
                 'label'       => 'ra.management.form.change_ra_role.label.role',
                 'choices' => RaRoleChoiceList::create(),
                 'choices_as_values' => true,
             ])
-            ->add('create_ra', 'submit', [
+            ->add('create_ra', SubmitType::class, [
                 'label' => 'ra.management.form.change_ra_role.label.save',
                 'attr'  => ['class' => 'btn btn-primary pull-right change-ra-role']
             ])
@@ -44,14 +46,14 @@ class ChangeRaRoleType extends AbstractType
             ]);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand'
         ]);
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ra_management_change_ra_role';
     }
