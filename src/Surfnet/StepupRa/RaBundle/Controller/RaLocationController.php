@@ -86,7 +86,7 @@ final class RaLocationController extends Controller
 
         $form = $this->createForm(CreateRaLocationType::class, $command)->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $logger->debug('RA Location form submitted, start processing command');
 
             $success = $this->getRaLocationService()->create($command);
@@ -147,7 +147,7 @@ final class RaLocationController extends Controller
 
         $form = $this->createForm(ChangeRaLocationType::class, $command)->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $logger->debug('RA Location form submitted, start processing command');
 
             $success = $this->getRaLocationService()->change($command);

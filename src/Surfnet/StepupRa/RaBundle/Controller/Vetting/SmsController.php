@@ -66,7 +66,7 @@ class SmsController extends SecondFactorController
         $maximumOtpRequests = $vettingService->getSmsMaximumOtpRequestsCount();
         $viewVariables = ['otpRequestsRemaining' => $otpRequestsRemaining, 'maximumOtpRequests' => $maximumOtpRequests];
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             $logger->notice('Form has not been submitted, not sending SMS, rendering Send SMS Challenge page');
 
             return array_merge(
@@ -124,7 +124,7 @@ class SmsController extends SecondFactorController
             return $this->redirectToRoute('ra_vetting_search');
         }
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             $logger->notice(
                 'SMS OTP was not submitted through form, rendering Proof of Possession of SMS Second Factor page'
             );

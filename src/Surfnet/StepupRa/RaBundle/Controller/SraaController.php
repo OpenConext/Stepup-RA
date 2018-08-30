@@ -46,7 +46,7 @@ class SraaController extends Controller
         $form = $this->createForm(InstitutionSelectionType::class, $command);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $institutionConfigurationOptions = $this->get('ra.service.institution_configuration_options')
                 ->getInstitutionConfigurationOptionsFor($command->institution);
             $token->changeInstitutionScope($command->institution, $institutionConfigurationOptions);

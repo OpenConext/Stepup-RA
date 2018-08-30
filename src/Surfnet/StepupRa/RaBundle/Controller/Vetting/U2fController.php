@@ -120,7 +120,7 @@ class U2fController extends SecondFactorController
             )
             ->handleRequest($request);
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             return $this->render('SurfnetStepupRaRaBundle:Vetting/U2f:authentication.html.twig', [
                 'authenticationFailed' => true,
                 'procedureId' => $procedureId,

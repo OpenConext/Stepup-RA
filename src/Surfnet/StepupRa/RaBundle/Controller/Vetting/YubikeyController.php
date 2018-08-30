@@ -52,7 +52,7 @@ class YubikeyController extends SecondFactorController
         $command = new VerifyYubikeyPublicIdCommand();
         $form = $this->createForm(VerifyYubikeyPublicIdType::class, $command)->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $result = $this->getVettingService()->verifyYubikeyPublicId($procedureId, $command);
 
             if ($result->didPublicIdMatch()) {

@@ -164,7 +164,7 @@ class RaManagementController extends Controller
         $command->institution = $raCandidate->institution;
 
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $logger->debug('Accreditation form submitted, start processing command');
 
             $success = $this->getRaCandidateService()->accreditCandidate($command);
@@ -214,7 +214,7 @@ class RaManagementController extends Controller
         $command->contactInformation = $raListing->contactInformation;
 
         $form = $this->createForm(AmendRegistrationAuthorityInformationType::class, $command)->handleRequest($request);
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $logger->notice(sprintf("RA(A) '%s' information amendment form submitted, processing", $identityId));
 
             if ($this->get('ra.service.ra')->amendRegistrationAuthorityInformation($command)) {
@@ -258,7 +258,7 @@ class RaManagementController extends Controller
         $command->role        = $raListing->role;
 
         $form = $this->createForm(ChangeRaRoleType::class, $command)->handleRequest($request);
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $logger->notice(sprintf('RA(A) "%s" Change Role form submitted, processing', $identityId));
 
             if ($this->get('ra.service.ra')->changeRegistrationAuthorityRole($command)) {
@@ -300,7 +300,7 @@ class RaManagementController extends Controller
         $command->identityId = $identityId;
 
         $form = $this->createForm(RetractRegistrationAuthorityType::class, $command)->handleRequest($request);
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('cancel')->isClicked()) {
                 $logger->notice('Retraction of registration authority cancelled');
                 return $this->redirectToRoute('ra_management_manage');

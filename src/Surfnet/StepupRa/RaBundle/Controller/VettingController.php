@@ -63,7 +63,7 @@ class VettingController extends Controller
 
         $form = $this->createForm(StartVettingProcedureType::class, $command)->handleRequest($request);
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             $logger->notice('No search submitted, displaying search by registration code form');
 
             return ['form' => $form->createView()];
@@ -189,6 +189,9 @@ class VettingController extends Controller
      * @param Request $request
      * @param string $procedureId
      * @return array|Response
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function verifyIdentityAction(Request $request, $procedureId)
     {
@@ -225,7 +228,7 @@ class VettingController extends Controller
             return ['commonName' => $commonName, 'form' => $form->createView()];
         };
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             $logger->notice('Verify Identity Form not submitted, displaying form');
 
             return $showForm();
