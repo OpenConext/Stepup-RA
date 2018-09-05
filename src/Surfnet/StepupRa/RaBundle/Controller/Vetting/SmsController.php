@@ -82,7 +82,7 @@ class SmsController extends SecondFactorController
             return $this->redirectToRoute('ra_vetting_sms_prove_possession', ['procedureId' => $procedureId]);
         }
 
-        $form->addError(new FormError('ra.sms_send_challenge.send_sms_challenge_failed'));
+        $this->addFlash('error', 'ra.sms_send_challenge.send_sms_challenge_failed');
 
         $logger->notice(
             'SMS Challenge could not be sent, added error to page to notify user and re-rendering send challenge page'
@@ -140,11 +140,11 @@ class SmsController extends SecondFactorController
                 ['procedureId' => $procedureId]
             );
         } elseif ($verification->didOtpExpire()) {
-            $form->addError(new FormError('ra.prove_phone_possession.challenge_expired'));
+            $this->addFlash('error', 'ra.prove_phone_possession.challenge_expired');
         } elseif ($verification->wasAttemptedTooManyTimes()) {
-            $form->addError(new FormError('ra.prove_phone_possession.too_many_attempts'));
+            $this->addFlash('error', 'ra.prove_phone_possession.too_many_attempts');
         } else {
-            $form->addError(new FormError('ra.prove_phone_possession.challenge_response_incorrect'));
+            $this->addFlash('error', 'ra.prove_phone_possession.challenge_response_incorrect');
         }
 
         $logger->notice('SMS OTP verification failed - Proof of Possession denied, added error to form');

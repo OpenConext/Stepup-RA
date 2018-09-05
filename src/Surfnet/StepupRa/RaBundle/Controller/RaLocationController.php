@@ -95,7 +95,7 @@ final class RaLocationController extends Controller
             }
 
             $logger->debug('RA Location creation failed, adding error to form');
-            $form->addError(new FormError('ra.create_ra_location.error.middleware_command_failed'));
+            $this->addFlash('error', 'ra.create_ra_location.error.middleware_command_failed');
         }
 
         return $this->render('SurfnetStepupRaRaBundle:RaLocation:create.html.twig', [
@@ -156,7 +156,7 @@ final class RaLocationController extends Controller
             }
 
             $logger->debug('RA Location creation failed, adding error to form');
-            $form->addError(new FormError('ra.create_ra_location.error.middleware_command_failed'));
+            $this->addFlash('error', 'ra.create_ra_location.error.middleware_command_failed');
         }
 
         return $this->render('SurfnetStepupRaRaBundle:RaLocation:change.html.twig', [

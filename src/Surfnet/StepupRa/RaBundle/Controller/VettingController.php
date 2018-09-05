@@ -71,14 +71,14 @@ class VettingController extends Controller
             ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode);
 
         if ($secondFactor === null) {
-            $form->addError(new FormError('ra.form.start_vetting_procedure.unknown_registration_code'));
+            $this->addFlash('error', 'ra.form.start_vetting_procedure.unknown_registration_code');
             $logger->notice('Cannot start new vetting procedure, no second factor found');
 
             return ['form' => $form->createView()];
         }
 
         if (!$this->isGranted('ROLE_SRAA') && $secondFactor->institution !== $this->getIdentity()->institution) {
-            $form->addError(new FormError('ra.form.start_vetting_procedure.different_institution_error'));
+            $this->addFlash('error', 'ra.form.start_vetting_procedure.different_institution_error');
             $logger->notice(
                 'Cannot start new vetting procedure, registrant belongs to a different institution than RA'
             );
@@ -111,16 +111,15 @@ class VettingController extends Controller
         $command->secondFactor = $secondFactor;
 
         if ($this->getVettingService()->isExpiredRegistrationCode($command)) {
-            $form->addError(
-                new FormError(
-                    $this->getTranslator()
-                        ->trans(
-                            'ra.verify_identity.registration_code_expired',
-                            [
-                                '%self_service_url%' => $this->getParameter('surfnet_stepup_ra.self_service_url'),
-                            ]
-                        )
-                )
+            $this->addFlash(
+                'error',
+                $this->getTranslator()
+                    ->trans(
+                        'ra.verify_identity.registration_code_expired',
+                        [
+                            '%self_service_url%' => $this->getParameter('surfnet_stepup_ra.self_service_url'),
+                        ]
+                    )
             );
 
             $logger->notice(
@@ -132,7 +131,7 @@ class VettingController extends Controller
         }
 
         if (!$this->getVettingService()->isLoaSufficientToStartProcedure($command)) {
-            $form->addError(new FormError('ra.form.start_vetting_procedure.loa_insufficient'));
+            $this->addFlash('error', 'ra.form.start_vetting_procedure.loa_insufficient');
 
             $logger->notice('Cannot start new vetting procedure, Authority LoA is insufficient');
 
@@ -217,7 +216,7 @@ class VettingController extends Controller
 
         $showForm = function ($error = null) use ($form, $commonName) {
             if ($error) {
-                $form->addError(new FormError($error));
+                $this->addFlash('error', $error);
             }
 
             return ['commonName' => $commonName, 'form' => $form->createView()];

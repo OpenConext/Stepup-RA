@@ -176,7 +176,7 @@ class RaManagementController extends Controller
             }
 
             $logger->debug('Identity Accreditation failed, adding error to form');
-            $form->addError(new FormError('ra.management.create_ra.error.middleware_command_failed'));
+            $this->addFlash('error', 'ra.management.create_ra.error.middleware_command_failed');
         }
 
         return $this->render('SurfnetStepupRaRaBundle:RaManagement:createRa.html.twig', [
@@ -221,7 +221,7 @@ class RaManagementController extends Controller
             }
 
             $logger->notice(sprintf("Information of RA(A) '%s' failed to be amended, informing user", $identityId));
-            $form->addError(new FormError('ra.management.amend_ra_info.error.middleware_command_failed'));
+            $this->addFlash('error', 'ra.management.amend_ra_info.error.middleware_command_failed');
         }
 
         return $this->render('SurfnetStepupRaRaBundle:RaManagement:amendRaInformation.html.twig', [
@@ -265,7 +265,7 @@ class RaManagementController extends Controller
             }
 
             $logger->notice(sprintf('Role of RA(A) "%s" could not be changed, informing user', $identityId));
-            $form->addError(new FormError('ra.management.change_ra_role.middleware_command_failed'));
+            $this->addFlash('error', 'ra.management.change_ra_role.middleware_command_failed');
         }
 
         return $this->render('SurfnetStepupRaRaBundle:RaManagement:changeRaRole.html.twig', [
@@ -315,7 +315,7 @@ class RaManagementController extends Controller
                 'Could not retract Registration Authority credentials for identity "%s"',
                 $identityId
             ));
-            $form->addError(new FormError('ra.management.retract_ra.middleware_command_failed'));
+            $this->addFlash('error', 'ra.management.retract_ra.middleware_command_failed');
         }
 
         return $this->render('SurfnetStepupRaRaBundle:RaManagement:confirmRetractRa.html.twig', [
