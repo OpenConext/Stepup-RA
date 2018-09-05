@@ -42,15 +42,11 @@ class ChangeRaLocationType extends AbstractType
                 'label' => 'ra.management.form.change_ra_location.label.change_ra_location',
                 'attr' => ['class' => 'btn btn-primary pull-right change-ra-location']
             ])
-            ->add(
-                'cancel',
-                'anchor',
-                [
-                    'label' => 'ra.management.form.change_ra_location.label.cancel',
-                    'route' => 'ra_locations_manage',
-                    'attr'  => ['class' => 'btn btn-link pull-right cancel']
-                ]
-            )
+            ->add('cancel', AnchorType::class, [
+                'label' => 'ra.management.form.change_ra_location.label.cancel',
+                'route' => 'ra_locations_manage',
+                'attr' => ['class' => 'btn btn-link pull-right cancel'],
+            ])
         ;
     }
 

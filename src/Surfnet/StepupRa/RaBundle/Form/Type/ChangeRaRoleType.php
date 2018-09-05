@@ -39,7 +39,7 @@ class ChangeRaRoleType extends AbstractType
                 'label' => 'ra.management.form.change_ra_role.label.save',
                 'attr'  => ['class' => 'btn btn-primary pull-right change-ra-role']
             ])
-            ->add('cancel', 'anchor', [
+            ->add('cancel', AnchorType::class, [
                 'label' => 'ra.management.form.create_ra.label.cancel',
                 'route' => 'ra_management_ra_candidate_search',
                 'attr'  => ['class' => 'btn btn-link pull-right cancel']

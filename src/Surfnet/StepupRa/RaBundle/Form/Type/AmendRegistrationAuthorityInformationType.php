@@ -39,15 +39,11 @@ class AmendRegistrationAuthorityInformationType extends AbstractType
                 'label' => 'ra.management.form.amend_ra_info.label.amend_ra_info',
                 'attr' => ['class' => 'btn btn-primary pull-right']
             ])
-            ->add(
-                'cancel',
-                'anchor',
-                [
-                    'label' => 'ra.management.form.amend_ra_info.label.cancel',
-                    'route' => 'ra_management_manage',
-                    'attr'  => ['class' => 'btn btn-link pull-right cancel']
-                ]
-            )
+            ->add('cancel', AnchorType::class, [
+                'label' => 'ra.management.form.amend_ra_info.label.cancel',
+                'route' => 'ra_management_manage',
+                'attr'  => ['class' => 'btn btn-link pull-right cancel']
+            ])
         ;
     }
 

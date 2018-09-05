@@ -39,7 +39,7 @@ class VerifyPhoneNumberType extends AbstractType
             'label' => 'ra.form.ra_verify_phone_number.button.verify_challenge',
             'attr' => [ 'class' => 'btn btn-primary pull-right' ],
         ]);
-        $builder->add('resendChallenge', 'anchor', [
+        $builder->add('resendChallenge', AnchorType::class, [
             'label' => 'ra.form.ra_verify_phone_number.button.resend_challenge',
             'attr' => [ 'class' => 'btn btn-default' ],
             'route' => 'ra_vetting_sms_send_challenge',

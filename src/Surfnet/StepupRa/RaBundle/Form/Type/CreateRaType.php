@@ -46,15 +46,11 @@ class CreateRaType extends AbstractType
                 'label' => 'ra.management.form.create_ra.label.create_ra',
                 'attr' => ['class' => 'btn btn-primary pull-right create-ra']
             ])
-            ->add(
-                'cancel',
-                'anchor',
-                [
-                    'label' => 'ra.management.form.create_ra.label.cancel',
-                    'route' => 'ra_management_ra_candidate_search',
-                    'attr'  => ['class' => 'btn btn-link pull-right cancel']
-                ]
-            )
+            ->add('cancel', AnchorType::class, [
+                'label' => 'ra.management.form.create_ra.label.cancel',
+                'route' => 'ra_management_ra_candidate_search',
+                'attr'  => ['class' => 'btn btn-link pull-right cancel']
+            ])
         ;
     }
 

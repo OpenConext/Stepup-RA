@@ -42,15 +42,11 @@ class CreateRaLocationType extends AbstractType
                 'label' => 'ra.form.ra_create_ra_location.label.create_ra_location',
                 'attr' => ['class' => 'btn btn-primary pull-right create-ra-location']
             ])
-            ->add(
-                'cancel',
-                'anchor',
-                [
-                    'label' => 'ra.form.ra_create_ra_location.label.cancel',
-                    'route' => 'ra_locations_manage',
-                    'attr'  => ['class' => 'btn btn-link pull-right cancel']
-                ]
-            )
+            ->add('cancel', AnchorType::class, [
+                'label' => 'ra.form.ra_create_ra_location.label.cancel',
+                'route' => 'ra_locations_manage',
+                'attr'  => ['class' => 'btn btn-link pull-right cancel']
+            ])
         ;
     }
 
