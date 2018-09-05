@@ -26,6 +26,7 @@ use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\AmendRegistrationAuthorityInformationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaRoleType;
+use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
