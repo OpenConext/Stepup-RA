@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupBundle\Command\SwitchLocaleCommand;
+use Surfnet\StepupBundle\Form\Type\SwitchLocaleType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -56,13 +57,13 @@ final class LocaleController extends Controller
         $command->identityId = $identity->id;
 
         $form = $this->createForm(
-            'stepup_switch_locale',
+            SwitchLocaleType::class,
             $command,
             ['route' => 'ra_switch_locale', 'route_parameters' => ['return_url' => $returnUrl]]
         );
         $form->handleRequest($request);
 
-        if (!$form->isValid()) {
+        if ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('error', $this->get('translator')->trans('ra.flash.invalid_switch_locale_form'));
             $logger->error('The switch locale form unexpectedly contained invalid data');
             return $this->redirect($returnUrl);

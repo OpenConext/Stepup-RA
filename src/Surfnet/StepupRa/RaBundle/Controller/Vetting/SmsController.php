@@ -23,6 +23,8 @@ use Surfnet\StepupBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupBundle\Command\VerifyPhoneNumberCommand;
 use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
+use Surfnet\StepupRa\RaBundle\Form\Type\SendSmsChallengeType;
+use Surfnet\StepupRa\RaBundle\Form\Type\VerifyPhoneNumberType;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\SubmitButton;
@@ -53,7 +55,7 @@ class SmsController extends SecondFactorController
         }
 
         $command = new SendSmsChallengeCommand();
-        $form = $this->createForm('ra_send_sms_challenge', $command)->handleRequest($request);
+        $form = $this->createForm(SendSmsChallengeType::class, $command)->handleRequest($request);
 
         $vettingService = $this->getVettingService();
         $phoneNumber = InternationalPhoneNumber::fromStringFormat(
@@ -64,7 +66,7 @@ class SmsController extends SecondFactorController
         $maximumOtpRequests = $vettingService->getSmsMaximumOtpRequestsCount();
         $viewVariables = ['otpRequestsRemaining' => $otpRequestsRemaining, 'maximumOtpRequests' => $maximumOtpRequests];
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             $logger->notice('Form has not been submitted, not sending SMS, rendering Send SMS Challenge page');
 
             return array_merge(
@@ -82,7 +84,7 @@ class SmsController extends SecondFactorController
             return $this->redirectToRoute('ra_vetting_sms_prove_possession', ['procedureId' => $procedureId]);
         }
 
-        $form->addError(new FormError('ra.sms_send_challenge.send_sms_challenge_failed'));
+        $this->addFlash('error', 'ra.sms_send_challenge.send_sms_challenge_failed');
 
         $logger->notice(
             'SMS Challenge could not be sent, added error to page to notify user and re-rendering send challenge page'
@@ -110,7 +112,7 @@ class SmsController extends SecondFactorController
 
         $command = new VerifyPossessionOfPhoneCommand();
         $form = $this
-            ->createForm('ra_verify_phone_number', $command, ['procedureId' => $procedureId])
+            ->createForm(VerifyPhoneNumberType::class, $command, ['procedureId' => $procedureId])
             ->handleRequest($request);
 
         /** @var SubmitButton $cancelButton */
@@ -122,7 +124,7 @@ class SmsController extends SecondFactorController
             return $this->redirectToRoute('ra_vetting_search');
         }
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             $logger->notice(
                 'SMS OTP was not submitted through form, rendering Proof of Possession of SMS Second Factor page'
             );
@@ -140,11 +142,11 @@ class SmsController extends SecondFactorController
                 ['procedureId' => $procedureId]
             );
         } elseif ($verification->didOtpExpire()) {
-            $form->addError(new FormError('ra.prove_phone_possession.challenge_expired'));
+            $this->addFlash('error', 'ra.prove_phone_possession.challenge_expired');
         } elseif ($verification->wasAttemptedTooManyTimes()) {
-            $form->addError(new FormError('ra.prove_phone_possession.too_many_attempts'));
+            $this->addFlash('error', 'ra.prove_phone_possession.too_many_attempts');
         } else {
-            $form->addError(new FormError('ra.prove_phone_possession.challenge_response_incorrect'));
+            $this->addFlash('error', 'ra.prove_phone_possession.challenge_response_incorrect');
         }
 
         $logger->notice('SMS OTP verification failed - Proof of Possession denied, added error to form');

@@ -19,3 +19,6 @@ This component is part of "Step-up Authentication as-a Service" and requires oth
 Clone the repository or download the archive to a directory. Install the dependencies by running `composer install`.
 
 Run `app/console mopa:bootstrap:symlink:less` to configure Bootstrap symlinks.
+
+## Release strategy
+Please read: https://github.com/OpenConext/Stepup-Deploy/wiki/Release-Management fro more information on the release strategy used in Stepup projects.

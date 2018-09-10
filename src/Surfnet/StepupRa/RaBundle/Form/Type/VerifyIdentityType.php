@@ -19,15 +19,17 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Length;
 
 class VerifyIdentityType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('documentNumber', 'text', [
+        $builder->add('documentNumber', TextType::class, [
             'label' => 'ra.form.verify_identity.document_number.label',
             'horizontal_label_class' => 'col-sm-6 left-aligned',
             'horizontal_input_wrapper_class' => 'col-sm-6',
@@ -38,16 +40,16 @@ class VerifyIdentityType extends AbstractType
                 'novalidate' => true
             ]
         ]);
-        $builder->add('identityVerified', 'checkbox', [
+        $builder->add('identityVerified', CheckboxType::class, [
             'label' => 'ra.form.verify_identity.identity_verified.label',
             'widget_checkbox_label' => 'widget',
             'widget_form_group_attr' => ['class' => 'form-group form-group-verify-identity'],
         ]);
-        $builder->add('verifyIdentity', 'submit', [
+        $builder->add('verifyIdentity', SubmitType::class, [
             'label' => 'ra.form.verify_identity.verify_identity.button',
             'attr' => [ 'class' => 'btn btn-primary pull-right' ],
         ]);
-        $builder->add('cancel', 'submit', [
+        $builder->add('cancel', SubmitType::class, [
             'label' => 'ra.vetting.button.cancel_procedure',
             'attr' => [ 'class' => 'btn btn-danger' ],
         ]);
@@ -60,7 +62,7 @@ class VerifyIdentityType extends AbstractType
         ]);
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ra_verify_identity';
     }

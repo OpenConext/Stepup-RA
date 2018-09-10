@@ -23,12 +23,12 @@ use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
 use Surfnet\SamlBundle\SAML2\Response\AssertionAdapter;
 use Surfnet\StepupRa\RaBundle\Exception\InconsistentStateException;
 use Surfnet\StepupRa\RaBundle\Exception\MissingRequiredAttributeException;
+use Surfnet\StepupRa\RaBundle\Exception\UserNotRaException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 class SamlProvider implements AuthenticationProviderInterface
@@ -89,7 +89,7 @@ class SamlProvider implements AuthenticationProviderInterface
 
         // if no credentials can be found, we're done.
         if (!$raCredentials) {
-            throw new AccessDeniedException(
+            throw new UserNotRaException(
                 'The Identity is not registered as (S)RA(A) and therefor does not have access to this application'
             );
         }

@@ -19,8 +19,8 @@
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Session;
 
 use Surfnet\StepupRa\RaBundle\Exception\LogicException;
-use Surfnet\StepupRa\RaBundle\Security\Authentication\SamlAuthenticationStateHandler;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\AuthenticatedSessionStateHandler;
+use Surfnet\StepupRa\RaBundle\Security\Authentication\SamlAuthenticationStateHandler;
 use Surfnet\StepupRa\RaBundle\Value\DateTime;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 

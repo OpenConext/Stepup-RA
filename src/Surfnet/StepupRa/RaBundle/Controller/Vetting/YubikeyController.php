@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
+use Surfnet\StepupRa\RaBundle\Form\Type\VerifyYubikeyPublicIdType;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,9 +50,9 @@ class YubikeyController extends SecondFactorController
         }
 
         $command = new VerifyYubikeyPublicIdCommand();
-        $form = $this->createForm('ra_verify_yubikey_public_id', $command)->handleRequest($request);
+        $form = $this->createForm(VerifyYubikeyPublicIdType::class, $command)->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $result = $this->getVettingService()->verifyYubikeyPublicId($procedureId, $command);
 
             if ($result->didPublicIdMatch()) {
@@ -61,11 +62,11 @@ class YubikeyController extends SecondFactorController
             }
 
             if ($result->wasOtpInvalid()) {
-                $form->addError(new FormError('ra.verify_yubikey_command.otp.otp_invalid'));
+                $this->addFlash('error', 'ra.verify_yubikey_command.otp.otp_invalid');
             } elseif ($result->didOtpVerificationFail()) {
-                $form->addError(new FormError('ra.verify_yubikey_command.otp.verification_error'));
+                $this->addFlash('error', 'ra.verify_yubikey_command.otp.verification_error');
             } else {
-                $form->addError(new FormError('ra.prove_yubikey_possession.different_yubikey_used'));
+                $this->addFlash('error', 'ra.prove_yubikey_possession.different_yubikey_used');
             }
 
             $logger->notice('Yubikey could not be verified, added error to form');

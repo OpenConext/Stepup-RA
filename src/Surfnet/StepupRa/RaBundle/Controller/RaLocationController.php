@@ -23,12 +23,19 @@ use Surfnet\StepupRa\RaBundle\Command\ChangeRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\CreateRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\RemoveRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaLocationsCommand;
+use Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaLocationType;
+use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaLocationType;
+use Surfnet\StepupRa\RaBundle\Form\Type\RemoveRaLocationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects) By making the Form Type classes explicit, MD now realizes couping
+ *                                                 is to high.
+ */
 final class RaLocationController extends Controller
 {
     /**
@@ -50,7 +57,7 @@ final class RaLocationController extends Controller
 
         $locations = $this->getRaLocationService()->search($command);
 
-        $removalForm = $this->createForm('ra_remove_ra_location', new RemoveRaLocationCommand());
+        $removalForm = $this->createForm(RemoveRaLocationType::class, new RemoveRaLocationCommand());
 
         $this->get('logger')->notice(sprintf(
             'Searching for RA locations yielded "%d" results',
@@ -77,9 +84,9 @@ final class RaLocationController extends Controller
         $command->institution = $identity->institution;
         $command->currentUserId = $identity->id;
 
-        $form = $this->createForm('ra_create_ra_location', $command)->handleRequest($request);
+        $form = $this->createForm(CreateRaLocationType::class, $command)->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $logger->debug('RA Location form submitted, start processing command');
 
             $success = $this->getRaLocationService()->create($command);
@@ -95,7 +102,7 @@ final class RaLocationController extends Controller
             }
 
             $logger->debug('RA Location creation failed, adding error to form');
-            $form->addError(new FormError('ra.create_ra_location.error.middleware_command_failed'));
+            $this->addFlash('error', 'ra.create_ra_location.error.middleware_command_failed');
         }
 
         return $this->render('SurfnetStepupRaRaBundle:RaLocation:create.html.twig', [
@@ -138,9 +145,9 @@ final class RaLocationController extends Controller
         $command->location = $raLocation->location;
         $command->contactInformation = $raLocation->contactInformation;
 
-        $form = $this->createForm('ra_change_ra_location', $command)->handleRequest($request);
+        $form = $this->createForm(ChangeRaLocationType::class, $command)->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $logger->debug('RA Location form submitted, start processing command');
 
             $success = $this->getRaLocationService()->change($command);
@@ -156,7 +163,7 @@ final class RaLocationController extends Controller
             }
 
             $logger->debug('RA Location creation failed, adding error to form');
-            $form->addError(new FormError('ra.create_ra_location.error.middleware_command_failed'));
+            $this->addFlash('error', 'ra.create_ra_location.error.middleware_command_failed');
         }
 
         return $this->render('SurfnetStepupRaRaBundle:RaLocation:change.html.twig', [
@@ -179,7 +186,7 @@ final class RaLocationController extends Controller
         $command = new RemoveRaLocationCommand();
         $command->currentUserId = $this->getCurrentUser()->id;
 
-        $form = $this->createForm('ra_remove_ra_location', $command);
+        $form = $this->createForm(RemoveRaLocationType::class, $command);
         $form->handleRequest($request);
 
         $logger->info(sprintf(

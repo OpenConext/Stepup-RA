@@ -23,11 +23,17 @@ use Surfnet\StepupRa\RaBundle\Command\ExportRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchSecondFactorAuditLogCommand;
+use Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType;
+use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects) By making the Form Type classes explicit, MD now realizes couping
+ *                                                 is to high.
+ */
 final class SecondFactorController extends Controller
 {
     /**
@@ -48,7 +54,7 @@ final class SecondFactorController extends Controller
         $command->orderBy = $request->get('orderBy');
         $command->orderDirection = $request->get('orderDirection');
 
-        $form = $this->createForm('ra_search_ra_second_factors', $command, ['method' => 'get']);
+        $form = $this->createForm(SearchRaSecondFactorsType::class, $command, ['method' => 'get']);
         $form->handleRequest($request);
 
         $secondFactors = $this->getSecondFactorService()->search($command);
@@ -65,7 +71,7 @@ final class SecondFactorController extends Controller
             $secondFactors->getItemsPerPage()
         );
 
-        $revocationForm = $this->createForm('ra_revoke_second_factor', new RevokeSecondFactorCommand());
+        $revocationForm = $this->createForm(RevokeSecondFactorType::class, new RevokeSecondFactorCommand());
 
         $this->get('logger')->notice(sprintf(
             'Searching for second factors yielded "%d" results',
@@ -111,7 +117,7 @@ final class SecondFactorController extends Controller
         $command = new RevokeSecondFactorCommand();
         $command->currentUserId = $this->getCurrentUser()->id;
 
-        $form = $this->createForm('ra_revoke_second_factor', $command);
+        $form = $this->createForm(RevokeSecondFactorType::class, $command);
         $form->handleRequest($request);
 
         $logger->info(sprintf(

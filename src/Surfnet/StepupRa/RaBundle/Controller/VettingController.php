@@ -25,6 +25,8 @@ use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
+use Surfnet\StepupRa\RaBundle\Form\Type\StartVettingProcedureType;
+use Surfnet\StepupRa\RaBundle\Form\Type\VerifyIdentityType;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
@@ -59,9 +61,9 @@ class VettingController extends Controller
 
         $command = new StartVettingProcedureCommand();
 
-        $form = $this->createForm('ra_start_vetting_procedure', $command)->handleRequest($request);
+        $form = $this->createForm(StartVettingProcedureType::class, $command)->handleRequest($request);
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             $logger->notice('No search submitted, displaying search by registration code form');
 
             return ['form' => $form->createView()];
@@ -71,14 +73,14 @@ class VettingController extends Controller
             ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode);
 
         if ($secondFactor === null) {
-            $form->addError(new FormError('ra.form.start_vetting_procedure.unknown_registration_code'));
+            $this->addFlash('error', 'ra.form.start_vetting_procedure.unknown_registration_code');
             $logger->notice('Cannot start new vetting procedure, no second factor found');
 
             return ['form' => $form->createView()];
         }
 
         if (!$this->isGranted('ROLE_SRAA') && $secondFactor->institution !== $this->getIdentity()->institution) {
-            $form->addError(new FormError('ra.form.start_vetting_procedure.different_institution_error'));
+            $this->addFlash('error', 'ra.form.start_vetting_procedure.different_institution_error');
             $logger->notice(
                 'Cannot start new vetting procedure, registrant belongs to a different institution than RA'
             );
@@ -111,16 +113,15 @@ class VettingController extends Controller
         $command->secondFactor = $secondFactor;
 
         if ($this->getVettingService()->isExpiredRegistrationCode($command)) {
-            $form->addError(
-                new FormError(
-                    $this->getTranslator()
-                        ->trans(
-                            'ra.verify_identity.registration_code_expired',
-                            [
-                                '%self_service_url%' => $this->getParameter('surfnet_stepup_ra.self_service_url'),
-                            ]
-                        )
-                )
+            $this->addFlash(
+                'error',
+                $this->getTranslator()
+                    ->trans(
+                        'ra.verify_identity.registration_code_expired',
+                        [
+                            '%self_service_url%' => $this->getParameter('surfnet_stepup_ra.self_service_url'),
+                        ]
+                    )
             );
 
             $logger->notice(
@@ -132,7 +133,7 @@ class VettingController extends Controller
         }
 
         if (!$this->getVettingService()->isLoaSufficientToStartProcedure($command)) {
-            $form->addError(new FormError('ra.form.start_vetting_procedure.loa_insufficient'));
+            $this->addFlash('error', 'ra.form.start_vetting_procedure.loa_insufficient');
 
             $logger->notice('Cannot start new vetting procedure, Authority LoA is insufficient');
 
@@ -187,6 +188,9 @@ class VettingController extends Controller
      * @param Request $request
      * @param string $procedureId
      * @return array|Response
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function verifyIdentityAction(Request $request, $procedureId)
     {
@@ -201,7 +205,7 @@ class VettingController extends Controller
         }
 
         $command = new VerifyIdentityCommand();
-        $form = $this->createForm('ra_verify_identity', $command)->handleRequest($request);
+        $form = $this->createForm(VerifyIdentityType::class, $command)->handleRequest($request);
 
         /** @var SubmitButton $cancelButton */
         $cancelButton = $form->get('cancel');
@@ -217,13 +221,13 @@ class VettingController extends Controller
 
         $showForm = function ($error = null) use ($form, $commonName) {
             if ($error) {
-                $form->addError(new FormError($error));
+                $this->addFlash('error', $error);
             }
 
             return ['commonName' => $commonName, 'form' => $form->createView()];
         };
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             $logger->notice('Verify Identity Form not submitted, displaying form');
 
             return $showForm();

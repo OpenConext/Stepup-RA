@@ -20,6 +20,8 @@ namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Surfnet\StepupRa\RaBundle\Form\Extension\SecondFactorTypeChoiceList;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -40,7 +42,7 @@ class SearchRaSecondFactorsType extends AbstractType
         $builder->add('name', null, [
             'label' => 'ra.form.ra_search_ra_second_factors.label.name',
         ]);
-        $builder->add('type', 'choice', [
+        $builder->add('type', ChoiceType::class, [
             'label' => 'ra.form.ra_search_ra_second_factors.label.type',
             'choices' => $this->secondFactorTypeChoiseList->create(),
             'required' => false,
@@ -51,7 +53,7 @@ class SearchRaSecondFactorsType extends AbstractType
         $builder->add('email', null, [
             'label' => 'ra.form.ra_search_ra_second_factors.label.email',
         ]);
-        $builder->add('status', 'choice', [
+        $builder->add('status', ChoiceType::class, [
             'label' => 'ra.form.ra_search_ra_second_factors.label.status',
             'choices' => [
                 'unverified' => 'ra.form.ra_search_ra_second_factors.choice.status.unverified',
@@ -61,12 +63,12 @@ class SearchRaSecondFactorsType extends AbstractType
             ],
             'required' => false,
         ]);
-        $builder->add('search', 'submit', [
+        $builder->add('search', SubmitType::class, [
             'label' => 'ra.form.ra_search_ra_second_factors.button.search',
             'attr' => [ 'class' => 'btn btn-primary pull-left' ],
         ]);
 
-        $builder->add('export', 'submit', [
+        $builder->add('export', SubmitType::class, [
             'label' => 'ra.form.ra_search_ra_second_factors.button.export',
             'attr' => [ 'class' => 'btn btn-secondary pull-left' ],
         ]);
@@ -79,7 +81,7 @@ class SearchRaSecondFactorsType extends AbstractType
         ]);
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ra_search_ra_second_factors';
     }
