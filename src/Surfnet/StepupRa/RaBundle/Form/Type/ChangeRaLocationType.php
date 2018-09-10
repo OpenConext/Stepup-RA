@@ -19,6 +19,8 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,25 +32,21 @@ class ChangeRaLocationType extends AbstractType
             ->add('name', null, [
                 'label' => 'ra.form.ra_search_ra_candidates.label.name',
             ])
-            ->add('location', 'textarea', [
+            ->add('location', TextareaType::class, [
                 'label' => 'ra.management.form.change_ra.label.location'
             ])
-            ->add('contactInformation', 'textarea', [
+            ->add('contactInformation', TextareaType::class, [
                 'label' => 'ra.management.form.change_ra.label.contact_information'
             ])
-            ->add('change_ra_location', 'submit', [
+            ->add('change_ra_location', SubmitType::class, [
                 'label' => 'ra.management.form.change_ra_location.label.change_ra_location',
                 'attr' => ['class' => 'btn btn-primary pull-right change-ra-location']
             ])
-            ->add(
-                'cancel',
-                'anchor',
-                [
-                    'label' => 'ra.management.form.change_ra_location.label.cancel',
-                    'route' => 'ra_locations_manage',
-                    'attr'  => ['class' => 'btn btn-link pull-right cancel']
-                ]
-            )
+            ->add('cancel', AnchorType::class, [
+                'label' => 'ra.management.form.change_ra_location.label.cancel',
+                'route' => 'ra_locations_manage',
+                'attr' => ['class' => 'btn btn-link pull-right cancel'],
+            ])
         ;
     }
 
@@ -59,7 +57,7 @@ class ChangeRaLocationType extends AbstractType
         ]);
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ra_change_ra_location';
     }

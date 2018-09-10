@@ -31,7 +31,7 @@ services:
         public: false
         class: Surfnet\StepupBundle\Value\Loa
         factory: ["@surfnet_stepup.service.loa_resolution", getLoa]
-        arguments: [%surfnet_stepup_ra.security.required_loa%]
+        arguments: ["%surfnet_stepup_ra.security.required_loa%"]
 
     # Authentication Handlers
     ra.security.authentication.handler.authenticated_user_handler:

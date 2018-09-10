@@ -19,32 +19,33 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RetractRegistrationAuthorityType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('confirm', 'submit', [
+            ->add('confirm', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-warning pull-right'],
                 'label' => 'ra.management.retract_ra.modal.confirm',
             ])
-            ->add('cancel', 'submit', [
+            ->add('cancel', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-info pull-right'],
                 'label' => 'ra.management.retract_ra.modal.cancel',
             ]);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand'
         ]);
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ra_management_retract_registration_authority';
     }

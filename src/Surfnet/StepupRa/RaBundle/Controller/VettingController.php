@@ -25,6 +25,8 @@ use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
+use Surfnet\StepupRa\RaBundle\Form\Type\StartVettingProcedureType;
+use Surfnet\StepupRa\RaBundle\Form\Type\VerifyIdentityType;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
@@ -59,9 +61,9 @@ class VettingController extends Controller
 
         $command = new StartVettingProcedureCommand();
 
-        $form = $this->createForm('ra_start_vetting_procedure', $command)->handleRequest($request);
+        $form = $this->createForm(StartVettingProcedureType::class, $command)->handleRequest($request);
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             $logger->notice('No search submitted, displaying search by registration code form');
 
             return ['form' => $form->createView()];
@@ -186,6 +188,9 @@ class VettingController extends Controller
      * @param Request $request
      * @param string $procedureId
      * @return array|Response
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function verifyIdentityAction(Request $request, $procedureId)
     {
@@ -200,7 +205,7 @@ class VettingController extends Controller
         }
 
         $command = new VerifyIdentityCommand();
-        $form = $this->createForm('ra_verify_identity', $command)->handleRequest($request);
+        $form = $this->createForm(VerifyIdentityType::class, $command)->handleRequest($request);
 
         /** @var SubmitButton $cancelButton */
         $cancelButton = $form->get('cancel');
@@ -222,7 +227,7 @@ class VettingController extends Controller
             return ['commonName' => $commonName, 'form' => $form->createView()];
         };
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             $logger->notice('Verify Identity Form not submitted, displaying form');
 
             return $showForm();

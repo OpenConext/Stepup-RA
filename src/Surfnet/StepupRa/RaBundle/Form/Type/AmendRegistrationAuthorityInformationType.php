@@ -19,6 +19,8 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,25 +29,21 @@ class AmendRegistrationAuthorityInformationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('location', 'textarea', [
+            ->add('location', TextareaType::class, [
                 'label' => 'ra.management.form.amend_ra_info.label.location'
             ])
-            ->add('contactInformation', 'textarea', [
+            ->add('contactInformation', TextareaType::class, [
                 'label' => 'ra.management.form.amend_ra_info.label.contact_information'
             ])
-            ->add('amend_ra_info', 'submit', [
+            ->add('amend_ra_info', SubmitType::class, [
                 'label' => 'ra.management.form.amend_ra_info.label.amend_ra_info',
                 'attr' => ['class' => 'btn btn-primary pull-right']
             ])
-            ->add(
-                'cancel',
-                'anchor',
-                [
-                    'label' => 'ra.management.form.amend_ra_info.label.cancel',
-                    'route' => 'ra_management_manage',
-                    'attr'  => ['class' => 'btn btn-link pull-right cancel']
-                ]
-            )
+            ->add('cancel', AnchorType::class, [
+                'label' => 'ra.management.form.amend_ra_info.label.cancel',
+                'route' => 'ra_management_manage',
+                'attr'  => ['class' => 'btn btn-link pull-right cancel']
+            ])
         ;
     }
 
@@ -56,7 +54,7 @@ class AmendRegistrationAuthorityInformationType extends AbstractType
         ]);
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ra_management_amend_ra_info';
     }

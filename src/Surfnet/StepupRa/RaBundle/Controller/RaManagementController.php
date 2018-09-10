@@ -24,6 +24,11 @@ use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationComma
 use Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand;
 use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
+use Surfnet\StepupRa\RaBundle\Form\Type\AmendRegistrationAuthorityInformationType;
+use Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaRoleType;
+use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
+use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
+use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -97,7 +102,7 @@ class RaManagementController extends Controller
         $command->orderBy        = $request->get('orderBy');
         $command->orderDirection = $request->get('orderDirection');
 
-        $form = $this->createForm('ra_search_ra_candidates', $command, ['method' => 'get']);
+        $form = $this->createForm(SearchRaCandidatesType::class, $command, ['method' => 'get']);
         $form->handleRequest($request);
 
         $service = $this->getRaCandidateService();
@@ -159,8 +164,8 @@ class RaManagementController extends Controller
         $command->identityId  = $identityId;
         $command->institution = $raCandidate->institution;
 
-        $form = $this->createForm('ra_management_create_ra', $command)->handleRequest($request);
-        if ($form->isValid()) {
+        $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $logger->debug('Accreditation form submitted, start processing command');
 
             $success = $this->getRaCandidateService()->accreditCandidate($command);
@@ -209,8 +214,8 @@ class RaManagementController extends Controller
         $command->location = $raListing->location;
         $command->contactInformation = $raListing->contactInformation;
 
-        $form = $this->createForm('ra_management_amend_ra_info', $command)->handleRequest($request);
-        if ($form->isValid()) {
+        $form = $this->createForm(AmendRegistrationAuthorityInformationType::class, $command)->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $logger->notice(sprintf("RA(A) '%s' information amendment form submitted, processing", $identityId));
 
             if ($this->get('ra.service.ra')->amendRegistrationAuthorityInformation($command)) {
@@ -253,8 +258,8 @@ class RaManagementController extends Controller
         $command->institution = $raListing->institution;
         $command->role        = $raListing->role;
 
-        $form = $this->createForm('ra_management_change_ra_role', $command)->handleRequest($request);
-        if ($form->isValid()) {
+        $form = $this->createForm(ChangeRaRoleType::class, $command)->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             $logger->notice(sprintf('RA(A) "%s" Change Role form submitted, processing', $identityId));
 
             if ($this->get('ra.service.ra')->changeRegistrationAuthorityRole($command)) {
@@ -295,8 +300,8 @@ class RaManagementController extends Controller
         $command = new RetractRegistrationAuthorityCommand();
         $command->identityId = $identityId;
 
-        $form = $this->createForm('ra_management_retract_registration_authority', $command)->handleRequest($request);
-        if ($form->isValid()) {
+        $form = $this->createForm(RetractRegistrationAuthorityType::class, $command)->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('cancel')->isClicked()) {
                 $logger->notice('Retraction of registration authority cancelled');
                 return $this->redirectToRoute('ra_management_manage');

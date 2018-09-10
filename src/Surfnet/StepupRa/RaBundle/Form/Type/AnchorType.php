@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ButtonTypeInterface;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,10 +29,10 @@ class AnchorType extends AbstractType implements ButtonTypeInterface
 {
     public function getParent()
     {
-        return 'button';
+        return ButtonType::class;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'anchor';
     }
@@ -46,10 +47,8 @@ class AnchorType extends AbstractType implements ButtonTypeInterface
 
         $resolver->setRequired(['route']);
 
-        $resolver->setAllowedTypes([
-            'route'            => 'string',
-            'route_parameters' => 'array',
-        ]);
+        $resolver->setAllowedTypes('route', 'string');
+        $resolver->setAllowedTypes('route_parameters', 'array');
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)

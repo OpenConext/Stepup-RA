@@ -19,6 +19,8 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,24 +28,24 @@ class VerifyPhoneNumberType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('challenge', 'text', [
+        $builder->add('challenge', TextType::class, [
             'label' => 'ra.form.ra_verify_phone_number.text.challenge',
             'required' => true,
             'attr' => array(
                 'autofocus' => true,
             ),
         ]);
-        $builder->add('verifyChallenge', 'submit', [
+        $builder->add('verifyChallenge', SubmitType::class, [
             'label' => 'ra.form.ra_verify_phone_number.button.verify_challenge',
             'attr' => [ 'class' => 'btn btn-primary pull-right' ],
         ]);
-        $builder->add('resendChallenge', 'anchor', [
+        $builder->add('resendChallenge', AnchorType::class, [
             'label' => 'ra.form.ra_verify_phone_number.button.resend_challenge',
             'attr' => [ 'class' => 'btn btn-default' ],
             'route' => 'ra_vetting_sms_send_challenge',
             'route_parameters' => ['procedureId' => $options['procedureId']],
         ]);
-        $builder->add('cancel', 'submit', [
+        $builder->add('cancel', SubmitType::class, [
             'label' => 'ra.vetting.button.cancel_procedure',
             'attr' => [ 'class' => 'btn btn-danger' ],
         ]);
@@ -63,7 +65,7 @@ class VerifyPhoneNumberType extends AbstractType
         ]);
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ra_verify_phone_number';
     }

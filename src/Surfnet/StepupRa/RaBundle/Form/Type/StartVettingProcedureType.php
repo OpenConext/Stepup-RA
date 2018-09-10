@@ -19,6 +19,8 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,7 +28,7 @@ class StartVettingProcedureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('registrationCode', 'text', [
+        $builder->add('registrationCode', TextType::class, [
             'label' => /** @Ignore */ false,
             'required' => true,
             'widget_addon_prepend' => [
@@ -38,7 +40,7 @@ class StartVettingProcedureType extends AbstractType
                 'placeholder' => 'ra.form.start_vetting_procedure.enter_activation_code_here',
             )
         ]);
-        $builder->add('search', 'submit', [
+        $builder->add('search', SubmitType::class, [
             'label' => 'ra.form.start_vetting_procedure.search',
             'attr' => [ 'class' => 'btn btn-primary' ],
         ]);
@@ -51,7 +53,7 @@ class StartVettingProcedureType extends AbstractType
         ]);
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'ra_start_vetting_procedure';
     }

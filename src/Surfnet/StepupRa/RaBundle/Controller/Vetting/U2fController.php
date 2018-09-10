@@ -21,8 +21,8 @@ namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\VerifyU2fPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
-use Surfnet\StepupU2fBundle\Dto\RegisterResponse;
 use Surfnet\StepupU2fBundle\Dto\SignResponse;
+use Surfnet\StepupU2fBundle\Form\Type\VerifyDeviceAuthenticationType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -88,7 +88,7 @@ class U2fController extends SecondFactorController
 
         $formAction = $this->generateUrl('ra_vetting_u2f_prove_possession', ['procedureId' => $procedureId]);
         $form = $this->createForm(
-            'surfnet_stepup_u2f_verify_device_authentication',
+            VerifyDeviceAuthenticationType::class,
             $signResponse,
             ['sign_request' => $signRequest, 'action' => $formAction,]
         );
@@ -114,13 +114,13 @@ class U2fController extends SecondFactorController
         $formAction = $this->generateUrl('ra_vetting_u2f_prove_possession', ['procedureId' => $procedureId]);
         $form = $this
             ->createForm(
-                'surfnet_stepup_u2f_verify_device_authentication',
+                VerifyDeviceAuthenticationType::class,
                 $signResponse,
                 ['sign_request' => $signRequest, 'action' => $formAction]
             )
             ->handleRequest($request);
 
-        if (!$form->isValid()) {
+        if (!$form->isSubmitted() || !$form->isValid()) {
             return $this->render('SurfnetStepupRaRaBundle:Vetting/U2f:authentication.html.twig', [
                 'authenticationFailed' => true,
                 'procedureId' => $procedureId,
