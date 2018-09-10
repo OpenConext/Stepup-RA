@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c2338bd231e7789752c7f5203555bb4",
+    "content-hash": "aedcece177d0952f5822d220d57f31ec",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1478,16 +1478,16 @@
         },
         {
             "name": "openconext/monitor-bundle",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Monitor-bundle.git",
-                "reference": "1455a292376a03e28465195202c572aa243f0ddb"
+                "reference": "7dfec45d5f5dc6c101383fbef2c6c347adec59a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Monitor-bundle/zipball/1455a292376a03e28465195202c572aa243f0ddb",
-                "reference": "1455a292376a03e28465195202c572aa243f0ddb",
+                "url": "https://api.github.com/repos/OpenConext/Monitor-bundle/zipball/7dfec45d5f5dc6c101383fbef2c6c347adec59a1",
+                "reference": "7dfec45d5f5dc6c101383fbef2c6c347adec59a1",
                 "shasum": ""
             },
             "require": {
@@ -1498,7 +1498,6 @@
             },
             "require-dev": {
                 "jakub-onderka/php-parallel-lint": "^0.9.2",
-                "liip/rmt": "^1.1",
                 "malukenho/docheader": "^0.1.6",
                 "matthiasnoback/symfony-config-test": "^2.1",
                 "mockery/mockery": "~0.9",
@@ -1527,7 +1526,7 @@
                 "stepup",
                 "surfnet"
             ],
-            "time": "2018-08-16T13:07:30+00:00"
+            "time": "2018-09-04T10:09:23+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -2214,16 +2213,16 @@
         },
         {
             "name": "surfnet/stepup-bundle",
-            "version": "4.0.0",
+            "version": "4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-bundle.git",
-                "reference": "064c96ad28877221e1100a81477f14dbf43d0b90"
+                "reference": "5946dde19d5e095a5836d602b7abfa64cb71d6f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-bundle/zipball/064c96ad28877221e1100a81477f14dbf43d0b90",
-                "reference": "064c96ad28877221e1100a81477f14dbf43d0b90",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-bundle/zipball/5946dde19d5e095a5836d602b7abfa64cb71d6f1",
+                "reference": "5946dde19d5e095a5836d602b7abfa64cb71d6f1",
                 "shasum": ""
             },
             "require": {
@@ -2266,20 +2265,20 @@
                 "suaas",
                 "surfnet"
             ],
-            "time": "2018-08-29T11:45:58+00:00"
+            "time": "2018-09-06T12:43:15+00:00"
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "2.4.3",
+            "version": "2.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-Middleware-clientbundle.git",
-                "reference": "cf6515543b6a258d8d0dd76beca6b95c5cb76330"
+                "reference": "d2aa7f06f9f56456d1b852b7ebca396686d0c51e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/cf6515543b6a258d8d0dd76beca6b95c5cb76330",
-                "reference": "cf6515543b6a258d8d0dd76beca6b95c5cb76330",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/d2aa7f06f9f56456d1b852b7ebca396686d0c51e",
+                "reference": "d2aa7f06f9f56456d1b852b7ebca396686d0c51e",
                 "shasum": ""
             },
             "require": {
@@ -2299,7 +2298,6 @@
                 "surfnet/stepup-middleware-client": "*"
             },
             "require-dev": {
-                "liip/rmt": "1.1.*",
                 "matthiasnoback/symfony-config-test": "0.*",
                 "mockery/mockery": "0.9.*",
                 "phpmd/phpmd": "^2.0",
@@ -2320,20 +2318,20 @@
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "time": "2018-08-30T11:31:21+00:00"
+            "time": "2018-09-04T10:01:29+00:00"
         },
         {
             "name": "surfnet/stepup-saml-bundle",
-            "version": "4.1.1",
+            "version": "4.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-saml-bundle.git",
-                "reference": "e6115d07eccc905fcf522552ee186f89686045cf"
+                "reference": "1ce8e74a7e35963e60378da8c8647656e382cef9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-saml-bundle/zipball/e6115d07eccc905fcf522552ee186f89686045cf",
-                "reference": "e6115d07eccc905fcf522552ee186f89686045cf",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-saml-bundle/zipball/1ce8e74a7e35963e60378da8c8647656e382cef9",
+                "reference": "1ce8e74a7e35963e60378da8c8647656e382cef9",
                 "shasum": ""
             },
             "require": {
@@ -2346,7 +2344,6 @@
             },
             "require-dev": {
                 "ibuildings/qa-tools": "~1.1",
-                "liip/rmt": "~1.1",
                 "mockery/mockery": "~0.9",
                 "psr/log": "~1.0"
             },
@@ -2368,7 +2365,7 @@
                 "stepup",
                 "surfnet"
             ],
-            "time": "2018-08-29T12:18:23+00:00"
+            "time": "2018-09-04T10:06:38+00:00"
         },
         {
             "name": "surfnet/stepup-u2f-bundle",
