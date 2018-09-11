@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "aedcece177d0952f5822d220d57f31ec",
+    "content-hash": "ad296108577f810d86cba201d17fe756",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -467,12 +467,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/MKodde/DataExporter.git",
-                "reference": "ab440e69af642fbc5c9535197b677410b5a3aba3"
+                "reference": "d58c4f92a39decd0a7ff5280d56653dfce45ca44"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/MKodde/DataExporter/zipball/ab440e69af642fbc5c9535197b677410b5a3aba3",
-                "reference": "ab440e69af642fbc5c9535197b677410b5a3aba3",
+                "url": "https://api.github.com/repos/MKodde/DataExporter/zipball/d58c4f92a39decd0a7ff5280d56653dfce45ca44",
+                "reference": "d58c4f92a39decd0a7ff5280d56653dfce45ca44",
                 "shasum": ""
             },
             "require": {
@@ -513,7 +513,7 @@
             "support": {
                 "source": "https://github.com/MKodde/DataExporter/tree/feature/syfony-3-and-4-support"
             },
-            "time": "2018-08-24T07:02:26+00:00"
+            "time": "2018-08-24T09:47:03+00:00"
         },
         {
             "name": "fig/link-util",
