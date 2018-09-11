@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.10.1
+* Restore DataExporter repository (thanks @tvdijen for issue 164)
+
 ## 2.10.0
 **Features & Bugfixes**
 * Improved the AccessDenied error page #159
