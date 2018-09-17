@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.10.2
+**Bugfixes**
+* Fix setAllowedTypes usage in VerifyPhoneNumberType form #166
+
 ## 2.10.1
 * Restore DataExporter repository (thanks @tvdijen for issue 164)
 
