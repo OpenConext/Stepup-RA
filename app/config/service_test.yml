@@ -1,0 +1,5 @@
+services:
+  surfnet_stepup.service.sms_second_factor:
+    class: Surfnet\StepupBundle\Tests\TestDouble\Service\SmsSecondFactorService
+    arguments:
+      - "@surfnet_stepup.service.challenge_handler"
