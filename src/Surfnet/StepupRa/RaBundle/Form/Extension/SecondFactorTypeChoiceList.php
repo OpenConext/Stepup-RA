@@ -96,7 +96,7 @@ class SecondFactorTypeChoiceList
                 );
                 continue;
             }
-            $selectOptions[$sfTypeIdentifier] = $translation;
+            $selectOptions[$translation] = $sfTypeIdentifier;
         }
 
         return $selectOptions;

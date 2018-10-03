@@ -56,10 +56,10 @@ class SearchRaSecondFactorsType extends AbstractType
         $builder->add('status', ChoiceType::class, [
             'label' => 'ra.form.ra_search_ra_second_factors.label.status',
             'choices' => [
-                'unverified' => 'ra.form.ra_search_ra_second_factors.choice.status.unverified',
-                'verified'   => 'ra.form.ra_search_ra_second_factors.choice.status.verified',
-                'vetted'     => 'ra.form.ra_search_ra_second_factors.choice.status.vetted',
-                'revoked'    => 'ra.form.ra_search_ra_second_factors.choice.status.revoked',
+                'ra.form.ra_search_ra_second_factors.choice.status.unverified' => 'unverified',
+                'ra.form.ra_search_ra_second_factors.choice.status.verified' => 'verified',
+                'ra.form.ra_search_ra_second_factors.choice.status.vetted' => 'vetted',
+                'ra.form.ra_search_ra_second_factors.choice.status.revoked' => 'revoked',
             ],
             'required' => false,
         ]);
