@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.10.3
+**Bugfix**
+* Flip value/label in choice form type definitions #168
+
 ## 2.10.2
 **Bugfixes**
 * Fix setAllowedTypes usage in VerifyPhoneNumberType form #166
