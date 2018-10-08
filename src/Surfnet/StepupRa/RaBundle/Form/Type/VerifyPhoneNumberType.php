@@ -60,9 +60,7 @@ class VerifyPhoneNumberType extends AbstractType
 
         $resolver->setRequired(['procedureId']);
 
-        $resolver->setAllowedTypes([
-            'procedureId' => 'string',
-        ]);
+        $resolver->setAllowedTypes('procedureId', 'string');
     }
 
     public function getBlockPrefix()
