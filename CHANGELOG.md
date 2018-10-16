@@ -1,8 +1,12 @@
 # Changelog
 
 ## Develop
+
 **Bugfixes**
 * Flip value/label in choice form type definitions #168
+
+**Improvments for testing**
+* Ensure middleware API is used in test mode #167
 
 ## 2.10.2
 **Bugfixes**
