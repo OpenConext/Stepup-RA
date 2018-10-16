@@ -2,6 +2,9 @@
 
 ## Develop
 
+**New features**
+* Implement FGA for vetting procedure #169
+
 **Bugfixes**
 * Flip value/label in choice form type definitions #168
 
