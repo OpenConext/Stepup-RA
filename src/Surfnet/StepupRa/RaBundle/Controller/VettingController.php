@@ -79,15 +79,6 @@ class VettingController extends Controller
             return ['form' => $form->createView()];
         }
 
-        if (!$this->isGranted('ROLE_SRAA') && $secondFactor->institution !== $this->getIdentity()->institution) {
-            $this->addFlash('error', 'ra.form.start_vetting_procedure.different_institution_error');
-            $logger->notice(
-                'Cannot start new vetting procedure, registrant belongs to a different institution than RA'
-            );
-
-            return ['form' => $form->createView()];
-        }
-
         $enabledSecondFactors = $this->container->getParameter('surfnet_stepup_ra.enabled_second_factors');
         if (!in_array($secondFactor->type, $enabledSecondFactors, true)) {
             $logger->warning(
