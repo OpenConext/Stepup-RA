@@ -35,4 +35,4 @@ branches:
   only:
     - master
     - develop
-    - release/2.8
+    - feature/fine-grained-authorization
