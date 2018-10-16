@@ -5,6 +5,9 @@
 * Open help in new tab #187 
 * Introduce multi-lingual logout redirect #186 
 
+**New features**
+* Implement FGA for vetting procedure #169
+
 **Bugfixes**
 * Fix the token sorting #185
  
