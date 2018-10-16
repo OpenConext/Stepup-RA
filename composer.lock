@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad296108577f810d86cba201d17fe756",
+    "content-hash": "36ae18ec1a5f1b94bae1718ea02e498c",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2269,17 +2269,12 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "2.4.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/OpenConext/Stepup-Middleware-clientbundle.git",
-                "reference": "d2aa7f06f9f56456d1b852b7ebca396686d0c51e"
-            },
+            "version": "dev-develop",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/d2aa7f06f9f56456d1b852b7ebca396686d0c51e",
-                "reference": "d2aa7f06f9f56456d1b852b7ebca396686d0c51e",
-                "shasum": ""
+                "type": "path",
+                "url": "/src/dependencies/Stepup-Middleware-clientbundle",
+                "reference": "aeed64317ca1e99a095ee637471a9a66f5c3fae9",
+                "shasum": null
             },
             "require": {
                 "beberlei/assert": "~2.0",
@@ -2313,12 +2308,13 @@
                     "Surfnet\\StepupMiddlewareClient\\": "src/Surfnet/StepupMiddlewareClient/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "time": "2018-09-04T10:01:29+00:00"
+            "transport-options": {
+                "symlink": true
+            }
         },
         {
             "name": "surfnet/stepup-saml-bundle",
@@ -5109,6 +5105,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "surfnet/stepup-middleware-client-bundle": 20,
         "surfnet/stepup-u2f-bundle": 20,
         "ee/dataexporter-bundle": 20
     },
