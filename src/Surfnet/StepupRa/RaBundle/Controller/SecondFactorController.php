@@ -66,7 +66,7 @@ final class SecondFactorController extends Controller
         }
 
         $pagination = $this->get('knp_paginator')->paginate(
-            $secondFactors->getTotalItems() > 0 ? array_fill(0, $secondFactors->getTotalItems(), 1) : [],
+            $secondFactors->getElements(),
             $secondFactors->getCurrentPage(),
             $secondFactors->getItemsPerPage()
         );
