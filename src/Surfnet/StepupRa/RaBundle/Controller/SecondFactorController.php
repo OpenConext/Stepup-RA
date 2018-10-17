@@ -69,7 +69,7 @@ final class SecondFactorController extends Controller
         /** @var Paginator $paginator */
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $secondFactors->getTotalItems() > 0 ? $secondFactors->getElements() : [],
+            $secondFactors->getElements(),
             $secondFactors->getCurrentPage(),
             $secondFactors->getItemsPerPage()
         );

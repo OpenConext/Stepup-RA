@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-10-16T08:53:56Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2018-10-17T11:02:43Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -842,43 +842,43 @@
       <trans-unit id="f70c06516166354cd4d8d3490cbd707941610ed9" resname="ra.second_factor.revocation.modal.are_you_sure">
         <source>ra.second_factor.revocation.modal.are_you_sure</source>
         <target>Weet u zeker dat u onderstaand token wilt verwijderen?</target>
-        <jms:reference-file line="75">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="77">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="441e4d7c6bece19e1a2a0008af6302443d36c7a4" resname="ra.second_factor.revocation.modal.cancel">
         <source>ra.second_factor.revocation.modal.cancel</source>
         <target>Annuleren</target>
-        <jms:reference-file line="97">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="99">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4a0e93233ac08a0e08df4ccabdddb3183f0343ea" resname="ra.second_factor.revocation.modal.close">
         <source>ra.second_factor.revocation.modal.close</source>
         <target>Sluiten</target>
-        <jms:reference-file line="70">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="72">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c8ac97a99dfe2e9a93156f17db2ad4475372cd4a" resname="ra.second_factor.revocation.modal.confirm">
         <source>ra.second_factor.revocation.modal.confirm</source>
         <target>Bevestig</target>
-        <jms:reference-file line="71">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
-        <jms:reference-file line="98">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="100">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="73">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0a7020ade86510c9f2a60c58d10d539b92be2f4a" resname="ra.second_factor.revocation.modal.sf_email">
         <source>ra.second_factor.revocation.modal.sf_email</source>
         <target>E-mail</target>
-        <jms:reference-file line="91">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="93">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e704ffd6983d5ec3776c1ad832c9cb9823dd3d0b" resname="ra.second_factor.revocation.modal.sf_identifier">
         <source>ra.second_factor.revocation.modal.sf_identifier</source>
         <target>Token</target>
-        <jms:reference-file line="79">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="81">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1d9dbf1e942ebc0614b14e5efef0dadc4f8073be" resname="ra.second_factor.revocation.modal.sf_name">
         <source>ra.second_factor.revocation.modal.sf_name</source>
         <target>Naam</target>
-        <jms:reference-file line="87">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="89">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="153b9ee684f0de6cc27fc8b40d9b38da7477323b" resname="ra.second_factor.revocation.modal.sf_type">
         <source>ra.second_factor.revocation.modal.sf_type</source>
         <target>Type</target>
-        <jms:reference-file line="83">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="85">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5c500a2dc008cbf1a8501593a2a50e518f6fe145" resname="ra.second_factor.revocation.revoked">
         <source>ra.second_factor.revocation.revoked</source>
@@ -888,11 +888,16 @@
       <trans-unit id="2b7c9489a8b311fcdb89652c38387bd08126de9b" resname="ra.second_factor.search.column.document_number">
         <source>ra.second_factor.search.column.document_number</source>
         <target>Documentnummer</target>
-        <jms:reference-file line="24">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="25">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e091076baef38f98898434eb2e98795a0c439a9e" resname="ra.second_factor.search.column.email">
         <source>ra.second_factor.search.column.email</source>
         <target>E-mail</target>
+        <jms:reference-file line="24">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9a0bc2d664e53d2ea521cf9e02483a8c79e955bb" resname="ra.second_factor.search.column.institution">
+        <source>ra.second_factor.search.column.institution</source>
+        <target>Instelling</target>
         <jms:reference-file line="23">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="21e718b7694ff1f02469cb238e02b7a7ff64bb1a" resname="ra.second_factor.search.column.name">
@@ -908,7 +913,7 @@
       <trans-unit id="58e40269b93faaaea1a3f28625676038219aa401" resname="ra.second_factor.search.column.status">
         <source>ra.second_factor.search.column.status</source>
         <target>Status</target>
-        <jms:reference-file line="25">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="26">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="34c288fe87f33cd2c28aef89b556aace8a8e64d2" resname="ra.second_factor.search.column.type">
         <source>ra.second_factor.search.column.type</source>
@@ -938,7 +943,7 @@
       <trans-unit id="b460113e39fffb71f86d0c0a9509b5c741924e99" resname="ra.second_factor.search.text.no_second_factors">
         <source>ra.second_factor.search.text.no_second_factors</source>
         <target>Er zijn op dit moment geen geregistreerde tokens die voldoen aan uw zoekopdracht.</target>
-        <jms:reference-file line="61">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="63">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2e427c59176d431e47b67cbc0bd137a328979a16" resname="ra.second_factor.search.text.number_of_second_factors">
         <source>ra.second_factor.search.text.number_of_second_factors</source>
@@ -968,12 +973,12 @@
       <trans-unit id="eac92ad5c53846aea116ad96b3f985d4c765088a" resname="ra.secondfactor.auditlog">
         <source>ra.secondfactor.auditlog</source>
         <target>Audit log</target>
-        <jms:reference-file line="39">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="41">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="512d5614cc27358eb50068a1ba510983e3e0c620" resname="ra.secondfactor.revoke">
         <source>ra.secondfactor.revoke</source>
         <target>Verwijderen</target>
-        <jms:reference-file line="49">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
+        <jms:reference-file line="51">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a93a34cbd8a46054c58610a840809f4be0a3360a" resname="ra.security.session_expired.click_to_login">
         <source>ra.security.session_expired.click_to_login</source>

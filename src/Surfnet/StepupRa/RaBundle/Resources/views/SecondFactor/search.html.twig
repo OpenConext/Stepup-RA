@@ -20,6 +20,7 @@
                         <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.second_factor_id'|trans, 'secondFactorId') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.type'|trans, 'type') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.name'|trans, 'name') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.institution'|trans, 'institution') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.email'|trans, 'email') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.document_number'|trans, 'document_number') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.status'|trans, 'status') }}</th>
@@ -32,6 +33,7 @@
                             <td>{{ secondFactor.secondFactorId }}</td>
                             <td>{{ secondFactor.type|trans_second_factor_type }}</td>
                             <td>{{ secondFactor.name }}</td>
+                            <td>{{ secondFactor.institution }}</td>
                             <td>{{ secondFactor.email }}</td>
                             <td>{% if secondFactor.documentNumber is not empty %}{{ secondFactor.documentNumber}}{% else %}&mdash;{% endif %}</td>
                             <td>{{ ('ra.second_factor.search.status.'~secondFactor.status)|trans }}</td>
@@ -45,6 +47,7 @@
                                         data-sfidentityid="{{ secondFactor.identityId }}"
                                         data-sfname="{{ secondFactor.name }}"
                                         data-sfemail="{{ secondFactor.email }}"
+                                        data-sfinstitution="{{ secondFactor.institution }}"
                                         >
                                     {{ 'ra.secondfactor.revoke'|trans }}
                                 </button>
