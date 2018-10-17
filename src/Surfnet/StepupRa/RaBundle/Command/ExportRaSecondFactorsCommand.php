@@ -33,7 +33,7 @@ final class ExportRaSecondFactorsCommand
      *
      * @var string
      */
-    public $institution;
+    public $actorInstitution;
 
     /**
      * @var string|null
@@ -54,6 +54,11 @@ final class ExportRaSecondFactorsCommand
      * @var string|null
      */
     public $email;
+
+    /**
+     * @var string|null
+     */
+    public $institution;
 
     /**
      * @Assert\Choice(
@@ -88,18 +93,19 @@ final class ExportRaSecondFactorsCommand
      * @param string $institution
      * @return ExportRaSecondFactorsCommand
      */
-    public static function fromSearchCommand(SearchRaSecondFactorsCommand $command, $institution)
+    public static function fromSearchCommand(SearchRaSecondFactorsCommand $command, $actorInstitution)
     {
         $exportCommand = new self;
 
+        $exportCommand->actorInstitution = $actorInstitution;
         $exportCommand->name = $command->name;
         $exportCommand->type = $command->type;
         $exportCommand->secondFactorId = $command->secondFactorId;
         $exportCommand->email = $command->email;
+        $exportCommand->institution = $command->institution;
         $exportCommand->status = $command->status;
         $exportCommand->orderBy = $command->orderBy;
         $exportCommand->orderDirection = $command->orderDirection;
-        $exportCommand->institution = $institution;
 
         return $exportCommand;
     }
