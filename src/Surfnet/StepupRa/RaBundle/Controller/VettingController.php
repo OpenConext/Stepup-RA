@@ -31,7 +31,6 @@ use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,6 +55,7 @@ class VettingController extends Controller
     {
         $this->denyAccessUnlessGranted(['ROLE_RA']);
         $logger = $this->get('logger');
+        $identity = $this->getIdentity();
 
         $logger->notice('Vetting Procedure Search started');
 
@@ -70,20 +70,11 @@ class VettingController extends Controller
         }
 
         $secondFactor = $this->getSecondFactorService()
-            ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode);
+            ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode, $identity->institution);
 
         if ($secondFactor === null) {
             $this->addFlash('error', 'ra.form.start_vetting_procedure.unknown_registration_code');
             $logger->notice('Cannot start new vetting procedure, no second factor found');
-
-            return ['form' => $form->createView()];
-        }
-
-        if (!$this->isGranted('ROLE_SRAA') && $secondFactor->institution !== $this->getIdentity()->institution) {
-            $this->addFlash('error', 'ra.form.start_vetting_procedure.different_institution_error');
-            $logger->notice(
-                'Cannot start new vetting procedure, registrant belongs to a different institution than RA'
-            );
 
             return ['form' => $form->createView()];
         }

@@ -51,11 +51,13 @@ class SecondFactorService
 
     /**
      * @param string $registrationCode
+     * @param string $actorInstitution
      * @return null|VerifiedSecondFactor
      */
-    public function findVerifiedSecondFactorByRegistrationCode($registrationCode)
+    public function findVerifiedSecondFactorByRegistrationCode($registrationCode, $actorInstitution)
     {
         $query = new VerifiedSecondFactorSearchQuery();
+        $query->setActorInstitution($actorInstitution);
         $query->setRegistrationCode($registrationCode);
 
         try {
