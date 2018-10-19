@@ -72,7 +72,7 @@ class RaCandidateService
      */
     public function search(SearchRaCandidatesCommand $command)
     {
-        $query = new RaCandidateSearchQuery($command->institution, $command->pageNumber);
+        $query = new RaCandidateSearchQuery($command->actorInstitution, $command->pageNumber);
 
         if ($command->name) {
             $query->setCommonName($command->name);
@@ -84,6 +84,10 @@ class RaCandidateService
 
         if ($command->orderBy) {
             $query->setOrderBy($command->orderBy);
+        }
+
+        if ($command->institution) {
+            $query->setInstitution($command->institution);
         }
 
         if ($command->orderDirection) {
@@ -111,6 +115,7 @@ class RaCandidateService
     public function accreditCandidate(AccreditCandidateCommand $command)
     {
         $apiCommand                     = new AccreditIdentityCommand();
+        $apiCommand->actorInstitution   = $command->actorInstitution;
         $apiCommand->identityId         = $command->identityId;
         $apiCommand->institution        = $command->institution;
         $apiCommand->role               = $command->role;
