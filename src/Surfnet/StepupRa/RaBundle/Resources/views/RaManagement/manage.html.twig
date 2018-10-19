@@ -9,9 +9,9 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>{{ 'ra.management.overview.institution'|trans }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'ra.management.overview.common_name'|trans, 'commonName') }}</th>
                         <th>{{ 'ra.management.overview.email'|trans }}</th>
+                        <th>{{ 'ra.management.overview.institution'|trans }}</th>
                         <th>{{ 'ra.management.overview.role'|trans }}</th>
                         <th></th>
                     </tr>
@@ -19,10 +19,14 @@
                 <tbody>
                 {% for authority in raList %}
                     <tr>
-                        <td>{{ authority.institution }}</td>
                         <td>{{ authority.commonName }}</td>
                         <td>{{ authority.email }}</td>
-                        <td>{{ ('ra.management.overview.role.value.'~authority.role)|trans }}</td>
+                        <td>{{ authority.institution }}</td>
+                        <td>
+                            {{ ('ra.management.overview.role.value.'~authority.role)|trans }}
+                            @
+                            {{ authority.institution }}
+                        </td>
                         <td>
                             <a href="{{ path('ra_management_change_ra_role', {identityId: authority.identityId}) }}" class="btn btn-info" role="button">
                                 {{ 'ra.management.overview.change_role'|trans }}

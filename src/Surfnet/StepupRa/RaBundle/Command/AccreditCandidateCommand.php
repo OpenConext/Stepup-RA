@@ -30,6 +30,11 @@ class AccreditCandidateCommand
     /**
      * @var string
      */
+    public $actorInstitution;
+
+    /**
+     * @var string
+     */
     public $institution;
 
     /**
