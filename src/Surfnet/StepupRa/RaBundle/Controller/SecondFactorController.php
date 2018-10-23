@@ -26,6 +26,8 @@ use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchSecondFactorAuditLogCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType;
+use Surfnet\StepupRa\RaBundle\Security\Authorization\Context\InstitutionContext;
+use Surfnet\StepupRa\RaBundle\Security\Authorization\Voter\AllowedInOtherInstitutionVoter;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -177,7 +179,8 @@ final class SecondFactorController extends Controller
             throw new NotFoundHttpException();
         }
 
-        if ($identity->institution !== $this->getCurrentUser()->institution) {
+        $institutionContext = new InstitutionContext($identity->institution, $this->getCurrentUser()->institution);
+        if (!$this->isGranted(AllowedInOtherInstitutionVoter::VIEW_AUDITLOG, $institutionContext)) {
             $logger->warning(sprintf(
                 'User with Identity "%s" (%s) requested Identity "%s" (%s) of another institution, denying access',
                 $this->getCurrentUser()->id,
