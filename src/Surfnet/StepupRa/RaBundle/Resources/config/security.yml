@@ -113,3 +113,12 @@ services:
         factory: [Surfnet\StepupRa\RaBundle\Value\TimeFrame, ofSeconds]
         arguments:
             - "%ra.security.authentication.session.maximum_relative_lifetime_in_seconds%"
+
+    # Voters
+    ra.security.authorization.allowed_in_other_institution_voter:
+        class: Surfnet\StepupRa\RaBundle\Security\Authorization\Voter\AllowedInOtherInstitutionVoter
+        arguments:
+            - '@ra.service.institution_configuration_options'
+        tags:
+            - { name: security.voter }
+        public: false
