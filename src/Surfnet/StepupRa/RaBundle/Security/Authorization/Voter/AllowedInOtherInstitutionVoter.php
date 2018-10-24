@@ -87,13 +87,16 @@ class AllowedInOtherInstitutionVoter implements VoterInterface
         // Now test if any of the roles allow the user to perform the requested task
         foreach ($actorRoles as $role) {
             switch ($role->getRole()) {
+                // The SRAA role is always allowed to perform the VIEW_AUDITLOG action
+                case "ROLE_SRAA":
+                    return VoterInterface::ACCESS_GRANTED;
+                    break;
                 case "ROLE_RA":
                     // RA roles are allowed if the target institution is in the useRa options.
                     if (in_array($subject->getTargetInstitution(), $raInstitutions)) {
                         return VoterInterface::ACCESS_GRANTED;
                     }
                     break;
-                case "ROLE_SRAA":
                 case "ROLE_RAA":
                     // (S)RAA roles are allowed if either the target institution is in the useRa or useRaa options.
                     if (in_array($subject->getTargetInstitution(), array_merge($raInstitutions, $raaInstitutions))) {

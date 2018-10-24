@@ -158,12 +158,6 @@ class AllowedInOtherInstitutionVoterTest extends TestCase
                 $this->getOptions(['ra' => [], 'raa' => []]),
                 $this->getContext('a', 'b'),
             ],
-            'no-ample-institution-config-options-available-even-for-sraa' => [
-                VoterInterface::ACCESS_DENIED,
-                $this->getRoles(['ROLE_SRAA']),
-                $this->getOptions(['ra' => [], 'raa' => []]),
-                $this->getContext('a', 'b'),
-            ],
             'not-configured-target-institution' => [
                 VoterInterface::ACCESS_DENIED,
                 $this->getRoles(['ROLE_RA']),
