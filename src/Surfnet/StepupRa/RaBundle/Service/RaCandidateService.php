@@ -100,16 +100,17 @@ class RaCandidateService
     }
 
     /**
-     * @param $identityId
+     * @param string $identityId
+     * @param string $institution
      * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidate
      */
-    public function getRaCandidateByIdentityId($identityId)
+    public function getRaCandidate($identityId, $institution)
     {
         if (!is_string($identityId)) {
             throw InvalidArgumentException::invalidType('string', 'identityId', $identityId);
         }
 
-        return $this->apiRaCandidateService->getByIdentityId($identityId);
+        return $this->apiRaCandidateService->get($identityId, $institution);
     }
 
     public function accreditCandidate(AccreditCandidateCommand $command)
