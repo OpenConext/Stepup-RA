@@ -61,7 +61,7 @@ class RaManagementController extends Controller
 
         $raaSwitcherOptions = $this
             ->getInstitutionConfigurationOptionsService()
-            ->getAvailableInstitutionsFor($institution);
+            ->getSelectRaaOptionsFor($institution);
 
         $raaSwitcherCommand = new ChangeRaManagementInstitutionCommand();
         $raaSwitcherCommand->raaManagementInstitution = $token->getRaManagementInstitution();
