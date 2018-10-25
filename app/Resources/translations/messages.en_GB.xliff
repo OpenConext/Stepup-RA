@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-10-22T14:34:05Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2018-10-25T14:09:34Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -126,11 +126,12 @@
         <source>ra.auditlog.institution</source>
         <target>Institution</target>
         <jms:reference-file line="18">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <jms:reference-file line="31">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/auditLog.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8a542621cac70df8e15d200c8bd2f2b650663849" resname="ra.auditlog.no_entries">
         <source>ra.auditlog.no_entries</source>
         <target>No records have been found in the audit log</target>
-        <jms:reference-file line="48">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/auditLog.html.twig</jms:reference-file>
+        <jms:reference-file line="50">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/auditLog.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5e0d6e050bc563d5e4b8f419651120cd8f250825" resname="ra.auditlog.second_factor_identifier">
         <source>ra.auditlog.second_factor_identifier</source>
@@ -210,12 +211,17 @@
       <trans-unit id="2ddc6712364551204f635e4718e015e682fd208c" resname="ra.form.ra_search_ra_candidates.button.search">
         <source>ra.form.ra_search_ra_candidates.button.search</source>
         <target>Search</target>
-        <jms:reference-file line="38">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaCandidatesType.php</jms:reference-file>
+        <jms:reference-file line="41">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaCandidatesType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="543a02dfd360a01fa0c9076da584e3f8d69394b4" resname="ra.form.ra_search_ra_candidates.label.email">
         <source>ra.form.ra_search_ra_candidates.label.email</source>
         <target>E-mail</target>
         <jms:reference-file line="35">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaCandidatesType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5349450b9c65b0e168b1468704c538dfbcddf6a9" resname="ra.form.ra_search_ra_candidates.label.institution">
+        <source>ra.form.ra_search_ra_candidates.label.institution</source>
+        <target state="new">ra.form.ra_search_ra_candidates.label.institution</target>
+        <jms:reference-file line="38">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaCandidatesType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9f4c34138ef487cdf008770c1257b06291343831" resname="ra.form.ra_search_ra_candidates.label.name">
         <source>ra.form.ra_search_ra_candidates.label.name</source>
@@ -372,7 +378,7 @@
       <trans-unit id="5fa5dfb0514d509432e81f5b2344b12d7351715b" resname="ra.management.amend_ra_info.info_amended">
         <source>ra.management.amend_ra_info.info_amended</source>
         <target>The RA's information has been amended.</target>
-        <jms:reference-file line="222">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="245">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6492fd6bfd9bf1c89d052b3172d572e9df9e54e8" resname="ra.management.amend_ra_info.ra_listing.email">
         <source>ra.management.amend_ra_info.ra_listing.email</source>
@@ -450,7 +456,7 @@
       <trans-unit id="011f64144e98b72e6a4ec42919ceb12298f059ef" resname="ra.management.change_ra_role_changed">
         <source>ra.management.change_ra_role_changed</source>
         <target>The Registration Authority has been granted the selected role</target>
-        <jms:reference-file line="268">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="291">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f2d212150076ce42ffe47d514f182ad5e7a6c9fe" resname="ra.management.create_ra.error.middleware_command_failed">
         <source>ra.management.create_ra.error.middleware_command_failed</source>
@@ -460,7 +466,7 @@
       <trans-unit id="4029e4383ef4a57077b346cc66f971c9cafb71c3" resname="ra.management.create_ra.identity_accredited">
         <source>ra.management.create_ra.identity_accredited</source>
         <target>The role of this user has been changed.</target>
-        <jms:reference-file line="176">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="199">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="62bc099c53662e393741f519a15503dcb4d6c77f" resname="ra.management.create_ra.modal.are_you_sure">
         <source>ra.management.create_ra.modal.are_you_sure</source>
@@ -556,6 +562,16 @@
         <target>Update RA Location</target>
         <jms:reference-file line="42">/../src/Surfnet/StepupRa/RaBundle/Form/Type/ChangeRaLocationType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="67f3f542199eb1bbc03c15dc9a3477d2c8ccdcc5" resname="ra.management.form.change_ra_management_institution.label.institution">
+        <source>ra.management.form.change_ra_management_institution.label.institution</source>
+        <target>Acting on behalf of:</target>
+        <jms:reference-file line="39">/../src/Surfnet/StepupRa/RaBundle/Form/Type/ChangeRaManagementInstitutionType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6940fb31b4ca7388731a323d43c673c20895ddad" resname="ra.management.form.change_ra_management_institution.label.submit">
+        <source>ra.management.form.change_ra_management_institution.label.submit</source>
+        <target>Save</target>
+        <jms:reference-file line="42">/../src/Surfnet/StepupRa/RaBundle/Form/Type/ChangeRaManagementInstitutionType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="c46b2115a26b03ef1c8eb69d299b537486003056" resname="ra.management.form.change_ra_role.label.role">
         <source>ra.management.form.change_ra_role.label.role</source>
         <target>Role</target>
@@ -600,7 +616,7 @@
       <trans-unit id="65486b5669de95b6a49203f59af122ec56fdc5ba" resname="ra.management.overview.change_role">
         <source>ra.management.overview.change_role</source>
         <target>Change Role</target>
-        <jms:reference-file line="28">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="33">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="249a6c69487c5477929e1dac383aa2d02fb25198" resname="ra.management.overview.common_name">
         <source>ra.management.overview.common_name</source>
@@ -616,17 +632,17 @@
       <trans-unit id="44ed8664990fcd8d55324dc98bfa3ac905bb9c0d" resname="ra.management.overview.institution">
         <source>ra.management.overview.institution</source>
         <target>Institution</target>
-        <jms:reference-file line="12">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="15">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e6f5ea2d06110a1b436b1814e53f99aeae92c867" resname="ra.management.overview.remove_as_ra">
         <source>ra.management.overview.remove_as_ra</source>
         <target>Remove role</target>
-        <jms:reference-file line="34">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="39">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3405f2d5ec00142a5b1b5c0c1509b6aa2543473b" resname="ra.management.overview.role">
         <source>ra.management.overview.role</source>
         <target>Role</target>
-        <jms:reference-file line="15">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="16">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="64d8691325da6d2b996fd48f7da7a382fdeb22e7" resname="ra.management.overview.role.value.ra">
         <source>ra.management.overview.role.value.ra</source>
@@ -646,7 +662,7 @@
       <trans-unit id="3d101556c7d65068f5e964ba8c5a9b8709e23266" resname="ra.management.overview.update_information">
         <source>ra.management.overview.update_information</source>
         <target>Edit</target>
-        <jms:reference-file line="31">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="36">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="114a1fc30fec7da3d1a7dc2b9a55d2b5dd78c8ce" resname="ra.management.ra_candidate.common_name">
         <source>ra.management.ra_candidate.common_name</source>
@@ -686,7 +702,7 @@
       <trans-unit id="1a03ce1515132785c884129598c2cb52db461cd0" resname="ra.management.retract_ra.success">
         <source>ra.management.retract_ra.success</source>
         <target>The Identity is no longer RA(A)</target>
-        <jms:reference-file line="315">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="338">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a973963d22345656dc73a28876fe2a9e481c6d3a" resname="ra.management.retract_registration_authority.are_you_sure">
         <source>ra.management.retract_registration_authority.are_you_sure</source>
@@ -834,6 +850,11 @@
         <target>RA Location removed</target>
         <jms:reference-file line="203">/../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="026f36542c59df635ff24d17be7bbfd905cde2a2" resname="ra.raa.changed_institution">
+        <source>ra.raa.changed_institution</source>
+        <target>You are now performing RA management on behalf of institution "%institution%"</target>
+        <jms:reference-file line="76">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="f12e743e43bca49fe86f99db331ded47fb88f1da" resname="ra.registration.sms.text.otp_requests_remaining">
         <source>ra.registration.sms.text.otp_requests_remaining</source>
         <target>Attempts remaining: %count%</target>
@@ -847,7 +868,7 @@
       <trans-unit id="800e5d0a1f57a8b4d3654ac7d173efe68c098f68" resname="ra.second_factor.revocation.could_not_revoke">
         <source>ra.second_factor.revocation.could_not_revoke</source>
         <target>The removal of the token failed</target>
-        <jms:reference-file line="145">/../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <jms:reference-file line="147">/../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f70c06516166354cd4d8d3490cbd707941610ed9" resname="ra.second_factor.revocation.modal.are_you_sure">
         <source>ra.second_factor.revocation.modal.are_you_sure</source>
@@ -893,7 +914,7 @@
       <trans-unit id="5c500a2dc008cbf1a8501593a2a50e518f6fe145" resname="ra.second_factor.revocation.revoked">
         <source>ra.second_factor.revocation.revoked</source>
         <target>The token has been successfully removed</target>
-        <jms:reference-file line="142">/../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <jms:reference-file line="144">/../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2b7c9489a8b311fcdb89652c38387bd08126de9b" resname="ra.second_factor.search.column.document_number">
         <source>ra.second_factor.search.column.document_number</source>
