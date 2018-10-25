@@ -37,10 +37,11 @@ class ChangeRaManagementInstitutionType extends AbstractType
         $builder
             ->add('raaManagementInstitution', ChoiceType::class, [
                 'label'       => 'ra.management.form.change_ra_management_institution.label.institution',
+                'attr'  => ['class' => 'raa-institution-switcher'],
                 'choices' => $options
             ])->add('search', SubmitType::class, [
                 'label' => 'ra.management.form.change_ra_management_institution.label.submit',
-                'attr'  => ['class' => 'btn btn-primary'],
+                'attr'  => ['class' => 'btn btn-primary raa-switcher-button'],
             ]);
     }
 
