@@ -34,6 +34,9 @@ class SearchRaCandidatesType extends AbstractType
             ->add('email', null, [
                 'label' => 'ra.form.ra_search_ra_candidates.label.email',
             ])
+            ->add('institution', null, [
+                'label' => 'ra.form.ra_search_ra_candidates.label.institution',
+            ])
             ->add('search', SubmitType::class, [
                 'label' => 'ra.form.ra_search_ra_candidates.button.search',
                 'attr'  => ['class' => 'btn btn-primary'],
