@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-10-22T14:34:02Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2018-10-25T14:09:30Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -375,13 +375,13 @@
         <source>ra.form.extension.ra_role.must_be_valid_choice</source>
         <target>The selected role is not a valid choice</target>
       </trans-unit>
+      <trans-unit id="21931fdf964650189b5c9da690b931a566c1a275" resname="ra.search_ra_candidates.actor_institution.type">
+        <source>ra.search_ra_candidates.actor_institution.type</source>
+        <target state="new">ra.search_ra_candidates.actor_institution.type</target>
+      </trans-unit>
       <trans-unit id="63afbb9b99d8cd2a35f01ca455bd73b2994397c8" resname="ra.search_ra_candidates.institution.blank">
         <source>ra.search_ra_candidates.institution.blank</source>
         <target>Instituut moet een waarde hebben</target>
-      </trans-unit>
-      <trans-unit id="768441c3e810f5a3e1b7dd5c57ea02e5066be253" resname="ra.search_ra_candidates.institution.type">
-        <source>ra.search_ra_candidates.institution.type</source>
-        <target>Instituut moet een tekstuele waarde hebben</target>
       </trans-unit>
       <trans-unit id="f5896924bf34d44a4af698498d21d8732258b418" resname="ra.search_ra_candidates.order_by.invalid_choice">
         <source>ra.search_ra_candidates.order_by.invalid_choice</source>
