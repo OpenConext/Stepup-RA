@@ -18,9 +18,10 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurationOptions;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Service\InstitutionConfigurationOptionsService as ApiInstitutionConfigurationOptionsService;
 
-final class InstitutionConfigurationOptionsService
+final class InstitutionConfigurationOptionsService implements InstitutionConfigurationOptionsServiceInterface
 {
     /**
      * @var ApiInstitutionConfigurationOptionsService
@@ -32,9 +33,28 @@ final class InstitutionConfigurationOptionsService
         $this->apiInstitutionConfigurationOptionsService = $apiService;
     }
 
+    /**
+     * @param $institution
+     * @return null|InstitutionConfigurationOptions
+     */
     public function getInstitutionConfigurationOptionsFor($institution)
     {
-        return $this->apiInstitutionConfigurationOptionsService->getInstitutionConfigurationOptionsFor($institution);
+        $configuration = $this->apiInstitutionConfigurationOptionsService->getInstitutionConfigurationOptionsFor($institution);
+
+        // If the FGA options are null (which they may be) then set them with the default value. This is the own institution.
+        if (is_null($configuration->useRa)) {
+            $configuration->useRa = [$institution];
+        }
+
+        if (is_null($configuration->useRaa)) {
+            $configuration->useRaa = [$institution];
+        }
+
+        if (is_null($configuration->selectRaa)) {
+            $configuration->selectRaa = [$institution];
+        }
+
+        return $configuration;
     }
 
     /**
