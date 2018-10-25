@@ -14,7 +14,7 @@
             <hr>
 
             {% if secondFactors.elements|length > 0 %}
-                <table class="table table-striped">
+                <table class="table table-striped orderable">
                     <thead>
                     <tr>
                         <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.second_factor_id'|trans, 'secondFactorId') }}</th>
@@ -22,7 +22,7 @@
                         <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.name'|trans, 'name') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.institution'|trans, 'institution') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.email'|trans, 'email') }}</th>
-                        <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.document_number'|trans, 'document_number') }}</th>
+                        <th>{{ 'ra.second_factor.search.column.document_number'|trans }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.status'|trans, 'status') }}</th>
                         <th></th>
                     </tr>
