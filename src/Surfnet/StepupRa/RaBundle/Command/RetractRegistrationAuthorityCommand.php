@@ -24,4 +24,9 @@ class RetractRegistrationAuthorityCommand
      * @var string
      */
     public $identityId;
+
+    /**
+     * @var string
+     */
+    public $institution;
 }

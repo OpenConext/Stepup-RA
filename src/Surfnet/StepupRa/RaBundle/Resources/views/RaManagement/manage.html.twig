@@ -33,7 +33,7 @@
                         <td>
                             {{ ('ra.management.overview.role.value.'~authority.role)|trans }}
                             @
-                            {{ authority.institution }}
+                            {{ authority.raInstitution }}
                         </td>
                         <td>
                             <a href="{{ path('ra_management_change_ra_role', {identityId: authority.identityId}) }}" class="btn btn-info" role="button">

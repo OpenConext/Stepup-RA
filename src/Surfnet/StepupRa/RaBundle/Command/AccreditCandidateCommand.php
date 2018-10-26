@@ -30,11 +30,6 @@ class AccreditCandidateCommand
     /**
      * @var string
      */
-    public $actorInstitution;
-
-    /**
-     * @var string
-     */
     public $institution;
 
     /**
@@ -62,4 +57,9 @@ class AccreditCandidateCommand
      * @var string
      */
     public $role;
+
+    /**
+     * @var string
+     */
+    public $raInstitution;
 }
