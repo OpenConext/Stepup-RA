@@ -36,9 +36,6 @@
                             {{ authority.raInstitution }}
                         </td>
                         <td>
-                            <a href="{{ path('ra_management_change_ra_role', {identityId: authority.identityId}) }}" class="btn btn-info" role="button">
-                                {{ 'ra.management.overview.change_role'|trans }}
-                            </a>
                             <a href="{{ path('ra_management_amend_ra_information', {identityId: authority.identityId}) }}" class="btn btn-primary" role="button">
                                 {{ 'ra.management.overview.update_information'|trans }}
                             </a>
