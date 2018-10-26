@@ -564,7 +564,7 @@
       </trans-unit>
       <trans-unit id="67f3f542199eb1bbc03c15dc9a3477d2c8ccdcc5" resname="ra.management.form.change_ra_management_institution.label.institution">
         <source>ra.management.form.change_ra_management_institution.label.institution</source>
-        <target>Acting on behalf of:</target>
+        <target>Select candidate from:</target>
         <jms:reference-file line="39">/../src/Surfnet/StepupRa/RaBundle/Form/Type/ChangeRaManagementInstitutionType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6940fb31b4ca7388731a323d43c673c20895ddad" resname="ra.management.form.change_ra_management_institution.label.submit">
@@ -852,7 +852,7 @@
       </trans-unit>
       <trans-unit id="026f36542c59df635ff24d17be7bbfd905cde2a2" resname="ra.raa.changed_institution">
         <source>ra.raa.changed_institution</source>
-        <target>You are now performing RA management on behalf of institution "%institution%"</target>
+        <target>You are now selecting candidates from institution "%institution%"</target>
         <jms:reference-file line="76">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f12e743e43bca49fe86f99db331ded47fb88f1da" resname="ra.registration.sms.text.otp_requests_remaining">
