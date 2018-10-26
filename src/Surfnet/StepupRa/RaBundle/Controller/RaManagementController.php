@@ -131,6 +131,7 @@ class RaManagementController extends Controller
 
         $command                   = new SearchRaCandidatesCommand();
         $command->actorInstitution = $institution;
+        //$command->institution      = $institution;
         $command->pageNumber       = (int) $request->get('p', 1);
         $command->orderBy          = $request->get('orderBy');
         $command->orderDirection   = $request->get('orderDirection');
@@ -182,9 +183,9 @@ class RaManagementController extends Controller
         }
 
         $command                   = new AccreditCandidateCommand();
-        $command->actorInstitution = $this->getUser()->institution;
         $command->identityId       = $identityId;
-        $command->institution      = $raCandidate->institution;
+        $command->institution      = $this->getUser()->institution;
+        $command->raInstitution    = $raCandidate->institution;
 
         // todo: make choicelist configurable
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
@@ -236,6 +237,8 @@ class RaManagementController extends Controller
         $command->identityId = $raListing->identityId;
         $command->location = $this->getUser()->institution;
         $command->contactInformation = $raListing->contactInformation;
+        // todo: institution
+        $command->institution = $raListing->institution;
 
         $form = $this->createForm(AmendRegistrationAuthorityInformationType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -265,6 +268,7 @@ class RaManagementController extends Controller
      */
     public function changeRaRoleAction(Request $request, $identityId)
     {
+        // todo: remove?
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
         $logger = $this->get('logger');
 
@@ -322,6 +326,7 @@ class RaManagementController extends Controller
 
         $command = new RetractRegistrationAuthorityCommand();
         $command->identityId = $identityId;
+        $command->institution = $this->getUser()->institution;
 
         $form = $this->createForm(RetractRegistrationAuthorityType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
