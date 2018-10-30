@@ -42,6 +42,11 @@ class SamlToken extends AbstractToken
      */
     private $institutionConfigurationOptions;
 
+    /**
+     * @var string
+     */
+    private $raManagementInstitution;
+
     public function __construct(
         Loa $loa,
         array $roles = [],
@@ -91,6 +96,30 @@ class SamlToken extends AbstractToken
     }
 
     /**
+     * @param string $institution
+     */
+    public function changeRaaInstitutionScope($institution)
+    {
+        if ($this->getUser() === null) {
+            throw new LogicException('Cannot change RAA institution scope: token does not contain a user');
+        }
+
+        $roles = array_map(function (RoleInterface $role) {
+            return $role->getRole();
+        }, $this->getRoles());
+
+        if (!in_array('ROLE_RAA', $roles)) {
+            throw new RuntimeException(sprintf(
+                'Unauthorized to change institution scope to "%s": role SRAA required, found roles "%s"',
+                $institution,
+                implode(', ', $roles)
+            ));
+        }
+
+        $this->raManagementInstitution = $institution;
+    }
+
+    /**
      * Returns the user credentials.
      *
      * @return mixed The user credentials
@@ -110,13 +139,24 @@ class SamlToken extends AbstractToken
 
     public function serialize()
     {
-        return serialize([parent::serialize(), $this->loa, $this->institutionConfigurationOptions]);
+        return serialize([parent::serialize(), $this->loa, $this->institutionConfigurationOptions, $this->raManagementInstitution]);
     }
 
     public function unserialize($serialized)
     {
-        list($parent, $this->loa, $this->institutionConfigurationOptions) = unserialize($serialized);
+        list($parent, $this->loa, $this->institutionConfigurationOptions, $this->raManagementInstitution) = unserialize($serialized);
 
         parent::unserialize($parent);
+    }
+
+    /**
+     * @return string
+     */
+    public function getRaManagementInstitution()
+    {
+        if (!$this->raManagementInstitution) {
+            return $this->getUser()->institution;
+        }
+        return $this->raManagementInstitution;
     }
 }
