@@ -21,9 +21,9 @@ namespace Surfnet\StepupRa\RaBundle\Tests\Security\Authorization\Voter;
 use Mockery as m;
 use PHPUnit_Framework_TestCase as TestCase;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListingCollection;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaListingService;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Security\Authorization\Voter\AllowedToSwitchInstitutionVoter;
+use Surfnet\StepupRa\RaBundle\Service\RaListingService;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Role\Role;
 
@@ -59,7 +59,7 @@ class AllowedToSwitchInstitutionVoterTest extends TestCase
 
         $service = m::mock(RaListingService::class);
         $service
-            ->shouldReceive('search')
+            ->shouldReceive('searchBy')
             ->andReturn($collection);
 
         $voter = new AllowedToSwitchInstitutionVoter($service);

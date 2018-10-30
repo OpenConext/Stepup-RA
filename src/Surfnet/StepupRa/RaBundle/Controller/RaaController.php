@@ -24,6 +24,7 @@ use Surfnet\StepupRa\RaBundle\Form\Type\RaaInstitutionSelectionType;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Security\Authorization\Voter\AllowedToSwitchInstitutionVoter;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
+use Surfnet\StepupRa\RaBundle\Service\RaListingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -44,8 +45,8 @@ class RaaController extends Controller
         $logger->notice(sprintf('Select Institution for RAA "%s"', $identity->id));
 
         $raaSwitcherOptions = $this
-            ->getInstitutionConfigurationOptionsService()
-            ->getAvailableInstitutionsFor($token->getIdentityInstitution());
+            ->getRaListingService()
+            ->createChoiceListFor($token->getIdentityInstitution());
 
         $command = new ChangeRaaInstitutionCommand();
         $command->institution = $institution;
@@ -81,6 +82,13 @@ class RaaController extends Controller
         );
     }
 
+    /**
+     * @return RaListingService
+     */
+    private function getRaListingService()
+    {
+        return $this->get('ra.service.ra_listing');
+    }
 
     /**
      * @return InstitutionConfigurationOptionsService
