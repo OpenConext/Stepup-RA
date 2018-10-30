@@ -19,8 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Security\Authorization\Voter;
 
 use InvalidArgumentException;
-use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaListingService;
+use Surfnet\StepupRa\RaBundle\Service\RaListingService;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Role\Role;
@@ -71,9 +70,7 @@ class AllowedToSwitchInstitutionVoter implements VoterInterface
             return VoterInterface::ACCESS_DENIED;
         }
 
-        $query = new RaListingSearchQuery($token->getIdentityInstitution(), 1);
-        $query->setIdentityId($token->getIdentityInstitution());
-        $raListing = $this->service->search($query);
+        $raListing = $this->service->searchBy($token->getIdentityInstitution());
 
         if ($raListing->getTotalItems() > 1) {
             return VoterInterface::ACCESS_GRANTED;

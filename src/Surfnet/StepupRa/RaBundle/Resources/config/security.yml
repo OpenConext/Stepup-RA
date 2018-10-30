@@ -126,7 +126,7 @@ services:
     ra.security.authorization.allowed_to_switch_institution:
         class: Surfnet\StepupRa\RaBundle\Security\Authorization\Voter\AllowedToSwitchInstitutionVoter
         arguments:
-            - '@surfnet_stepup_middleware_client.library.identity.service.ra_listing'
+            - '@ra.service.ra_listing'
         tags:
             - { name: security.voter }
         public: false

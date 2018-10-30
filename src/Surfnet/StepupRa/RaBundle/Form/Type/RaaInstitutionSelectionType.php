@@ -29,18 +29,13 @@ class RaaInstitutionSelectionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $options = array_combine(
-            $builder->getData()->availableInstitutions,
-            $builder->getData()->availableInstitutions
-        );
-
         $builder
             ->add(
                 'institution',
                 ChoiceType::class,
                 [
                     'label' => 'ra.form.ra_select_institution.label.institution',
-                    'choices' => $options,
+                    'choices' => $builder->getData()->availableInstitutions,
                 ]
             )->add(
                 'select_and_apply',

@@ -20,8 +20,8 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListingCollection;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaListingService as MiddlewareClientBundleRaListingService;
-use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
 
 class RaListingService
 {
@@ -45,25 +45,35 @@ class RaListingService
 
     /**
      * @param $institution
-     * @return ArrayChoiceList
+     * @return array
      */
     public function createChoiceListFor($institution)
     {
-        $query = new RaListingSearchQuery($institution, 1);
-        $query->setIdentityId($institution->getIdentityInstitution());
-
-        $collection = $this->raListingService->search($query);
+        $collection = $this->searchBy($institution);
 
         if ($collection->getTotalItems() === 0) {
             $this->logger->warning('No RAA institutions found for identity, unable to build the choice list for the RAA switcher');
-            return new ArrayChoiceList();
+            return [];
         }
 
         $choices = [];
-        foreach ($collection as $item) {
-            $choices[$item->institution] = $item->institution;
+        foreach ($collection->getElements() as $item) {
+            $choices[$item->raInstitution] = $item->raInstitution;
         }
 
-        return new ArrayChoiceList($choices);
+        // Sort the list alphabetically while preserving the keys
+        asort($choices);
+        return $choices;
+    }
+
+    /**
+     * @param string $institution
+     * @return RaListingCollection
+     */
+    public function searchBy($institution)
+    {
+        $query = new RaListingSearchQuery($institution, 1);
+        //$query->setIdentityId($institution);
+        return $this->raListingService->search($query);
     }
 }
