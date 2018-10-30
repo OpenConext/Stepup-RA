@@ -249,6 +249,12 @@ services:
             - "%locales%"
             - "%support_url%"
 
+    ra.service.ra_listing:
+        class: Surfnet\StepupRa\RaBundle\Service\RaListingService
+        arguments:
+            - '@surfnet_stepup_middleware_client.identity.service.ra_listing'
+            - '@logger'
+
     # Repositories
     ra.repository.vetting_procedure:
         class: Surfnet\StepupRa\RaBundle\Repository\SessionVettingProcedureRepository
