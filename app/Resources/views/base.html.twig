@@ -67,6 +67,15 @@
                             </a>
                         </li>
                     </ul>
+                {# TODO  Use a voter to determine if the switcher should be displayed (if only RAA for one institution, then there is no use to show the switcher) #}
+                {% elseif is_granted('ROLE_RAA') %}
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation"{% if app.request.attributes.get('_route') == 'raa_select_institution' %} class="active"{% endif %}>
+                            <a href="{{ path('raa_select_institution') }}">
+                                {{ app.user.institution }} <i class="fa fa-exchange"></i> {{ 'ra.menu.sraa_change_institution'|trans }}
+                            </a>
+                        </li>
+                    </ul>
                 {% endif %}
                 </div>
             </div>

@@ -70,6 +70,10 @@ services:
             - "@ra.form.extension.institution_listing_choice_list"
         tags: [{ name: form.type, alias: sraa_institution_select }]
 
+    ra.form.type.raa_institution_select:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\RaaInstitutionSelectionType
+        tags: [{ name: form.type, alias: raa_institution_select }]
+
     ra.form.type.management.create_ra:
         class: Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType
         tags: [{ name: form.type, alias: ra_management_create_ra }]
