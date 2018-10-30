@@ -22,6 +22,7 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\ChangeRaaInstitutionCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\RaaInstitutionSelectionType;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
+use Surfnet\StepupRa\RaBundle\Security\Authorization\Voter\AllowedToSwitchInstitutionVoter;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +31,7 @@ class RaaController extends Controller
 {
     public function selectInstitutionAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA']);
+        $this->denyAccessUnlessGranted([AllowedToSwitchInstitutionVoter::RAA_SWITCHING]);
 
         /** @var SamlToken $token */
         $token  = $this->get('security.token_storage')->getToken();
