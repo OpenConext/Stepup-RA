@@ -47,6 +47,15 @@ class SamlToken extends AbstractToken
      */
     private $raManagementInstitution;
 
+    /**
+     * The identity institution is set with the SHO of the identity. This value is not overridden like the user
+     * institution can be. This value can be used to get the identities institution regardless of the scope it
+     * is performing RAA tasks for at this moment.
+     *
+     * @var string
+     */
+    private $identityInstitution;
+
     public function __construct(
         Loa $loa,
         array $roles = [],
@@ -83,9 +92,9 @@ class SamlToken extends AbstractToken
             return $role->getRole();
         }, $this->getRoles());
 
-        if (!in_array('ROLE_SRAA', $roles)) {
+        if (!in_array('ROLE_SRAA', $roles) && !in_array('ROLE_RAA', $roles)) {
             throw new RuntimeException(sprintf(
-                'Unauthorized to change institution scope to "%s": role SRAA required, found roles "%s"',
+                'Unauthorized to change institution scope to "%s": role (S)RAA required, found roles "%s"',
                 $institution,
                 implode(', ', $roles)
             ));
@@ -139,15 +148,38 @@ class SamlToken extends AbstractToken
 
     public function serialize()
     {
-        return serialize([parent::serialize(), $this->loa, $this->institutionConfigurationOptions, $this->raManagementInstitution]);
+        return serialize(
+            [
+                parent::serialize(),
+                $this->loa,
+                $this->institutionConfigurationOptions,
+                $this->raManagementInstitution,
+                $this->identityInstitution,
+            ]
+        );
     }
 
     public function unserialize($serialized)
     {
-        list($parent, $this->loa, $this->institutionConfigurationOptions, $this->raManagementInstitution) = unserialize($serialized);
+        list($parent, $this->loa, $this->institutionConfigurationOptions, $this->raManagementInstitution, $this->identityInstitution) = unserialize(
+            $serialized
+        );
 
         parent::unserialize($parent);
     }
+
+    /**
+     * @return string
+     */
+    public function getIdentityInstitution()
+    {
+        // If the identityInstitution is not yet set, fill it with the institution of the identity.
+        if (!$this->identityInstitution) {
+            $this->identityInstitution = $this->getUser()->institution;
+        }
+        return $this->identityInstitution;
+    }
+
 
     /**
      * @return string

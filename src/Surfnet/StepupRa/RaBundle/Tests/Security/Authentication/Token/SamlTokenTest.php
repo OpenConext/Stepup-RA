@@ -60,7 +60,7 @@ class SamlTokenTest extends TestCase
      * @group security
      * @group sraa
      */
-    public function institution_scope_of_saml_token_cannot_be_changed_when_not_sraa()
+    public function institution_scope_of_saml_token_cannot_be_changed_when_not_raa()
     {
         $this->setExpectedException(RuntimeException::class, 'Unauthorized to change institution scope');
 
@@ -68,7 +68,7 @@ class SamlTokenTest extends TestCase
 
         $samlToken = new SamlToken(
             new Loa(Loa::LOA_1, 'http://some.url.tld/authentication/loa1'),
-            ['ROLE_RAA', 'ROLE_RA']
+            ['ROLE_RA']
         );
         $samlToken->setUser($identity);
 
