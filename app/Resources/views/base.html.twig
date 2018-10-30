@@ -67,8 +67,7 @@
                             </a>
                         </li>
                     </ul>
-                {# TODO  Use a voter to determine if the switcher should be displayed (if only RAA for one institution, then there is no use to show the switcher) #}
-                {% elseif is_granted('ROLE_RAA') %}
+                {% elseif is_granted('raa_switching') %}
                     <ul class="nav nav-pills pull-right">
                         <li role="presentation"{% if app.request.attributes.get('_route') == 'raa_select_institution' %} class="active"{% endif %}>
                             <a href="{{ path('raa_select_institution') }}">
