@@ -85,6 +85,7 @@ class RaManagementController extends Controller
         }
 
         $searchQuery = (new RaListingSearchQuery($this->getUser()->institution, 1))
+            ->setInstitution($this->getRaManagementInstitution())
             ->setOrderBy($request->get('orderBy', 'commonName'))
             ->setOrderDirection($request->get('orderDirection', 'asc'));
 
@@ -131,6 +132,7 @@ class RaManagementController extends Controller
 
         $command                   = new SearchRaCandidatesCommand();
         $command->actorInstitution = $institution;
+        $command->institution      = $this->getRaManagementInstitution();
         $command->pageNumber       = (int) $request->get('p', 1);
         $command->orderBy          = $request->get('orderBy');
         $command->orderDirection   = $request->get('orderDirection');
@@ -174,7 +176,7 @@ class RaManagementController extends Controller
 
         $logger->notice('Page for Accreditation of Identity to Ra or Raa requested');
         $identityId = $request->get('identityId');
-        $raCandidate = $this->getRaCandidateService()->getRaCandidate($identityId, $this->getUser()->institution);
+        $raCandidate = $this->getRaCandidateService()->getRaCandidate($identityId, $this->getRaManagementInstitution());
 
         if (!$raCandidate) {
             $logger->warning(sprintf('RaCandidate based on identity "%s" not found', $identityId));
@@ -182,9 +184,9 @@ class RaManagementController extends Controller
         }
 
         $command                   = new AccreditCandidateCommand();
-        $command->actorInstitution = $this->getUser()->institution;
         $command->identityId       = $identityId;
-        $command->institution      = $raCandidate->institution;
+        $command->institution      = $this->getRaManagementInstitution();
+        $command->raInstitution    = $this->getUser()->institution;
 
         // todo: make choicelist configurable
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
@@ -236,6 +238,8 @@ class RaManagementController extends Controller
         $command->identityId = $raListing->identityId;
         $command->location = $this->getUser()->institution;
         $command->contactInformation = $raListing->contactInformation;
+        // todo: institution
+        $command->institution = $raListing->institution;
 
         $form = $this->createForm(AmendRegistrationAuthorityInformationType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -265,6 +269,7 @@ class RaManagementController extends Controller
      */
     public function changeRaRoleAction(Request $request, $identityId)
     {
+        // todo: remove?
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
         $logger = $this->get('logger');
 
@@ -322,6 +327,7 @@ class RaManagementController extends Controller
 
         $command = new RetractRegistrationAuthorityCommand();
         $command->identityId = $identityId;
+        $command->institution = $this->getUser()->institution;
 
         $form = $this->createForm(RetractRegistrationAuthorityType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -382,5 +388,17 @@ class RaManagementController extends Controller
     private function getPaginator()
     {
         return $this->get('knp_paginator');
+    }
+
+    /**
+     * @return string
+     */
+    private function getRaManagementInstitution()
+    {
+        /**
+         * @var SamlToken $token
+         */
+        $token  = $this->get('security.token_storage')->getToken();
+        return $token->getRaManagementInstitution();
     }
 }
