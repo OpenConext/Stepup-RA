@@ -46,7 +46,7 @@ class RaaController extends Controller
 
         $raaSwitcherOptions = $this
             ->getRaListingService()
-            ->createChoiceListFor($token->getIdentityInstitution());
+            ->createChoiceListFor($identity->id, $token->getIdentityInstitution());
 
         $command = new ChangeRaaInstitutionCommand();
         $command->institution = $institution;
