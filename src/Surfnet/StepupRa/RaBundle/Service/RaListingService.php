@@ -44,12 +44,13 @@ class RaListingService
     }
 
     /**
-     * @param $institution
+     * @param string $identityId
+     * @param string $institution
      * @return array
      */
-    public function createChoiceListFor($institution)
+    public function createChoiceListFor($identityId, $institution)
     {
-        $collection = $this->searchBy($institution);
+        $collection = $this->searchBy($identityId, $institution);
 
         if ($collection->getTotalItems() === 0) {
             $this->logger->warning('No RAA institutions found for identity, unable to build the choice list for the RAA switcher');
@@ -67,13 +68,14 @@ class RaListingService
     }
 
     /**
+     * @param string $identityId
      * @param string $institution
      * @return RaListingCollection
      */
-    public function searchBy($institution)
+    public function searchBy($identityId, $institution)
     {
         $query = new RaListingSearchQuery($institution, 1);
-        //$query->setIdentityId($institution);
+        $query->setIdentityId($identityId);
         return $this->raListingService->search($query);
     }
 }

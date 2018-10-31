@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Tests\Security\Authorization\Voter;
 
 use Mockery as m;
 use PHPUnit_Framework_TestCase as TestCase;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListingCollection;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Security\Authorization\Voter\AllowedToSwitchInstitutionVoter;
@@ -41,11 +42,18 @@ class AllowedToSwitchInstitutionVoterTest extends TestCase
         $attributes
     )
     {
+        $user = new Identity();
+        $user->id = '47820bdd-7e48-46e5-916b-0b38b65f4d6b';
+
         $token = m::mock(SamlToken::class);
         $token
             ->shouldReceive('getRoles')
             ->once()
             ->andReturn($actorRoles);
+
+        $token
+            ->shouldReceive('getUser')
+            ->andReturn($user);
 
         $token
             ->shouldReceive('getIdentityInstitution')

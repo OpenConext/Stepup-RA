@@ -70,7 +70,7 @@ class AllowedToSwitchInstitutionVoter implements VoterInterface
             return VoterInterface::ACCESS_DENIED;
         }
 
-        $raListing = $this->service->searchBy($token->getIdentityInstitution());
+        $raListing = $this->service->searchBy($token->getUser()->id, $token->getIdentityInstitution());
 
         if ($raListing->getTotalItems() > 1) {
             return VoterInterface::ACCESS_GRANTED;
