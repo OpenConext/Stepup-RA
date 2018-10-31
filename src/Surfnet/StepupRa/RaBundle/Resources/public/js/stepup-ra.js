@@ -107,7 +107,7 @@
                 .text($('textarea#ra_management_create_ra_contactInformation').val());
             modal
                 .find('.modal-body td.role')
-                .text($('select#ra_management_create_ra_role option:selected').text());
+                .text($('select#ra_management_create_ra_role option:selected').text() + " @ " + $('select#ra_management_create_ra_raInstitution option:selected').text());
 
             modal.modal();
 
