@@ -30,6 +30,11 @@ class CreateRaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $options = array_combine(
+            $builder->getData()->availableInstitutions,
+            $builder->getData()->availableInstitutions
+        );
+
         $builder
             ->add('location', TextareaType::class, [
                 'label' => 'ra.management.form.create_ra.label.location'
@@ -41,6 +46,10 @@ class CreateRaType extends AbstractType
                 'label' => 'ra.management.form.create_ra.label.role',
                 'choices' => RaRoleChoiceList::create(),
                 'choices_as_values' => true,
+            ])
+            ->add('raInstitution', ChoiceType::class, [
+                'label'       => 'ra.management.form.create_ra.label.institution',
+                'choices' => $options
             ])
             ->add('create_ra', SubmitType::class, [
                 'label' => 'ra.management.form.create_ra.label.create_ra',
