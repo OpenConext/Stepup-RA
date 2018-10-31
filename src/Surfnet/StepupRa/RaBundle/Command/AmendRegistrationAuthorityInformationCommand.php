@@ -42,4 +42,9 @@ class AmendRegistrationAuthorityInformationCommand
      * @var string
      */
     public $contactInformation;
+
+    /**
+     * @var string
+     */
+    public $institution;
 }
