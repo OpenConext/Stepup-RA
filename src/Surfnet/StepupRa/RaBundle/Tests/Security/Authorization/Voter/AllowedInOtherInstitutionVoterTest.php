@@ -16,13 +16,14 @@
  * limitations under the License.
  */
 
-namespace Surfnet\StepupRa\RaBundle\Security\Authorization\Voter;
+namespace Surfnet\StepupRa\RaBundle\Tests\Security\Authorization\Voter;
 
 use Mockery as m;
 use PHPUnit_Framework_TestCase as TestCase;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurationOptions;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Security\Authorization\Context\InstitutionContext;
+use Surfnet\StepupRa\RaBundle\Security\Authorization\Voter\AllowedInOtherInstitutionVoter;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsServiceInterface;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
