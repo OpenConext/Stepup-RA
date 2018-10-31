@@ -21,12 +21,10 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
-use Surfnet\StepupRa\RaBundle\Command\ChangeRaManagementInstitutionCommand;
 use Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand;
 use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\AmendRegistrationAuthorityInformationType;
-use Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaManagementInstitutionType;
 use Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaRoleType;
 use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
@@ -52,37 +50,7 @@ class RaManagementController extends Controller
 
         $logger = $this->get('logger');
         $institution = $this->getUser()->institution;
-
-        /**
-         * @var SamlToken $token
-         */
-        $token  = $this->get('security.token_storage')->getToken();
         $logger->notice(sprintf('Loading overview of RA(A)s for institution "%s"', $institution));
-
-        $raaSwitcherOptions = $this
-            ->getInstitutionConfigurationOptionsService()
-            ->getSelectRaaOptionsFor($institution);
-
-        $raaSwitcherCommand = new ChangeRaManagementInstitutionCommand();
-        $raaSwitcherCommand->raaManagementInstitution = $token->getRaManagementInstitution();
-        $raaSwitcherCommand->availableInstitutions = $raaSwitcherOptions;
-
-        $form = $this->createForm(ChangeRaManagementInstitutionType::class, $raaSwitcherCommand);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted()) {
-            $token->changeRaaInstitutionScope($raaSwitcherCommand->raaManagementInstitution);
-
-            $flashMessage = $this->get('translator')
-                ->trans('ra.raa.changed_institution', ['%institution%' => $raaSwitcherCommand->raaManagementInstitution]);
-            $this->get('session')->getFlashBag()->add('success', $flashMessage);
-
-            $logger->notice(sprintf(
-                'RAA "%s" successfully switched to institution "%s"',
-                $this->getUser()->id,
-                $raaSwitcherCommand->raaManagementInstitution
-            ));
-        }
 
         $searchQuery = (new RaListingSearchQuery($this->getUser()->institution, 1))
             ->setInstitution($this->getRaManagementInstitution())
@@ -110,9 +78,8 @@ class RaManagementController extends Controller
         return $this->render(
             'SurfnetStepupRaRaBundle:RaManagement:manage.html.twig',
             [
-                'raInstitutionSwitcher' => $form->createView(),
-                'raList' => $raListings,
-                'pagination' => $pagination,
+                'raList'     => $raListings,
+                'pagination' => $pagination
             ]
         );
     }
@@ -183,10 +150,19 @@ class RaManagementController extends Controller
             throw new NotFoundHttpException();
         }
 
+        /**
+         * @var SamlToken $token
+         */
+        $token  = $this->get('security.token_storage')->getToken();
+        $raaSwitcherOptions = $this
+            ->getInstitutionConfigurationOptionsService()
+            ->getAvailableInstitutionsFor($token->getIdentityInstitution());
+
         $command                   = new AccreditCandidateCommand();
         $command->identityId       = $identityId;
         $command->institution      = $this->getRaManagementInstitution();
         $command->raInstitution    = $this->getUser()->institution;
+        $command->availableInstitutions = $raaSwitcherOptions;
 
         // todo: make choicelist configurable
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
@@ -395,10 +371,6 @@ class RaManagementController extends Controller
      */
     private function getRaManagementInstitution()
     {
-        /**
-         * @var SamlToken $token
-         */
-        $token  = $this->get('security.token_storage')->getToken();
-        return $token->getRaManagementInstitution();
+        return $this->getUser()->institution;
     }
 }

@@ -107,7 +107,7 @@
                 .text($('textarea#ra_management_create_ra_contactInformation').val());
             modal
                 .find('.modal-body td.role')
-                .text($('select#ra_management_create_ra_role option:selected').text());
+                .text($('select#ra_management_create_ra_role option:selected').text() + " @ " + $('select#ra_management_create_ra_raInstitution option:selected').text());
 
             modal.modal();
 
@@ -188,13 +188,5 @@
             $('button#ra_search_ra_second_factors_export').hide();
         }
 
-        // Hide the RAA switch button and register a chane listener on the select list
-        if ($('.raa-institution-switcher').length) {
-            $('.raa-switcher-button').hide();
-            $('.raa-institution-switcher').on('blur', function (event) {
-                $('.raa-institution-switcher').closest('form').submit();
-            });
-        }
-
-        });
+    });
 })(jQuery);

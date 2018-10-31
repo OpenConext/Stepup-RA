@@ -6,14 +6,6 @@
             <a href="{{ path('ra_management_ra_candidate_search') }}" class="btn btn-primary pull-right" role="button">
                 <i class="fa fa-plus"></i> {{ 'ra.management.overview.add_raa'|trans }}
             </a>
-
-            <div class="row">
-                <div class="col-sm-8 pull-left">
-                    {% form_theme raInstitutionSwitcher 'MopaBootstrapBundle:Form:fields.html.twig' %}
-                    {{ form(raInstitutionSwitcher) }}
-                </div>
-            </div>
-
             <table class="table table-striped orderable">
                 <thead>
                     <tr>
