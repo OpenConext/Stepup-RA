@@ -29,8 +29,9 @@ use Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaRoleType;
 use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType;
+use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
+use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -149,10 +150,19 @@ class RaManagementController extends Controller
             throw new NotFoundHttpException();
         }
 
+        /**
+         * @var SamlToken $token
+         */
+        $token  = $this->get('security.token_storage')->getToken();
+        $raaSwitcherOptions = $this
+            ->getInstitutionConfigurationOptionsService()
+            ->getAvailableInstitutionsFor($token->getIdentityInstitution());
+
         $command                   = new AccreditCandidateCommand();
         $command->identityId       = $identityId;
         $command->institution      = $this->getRaManagementInstitution();
         $command->raInstitution    = $this->getUser()->institution;
+        $command->availableInstitutions = $raaSwitcherOptions;
 
         // todo: make choicelist configurable
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
@@ -341,6 +351,14 @@ class RaManagementController extends Controller
     }
 
     /**
+     * @return InstitutionConfigurationOptionsService
+     */
+    private function getInstitutionConfigurationOptionsService()
+    {
+        return $this->get('ra.service.institution_configuration_options');
+    }
+
+    /**
      * @return \Knp\Component\Pager\Paginator
      */
     private function getPaginator()
@@ -353,10 +371,6 @@ class RaManagementController extends Controller
      */
     private function getRaManagementInstitution()
     {
-        /**
-         * @var SamlToken $token
-         */
-        $token  = $this->get('security.token_storage')->getToken();
-        return $token->getRaManagementInstitution();
+        return $this->getUser()->institution;
     }
 }
