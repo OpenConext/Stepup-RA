@@ -115,7 +115,7 @@ ra_vetting_completed:
 
 ra_management_manage:
     path:     /management/ra
-    methods:  [GET, POST]
+    methods:  [GET]
     defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:manage }
 
 ra_management_ra_candidate_search:
