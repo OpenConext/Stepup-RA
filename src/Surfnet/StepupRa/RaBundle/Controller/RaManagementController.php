@@ -214,8 +214,7 @@ class RaManagementController extends Controller
         $command->identityId = $raListing->identityId;
         $command->location = $this->getUser()->institution;
         $command->contactInformation = $raListing->contactInformation;
-        // todo: institution
-        $command->institution = $raListing->institution;
+        $command->institution = $this->getRaManagementInstitution();
 
         $form = $this->createForm(AmendRegistrationAuthorityInformationType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

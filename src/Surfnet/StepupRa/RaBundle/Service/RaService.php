@@ -51,6 +51,7 @@ final class RaService
         $apiCommand->identityId = $command->identityId;
         $apiCommand->location = $command->location;
         $apiCommand->contactInformation = $command->contactInformation;
+        $apiCommand->raInstitution = $command->institution;
 
         $result = $this->commandService->execute($apiCommand);
 
