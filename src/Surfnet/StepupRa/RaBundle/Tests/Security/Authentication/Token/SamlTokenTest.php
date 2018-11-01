@@ -60,7 +60,7 @@ class SamlTokenTest extends TestCase
      * @group security
      * @group sraa
      */
-    public function institution_scope_of_saml_token_cannot_be_changed_when_not_raa()
+    public function institution_scope_of_saml_token_cannot_be_changed_when_not_ra()
     {
         $this->setExpectedException(RuntimeException::class, 'Unauthorized to change institution scope');
 
@@ -68,7 +68,7 @@ class SamlTokenTest extends TestCase
 
         $samlToken = new SamlToken(
             new Loa(Loa::LOA_1, 'http://some.url.tld/authentication/loa1'),
-            ['ROLE_RA']
+            ['ROLE_ARA']
         );
         $samlToken->setUser($identity);
 
@@ -81,11 +81,12 @@ class SamlTokenTest extends TestCase
 
     /**
      * @test
+     * @dataProvider allowedRoles
      * @group authorization
      * @group security
      * @group sraa
      */
-    public function institution_scope_of_saml_token_can_be_changed_when_sraa()
+    public function institution_scope_of_saml_token_can_be_changed($role)
     {
         $expectedInstitution = 'surfnet.nl';
 
@@ -98,7 +99,7 @@ class SamlTokenTest extends TestCase
 
         $samlToken = new SamlToken(
             new Loa(Loa::LOA_1, 'http://some.url.tld/authentication/loa1'),
-            ['ROLE_SRAA'],
+            [$role],
             $oldInstitutionConfigurationOptions
         );
         $samlToken->setUser($identity);
@@ -112,6 +113,7 @@ class SamlTokenTest extends TestCase
         $this->assertSame($expectedInstitution, $samlToken->getUser()->institution);
         $this->assertSame($newInstitutionConfigurationOptions, $samlToken->getInstitutionConfigurationOptions());
     }
+
 
     /**
      * @test
@@ -132,5 +134,14 @@ class SamlTokenTest extends TestCase
         $newInstitutionConfigurationOptions->showRaaContactInformation = false;
 
         $samlToken->changeInstitutionScope('surfnet.nl', $newInstitutionConfigurationOptions);
+    }
+
+    public function allowedRoles()
+    {
+        return [
+            'ra-is-allowed' => ['ROLE_RA'],
+            'raa-is-allowed' => ['ROLE_RAA'],
+            'sraa-is-allowed' => ['ROLE_SRAA'],
+        ];
     }
 }

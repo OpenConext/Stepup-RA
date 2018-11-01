@@ -92,9 +92,9 @@ class SamlToken extends AbstractToken
             return $role->getRole();
         }, $this->getRoles());
 
-        if (!in_array('ROLE_SRAA', $roles) && !in_array('ROLE_RAA', $roles)) {
+        if (!in_array('ROLE_SRAA', $roles) && !in_array('ROLE_RAA', $roles) && !in_array('ROLE_RA', $roles)) {
             throw new RuntimeException(sprintf(
-                'Unauthorized to change institution scope to "%s": role (S)RAA required, found roles "%s"',
+                'Unauthorized to change institution scope to "%s": role (S)RA(A) required, found roles "%s"',
                 $institution,
                 implode(', ', $roles)
             ));
