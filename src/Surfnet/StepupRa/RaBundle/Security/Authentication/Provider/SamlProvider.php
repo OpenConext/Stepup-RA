@@ -27,10 +27,16 @@ use Surfnet\StepupRa\RaBundle\Exception\UserNotRaException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
+use Surfnet\StepupRa\RaBundle\Service\RaListingService;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects) - The SamlProvider needs to test several authorizations in order
+ *  to determine the user may, or may not log in. This causes the coupling.
+ */
 class SamlProvider implements AuthenticationProviderInterface
 {
     /**
@@ -49,6 +55,11 @@ class SamlProvider implements AuthenticationProviderInterface
     private $institutionConfigurationOptionsService;
 
     /**
+     * @var RaListingService
+     */
+    private $raListingService;
+
+    /**
      * @var LoggerInterface
      */
     private $logger;
@@ -57,15 +68,20 @@ class SamlProvider implements AuthenticationProviderInterface
         IdentityService $identityService,
         AttributeDictionary $attributeDictionary,
         InstitutionConfigurationOptionsService $institutionConfigurationOptionsService,
+        RaListingService $raListingService,
         LoggerInterface $logger
     ) {
         $this->identityService                        = $identityService;
         $this->attributeDictionary                    = $attributeDictionary;
         $this->institutionConfigurationOptionsService = $institutionConfigurationOptionsService;
+        $this->raListingService                       = $raListingService;
         $this->logger                                 = $logger;
     }
 
     /**
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity) - The authorization tests cause the complexity to raise, could and
+     *  might be changed by introducing additional utility classes. Consider rebuilding this in the future.
+     *
      * @param SamlToken|TokenInterface $token
      * @return TokenInterface|void
      */
@@ -123,6 +139,26 @@ class SamlProvider implements AuthenticationProviderInterface
         // set the token
         $authenticatedToken = new SamlToken($token->getLoa(), $roles, $institutionConfigurationOptions);
         $authenticatedToken->setUser($identity);
+
+        // When dealing with a RA(A), determine for which institution the authenticating user should enter the RA environment
+        if (!in_array('ROLE_SRAA', $roles)) {
+            // Start by loading the ra listing for this identity to know what institutions (s)he is RA(A) for.
+            $institutions = $this->raListingService->searchBy($identity->id, $institution);
+            if ($institutions->getTotalItems() === 1) {
+                // Change the institution to the first item from the institution listing results
+                $institution = $institutions->getOnlyElement()->institution;
+            } elseif ($institutions->getTotalItems() > 1) {
+                if ($institutions->isListed($identity->institution)) {
+                    $institution = $identity->institution;
+                } else {
+                    // Otherwise pick the first institution in the list and set that for the
+                    $institution = reset($institutions->getElements())->institution;
+                }
+            } else {
+                throw new AuthenticationException('Unauthorized to authenticate, user is not present in ra listing');
+            }
+            $authenticatedToken->changeInstitutionScope($institution, $institutionConfigurationOptions);
+        }
 
         return $authenticatedToken;
     }
