@@ -111,12 +111,6 @@ class AllowedToSwitchInstitutionVoterTest extends TestCase
                 1,
                 [AllowedToSwitchInstitutionVoter::RAA_SWITCHING]
             ],
-            'ra-insufficiant-role' => [
-                VoterInterface::ACCESS_DENIED,
-                $this->getRoles(['ROLE_RA']),
-                3,
-                [AllowedToSwitchInstitutionVoter::RAA_SWITCHING]
-            ],
             'raa-with-invalid-attributes' => [
                 VoterInterface::ACCESS_ABSTAIN,
                 $this->getRoles(['ROLE_RAA']),

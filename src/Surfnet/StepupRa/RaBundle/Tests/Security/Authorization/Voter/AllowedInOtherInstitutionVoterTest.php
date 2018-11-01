@@ -147,21 +147,15 @@ class AllowedInOtherInstitutionVoterTest extends TestCase
     private  function denied()
     {
         return [
-            'only-raas-are-granted-access' => [
-                VoterInterface::ACCESS_DENIED,
-                $this->getRoles(['ROLE_RA']),
-                $this->getOptions(['ra' => [], 'raa' => ['a', 'b']]),
-                $this->getContext('a', 'b'),
-            ],
             'no-ample-institution-config-options-available' => [
                 VoterInterface::ACCESS_DENIED,
-                $this->getRoles(['ROLE_RA']),
+                $this->getRoles(['ROLE_RAA']),
                 $this->getOptions(['ra' => [], 'raa' => []]),
                 $this->getContext('a', 'b'),
             ],
             'not-configured-target-institution' => [
                 VoterInterface::ACCESS_DENIED,
-                $this->getRoles(['ROLE_RA']),
+                $this->getRoles(['ROLE_RAA']),
                 $this->getOptions(['ra' => ['a'], 'raa' => []]),
                 $this->getContext('a', 'b'),
             ],
