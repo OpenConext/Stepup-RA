@@ -156,7 +156,7 @@ class RaManagementController extends Controller
         $token  = $this->get('security.token_storage')->getToken();
         $raaSwitcherOptions = $this
             ->getInstitutionConfigurationOptionsService()
-            ->getAvailableInstitutionsFor($token->getIdentityInstitution());
+            ->getAvailableRaaInstitutionsFor($token->getIdentityInstitution());
 
         $command                   = new AccreditCandidateCommand();
         $command->identityId       = $identityId;
@@ -164,7 +164,6 @@ class RaManagementController extends Controller
         $command->raInstitution    = $this->getUser()->institution;
         $command->availableInstitutions = $raaSwitcherOptions;
 
-        // todo: make choicelist configurable
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $logger->debug('Accreditation form submitted, start processing command');

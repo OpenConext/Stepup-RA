@@ -83,4 +83,26 @@ final class InstitutionConfigurationOptionsService implements InstitutionConfigu
 
         return array_unique(array_merge($useRaInstitutions, $useRaaInstitutions));
     }
+
+    /**
+     * Return the institutions that can handle ra(a) actions on behalf of institution
+     * configuration options.
+     *
+     * If one of the two configuration options is configured with null (the default),
+     * than the institution the query was performed for is set as the default.
+     *
+     * @param $institution
+     * @return array
+     */
+    public function getAvailableRaaInstitutionsFor($institution)
+    {
+        $config = $this->getInstitutionConfigurationOptionsFor($institution);
+        $selectRaaInstitutions = [];
+
+        if (is_array($config->useRa)) {
+            $selectRaaInstitutions = $config->selectRaa;
+        }
+
+        return $selectRaaInstitutions;
+    }
 }
