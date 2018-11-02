@@ -40,8 +40,7 @@ class AllowedToSwitchInstitutionVoterTest extends TestCase
         array $actorRoles,
         $raListingCount,
         $attributes
-    )
-    {
+    ) {
         $user = new Identity();
         $user->id = '47820bdd-7e48-46e5-916b-0b38b65f4d6b';
 
@@ -100,13 +99,13 @@ class AllowedToSwitchInstitutionVoterTest extends TestCase
                 [AllowedToSwitchInstitutionVoter::RAA_SWITCHING]
             ],
             'raa-with-one-institution' => [
-                VoterInterface::ACCESS_DENIED,
+                VoterInterface::ACCESS_GRANTED,
                 $this->getRoles(['ROLE_RAA']),
                 1,
                 [AllowedToSwitchInstitutionVoter::RAA_SWITCHING]
             ],
             'sraa-with-one-institution' => [
-                VoterInterface::ACCESS_DENIED,
+                VoterInterface::ACCESS_GRANTED,
                 $this->getRoles(['ROLE_SRAA']),
                 1,
                 [AllowedToSwitchInstitutionVoter::RAA_SWITCHING]
