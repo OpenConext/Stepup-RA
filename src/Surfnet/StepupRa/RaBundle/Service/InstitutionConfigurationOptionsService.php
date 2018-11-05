@@ -94,12 +94,12 @@ final class InstitutionConfigurationOptionsService implements InstitutionConfigu
      * @param $institution
      * @return array
      */
-    public function getAvailableRaaInstitutionsFor($institution)
+    public function getAvailableSeleactRaaInstitutionsFor($institution)
     {
         $config = $this->getInstitutionConfigurationOptionsFor($institution);
         $selectRaaInstitutions = [];
 
-        if (is_array($config->useRa)) {
+        if (is_array($config->selectRaa)) {
             $selectRaaInstitutions = $config->selectRaa;
         }
 
