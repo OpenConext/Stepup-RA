@@ -1,8 +1,6 @@
 # Changelog
 
-## Develop
-
-## FGA (fine grained authorization)
+## 3.0.0 FGA (more fine grained authorization)
 **New features**
 
 The new fine grained authorization logic will allow Ra's from other institutions to accredidate RA's on behalf of another organisation.
@@ -11,7 +9,6 @@ https://github.com/OpenConext/Stepup-Deploy/wiki/rfc-fine-grained-authorization/
 
 * Implement the new FGA feature #169 > # 182
 
-## Develop
 **Bugfixes**
 * Flip value/label in choice form type definitions #168
 
