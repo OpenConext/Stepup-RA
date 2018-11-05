@@ -106,13 +106,12 @@ class IdentityService implements UserProviderInterface
 
     /**
      * @param string $nameId
-     * @param string $institution
      * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
      * @throws \Surfnet\StepupRa\RaBundle\Exception\RuntimeException
      */
-    public function findByNameIdAndInstitution($nameId, $institution)
+    public function findByNameId($nameId)
     {
-        $searchQuery = new IdentitySearchQuery($institution);
+        $searchQuery = new IdentitySearchQuery();
         $searchQuery->setNameId($nameId);
 
         try {

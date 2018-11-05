@@ -92,7 +92,7 @@ class SamlProvider implements AuthenticationProviderInterface
         $nameId      = $translatedAssertion->getNameID();
         $institution = $this->getSingleStringValue('schacHomeOrganization', $translatedAssertion);
 
-        $identity = $this->identityService->findByNameIdAndInstitution($nameId, $institution);
+        $identity = $this->identityService->findByNameId($nameId);
 
         // if no identity can be found, we're done.
         if ($identity === null) {
