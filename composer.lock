@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36ae18ec1a5f1b94bae1718ea02e498c",
+    "content-hash": "f908654a93cf42cfa184eb338a5f72df",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2269,12 +2269,17 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "dev-develop",
+            "version": "dev-feature/fine-grained-authorization",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OpenConext/Stepup-Middleware-clientbundle.git",
+                "reference": "54dbb333e3bb36a911b49c81788f547a46e38742"
+            },
             "dist": {
-                "type": "path",
-                "url": "/src/dependencies/Stepup-Middleware-clientbundle",
-                "reference": "aeed64317ca1e99a095ee637471a9a66f5c3fae9",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/54dbb333e3bb36a911b49c81788f547a46e38742",
+                "reference": "54dbb333e3bb36a911b49c81788f547a46e38742",
+                "shasum": ""
             },
             "require": {
                 "beberlei/assert": "~2.0",
@@ -2308,13 +2313,12 @@
                     "Surfnet\\StepupMiddlewareClient\\": "src/Surfnet/StepupMiddlewareClient/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "transport-options": {
-                "symlink": true
-            }
+            "time": "2018-11-02T08:11:16+00:00"
         },
         {
             "name": "surfnet/stepup-saml-bundle",
