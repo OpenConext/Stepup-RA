@@ -72,7 +72,7 @@ class AllowedToSwitchInstitutionVoter implements VoterInterface
 
         $raListing = $this->service->searchBy($token->getUser()->id, $token->getIdentityInstitution());
 
-        if ($raListing->getTotalItems() >= 1) {
+        if ($raListing->getTotalItems() > 1) {
             return VoterInterface::ACCESS_GRANTED;
         }
 
