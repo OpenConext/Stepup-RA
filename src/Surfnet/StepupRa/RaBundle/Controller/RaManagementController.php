@@ -156,7 +156,7 @@ class RaManagementController extends Controller
         $token  = $this->get('security.token_storage')->getToken();
         $raaSwitcherOptions = $this
             ->getInstitutionConfigurationOptionsService()
-            ->getAvailableRaaInstitutionsFor($token->getIdentityInstitution());
+            ->getAvailableSeleactRaaInstitutionsFor($token->getIdentityInstitution());
 
         $command                   = new AccreditCandidateCommand();
         $command->identityId       = $identityId;
