@@ -52,7 +52,7 @@ class RaManagementController extends Controller
         $institution = $this->getUser()->institution;
         $logger->notice(sprintf('Loading overview of RA(A)s for institution "%s"', $institution));
 
-        $searchQuery = (new RaListingSearchQuery($this->getUser()->institution, 1))
+        $searchQuery = (new RaListingSearchQuery($this->getIdentityInstitution(), 1))
             ->setInstitution($this->getRaManagementInstitution())
             ->setOrderBy($request->get('orderBy', 'commonName'))
             ->setOrderDirection($request->get('orderDirection', 'asc'));
@@ -98,7 +98,7 @@ class RaManagementController extends Controller
         $logger->notice(sprintf('Searching for RaCandidates within institution "%s"', $institution));
 
         $command                   = new SearchRaCandidatesCommand();
-        $command->actorInstitution = $institution;
+        $command->actorInstitution = $this->getIdentityInstitution();
         $command->institution      = $this->getRaManagementInstitution();
         $command->pageNumber       = (int) $request->get('p', 1);
         $command->orderBy          = $request->get('orderBy');
@@ -143,25 +143,21 @@ class RaManagementController extends Controller
 
         $logger->notice('Page for Accreditation of Identity to Ra or Raa requested');
         $identityId = $request->get('identityId');
-        $raCandidate = $this->getRaCandidateService()->getRaCandidate($identityId, $this->getRaManagementInstitution());
+        $raCandidate = $this->getRaCandidateService()->getRaCandidate($identityId, $this->getIdentityInstitution());
 
         if (!$raCandidate) {
             $logger->warning(sprintf('RaCandidate based on identity "%s" not found', $identityId));
             throw new NotFoundHttpException();
         }
 
-        /**
-         * @var SamlToken $token
-         */
-        $token  = $this->get('security.token_storage')->getToken();
         $raaSwitcherOptions = $this
             ->getInstitutionConfigurationOptionsService()
-            ->getAvailableSeleactRaaInstitutionsFor($token->getIdentityInstitution());
+            ->getAvailableSeleactRaaInstitutionsFor($this->getIdentityInstitution());
 
         $command                   = new AccreditCandidateCommand();
         $command->identityId       = $identityId;
-        $command->institution      = $this->getRaManagementInstitution();
-        $command->raInstitution    = $this->getUser()->institution;
+        $command->institution      = $this->getIdentityInstitution();
+        $command->raInstitution    = $this->getRaManagementInstitution();
         $command->availableInstitutions = $raaSwitcherOptions;
 
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
@@ -193,16 +189,17 @@ class RaManagementController extends Controller
     /**
      * @param Request $request
      * @param         $identityId
+     * @param         $institution
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function amendRaInformationAction(Request $request, $identityId)
+    public function amendRaInformationAction(Request $request, $identityId,$institution)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
         $logger = $this->get('logger');
         $logger->notice(sprintf("Loading information amendment form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId, $this->getUser()->institution);
+        $raListing = $this->getRaListingService()->get($identityId, $institution);
 
         if (!$raListing) {
             $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
@@ -213,7 +210,7 @@ class RaManagementController extends Controller
         $command->identityId = $raListing->identityId;
         $command->location = $this->getUser()->institution;
         $command->contactInformation = $raListing->contactInformation;
-        $command->institution = $this->getRaManagementInstitution();
+        $command->institution = $institution;
 
         $form = $this->createForm(AmendRegistrationAuthorityInformationType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -239,17 +236,17 @@ class RaManagementController extends Controller
     /**
      * @param Request $request
      * @param         $identityId
+     * @param         $institution
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function changeRaRoleAction(Request $request, $identityId)
+    public function changeRaRoleAction(Request $request, $identityId, $institution)
     {
-        // todo: remove?
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
         $logger = $this->get('logger');
 
         $logger->notice(sprintf("Loading change Ra Role form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId, $this->getUser()->institution);
+        $raListing = $this->getRaListingService()->get($identityId, $institution);
         if (!$raListing) {
             $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
             throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
@@ -257,8 +254,8 @@ class RaManagementController extends Controller
 
         $command              = new ChangeRaRoleCommand();
         $command->identityId  = $raListing->identityId;
-        $command->institution = $this->getUser()->institution;
-        $command->role        = $raListing->role;
+        $command->institution = $this->getRaManagementInstitution();
+        $command->role        = $institution;
 
         $form = $this->createForm(ChangeRaRoleType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -284,16 +281,17 @@ class RaManagementController extends Controller
     /**
      * @param Request $request
      * @param         $identityId
+     * @param         $institution
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function retractRegistrationAuthorityAction(Request $request, $identityId)
+    public function retractRegistrationAuthorityAction(Request $request, $identityId, $institution)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
         $logger = $this->get('logger');
 
         $logger->notice(sprintf("Loading retract registration authority form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId, $this->getUser()->institution);
+        $raListing = $this->getRaListingService()->get($identityId, $institution);
         if (!$raListing) {
             $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
             throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
@@ -301,7 +299,7 @@ class RaManagementController extends Controller
 
         $command = new RetractRegistrationAuthorityCommand();
         $command->identityId = $identityId;
-        $command->institution = $this->getUser()->institution;
+        $command->institution = $institution;
 
         $form = $this->createForm(RetractRegistrationAuthorityType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -370,5 +368,39 @@ class RaManagementController extends Controller
     private function getRaManagementInstitution()
     {
         return $this->getUser()->institution;
+    }
+
+    /**
+     * @return string
+     */
+    private function getIdentityInstitution()
+    {
+        if (!$this->getUserIsSraa()) {
+            /**
+             * @var SamlToken $token
+             */
+            $token  = $this->get('security.token_storage')->getToken();
+            return $token->getSchacHomeInstitution();
+        }
+
+        return $this->getUser()->institution;
+    }
+
+    /**
+     * @return string
+     */
+    private function getUserIsSraa()
+    {
+        /**
+         * @var SamlToken $token
+         */
+        $token  = $this->get('security.token_storage')->getToken();
+        foreach ($token->getRoles() as $role){
+            if ($role->getRole() == 'ROLE_SRAA') {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

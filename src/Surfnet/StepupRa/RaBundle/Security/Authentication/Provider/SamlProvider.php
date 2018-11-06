@@ -137,7 +137,7 @@ class SamlProvider implements AuthenticationProviderInterface
         }
 
         // set the token
-        $authenticatedToken = new SamlToken($token->getLoa(), $roles, $institutionConfigurationOptions);
+        $authenticatedToken = new SamlToken($token->getLoa(), $roles, $institutionConfigurationOptions, $institution);
         $authenticatedToken->setUser($identity);
 
         // When dealing with a RA(A), determine for which institution the authenticating user should enter the RA environment

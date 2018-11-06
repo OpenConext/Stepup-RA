@@ -48,6 +48,11 @@ class SamlToken extends AbstractToken
     private $raManagementInstitution;
 
     /**
+     * @var string
+     */
+    private $schacHomeOrganization;
+
+    /**
      * The identity institution is set with the SHO of the identity. This value is not overridden like the user
      * institution can be. This value can be used to get the identities institution regardless of the scope it
      * is performing RAA tasks for at this moment.
@@ -59,13 +64,15 @@ class SamlToken extends AbstractToken
     public function __construct(
         Loa $loa,
         array $roles = [],
-        InstitutionConfigurationOptions $institutionConfigurationOptions = null
+        InstitutionConfigurationOptions $institutionConfigurationOptions = null,
+        $schacHomeOrganization = ''
     ) {
         parent::__construct($roles);
 
         $this->loa = $loa;
         $this->setAuthenticated(count($roles));
         $this->institutionConfigurationOptions = $institutionConfigurationOptions;
+        $this->schacHomeOrganization = $schacHomeOrganization;
     }
 
     /**
@@ -131,13 +138,14 @@ class SamlToken extends AbstractToken
                 $this->institutionConfigurationOptions,
                 $this->raManagementInstitution,
                 $this->identityInstitution,
+                $this->schacHomeOrganization,
             ]
         );
     }
 
     public function unserialize($serialized)
     {
-        list($parent, $this->loa, $this->institutionConfigurationOptions, $this->raManagementInstitution, $this->identityInstitution) = unserialize(
+        list($parent, $this->loa, $this->institutionConfigurationOptions, $this->raManagementInstitution, $this->identityInstitution, $this->schacHomeOrganization) = unserialize(
             $serialized
         );
 
@@ -166,5 +174,13 @@ class SamlToken extends AbstractToken
             return $this->getUser()->institution;
         }
         return $this->raManagementInstitution;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSchacHomeInstitution()
+    {
+        return $this->schacHomeOrganization;
     }
 }
