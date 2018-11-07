@@ -56,7 +56,7 @@ class AllowedToSwitchInstitutionVoterTest extends TestCase
             ->andReturn($user);
 
         $token
-            ->shouldReceive('getIdentityInstitution')
+            ->shouldReceive('getSchacHomeInstitution')
             ->once()
             ->andReturn('institution-a.example.com');
 
