@@ -188,11 +188,11 @@ class RaManagementController extends Controller
 
     /**
      * @param Request $request
-     * @param         $identityId
-     * @param         $institution
+     * @param string  $identityId
+     * @param string  $institution
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function amendRaInformationAction(Request $request, $identityId,$institution)
+    public function amendRaInformationAction(Request $request, $identityId, $institution)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
@@ -375,32 +375,10 @@ class RaManagementController extends Controller
      */
     private function getIdentityInstitution()
     {
-        if (!$this->getUserIsSraa()) {
-            /**
-             * @var SamlToken $token
-             */
-            $token  = $this->get('security.token_storage')->getToken();
-            return $token->getSchacHomeInstitution();
-        }
-
-        return $this->getUser()->institution;
-    }
-
-    /**
-     * @return string
-     */
-    private function getUserIsSraa()
-    {
         /**
          * @var SamlToken $token
          */
         $token  = $this->get('security.token_storage')->getToken();
-        foreach ($token->getRoles() as $role){
-            if ($role->getRole() == 'ROLE_SRAA') {
-                return true;
-            }
-        }
-
-        return false;
+        return $token->getIdentityOriginalInstitution();
     }
 }

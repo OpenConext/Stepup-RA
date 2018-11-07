@@ -48,6 +48,8 @@ class SamlToken extends AbstractToken
     private $raManagementInstitution;
 
     /**
+     * The SHO of the identity
+     *
      * @var string
      */
     private $schacHomeOrganization;
@@ -145,9 +147,16 @@ class SamlToken extends AbstractToken
 
     public function unserialize($serialized)
     {
-        list($parent, $this->loa, $this->institutionConfigurationOptions, $this->raManagementInstitution, $this->identityInstitution, $this->schacHomeOrganization) = unserialize(
-            $serialized
-        );
+        list(
+            $parent,
+            $this->loa,
+            $this->institutionConfigurationOptions,
+            $this->raManagementInstitution,
+            $this->identityInstitution,
+            $this->schacHomeOrganization
+            ) = unserialize(
+                $serialized
+            );
 
         parent::unserialize($parent);
     }
@@ -182,5 +191,34 @@ class SamlToken extends AbstractToken
     public function getSchacHomeInstitution()
     {
         return $this->schacHomeOrganization;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdentityOriginalInstitution()
+    {
+        if (!$this->isUserSraa()) {
+            return $this->getSchacHomeInstitution();
+        }
+
+        return $this->getUser()->institution;
+    }
+
+    /**
+     * @return string
+     */
+    private function isUserSraa()
+    {
+        /**
+         * @var SamlToken $token
+         */
+        foreach ($this->getRoles() as $role) {
+            if ($role->getRole() == 'ROLE_SRAA') {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
