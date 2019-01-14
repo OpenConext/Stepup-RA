@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
+use Knp\Component\Pager\Paginator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\ExportRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
@@ -65,8 +66,10 @@ final class SecondFactorController extends Controller
             return $this->forward('SurfnetStepupRaRaBundle:SecondFactor:export', ['command' => $command]);
         }
 
-        $pagination = $this->get('knp_paginator')->paginate(
-            $secondFactors->getTotalItems() > 0 ? array_fill(0, $secondFactors->getTotalItems(), 1) : [],
+        /** @var Paginator $paginator */
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $secondFactors->getTotalItems() > 0 ? $secondFactors->getElements() : [],
             $secondFactors->getCurrentPage(),
             $secondFactors->getItemsPerPage()
         );
