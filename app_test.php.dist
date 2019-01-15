@@ -7,7 +7,7 @@ Debug::enable(~E_USER_DEPRECATED);
 
 $request = Request::createFromGlobals();
 
-$kernel = new AppKernel('dev', true);
+$kernel = new AppKernel('test', true);
 $kernel->boot();
 
 $trustedProxies = $kernel->getContainer()->getParameter('trusted_proxies');
