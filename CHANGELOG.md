@@ -1,7 +1,14 @@
 # Changelog
 
-## Develop
+## 2.10.4
+**Improvements**
+* Open help in new tab #187 
+* Introduce multi-lingual logout redirect #186 
 
+**Bugfixes**
+* Fix the token sorting #185
+ 
+## 2.10.3
 **Bugfixes**
 * Flip value/label in choice form type definitions #168
 
