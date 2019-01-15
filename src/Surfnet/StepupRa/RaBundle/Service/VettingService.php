@@ -23,7 +23,7 @@ use Surfnet\StepupBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
 use Surfnet\StepupBundle\Service\SecondFactorTypeService;
 use Surfnet\StepupBundle\Service\SmsSecondFactor\OtpVerification;
-use Surfnet\StepupBundle\Service\SmsSecondFactorService;
+use Surfnet\StepupBundle\Service\SmsSecondFactorServiceInterface;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\VetSecondFactorCommand;
@@ -57,7 +57,7 @@ class VettingService
         'Surfnet\Stepup\Exception\DomainException: Cannot vet second factor, the registration window is closed.';
 
     /**
-     * @var \Surfnet\StepupBundle\Service\SmsSecondFactorService
+     * @var \Surfnet\StepupBundle\Service\SmsSecondFactorServiceInterface
      */
     private $smsSecondFactorService;
 
@@ -102,7 +102,7 @@ class VettingService
     private $secondFactorTypeService;
 
     public function __construct(
-        SmsSecondFactorService $smsSecondFactorService,
+        SmsSecondFactorServiceInterface $smsSecondFactorService,
         YubikeySecondFactorService $yubikeySecondFactorService,
         GssfService $gssfService,
         U2fService $u2fService,
