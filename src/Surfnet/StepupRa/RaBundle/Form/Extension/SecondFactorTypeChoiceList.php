@@ -80,7 +80,6 @@ class SecondFactorTypeChoiceList
         sort($collection);
 
         foreach ($collection as $sfTypeIdentifier) {
-
             $translation = $this->translator->translate(
                 $sfTypeIdentifier,
                 'ra.form.ra_search_ra_second_factors.choice.type.%s'
