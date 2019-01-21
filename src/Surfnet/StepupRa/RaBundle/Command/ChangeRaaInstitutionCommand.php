@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2018 SURFnet B.V.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,33 +18,15 @@
 
 namespace Surfnet\StepupRa\RaBundle\Command;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
-class AmendRegistrationAuthorityInformationCommand
+class ChangeRaaInstitutionCommand
 {
     /**
      * @var string
      */
-    public $identityId;
-
-    /**
-     * @Assert\NotBlank(message="ra.amend_ra_information.location")
-     * @Assert\Type(type="string")
-     *
-     * @var string
-     */
-    public $location;
-
-    /**
-     * @Assert\NotBlank(message="ra.amend_ra_information.contact_information")
-     * @Assert\Type(type="string")
-     *
-     * @var string
-     */
-    public $contactInformation;
-
-    /**
-     * @var string
-     */
     public $institution;
+
+    /**
+     * @var array
+     */
+    public $availableInstitutions = [];
 }

@@ -19,13 +19,9 @@
             "url":  "https://github.com/MKodde/DataExporter.git"
         },
         {
-            "packagist.org": false,
             "package": "surfnet/stepup-middleware-client-bundle",
-            "type": "path",
-            "url": "/src/dependencies/Stepup-Middleware-clientbundle",
-            "options": {
-                "symlink": true
-            }
+            "type": "vcs",
+            "url":  "https://github.com/OpenConext/Stepup-Middleware-clientbundle.git"
         }
     ],
     "require": {
@@ -43,7 +39,7 @@
         "twbs/bootstrap": "~3.3.0",
         "fortawesome/font-awesome": "~4.2.0",
         "jms/translation-bundle": "~1.3.0",
-        "surfnet/stepup-middleware-client-bundle": "@dev",
+        "surfnet/stepup-middleware-client-bundle": "dev-feature/fine-grained-authorization",
         "surfnet/stepup-saml-bundle": "^4.1",
         "surfnet/stepup-bundle": "^4.0",
         "surfnet/stepup-u2f-bundle": "dev-develop",

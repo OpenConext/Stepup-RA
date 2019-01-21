@@ -14,9 +14,13 @@
                 <label class="control-label col-sm-3">{{ 'ra.auditlog.email'|trans }}</label>
                 <div class="control-text col-sm-9">{{ identity.email }}</div>
             </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">{{ 'ra.auditlog.institution'|trans }}</label>
+                <div class="control-text col-sm-9">{{ identity.institution }}</div>
+            </div>
         </div>
     {% if auditLog.elements|length > 0 %}
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover orderable">
             <thead>
                 <tr>
                     <th scope="col">{{ knp_pagination_sortable(pagination, 'ra.auditlog.second_factor_identifier'|trans, 'secondFactorIdentifier') }}</th>
@@ -24,6 +28,7 @@
                     <th scope="col">{{ knp_pagination_sortable(pagination, 'ra.auditlog.event'|trans, 'event') }}</th>
                     <th scope="col">{{ knp_pagination_sortable(pagination, 'ra.auditlog.when'|trans, 'recordedOn') }}</th>
                     <th scope="col">{{ knp_pagination_sortable(pagination, 'ra.auditlog.actor'|trans, 'actorCommonName') }}</th>
+                    <th scope="col">{{ knp_pagination_sortable(pagination, 'ra.auditlog.institution'|trans, 'actorInstitution') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,9 +36,10 @@
                 <tr>
                     <td>{{ logEntry.secondFactorIdentifier }}</td>
                     <td>{{ logEntry.secondFactorType|trans_second_factor_type }}</td>
-                    <td>{{ ('ra.auditlog.action.' ~ logEntry.action)|trans }}</td>
+                    <td>{{ ('ra.auditlog.action.' ~ logEntry.action)|trans({'%ra_institution%': logEntry.raInstitution}) }}</td>
                     <td><time datetime="{{ logEntry.recordedOn.format('c') }}">{{ logEntry.recordedOn.format("Y-m-d H:i e") }}</time></td>
                     <td>{{ logEntry.actorCommonName }}</td>
+                    <td>{{ logEntry.actorInstitution }}</td>
                 </tr>
             {% endfor %}
             </tbody>

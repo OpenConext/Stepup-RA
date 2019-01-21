@@ -18,9 +18,10 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurationOptions;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Service\InstitutionConfigurationOptionsService as ApiInstitutionConfigurationOptionsService;
 
-final class InstitutionConfigurationOptionsService
+final class InstitutionConfigurationOptionsService implements InstitutionConfigurationOptionsServiceInterface
 {
     /**
      * @var ApiInstitutionConfigurationOptionsService
@@ -32,8 +33,76 @@ final class InstitutionConfigurationOptionsService
         $this->apiInstitutionConfigurationOptionsService = $apiService;
     }
 
+    /**
+     * @param $institution
+     * @return null|InstitutionConfigurationOptions
+     */
     public function getInstitutionConfigurationOptionsFor($institution)
     {
-        return $this->apiInstitutionConfigurationOptionsService->getInstitutionConfigurationOptionsFor($institution);
+        $configuration = $this->apiInstitutionConfigurationOptionsService->getInstitutionConfigurationOptionsFor($institution);
+
+        // If the FGA options are null (which they may be) then set them with the default value. This is the own institution.
+        if (is_null($configuration->useRa)) {
+            $configuration->useRa = [$institution];
+        }
+
+        if (is_null($configuration->useRaa)) {
+            $configuration->useRaa = [$institution];
+        }
+
+        if (is_null($configuration->selectRaa)) {
+            $configuration->selectRaa = [$institution];
+        }
+
+        return $configuration;
+    }
+
+    /**
+     * Return the institutions that are configured in the useRa and useRaa insititution
+     * configuration options.
+     *
+     * If one of the two configuration options is configured with null (the default),
+     * than the institution the query was performed for is set as the default.
+     *
+     * @param $institution
+     * @return array
+     */
+    public function getAvailableInstitutionsFor($institution)
+    {
+        $config = $this->getInstitutionConfigurationOptionsFor($institution);
+        $useRaInstitutions = [$institution];
+        $useRaaInstitutions = [$institution];
+
+        if (is_array($config->useRa)) {
+            $useRaInstitutions = $config->useRa;
+        }
+
+        if (is_array($config->useRaa)) {
+            $useRaaInstitutions = $config->useRaa;
+        }
+
+        return array_unique(array_merge($useRaInstitutions, $useRaaInstitutions));
+    }
+
+    /**
+     * Return the institutions that can handle ra(a) actions on behalf of institution
+     * configuration options.
+     *
+     * If one of the two configuration options is configured with null (the default),
+     * than the institution the query was performed for is set as the default.
+     *
+     * @param $institution
+     * @return array
+     */
+    public function getAvailableSeleactRaaInstitutionsFor($institution)
+    {
+        $config = $this->getInstitutionConfigurationOptionsFor($institution);
+        $selectRaaInstitutions = [];
+
+        if (is_array($config->selectRaa)) {
+            $selectRaaInstitutions = $config->selectRaa;
+        }
+
+        return $selectRaaInstitutions;
     }
 }

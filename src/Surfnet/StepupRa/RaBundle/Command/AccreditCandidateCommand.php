@@ -57,4 +57,14 @@ class AccreditCandidateCommand
      * @var string
      */
     public $role;
+
+    /**
+     * @var string
+     */
+    public $raInstitution;
+
+    /**
+     * @var array
+     */
+    public $availableInstitutions = [];
 }

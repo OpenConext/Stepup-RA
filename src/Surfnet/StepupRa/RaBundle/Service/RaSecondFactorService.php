@@ -28,6 +28,10 @@ use Surfnet\StepupRa\RaBundle\Command\ExportRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 
+/**
+ * @SuppressWarnings(PHPMD.NPathComplexity) -- The command to query mapping in search and export exceed the
+ * NPathComplexity threshold.
+ */
 class RaSecondFactorService
 {
     /**
@@ -96,7 +100,7 @@ class RaSecondFactorService
      */
     public function search(SearchRaSecondFactorsCommand $command)
     {
-        $query = new RaSecondFactorSearchQuery($command->institution, $command->pageNumber);
+        $query = new RaSecondFactorSearchQuery($command->actorInstitution, $command->pageNumber);
 
         if ($command->name) {
             $query->setName($command->name);
@@ -112,6 +116,10 @@ class RaSecondFactorService
 
         if ($command->email) {
             $query->setEmail($command->email);
+        }
+
+        if ($command->institution) {
+            $query->setInstitution($command->institution);
         }
 
         if ($command->status) {
@@ -138,7 +146,7 @@ class RaSecondFactorService
      */
     public function export(ExportRaSecondFactorsCommand $command)
     {
-        $query = new RaSecondFactorExportQuery($command->institution);
+        $query = new RaSecondFactorExportQuery($command->actorInstitution);
 
         if ($command->name) {
             $query->setName($command->name);
@@ -154,6 +162,10 @@ class RaSecondFactorService
 
         if ($command->email) {
             $query->setEmail($command->email);
+        }
+
+        if ($command->institution) {
+            $query->setInstitution($command->institution);
         }
 
         if ($command->status) {

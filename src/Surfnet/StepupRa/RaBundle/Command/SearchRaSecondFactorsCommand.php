@@ -33,7 +33,7 @@ final class SearchRaSecondFactorsCommand
      *
      * @var string
      */
-    public $institution;
+    public $actorInstitution;
 
     /**
      * @var string|null
@@ -89,4 +89,14 @@ final class SearchRaSecondFactorsCommand
      * @var int
      */
     public $pageNumber;
+
+    /**
+     * @var string|null The institution to filter the results on
+     */
+    public $institution;
+
+    /**
+     * @var array
+     */
+    public $institutionFilterOptions;
 }

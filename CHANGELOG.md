@@ -5,6 +5,16 @@
 * Open help in new tab #187 
 * Introduce multi-lingual logout redirect #186 
 
+## FGA (fine grained authorization)
+**New features**
+
+The new fine grained authorization logic will allow Ra's from other institutions to accredidate RA's on behalf of another organisation.
+This is determined based on the institution configuration.
+https://github.com/OpenConext/Stepup-Deploy/wiki/rfc-fine-grained-authorization/b6852587baee698cccae7ebc922f29552420a296
+
+* Implement the new FGA feature #169 > # 182
+
+## Develop
 **Bugfixes**
 * Fix the token sorting #185
  

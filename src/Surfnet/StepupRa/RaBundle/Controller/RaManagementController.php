@@ -29,8 +29,9 @@ use Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaRoleType;
 use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType;
+use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
+use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -49,10 +50,10 @@ class RaManagementController extends Controller
 
         $logger = $this->get('logger');
         $institution = $this->getUser()->institution;
-
         $logger->notice(sprintf('Loading overview of RA(A)s for institution "%s"', $institution));
 
         $searchQuery = (new RaListingSearchQuery($this->getUser()->institution, 1))
+            ->setInstitution($this->getRaManagementInstitution())
             ->setOrderBy($request->get('orderBy', 'commonName'))
             ->setOrderDirection($request->get('orderDirection', 'asc'));
 
@@ -96,11 +97,12 @@ class RaManagementController extends Controller
 
         $logger->notice(sprintf('Searching for RaCandidates within institution "%s"', $institution));
 
-        $command                 = new SearchRaCandidatesCommand();
-        $command->institution    = $institution;
-        $command->pageNumber     = (int) $request->get('p', 1);
-        $command->orderBy        = $request->get('orderBy');
-        $command->orderDirection = $request->get('orderDirection');
+        $command                   = new SearchRaCandidatesCommand();
+        $command->actorInstitution = $institution;
+        $command->institution      = $this->getRaManagementInstitution();
+        $command->pageNumber       = (int) $request->get('p', 1);
+        $command->orderBy          = $request->get('orderBy');
+        $command->orderDirection   = $request->get('orderDirection');
 
         $form = $this->createForm(SearchRaCandidatesType::class, $command, ['method' => 'get']);
         $form->handleRequest($request);
@@ -141,28 +143,26 @@ class RaManagementController extends Controller
 
         $logger->notice('Page for Accreditation of Identity to Ra or Raa requested');
         $identityId = $request->get('identityId');
-        $raCandidate = $this->getRaCandidateService()->getRaCandidateByIdentityId($identityId);
+        $raCandidate = $this->getRaCandidateService()->getRaCandidate($identityId, $this->getRaManagementInstitution());
 
         if (!$raCandidate) {
             $logger->warning(sprintf('RaCandidate based on identity "%s" not found', $identityId));
             throw new NotFoundHttpException();
         }
 
-        if ($raCandidate->institution !== $this->getUser()->institution) {
-            $user = $this->getUser();
-            $logger->warning(sprintf(
-                'Identity "%s" of "%s" illegally tried to accredit tried to accredit Identity "%s" of "%s"',
-                $user->id,
-                $user->institution,
-                $raCandidate->identityId,
-                $raCandidate->institution
-            ));
-            throw $this->createAccessDeniedException();
-        }
+        /**
+         * @var SamlToken $token
+         */
+        $token  = $this->get('security.token_storage')->getToken();
+        $raaSwitcherOptions = $this
+            ->getInstitutionConfigurationOptionsService()
+            ->getAvailableSeleactRaaInstitutionsFor($token->getIdentityInstitution());
 
-        $command              = new AccreditCandidateCommand();
-        $command->identityId  = $identityId;
-        $command->institution = $raCandidate->institution;
+        $command                   = new AccreditCandidateCommand();
+        $command->identityId       = $identityId;
+        $command->institution      = $this->getRaManagementInstitution();
+        $command->raInstitution    = $this->getUser()->institution;
+        $command->availableInstitutions = $raaSwitcherOptions;
 
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -202,7 +202,7 @@ class RaManagementController extends Controller
         $logger = $this->get('logger');
         $logger->notice(sprintf("Loading information amendment form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId);
+        $raListing = $this->getRaListingService()->get($identityId, $this->getUser()->institution);
 
         if (!$raListing) {
             $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
@@ -211,8 +211,9 @@ class RaManagementController extends Controller
 
         $command = new AmendRegistrationAuthorityInformationCommand();
         $command->identityId = $raListing->identityId;
-        $command->location = $raListing->location;
+        $command->location = $this->getUser()->institution;
         $command->contactInformation = $raListing->contactInformation;
+        $command->institution = $this->getRaManagementInstitution();
 
         $form = $this->createForm(AmendRegistrationAuthorityInformationType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -242,12 +243,13 @@ class RaManagementController extends Controller
      */
     public function changeRaRoleAction(Request $request, $identityId)
     {
+        // todo: remove?
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
         $logger = $this->get('logger');
 
         $logger->notice(sprintf("Loading change Ra Role form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId);
+        $raListing = $this->getRaListingService()->get($identityId, $this->getUser()->institution);
         if (!$raListing) {
             $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
             throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
@@ -255,7 +257,7 @@ class RaManagementController extends Controller
 
         $command              = new ChangeRaRoleCommand();
         $command->identityId  = $raListing->identityId;
-        $command->institution = $raListing->institution;
+        $command->institution = $this->getUser()->institution;
         $command->role        = $raListing->role;
 
         $form = $this->createForm(ChangeRaRoleType::class, $command)->handleRequest($request);
@@ -291,7 +293,7 @@ class RaManagementController extends Controller
 
         $logger->notice(sprintf("Loading retract registration authority form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId);
+        $raListing = $this->getRaListingService()->get($identityId, $this->getUser()->institution);
         if (!$raListing) {
             $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
             throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
@@ -299,6 +301,7 @@ class RaManagementController extends Controller
 
         $command = new RetractRegistrationAuthorityCommand();
         $command->identityId = $identityId;
+        $command->institution = $this->getUser()->institution;
 
         $form = $this->createForm(RetractRegistrationAuthorityType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -346,10 +349,26 @@ class RaManagementController extends Controller
     }
 
     /**
+     * @return InstitutionConfigurationOptionsService
+     */
+    private function getInstitutionConfigurationOptionsService()
+    {
+        return $this->get('ra.service.institution_configuration_options');
+    }
+
+    /**
      * @return \Knp\Component\Pager\Paginator
      */
     private function getPaginator()
     {
         return $this->get('knp_paginator');
+    }
+
+    /**
+     * @return string
+     */
+    private function getRaManagementInstitution()
+    {
+        return $this->getUser()->institution;
     }
 }

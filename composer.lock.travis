@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36ae18ec1a5f1b94bae1718ea02e498c",
+    "content-hash": "1651dcb1ee0dcea61b1fde2a79e263c9",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2269,12 +2269,17 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "dev-develop",
+            "version": "dev-feature/fine-grained-authorization",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/OpenConext/Stepup-Middleware-clientbundle.git",
+                "reference": "00f0ff925fabac085efe28fbe370d81876661d9c"
+            },
             "dist": {
-                "type": "path",
-                "url": "/src/dependencies/Stepup-Middleware-clientbundle",
-                "reference": "aeed64317ca1e99a095ee637471a9a66f5c3fae9",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/00f0ff925fabac085efe28fbe370d81876661d9c",
+                "reference": "00f0ff925fabac085efe28fbe370d81876661d9c",
+                "shasum": ""
             },
             "require": {
                 "beberlei/assert": "~2.0",
@@ -2312,9 +2317,11 @@
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "transport-options": {
-                "symlink": true
-            }
+            "support": {
+                "source": "https://github.com/OpenConext/Stepup-Middleware-clientbundle/tree/feature/fine-grained-authorization",
+                "issues": "https://github.com/OpenConext/Stepup-Middleware-clientbundle/issues"
+            },
+            "time": "2018-10-16T07:19:05+00:00"
         },
         {
             "name": "surfnet/stepup-saml-bundle",

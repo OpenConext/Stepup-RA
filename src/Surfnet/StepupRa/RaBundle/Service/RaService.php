@@ -51,6 +51,7 @@ final class RaService
         $apiCommand->identityId = $command->identityId;
         $apiCommand->location = $command->location;
         $apiCommand->contactInformation = $command->contactInformation;
+        $apiCommand->raInstitution = $command->institution;
 
         $result = $this->commandService->execute($apiCommand);
 
@@ -87,8 +88,9 @@ final class RaService
 
     public function retractRegistrationAuthority(RetractRegistrationAuthorityCommand $command)
     {
-        $apiCommand             = new ApiRetractRegistrationAuthorityCommand();
-        $apiCommand->identityId = $command->identityId;
+        $apiCommand              = new ApiRetractRegistrationAuthorityCommand();
+        $apiCommand->identityId  = $command->identityId;
+        $apiCommand->institution = $command->institution;
 
         $result = $this->commandService->execute($apiCommand);
 

@@ -63,6 +63,18 @@ class SearchRaSecondFactorsType extends AbstractType
             ],
             'required' => false,
         ]);
+
+        $options = array_combine(
+            $builder->getData()->institutionFilterOptions,
+            $builder->getData()->institutionFilterOptions
+        );
+
+        $builder->add('institution', ChoiceType::class, [
+            'label' => 'ra.form.ra_search_ra_second_factors.label.institution',
+            'choices' => $options,
+            'required' => false,
+        ]);
+
         $builder->add('search', SubmitType::class, [
             'label' => 'ra.form.ra_search_ra_second_factors.button.search',
             'attr' => [ 'class' => 'btn btn-primary pull-left' ],

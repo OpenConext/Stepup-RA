@@ -26,6 +26,9 @@ use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchSecondFactorAuditLogCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType;
+use Surfnet\StepupRa\RaBundle\Security\Authorization\Context\InstitutionContext;
+use Surfnet\StepupRa\RaBundle\Security\Authorization\Voter\AllowedInOtherInstitutionVoter;
+use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,11 +52,18 @@ final class SecondFactorController extends Controller
         $identity = $this->getCurrentUser();
         $this->get('logger')->notice('Starting search for second factors');
 
+        $institutionFilterOptions = $this
+            ->getInstitutionConfigurationOptionsService()
+            ->getAvailableInstitutionsFor($identity->institution);
+
         $command = new SearchRaSecondFactorsCommand();
-        $command->institution = $identity->institution;
+        $command->actorInstitution = $identity->institution;
         $command->pageNumber = (int) $request->get('p', 1);
         $command->orderBy = $request->get('orderBy');
         $command->orderDirection = $request->get('orderDirection');
+        
+        // The options that will populate the institution filter choice list.
+        $command->institutionFilterOptions = $institutionFilterOptions;
 
         $form = $this->createForm(SearchRaSecondFactorsType::class, $command, ['method' => 'get']);
         $form->handleRequest($request);
@@ -69,7 +79,7 @@ final class SecondFactorController extends Controller
         /** @var Paginator $paginator */
         $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
-            $secondFactors->getTotalItems() > 0 ? $secondFactors->getElements() : [],
+            $secondFactors->getElements(),
             $secondFactors->getCurrentPage(),
             $secondFactors->getItemsPerPage()
         );
@@ -169,7 +179,8 @@ final class SecondFactorController extends Controller
             throw new NotFoundHttpException();
         }
 
-        if ($identity->institution !== $this->getCurrentUser()->institution) {
+        $institutionContext = new InstitutionContext($identity->institution, $this->getCurrentUser()->institution);
+        if (!$this->isGranted(AllowedInOtherInstitutionVoter::VIEW_AUDITLOG, $institutionContext)) {
             $logger->warning(sprintf(
                 'User with Identity "%s" (%s) requested Identity "%s" (%s) of another institution, denying access',
                 $this->getCurrentUser()->id,
@@ -240,5 +251,13 @@ final class SecondFactorController extends Controller
     private function getCurrentUser()
     {
         return $this->get('security.token_storage')->getToken()->getUser();
+    }
+
+    /**
+     * @return InstitutionConfigurationOptionsService
+     */
+    private function getInstitutionConfigurationOptionsService()
+    {
+        return $this->get('ra.service.institution_configuration_options');
     }
 }

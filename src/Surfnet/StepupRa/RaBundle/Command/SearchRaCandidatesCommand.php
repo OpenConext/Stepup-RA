@@ -23,9 +23,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class SearchRaCandidatesCommand
 {
     /**
-     * @Assert\NotBlank(message="ra.search_ra_candidates.institution.blank")
-     * @Assert\Type("string", message="ra.search_ra_candidates.institution.type")
-     *
      * @var string
      */
     public $institution;
@@ -39,6 +36,14 @@ class SearchRaCandidatesCommand
      * @var string|null
      */
     public $email;
+
+    /**
+     * @Assert\NotBlank(message="ra.search_ra_candidates.institution.blank")
+     * @Assert\Type("string", message="ra.search_ra_candidates.actor_institution.type")
+     *
+     * @var string
+     */
+    public $actorInstitution;
 
     /**
      * @Assert\Choice(
