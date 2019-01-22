@@ -37,11 +37,9 @@ final class ExceptionController extends BaseExceptionController
         if ($exception instanceof UserNotRaException) {
             $title = $translator->trans('stepup.error.user_not_ra.title');
             $description = $translator->trans('stepup.error.user_not_ra.description');
-
         } elseif ($exception instanceof LoaTooLowException) {
             $title = $translator->trans('stepup.error.loa_too_low.title');
             $description = $translator->trans('stepup.error.loa_too_low.description');
-
         } elseif ($exception instanceof MissingRequiredAttributeException) {
             $title = $translator->trans('stepup.error.missing_required_attribute.title');
             $description = $exception->getMessage();
