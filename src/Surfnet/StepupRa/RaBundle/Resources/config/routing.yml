@@ -171,3 +171,9 @@ ra_security_session_expired:
     methods: [GET]
     defaults:
         _controller: SurfnetStepupRaRaBundle:Security:sessionExpired
+
+ra_profile:
+    path: /profile
+    methods: [GET]
+    defaults:
+        _controller: SurfnetStepupRaRaBundle:Profile:profile

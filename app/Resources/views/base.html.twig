@@ -53,6 +53,9 @@
                             <a href="{{ path('institution-configuration') }}">{{ 'ra.menu.institution-configuration'|trans }}</a>
                         </li>
                     {% endif %}
+                        <li role="presentation"{% if app.request.attributes.get('_route') == 'ra_profile' %} class="active"{% endif %}>
+                            <a href="{{ path('ra_profile') }}">{{ 'ra.menu.ra_profile'|trans }}</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-sm-4">

@@ -255,6 +255,12 @@ services:
             - '@surfnet_stepup_middleware_client.identity.service.ra_listing'
             - '@logger'
 
+    ra.service.profile:
+        class: Surfnet\StepupRa\RaBundle\Service\ProfileService
+        arguments:
+          - "@surfnet_stepup_middleware_client.identity.service.profile"
+          - "@logger"
+
     # Repositories
     ra.repository.vetting_procedure:
         class: Surfnet\StepupRa\RaBundle\Repository\SessionVettingProcedureRepository
@@ -302,3 +308,10 @@ services:
             - "@surfnet_stepup.service.second_factor_type_translator"
         tags:
             - { name : twig.extension }
+
+    # Controller
+    ra.controller.profile:
+        class: Surfnet\StepupRa\RaBundle\Controller\ProfileController
+        arguments:
+            - "@ra.service.profile"
+        tags: ['controller.service_arguments']

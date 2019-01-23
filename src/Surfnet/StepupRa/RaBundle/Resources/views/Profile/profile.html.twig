@@ -1,0 +1,54 @@
+{% extends '::base.html.twig' %}
+
+{% block page_title %}{{ 'ra.profile.page.title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <th scope="row" class="half-width">{{ 'ra.profile.overview.common_name'|trans }}</th>
+                    <td class="half-width">{{ profile.commonName }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="half-width">{{ 'ra.profile.overview.name_id'|trans }}</th>
+                    <td class="half-width">{{ profile.nameId }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="half-width">{{ 'ra.profile.overview.email'|trans }}</th>
+                    <td class="half-width">{{ profile.email }}</td>
+                </tr>
+                <tr>
+                    <th scope="row" class="half-width">{{ 'ra.profile.overview.preferred_locale'|trans }}</th>
+                    <td class="half-width">{{ profile.preferredLocale }}</td>
+                </tr>
+
+                {% if profile.isSraa %}
+                    <tr>
+                        <th scope="row" class="half-width">{{ 'ra.profile.overview.is_sraa'|trans }}</th>
+                        <td class="half-width">{{ profile.isSraa }}</td>
+                    </tr>
+                {% endif %}
+
+                {% if profile.authorizations is not empty %}
+                    <tr>
+                        <th scope="row" class="half-width">{{ 'ra.profile.overview.authorizations'|trans }}</th>
+                        <td class="half-width">
+                        {% for institution, authorization in profile.authorizations %}
+                            <div>
+                                <strong>{{ institution }}:</strong>
+                                {% for type in authorization  %}
+                                {{ type|trans }}
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                        </td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
