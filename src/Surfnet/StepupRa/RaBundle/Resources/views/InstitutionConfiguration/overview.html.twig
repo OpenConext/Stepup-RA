@@ -1,0 +1,72 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td>{{ 'ra.institution_configuration.use_ra_locations'|trans }}</td>
+                    <td>{{ configuration.useRaLocations ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'ra.institution_configuration.show_ra_contact_information'|trans }}</td>
+                    <td>{{ configuration.showRaaContactInformation ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'ra.institution_configuration.verify_email'|trans }}</td>
+                    <td>{{ configuration.verifyEmail ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'ra.institution_configuration.allowed_second_factors'|trans }}</td>
+                    <td>
+                        {% if configuration.allowedSecondFactors is empty %}
+                            {{ 'ra.institution_configuration.all_second_factors_enabled'|trans }}
+                        {% else %}
+                        <ul>
+                            {% for allowedSecondFactor in configuration.allowedSecondFactors %}
+                                <li>{{ allowedSecondFactor }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ 'ra.institution_configuration.number_of_tokens_per_identity'|trans }}</td>
+                    <td>{{ configuration.numberOfTokensPerIdentity }}</td>
+                </tr>
+                <tr>
+                    <td>{{ 'ra.institution_configuration.select_raa'|trans }}</td>
+                    <td>
+                        <ul>
+                            {% for selectRaaFrom in configuration.selectRaa %}
+                                <li>{{ selectRaaFrom }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ 'ra.institution_configuration.use_ra'|trans }}</td>
+                    <td>
+                        <ul>
+                            {% for useRaFrom in configuration.useRa %}
+                                <li>{{ useRaFrom }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{{ 'ra.institution_configuration.use_raa'|trans }}</td>
+                    <td>
+                        <ul>
+                            {% for useRaaFrom in configuration.useRaa %}
+                                <li>{{ useRaaFrom }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}
