@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.10.5
+**Bugfix**
+* Fix the token sorting PART II #192
+
 ## 2.10.4
 **Improvements**
 * Open help in new tab #187 
