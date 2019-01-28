@@ -99,7 +99,6 @@ class RaManagementController extends Controller
 
         $command                   = new SearchRaCandidatesCommand();
         $command->actorInstitution = $institution;
-        $command->institution      = $this->getRaManagementInstitution();
         $command->pageNumber       = (int) $request->get('p', 1);
         $command->orderBy          = $request->get('orderBy');
         $command->orderDirection   = $request->get('orderDirection');
@@ -156,12 +155,12 @@ class RaManagementController extends Controller
         $token  = $this->get('security.token_storage')->getToken();
         $raaSwitcherOptions = $this
             ->getInstitutionConfigurationOptionsService()
-            ->getAvailableSeleactRaaInstitutionsFor($token->getIdentityInstitution());
+            ->getAvailableSelectRaaInstitutionsFor($token->getIdentityInstitution());
 
         $command                   = new AccreditCandidateCommand();
         $command->identityId       = $identityId;
-        $command->institution      = $this->getRaManagementInstitution();
-        $command->raInstitution    = $this->getUser()->institution;
+        $command->institution      = $raCandidate->institution;
+        $command->raInstitution    = $this->getRaManagementInstitution();
         $command->availableInstitutions = $raaSwitcherOptions;
 
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
@@ -202,7 +201,7 @@ class RaManagementController extends Controller
         $logger = $this->get('logger');
         $logger->notice(sprintf("Loading information amendment form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId, $this->getUser()->institution);
+        $raListing = $this->getRaListingService()->get($identityId, $this->getRaManagementInstitution());
 
         if (!$raListing) {
             $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
@@ -249,7 +248,7 @@ class RaManagementController extends Controller
 
         $logger->notice(sprintf("Loading change Ra Role form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId, $this->getUser()->institution);
+        $raListing = $this->getRaListingService()->get($identityId, $this->getRaManagementInstitution());
         if (!$raListing) {
             $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
             throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
@@ -293,9 +292,9 @@ class RaManagementController extends Controller
 
         $logger->notice(sprintf("Loading retract registration authority form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId, $this->getUser()->institution);
+        $raListing = $this->getRaListingService()->get($identityId, $this->getRaManagementInstitution());
         if (!$raListing) {
-            $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
+            $logger->warning(sprintf("RA listing for identity ID '%s@%s' not found' not found", $identityId, $this->getRaManagementInstitution()));
             throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
         }
 

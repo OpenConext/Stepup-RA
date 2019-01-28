@@ -128,9 +128,10 @@ class RaCandidateService
         if (!$result->isSuccessful()) {
             $this->logger->critical(
                 sprintf(
-                    'Accreditation of Identity "%s" of Institution "%s" with role "%s" failed: "%s"',
+                    'Accreditation of Identity "%s" of Institution "%s" for Institution "%s" with role "%s" failed: "%s"',
                     $apiCommand->identityId,
                     $apiCommand->institution,
+                    $apiCommand->raInstitution,
                     $apiCommand->role,
                     implode(", ", $result->getErrors())
                 )
