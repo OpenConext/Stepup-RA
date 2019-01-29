@@ -35,4 +35,4 @@ branches:
   only:
     - master
     - develop
-    - release/2.8
+    - release/2.10
