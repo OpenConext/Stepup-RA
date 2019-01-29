@@ -82,6 +82,32 @@ class RaaController extends Controller
         );
     }
 
+    public function institutionConfigurationAction()
+    {
+        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+        $token  = $this->get('security.token_storage')->getToken();
+
+        $logger = $this->get('logger');
+        /** @var Identity $identity */
+        $identity = $token->getUser();
+        $institution = $identity->institution;
+
+        $logger->notice(sprintf('Opening the institution configuration for "%s"', $institution));
+
+        $configuration = $this->getInstitutionConfigurationOptionsService()
+            ->getInstitutionConfigurationOptionsFor($institution);
+
+        if (!$configuration) {
+            $logger->warning(sprintf('Unable to find the institution configuration for "%s"', $institution));
+            return $this->createNotFoundException('The institution configuration could not be found');
+        }
+
+        return $this->render(
+            '@SurfnetStepupRaRa/InstitutionConfiguration/overview.html.twig',
+            ['configuration' => (array) $configuration]
+        );
+    }
+
     /**
      * @return RaListingService
      */

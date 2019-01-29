@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-10-31T13:55:45Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2019-01-28T15:42:29Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -15,12 +15,12 @@
       <trans-unit id="ff6230b38fe127145d864f4d4920ceb4d857af18" resname="button.logout">
         <source>button.logout</source>
         <target>Sign out</target>
-        <jms:reference-file line="55">/Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="60">/Resources/views/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5f1e0c5b2426bfd27630e1a79ced536d4ef05d10" resname="footer.documentation">
         <source>footer.documentation</source>
         <target>Manual</target>
-        <jms:reference-file line="107">/Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="112">/Resources/views/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a08764057e3607049e3495943676b29f7baefba9" resname="locale.en_GB">
         <source>locale.en_GB</source>
@@ -367,6 +367,65 @@
         <target>Verify identity</target>
         <jms:reference-file line="49">/../src/Surfnet/StepupRa/RaBundle/Form/Type/VerifyIdentityType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="17ab744355f1655994692471da5d40bebb69b116" resname="ra.institution_configuration.all_second_factors_enabled">
+        <source>ra.institution_configuration.all_second_factors_enabled</source>
+        <target>All enabled tokens are available</target>
+        <jms:reference-file line="24">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="217097881ba32fe3854fc0b41f3a71437a22861d" resname="ra.institution_configuration.allowed_second_factors">
+        <source>ra.institution_configuration.allowed_second_factors</source>
+        <target>Allowed second factor tokens</target>
+        <jms:reference-file line="21">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="61dd68e8cba8bedbd5c69f57846161be150580a2" resname="ra.institution_configuration.no">
+        <source>ra.institution_configuration.no</source>
+        <target>No</target>
+        <jms:reference-file line="10">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="14">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="18">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7c2f87e0fb31a1da5050b865323409759b727336" resname="ra.institution_configuration.number_of_tokens_per_identity">
+        <source>ra.institution_configuration.number_of_tokens_per_identity</source>
+        <target>Number of tokens per identity</target>
+        <jms:reference-file line="35">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="817cff31f9baf1c7bce18b5c6332c1be54bf44ef" resname="ra.institution_configuration.select_raa">
+        <source>ra.institution_configuration.select_raa</source>
+        <target>From which other institution(s) can users be assigned the RA(A) role for this institution?</target>
+        <jms:reference-file line="39">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b5fdeda8565fa6fa18934ced8039240beaf5ebea" resname="ra.institution_configuration.show_ra_contact_information">
+        <source>ra.institution_configuration.show_ra_contact_information</source>
+        <target>Show RAA contact information?</target>
+        <jms:reference-file line="13">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0344c705268b0d366e23e4a9f3e90df9aa55960b" resname="ra.institution_configuration.use_ra">
+        <source>ra.institution_configuration.use_ra</source>
+        <target>In which other institution(s) are the RAs from this institution an RA?</target>
+        <jms:reference-file line="49">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="98471184366a598d348e400875f1fe3ba1cf6c2f" resname="ra.institution_configuration.use_ra_locations">
+        <source>ra.institution_configuration.use_ra_locations</source>
+        <target>Use RA locations enabled?</target>
+        <jms:reference-file line="9">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="63cd93b650cdeb407293c1cdef07ce9d49e0976a" resname="ra.institution_configuration.use_raa">
+        <source>ra.institution_configuration.use_raa</source>
+        <target>From which other institution(s) the RAAs are also an RAA for this institution?</target>
+        <jms:reference-file line="59">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d6ea1d4efa906c5056f389f4fde35bbb26511521" resname="ra.institution_configuration.verify_email">
+        <source>ra.institution_configuration.verify_email</source>
+        <target>E-mail verification enabled?</target>
+        <jms:reference-file line="17">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9936b7fe8eea29acc108f05e5ea2edeb3a6033a5" resname="ra.institution_configuration.yes">
+        <source>ra.institution_configuration.yes</source>
+        <target>Yes</target>
+        <jms:reference-file line="10">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="14">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="18">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="584ef35d6af2f2917e708a1a6092f0b0938151e4" resname="ra.management.amend_ra_info.error.middleware_command_failed">
         <source>ra.management.amend_ra_info.error.middleware_command_failed</source>
         <target>The amendment of the RA's information failed due to a server error.</target>
@@ -375,7 +434,7 @@
       <trans-unit id="5fa5dfb0514d509432e81f5b2344b12d7351715b" resname="ra.management.amend_ra_info.info_amended">
         <source>ra.management.amend_ra_info.info_amended</source>
         <target>The RA's information has been amended.</target>
-        <jms:reference-file line="225">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="223">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6492fd6bfd9bf1c89d052b3172d572e9df9e54e8" resname="ra.management.amend_ra_info.ra_listing.email">
         <source>ra.management.amend_ra_info.ra_listing.email</source>
@@ -453,7 +512,7 @@
       <trans-unit id="011f64144e98b72e6a4ec42919ceb12298f059ef" resname="ra.management.change_ra_role_changed">
         <source>ra.management.change_ra_role_changed</source>
         <target>The Registration Authority has been granted the selected role</target>
-        <jms:reference-file line="272">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="270">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f2d212150076ce42ffe47d514f182ad5e7a6c9fe" resname="ra.management.create_ra.error.middleware_command_failed">
         <source>ra.management.create_ra.error.middleware_command_failed</source>
@@ -463,7 +522,7 @@
       <trans-unit id="4029e4383ef4a57077b346cc66f971c9cafb71c3" resname="ra.management.create_ra.identity_accredited">
         <source>ra.management.create_ra.identity_accredited</source>
         <target>The role of this user has been changed.</target>
-        <jms:reference-file line="177">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="176">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="62bc099c53662e393741f519a15503dcb4d6c77f" resname="ra.management.create_ra.modal.are_you_sure">
         <source>ra.management.create_ra.modal.are_you_sure</source>
@@ -689,12 +748,17 @@
       <trans-unit id="1a03ce1515132785c884129598c2cb52db461cd0" resname="ra.management.retract_ra.success">
         <source>ra.management.retract_ra.success</source>
         <target>The Identity is no longer RA(A)</target>
-        <jms:reference-file line="320">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="318">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a973963d22345656dc73a28876fe2a9e481c6d3a" resname="ra.management.retract_registration_authority.are_you_sure">
         <source>ra.management.retract_registration_authority.are_you_sure</source>
         <target>Are you sure you want to remove the user below as RA(A)?</target>
         <jms:reference-file line="6">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/confirmRetractRa.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ea11cd6d8f399195aeb56a640ac0a946a5302fce" resname="ra.menu.institution-configuration">
+        <source>ra.menu.institution-configuration</source>
+        <target>Institution configuration</target>
+        <jms:reference-file line="53">/Resources/views/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b4a82e0141a37a71ca4197275026c666429430cc" resname="ra.menu.ra_locations">
         <source>ra.menu.ra_locations</source>
@@ -719,8 +783,8 @@
       <trans-unit id="ea07c1ef2b8502f7457347223483d010ab427050" resname="ra.menu.sraa_change_institution">
         <source>ra.menu.sraa_change_institution</source>
         <target>change</target>
-        <jms:reference-file line="66">/Resources/views/base.html.twig</jms:reference-file>
-        <jms:reference-file line="74">/Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="71">/Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="79">/Resources/views/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ff49fbf3684f01850a026abeff8b6f3cd6d89a98" resname="ra.prove_phone_possession.challenge_expired">
         <source>ra.prove_phone_possession.challenge_expired</source>
@@ -851,7 +915,7 @@
       <trans-unit id="800e5d0a1f57a8b4d3654ac7d173efe68c098f68" resname="ra.second_factor.revocation.could_not_revoke">
         <source>ra.second_factor.revocation.could_not_revoke</source>
         <target>The removal of the token failed</target>
-        <jms:reference-file line="147">/../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <jms:reference-file line="150">/../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f70c06516166354cd4d8d3490cbd707941610ed9" resname="ra.second_factor.revocation.modal.are_you_sure">
         <source>ra.second_factor.revocation.modal.are_you_sure</source>
@@ -897,7 +961,7 @@
       <trans-unit id="5c500a2dc008cbf1a8501593a2a50e518f6fe145" resname="ra.second_factor.revocation.revoked">
         <source>ra.second_factor.revocation.revoked</source>
         <target>The token has been successfully removed</target>
-        <jms:reference-file line="144">/../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <jms:reference-file line="147">/../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2b7c9489a8b311fcdb89652c38387bd08126de9b" resname="ra.second_factor.search.column.document_number">
         <source>ra.second_factor.search.column.document_number</source>
@@ -1282,17 +1346,17 @@ The token is now activated and ready to be used.</target>
       <trans-unit id="08b4dba663adb4085da573cd258a227d7db1367d" resname="stepup.error.loa_too_low.description">
         <source>stepup.error.loa_too_low.description</source>
         <target>You don't have the required security clearance to sign in.</target>
-        <jms:reference-file line="43">/../src/Surfnet/StepupRa/RaBundle/Controller/ExceptionController.php</jms:reference-file>
+        <jms:reference-file line="42">/../src/Surfnet/StepupRa/RaBundle/Controller/ExceptionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="5861edb7af95a8dec5813e696d66e34a6b39e712" resname="stepup.error.loa_too_low.title">
         <source>stepup.error.loa_too_low.title</source>
         <target>Security clearance too low</target>
-        <jms:reference-file line="42">/../src/Surfnet/StepupRa/RaBundle/Controller/ExceptionController.php</jms:reference-file>
+        <jms:reference-file line="41">/../src/Surfnet/StepupRa/RaBundle/Controller/ExceptionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4333aed6f41daef505fd25cc77e65a7dc4b12303" resname="stepup.error.missing_required_attribute.title">
         <source>stepup.error.missing_required_attribute.title</source>
         <target>Missing required attribute</target>
-        <jms:reference-file line="46">/../src/Surfnet/StepupRa/RaBundle/Controller/ExceptionController.php</jms:reference-file>
+        <jms:reference-file line="44">/../src/Surfnet/StepupRa/RaBundle/Controller/ExceptionController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b4809e818f782127b31392936e35593812543700" resname="stepup.error.page_not_found.text">
         <source>stepup.error.page_not_found.text</source>

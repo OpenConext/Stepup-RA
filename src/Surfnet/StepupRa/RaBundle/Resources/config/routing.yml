@@ -153,6 +153,12 @@ raa_select_institution:
     methods:  [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:Raa:selectInstitution }
 
+institution-configuration:
+    path: /institution-configuration
+    methods: [GET]
+    defaults:
+        _controller: SurfnetStepupRaRaBundle:Raa:institutionConfiguration
+
 ra_switch_locale:
     path:     /switch-locale
     methods:  [POST]
