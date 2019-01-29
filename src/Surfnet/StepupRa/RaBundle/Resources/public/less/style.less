@@ -143,31 +143,37 @@ form[name="ra_verify_phone_number"] {
         text-transform: uppercase;
     }
 }
-
-form[name="ra_search_ra_second_factors"] {
-    input#ra_search_ra_second_factors_name {
-        max-width: 300px;
-    }
-    input#ra_search_ra_second_factors_secondFactorId {
-        max-width: 200px;
-    }
-    input#ra_search_ra_second_factors_email {
-        max-width: 350px;
-    }
-    select {
-        max-width: 175px;
-    }
-    button#ra_search_ra_second_factors_export {
-        margin-left: 0.5em;
-    }
-    div.button-group {
-        margin-left: 25%;
-        div.form-group {
-            margin-right: 14px;
-            float: left;
-            button:first-child {
-                margin-left: 8px;
+.search-second-factors {
+    form[name="ra_search_ra_second_factors"] {
+        input#ra_search_ra_second_factors_name {
+            max-width: 300px;
+        }
+        input#ra_search_ra_second_factors_secondFactorId {
+            max-width: 200px;
+        }
+        input#ra_search_ra_second_factors_email {
+            max-width: 350px;
+        }
+        select {
+            max-width: 175px;
+        }
+        button#ra_search_ra_second_factors_export {
+            margin-left: 0.5em;
+        }
+        div.button-group {
+            margin-left: 25%;
+            div.form-group {
+                margin-right: 14px;
+                float: left;
+                button:first-child {
+                    margin-left: 8px;
+                }
             }
+        }
+    }
+    td.button-column {
+        .audit-log, .revoke {
+            margin: 0px 3px 3px 3px;
         }
     }
 }
