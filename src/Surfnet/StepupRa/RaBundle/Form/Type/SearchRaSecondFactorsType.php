@@ -21,6 +21,7 @@ namespace Surfnet\StepupRa\RaBundle\Form\Type;
 use Surfnet\StepupRa\RaBundle\Form\Extension\SecondFactorTypeChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -63,15 +64,26 @@ class SearchRaSecondFactorsType extends AbstractType
             ],
             'required' => false,
         ]);
-        $builder->add('search', SubmitType::class, [
-            'label' => 'ra.form.ra_search_ra_second_factors.button.search',
-            'attr' => [ 'class' => 'btn btn-primary pull-left' ],
-        ]);
 
-        $builder->add('export', SubmitType::class, [
-            'label' => 'ra.form.ra_search_ra_second_factors.button.export',
-            'attr' => [ 'class' => 'btn btn-secondary pull-left' ],
-        ]);
+        $builder->add(
+            $builder->create(
+                'button-group',
+                FormType::class,
+                [
+                    'inherit_data' => true,
+                    'label' => false,
+                    'widget_form_group_attr' => ['class' => 'form-group button-group'],
+                ]
+            )
+                ->add('search', SubmitType::class, [
+                    'label' => 'ra.form.ra_search_ra_second_factors.button.search',
+                    'attr' => [ 'class' => 'btn btn-primary pull-left button-group-member' ],
+                ])
+                ->add('export', SubmitType::class, [
+                    'label' => 'ra.form.ra_search_ra_second_factors.button.export',
+                    'attr' => [ 'class' => 'btn btn-secondary pull-left button-group-member' ],
+                ])
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
