@@ -3,6 +3,10 @@
 /web/app_dev.php.dist
 /web/app_test.php
 /app/bootstrap.php.cache
+/web/css/*
+/web/js/*
+/app/config/*.crt
+/app/config/*.key
 /app/cache/*
 /app/config/parameters.yml
 /app/config/samlstepupproviders_parameters.yml
