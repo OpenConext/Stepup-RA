@@ -3,22 +3,23 @@
 {% block content %}
     <div class="row">
         <div class="col-sm-12">
-            <table class="table table-striped">
+            <h3>Configuration of {{ institution }}</h3>
+            <table class="table table-bordered table-hover">
                 <tbody>
                 <tr>
-                    <td>{{ 'ra.institution_configuration.use_ra_locations'|trans }}</td>
+                    <th>{{ 'ra.institution_configuration.use_ra_locations'|trans }}</th>
                     <td>{{ configuration.useRaLocations ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'ra.institution_configuration.show_ra_contact_information'|trans }}</td>
+                    <th>{{ 'ra.institution_configuration.show_ra_contact_information'|trans }}</th>
                     <td>{{ configuration.showRaaContactInformation ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'ra.institution_configuration.verify_email'|trans }}</td>
+                    <th>{{ 'ra.institution_configuration.verify_email'|trans }}</th>
                     <td>{{ configuration.verifyEmail ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'ra.institution_configuration.allowed_second_factors'|trans }}</td>
+                    <th>{{ 'ra.institution_configuration.allowed_second_factors'|trans }}</th>
                     <td>
                         {% if configuration.allowedSecondFactors is empty %}
                             {{ 'ra.institution_configuration.all_second_factors_enabled'|trans }}
@@ -32,11 +33,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>{{ 'ra.institution_configuration.number_of_tokens_per_identity'|trans }}</td>
+                    <th>{{ 'ra.institution_configuration.number_of_tokens_per_identity'|trans }}</th>
                     <td>{{ configuration.numberOfTokensPerIdentity }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'ra.institution_configuration.select_raa'|trans }}</td>
+                    <th>{{ 'ra.institution_configuration.select_raa'|trans }}</th>
                     <td>
                         <ul>
                             {% for selectRaaFrom in configuration.selectRaa %}
@@ -46,7 +47,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>{{ 'ra.institution_configuration.use_ra'|trans }}</td>
+                    <th>{{ 'ra.institution_configuration.use_ra'|trans }}</th>
                     <td>
                         <ul>
                             {% for useRaFrom in configuration.useRa %}
@@ -56,7 +57,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>{{ 'ra.institution_configuration.use_raa'|trans }}</td>
+                    <th>{{ 'ra.institution_configuration.use_raa'|trans }}</th>
                     <td>
                         <ul>
                             {% for useRaaFrom in configuration.useRaa %}

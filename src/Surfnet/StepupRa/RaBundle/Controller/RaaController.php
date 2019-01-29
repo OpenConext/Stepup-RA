@@ -104,7 +104,10 @@ class RaaController extends Controller
 
         return $this->render(
             '@SurfnetStepupRaRa/InstitutionConfiguration/overview.html.twig',
-            ['configuration' => (array) $configuration]
+            [
+                'configuration' => (array)$configuration,
+                'institution' => $institution,
+            ]
         );
     }
 
