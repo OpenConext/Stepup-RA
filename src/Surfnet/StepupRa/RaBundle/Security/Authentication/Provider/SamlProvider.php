@@ -140,27 +140,6 @@ class SamlProvider implements AuthenticationProviderInterface
         $authenticatedToken = new SamlToken($token->getLoa(), $roles, $institutionConfigurationOptions);
         $authenticatedToken->setUser($identity);
 
-        // When dealing with a RA(A), determine for which institution the authenticating user should enter the RA environment
-        if (!in_array('ROLE_SRAA', $roles)) {
-            // Start by loading the ra listing for this identity to know what institutions (s)he is RA(A) for.
-            $institutions = $this->raListingService->searchBy($identity->id, $institution);
-
-            if ($institutions->getTotalItems() === 1) {
-                // Change the institution to the first item from the institution listing results
-                $institution = $institutions->getOnlyElement()->raInstitution;
-            } elseif ($institutions->getTotalItems() > 1) {
-                if ($institutions->isListed($identity->institution)) {
-                    $institution = $identity->institution;
-                } else {
-                    // Otherwise pick the first institution in the list and set that for the
-                    $institution = reset($institutions->getElements())->raInstitution;
-                }
-            } else {
-                throw new AuthenticationException('Unauthorized to authenticate, user is not present in ra listing');
-            }
-            $authenticatedToken->changeInstitutionScope($institution, $institutionConfigurationOptions);
-        }
-
         return $authenticatedToken;
     }
 
