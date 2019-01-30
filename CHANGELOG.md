@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.10.6
+**Improvement**
+* Align buttons on 'Tokens' page #194
+
 ## 2.10.5
 **Bugfix**
 * Fix the token sorting PART II #192
