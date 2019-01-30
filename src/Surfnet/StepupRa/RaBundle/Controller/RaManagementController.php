@@ -22,11 +22,9 @@ use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitution;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
-use Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand;
 use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\AmendRegistrationAuthorityInformationType;
-use Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaRoleType;
 use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType;
@@ -230,51 +228,6 @@ class RaManagementController extends Controller
         return $this->render('SurfnetStepupRaRaBundle:RaManagement:amendRaInformation.html.twig', [
             'raListing' => $raListing,
             'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @param Request $request
-     * @param         $identityId
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function changeRaRoleAction(Request $request, $identityId)
-    {
-        // todo: remove?
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
-        $logger = $this->get('logger');
-
-        $logger->notice(sprintf("Loading change Ra Role form for RA(A) '%s'", $identityId));
-
-        $raListing = $this->getRaListingService()->get($identityId, $this->getUser()->institution);
-        if (!$raListing) {
-            $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
-            throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
-        }
-
-        $command              = new ChangeRaRoleCommand();
-        $command->identityId  = $raListing->identityId;
-        $command->institution = $this->getUser()->institution;
-        $command->role        = $raListing->role;
-
-        $form = $this->createForm(ChangeRaRoleType::class, $command)->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $logger->notice(sprintf('RA(A) "%s" Change Role form submitted, processing', $identityId));
-
-            if ($this->get('ra.service.ra')->changeRegistrationAuthorityRole($command)) {
-                $logger->notice('Role successfully changed');
-
-                $this->addFlash('success', $this->get('translator')->trans('ra.management.change_ra_role_changed'));
-                return $this->redirectToRoute('ra_management_manage');
-            }
-
-            $logger->notice(sprintf('Role of RA(A) "%s" could not be changed, informing user', $identityId));
-            $this->addFlash('error', 'ra.management.change_ra_role.middleware_command_failed');
-        }
-
-        return $this->render('SurfnetStepupRaRaBundle:RaManagement:changeRaRole.html.twig', [
-            'raListing' => $raListing,
-            'form'      => $form->createView()
         ]);
     }
 
