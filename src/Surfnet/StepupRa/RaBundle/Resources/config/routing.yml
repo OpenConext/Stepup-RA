@@ -150,7 +150,7 @@ sraa_select_institution:
 
 institution-configuration:
     path: /institution-configuration
-    methods: [GET]
+    methods: [GET, POST]
     defaults:
         _controller: SurfnetStepupRaRaBundle:Raa:institutionConfiguration
 
