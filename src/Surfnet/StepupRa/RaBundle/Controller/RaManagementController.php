@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitution;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
 use Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand;
@@ -29,7 +30,6 @@ use Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaRoleType;
 use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType;
-use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -150,15 +150,16 @@ class RaManagementController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $raaSwitcherOptions = $this
-            ->getInstitutionConfigurationOptionsService()
-            ->getAvailableSelectRaaInstitutionsFor($this->getUser()->institution);
+        $options = array_map(function (RaCandidateInstitution $institution) {
+            return $institution->institution;
+        }, $raCandidate->institutions->getElements());
+        $selectOptions = array_combine($options, $options);
 
         $command                   = new AccreditCandidateCommand();
         $command->identityId       = $identityId;
-        $command->institution      = $raCandidate->institution;
+        $command->institution      = $raCandidate->raCandidate->institution;
         $command->raInstitution    = $this->getUser()->institution;
-        $command->availableInstitutions = $raaSwitcherOptions;
+        $command->availableInstitutions = $selectOptions;
 
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -181,7 +182,7 @@ class RaManagementController extends Controller
         }
 
         return $this->render('SurfnetStepupRaRaBundle:RaManagement:createRa.html.twig', [
-            'raCandidate' => $raCandidate,
+            'raCandidate' => $raCandidate->raCandidate,
             'form'        => $form->createView()
         ]);
     }

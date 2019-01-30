@@ -102,7 +102,7 @@ class RaCandidateService
     /**
      * @param string $identityId
      * @param string $institution
-     * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidate
+     * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitutions
      */
     public function getRaCandidate($identityId, $institution)
     {
