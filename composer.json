@@ -21,29 +21,29 @@
     ],
     "require": {
         "php": "~5.6|~7.0",
-        "symfony/symfony": "3.4.*",
-        "twig/twig": "^1.35",
-        "twig/extensions": "~1.5",
-        "symfony/assetic-bundle": "~2.3",
-        "symfony/monolog-bundle": "~3.1.0",
+        "ee/dataexporter-bundle": "dev-feature/syfony-3-and-4-support",
+        "fortawesome/font-awesome": "~4.2.0",
+        "guzzlehttp/guzzle": "^6",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "jms/translation-bundle": "~1.3.0",
+        "knplabs/knp-paginator-bundle": "~2.4",
+        "mopa/bootstrap-bundle": "^3.2",
+        "mopa/composer-bridge": "~1.5",
+        "nelmio/security-bundle": "~1.6",
+        "openconext/monitor-bundle": "^1.0",
+        "ramsey/uuid": "^3.5",
         "sensio/distribution-bundle": "~5.0",
         "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0",
-        "nelmio/security-bundle": "~1.6",
-        "mopa/bootstrap-bundle": "^3.2",
-        "twbs/bootstrap": "~3.3.0",
-        "fortawesome/font-awesome": "~4.2.0",
-        "jms/translation-bundle": "~1.3.0",
+        "surfnet/stepup-bundle": "^4.0",
         "surfnet/stepup-middleware-client-bundle": "^3.0",
         "surfnet/stepup-saml-bundle": "^4.1",
-        "surfnet/stepup-bundle": "^4.0",
         "surfnet/stepup-u2f-bundle": "dev-develop",
-        "openconext/monitor-bundle": "^1.0",
-        "guzzlehttp/guzzle": "^6",
-        "knplabs/knp-paginator-bundle": "~2.4",
-        "mopa/composer-bridge": "~1.5",
-        "ramsey/uuid": "^3.5",
-        "ee/dataexporter-bundle": "dev-feature/syfony-3-and-4-support"
+        "symfony/assetic-bundle": "~2.3",
+        "symfony/monolog-bundle": "~3.1.0",
+        "symfony/symfony": "3.4.*",
+        "twbs/bootstrap": "~3.3.0",
+        "twig/extensions": "~1.5",
+        "twig/twig": "^1.35"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^2.2",
@@ -74,7 +74,8 @@
         ]
     },
     "config": {
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "sort-packages": true
     },
     "extra": {
         "symfony-app-dir": "app",
