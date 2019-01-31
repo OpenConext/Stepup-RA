@@ -51,7 +51,6 @@ class RaManagementController extends Controller
         $logger->notice(sprintf('Loading overview of RA(A)s for institution "%s"', $institution));
 
         $searchQuery = (new RaListingSearchQuery($institution, 1))
-            ->setInstitution($institution)
             ->setOrderBy($request->get('orderBy', 'commonName'))
             ->setOrderDirection($request->get('orderDirection', 'asc'));
 
