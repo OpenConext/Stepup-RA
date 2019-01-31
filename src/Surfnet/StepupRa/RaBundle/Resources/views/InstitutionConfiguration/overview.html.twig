@@ -39,31 +39,43 @@
                 <tr>
                     <th>{{ 'ra.institution_configuration.select_raa'|trans }}</th>
                     <td>
+                        {% if configuration.selectRaa|length > 0 %}
                         <ul>
                             {% for selectRaaFrom in configuration.selectRaa %}
                                 <li>{{ selectRaaFrom }}</li>
                             {% endfor %}
                         </ul>
+                        {% else %}
+                            {{ 'ra.institution_configuration.no_entries'|trans }}
+                        {% endif %}
                     </td>
                 </tr>
                 <tr>
                     <th>{{ 'ra.institution_configuration.use_ra'|trans }}</th>
                     <td>
+                        {% if configuration.useRa|length > 0 %}
                         <ul>
                             {% for useRaFrom in configuration.useRa %}
                                 <li>{{ useRaFrom }}</li>
                             {% endfor %}
                         </ul>
+                        {% else %}
+                            {{ 'ra.institution_configuration.no_entries'|trans }}
+                        {% endif %}
                     </td>
                 </tr>
                 <tr>
                     <th>{{ 'ra.institution_configuration.use_raa'|trans }}</th>
                     <td>
+                        {% if configuration.useRaa|length > 0 %}
                         <ul>
                             {% for useRaaFrom in configuration.useRaa %}
                                 <li>{{ useRaaFrom }}</li>
                             {% endfor %}
                         </ul>
+                        {% else %}
+                            {{ 'ra.institution_configuration.no_entries'|trans }}
+                        {% endif %}
                     </td>
                 </tr>
                 </tbody>
