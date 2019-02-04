@@ -135,7 +135,7 @@ class SamlToken extends AbstractToken
             $this->raManagementInstitution,
             ) = unserialize(
                 $serialized
-        );
+            );
 
         parent::unserialize($parent);
     }
