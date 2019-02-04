@@ -28,10 +28,10 @@
                             {{ authority.raInstitution }}
                         </td>
                         <td>
-                            <a href="{{ path('ra_management_amend_ra_information', {identityId: authority.identityId}) }}" class="btn btn-primary" role="button">
+                            <a href="{{ path('ra_management_amend_ra_information', {identityId: authority.identityId, raInstitution: authority.raInstitution}) }}" class="btn btn-primary" role="button">
                                 {{ 'ra.management.overview.update_information'|trans }}
                             </a>
-                            <a href="{{ path('ra_management_retract_registration_authority', {identityId: authority.identityId}) }}" class="btn btn-warning" role="button">
+                            <a href="{{ path('ra_management_retract_registration_authority', {identityId: authority.identityId, raInstitution: authority.raInstitution}) }}" class="btn btn-warning" role="button">
                                 {{ 'ra.management.overview.remove_as_ra'|trans }}
                             </a>
                         </td>

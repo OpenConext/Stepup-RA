@@ -187,16 +187,17 @@ class RaManagementController extends Controller
     /**
      * @param Request $request
      * @param         $identityId
+     * @param         $raInstitution
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function amendRaInformationAction(Request $request, $identityId)
+    public function amendRaInformationAction(Request $request, $identityId, $raInstitution)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
         $logger = $this->get('logger');
         $logger->notice(sprintf("Loading information amendment form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId, $this->getUser()->institution);
+        $raListing = $this->getRaListingService()->get($identityId, $raInstitution);
 
         if (!$raListing) {
             $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
@@ -207,7 +208,7 @@ class RaManagementController extends Controller
         $command->identityId = $raListing->identityId;
         $command->location = $this->getUser()->institution;
         $command->contactInformation = $raListing->contactInformation;
-        $command->institution = $this->getUser()->institution;
+        $command->institution = $raListing->raInstitution;
 
         $form = $this->createForm(AmendRegistrationAuthorityInformationType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -233,16 +234,17 @@ class RaManagementController extends Controller
     /**
      * @param Request $request
      * @param         $identityId
+     * @param         $raInstitution
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function retractRegistrationAuthorityAction(Request $request, $identityId)
+    public function retractRegistrationAuthorityAction(Request $request, $identityId, $raInstitution)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
         $logger = $this->get('logger');
 
         $logger->notice(sprintf("Loading retract registration authority form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId, $this->getUser()->institution);
+        $raListing = $this->getRaListingService()->get($identityId, $raInstitution);
         if (!$raListing) {
             $logger->warning(sprintf("RA listing for identity ID '%s@%s' not found' not found", $identityId, $this->getUser()->institution));
             throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
@@ -250,7 +252,7 @@ class RaManagementController extends Controller
 
         $command = new RetractRegistrationAuthorityCommand();
         $command->identityId = $identityId;
-        $command->institution = $this->getUser()->institution;
+        $command->institution = $raListing->raInstitution;
 
         $form = $this->createForm(RetractRegistrationAuthorityType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -311,13 +313,5 @@ class RaManagementController extends Controller
     private function getPaginator()
     {
         return $this->get('knp_paginator');
-    }
-
-    /**
-     * @return string
-     */
-    private function getRaManagementInstitution()
-    {
-        return $this->getUser()->institution;
     }
 }
