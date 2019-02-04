@@ -129,12 +129,3 @@ services:
         tags:
             - { name: security.voter }
         public: false
-
-    ra.security.authorization.allowed_to_switch_institution:
-        class: Surfnet\StepupRa\RaBundle\Security\Authorization\Voter\AllowedToSwitchInstitutionVoter
-        arguments:
-            - '@ra.service.ra_listing'
-        tags:
-            - { name: security.voter }
-        public: false
-
