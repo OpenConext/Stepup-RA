@@ -300,14 +300,6 @@ class RaManagementController extends Controller
     }
 
     /**
-     * @return InstitutionConfigurationOptionsService
-     */
-    private function getInstitutionConfigurationOptionsService()
-    {
-        return $this->get('ra.service.institution_configuration_options');
-    }
-
-    /**
      * @return \Knp\Component\Pager\Paginator
      */
     private function getPaginator()
