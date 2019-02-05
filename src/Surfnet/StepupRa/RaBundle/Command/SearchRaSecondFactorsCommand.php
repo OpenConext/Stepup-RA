@@ -36,6 +36,14 @@ final class SearchRaSecondFactorsCommand
     public $actorInstitution;
 
     /**
+     * @Assert\NotBlank(message="ra.search_ra_second_factors.actor.blank")
+     * @Assert\Type("string", message="ra.search_ra_second_factors.actor.type")
+     *
+     * @var string
+     */
+    public $actorId;
+
+    /**
      * @var string|null
      */
     public $name;

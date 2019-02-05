@@ -58,6 +58,7 @@ final class SecondFactorController extends Controller
 
         $command = new SearchRaSecondFactorsCommand();
         $command->actorInstitution = $identity->institution;
+        $command->actorId = $identity->id;
         $command->pageNumber = (int) $request->get('p', 1);
         $command->orderBy = $request->get('orderBy');
         $command->orderDirection = $request->get('orderDirection');
@@ -109,8 +110,7 @@ final class SecondFactorController extends Controller
 
         $this->get('logger')->notice('Starting export of searched second factors');
 
-        $identity = $this->getCurrentUser();
-        $exportCommand = ExportRaSecondFactorsCommand::fromSearchCommand($command, $identity->institution);
+        $exportCommand = ExportRaSecondFactorsCommand::fromSearchCommand($command);
 
         return $this->getSecondFactorService()->export($exportCommand);
     }
