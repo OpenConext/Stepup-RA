@@ -19,13 +19,14 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
+use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class RaaController extends Controller
 {
-
-    public function institutionConfigurationAction()
+    public function institutionConfigurationAction(Request $request)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
         $token = $this->get('security.token_storage')->getToken();
@@ -33,10 +34,36 @@ class RaaController extends Controller
         $logger = $this->get('logger');
         /** @var Identity $identity */
         $identity = $token->getUser();
-        $institution = $identity->institution;
+
+        // Load the RA institutions for the identity that is logged in
+        $options = $this
+            ->getRaListingService()
+            ->createChoiceListFor($identity->id, $token->getIdentityInstitution());
+        $institution = reset($options);
+
+        // SRAA's are usually not RAA for other institutions as they already are SRAA. Show the institution config
+        // of the SRAAs SHO, and let her use the SRAA switcher in order to see config for different institutions.
+        if (empty($options) && $this->isGranted('ROLE_SRAA')) {
+            $institution = $token->getIdentityInstitution();
+        }
+
+        // Only show the form if more than one institutions where found.
+        if (count($options) > 1) {
+            $command = new SelectInstitutionCommand();
+            $command->institution = $institution;
+            $command->availableInstitutions = $options;
+
+            $form = $this->createForm(SelectInstitutionType::class, $command);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $institution = $command->institution;
+            }
+        }
 
         $logger->notice(sprintf('Opening the institution configuration for "%s"', $institution));
 
+        // Load the configuration for the institution that was selected.
         $configuration = $this->getInstitutionConfigurationOptionsService()
             ->getInstitutionConfigurationOptionsFor($institution);
 
@@ -49,6 +76,7 @@ class RaaController extends Controller
             '@SurfnetStepupRaRa/InstitutionConfiguration/overview.html.twig',
             [
                 'configuration' => (array)$configuration,
+                'form' => isset($form) ? $form->createView() : null,
                 'institution' => $institution,
             ]
         );
