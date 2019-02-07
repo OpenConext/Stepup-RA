@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f0bcc2c2ee06c367a0a7e7bd373473a",
+    "content-hash": "c173815ea42744830da2a5ac1e82061a",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2367,16 +2367,16 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "3.0.1",
+            "version": "3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-Middleware-clientbundle.git",
-                "reference": "47ceaa8d460eba92f1bf82ecd766b2e6d480642e"
+                "reference": "d90ccc8dc97fe7a0608e807d70fafeaec98d78e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/47ceaa8d460eba92f1bf82ecd766b2e6d480642e",
-                "reference": "47ceaa8d460eba92f1bf82ecd766b2e6d480642e",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/d90ccc8dc97fe7a0608e807d70fafeaec98d78e6",
+                "reference": "d90ccc8dc97fe7a0608e807d70fafeaec98d78e6",
                 "shasum": ""
             },
             "require": {
@@ -2416,7 +2416,7 @@
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "time": "2019-01-23T13:42:55+00:00"
+            "time": "2019-02-05T11:23:28+00:00"
         },
         {
             "name": "surfnet/stepup-saml-bundle",
@@ -5183,8 +5183,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "surfnet/stepup-u2f-bundle": 20,
-        "ee/dataexporter-bundle": 20
+        "ee/dataexporter-bundle": 20,
+        "surfnet/stepup-u2f-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -75,14 +75,6 @@
                             </a>
                         </li>
                     </ul>
-                {% elseif is_granted('raa_switching') %}
-                    <ul class="nav nav-pills pull-right">
-                        <li role="presentation"{% if app.request.attributes.get('_route') == 'raa_select_institution' %} class="active"{% endif %}>
-                            <a href="{{ path('raa_select_institution') }}">
-                                {{ app.user.institution }} <i class="fa fa-exchange"></i> {{ 'ra.menu.sraa_change_institution'|trans }}
-                            </a>
-                        </li>
-                    </ul>
                 {% endif %}
                 </div>
             </div>
