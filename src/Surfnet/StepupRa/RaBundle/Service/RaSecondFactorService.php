@@ -100,7 +100,7 @@ class RaSecondFactorService
      */
     public function search(SearchRaSecondFactorsCommand $command)
     {
-        $query = new RaSecondFactorSearchQuery($command->actorInstitution, $command->pageNumber);
+        $query = new RaSecondFactorSearchQuery($command->actorInstitution, $command->pageNumber, $command->actorId);
 
         if ($command->name) {
             $query->setName($command->name);
@@ -146,7 +146,7 @@ class RaSecondFactorService
      */
     public function export(ExportRaSecondFactorsCommand $command)
     {
-        $query = new RaSecondFactorExportQuery($command->actorInstitution);
+        $query = new RaSecondFactorExportQuery($command->actorInstitution, $command->actorId);
 
         if ($command->name) {
             $query->setName($command->name);

@@ -36,6 +36,14 @@ final class ExportRaSecondFactorsCommand
     public $actorInstitution;
 
     /**
+     * @Assert\NotBlank(message="ra.search_ra_second_factors.actor.blank")
+     * @Assert\Type("string", message="ra.search_ra_second_factors.actor.type")
+     *
+     * @var string
+     */
+    public $actorId;
+
+    /**
      * @var string|null
      */
     public $name;
@@ -90,14 +98,14 @@ final class ExportRaSecondFactorsCommand
     /**
      * Builds the command from a SearchRaSecondFactorsCommand
      * @param SearchRaSecondFactorsCommand $command
-     * @param string $institution
      * @return ExportRaSecondFactorsCommand
      */
-    public static function fromSearchCommand(SearchRaSecondFactorsCommand $command, $actorInstitution)
+    public static function fromSearchCommand(SearchRaSecondFactorsCommand $command)
     {
         $exportCommand = new self;
 
-        $exportCommand->actorInstitution = $actorInstitution;
+        $exportCommand->actorInstitution = $command->actorInstitution;
+        $exportCommand->actorId = $command->actorId;
         $exportCommand->name = $command->name;
         $exportCommand->type = $command->type;
         $exportCommand->secondFactorId = $command->secondFactorId;
