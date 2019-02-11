@@ -28,7 +28,6 @@ use Surfnet\StepupRa\RaBundle\Form\Type\AmendRegistrationAuthorityInformationTyp
 use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType;
-use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -50,7 +49,7 @@ class RaManagementController extends Controller
         $institution = $this->getUser()->institution;
         $logger->notice(sprintf('Loading overview of RA(A)s for institution "%s"', $institution));
 
-        $searchQuery = (new RaListingSearchQuery($institution, 1))
+        $searchQuery = (new RaListingSearchQuery($this->getUser()->id, $institution, 1))
             ->setOrderBy($request->get('orderBy', 'commonName'))
             ->setOrderDirection($request->get('orderDirection', 'asc'));
 
@@ -95,6 +94,7 @@ class RaManagementController extends Controller
         $logger->notice(sprintf('Searching for RaCandidates within institution "%s"', $institution));
 
         $command                   = new SearchRaCandidatesCommand();
+        $command->actorId          = $this->getUser()->id;
         $command->actorInstitution = $institution;
         $command->pageNumber       = (int) $request->get('p', 1);
         $command->orderBy          = $request->get('orderBy');
@@ -140,7 +140,7 @@ class RaManagementController extends Controller
         $logger->notice('Page for Accreditation of Identity to Ra or Raa requested');
         $identityId = $request->get('identityId');
 
-        $raCandidate = $this->getRaCandidateService()->getRaCandidate($identityId, $this->getUser()->institution);
+        $raCandidate = $this->getRaCandidateService()->getRaCandidate($identityId, $this->getUser()->institution, $this->getUser()->id);
 
         if (!$raCandidate) {
             $logger->warning(sprintf('RaCandidate based on identity "%s" not found', $identityId));

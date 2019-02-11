@@ -13,7 +13,6 @@ services:
             - "@ra.service.identity"
             - "@surfnet_saml.saml.attribute_dictionary"
             - "@ra.service.institution_configuration_options"
-            - "@ra.service.ra_listing"
             - "@logger"
 
     ra.security.authentication.saml_interaction:

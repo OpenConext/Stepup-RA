@@ -27,10 +27,8 @@ use Surfnet\StepupRa\RaBundle\Exception\UserNotRaException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
-use Surfnet\StepupRa\RaBundle\Service\RaListingService;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 /**
@@ -55,11 +53,6 @@ class SamlProvider implements AuthenticationProviderInterface
     private $institutionConfigurationOptionsService;
 
     /**
-     * @var RaListingService
-     */
-    private $raListingService;
-
-    /**
      * @var LoggerInterface
      */
     private $logger;
@@ -68,13 +61,11 @@ class SamlProvider implements AuthenticationProviderInterface
         IdentityService $identityService,
         AttributeDictionary $attributeDictionary,
         InstitutionConfigurationOptionsService $institutionConfigurationOptionsService,
-        RaListingService $raListingService,
         LoggerInterface $logger
     ) {
         $this->identityService                        = $identityService;
         $this->attributeDictionary                    = $attributeDictionary;
         $this->institutionConfigurationOptionsService = $institutionConfigurationOptionsService;
-        $this->raListingService                       = $raListingService;
         $this->logger                                 = $logger;
     }
 

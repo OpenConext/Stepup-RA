@@ -72,7 +72,7 @@ class RaCandidateService
      */
     public function search(SearchRaCandidatesCommand $command)
     {
-        $query = new RaCandidateSearchQuery($command->actorInstitution, $command->pageNumber);
+        $query = new RaCandidateSearchQuery($command->actorId, $command->actorInstitution, $command->pageNumber);
 
         if ($command->name) {
             $query->setCommonName($command->name);
@@ -102,15 +102,24 @@ class RaCandidateService
     /**
      * @param string $identityId
      * @param string $institution
+     * @param string $actorId
      * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitutions
      */
-    public function getRaCandidate($identityId, $institution)
+    public function getRaCandidate($identityId, $institution, $actorId)
     {
         if (!is_string($identityId)) {
             throw InvalidArgumentException::invalidType('string', 'identityId', $identityId);
         }
 
-        return $this->apiRaCandidateService->get($identityId, $institution);
+        if (!is_string($institution)) {
+            throw InvalidArgumentException::invalidType('string', 'institution', $institution);
+        }
+
+        if (!is_string($actorId)) {
+            throw InvalidArgumentException::invalidType('string', 'actorId', $actorId);
+        }
+
+        return $this->apiRaCandidateService->get($identityId, $institution, $actorId);
     }
 
     public function accreditCandidate(AccreditCandidateCommand $command)
