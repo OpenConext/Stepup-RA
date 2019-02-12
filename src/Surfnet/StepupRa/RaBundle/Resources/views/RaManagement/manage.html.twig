@@ -3,6 +3,15 @@
 {% block content %}
     <div class="row">
         <div class="col-sm-12">
+
+            {{ form(form) }}
+
+            {% if raList|length > 0 %}
+                <div class="result-count">{{ 'ra.management.search.text.number_results'|transchoice(numberOfResults, {'count': numberOfResults}) }}</div>
+            {% endif %}
+
+            <hr>
+
             <a href="{{ path('ra_management_ra_candidate_search') }}" class="btn btn-primary pull-right" role="button">
                 <i class="fa fa-plus"></i> {{ 'ra.management.overview.add_raa'|trans }}
             </a>
@@ -39,6 +48,9 @@
                 {% endfor %}
                 </tbody>
             </table>
+
+            {{ knp_pagination_render(pagination) }}
+
         </div>
     </div>
 {% endblock %}
