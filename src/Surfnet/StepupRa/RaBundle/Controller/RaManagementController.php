@@ -18,16 +18,19 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
-use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitution;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
 use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
+use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\AmendRegistrationAuthorityInformationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType;
+use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaListingType;
+use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
+use Surfnet\StepupRa\RaBundle\Service\RaListingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -49,12 +52,32 @@ class RaManagementController extends Controller
         $institution = $this->getUser()->institution;
         $logger->notice(sprintf('Loading overview of RA(A)s for institution "%s"', $institution));
 
-        $searchQuery = (new RaListingSearchQuery($this->getUser()->id, $institution, 1))
-            ->setOrderBy($request->get('orderBy', 'commonName'))
-            ->setOrderDirection($request->get('orderDirection', 'asc'));
+        $identity = $this->getCurrentUser();
+
+        $institutionFilterOptions = $this
+            ->getInstitutionConfigurationOptionsService()
+            ->getAvailableInstitutionsFor($identity->institution);
+
+        $selectRaaFilterOptions = $this
+            ->getInstitutionConfigurationOptionsService()
+            ->getAvailableSelectRaaInstitutionsFor($identity->institution);
+
+        $command = new SearchRaListingCommand();
+        $command->actorInstitution = $identity->institution;
+        $command->actorId = $identity->id;
+        $command->pageNumber = (int) $request->get('p', 1);
+        $command->orderBy = $request->get('orderBy');
+        $command->orderDirection = $request->get('orderDirection');
+
+        // The options that will populate the institution filter choice list.
+        $command->institutionFilterOptions = $institutionFilterOptions;
+        $command->raInstitutionFilterOptions = $selectRaaFilterOptions;
+
+        $form = $this->createForm(SearchRaListingType::class, $command, ['method' => 'get']);
+        $form->handleRequest($request);
 
         $service = $this->getRaListingService();
-        $raList = $service->search($searchQuery);
+        $raList = $service->search($command);
 
         $pagination = $this->getPaginator()->paginate(
             $raList->getTotalItems() > 0 ? array_fill(0, $raList->getTotalItems(), 1) : [],
@@ -63,9 +86,8 @@ class RaManagementController extends Controller
         );
 
         $logger->notice(sprintf(
-            'Created overview of "%d" RA(A)s for institution "%s"',
-            $raList->getTotalItems(),
-            $institution
+            'Searching for RA(A)s yielded "%d" results',
+            $raList->getTotalItems()
         ));
 
         /** @var \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing[] $raListings */
@@ -74,8 +96,10 @@ class RaManagementController extends Controller
         return $this->render(
             'SurfnetStepupRaRaBundle:RaManagement:manage.html.twig',
             [
-                'raList'     => $raListings,
-                'pagination' => $pagination
+                'form' => $form->createView(),
+                'raList' => $raListings,
+                'numberOfResults' => $raList->getTotalItems(),
+                'pagination' => $pagination,
             ]
         );
     }
@@ -284,11 +308,11 @@ class RaManagementController extends Controller
     }
 
     /**
-     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaListingService
+     * @return RaListingService
      */
     private function getRaListingService()
     {
-        return $this->get('surfnet_stepup_middleware_client.identity.service.ra_listing');
+        return $this->get('ra.service.ra_listing');
     }
 
     /**
@@ -297,6 +321,22 @@ class RaManagementController extends Controller
     private function getRaCandidateService()
     {
         return $this->get('ra.service.ra_candidate');
+    }
+
+    /**
+     * @return InstitutionConfigurationOptionsService
+     */
+    private function getInstitutionConfigurationOptionsService()
+    {
+        return $this->get('ra.service.institution_configuration_options');
+    }
+
+    /**
+     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
+     */
+    private function getCurrentUser()
+    {
+        return $this->get('security.token_storage')->getToken()->getUser();
     }
 
     /**

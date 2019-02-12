@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * Copyright 2019 SURFnet B.V.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace Surfnet\StepupRa\RaBundle\Form\Type;
+
+use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
+use Surfnet\StepupRa\RaBundle\Form\Extension\RaRoleChoiceList;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class SearchRaListingType extends AbstractType
+{
+
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $institutionOptions = array_combine(
+            $builder->getData()->institutionFilterOptions,
+            $builder->getData()->institutionFilterOptions
+        );
+        $selectRaaOptions = array_combine(
+            $builder->getData()->institutionFilterOptions,
+            $builder->getData()->institutionFilterOptions
+        );
+
+        $builder
+            ->add('name', null, [
+                'label' => 'ra.form.ra_search_ra_listing.label.name',
+            ])
+            ->add('email', null, [
+                'label' => 'ra.form.ra_search_ra_listing.label.email',
+            ])->add('institution', ChoiceType::class, [
+                'label' => 'ra.form.ra_search_ra_listing.label.institution',
+                'choices' => $institutionOptions,
+                'required' => false,
+            ])->add('role', ChoiceType::class, [
+                'label' => 'ra.form.ra_search_ra_listing.label.role',
+                'choices' => RaRoleChoiceList::createWithEmpty(),
+                'choices_as_values' => true,
+            ])->add('raInstitution', ChoiceType::class, [
+                'label' => 'ra.form.ra_search_ra_listing.label.ra_institution',
+                'choices' => $selectRaaOptions,
+                'required' => false,
+            ])->add('search', SubmitType::class, [
+                'label' => 'ra.form.ra_search_ra_listing.button.search',
+                'attr'  => ['class' => 'btn btn-primary search-button'],
+            ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => SearchRaListingCommand::class,
+        ]);
+    }
+
+    public function getBlockPrefix()
+    {
+        return 'ra_search_ra_listing';
+    }
+}

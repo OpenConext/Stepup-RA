@@ -25,6 +25,17 @@ class RaRoleChoiceList
      */
     public static function create()
     {
+        return self::buildChoices();
+    }
+
+    public static function createWithEmpty()
+    {
+        $choices = self::buildChoices();
+        return array_merge(['' => null], $choices);
+    }
+
+    private static function buildChoices()
+    {
         $choices = self::getChoices();
         $labels = array_map(function ($choice) {
             return 'ra.form.extension.ra_role_choice.' . $choice;
