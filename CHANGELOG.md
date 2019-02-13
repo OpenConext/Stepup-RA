@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.10.7
+**Features**
+* Allow filtering the RA candidate on institute #201 
+* Add search support on the RA management page #200
+
+**Improvements**
+* Widen the width of the menu #199
+* Remove RAA switcher #198
+
+## 2.10.6
+
+## 2.10.5
+
 ## 2.10.4
 **Improvements**
 * Open help in new tab #187 
