@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaListingService as ApiRaListingService;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
 
@@ -74,5 +75,15 @@ final class RaListingService
         }
 
         return $this->apiRaListingService->search($query);
+    }
+
+    /**
+     * @param string $id
+     * @param string $institution
+     * @return null|RaListing
+     */
+    public function get($id, $institution)
+    {
+        return $this->apiRaListingService->get($id, $institution);
     }
 }
