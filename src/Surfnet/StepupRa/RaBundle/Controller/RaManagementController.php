@@ -113,7 +113,12 @@ class RaManagementController extends Controller
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
         $logger = $this->get('logger');
-        $institution = $this->getUser()->institution;
+        $identity = $this->getCurrentUser();
+        $institution = $identity->institution;
+
+        $institutionFilterOptions = $this
+            ->getInstitutionConfigurationOptionsService()
+            ->getAvailableInstitutionsFor($institution);
 
         $logger->notice(sprintf('Searching for RaCandidates within institution "%s"', $institution));
 
@@ -123,6 +128,9 @@ class RaManagementController extends Controller
         $command->pageNumber       = (int) $request->get('p', 1);
         $command->orderBy          = $request->get('orderBy');
         $command->orderDirection   = $request->get('orderDirection');
+
+        // The options that will populate the institution filter choice list.
+        $command->institutionFilterOptions = $institutionFilterOptions;
 
         $form = $this->createForm(SearchRaCandidatesType::class, $command, ['method' => 'get']);
         $form->handleRequest($request);

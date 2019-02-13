@@ -77,4 +77,9 @@ class SearchRaCandidatesCommand
      * @var int
      */
     public $pageNumber;
+
+    /**
+     * @var array
+     */
+    public $institutionFilterOptions;
 }

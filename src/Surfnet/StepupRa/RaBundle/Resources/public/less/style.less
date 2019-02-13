@@ -143,6 +143,11 @@ form[name="ra_verify_phone_number"] {
         text-transform: uppercase;
     }
 }
+
+select.form-control {
+    max-width: 175px;
+}
+
 .search-second-factors {
     form[name="ra_search_ra_second_factors"] {
         input#ra_search_ra_second_factors_name {
@@ -153,9 +158,6 @@ form[name="ra_verify_phone_number"] {
         }
         input#ra_search_ra_second_factors_email {
             max-width: 350px;
-        }
-        select {
-            max-width: 175px;
         }
         button#ra_search_ra_second_factors_export {
             margin-left: 0.5em;
@@ -194,6 +196,7 @@ form[name="logout"] button {
     line-height: 26px;
 }
 
+form[name="ra_search_ra_candidates"] button.search-button,
 form[name="ra_search_ra_listing"] button.search-button {
     margin-left: 26%;
 }
