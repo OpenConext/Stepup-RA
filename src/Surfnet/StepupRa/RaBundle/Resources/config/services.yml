@@ -212,6 +212,12 @@ services:
             - "@ra.service.command"
             - "@logger"
 
+    ra.service.ra_listing:
+        class: Surfnet\StepupRa\RaBundle\Service\RaListingService
+        arguments:
+            - "@surfnet_stepup_middleware_client.identity.service.ra_listing"
+            - "@logger"
+
     ra.service.ra_second_factor_exporter:
         class: Surfnet\StepupRa\RaBundle\Service\RaSecondFactorExport
         arguments:
