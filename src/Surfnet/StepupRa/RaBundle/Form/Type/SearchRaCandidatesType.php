@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -27,6 +28,11 @@ class SearchRaCandidatesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $options = array_combine(
+            $builder->getData()->institutionFilterOptions,
+            $builder->getData()->institutionFilterOptions
+        );
+
         $builder
             ->add('name', null, [
                 'label' => 'ra.form.ra_search_ra_candidates.label.name',
@@ -34,9 +40,14 @@ class SearchRaCandidatesType extends AbstractType
             ->add('email', null, [
                 'label' => 'ra.form.ra_search_ra_candidates.label.email',
             ])
+            ->add('institution', ChoiceType::class, [
+                'label' => 'ra.form.ra_search_ra_candidates.label.institution',
+                'choices' => $options,
+                'required' => false,
+            ])
             ->add('search', SubmitType::class, [
                 'label' => 'ra.form.ra_search_ra_candidates.button.search',
-                'attr'  => ['class' => 'btn btn-primary'],
+                'attr'  => ['class' => 'btn btn-primary search-button'],
             ]);
     }
 
