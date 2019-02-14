@@ -221,7 +221,7 @@ class RaManagementController extends Controller
         $logger = $this->get('logger');
         $logger->notice(sprintf("Loading information amendment form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId, $raInstitution,  $this->getUser()->institution, $this->getUser()->id);
+        $raListing = $this->getRaListingService()->get($identityId, $raInstitution, $this->getUser()->institution, $this->getUser()->id);
 
         if (!$raListing) {
             $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
