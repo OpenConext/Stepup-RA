@@ -23,6 +23,7 @@ use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaListingService as ApiRaListingService;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
+use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
 final class RaListingService
 {
@@ -78,12 +79,30 @@ final class RaListingService
     }
 
     /**
-     * @param string $id
+     * @param string $identityId
      * @param string $institution
+     * @param string $actorInstitution
+     * @param string $actorId
      * @return null|RaListing
      */
-    public function get($id, $institution)
+    public function get($identityId, $institution, $actorInstitution, $actorId)
     {
-        return $this->apiRaListingService->get($id, $institution);
+        if (!is_string($identityId)) {
+            throw InvalidArgumentException::invalidType('string', 'identityId', $identityId);
+        }
+
+        if (!is_string($institution)) {
+            throw InvalidArgumentException::invalidType('string', 'institution', $institution);
+        }
+
+        if (!is_string($actorInstitution)) {
+            throw InvalidArgumentException::invalidType('string', 'actorInstitution', $actorInstitution);
+        }
+
+        if (!is_string($actorId)) {
+            throw InvalidArgumentException::invalidType('string', 'actorId', $actorId);
+        }
+
+        return $this->apiRaListingService->get($identityId, $institution, $actorInstitution, $actorId);
     }
 }

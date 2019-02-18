@@ -133,11 +133,6 @@ ra_management_amend_ra_information:
     methods:  [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:amendRaInformation }
 
-ra_management_change_ra_role:
-    path:     /management/change-role/{identityId}
-    methods:  [GET, POST]
-    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:changeRaRole }
-
 ra_management_retract_registration_authority:
     path:     /management/retract-registration-authority/{identityId}/{raInstitution}
     methods:  [GET, POST]
