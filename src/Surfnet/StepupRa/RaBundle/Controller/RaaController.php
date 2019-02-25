@@ -19,10 +19,13 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
+use Surfnet\StepupRa\RaBundle\Service\RaListingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class RaaController extends Controller
 {
@@ -35,23 +38,52 @@ class RaaController extends Controller
         /** @var Identity $identity */
         $identity = $token->getUser();
 
+        $institutionFilterOptions = $this
+            ->getInstitutionConfigurationOptionsService()
+            ->getAvailableInstitutionsFor($identity->institution);
+
+        $selectRaaFilterOptions = $this
+            ->getInstitutionConfigurationOptionsService()
+            ->getAvailableSelectRaaInstitutionsFor($identity->institution);
+
+        $command = new SearchRaListingCommand();
+        $command->actorInstitution = $identity->institution;
+        $command->actorId = $identity->id;
+        $command->pageNumber = (int) $request->get('p', 1);
+        $command->orderBy = $request->get('orderBy');
+        $command->orderDirection = $request->get('orderDirection');
+
+        // The options that will populate the institution filter choice list.
+        $command->institutionFilterOptions = $institutionFilterOptions;
+        $command->raInstitutionFilterOptions = $selectRaaFilterOptions;
+
         // Load the RA institutions for the identity that is logged in
-        $options = $this
+        $raList = $this
             ->getRaListingService()
-            ->createChoiceListFor($identity->id, $token->getIdentityInstitution());
-        $institution = reset($options);
+            ->search($command);
+
+        /** @var \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing[] $raListings */
+        $raListings = $raList->getElements();
+        $institution = reset($raListings);
+
+        $choices = [];
+        foreach ($raListings as $item) {
+            $choices[$item->raInstitution] = $item->raInstitution;
+        }
 
         // SRAA's are usually not RAA for other institutions as they already are SRAA. Show the institution config
         // of the SRAAs SHO, and let her use the SRAA switcher in order to see config for different institutions.
-        if (empty($options) && $this->isGranted('ROLE_SRAA')) {
-            $institution = $token->getIdentityInstitution();
+        if (empty($raListings) && $this->isGranted('ROLE_SRAA')) {
+            $institution = $identity->institution;
+        } else {
+            $institution = $institution->institution;
         }
 
         // Only show the form if more than one institutions where found.
-        if (count($options) > 1) {
+        if (count($raListings) > 1) {
             $command = new SelectInstitutionCommand();
             $command->institution = $institution;
-            $command->availableInstitutions = $options;
+            $command->availableInstitutions = $choices;
 
             $form = $this->createForm(SelectInstitutionType::class, $command);
             $form->handleRequest($request);
@@ -89,4 +121,13 @@ class RaaController extends Controller
     {
         return $this->get('ra.service.institution_configuration_options');
     }
+
+    /**
+     * @return RaListingService
+     */
+    private function getRaListingService()
+    {
+        return $this->get('ra.service.ra_listing');
+    }
+
 }
