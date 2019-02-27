@@ -757,7 +757,7 @@
       </trans-unit>
       <trans-unit id="3d101556c7d65068f5e964ba8c5a9b8709e23266" resname="ra.management.overview.update_information">
         <source>ra.management.overview.update_information</source>
-        <target>Wijzig</target>
+        <target>Bewerk locatie</target>
         <jms:reference-file line="41">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="114a1fc30fec7da3d1a7dc2b9a55d2b5dd78c8ce" resname="ra.management.ra_candidate.common_name">
