@@ -767,7 +767,7 @@
       </trans-unit>
       <trans-unit id="8108bf5ef1a111214faee15630b8ff0c0549bc66" resname="ra.management.ra_candidate.create_ra">
         <source>ra.management.ra_candidate.create_ra</source>
-        <target>Change role</target>
+        <target>Add role</target>
         <jms:reference-file line="25">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ffb5905d1d08ea222cf82aacc96649f90730af92" resname="ra.management.ra_candidate.email">
