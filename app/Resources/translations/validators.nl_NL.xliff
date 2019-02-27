@@ -233,7 +233,7 @@
       </trans-unit>
       <trans-unit id="cef486e563918733de56e3727d0a8139a4464405" resname="middleware_client.dto.ra_location.institution.must_be_string">
         <source>middleware_client.dto.ra_location.institution.must_be_string</source>
-        <target>RA-locatie instituut moet een string zijn</target>
+        <target>RA-locatie instelling moet een string zijn</target>
       </trans-unit>
       <trans-unit id="8f41119d418608dad1097e5d8c0f0f6d2acb72d0" resname="middleware_client.dto.ra_location.institution.must_not_be_blank">
         <source>middleware_client.dto.ra_location.institution.must_not_be_blank</source>
@@ -241,7 +241,7 @@
       </trans-unit>
       <trans-unit id="1af222917a056b6fbe7ee8855170ae1ffc5d94ca" resname="middleware_client.dto.ra_location.location.must_be_string">
         <source>middleware_client.dto.ra_location.location.must_be_string</source>
-        <target>RA-locatie instituut</target>
+        <target>RA-locatie instelling</target>
       </trans-unit>
       <trans-unit id="839cc774a4a67bae3d10d47259b1e7a231d51d2d" resname="middleware_client.dto.ra_location.location.must_not_be_blank">
         <source>middleware_client.dto.ra_location.location.must_not_be_blank</source>
@@ -425,11 +425,11 @@
       </trans-unit>
       <trans-unit id="96fa6c297f7ae3acce042b0fe9a271753761c646" resname="ra.search_ra_second_factors.institution.blank">
         <source>ra.search_ra_second_factors.institution.blank</source>
-        <target>Instituut van de identiteit moet ingevuld zijn.</target>
+        <target>Instelling van de identiteit moet ingevuld zijn.</target>
       </trans-unit>
       <trans-unit id="2857be76516afd4c42c8fd8f2f0111b41fd1d0ab" resname="ra.search_ra_second_factors.institution.type">
         <source>ra.search_ra_second_factors.institution.type</source>
-        <target>Instituut van de identiteit is geen tekenreeks.</target>
+        <target>Instelling van de identiteit is geen tekenreeks.</target>
       </trans-unit>
       <trans-unit id="63a7ae276c7780ef51e59bed7c762f30d8d7dff3" resname="ra.search_ra_second_factors.order_by.invalid_choice">
         <source>ra.search_ra_second_factors.order_by.invalid_choice</source>

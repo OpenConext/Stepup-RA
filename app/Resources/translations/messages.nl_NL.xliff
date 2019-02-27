@@ -129,7 +129,7 @@
       </trans-unit>
       <trans-unit id="3049053dba19e9aeae8dd4b8045710e61f8d01ce" resname="ra.auditlog.institution">
         <source>ra.auditlog.institution</source>
-        <target>Instituut</target>
+        <target>Instelling</target>
         <jms:reference-file line="18">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/auditLog.html.twig</jms:reference-file>
         <jms:reference-file line="31">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/auditLog.html.twig</jms:reference-file>
       </trans-unit>
@@ -311,7 +311,7 @@
       </trans-unit>
       <trans-unit id="17f4dd140f0d73e3254d7b9bc1096cb056703514" resname="ra.form.ra_search_ra_second_factors.label.institution">
         <source>ra.form.ra_search_ra_second_factors.label.institution</source>
-        <target>Instituut</target>
+        <target>Instelling</target>
         <jms:reference-file line="74">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="8a7dd1f88e5c62c8897ba2eb5b80b6d683db0902" resname="ra.form.ra_search_ra_second_factors.label.name">
@@ -341,7 +341,7 @@
       </trans-unit>
       <trans-unit id="aff72bc7d94c65f8b3dcf0b3b9bb3f5430ac28f6" resname="ra.form.ra_select_institution.label.institution">
         <source>ra.form.ra_select_institution.label.institution</source>
-        <target>Instituut</target>
+        <target>Instelling</target>
         <jms:reference-file line="43">/../src/Surfnet/StepupRa/RaBundle/Form/Type/InstitutionSelectionType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b190a055ec0458747cdff543e6693c2433a6eb6b" resname="ra.form.ra_send_sms_challenge.button.send_challenge">
@@ -498,7 +498,7 @@
       </trans-unit>
       <trans-unit id="072b301901b5acd0d85dc66bf9f037af3b6682d1" resname="ra.management.amend_ra_info.ra_listing.institution">
         <source>ra.management.amend_ra_info.ra_listing.institution</source>
-        <target>Instituut</target>
+        <target>Instelling</target>
         <jms:reference-file line="15">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/amendRaInformation.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3a609438ddb4a93fe694bd72db998784551914b3" resname="ra.management.amend_ra_info.ra_listing.name">
@@ -542,7 +542,7 @@
       </trans-unit>
       <trans-unit id="84d802a13574d12ff20b6227331e196fde4c97fc" resname="ra.management.change_ra_role.ra_listing.institution">
         <source>ra.management.change_ra_role.ra_listing.institution</source>
-        <target>Instituut</target>
+        <target>Instelling</target>
         <jms:reference-file line="15">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/changeRaRole.html.twig</jms:reference-file>
         <jms:reference-file line="20">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/confirmRetractRa.html.twig</jms:reference-file>
       </trans-unit>
@@ -608,7 +608,7 @@
       </trans-unit>
       <trans-unit id="08684398fc31faa6cdddc3e171d5fa85d2468975" resname="ra.management.create_ra.ra_candidate.institution">
         <source>ra.management.create_ra.ra_candidate.institution</source>
-        <target>Instituut</target>
+        <target>Instelling</target>
         <jms:reference-file line="15">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/createRa.html.twig</jms:reference-file>
         <jms:reference-file line="41">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/createRa.html.twig</jms:reference-file>
       </trans-unit>
@@ -727,7 +727,7 @@
       </trans-unit>
       <trans-unit id="44ed8664990fcd8d55324dc98bfa3ac905bb9c0d" resname="ra.management.overview.institution">
         <source>ra.management.overview.institution</source>
-        <target>Instituut</target>
+        <target>Instelling</target>
         <jms:reference-file line="23">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e6f5ea2d06110a1b436b1814e53f99aeae92c867" resname="ra.management.overview.remove_as_ra">
@@ -777,7 +777,7 @@
       </trans-unit>
       <trans-unit id="d983bd416823b073f0ce5d3a76f2ae6717818613" resname="ra.management.ra_candidate.institution">
         <source>ra.management.ra_candidate.institution</source>
-        <target>Instituut</target>
+        <target>Instelling</target>
         <jms:reference-file line="11">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="12c64b6bb6b6b53d7f385978810b8a6058a30899" resname="ra.management.ra_candidate.no_candidates">
@@ -1069,7 +1069,7 @@
       </trans-unit>
       <trans-unit id="e993504557606e24dd5726655f65b534ab361780" resname="ra.second_factor.search.column.institution">
         <source>ra.second_factor.search.column.institution</source>
-        <target>Instituut</target>
+        <target>Instelling</target>
         <jms:reference-file line="23">/../src/Surfnet/StepupRa/RaBundle/Resources/views/SecondFactor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="21e718b7694ff1f02469cb238e02b7a7ff64bb1a" resname="ra.second_factor.search.column.name">
@@ -1174,7 +1174,7 @@
       </trans-unit>
       <trans-unit id="e8ada95651cf644c6bbeeff32c330b4fde42f87d" resname="ra.sraa.changed_institution">
         <source>ra.sraa.changed_institution</source>
-        <target>Je instituut is veranderd naar "%institution%"</target>
+        <target>Je instelling is veranderd naar "%institution%"</target>
         <jms:reference-file line="54">/../src/Surfnet/StepupRa/RaBundle/Controller/SraaController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="abe2e824031a2393db11918365a49cf65d3ec585" resname="ra.verify_identity.identity_verification_failed">
