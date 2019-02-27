@@ -21,6 +21,7 @@ namespace Surfnet\StepupRa\RaBundle\Form\Type;
 use Surfnet\StepupRa\RaBundle\Form\Extension\RaRoleChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -51,15 +52,26 @@ class CreateRaType extends AbstractType
                 'label'       => 'ra.management.form.create_ra.label.institution',
                 'choices' => $options
             ])
-            ->add('create_ra', SubmitType::class, [
-                'label' => 'ra.management.form.create_ra.label.create_ra',
-                'attr' => ['class' => 'btn btn-primary pull-right create-ra']
-            ])
-            ->add('cancel', AnchorType::class, [
-                'label' => 'ra.management.form.create_ra.label.cancel',
-                'route' => 'ra_management_ra_candidate_search',
-                'attr'  => ['class' => 'btn btn-link pull-right cancel']
-            ])
+            ->add(
+                $builder->create(
+                    'button-group',
+                    FormType::class,
+                    [
+                        'inherit_data' => true,
+                        'label' => false,
+                        'widget_form_group_attr' => ['class' => 'form-group button-group'],
+                    ]
+                )
+                ->add('create_ra', SubmitType::class, [
+                    'label' => 'ra.management.form.create_ra.label.create_ra',
+                    'attr' => ['class' => 'btn btn-primary create-ra button-group-member']
+                ])
+                ->add('cancel', AnchorType::class, [
+                    'label' => 'ra.management.form.create_ra.label.cancel',
+                    'route' => 'ra_management_ra_candidate_search',
+                    'attr'  => ['class' => 'btn btn-link cancel pull-right button-group-member'],
+                ])
+            )
         ;
     }
 
