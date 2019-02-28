@@ -28,12 +28,6 @@ class RaRoleChoiceList
         return self::buildChoices();
     }
 
-    public static function createWithEmpty()
-    {
-        $choices = self::buildChoices();
-        return array_merge(['' => null], $choices);
-    }
-
     private static function buildChoices()
     {
         $choices = self::getChoices();
