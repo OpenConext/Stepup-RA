@@ -125,10 +125,10 @@ class RaCandidateService
     public function accreditCandidate(AccreditCandidateCommand $command)
     {
         $apiCommand                     = new AccreditIdentityCommand();
-        $apiCommand->raInstitution      = $command->raInstitution;
+        $apiCommand->raInstitution      = $command->roleAtInstitution->getInstitution();
         $apiCommand->identityId         = $command->identityId;
         $apiCommand->institution        = $command->institution;
-        $apiCommand->role               = $command->role;
+        $apiCommand->role               = $command->roleAtInstitution->getRole();
         $apiCommand->location           = $command->location ?: '';
         $apiCommand->contactInformation = $command->contactInformation ?: '';
 

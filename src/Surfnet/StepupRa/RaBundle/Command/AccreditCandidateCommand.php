@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Command;
 
+use Surfnet\StepupRa\RaBundle\Value\RoleAtInstitution;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class AccreditCandidateCommand
@@ -49,19 +50,9 @@ class AccreditCandidateCommand
     public $contactInformation;
 
     /**
-     * @Assert\Choice(
-     *      callback={"Surfnet\StepupRa\RaBundle\Form\Extension\RaRoleChoiceList", "getChoices"},
-     *      message="ra.form.extension.ra_role.must_be_valid_choice"
-     * )
-     *
-     * @var string
+     * @var RoleAtInstitution
      */
-    public $role;
-
-    /**
-     * @var string
-     */
-    public $raInstitution;
+    public $roleAtInstitution;
 
     /**
      * @var array
