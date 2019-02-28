@@ -21,6 +21,7 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListingCollection;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaListingService as ApiRaListingService;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
@@ -43,6 +44,13 @@ final class RaListingService
         $this->logger = $logger;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)  -- The command to query mapping in search exceed the
+     * @SuppressWarnings(PHPMD.NPathComplexity)          CyclomaticComplexity and NPathComplexity threshold.
+     *
+     * @param SearchRaListingCommand $command
+     * @return RaListingCollection
+     */
     public function search(SearchRaListingCommand $command)
     {
         $query = new RaListingSearchQuery($command->actorId, $command->actorInstitution, $command->pageNumber);
@@ -59,12 +67,12 @@ final class RaListingService
             $query->setInstitution($command->institution);
         }
 
-        if ($command->role) {
-            $query->setRole($command->role);
+        if ($command->roleAtInstitution && $command->roleAtInstitution->hasRole()) {
+            $query->setRole($command->roleAtInstitution->getRole());
         }
 
-        if ($command->raInstitution) {
-            $query->setRaInstitution($command->raInstitution);
+        if ($command->roleAtInstitution && $command->roleAtInstitution->hasInstitution()) {
+            $query->setRaInstitution($command->roleAtInstitution->getInstitution());
         }
 
         if ($command->orderBy) {

@@ -22,6 +22,7 @@ use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
 use Surfnet\StepupRa\RaBundle\Form\Extension\RaRoleChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -50,13 +51,9 @@ class SearchRaListingType extends AbstractType
                 'label' => 'ra.form.ra_search_ra_listing.label.institution',
                 'choices' => $institutionOptions,
                 'required' => false,
-            ])->add('role', ChoiceType::class, [
-                'label' => 'ra.form.ra_search_ra_listing.label.role',
-                'choices' => RaRoleChoiceList::createWithEmpty(),
-                'choices_as_values' => true,
-            ])->add('raInstitution', ChoiceType::class, [
-                'label' => 'ra.form.ra_search_ra_listing.label.ra_institution',
+            ])->add('roleAtInstitution', RoleAtInstitutionType::class, [
                 'choices' => $selectRaaOptions,
+                'label' => 'ra.form.ra_search_ra_listing.label.role',
                 'required' => false,
             ])->add('search', SubmitType::class, [
                 'label' => 'ra.form.ra_search_ra_listing.button.search',
