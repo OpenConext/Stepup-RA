@@ -37,11 +37,9 @@
                         <td class="half-width">
                         {% for institution, authorization in profile.authorizations %}
                             <div>
-                                <strong>{{ institution }}:</strong>
                                 {% for type in authorization  %}
-                                {{ type|trans }}
+                                {{ type|trans }} @ {{ institution }}
                                 {% endfor %}
-                                </ul>
                             </div>
                         {% endfor %}
                         </td>
