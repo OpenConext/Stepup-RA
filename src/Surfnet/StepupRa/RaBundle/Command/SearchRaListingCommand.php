@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Command;
 
+use Surfnet\StepupRa\RaBundle\Value\RoleAtInstitution;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class SearchRaListingCommand
@@ -54,14 +55,9 @@ class SearchRaListingCommand
     public $email;
 
     /**
-     * @var string
+     * @var RoleAtInstitution
      */
-    public $role;
-
-    /**
-     * @var string
-     */
-    public $raInstitution;
+    public $roleAtInstitution;
 
     /**
      * @Assert\Choice(
