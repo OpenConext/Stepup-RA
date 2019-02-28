@@ -52,7 +52,7 @@ class RoleAtInstitutionType extends AbstractType
             'choices_as_values' => true,
             'required' => $isRequired,
         ])->add('institution', ChoiceType::class, [
-            'label' => 'ra.form.ra_search_ra_listing.label.ra_institution',
+            'label' => 'ra.form.role_at_institution.label.institution',
             'choices' => $selectRaaOptions,
             'required' => $isRequired,
         ]);
