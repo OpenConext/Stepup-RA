@@ -19,11 +19,10 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
-use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
+use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
-use Surfnet\StepupRa\RaBundle\Service\RaListingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -32,55 +31,32 @@ class RaaController extends Controller
     public function institutionConfigurationAction(Request $request)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
-        $token = $this->get('security.token_storage')->getToken();
 
         $logger = $this->get('logger');
         /** @var Identity $identity */
-        $identity = $token->getUser();
+        $identity = $this->getUser();
 
-        $institutionFilterOptions = $this
-            ->getInstitutionConfigurationOptionsService()
-            ->getAvailableInstitutionsFor($identity->institution);
-
-        $selectRaaFilterOptions = $this
-            ->getInstitutionConfigurationOptionsService()
-            ->getAvailableSelectRaaInstitutionsFor($identity->institution);
-
-        $command = new SearchRaListingCommand();
-        $command->actorInstitution = $identity->institution;
-        $command->actorId = $identity->id;
-        $command->pageNumber = (int) $request->get('p', 1);
-        $command->orderBy = $request->get('orderBy');
-        $command->orderDirection = $request->get('orderDirection');
-
-        // The options that will populate the institution filter choice list.
-        $command->institutionFilterOptions = $institutionFilterOptions;
-        $command->raInstitutionFilterOptions = $selectRaaFilterOptions;
-
-        // Load the RA institutions for the identity that is logged in
-        $raList = $this
-            ->getRaListingService()
-            ->search($command);
-
-        /** @var \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing[] $raListings */
-        $raListings = $raList->getElements();
-        $institution = reset($raListings);
+        $profile = $this->getProfileService()->findByIdentityId($identity->id);
 
         $choices = [];
-        foreach ($raListings as $item) {
-            $choices[$item->raInstitution] = $item->raInstitution;
-        }
-
-        // SRAA's are usually not RAA for other institutions as they already are SRAA. Show the institution config
-        // of the SRAAs SHO, and let her use the SRAA switcher in order to see config for different institutions.
-        if (empty($raListings) && $this->isGranted('ROLE_SRAA')) {
-            $institution = $identity->institution;
-        } else {
-            $institution = $institution->institution;
+        foreach ($profile->authorizations as $institution => $role) {
+            if ($role[0] == 'raa') {
+                $choices[$institution] = $institution;
+            }
         }
 
         // Only show the form if more than one institutions where found.
-        if (count($raListings) > 1) {
+        $institution = null;
+        if (count($choices) > 1) {
+            // SRAA's are usually not RAA for other institutions as they already are SRAA. Show the institution config
+            // of the SRAAs SHO, and let her use the SRAA switcher in order to see config for different institutions.
+            if ($this->isGranted('ROLE_SRAA')) {
+                $institution = $identity->institution;
+            } else {
+                $institution = reset($choices);
+            }
+
+
             $command = new SelectInstitutionCommand();
             $command->institution = $institution;
             $command->availableInstitutions = $choices;
@@ -123,11 +99,10 @@ class RaaController extends Controller
     }
 
     /**
-     * @return RaListingService
+     * @return ProfileService
      */
-    private function getRaListingService()
+    private function getProfileService()
     {
-        return $this->get('ra.service.ra_listing');
+        return $this->get('ra.service.profile');
     }
-
 }
