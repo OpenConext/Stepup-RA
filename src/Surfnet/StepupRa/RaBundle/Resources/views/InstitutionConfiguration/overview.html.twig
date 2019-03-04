@@ -6,7 +6,17 @@
             <h3>Configuration of {{ institution }}</h3>
 
             {% if form is not null %}
-            {{ form(form) }}
+
+            {{ form_start(form) }}
+            <div class="errors">
+                {{ form_errors(form) }}
+            </div>
+            <div class="row horizontal">
+                {{ form_row(form.institution) }}
+                {{ form_row(form.select_and_apply) }}
+            </div>
+            {{ form_end(form) }}
+
             {% endif %}
 
             <table class="table table-bordered table-hover">
