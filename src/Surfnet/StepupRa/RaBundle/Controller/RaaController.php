@@ -37,7 +37,6 @@ class RaaController extends Controller
         $identity = $this->getUser();
 
         $profile = $this->getProfileService()->findByIdentityId($identity->id);
-
         $choices = [];
         foreach ($profile->authorizations as $institution => $role) {
             if ($role[0] == 'raa') {
@@ -45,17 +44,15 @@ class RaaController extends Controller
             }
         }
 
+        $institution = reset($choices);
+
         // Only show the form if more than one institutions where found.
-        $institution = null;
         if (count($choices) > 1) {
             // SRAA's are usually not RAA for other institutions as they already are SRAA. Show the institution config
             // of the SRAAs SHO, and let her use the SRAA switcher in order to see config for different institutions.
             if ($this->isGranted('ROLE_SRAA')) {
                 $institution = $identity->institution;
-            } else {
-                $institution = reset($choices);
             }
-
 
             $command = new SelectInstitutionCommand();
             $command->institution = $institution;
