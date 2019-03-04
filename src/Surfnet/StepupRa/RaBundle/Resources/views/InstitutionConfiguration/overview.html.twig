@@ -6,7 +6,17 @@
             <h3>Configuration of {{ institution }}</h3>
 
             {% if form is not null %}
-            {{ form(form) }}
+
+            {{ form_start(form) }}
+            <div class="errors">
+                {{ form_errors(form) }}
+            </div>
+            <div class="row horizontal">
+                {{ form_row(form.institution) }}
+                {{ form_row(form.select_and_apply) }}
+            </div>
+            {{ form_end(form) }}
+
             {% endif %}
 
             <table class="table table-bordered table-hover">
@@ -29,11 +39,9 @@
                         {% if configuration.allowedSecondFactors is empty %}
                             {{ 'ra.institution_configuration.all_second_factors_enabled'|trans }}
                         {% else %}
-                        <ul>
                             {% for allowedSecondFactor in configuration.allowedSecondFactors %}
-                                <li>{{ allowedSecondFactor }}</li>
+                                {{ allowedSecondFactor }}<br>
                             {% endfor %}
-                        </ul>
                         {% endif %}
                     </td>
                 </tr>
@@ -45,11 +53,9 @@
                     <th>{{ 'ra.institution_configuration.select_raa'|trans }}</th>
                     <td>
                         {% if configuration.selectRaa|length > 0 %}
-                        <ul>
                             {% for selectRaaFrom in configuration.selectRaa %}
-                                <li>{{ selectRaaFrom }}</li>
+                                {{ selectRaaFrom }}<br>
                             {% endfor %}
-                        </ul>
                         {% else %}
                             {{ 'ra.institution_configuration.no_entries'|trans }}
                         {% endif %}
@@ -59,11 +65,9 @@
                     <th>{{ 'ra.institution_configuration.use_ra'|trans }}</th>
                     <td>
                         {% if configuration.useRa|length > 0 %}
-                        <ul>
                             {% for useRaFrom in configuration.useRa %}
-                                <li>{{ useRaFrom }}</li>
+                                {{ useRaFrom }}<br>
                             {% endfor %}
-                        </ul>
                         {% else %}
                             {{ 'ra.institution_configuration.no_entries'|trans }}
                         {% endif %}
@@ -73,11 +77,9 @@
                     <th>{{ 'ra.institution_configuration.use_raa'|trans }}</th>
                     <td>
                         {% if configuration.useRaa|length > 0 %}
-                        <ul>
                             {% for useRaaFrom in configuration.useRaa %}
-                                <li>{{ useRaaFrom }}</li>
+                                {{ useRaaFrom }}<br>
                             {% endfor %}
-                        </ul>
                         {% else %}
                             {{ 'ra.institution_configuration.no_entries'|trans }}
                         {% endif %}
