@@ -23,6 +23,7 @@ use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class RaaController extends Controller
 {
