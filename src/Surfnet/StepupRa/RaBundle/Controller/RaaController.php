@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
@@ -30,29 +31,35 @@ class RaaController extends Controller
     public function institutionConfigurationAction(Request $request)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
-        $token = $this->get('security.token_storage')->getToken();
 
         $logger = $this->get('logger');
         /** @var Identity $identity */
-        $identity = $token->getUser();
+        $identity = $this->getUser();
 
-        // Load the RA institutions for the identity that is logged in
-        $options = $this
-            ->getRaListingService()
-            ->createChoiceListFor($identity->id, $token->getIdentityInstitution());
-        $institution = reset($options);
+        $profile = $this->getProfileService()->findByIdentityId($identity->id);
 
-        // SRAA's are usually not RAA for other institutions as they already are SRAA. Show the institution config
-        // of the SRAAs SHO, and let her use the SRAA switcher in order to see config for different institutions.
-        if (empty($options) && $this->isGranted('ROLE_SRAA')) {
-            $institution = $token->getIdentityInstitution();
+        $choices = [];
+        foreach ($profile->authorizations as $institution => $role) {
+            if ($role[0] == 'raa') {
+                $choices[$institution] = $institution;
+            }
         }
 
         // Only show the form if more than one institutions where found.
-        if (count($options) > 1) {
+        $institution = null;
+        if (count($choices) > 1) {
+            // SRAA's are usually not RAA for other institutions as they already are SRAA. Show the institution config
+            // of the SRAAs SHO, and let her use the SRAA switcher in order to see config for different institutions.
+            if ($this->isGranted('ROLE_SRAA')) {
+                $institution = $identity->institution;
+            } else {
+                $institution = reset($choices);
+            }
+
+
             $command = new SelectInstitutionCommand();
             $command->institution = $institution;
-            $command->availableInstitutions = $options;
+            $command->availableInstitutions = $choices;
 
             $form = $this->createForm(SelectInstitutionType::class, $command);
             $form->handleRequest($request);
@@ -89,5 +96,13 @@ class RaaController extends Controller
     private function getInstitutionConfigurationOptionsService()
     {
         return $this->get('ra.service.institution_configuration_options');
+    }
+
+    /**
+     * @return ProfileService
+     */
+    private function getProfileService()
+    {
+        return $this->get('ra.service.profile');
     }
 }

@@ -18,19 +18,27 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
+use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 final class ProfileController extends Controller
 {
     public function profileAction()
     {
-        $token  = $this->get('security.token_storage')->getToken();
         $logger = $this->get('logger');
 
         $logger->notice('Opening profile page');
 
-        $identity = $token->getUser();
-        $profile = $this->get('ra.service.profile')->findByIdentityId($identity->id);
+        $identity = $this->getUser();
+        $profile = $this->getProfileService()->findByIdentityId($identity->id);
         return $this->render('SurfnetStepupRaRaBundle:Profile:profile.html.twig', ['profile' => $profile]);
+    }
+
+    /**
+     * @return ProfileService
+     */
+    private function getProfileService()
+    {
+        return $this->get('ra.service.profile');
     }
 }
