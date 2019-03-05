@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Form\Extension\SecondFactorTypeChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -65,14 +66,12 @@ class SearchRaSecondFactorsType extends AbstractType
             'required' => false,
         ]);
 
-        $options = array_combine(
-            $builder->getData()->institutionFilterOptions,
-            $builder->getData()->institutionFilterOptions
-        );
+        /** @var SearchRaSecondFactorsCommand $data */
+        $data = $builder->getData();
 
         $builder->add('institution', ChoiceType::class, [
             'label' => 'ra.form.ra_search_ra_second_factors.label.institution',
-            'choices' => $options,
+            'choices' => $data->institutionFilterOptions,
             'required' => false,
         ]);
 

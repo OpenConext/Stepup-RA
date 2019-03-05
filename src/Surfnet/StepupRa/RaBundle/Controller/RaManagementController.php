@@ -54,13 +54,7 @@ class RaManagementController extends Controller
 
         $identity = $this->getCurrentUser();
 
-        $institutionFilterOptions = $this
-            ->getInstitutionConfigurationOptionsService()
-            ->getAvailableInstitutionsFor($identity->institution);
-
-        $selectRaaFilterOptions = $this
-            ->getInstitutionConfigurationOptionsService()
-            ->getAvailableSelectRaaInstitutionsFor($identity->institution);
+        $service = $this->getRaListingService();
 
         $command = new SearchRaListingCommand();
         $command->actorInstitution = $identity->institution;
@@ -70,13 +64,13 @@ class RaManagementController extends Controller
         $command->orderDirection = $request->get('orderDirection');
 
         // The options that will populate the institution filter choice list.
-        $command->institutionFilterOptions = $institutionFilterOptions;
-        $command->raInstitutionFilterOptions = $selectRaaFilterOptions;
+        $raList = $service->search($command);
+        $command->institutionFilterOptions = $raList->getFilterOption('institution');
+        $command->raInstitutionFilterOptions = $raList->getFilterOption('raInstitution');
 
         $form = $this->createForm(SearchRaListingType::class, $command, ['method' => 'get']);
         $form->handleRequest($request);
 
-        $service = $this->getRaListingService();
         $raList = $service->search($command);
 
         $pagination = $this->getPaginator()->paginate(
@@ -116,11 +110,9 @@ class RaManagementController extends Controller
         $identity = $this->getCurrentUser();
         $institution = $identity->institution;
 
-        $institutionFilterOptions = $this
-            ->getInstitutionConfigurationOptionsService()
-            ->getAvailableInstitutionsFor($institution);
-
         $logger->notice(sprintf('Searching for RaCandidates within institution "%s"', $institution));
+
+        $service = $this->getRaCandidateService();
 
         $command                   = new SearchRaCandidatesCommand();
         $command->actorId          = $this->getUser()->id;
@@ -129,13 +121,14 @@ class RaManagementController extends Controller
         $command->orderBy          = $request->get('orderBy');
         $command->orderDirection   = $request->get('orderDirection');
 
+        $raCandidateList = $service->search($command);
+
         // The options that will populate the institution filter choice list.
-        $command->institutionFilterOptions = $institutionFilterOptions;
+        $command->institutionFilterOptions = $raCandidateList->getFilterOption('institution');
 
         $form = $this->createForm(SearchRaCandidatesType::class, $command, ['method' => 'get']);
         $form->handleRequest($request);
 
-        $service = $this->getRaCandidateService();
         $raCandidateList = $service->search($command);
 
         $pagination = $this->getPaginator()->paginate(
@@ -329,14 +322,6 @@ class RaManagementController extends Controller
     private function getRaCandidateService()
     {
         return $this->get('ra.service.ra_candidate');
-    }
-
-    /**
-     * @return InstitutionConfigurationOptionsService
-     */
-    private function getInstitutionConfigurationOptionsService()
-    {
-        return $this->get('ra.service.institution_configuration_options');
     }
 
     /**

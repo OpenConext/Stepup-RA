@@ -32,14 +32,8 @@ class SearchRaListingType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $institutionOptions = array_combine(
-            $builder->getData()->institutionFilterOptions,
-            $builder->getData()->institutionFilterOptions
-        );
-        $selectRaaOptions = array_combine(
-            $builder->getData()->institutionFilterOptions,
-            $builder->getData()->institutionFilterOptions
-        );
+        /** @var SearchRaListingCommand $data */
+        $data = $builder->getData();
 
         $builder
             ->add('name', null, [
@@ -49,10 +43,10 @@ class SearchRaListingType extends AbstractType
                 'label' => 'ra.form.ra_search_ra_listing.label.email',
             ])->add('institution', ChoiceType::class, [
                 'label' => 'ra.form.ra_search_ra_listing.label.institution',
-                'choices' => $institutionOptions,
+                'choices' => $data->institutionFilterOptions,
                 'required' => false,
             ])->add('roleAtInstitution', RoleAtInstitutionType::class, [
-                'choices' => $selectRaaOptions,
+                'choices' => $data->raInstitutionFilterOptions,
                 'label' => 'ra.form.ra_search_ra_listing.label.role',
                 'required' => false,
             ])->add('search', SubmitType::class, [

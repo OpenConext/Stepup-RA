@@ -52,19 +52,17 @@ final class SecondFactorController extends Controller
         $identity = $this->getCurrentUser();
         $this->get('logger')->notice('Starting search for second factors');
 
-        $institutionFilterOptions = $this
-            ->getInstitutionConfigurationOptionsService()
-            ->getAvailableInstitutionsFor($identity->institution);
-
         $command = new SearchRaSecondFactorsCommand();
         $command->actorInstitution = $identity->institution;
         $command->actorId = $identity->id;
         $command->pageNumber = (int) $request->get('p', 1);
         $command->orderBy = $request->get('orderBy');
         $command->orderDirection = $request->get('orderDirection');
+
+        $secondFactors = $this->getSecondFactorService()->search($command);
         
         // The options that will populate the institution filter choice list.
-        $command->institutionFilterOptions = $institutionFilterOptions;
+        $command->institutionFilterOptions = $secondFactors->getFilterOption('institution');
 
         $form = $this->createForm(SearchRaSecondFactorsType::class, $command, ['method' => 'get']);
         $form->handleRequest($request);
@@ -251,13 +249,5 @@ final class SecondFactorController extends Controller
     private function getCurrentUser()
     {
         return $this->get('security.token_storage')->getToken()->getUser();
-    }
-
-    /**
-     * @return InstitutionConfigurationOptionsService
-     */
-    private function getInstitutionConfigurationOptionsService()
-    {
-        return $this->get('ra.service.institution_configuration_options');
     }
 }
