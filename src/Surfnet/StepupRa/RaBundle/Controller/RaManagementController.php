@@ -29,8 +29,8 @@ use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaListingType;
-use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Surfnet\StepupRa\RaBundle\Service\RaListingService;
+use Surfnet\StepupRa\RaBundle\Value\RoleAtInstitution;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -177,10 +177,11 @@ class RaManagementController extends Controller
         }, $raCandidate->institutions->getElements());
         $selectOptions = array_combine($options, $options);
 
-        $command                   = new AccreditCandidateCommand();
-        $command->identityId       = $identityId;
-        $command->institution      = $raCandidate->raCandidate->institution;
-        $command->raInstitution    = $this->getUser()->institution;
+        $command = new AccreditCandidateCommand();
+        $command->identityId = $identityId;
+        $command->institution = $raCandidate->raCandidate->institution;
+        $command->roleAtInstitution = new RoleAtInstitution();
+        $command->roleAtInstitution->setInstitution($this->getUser()->institution);
         $command->availableInstitutions = $selectOptions;
 
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
