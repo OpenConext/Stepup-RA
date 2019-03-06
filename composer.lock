@@ -2367,7 +2367,7 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "3.0.13",
+            "version": "3.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-Middleware-clientbundle.git",

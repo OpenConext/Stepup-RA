@@ -25,7 +25,7 @@ use Surfnet\StepupRa\RaBundle\Exception\MissingRequiredAttributeException;
 use Surfnet\StepupRa\RaBundle\Exception\UserNotRaException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
-use Surfnet\StepupRa\RaBundle\Service\profileService;
+use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
@@ -37,17 +37,17 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 class SamlProvider implements AuthenticationProviderInterface
 {
     /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\IdentityService
+     * @var IdentityService
      */
     private $identityService;
 
     /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\profileService
+     * @var ProfileService
      */
     private $profileService;
 
     /**
-     * @var \Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary
+     * @var AttributeDictionary
      */
     private $attributeDictionary;
 
@@ -93,7 +93,7 @@ class SamlProvider implements AuthenticationProviderInterface
         $profile = $this->profileService->findByIdentityId($identity->id);
 
         // if no credentials can be found, we're done.
-        if (empty($profile->authorizations)) {
+        if (!$profile->isSraa && empty($profile->authorizations) && empty($profile->management)) {
             throw new UserNotRaException(
                 'The Identity is not registered as (S)RA(A) and therefor does not have access to this application'
             );
@@ -105,6 +105,7 @@ class SamlProvider implements AuthenticationProviderInterface
             $roles[] = 'ROLE_SRAA';
         }
 
+        // Get authorizations (explicit RA(A) roles use_ra/use_raa).
         foreach ($profile->authorizations as $institution => $role) {
             if ($role[0] == 'raa' && !in_array('ROLE_RAA', $roles)) {
                 $roles[] = 'ROLE_RAA';
@@ -112,6 +113,13 @@ class SamlProvider implements AuthenticationProviderInterface
             if ($role[0] == 'ra' && !in_array('ROLE_RA', $roles)) {
                 $roles[] = 'ROLE_RA';
             }
+        }
+
+        // Get authorizations (implicit RAA roles through select_raa institution configuration)
+        if (!empty($profile->implicitRaaAt)) {
+            // The ROLE_SELECT_RAA applies, regardless of which institution it applies for, the application will only
+            // allow RAA actions for those institutions.
+            $roles[] = 'ROLE_SELECT_RAA';
         }
 
         // set the token

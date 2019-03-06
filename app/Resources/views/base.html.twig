@@ -38,21 +38,24 @@
                         <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_second_factors' %} class="active"{% endif %}>
                             <a href="{{ path('ra_second_factors_search') }}">{{ 'ra.menu.search'|trans }}</a>
                         </li>
+                        {% if is_granted('ROLE_RAA') or is_granted('ROLE_SELECT_RAA') or is_granted('ROLE_SRAA') %}
+                            <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_management' %} class="active"{% endif %}>
+                                <a href="{{ path('ra_management_manage') }}">{{ 'ra.menu.ra_management'|trans }}</a>
+                            </li>
+                        {% endif %}
 
-                        <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_management' %} class="active"{% endif %}>
-                            <a href="{{ path('ra_management_manage') }}">{{ 'ra.menu.ra_management'|trans }}</a>
-                        </li>
+                        {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                            <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_locations' %} class="active"{% endif %}>
+                                <a href="{{ path('ra_locations_manage') }}">{{ 'ra.menu.ra_locations'|trans }}</a>
+                            </li>
+                        {% endif %}
 
+                        {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                            <li role="presentation"{% if app.request.attributes.get('_route') starts with 'institution-configuration' %} class="active"{% endif %}>
+                                <a href="{{ path('institution-configuration') }}">{{ 'ra.menu.institution-configuration'|trans }}</a>
+                            </li>
+                        {% endif %}
 
-                        <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_locations' %} class="active"{% endif %}>
-                            <a href="{{ path('ra_locations_manage') }}">{{ 'ra.menu.ra_locations'|trans }}</a>
-                        </li>
-
-                    {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
-                        <li role="presentation"{% if app.request.attributes.get('_route') starts with 'institution-configuration' %} class="active"{% endif %}>
-                            <a href="{{ path('institution-configuration') }}">{{ 'ra.menu.institution-configuration'|trans }}</a>
-                        </li>
-                    {% endif %}
                         <li role="presentation"{% if app.request.attributes.get('_route') == 'ra_profile' %} class="active"{% endif %}>
                             <a href="{{ path('ra_profile') }}">{{ 'ra.menu.ra_profile'|trans }}</a>
                         </li>
