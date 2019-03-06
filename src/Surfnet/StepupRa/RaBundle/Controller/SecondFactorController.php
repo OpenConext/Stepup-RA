@@ -177,19 +177,6 @@ final class SecondFactorController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $institutionContext = new InstitutionContext($identity->institution, $this->getCurrentUser()->institution);
-        if (!$this->isGranted(AllowedInOtherInstitutionVoter::VIEW_AUDITLOG, $institutionContext)) {
-            $logger->warning(sprintf(
-                'User with Identity "%s" (%s) requested Identity "%s" (%s) of another institution, denying access',
-                $this->getCurrentUser()->id,
-                $this->getCurrentUser()->institution,
-                $identity->id,
-                $identity->institution
-            ));
-
-            throw $this->createAccessDeniedException();
-        }
-
         $logger->info(sprintf('Retrieving audit log for Identity "%s"', $identity->id));
 
         $command                 = new SearchSecondFactorAuditLogCommand();

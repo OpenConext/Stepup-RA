@@ -72,11 +72,7 @@ class SamlTokenTest extends TestCase
         );
         $samlToken->setUser($identity);
 
-        $newInstitutionConfigurationOptions                            = new InstitutionConfigurationOptions();
-        $newInstitutionConfigurationOptions->useRaLocations            = false;
-        $newInstitutionConfigurationOptions->showRaaContactInformation = false;
-
-        $samlToken->changeInstitutionScope('surfnet.nl', $newInstitutionConfigurationOptions);
+        $samlToken->changeInstitutionScope('surfnet.nl');
     }
 
     /**
@@ -103,14 +99,9 @@ class SamlTokenTest extends TestCase
         );
         $samlToken->setUser($identity);
 
-        $newInstitutionConfigurationOptions                            = new InstitutionConfigurationOptions();
-        $newInstitutionConfigurationOptions->useRaLocations            = false;
-        $newInstitutionConfigurationOptions->showRaaContactInformation = false;
-
-        $samlToken->changeInstitutionScope($expectedInstitution, $newInstitutionConfigurationOptions);
+        $samlToken->changeInstitutionScope($expectedInstitution);
 
         $this->assertSame($expectedInstitution, $samlToken->getUser()->institution);
-        $this->assertSame($newInstitutionConfigurationOptions, $samlToken->getInstitutionConfigurationOptions());
     }
 
     /**
@@ -127,10 +118,6 @@ class SamlTokenTest extends TestCase
             ['ROLE_SRAA']
         );
 
-        $newInstitutionConfigurationOptions                            = new InstitutionConfigurationOptions();
-        $newInstitutionConfigurationOptions->useRaLocations            = false;
-        $newInstitutionConfigurationOptions->showRaaContactInformation = false;
-
-        $samlToken->changeInstitutionScope('surfnet.nl', $newInstitutionConfigurationOptions);
+        $samlToken->changeInstitutionScope('surfnet.nl');
     }
 }
