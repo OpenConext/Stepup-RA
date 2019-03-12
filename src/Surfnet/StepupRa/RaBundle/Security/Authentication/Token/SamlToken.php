@@ -19,7 +19,6 @@
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Token;
 
 use Surfnet\StepupBundle\Value\Loa;
-use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurationOptions;
 use Surfnet\StepupRa\RaBundle\Exception\LogicException;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
@@ -37,44 +36,19 @@ class SamlToken extends AbstractToken
      */
     private $loa;
 
-    /**
-     * @var InstitutionConfigurationOptions
-     */
-    private $institutionConfigurationOptions;
-
-    /**
-     * @var string
-     */
-    private $raManagementInstitution;
-
-    public function __construct(
-        Loa $loa,
-        array $roles = [],
-        InstitutionConfigurationOptions $institutionConfigurationOptions = null
-    ) {
+    public function __construct(Loa $loa, array $roles = [])
+    {
         parent::__construct($roles);
 
         $this->loa = $loa;
         $this->setAuthenticated(count($roles));
-        $this->institutionConfigurationOptions = $institutionConfigurationOptions;
-    }
-
-    /**
-     * @return InstitutionConfigurationOptions
-     */
-    public function getInstitutionConfigurationOptions()
-    {
-        return $this->institutionConfigurationOptions;
     }
 
     /**
      * @param string $institution
-     * @param InstitutionConfigurationOptions $institutionConfigurationOptions
      */
-    public function changeInstitutionScope(
-        $institution,
-        InstitutionConfigurationOptions $institutionConfigurationOptions
-    ) {
+    public function changeInstitutionScope($institution)
+    {
         if ($this->getUser() === null) {
             throw new LogicException('Cannot change institution scope: token does not contain a user');
         }
@@ -91,9 +65,7 @@ class SamlToken extends AbstractToken
             ));
         }
 
-        $this->raManagementInstitution = $institution;
         $this->getUser()->institution = $institution;
-        $this->institutionConfigurationOptions = $institutionConfigurationOptions;
     }
 
     /**
@@ -120,8 +92,6 @@ class SamlToken extends AbstractToken
             [
                 parent::serialize(),
                 $this->loa,
-                $this->institutionConfigurationOptions,
-                $this->raManagementInstitution,
             ]
         );
     }
@@ -131,23 +101,10 @@ class SamlToken extends AbstractToken
         list(
             $parent,
             $this->loa,
-            $this->institutionConfigurationOptions,
-            $this->raManagementInstitution,
             ) = unserialize(
                 $serialized
             );
 
         parent::unserialize($parent);
-    }
-
-    /**
-     * @return string
-     */
-    public function getRaManagementInstitution()
-    {
-        if (!$this->raManagementInstitution) {
-            return $this->getUser()->institution;
-        }
-        return $this->raManagementInstitution;
     }
 }

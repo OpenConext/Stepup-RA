@@ -21,12 +21,11 @@ namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Provider;
 use Psr\Log\LoggerInterface;
 use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
 use Surfnet\SamlBundle\SAML2\Response\AssertionAdapter;
-use Surfnet\StepupRa\RaBundle\Exception\InconsistentStateException;
 use Surfnet\StepupRa\RaBundle\Exception\MissingRequiredAttributeException;
 use Surfnet\StepupRa\RaBundle\Exception\UserNotRaException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
-use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
+use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
@@ -38,19 +37,19 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 class SamlProvider implements AuthenticationProviderInterface
 {
     /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\IdentityService
+     * @var IdentityService
      */
     private $identityService;
 
     /**
-     * @var \Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary
+     * @var ProfileService
      */
-    private $attributeDictionary;
+    private $profileService;
 
     /**
-     * @var InstitutionConfigurationOptionsService
+     * @var AttributeDictionary
      */
-    private $institutionConfigurationOptionsService;
+    private $attributeDictionary;
 
     /**
      * @var LoggerInterface
@@ -59,20 +58,20 @@ class SamlProvider implements AuthenticationProviderInterface
 
     public function __construct(
         IdentityService $identityService,
+        ProfileService $profileService,
         AttributeDictionary $attributeDictionary,
-        InstitutionConfigurationOptionsService $institutionConfigurationOptionsService,
         LoggerInterface $logger
     ) {
         $this->identityService                        = $identityService;
+        $this->profileService                        = $profileService;
         $this->attributeDictionary                    = $attributeDictionary;
-        $this->institutionConfigurationOptionsService = $institutionConfigurationOptionsService;
         $this->logger                                 = $logger;
     }
 
     /**
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity) - The authorization tests cause the complexity to raise, could and
-     *  might be changed by introducing additional utility classes. Consider rebuilding this in the future.
-     *
+     * @SuppressWarnings(PHPMD.NPathComplexity)      - The authorization tests cause the complexity to raise, could and
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)   might be changed by introducing additional utility classes.
+     *                                                 Consider rebuilding this in the future.
      * @param SamlToken|TokenInterface $token
      * @return TokenInterface|void
      */
@@ -80,9 +79,8 @@ class SamlProvider implements AuthenticationProviderInterface
     {
         $translatedAssertion = $this->attributeDictionary->translate($token->assertion);
 
-        $nameId      = $translatedAssertion->getNameID();
+        $nameId   = $translatedAssertion->getNameID();
         $institution = $this->getSingleStringValue('schacHomeOrganization', $translatedAssertion);
-
         $identity = $this->identityService->findByNameIdAndInstitution($nameId, $institution);
 
         // if no identity can be found, we're done.
@@ -92,10 +90,10 @@ class SamlProvider implements AuthenticationProviderInterface
             );
         }
 
-        $raCredentials = $this->identityService->getRaCredentials($identity);
+        $profile = $this->profileService->findByIdentityId($identity->id);
 
         // if no credentials can be found, we're done.
-        if (!$raCredentials) {
+        if (!$profile->isSraa && empty($profile->authorizations) && empty($profile->management)) {
             throw new UserNotRaException(
                 'The Identity is not registered as (S)RA(A) and therefor does not have access to this application'
             );
@@ -103,32 +101,29 @@ class SamlProvider implements AuthenticationProviderInterface
 
         // determine the role based on the credentials given
         $roles = [];
-        if ($raCredentials->isSraa) {
+        if ($profile->isSraa) {
             $roles[] = 'ROLE_SRAA';
         }
 
-        if ($raCredentials->isRaa) {
-            $roles[] = 'ROLE_RAA';
-        } else {
-            $roles[] = 'ROLE_RA';
+        // Get authorizations (explicit RA(A) roles use_ra/use_raa).
+        foreach ($profile->authorizations as $institution => $role) {
+            if ($role[0] == 'raa' && !in_array('ROLE_RAA', $roles)) {
+                $roles[] = 'ROLE_RAA';
+            }
+            if ($role[0] == 'ra' && !in_array('ROLE_RA', $roles)) {
+                $roles[] = 'ROLE_RA';
+            }
         }
 
-        $institutionConfigurationOptions = $this->institutionConfigurationOptionsService
-            ->getInstitutionConfigurationOptionsFor($identity->institution);
-
-        if ($institutionConfigurationOptions === null) {
-            throw new InconsistentStateException(
-                sprintf(
-                    'InstitutionConfigurationOptions for institution "%s" '
-                    . 'must exist but cannot be found after authenticating Identity "%s"',
-                    $identity->institution,
-                    $identity->id
-                )
-            );
+        // Get authorizations (implicit RAA roles through select_raa institution configuration)
+        if (!empty($profile->implicitRaaAt)) {
+            // The ROLE_SELECT_RAA applies, regardless of which institution it applies for, the application will only
+            // allow RAA actions for those institutions.
+            $roles[] = 'ROLE_SELECT_RAA';
         }
 
         // set the token
-        $authenticatedToken = new SamlToken($token->getLoa(), $roles, $institutionConfigurationOptions);
+        $authenticatedToken = new SamlToken($token->getLoa(), $roles);
         $authenticatedToken->setUser($identity);
 
         return $authenticatedToken;

@@ -293,11 +293,6 @@ services:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
     # Twig
-    ra.twig.institution_configuration_options:
-        class: Surfnet\StepupRa\RaBundle\Twig\InstitutionConfigurationOptions
-        arguments:
-            - "@security.token_storage"
-
     ra.twig.second_factor_type:
         class: Surfnet\StepupRa\RaBundle\Twig\Extensions\Extension\SecondFactorType
         arguments:

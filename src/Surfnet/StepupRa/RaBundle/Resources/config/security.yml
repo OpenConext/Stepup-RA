@@ -11,8 +11,8 @@ services:
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider
         arguments:
             - "@ra.service.identity"
+            - "@ra.service.profile"
             - "@surfnet_saml.saml.attribute_dictionary"
-            - "@ra.service.institution_configuration_options"
             - "@logger"
 
     ra.security.authentication.saml_interaction:
@@ -120,11 +120,3 @@ services:
             - "@security.token_storage"
             - "%logout_redirect_url%"
 
-    # Voters
-    ra.security.authorization.allowed_in_other_institution_voter:
-        class: Surfnet\StepupRa\RaBundle\Security\Authorization\Voter\AllowedInOtherInstitutionVoter
-        arguments:
-            - '@ra.service.institution_configuration_options'
-        tags:
-            - { name: security.voter }
-        public: false
