@@ -74,7 +74,7 @@ class RaManagementController extends Controller
         $raList = $service->search($command);
 
         $pagination = $this->getPaginator()->paginate(
-            $raList->getTotalItems() > 0 ? array_fill(0, $raList->getTotalItems(), 1) : [],
+            $raList->getTotalItems() > 0 ? $raList->getElements() : [],
             $raList->getCurrentPage(),
             $raList->getItemsPerPage()
         );
@@ -132,7 +132,7 @@ class RaManagementController extends Controller
         $raCandidateList = $service->search($command);
 
         $pagination = $this->getPaginator()->paginate(
-            $raCandidateList->getTotalItems() > 0 ? array_fill(4, $raCandidateList->getTotalItems(), 1) : [],
+            $raCandidateList->getTotalItems() > 0 ? $raCandidateList->getElements() : [],
             $raCandidateList->getCurrentPage(),
             $raCandidateList->getItemsPerPage()
         );

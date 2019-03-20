@@ -189,7 +189,7 @@ final class SecondFactorController extends Controller
         $auditLog = $this->getAuditLogService()->getAuditlog($command);
 
         $pagination = $this->get('knp_paginator')->paginate(
-            $auditLog->getTotalItems() > 0 ? array_fill(0, $auditLog->getTotalItems(), 1) : [],
+            $auditLog->getTotalItems() > 0 ? $auditLog->getElements() : [],
             $auditLog->getCurrentPage(),
             $auditLog->getItemsPerPage()
         );
