@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.10.7
+**Bugfixes**
+* Fix error when sorting in RA Mamagement view #185
+
 ## 2.10.6
 **Improvement**
 * Align buttons on 'Tokens' page #194
