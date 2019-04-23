@@ -1,8 +1,12 @@
 # Changelog
 
-## 2.10.7
+## 2.10.8
+**Improvement**
+* Install security updates
+
+# 2.10.7
 **Features**
-* Allow filtering the RA candidate on institute #201 
+* Allow filtering the RA candidate on institute #201
 * Add search support on the RA management page #200
 
 **Improvements**
@@ -10,8 +14,12 @@
 * Remove RAA switcher #198
 
 ## 2.10.6
+**Improvement**
+* Align buttons on 'Tokens' page #194
 
 ## 2.10.5
+**Bugfix**
+* Fix the token sorting PART II #192
 
 ## 2.10.4
 **Improvements**

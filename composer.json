@@ -43,7 +43,7 @@
         "symfony/symfony": "3.4.*",
         "twbs/bootstrap": "~3.3.0",
         "twig/extensions": "~1.5",
-        "twig/twig": "v1.38.1"
+        "twig/twig": "~1.38"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^2.2",
