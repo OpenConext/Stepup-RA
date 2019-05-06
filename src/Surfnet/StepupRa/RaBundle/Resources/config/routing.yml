@@ -14,7 +14,7 @@ ra_locations_manage:
     defaults: { _controller: SurfnetStepupRaRaBundle:RaLocation:manage }
 
 ra_location_create:
-    path:     /locations/create
+    path:     /locations/create/{institution}
     methods: [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:RaLocation:create }
 

@@ -23,9 +23,12 @@ use Surfnet\StepupRa\RaBundle\Command\ChangeRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\CreateRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\RemoveRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaLocationsCommand;
+use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaLocationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaLocationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RemoveRaLocationType;
+use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
+use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,11 +50,42 @@ final class RaLocationController extends Controller
     {
         $this->denyAccessUnlessGranted(['ROLE_RA']);
 
+        $institutionParameter = $request->get('institution');
+
         $identity = $this->getCurrentUser();
         $this->get('logger')->notice('Starting search for locations');
 
+        $profile = $this->getProfileService()->findByIdentityId($identity->id);
+        $choices = $profile->getRaaInstitutions();
+        $institution = reset($choices);
+
+        if (in_array($institutionParameter, $choices)) {
+            $institution = $institutionParameter;
+        }
+
+        // Only show the form if more than one institutions where found.
+        if (count($choices) > 1) {
+            // SRAA's are usually not RAA for other institutions as they already are SRAA. Show the institution config
+            // of the SRAAs SHO, and let her use the SRAA switcher in order to see config for different institutions.
+            if ($this->isGranted('ROLE_SRAA')) {
+                $institution = $identity->institution;
+            }
+
+            $command = new SelectInstitutionCommand();
+            $command->institution = $institution;
+            $command->availableInstitutions = $choices;
+
+            $form = $this->createForm(SelectInstitutionType::class, $command);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $institution = $command->institution;
+            }
+        }
+
+
         $command = new SearchRaLocationsCommand();
-        $command->institution = $identity->institution;
+        $command->institution = $institution;
         $command->orderBy = $request->get('orderBy');
         $command->orderDirection = $request->get('orderDirection');
 
@@ -65,6 +99,8 @@ final class RaLocationController extends Controller
         ));
 
         return [
+            'form'                  => isset($form) ? $form->createView() : null,
+            'institution'           => $institution,
             'locations'             => $locations,
             'removalForm'           => $removalForm->createView(),
             'orderBy'               => $command->orderBy,
@@ -78,10 +114,11 @@ final class RaLocationController extends Controller
         $this->denyAccessUnlessGranted(['ROLE_RA']);
         $logger = $this->get('logger');
 
+        $institution = $request->get('institution');
+
         $identity = $this->getCurrentUser();
         $command = new CreateRaLocationCommand();
-        $command->currentUserId = $this->getCurrentUser()->id;
-        $command->institution = $identity->institution;
+        $command->institution = $institution;
         $command->currentUserId = $identity->id;
 
         $form = $this->createForm(CreateRaLocationType::class, $command)->handleRequest($request);
@@ -98,7 +135,7 @@ final class RaLocationController extends Controller
                 );
 
                 $logger->debug('RA Location added, redirecting to the RA location overview');
-                return $this->redirectToRoute('ra_locations_manage');
+                return $this->redirectToRoute('ra_locations_manage', ['institution' => $command->institution]);
             }
 
             $logger->debug('RA Location creation failed, adding error to form');
@@ -125,20 +162,8 @@ final class RaLocationController extends Controller
 
         $identity = $this->getCurrentUser();
 
-        if ($raLocation->institution !== $identity->institution) {
-            $logger->warning(
-                sprintf(
-                    'RaLocation "%s" found but of institution "%s" while we require "%s"',
-                    $raLocation->id,
-                    $raLocation->institution,
-                    $identity->institution
-                )
-            );
-        }
-
         $command = new ChangeRaLocationCommand();
-        $command->currentUserId = $this->getCurrentUser()->id;
-        $command->institution = $identity->institution;
+        $command->institution = $raLocation->institution;
         $command->currentUserId = $identity->id;
         $command->id = $raLocation->id;
         $command->name = $raLocation->name;
@@ -159,7 +184,7 @@ final class RaLocationController extends Controller
                 );
 
                 $logger->debug('RA Location added, redirecting to the RA location overview');
-                return $this->redirectToRoute('ra_locations_manage');
+                return $this->redirectToRoute('ra_locations_manage', ['institution' => $command->institution]);
             }
 
             $logger->debug('RA Location creation failed, adding error to form');
@@ -208,7 +233,7 @@ final class RaLocationController extends Controller
 
         $logger->notice('Redirecting back to RA Location Manage Page');
 
-        return $this->redirectToRoute('ra_locations_manage');
+        return $this->redirectToRoute('ra_locations_manage', ['institution' => $command->institution]);
     }
 
     /**
@@ -225,5 +250,13 @@ final class RaLocationController extends Controller
     private function getCurrentUser()
     {
         return $this->get('security.token_storage')->getToken()->getUser();
+    }
+
+    /**
+     * @return ProfileService
+     */
+    private function getProfileService()
+    {
+        return $this->get('ra.service.profile');
     }
 }
