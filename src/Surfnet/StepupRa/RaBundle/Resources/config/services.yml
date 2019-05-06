@@ -254,8 +254,13 @@ services:
     ra.service.profile:
         class: Surfnet\StepupRa\RaBundle\Service\ProfileService
         arguments:
-          - "@surfnet_stepup_middleware_client.identity.service.profile"
-          - "@logger"
+            - "@surfnet_stepup_middleware_client.identity.service.profile"
+            - "@logger"
+
+    ra.service.institution_listing:
+        class: Surfnet\StepupRa\RaBundle\Service\InstitutionListingService
+        arguments:
+            - "@surfnet_stepup_middleware_client.identity.service.institution_listing"
 
     # Repositories
     ra.repository.vetting_procedure:

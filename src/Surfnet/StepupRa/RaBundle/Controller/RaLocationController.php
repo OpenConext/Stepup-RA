@@ -56,8 +56,14 @@ final class RaLocationController extends Controller
         $this->get('logger')->notice('Starting search for locations');
 
         $profile = $this->getProfileService()->findByIdentityId($identity->id);
-        $choices = $profile->getRaaInstitutions();
-        $institution = reset($choices);
+
+        if ($this->isGranted('ROLE_SRAA')) {
+            $institution = $identity->institution;
+            $choices = $this->getInstitutionListingService()->getAll();
+        } else {
+            $choices = $profile->getRaaInstitutions();
+            $institution = reset($choices);
+        }
 
         if (in_array($institutionParameter, $choices)) {
             $institution = $institutionParameter;
@@ -65,12 +71,6 @@ final class RaLocationController extends Controller
 
         // Only show the form if more than one institutions where found.
         if (count($choices) > 1) {
-            // SRAA's are usually not RAA for other institutions as they already are SRAA. Show the institution config
-            // of the SRAAs SHO, and let her use the SRAA switcher in order to see config for different institutions.
-            if ($this->isGranted('ROLE_SRAA')) {
-                $institution = $identity->institution;
-            }
-
             $command = new SelectInstitutionCommand();
             $command->institution = $institution;
             $command->availableInstitutions = $choices;
@@ -258,5 +258,13 @@ final class RaLocationController extends Controller
     private function getProfileService()
     {
         return $this->get('ra.service.profile');
+    }
+
+    /**
+     * @return InstitutionListingService
+     */
+    private function getInstitutionListingService()
+    {
+        return $this->get('ra.service.institution_listing');
     }
 }
