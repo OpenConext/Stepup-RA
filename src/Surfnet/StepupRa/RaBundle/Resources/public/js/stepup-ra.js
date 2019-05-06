@@ -188,5 +188,11 @@
             $('button#ra_search_ra_second_factors_export').hide();
         }
 
+        // Post sub institution switcher on change
+        $(document).on('change', '#select_institution_institution', function() {
+            var form = $(this).closest("form");
+            form.submit();
+        });
+
     });
 })(jQuery);
