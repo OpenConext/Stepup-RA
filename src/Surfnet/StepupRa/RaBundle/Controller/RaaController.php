@@ -37,13 +37,7 @@ class RaaController extends Controller
         $identity = $this->getUser();
 
         $profile = $this->getProfileService()->findByIdentityId($identity->id);
-        $choices = [];
-        foreach ($profile->authorizations as $institution => $role) {
-            if ($role[0] == 'raa') {
-                $choices[$institution] = $institution;
-            }
-        }
-
+        $choices = $profile->getRaaInstitutions();
         $institution = reset($choices);
 
         // Only show the form if more than one institutions where found.

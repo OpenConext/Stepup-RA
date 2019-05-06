@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2019-02-28T09:38:57Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2019-05-06T14:39:45Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -15,12 +15,12 @@
       <trans-unit id="ff6230b38fe127145d864f4d4920ceb4d857af18" resname="button.logout">
         <source>button.logout</source>
         <target>Sign out</target>
-        <jms:reference-file line="63">/Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="66">/Resources/views/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5f1e0c5b2426bfd27630e1a79ced536d4ef05d10" resname="footer.documentation">
         <source>footer.documentation</source>
         <target>Manual</target>
-        <jms:reference-file line="107">/Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="110">/Resources/views/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a08764057e3607049e3495943676b29f7baefba9" resname="locale.en_GB">
         <source>locale.en_GB</source>
@@ -161,12 +161,12 @@
       <trans-unit id="dae6a1cc0ab3be03b10145c4af4996c87111e961" resname="ra.create_ra_location.changed">
         <source>ra.create_ra_location.changed</source>
         <target>RA location successfully updated</target>
-        <jms:reference-file line="158">/../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php</jms:reference-file>
+        <jms:reference-file line="177">/../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="47eb17b091e09fe597bd854607d8397cbeb96718" resname="ra.create_ra_location.created">
         <source>ra.create_ra_location.created</source>
         <target>RA location successfully created</target>
-        <jms:reference-file line="97">/../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php</jms:reference-file>
+        <jms:reference-file line="128">/../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b172512ee794631a6aecb48e9188443e5ed7a6c3" resname="ra.flash.error_while_switching_locale">
         <source>ra.flash.error_while_switching_locale</source>
@@ -237,57 +237,57 @@
       <trans-unit id="736ba38c401eb4e0291235ce2fd1fab989a47dce" resname="ra.form.ra_search_ra_listing.button.search">
         <source>ra.form.ra_search_ra_listing.button.search</source>
         <target>Search</target>
-        <jms:reference-file line="59">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaListingType.php</jms:reference-file>
+        <jms:reference-file line="53">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaListingType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7fef53d6a631f627f835324f523cac56a72ee8e5" resname="ra.form.ra_search_ra_listing.label.email">
         <source>ra.form.ra_search_ra_listing.label.email</source>
         <target>E-mail</target>
-        <jms:reference-file line="49">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaListingType.php</jms:reference-file>
+        <jms:reference-file line="43">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaListingType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="780e800b136d61f0391f8dcc8a9b99c5defafadd" resname="ra.form.ra_search_ra_listing.label.institution">
         <source>ra.form.ra_search_ra_listing.label.institution</source>
         <target>Institution</target>
-        <jms:reference-file line="51">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaListingType.php</jms:reference-file>
+        <jms:reference-file line="45">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaListingType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="61f7a2bd44b213f18e79aae405b8365e9f2c9eee" resname="ra.form.ra_search_ra_listing.label.name">
         <source>ra.form.ra_search_ra_listing.label.name</source>
         <target>Name</target>
-        <jms:reference-file line="46">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaListingType.php</jms:reference-file>
+        <jms:reference-file line="40">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaListingType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a2127ebba44150cb30dbc4f4c5ab2890c0d2ecec" resname="ra.form.ra_search_ra_listing.label.role">
         <source>ra.form.ra_search_ra_listing.label.role</source>
         <target>Role</target>
-        <jms:reference-file line="56">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaListingType.php</jms:reference-file>
+        <jms:reference-file line="50">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaListingType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="810d4048f1795c3a8908fe09507a07aaac363d83" resname="ra.form.ra_search_ra_second_factors.button.export">
         <source>ra.form.ra_search_ra_second_factors.button.export</source>
         <target>Export</target>
-        <jms:reference-file line="94">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="93">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7317a2726d1f0c5a5457e36c46f817004792dd9d" resname="ra.form.ra_search_ra_second_factors.button.search">
         <source>ra.form.ra_search_ra_second_factors.button.search</source>
         <target>Search</target>
-        <jms:reference-file line="90">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="89">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="48cd99661dd9a7766fe9b5819b2e6fc2b1777da6" resname="ra.form.ra_search_ra_second_factors.choice.status.revoked">
         <source>ra.form.ra_search_ra_second_factors.choice.status.revoked</source>
         <target>Removed</target>
-        <jms:reference-file line="63">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="64">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f5b1f76a7766a04fbbeda4fb456846fc1d82104a" resname="ra.form.ra_search_ra_second_factors.choice.status.unverified">
         <source>ra.form.ra_search_ra_second_factors.choice.status.unverified</source>
         <target>Not verified</target>
-        <jms:reference-file line="60">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="61">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ae89a5ba9082c547a4dda73b729559c3b5d7b463" resname="ra.form.ra_search_ra_second_factors.choice.status.verified">
         <source>ra.form.ra_search_ra_second_factors.choice.status.verified</source>
         <target>Verified</target>
-        <jms:reference-file line="61">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="62">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c8a5fe4fab6c98758ca2bdab597d651fe6f6d782" resname="ra.form.ra_search_ra_second_factors.choice.status.vetted">
         <source>ra.form.ra_search_ra_second_factors.choice.status.vetted</source>
         <target>Activated</target>
-        <jms:reference-file line="62">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="63">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="82620c7566024bc53940025d305ad74317ac5b42" resname="ra.form.ra_search_ra_second_factors.choice.type.sms">
         <source>ra.form.ra_search_ra_second_factors.choice.type.sms</source>
@@ -302,32 +302,32 @@
       <trans-unit id="3bd13a55b07cf257fe610075cfcb65c04feca493" resname="ra.form.ra_search_ra_second_factors.label.email">
         <source>ra.form.ra_search_ra_second_factors.label.email</source>
         <target>E-mail</target>
-        <jms:reference-file line="55">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="56">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="17f4dd140f0d73e3254d7b9bc1096cb056703514" resname="ra.form.ra_search_ra_second_factors.label.institution">
         <source>ra.form.ra_search_ra_second_factors.label.institution</source>
         <target>Institution</target>
-        <jms:reference-file line="74">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="73">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="8a7dd1f88e5c62c8897ba2eb5b80b6d683db0902" resname="ra.form.ra_search_ra_second_factors.label.name">
         <source>ra.form.ra_search_ra_second_factors.label.name</source>
         <target>Name</target>
-        <jms:reference-file line="44">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="45">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="52a654d4baa15139647f3963ffb3d232a0aeb7c1" resname="ra.form.ra_search_ra_second_factors.label.second_factor_id">
         <source>ra.form.ra_search_ra_second_factors.label.second_factor_id</source>
         <target>Token ID</target>
-        <jms:reference-file line="52">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="53">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="cbdcec845d02a58a733a2aae110144ecaff67e8f" resname="ra.form.ra_search_ra_second_factors.label.status">
         <source>ra.form.ra_search_ra_second_factors.label.status</source>
         <target>Status</target>
-        <jms:reference-file line="58">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="59">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7bfd1b72b2e100569d5b328715abd728899c9043" resname="ra.form.ra_search_ra_second_factors.label.type">
         <source>ra.form.ra_search_ra_second_factors.label.type</source>
         <target>Type</target>
-        <jms:reference-file line="47">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
+        <jms:reference-file line="48">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaSecondFactorsType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1ded9028f8d549daf4dfd7f37b472ee17e1beb0c" resname="ra.form.ra_select_institution.button.select_and_apply">
         <source>ra.form.ra_select_institution.button.select_and_apply</source>
@@ -418,68 +418,68 @@
       <trans-unit id="17ab744355f1655994692471da5d40bebb69b116" resname="ra.institution_configuration.all_second_factors_enabled">
         <source>ra.institution_configuration.all_second_factors_enabled</source>
         <target>All enabled tokens are available</target>
-        <jms:reference-file line="30">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="40">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="217097881ba32fe3854fc0b41f3a71437a22861d" resname="ra.institution_configuration.allowed_second_factors">
         <source>ra.institution_configuration.allowed_second_factors</source>
         <target>Allowed second factor tokens</target>
-        <jms:reference-file line="27">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="37">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="61dd68e8cba8bedbd5c69f57846161be150580a2" resname="ra.institution_configuration.no">
         <source>ra.institution_configuration.no</source>
         <target>No</target>
-        <jms:reference-file line="16">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
-        <jms:reference-file line="20">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
-        <jms:reference-file line="24">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="26">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="30">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="34">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7eeb4b6c226dadecd3593c7e0de34d5fdeb85ec3" resname="ra.institution_configuration.no_entries">
         <source>ra.institution_configuration.no_entries</source>
         <target>None</target>
-        <jms:reference-file line="54">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
-        <jms:reference-file line="68">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
-        <jms:reference-file line="82">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="60">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="72">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="84">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7c2f87e0fb31a1da5050b865323409759b727336" resname="ra.institution_configuration.number_of_tokens_per_identity">
         <source>ra.institution_configuration.number_of_tokens_per_identity</source>
         <target>Number of tokens per identity</target>
-        <jms:reference-file line="41">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="49">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="817cff31f9baf1c7bce18b5c6332c1be54bf44ef" resname="ra.institution_configuration.select_raa">
         <source>ra.institution_configuration.select_raa</source>
         <target>From which other institution(s) can users be assigned the RA(A) role for this institution?</target>
-        <jms:reference-file line="45">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="53">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b5fdeda8565fa6fa18934ced8039240beaf5ebea" resname="ra.institution_configuration.show_ra_contact_information">
         <source>ra.institution_configuration.show_ra_contact_information</source>
         <target>Show RAA contact information?</target>
-        <jms:reference-file line="19">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="29">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0344c705268b0d366e23e4a9f3e90df9aa55960b" resname="ra.institution_configuration.use_ra">
         <source>ra.institution_configuration.use_ra</source>
         <target>In which other institution(s) are the RAs from this institution an RA?</target>
-        <jms:reference-file line="59">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="65">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="98471184366a598d348e400875f1fe3ba1cf6c2f" resname="ra.institution_configuration.use_ra_locations">
         <source>ra.institution_configuration.use_ra_locations</source>
         <target>Use RA locations enabled?</target>
-        <jms:reference-file line="15">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="25">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="63cd93b650cdeb407293c1cdef07ce9d49e0976a" resname="ra.institution_configuration.use_raa">
         <source>ra.institution_configuration.use_raa</source>
         <target>From which other institution(s) the RAAs are also an RAA for this institution?</target>
-        <jms:reference-file line="73">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="77">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d6ea1d4efa906c5056f389f4fde35bbb26511521" resname="ra.institution_configuration.verify_email">
         <source>ra.institution_configuration.verify_email</source>
         <target>E-mail verification enabled?</target>
-        <jms:reference-file line="23">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="33">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9936b7fe8eea29acc108f05e5ea2edeb3a6033a5" resname="ra.institution_configuration.yes">
         <source>ra.institution_configuration.yes</source>
         <target>Yes</target>
-        <jms:reference-file line="16">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
-        <jms:reference-file line="20">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
-        <jms:reference-file line="24">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="26">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="30">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="34">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="584ef35d6af2f2917e708a1a6092f0b0938151e4" resname="ra.management.amend_ra_info.error.middleware_command_failed">
         <source>ra.management.amend_ra_info.error.middleware_command_failed</source>
@@ -489,7 +489,7 @@
       <trans-unit id="5fa5dfb0514d509432e81f5b2344b12d7351715b" resname="ra.management.amend_ra_info.info_amended">
         <source>ra.management.amend_ra_info.info_amended</source>
         <target>The RA's information has been amended.</target>
-        <jms:reference-file line="250">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="244">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6492fd6bfd9bf1c89d052b3172d572e9df9e54e8" resname="ra.management.amend_ra_info.ra_listing.email">
         <source>ra.management.amend_ra_info.ra_listing.email</source>
@@ -572,7 +572,7 @@
       <trans-unit id="4029e4383ef4a57077b346cc66f971c9cafb71c3" resname="ra.management.create_ra.identity_accredited">
         <source>ra.management.create_ra.identity_accredited</source>
         <target>The role of this user has been changed.</target>
-        <jms:reference-file line="202">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="196">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="62bc099c53662e393741f519a15503dcb4d6c77f" resname="ra.management.create_ra.modal.are_you_sure">
         <source>ra.management.create_ra.modal.are_you_sure</source>
@@ -682,27 +682,27 @@
         <source>ra.management.form.create_ra.label.cancel</source>
         <target>Cancel</target>
         <jms:reference-file line="43">/../src/Surfnet/StepupRa/RaBundle/Form/Type/ChangeRaRoleType.php</jms:reference-file>
-        <jms:reference-file line="55">/../src/Surfnet/StepupRa/RaBundle/Form/Type/CreateRaType.php</jms:reference-file>
+        <jms:reference-file line="64">/../src/Surfnet/StepupRa/RaBundle/Form/Type/CreateRaType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="edea5e3071445a321b5063fe5108b8cc48e7510f" resname="ra.management.form.create_ra.label.contact_information">
         <source>ra.management.form.create_ra.label.contact_information</source>
         <target>Contact Information</target>
-        <jms:reference-file line="44">/../src/Surfnet/StepupRa/RaBundle/Form/Type/CreateRaType.php</jms:reference-file>
+        <jms:reference-file line="43">/../src/Surfnet/StepupRa/RaBundle/Form/Type/CreateRaType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="dae5acb09640e99da945664cf4e40423e1f2be03" resname="ra.management.form.create_ra.label.create_ra">
         <source>ra.management.form.create_ra.label.create_ra</source>
         <target>Create RA(A)</target>
-        <jms:reference-file line="51">/../src/Surfnet/StepupRa/RaBundle/Form/Type/CreateRaType.php</jms:reference-file>
+        <jms:reference-file line="60">/../src/Surfnet/StepupRa/RaBundle/Form/Type/CreateRaType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1cd95428cf58450eacda8b31a4fe09b542ea94b8" resname="ra.management.form.create_ra.label.location">
         <source>ra.management.form.create_ra.label.location</source>
         <target>Location</target>
-        <jms:reference-file line="41">/../src/Surfnet/StepupRa/RaBundle/Form/Type/CreateRaType.php</jms:reference-file>
+        <jms:reference-file line="40">/../src/Surfnet/StepupRa/RaBundle/Form/Type/CreateRaType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="26fef5899c09cd8915216fb81f6238d1ec3cc504" resname="ra.management.form.create_ra.label.role">
         <source>ra.management.form.create_ra.label.role</source>
         <target>Role</target>
-        <jms:reference-file line="48">/../src/Surfnet/StepupRa/RaBundle/Form/Type/CreateRaType.php</jms:reference-file>
+        <jms:reference-file line="47">/../src/Surfnet/StepupRa/RaBundle/Form/Type/CreateRaType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9047bdb896ecfb86395ffb69ac79180588b8d265" resname="ra.management.overview.add_raa">
         <source>ra.management.overview.add_raa</source>
@@ -793,7 +793,7 @@
       <trans-unit id="1a03ce1515132785c884129598c2cb52db461cd0" resname="ra.management.retract_ra.success">
         <source>ra.management.retract_ra.success</source>
         <target>The Identity is no longer RA(A)</target>
-        <jms:reference-file line="301">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
+        <jms:reference-file line="295">/../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a973963d22345656dc73a28876fe2a9e481c6d3a" resname="ra.management.retract_registration_authority.are_you_sure">
         <source>ra.management.retract_registration_authority.are_you_sure</source>
@@ -808,12 +808,12 @@
       <trans-unit id="ea11cd6d8f399195aeb56a640ac0a946a5302fce" resname="ra.menu.institution-configuration">
         <source>ra.menu.institution-configuration</source>
         <target>Institution configuration</target>
-        <jms:reference-file line="53">/Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="55">/Resources/views/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b4a82e0141a37a71ca4197275026c666429430cc" resname="ra.menu.ra_locations">
         <source>ra.menu.ra_locations</source>
         <target>RA Locations</target>
-        <jms:reference-file line="48">/Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="49">/Resources/views/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="08d2247eaaec4c6e898a3f3d01bda66d7c33731c" resname="ra.menu.ra_management">
         <source>ra.menu.ra_management</source>
@@ -823,7 +823,7 @@
       <trans-unit id="3e81619fb5ba21daeb0d44b21d6e13071f33cd74" resname="ra.menu.ra_profile">
         <source>ra.menu.ra_profile</source>
         <target>My profile</target>
-        <jms:reference-file line="57">/Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="60">/Resources/views/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7d6a9d74b9561d924dc4411c3ceebc63a01c83ae" resname="ra.menu.registration">
         <source>ra.menu.registration</source>
@@ -838,7 +838,7 @@
       <trans-unit id="ea07c1ef2b8502f7457347223483d010ab427050" resname="ra.menu.sraa_change_institution">
         <source>ra.menu.sraa_change_institution</source>
         <target>change</target>
-        <jms:reference-file line="74">/Resources/views/base.html.twig</jms:reference-file>
+        <jms:reference-file line="77">/Resources/views/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5f584865ad00e62914ac47108d14ee076f33c35e" resname="ra.profile.overview.authorizations">
         <source>ra.profile.overview.authorizations</source>
@@ -905,40 +905,55 @@
         <target>Create a new RA Location</target>
         <jms:reference-file line="3">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/create.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="25fc6a9eeb94ddb5588590e8c71eb084acaed310" resname="ra.institution_configuration.subtitle">
+        <source>ra.institution_configuration.subtitle</source>
+        <target>Configuration of %name%</target>
+        <jms:reference-file line="15">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2ed55e66a263f9e4a8705538f3af56691371a9bd" resname="ra.institution_configuration.title">
+        <source>ra.institution_configuration.title</source>
+        <target>Institution configuration</target>
+        <jms:reference-file line="3">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="f51a51a5a16addea4c78a1bd7421c9b6ede4099d" resname="ra.ra_location.manage.add">
         <source>ra.ra_location.manage.add</source>
         <target>Add an RA Location</target>
-        <jms:reference-file line="10">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="20">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ed0ff61d09551e39abfb8de3c221d24b51bef31a" resname="ra.ra_location.manage.column.contactInformation">
         <source>ra.ra_location.manage.column.contactInformation</source>
         <target>Contact Information</target>
-        <jms:reference-file line="22">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="32">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="459fb75ce969cb2d31243aea8655fb28c5970513" resname="ra.ra_location.manage.column.location">
         <source>ra.ra_location.manage.column.location</source>
         <target>Location</target>
-        <jms:reference-file line="21">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="31">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5a15cbc4257bd5c24d06cd7e156f05ef4f5d5de4" resname="ra.ra_location.manage.column.name">
         <source>ra.ra_location.manage.column.name</source>
         <target>Name</target>
-        <jms:reference-file line="20">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="30">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d577aff2084b6539d6027e8145b0fb3284882cf2" resname="ra.ra_location.manage.edit">
         <source>ra.ra_location.manage.edit</source>
         <target>Edit</target>
-        <jms:reference-file line="34">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="44">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="bec0527beec6a00f35773500e13fde8a998b7d12" resname="ra.ra_location.manage.remove">
         <source>ra.ra_location.manage.remove</source>
         <target>Remove</target>
-        <jms:reference-file line="45">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="55">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="47cc61ae8dc9ddaac28d766a3e6ef0d0e390dbec" resname="ra.ra_location.manage.subtitle">
+        <source>ra.ra_location.manage.subtitle</source>
+        <target>Locations of %name%</target>
+        <jms:reference-file line="13">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b98d29d711e4ee19c0f1c9bf7d0177edb32931d9" resname="ra.ra_location.manage.text.no_locations">
         <source>ra.ra_location.manage.text.no_locations</source>
         <target>No RA locations found for the current institution.</target>
-        <jms:reference-file line="54">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="64">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="90ed6b1e90e5184a97b345152a7595cf3f2749d6" resname="ra.ra_location.manage.title">
         <source>ra.ra_location.manage.title</source>
@@ -948,48 +963,48 @@
       <trans-unit id="a0de3018a71080cea47623b831bd7474c93d7897" resname="ra.ra_location.removal.modal.are_you_sure">
         <source>ra.ra_location.removal.modal.are_you_sure</source>
         <target>Are you sure you want to remove this RA Location?</target>
-        <jms:reference-file line="69">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="79">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5b31c8c74471e08aef9e67df823bf34704ee8287" resname="ra.ra_location.removal.modal.cancel">
         <source>ra.ra_location.removal.modal.cancel</source>
         <target>Cancel</target>
-        <jms:reference-file line="87">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="97">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3af4edb0aacfb2c1ff97c0716a0a4b54f2623485" resname="ra.ra_location.removal.modal.close">
         <source>ra.ra_location.removal.modal.close</source>
         <target>Close</target>
-        <jms:reference-file line="64">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="74">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ae4bdf6f6fe822058b7fd9c12495db5d3bd45f93" resname="ra.ra_location.removal.modal.confirm">
         <source>ra.ra_location.removal.modal.confirm</source>
         <target>Confirm</target>
-        <jms:reference-file line="65">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
-        <jms:reference-file line="88">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="75">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="98">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e98059fea0fe6432b24f15e933d0b65206341a47" resname="ra.ra_location.removal.modal.contactInformation">
         <source>ra.ra_location.removal.modal.contactInformation</source>
         <target>Contact Information</target>
-        <jms:reference-file line="81">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="91">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3dba3a71b743ee67d68a1e97692f264996860b90" resname="ra.ra_location.removal.modal.location">
         <source>ra.ra_location.removal.modal.location</source>
         <target>Location</target>
-        <jms:reference-file line="77">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="87">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4d0e7a44e93158009088987abb8bbb1f3f3acfa0" resname="ra.ra_location.removal.modal.name">
         <source>ra.ra_location.removal.modal.name</source>
         <target>Name</target>
-        <jms:reference-file line="73">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
+        <jms:reference-file line="83">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaLocation/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d0907a66b13be6d313d3abc5eac13e02156492e5" resname="ra.ra_location.revocation.could_not_remove">
         <source>ra.ra_location.revocation.could_not_remove</source>
         <target>Could not remove</target>
-        <jms:reference-file line="206">/../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php</jms:reference-file>
+        <jms:reference-file line="225">/../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="15e5cbcc209a9265cad52d14bd8809401043404c" resname="ra.ra_location.revocation.removed">
         <source>ra.ra_location.revocation.removed</source>
         <target>RA Location removed</target>
-        <jms:reference-file line="203">/../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php</jms:reference-file>
+        <jms:reference-file line="222">/../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f12e743e43bca49fe86f99db331ded47fb88f1da" resname="ra.registration.sms.text.otp_requests_remaining">
         <source>ra.registration.sms.text.otp_requests_remaining</source>
@@ -1004,7 +1019,7 @@
       <trans-unit id="800e5d0a1f57a8b4d3654ac7d173efe68c098f68" resname="ra.second_factor.revocation.could_not_revoke">
         <source>ra.second_factor.revocation.could_not_revoke</source>
         <target>The removal of the token failed</target>
-        <jms:reference-file line="150">/../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <jms:reference-file line="148">/../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f70c06516166354cd4d8d3490cbd707941610ed9" resname="ra.second_factor.revocation.modal.are_you_sure">
         <source>ra.second_factor.revocation.modal.are_you_sure</source>
@@ -1050,7 +1065,7 @@
       <trans-unit id="5c500a2dc008cbf1a8501593a2a50e518f6fe145" resname="ra.second_factor.revocation.revoked">
         <source>ra.second_factor.revocation.revoked</source>
         <target>The token has been successfully removed</target>
-        <jms:reference-file line="147">/../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php</jms:reference-file>
+        <jms:reference-file line="145">/../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2b7c9489a8b311fcdb89652c38387bd08126de9b" resname="ra.second_factor.search.column.document_number">
         <source>ra.second_factor.search.column.document_number</source>
@@ -1170,7 +1185,7 @@
       <trans-unit id="e8ada95651cf644c6bbeeff32c330b4fde42f87d" resname="ra.sraa.changed_institution">
         <source>ra.sraa.changed_institution</source>
         <target>Your institution has been changed to "%institution%"</target>
-        <jms:reference-file line="54">/../src/Surfnet/StepupRa/RaBundle/Controller/SraaController.php</jms:reference-file>
+        <jms:reference-file line="52">/../src/Surfnet/StepupRa/RaBundle/Controller/SraaController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="abe2e824031a2393db11918365a49cf65d3ec585" resname="ra.verify_identity.identity_verification_failed">
         <source>ra.verify_identity.identity_verification_failed</source>
