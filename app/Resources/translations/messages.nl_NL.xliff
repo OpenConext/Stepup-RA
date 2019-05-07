@@ -376,7 +376,7 @@
       </trans-unit>
       <trans-unit id="958288c6f1c589b8fa5875163ea436dafaa3711b" resname="ra.form.select_institution.label.institution">
         <source>ra.form.select_institution.label.institution</source>
-        <target>Instelling</target>
+        <target>Selecteer instelling</target>
         <jms:reference-file line="37">/../src/Surfnet/StepupRa/RaBundle/Form/Type/SelectInstitutionType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="bc646760865688482dd10d1f7bf383e3cf68b349" resname="ra.form.start_vetting_procedure.enter_activation_code_here">
