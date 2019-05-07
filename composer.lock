@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b26d4b51336402583bdcc8eeed6bd8d6",
+    "content-hash": "a6a24f6f7e85dafb12ce43916d8eda9c",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2367,16 +2367,16 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "3.0.15",
+            "version": "3.0.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-Middleware-clientbundle.git",
-                "reference": "8ac65291ecd2ebeea624f94810d8bad8158a9a3f"
+                "reference": "c141e98c105845c50d47053a23d6ee2f34458de5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/8ac65291ecd2ebeea624f94810d8bad8158a9a3f",
-                "reference": "8ac65291ecd2ebeea624f94810d8bad8158a9a3f",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/c141e98c105845c50d47053a23d6ee2f34458de5",
+                "reference": "c141e98c105845c50d47053a23d6ee2f34458de5",
                 "shasum": ""
             },
             "require": {
@@ -2387,10 +2387,11 @@
                 "psr/log": "~1.0",
                 "ramsey/uuid": "^3.4",
                 "surfnet/stepup-bundle": "^4.0",
-                "symfony/config": ">=2.7,<4",
-                "symfony/dependency-injection": ">=2.7,<4",
-                "symfony/http-kernel": ">=2.7,<4",
-                "symfony/validator": ">=2.7,<4"
+                "symfony/config": "^2.7|^2.8|^3.4",
+                "symfony/dependency-injection": "^2.7|^2.8|^3.4",
+                "symfony/framework-bundle": "^2.7|^2.8|^3.4",
+                "symfony/http-kernel": "^2.7|^2.8|^3.4",
+                "symfony/validator": "^2.7|^2.8|^3.4"
             },
             "conflict": {
                 "surfnet/stepup-middleware-client": "*"
@@ -2416,7 +2417,7 @@
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "time": "2019-03-12T13:14:45+00:00"
+            "time": "2019-05-07T14:03:59+00:00"
         },
         {
             "name": "surfnet/stepup-saml-bundle",
@@ -5196,5 +5197,8 @@
     "platform": {
         "php": "~5.6|~7.0"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "platform-overrides": {
+        "php": "5.6"
+    }
 }
