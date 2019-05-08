@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupRa\RaBundle\Service\InstitutionListingService;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
@@ -37,23 +38,17 @@ class RaaController extends Controller
         $identity = $this->getUser();
 
         $profile = $this->getProfileService()->findByIdentityId($identity->id);
-        $choices = [];
-        foreach ($profile->authorizations as $institution => $role) {
-            if ($role[0] == 'raa') {
-                $choices[$institution] = $institution;
-            }
-        }
 
-        $institution = reset($choices);
+        if ($this->isGranted('ROLE_SRAA')) {
+            $institution = $identity->institution;
+            $choices = $this->getInstitutionListingService()->getAll();
+        } else {
+            $choices = $profile->getRaaInstitutions();
+            $institution = reset($choices);
+        }
 
         // Only show the form if more than one institutions where found.
         if (count($choices) > 1) {
-            // SRAA's are usually not RAA for other institutions as they already are SRAA. Show the institution config
-            // of the SRAAs SHO, and let her use the SRAA switcher in order to see config for different institutions.
-            if ($this->isGranted('ROLE_SRAA')) {
-                $institution = $identity->institution;
-            }
-
             $command = new SelectInstitutionCommand();
             $command->institution = $institution;
             $command->availableInstitutions = $choices;
@@ -101,5 +96,13 @@ class RaaController extends Controller
     private function getProfileService()
     {
         return $this->get('ra.service.profile');
+    }
+
+    /**
+     * @return InstitutionListingService
+     */
+    private function getInstitutionListingService()
+    {
+        return $this->get('ra.service.institution_listing');
     }
 }

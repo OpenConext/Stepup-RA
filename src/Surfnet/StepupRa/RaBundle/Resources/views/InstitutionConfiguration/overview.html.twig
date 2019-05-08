@@ -1,23 +1,22 @@
 {% extends '::base.html.twig' %}
 
+{% block page_title %}{{ 'ra.institution_configuration.title'|trans }}{% endblock %}
+
 {% block content %}
     <div class="row">
+        <div class="col-sm-12" >
+            {% include 'SurfnetStepupRaRaBundle:Partial:languageSwitcher.html.twig' with {'form': form} only %}
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-sm-12">
-            <h3>Configuration of {{ institution }}</h3>
+            <h3>{{ 'ra.institution_configuration.subtitle'|trans({'%name%': institution}) }}</h3>
+        </div>
+    </div>
 
-            {% if form is not null %}
-
-            {{ form_start(form) }}
-            <div class="errors">
-                {{ form_errors(form) }}
-            </div>
-            <div class="row horizontal">
-                {{ form_row(form.institution) }}
-                {{ form_row(form.select_and_apply) }}
-            </div>
-            {{ form_end(form) }}
-
-            {% endif %}
+    <div class="row">
+        <div class="col-sm-12">
 
             <table class="table table-bordered table-hover">
                 <tbody>

@@ -4,8 +4,18 @@
 
 {% block content %}
     <div class="row">
+        <div class="col-sm-12" >
+            {% include 'SurfnetStepupRaRaBundle:Partial:languageSwitcher.html.twig' with {'form': form} only %}
+        </div>
+    </div>
+    <div class="row">
         <div class="col-sm-12">
-            <a class="btn btn-default pull-right" href="{{ path('ra_location_create') }}">
+            <h3>{{ 'ra.ra_location.manage.subtitle'|trans({'%name%': institution}) }}</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <a class="btn btn-default pull-right" href="{{ path('ra_location_create', {'institution': institution}) }}">
                 <i class="fa fa-plus"></i>
                 {{ 'ra.ra_location.manage.add'|trans }}
             </a>
