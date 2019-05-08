@@ -78,6 +78,7 @@ class RaManagementController extends Controller
             $raList->getCurrentPage(),
             $raList->getItemsPerPage()
         );
+        $pagination->setTotalItemCount($raList->getTotalItems());
 
         $logger->notice(sprintf(
             'Searching for RA(A)s yielded "%d" results',
@@ -136,6 +137,7 @@ class RaManagementController extends Controller
             $raCandidateList->getCurrentPage(),
             $raCandidateList->getItemsPerPage()
         );
+        $pagination->setTotalItemCount($raCandidateList->getTotalItems());
 
         $logger->notice(sprintf(
             'Searching for RaCandidates within institution "%s" yielded "%s" results',

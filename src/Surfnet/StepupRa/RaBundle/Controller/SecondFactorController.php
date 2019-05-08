@@ -75,13 +75,12 @@ final class SecondFactorController extends Controller
             return $this->forward('SurfnetStepupRaRaBundle:SecondFactor:export', ['command' => $command]);
         }
 
-        /** @var Paginator $paginator */
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
+        $pagination = $this->getPaginator()->paginate(
             $secondFactors->getElements(),
             $secondFactors->getCurrentPage(),
             $secondFactors->getItemsPerPage()
         );
+        $pagination->setTotalItemCount($secondFactors->getTotalItems());
 
         $revocationForm = $this->createForm(RevokeSecondFactorType::class, new RevokeSecondFactorCommand());
 
@@ -188,11 +187,12 @@ final class SecondFactorController extends Controller
 
         $auditLog = $this->getAuditLogService()->getAuditlog($command);
 
-        $pagination = $this->get('knp_paginator')->paginate(
-            $auditLog->getTotalItems() > 0 ? $auditLog->getElements() : [],
+        $pagination = $this->getPaginator()->paginate(
+            $auditLog->getElements(),
             $auditLog->getCurrentPage(),
             $auditLog->getItemsPerPage()
         );
+        $pagination->setTotalItemCount($auditLog->getTotalItems());
 
         $logger->notice(sprintf('Audit log yielded "%d" results, rendering page', $auditLog->getTotalItems()));
 
@@ -236,5 +236,13 @@ final class SecondFactorController extends Controller
     private function getCurrentUser()
     {
         return $this->get('security.token_storage')->getToken()->getUser();
+    }
+
+    /**
+     * @return Paginator
+     */
+    private function getPaginator()
+    {
+        return $this->get('knp_paginator');
     }
 }
