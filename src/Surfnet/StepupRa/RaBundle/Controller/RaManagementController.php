@@ -116,8 +116,9 @@ class RaManagementController extends Controller
         $service = $this->getRaCandidateService();
 
         $command                   = new SearchRaCandidatesCommand();
-        $command->actorId          = $this->getUser()->id;
+        $command->actorId          = $identity->id;
         $command->actorInstitution = $institution;
+        $command->raInstitution    = null;
         $command->pageNumber       = (int) $request->get('p', 1);
         $command->orderBy          = $request->get('orderBy');
         $command->orderDirection   = $request->get('orderDirection');
@@ -126,6 +127,7 @@ class RaManagementController extends Controller
 
         // The options that will populate the institution filter choice list.
         $command->institutionFilterOptions = $raCandidateList->getFilterOption('institution');
+        $command->raInstitutionFilterOptions = $raCandidateList->getFilterOption('raInstitution');
 
         $form = $this->createForm(SearchRaCandidatesType::class, $command, ['method' => 'get']);
         $form->handleRequest($request);

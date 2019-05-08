@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -28,10 +29,10 @@ class SearchRaCandidatesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $options = array_combine(
-            $builder->getData()->institutionFilterOptions,
-            $builder->getData()->institutionFilterOptions
-        );
+        /** @var $command SearchRaCandidatesCommand */
+        $command = $builder->getData();
+        $institutions = $command->institutionFilterOptions;
+        $raInstitutions = $command->raInstitutionFilterOptions;
 
         $builder
             ->add('name', null, [
@@ -42,7 +43,12 @@ class SearchRaCandidatesType extends AbstractType
             ])
             ->add('institution', ChoiceType::class, [
                 'label' => 'ra.form.ra_search_ra_candidates.label.institution',
-                'choices' => $options,
+                'choices' => $institutions,
+                'required' => false,
+            ])
+            ->add('raInstitution', ChoiceType::class, [
+                'label' => 'ra.form.ra_search_ra_candidates.label.raInstitution',
+                'choices' => $raInstitutions,
                 'required' => false,
             ])
             ->add('search', SubmitType::class, [
@@ -55,6 +61,7 @@ class SearchRaCandidatesType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => 'Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand',
+            'is_sraa' => false,
         ]);
     }
 

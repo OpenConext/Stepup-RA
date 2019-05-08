@@ -54,6 +54,11 @@ class SearchRaCandidatesCommand
     public $email;
 
     /**
+     * @var string
+     */
+    public $raInstitution;
+
+    /**
      * @Assert\Choice(
      *     {"name", "email"},
      *     message="ra.search_ra_candidates.order_by.invalid_choice"
@@ -82,4 +87,9 @@ class SearchRaCandidatesCommand
      * @var array
      */
     public $institutionFilterOptions;
+
+    /**
+     * @var array
+     */
+    public $raInstitutionFilterOptions;
 }

@@ -90,6 +90,10 @@ class RaCandidateService
             $query->setInstitution($command->institution);
         }
 
+        if ($command->raInstitution) {
+            $query->setRaInstitution($command->raInstitution);
+        }
+
         if ($command->orderDirection) {
             $query->setOrderDirection($command->orderDirection);
         }

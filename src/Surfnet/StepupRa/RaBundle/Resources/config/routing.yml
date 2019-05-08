@@ -138,11 +138,6 @@ ra_management_retract_registration_authority:
     methods:  [GET, POST]
     defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:retractRegistrationAuthority }
 
-sraa_select_institution:
-    path:     /sraa/select-institution
-    methods:  [GET, POST]
-    defaults: { _controller: SurfnetStepupRaRaBundle:Sraa:selectInstitution }
-
 institution-configuration:
     path: /institution-configuration
     methods: [GET, POST]
