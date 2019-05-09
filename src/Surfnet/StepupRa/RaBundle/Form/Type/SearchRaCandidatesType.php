@@ -61,7 +61,6 @@ class SearchRaCandidatesType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => 'Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand',
-            'is_sraa' => false,
         ]);
     }
 
