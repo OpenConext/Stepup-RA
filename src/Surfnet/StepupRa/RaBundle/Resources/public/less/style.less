@@ -254,15 +254,26 @@ select[name="stepup_switch_locale[locale]"] {
 }
 
 .role-at-institution {
-    position: relative;
+    display: flex;
     .form-group {
-        float: left;
-        @media (max-width: @screen-sm-min) {
-            float: none;
-        }
-        min-width: 175px;
+        margin: 0;
         select {
             min-width: 175px;
+        }
+        .control-label {
+            width: 20px;
+        }
+        &:first-child {
+            margin-left: -15px;
+        }
+    }
+
+    @media all and (-ms-high-contrast: none) {
+        /* IE10/11 specific layout tweak */
+        position: relative;
+        display: block;
+        .form-group {
+            float: left;
         }
     }
 }
