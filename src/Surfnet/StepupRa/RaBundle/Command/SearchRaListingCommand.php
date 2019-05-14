@@ -32,14 +32,6 @@ class SearchRaListingCommand
     public $actorId;
 
     /**
-     * @Assert\NotBlank(message="ra.search_ra_candidates.actor_institution.blank")
-     * @Assert\Type("string", message="ra.search_ra_candidates.actor_institution.type")
-     *
-     * @var string
-     */
-    public $actorInstitution;
-
-    /**
      * @var string
      */
     public $institution;

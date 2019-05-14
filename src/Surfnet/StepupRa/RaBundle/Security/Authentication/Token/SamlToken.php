@@ -45,30 +45,6 @@ class SamlToken extends AbstractToken
     }
 
     /**
-     * @param string $institution
-     */
-    public function changeInstitutionScope($institution)
-    {
-        if ($this->getUser() === null) {
-            throw new LogicException('Cannot change institution scope: token does not contain a user');
-        }
-
-        $roles = array_map(function (RoleInterface $role) {
-            return $role->getRole();
-        }, $this->getRoles());
-
-        if (!in_array('ROLE_SRAA', $roles)) {
-            throw new RuntimeException(sprintf(
-                'Unauthorized to change institution scope to "%s": role SRAA required, found roles "%s"',
-                $institution,
-                implode(', ', $roles)
-            ));
-        }
-
-        $this->getUser()->institution = $institution;
-    }
-
-    /**
      * Returns the user credentials.
      *
      * @return mixed The user credentials

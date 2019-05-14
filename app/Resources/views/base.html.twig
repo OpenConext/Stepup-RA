@@ -70,15 +70,6 @@
                         {{ form_widget(locale_switcher.locale) }}
                         {{ form_widget(locale_switcher.switch) }}
                         {{ form_end(locale_switcher) }}
-                {% if is_granted('ROLE_SRAA') %}
-                    <ul class="nav nav-pills pull-right">
-                        <li role="presentation"{% if app.request.attributes.get('_route') == 'sraa_select_institution' %} class="active"{% endif %}>
-                            <a href="{{ path('sraa_select_institution') }}">
-                                {{ app.user.institution }} <i class="fa fa-exchange"></i> {{ 'ra.menu.sraa_change_institution'|trans }}
-                            </a>
-                        </li>
-                    </ul>
-                {% endif %}
                 </div>
             </div>
             <div class="clearfix"></div>

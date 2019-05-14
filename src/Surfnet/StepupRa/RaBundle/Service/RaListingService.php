@@ -53,7 +53,7 @@ final class RaListingService
      */
     public function search(SearchRaListingCommand $command)
     {
-        $query = new RaListingSearchQuery($command->actorId, $command->actorInstitution, $command->pageNumber);
+        $query = new RaListingSearchQuery($command->actorId, $command->pageNumber);
 
         if ($command->name) {
             $query->setName($command->name);
@@ -89,11 +89,10 @@ final class RaListingService
     /**
      * @param string $identityId
      * @param string $institution
-     * @param string $actorInstitution
      * @param string $actorId
      * @return null|RaListing
      */
-    public function get($identityId, $institution, $actorInstitution, $actorId)
+    public function get($identityId, $institution, $actorId)
     {
         if (!is_string($identityId)) {
             throw InvalidArgumentException::invalidType('string', 'identityId', $identityId);
@@ -103,14 +102,10 @@ final class RaListingService
             throw InvalidArgumentException::invalidType('string', 'institution', $institution);
         }
 
-        if (!is_string($actorInstitution)) {
-            throw InvalidArgumentException::invalidType('string', 'actorInstitution', $actorInstitution);
-        }
-
         if (!is_string($actorId)) {
             throw InvalidArgumentException::invalidType('string', 'actorId', $actorId);
         }
 
-        return $this->apiRaListingService->get($identityId, $institution, $actorInstitution, $actorId);
+        return $this->apiRaListingService->get($identityId, $institution, $actorId);
     }
 }

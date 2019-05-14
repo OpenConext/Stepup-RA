@@ -70,7 +70,7 @@ class VettingController extends Controller
         }
 
         $secondFactor = $this->getSecondFactorService()
-            ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode, $identity->institution, $identity->id);
+            ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode, $identity->id);
 
         if ($secondFactor === null) {
             $this->addFlash('error', 'ra.form.start_vetting_procedure.unknown_registration_code');

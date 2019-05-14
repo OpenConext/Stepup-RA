@@ -26,9 +26,6 @@ use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchSecondFactorAuditLogCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType;
-use Surfnet\StepupRa\RaBundle\Security\Authorization\Context\InstitutionContext;
-use Surfnet\StepupRa\RaBundle\Security\Authorization\Voter\AllowedInOtherInstitutionVoter;
-use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -53,7 +50,6 @@ final class SecondFactorController extends Controller
         $this->get('logger')->notice('Starting search for second factors');
 
         $command = new SearchRaSecondFactorsCommand();
-        $command->actorInstitution = $identity->institution;
         $command->actorId = $identity->id;
         $command->pageNumber = (int) $request->get('p', 1);
         $command->orderBy = $request->get('orderBy');

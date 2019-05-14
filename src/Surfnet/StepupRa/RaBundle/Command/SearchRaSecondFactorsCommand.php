@@ -28,14 +28,6 @@ final class SearchRaSecondFactorsCommand
     const STATUS_REVOKED = 'revoked';
 
     /**
-     * @Assert\NotBlank(message="ra.search_ra_second_factors.institution.blank")
-     * @Assert\Type("string", message="ra.search_ra_second_factors.institution.type")
-     *
-     * @var string
-     */
-    public $actorInstitution;
-
-    /**
      * @Assert\NotBlank(message="ra.search_ra_second_factors.actor.blank")
      * @Assert\Type("string", message="ra.search_ra_second_factors.actor.type")
      *
