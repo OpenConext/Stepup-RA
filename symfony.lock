@@ -268,11 +268,11 @@
     "surfnet/stepup-saml-bundle": {
         "version": "4.1.11"
     },
-    "surfnet/stepup-u2f-bundle": {
-        "version": "dev-develop"
-    },
     "symfony/asset": {
         "version": "v4.4.10"
+    },
+    "symfony/assetic-bundle": {
+        "version": "v2.8.2"
     },
     "symfony/cache": {
         "version": "v4.4.10"
@@ -627,8 +627,5 @@
     },
     "webmozart/assert": {
         "version": "1.9.0"
-    },
-    "yubico/u2flib-server": {
-        "version": "0.1.0"
     }
 }
