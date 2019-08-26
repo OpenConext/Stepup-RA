@@ -11,7 +11,6 @@ return [
     Surfnet\SamlBundle\SurfnetSamlBundle::class => ['all' => true],
     Surfnet\StepupBundle\SurfnetStepupBundle::class => ['all' => true],
     Surfnet\StepupMiddlewareClientBundle\SurfnetStepupMiddlewareClientBundle::class => ['all' => true],
-    Surfnet\StepupU2fBundle\SurfnetStepupU2fBundle::class => ['all' => true],
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
     Surfnet\StepupRa\RaBundle\SurfnetStepupRaRaBundle::class => ['all' => true],
     Surfnet\StepupRa\SamlStepupProviderBundle\SurfnetStepupRaSamlStepupProviderBundle::class => ['all' => true],
