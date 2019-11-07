@@ -1,11 +1,10 @@
 # Changelog
 
 ## 2.10.8
-**Improvement**
-* Install security updates
+This is a security release that will harden the application against CVE 2019-346
+ * Upgrade xmlseclibs to version 3.0.4 #226 
 
-# 2.10.7
-
+## 2.10.7
 **Features**
 * Allow filtering the RA candidate on institute #201
 * Add search support on the RA management page #200
