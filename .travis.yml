@@ -36,3 +36,8 @@ branches:
     - master
     - develop
     - feature/fine-grained-authorization
+
+addons:
+  apt:
+    packages:
+      - ant
