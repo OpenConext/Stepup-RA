@@ -635,7 +635,7 @@
       </trans-unit>
       <trans-unit id="bd37603d0b4d61543e75f9903f0ea426e28de7e3" resname="ra.management.form.amend_ra_info.label.amend_ra_info">
         <source>ra.management.form.amend_ra_info.label.amend_ra_info</source>
-        <target>Amend</target>
+        <target>Modify</target>
         <jms:reference-file line="39">/../src/Surfnet/StepupRa/RaBundle/Form/Type/AmendRegistrationAuthorityInformationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9db7b05461e7e9d929e0640cac2f4dcb6341e599" resname="ra.management.form.amend_ra_info.label.cancel">
