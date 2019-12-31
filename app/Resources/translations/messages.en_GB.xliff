@@ -777,7 +777,7 @@
       </trans-unit>
       <trans-unit id="d983bd416823b073f0ce5d3a76f2ae6717818613" resname="ra.management.ra_candidate.institution">
         <source>ra.management.ra_candidate.institution</source>
-        <target>Institute</target>
+        <target>Institution</target>
         <jms:reference-file line="11">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="12c64b6bb6b6b53d7f385978810b8a6058a30899" resname="ra.management.ra_candidate.no_candidates">
