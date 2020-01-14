@@ -38,7 +38,7 @@
                         <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_second_factors' %} class="active"{% endif %}>
                             <a href="{{ path('ra_second_factors_search') }}">{{ 'ra.menu.search'|trans }}</a>
                         </li>
-                        {% if is_granted('ROLE_RAA') or is_granted('ROLE_SELECT_RAA') or is_granted('ROLE_SRAA') %}
+                        {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
                             <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_management' %} class="active"{% endif %}>
                                 <a href="{{ path('ra_management_manage') }}">{{ 'ra.menu.ra_management'|trans }}</a>
                             </li>

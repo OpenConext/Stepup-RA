@@ -115,13 +115,6 @@ class SamlProvider implements AuthenticationProviderInterface
             }
         }
 
-        // Get authorizations (implicit RAA roles through select_raa institution configuration)
-        if (!empty($profile->implicitRaaAt)) {
-            // The ROLE_SELECT_RAA applies, regardless of which institution it applies for, the application will only
-            // allow RAA actions for those institutions.
-            $roles[] = 'ROLE_SELECT_RAA';
-        }
-
         // set the token
         $authenticatedToken = new SamlToken($token->getLoa(), $roles);
         $authenticatedToken->setUser($identity);

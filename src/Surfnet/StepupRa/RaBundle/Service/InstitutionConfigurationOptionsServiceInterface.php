@@ -27,16 +27,4 @@ interface InstitutionConfigurationOptionsServiceInterface
      * @return null|InstitutionConfigurationOptions
      */
     public function getInstitutionConfigurationOptionsFor($institution);
-
-    /**
-     * Return the institutions that are configured in the useRa and useRaa insititution
-     * configuration options.
-     *
-     * If one of the two configuration options is configured with null (the default),
-     * than the institution the query was performed for is set as the default.
-     *
-     * @param $institution
-     * @return array
-     */
-    public function getAvailableInstitutionsFor($institution);
 }
