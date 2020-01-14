@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "2aa16ce83e872d1a629dafa8b127cd21",
     "packages": [
         {
             "name": "beberlei/assert",
-            "version": "v2.9.6",
+            "version": "v2.9.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/assert.git",
-                "reference": "ec9e4cf0b63890edce844ee3922e2b95a526e936"
+                "reference": "124317de301b7c91d5fce34c98bba2c6925bec95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/assert/zipball/ec9e4cf0b63890edce844ee3922e2b95a526e936",
-                "reference": "ec9e4cf0b63890edce844ee3922e2b95a526e936",
+                "url": "https://api.github.com/repos/beberlei/assert/zipball/124317de301b7c91d5fce34c98bba2c6925bec95",
+                "reference": "124317de301b7c91d5fce34c98bba2c6925bec95",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "assertion",
                 "validation"
             ],
-            "time": "2018-06-11T17:15:25+00:00"
+            "time": "2019-05-28T15:27:37+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -1268,32 +1268,33 @@
         },
         {
             "name": "moontoast/math",
-            "version": "1.1.2",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/moontoast-math.git",
-                "reference": "c2792a25df5cad4ff3d760dd37078fc5b6fccc79"
+                "reference": "5f47d34c87767dbcc08b30377a9827df71de91fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/moontoast-math/zipball/c2792a25df5cad4ff3d760dd37078fc5b6fccc79",
-                "reference": "c2792a25df5cad4ff3d760dd37078fc5b6fccc79",
+                "url": "https://api.github.com/repos/ramsey/moontoast-math/zipball/5f47d34c87767dbcc08b30377a9827df71de91fa",
+                "reference": "5f47d34c87767dbcc08b30377a9827df71de91fa",
                 "shasum": ""
             },
             "require": {
-                "ext-bcmath": "*",
-                "php": ">=5.3.3"
+                "php": ">=5.3.3",
+                "phpseclib/bcmath_compat": ">=1.0.3"
             },
             "require-dev": {
                 "jakub-onderka/php-parallel-lint": "^0.9.0",
-                "phpunit/phpunit": "^4.7|>=5.0 <5.4",
+                "phpunit/phpunit": "^4.8 || ^5.5 || ^6.5 || ^7.0",
                 "satooshi/php-coveralls": "^0.6.1",
                 "squizlabs/php_codesniffer": "^2.3"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Moontoast\\Math\\": "src/Moontoast/Math/"
+                    "Moontoast\\Math\\": "src/Moontoast/Math",
+                    "Moontoast\\Math\\Exception\\": "src/Moontoast/Math/Exception"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1314,7 +1315,7 @@
                 "math"
             ],
             "abandoned": "brick/math",
-            "time": "2017-02-16T16:54:46+00:00"
+            "time": "2020-01-05T04:49:34+00:00"
         },
         {
             "name": "mopa/bootstrap-bundle",
@@ -1644,6 +1645,152 @@
                 "random"
             ],
             "time": "2019-01-03T20:59:08+00:00"
+        },
+        {
+            "name": "phpseclib/bcmath_compat",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpseclib/bcmath_compat.git",
+                "reference": "f805922db4b3d8c1e174dafb74ac7374264e8880"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpseclib/bcmath_compat/zipball/f805922db4b3d8c1e174dafb74ac7374264e8880",
+                "reference": "f805922db4b3d8c1e174dafb74ac7374264e8880",
+                "shasum": ""
+            },
+            "require": {
+                "phpseclib/phpseclib": ">=2.0.19"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "suggest": {
+                "ext-gmp": "Will enable faster math operations"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/bcmath.php"
+                ],
+                "psr-4": {
+                    "bcmath_compat\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Wigginton",
+                    "email": "terrafrost@php.net",
+                    "homepage": "http://phpseclib.sourceforge.net"
+                }
+            ],
+            "description": "PHP 5.x/7.x polyfill for bcmath extension",
+            "keywords": [
+                "BigInteger",
+                "bcmath",
+                "bigdecimal",
+                "math",
+                "polyfill"
+            ],
+            "time": "2020-01-10T11:44:43+00:00"
+        },
+        {
+            "name": "phpseclib/phpseclib",
+            "version": "2.0.23",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpseclib/phpseclib.git",
+                "reference": "c78eb5058d5bb1a183133c36d4ba5b6675dfa099"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/c78eb5058d5bb1a183133c36d4ba5b6675dfa099",
+                "reference": "c78eb5058d5bb1a183133c36d4ba5b6675dfa099",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phing/phing": "~2.7",
+                "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
+                "sami/sami": "~2.0",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "suggest": {
+                "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
+                "ext-libsodium": "SSH2/SFTP can make use of some algorithms provided by the libsodium-php extension.",
+                "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
+                "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "phpseclib/bootstrap.php"
+                ],
+                "psr-4": {
+                    "phpseclib\\": "phpseclib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Wigginton",
+                    "email": "terrafrost@php.net",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Patrick Monnerat",
+                    "email": "pm@datasphere.ch",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Andreas Fischer",
+                    "email": "bantu@phpbb.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Hans-Jürgen Petrich",
+                    "email": "petrich@tronic-media.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Graham Campbell",
+                    "email": "graham@alt-three.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
+            "homepage": "http://phpseclib.sourceforge.net",
+            "keywords": [
+                "BigInteger",
+                "aes",
+                "asn.1",
+                "asn1",
+                "blowfish",
+                "crypto",
+                "cryptography",
+                "encryption",
+                "rsa",
+                "security",
+                "sftp",
+                "signature",
+                "signing",
+                "ssh",
+                "twofish",
+                "x.509",
+                "x509"
+            ],
+            "time": "2019-09-17T03:41:22+00:00"
         },
         {
             "name": "psr/cache",
@@ -2377,16 +2524,16 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "3.0.18",
+            "version": "3.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-Middleware-clientbundle.git",
-                "reference": "2a3f609a90370bc68ae49e827270dcc6411709d6"
+                "reference": "5b54adc425875143a3cbb022332fbe686d819d68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/2a3f609a90370bc68ae49e827270dcc6411709d6",
-                "reference": "2a3f609a90370bc68ae49e827270dcc6411709d6",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/5b54adc425875143a3cbb022332fbe686d819d68",
+                "reference": "5b54adc425875143a3cbb022332fbe686d819d68",
                 "shasum": ""
             },
             "require": {
@@ -2427,7 +2574,7 @@
                 "Apache-2.0"
             ],
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
-            "time": "2019-05-09T13:24:49+00:00"
+            "time": "2020-01-14T14:01:36+00:00"
         },
         {
             "name": "surfnet/stepup-saml-bundle",
