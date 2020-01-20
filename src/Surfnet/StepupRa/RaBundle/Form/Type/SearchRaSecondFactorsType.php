@@ -81,7 +81,8 @@ class SearchRaSecondFactorsType extends AbstractType
                 FormType::class,
                 [
                     'inherit_data' => true,
-                    'label' => false,
+                    // The empty label ensures the buttons are positioned correctly
+                    'label' => ' ',
                     'widget_form_group_attr' => ['class' => 'form-group button-group'],
                 ]
             )

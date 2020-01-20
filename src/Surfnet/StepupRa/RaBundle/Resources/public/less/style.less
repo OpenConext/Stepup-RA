@@ -160,19 +160,7 @@ select.form-control {
         input#ra_search_ra_second_factors_secondFactorId {
             max-width: 200px;
         }
-        button#ra_search_ra_second_factors_export {
-            margin-left: 0.5em;
-        }
-        div.button-group {
-            margin-left: 25%;
-            div.form-group {
-                margin-right: 14px;
-                float: left;
-                button:first-child {
-                    margin-left: 8px;
-                }
-            }
-        }
+
     }
     td.button-column {
         .audit-log, .revoke {
@@ -181,10 +169,9 @@ select.form-control {
     }
 }
 
-form[name="ra_management_create_ra"] {
+form {
     div.button-group {
         div {
-            left: 16%;
             margin-top: 0.5em;
 
             @media (max-width: @screen-sm-max) {
@@ -192,8 +179,11 @@ form[name="ra_management_create_ra"] {
             }
             div {
                 position: relative;
-                width: 110px;
+                padding-left: 15px;
                 float: left;
+            }
+            div.form-group {
+                margin-right: 1em;
             }
         }
     }
