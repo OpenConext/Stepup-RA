@@ -441,7 +441,7 @@
       </trans-unit>
       <trans-unit id="817cff31f9baf1c7bce18b5c6332c1be54bf44ef" resname="ra.institution_configuration.select_raa">
         <source>ra.institution_configuration.select_raa</source>
-        <target>From which other institution(s) can users be assigned the RA(A) role for this institution?</target>
+        <target>From which institution(s) can users be assigned the RA(A) role for this institution?</target>
         <jms:reference-file line="52">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b5fdeda8565fa6fa18934ced8039240beaf5ebea" resname="ra.institution_configuration.show_ra_contact_information">
@@ -461,7 +461,7 @@
       </trans-unit>
       <trans-unit id="0344c705268b0d366e23e4a9f3e90df9aa55960b" resname="ra.institution_configuration.use_ra">
         <source>ra.institution_configuration.use_ra</source>
-        <target>In which other institution(s) are the RAs from this institution an RA?</target>
+        <target>From which institution(s) are the RAs an RA for this institution?</target>
         <jms:reference-file line="64">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="98471184366a598d348e400875f1fe3ba1cf6c2f" resname="ra.institution_configuration.use_ra_locations">
@@ -471,7 +471,7 @@
       </trans-unit>
       <trans-unit id="63cd93b650cdeb407293c1cdef07ce9d49e0976a" resname="ra.institution_configuration.use_raa">
         <source>ra.institution_configuration.use_raa</source>
-        <target>From which other institution(s) the RAAs are also an RAA for this institution?</target>
+        <target>From which institution(s) are the RAAs an RAA for this institution?</target>
         <jms:reference-file line="76">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d6ea1d4efa906c5056f389f4fde35bbb26511521" resname="ra.institution_configuration.verify_email">
@@ -635,7 +635,7 @@
       </trans-unit>
       <trans-unit id="bd37603d0b4d61543e75f9903f0ea426e28de7e3" resname="ra.management.form.amend_ra_info.label.amend_ra_info">
         <source>ra.management.form.amend_ra_info.label.amend_ra_info</source>
-        <target>Amend</target>
+        <target>Modify</target>
         <jms:reference-file line="39">/../src/Surfnet/StepupRa/RaBundle/Form/Type/AmendRegistrationAuthorityInformationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9db7b05461e7e9d929e0640cac2f4dcb6341e599" resname="ra.management.form.amend_ra_info.label.cancel">
@@ -777,7 +777,7 @@
       </trans-unit>
       <trans-unit id="d983bd416823b073f0ce5d3a76f2ae6717818613" resname="ra.management.ra_candidate.institution">
         <source>ra.management.ra_candidate.institution</source>
-        <target>Institute</target>
+        <target>Institution</target>
         <jms:reference-file line="11">/../src/Surfnet/StepupRa/RaBundle/Resources/views/RaManagement/raCandidateOverview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="12c64b6bb6b6b53d7f385978810b8a6058a30899" resname="ra.management.ra_candidate.no_candidates">

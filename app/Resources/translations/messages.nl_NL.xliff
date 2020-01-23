@@ -441,7 +441,7 @@
       </trans-unit>
       <trans-unit id="817cff31f9baf1c7bce18b5c6332c1be54bf44ef" resname="ra.institution_configuration.select_raa">
         <source>ra.institution_configuration.select_raa</source>
-        <target>Van welke andere instelling(en) kunnen de gebruikers ook de RA(A) rol krijgen voor deze instelling?</target>
+        <target>Van welke instelling(en) kunnen de gebruikers de RA(A) rol krijgen voor deze instelling?</target>
         <jms:reference-file line="52">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b5fdeda8565fa6fa18934ced8039240beaf5ebea" resname="ra.institution_configuration.show_ra_contact_information">
@@ -461,7 +461,7 @@
       </trans-unit>
       <trans-unit id="0344c705268b0d366e23e4a9f3e90df9aa55960b" resname="ra.institution_configuration.use_ra">
         <source>ra.institution_configuration.use_ra</source>
-        <target>Van welke andere instelling(en) zijn de RA's ook RA voor deze instelling?</target>
+        <target>Van welke instelling(en) zijn de RA's een RA voor deze instelling?</target>
         <jms:reference-file line="64">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="98471184366a598d348e400875f1fe3ba1cf6c2f" resname="ra.institution_configuration.use_ra_locations">
@@ -471,7 +471,7 @@
       </trans-unit>
       <trans-unit id="63cd93b650cdeb407293c1cdef07ce9d49e0976a" resname="ra.institution_configuration.use_raa">
         <source>ra.institution_configuration.use_raa</source>
-        <target>Van welke andere instelling(en) zijn de RAA's ook RAA voor deze instelling?</target>
+        <target>Van welke instelling(en) zijn de RAA's een RAA voor deze instelling?</target>
         <jms:reference-file line="76">/../src/Surfnet/StepupRa/RaBundle/Resources/views/InstitutionConfiguration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d6ea1d4efa906c5056f389f4fde35bbb26511521" resname="ra.institution_configuration.verify_email">
