@@ -46,7 +46,7 @@ class RaManagementController extends Controller
      */
     public function manageAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SELECT_RAA', 'ROLE_SRAA']);
+        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
         $logger = $this->get('logger');
         $institution = $this->getUser()->institution;
@@ -104,7 +104,7 @@ class RaManagementController extends Controller
      */
     public function raCandidateSearchAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SELECT_RAA', 'ROLE_SRAA']);
+        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
         $logger = $this->get('logger');
         $identity = $this->getCurrentUser();
@@ -162,7 +162,7 @@ class RaManagementController extends Controller
      */
     public function createRaAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SELECT_RAA', 'ROLE_SRAA']);
+        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
         $logger = $this->get('logger');
 
         $logger->notice('Page for Accreditation of Identity to Ra or Raa requested');
@@ -221,7 +221,7 @@ class RaManagementController extends Controller
      */
     public function amendRaInformationAction(Request $request, $identityId, $raInstitution)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SELECT_RAA', 'ROLE_SRAA']);
+        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
         $logger = $this->get('logger');
         $logger->notice(sprintf("Loading information amendment form for RA(A) '%s'", $identityId));
@@ -268,7 +268,7 @@ class RaManagementController extends Controller
      */
     public function retractRegistrationAuthorityAction(Request $request, $identityId, $raInstitution)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SELECT_RAA', 'ROLE_SRAA']);
+        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
         $logger = $this->get('logger');
 
         $logger->notice(sprintf("Loading retract registration authority form for RA(A) '%s'", $identityId));
