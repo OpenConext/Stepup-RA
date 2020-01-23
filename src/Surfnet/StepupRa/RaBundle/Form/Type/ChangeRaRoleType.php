@@ -21,6 +21,7 @@ namespace Surfnet\StepupRa\RaBundle\Form\Type;
 use Surfnet\StepupRa\RaBundle\Form\Extension\RaRoleChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -35,15 +36,29 @@ class ChangeRaRoleType extends AbstractType
                 'choices' => RaRoleChoiceList::create(),
                 'choices_as_values' => true,
             ])
-            ->add('create_ra', SubmitType::class, [
-                'label' => 'ra.management.form.change_ra_role.label.save',
-                'attr'  => ['class' => 'btn btn-primary pull-right change-ra-role']
-            ])
-            ->add('cancel', AnchorType::class, [
-                'label' => 'ra.management.form.create_ra.label.cancel',
-                'route' => 'ra_management_ra_candidate_search',
-                'attr'  => ['class' => 'btn btn-link pull-right cancel']
-            ]);
+
+            ->add(
+                $builder->create(
+                    'button-group',
+                    FormType::class,
+                    [
+                        'inherit_data' => true,
+                        // The empty label ensures the buttons are positioned correctly
+                        'label' => ' ',
+                        'widget_form_group_attr' => ['class' => 'form-group button-group'],
+                    ]
+                )
+                ->add('create_ra', SubmitType::class, [
+                    'label' => 'ra.management.form.change_ra_role.label.save',
+                    'attr'  => ['class' => 'btn btn-primary pull-right change-ra-role']
+                ])
+                ->add('cancel', AnchorType::class, [
+                    'label' => 'ra.management.form.create_ra.label.cancel',
+                    'route' => 'ra_management_ra_candidate_search',
+                    'attr'  => ['class' => 'btn btn-link pull-right cancel']
+                ])
+            )
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
