@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.1.0
+A release with bugfixes after initial FGA test:
+ * Update translations #228
+ * Improve button-group button alignment #231
+ * Fix exception controller authentication exceptions #232
+ * Remove unused select_raa code #230
+ * Security updates #229
+ * Test php 7.3 with travis #224
+
 ## 3.0.1
 This is a security release that will harden the application against CVE 2019-346
  * Upgrade Stepup-saml-bundle to version 4.1.8 
