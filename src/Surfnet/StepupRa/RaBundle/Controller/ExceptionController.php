@@ -23,6 +23,7 @@ use Surfnet\StepupBundle\Controller\ExceptionController as BaseExceptionControll
 use Surfnet\StepupRa\RaBundle\Exception\LoaTooLowException;
 use Surfnet\StepupRa\RaBundle\Exception\MissingRequiredAttributeException;
 use Surfnet\StepupRa\RaBundle\Exception\UserNotRaException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 final class ExceptionController extends BaseExceptionController
 {
@@ -34,15 +35,19 @@ final class ExceptionController extends BaseExceptionController
     {
         $translator = $this->getTranslator();
 
-        if ($exception instanceof UserNotRaException) {
-            $title = $translator->trans('stepup.error.user_not_ra.title');
-            $description = $translator->trans('stepup.error.user_not_ra.description');
-        } elseif ($exception instanceof LoaTooLowException) {
-            $title = $translator->trans('stepup.error.loa_too_low.title');
-            $description = $translator->trans('stepup.error.loa_too_low.description');
-        } elseif ($exception instanceof MissingRequiredAttributeException) {
-            $title = $translator->trans('stepup.error.missing_required_attribute.title');
-            $description = $exception->getMessage();
+        if ($exception instanceof HttpException) {
+            $parent = $exception->getPrevious();
+
+            if ($parent instanceof UserNotRaException) {
+                $title = $translator->trans('stepup.error.user_not_ra.title');
+                $description = $translator->trans('stepup.error.user_not_ra.description');
+            } elseif ($parent instanceof LoaTooLowException) {
+                $title = $translator->trans('stepup.error.loa_too_low.title');
+                $description = $translator->trans('stepup.error.loa_too_low.description');
+            } elseif ($parent instanceof MissingRequiredAttributeException) {
+                $title = $translator->trans('stepup.error.missing_required_attribute.title');
+                $description = $parent->getMessage();
+            }
         }
 
         if (isset($title) && isset($description)) {
