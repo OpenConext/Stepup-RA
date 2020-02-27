@@ -126,7 +126,6 @@ class RaManagementController extends Controller
 
         // The options that will populate the institution filter choice list.
         $command->institutionFilterOptions = $raCandidateList->getFilterOption('institution');
-        $command->raInstitutionFilterOptions = $raCandidateList->getFilterOption('raInstitution');
 
         $form = $this->createForm(SearchRaCandidatesType::class, $command, ['method' => 'get']);
         $form->handleRequest($request);
