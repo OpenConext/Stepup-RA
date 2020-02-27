@@ -79,9 +79,4 @@ class SearchRaCandidatesCommand
      * @var array
      */
     public $institutionFilterOptions;
-
-    /**
-     * @var array
-     */
-    public $raInstitutionFilterOptions;
 }

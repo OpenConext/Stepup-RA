@@ -32,7 +32,6 @@ class SearchRaCandidatesType extends AbstractType
         /** @var $command SearchRaCandidatesCommand */
         $command = $builder->getData();
         $institutions = $command->institutionFilterOptions;
-        $raInstitutions = $command->raInstitutionFilterOptions;
 
         $builder
             ->add('name', null, [
@@ -44,11 +43,6 @@ class SearchRaCandidatesType extends AbstractType
             ->add('institution', ChoiceType::class, [
                 'label' => 'ra.form.ra_search_ra_candidates.label.institution',
                 'choices' => $institutions,
-                'required' => false,
-            ])
-            ->add('raInstitution', ChoiceType::class, [
-                'label' => 'ra.form.ra_search_ra_candidates.label.raInstitution',
-                'choices' => $raInstitutions,
                 'required' => false,
             ])
             ->add('search', SubmitType::class, [
