@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.1
+**Bugfix**
+ * Remove filter from ra candidate search form #233
+
 ## 3.1.0
 A release with bugfixes after initial FGA test:
  * Update translations #228
