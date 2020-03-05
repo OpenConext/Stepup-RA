@@ -75,33 +75,39 @@ class SearchRaSecondFactorsType extends AbstractType
             'required' => false,
         ]);
 
-        $builder->add(
-            $builder->create(
-                'button-group',
-                FormType::class,
-                [
-                    'inherit_data' => true,
-                    // The empty label ensures the buttons are positioned correctly
-                    'label' => ' ',
-                    'widget_form_group_attr' => ['class' => 'form-group button-group'],
-                ]
-            )
+        $buttonGroup = $builder->create(
+            'button-group',
+            FormType::class,
+            [
+                'inherit_data' => true,
+                // The empty label ensures the buttons are positioned correctly
+                'label' => ' ',
+                'widget_form_group_attr' => ['class' => 'form-group button-group'],
+            ]
+        )
             ->add('search', SubmitType::class, [
                 'label' => 'ra.form.ra_search_ra_second_factors.button.search',
                 'attr' => [ 'class' => 'btn btn-primary pull-left button-group-member' ],
-            ])
-            ->add('export', SubmitType::class, [
+            ]);
+
+        if ($options['enable_export_button']) {
+            $buttonGroup->add('export', SubmitType::class, [
                 'label' => 'ra.form.ra_search_ra_second_factors.button.export',
-                'attr' => [ 'class' => 'btn btn-secondary pull-left button-group-member' ],
-            ])
-        );
+                'attr' => ['class' => 'btn btn-secondary pull-left button-group-member'],
+            ]);
+        }
+
+        $builder->add($buttonGroup);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand',
+            'enable_export_button' => true,
         ]);
+
+        $resolver->setAllowedTypes('enable_export_button', 'bool');
     }
 
     public function getBlockPrefix()
