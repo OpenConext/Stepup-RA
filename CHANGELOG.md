@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.2
+**Bugfix**
+ * Repair the token export feature #234 
+ 
 ## 3.1.1
 **Bugfix**
  * Remove filter from ra candidate search form #233
