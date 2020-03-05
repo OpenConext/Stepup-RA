@@ -60,7 +60,10 @@ final class SecondFactorController extends Controller
         // The options that will populate the institution filter choice list.
         $command->institutionFilterOptions = $secondFactors->getFilterOption('institution');
 
-        $form = $this->createForm(SearchRaSecondFactorsType::class, $command, ['method' => 'get']);
+        $form = $this->createForm(SearchRaSecondFactorsType::class, $command, [
+            'method' => 'get',
+            'enable_export_button' => $this->isGranted(['ROLE_RAA']),
+        ]);
         $form->handleRequest($request);
 
         $secondFactors = $this->getSecondFactorService()->search($command);
@@ -99,7 +102,7 @@ final class SecondFactorController extends Controller
 
     public function exportAction(SearchRaSecondFactorsCommand $command)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted(['ROLE_RAA']);
 
         $this->get('logger')->notice('Starting export of searched second factors');
 

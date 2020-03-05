@@ -146,7 +146,7 @@ class RaSecondFactorService
      */
     public function export(ExportRaSecondFactorsCommand $command)
     {
-        $query = new RaSecondFactorExportQuery($command->actorInstitution, $command->actorId);
+        $query = new RaSecondFactorExportQuery($command->actorId);
 
         if ($command->name) {
             $query->setName($command->name);
