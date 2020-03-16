@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.3
+**Bugfix**
+ * Allow updating the location of an RA  #235
+ 
 ## 3.1.2
 **Bugfix**
  * Repair the token export feature #234 

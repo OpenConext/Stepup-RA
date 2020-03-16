@@ -234,7 +234,7 @@ class RaManagementController extends Controller
 
         $command = new AmendRegistrationAuthorityInformationCommand();
         $command->identityId = $raListing->identityId;
-        $command->location = $this->getUser()->institution;
+        $command->location = $raListing->location;
         $command->contactInformation = $raListing->contactInformation;
         $command->institution = $raListing->raInstitution;
 
