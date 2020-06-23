@@ -25,20 +25,13 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaSecondFactorExportCollec
 class RaSecondFactorExport
 {
     /**
-     * @var DataExporter
-     */
-    private $exporter;
-
-    /**
      * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
     public function __construct(
-        DataExporter $exporter,
         LoggerInterface $logger
     ) {
-        $this->exporter = $exporter;
         $this->logger = $logger;
     }
 
@@ -46,10 +39,11 @@ class RaSecondFactorExport
     {
         $this->logger->notice(sprintf('Exporting %d rows to "%s"', $collection->count(), $fileName));
 
-        $this->exporter->setOptions('csv', ['fileName' => $fileName]);
-        $this->exporter->setColumns($collection->getColumnNames());
-        $this->exporter->setData($collection->getElements());
-
-        return $this->exporter->render();
+        throw new \Exception('TODO: implement');
+//        $this->exporter->setOptions('csv', ['fileName' => $fileName]);
+//        $this->exporter->setColumns($collection->getColumnNames());
+//        $this->exporter->setData($collection->getElements());
+//
+//        return $this->exporter->render();
     }
 }

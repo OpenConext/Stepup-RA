@@ -221,7 +221,6 @@ services:
     ra.service.ra_second_factor_exporter:
         class: Surfnet\StepupRa\RaBundle\Service\RaSecondFactorExport
         arguments:
-            - "@ee.dataexporter"
             - "@logger"
 
     ra.service.ra_second_factor:

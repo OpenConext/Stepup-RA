@@ -19,9 +19,8 @@
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\Tests\Provider;
 
 use Mockery as m;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -55,11 +54,12 @@ final class ViewConfigTest extends TestCase
     /**
      * @test
      * @group di
-     * @expectedException \Surfnet\StepupRa\RaBundle\Exception\LogicException
-     * @expectedExceptionMessage The current language is not set
      */
     public function translation_fails_when_no_current_language_set()
     {
+        $this->expectExceptionMessage("The current language is not set");
+        $this->expectException(\Surfnet\StepupRa\RaBundle\Exception\LogicException::class);
+
         $viewConfig = $this->buildViewConfig(null);
         $viewConfig->getExplanation();
     }
@@ -67,12 +67,12 @@ final class ViewConfigTest extends TestCase
     /**
      * @test
      * @group di
-     * @expectedException \Surfnet\StepupRa\RaBundle\Exception\LogicException
-     * @expectedExceptionMessage The requested translation is not available in this language: fr_FR.
-     *                           Available languages: en_GB, nl_NL
      */
     public function view_config_cannot_serve_french_translations()
     {
+        $this->expectExceptionMessage("The requested translation is not available in this language: fr_FR. Available languages: en_GB, nl_NL");
+        $this->expectException(\Surfnet\StepupRa\RaBundle\Exception\LogicException::class);
+
         $viewConfig = $this->buildViewConfig('fr_FR');
         $viewConfig->getGssfIdMismatch();
     }

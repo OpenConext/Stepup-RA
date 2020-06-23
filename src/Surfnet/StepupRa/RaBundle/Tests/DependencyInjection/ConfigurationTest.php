@@ -19,7 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Tests\DependencyInjection;
 
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Surfnet\StepupRa\RaBundle\DependencyInjection\Configuration;
 
 final class ConfigurationTest extends TestCase

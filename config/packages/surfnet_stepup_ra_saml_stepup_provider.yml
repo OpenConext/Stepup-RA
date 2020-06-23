@@ -1,6 +1,3 @@
-imports:
-    - { resource: samlstepupproviders_parameters.yml }
-
 surfnet_stepup_ra_saml_stepup_provider:
     routes:
         consume_assertion: ra_vetting_gssf_verify

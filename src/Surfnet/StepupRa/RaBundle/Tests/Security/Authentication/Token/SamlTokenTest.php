@@ -18,12 +18,9 @@
 
 namespace Surfnet\StepupRa\RaBundle\Tests\Security\Authentication\Token;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Surfnet\StepupBundle\Value\Loa;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurationOptions;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
-use Surfnet\StepupRa\RaBundle\Exception\LogicException;
-use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 
 class SamlTokenTest extends TestCase

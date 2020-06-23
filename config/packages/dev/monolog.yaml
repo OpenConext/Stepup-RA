@@ -6,7 +6,6 @@ monolog:
       type: fingers_crossed
       action_level: ERROR
       passthru_level: DEBUG # DEV setting: this means that all message of level DEBUG or higher are always logged
-      #passthru_level: NOTICE # PROD setting this means that all message of level NOTICE or higher are always logged
       handler: main_syslog
       bubble: true
     main_syslog:

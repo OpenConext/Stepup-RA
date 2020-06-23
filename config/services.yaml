@@ -1,3 +1,10 @@
+imports:
+  - { resource: 'legacy/samlstepupproviders_parameters.yaml' }
+  - { resource: 'legacy/global_view_parameters.yaml' }
+  - { resource: 'legacy/parameters.yaml' }
+
+
+
 services:
   twig.extension.text: # Required by JMSTranslationBundle
     class: Twig_Extensions_Extension_Text

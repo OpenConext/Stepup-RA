@@ -1,0 +1,15 @@
+nelmio_security_report:
+  path: /csp/report
+  defaults: { _controller: nelmio_security.csp_reporter_controller:indexAction }
+  methods: [POST]
+
+openconext_monitor:
+  resource: "@OpenConextMonitorBundle/Resources/config/routing.yml"
+  prefix: /
+
+surfnet_stepup_ra_ra:
+  resource: "@SurfnetStepupRaRaBundle/Resources/config/routing.yml"
+
+logout:
+  path: /logout
+  methods: [POST]

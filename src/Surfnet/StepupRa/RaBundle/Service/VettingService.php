@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use DateInterval;
 use RuntimeException;
 use Surfnet\StepupBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
@@ -35,7 +36,6 @@ use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 use Surfnet\StepupRa\RaBundle\Exception\LoaTooLowException;
-use Surfnet\StepupRa\RaBundle\Exception\RegistrationCodeExpiredException;
 use Surfnet\StepupRa\RaBundle\Exception\UnknownVettingProcedureException;
 use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
 use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult as GssfVerificationResult;
@@ -143,7 +143,7 @@ class VettingService
         return DateTime::now()->comesAfter(
             new DateTime(
                 $command->secondFactor->registrationRequestedAt
-                    ->add(new \DateInterval('P14D'))
+                    ->add(new DateInterval('P14D'))
                     ->setTime(23, 59, 59)
             )
         );
