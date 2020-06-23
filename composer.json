@@ -90,13 +90,13 @@
         "symfony-assets-install": "relative",
         "incenteev-parameters": [
             {
-                "file": "app/config/parameters.yml"
+                "file": "config/legacy/parameters.yml"
             },
             {
-                "file": "app/config/samlstepupproviders_parameters.yml"
+                "file": "config/legacy/samlstepupproviders_parameters.yml"
             },
             {
-                "file": "app/config/global_view_parameters.yml"
+                "file": "config/legacy/global_view_parameters.yml"
             }
         ]
     }

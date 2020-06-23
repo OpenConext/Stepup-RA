@@ -1,0 +1,4 @@
+services:
+  twig.extension.text: # Required by JMSTranslationBundle
+    class: Twig_Extensions_Extension_Text
+    tags: [{ name: twig.extension }]
