@@ -21,7 +21,6 @@
     ],
     "require": {
         "php": "~5.6|~7.0",
-        "ee/dataexporter-bundle": "dev-feature/syfony-3-and-4-support",
         "fortawesome/font-awesome": "~4.2.0",
         "guzzlehttp/guzzle": "^6",
         "incenteev/composer-parameter-handler": "~2.0",
@@ -38,8 +37,7 @@
         "surfnet/stepup-middleware-client-bundle": "^3.0",
         "surfnet/stepup-saml-bundle": "^4.1",
         "surfnet/stepup-u2f-bundle": "dev-develop",
-        "symfony/assetic-bundle": "~2.3",
-        "symfony/monolog-bundle": "~3.1.0",
+        "symfony/monolog-bundle": "^3.5",
         "symfony/symfony": "3.4.*",
         "twbs/bootstrap": "~3.3.0",
         "twig/extensions": "~1.5",
@@ -81,6 +79,10 @@
         }
     },
     "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "4.4.*"
+        },
         "symfony-app-dir": "app",
         "symfony-var-dir": "app",
         "symfony-bin-dir": "app",
