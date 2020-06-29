@@ -19,7 +19,6 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,27 +33,25 @@ class AmendRegistrationAuthorityInformationType extends AbstractType
                 'label' => 'ra.management.form.amend_ra_info.label.location'
             ])
             ->add('contactInformation', TextareaType::class, [
-                'label' => 'ra.management.form.amend_ra_info.label.contact_information'
+                'label' => 'ra.management.form.amend_ra_info.label.contact_information',
+                'attr' => ['class'=>'col-sm-2'],
             ])
             ->add(
                 $builder->create(
                     'button-group',
-                    FormType::class,
+                    ButtonGroupType::class,
                     [
                         'inherit_data' => true,
-                        // The empty label ensures the buttons are positioned correctly
-                        'label' => ' ',
-                        'widget_form_group_attr' => ['class' => 'form-group button-group'],
                     ]
                 )
                 ->add('amend_ra_info', SubmitType::class, [
                     'label' => 'ra.management.form.amend_ra_info.label.amend_ra_info',
-                    'attr' => ['class' => 'btn btn-primary pull-right']
+                    'attr' => ['class' => 'btn btn-primary']
                 ])
                 ->add('cancel', AnchorType::class, [
                     'label' => 'ra.management.form.amend_ra_info.label.cancel',
                     'route' => 'ra_management_manage',
-                    'attr'  => ['class' => 'btn btn-link pull-right cancel']
+                    'attr'  => ['class' => 'btn btn-link cancel']
                 ])
             )
         ;

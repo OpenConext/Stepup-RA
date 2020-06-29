@@ -18,8 +18,6 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/translation-bundle": "^1.5",
         "knplabs/knp-paginator-bundle": "^5.0",
-        "mopa/bootstrap-bundle": "^3.2",
-        "mopa/composer-bridge": "~1.5",
         "nelmio/security-bundle": "2.9.*",
         "openconext/monitor-bundle": "^2.0",
         "ramsey/uuid": "^3.5",
@@ -37,6 +35,7 @@
         "symfony/translation": "4.4.*",
         "symfony/twig-pack": "^1.0",
         "symfony/validator": "4.4.*",
+        "symfony/webpack-encore-bundle": "^1.7",
         "twbs/bootstrap": "~3.3.0",
         "twig/extensions": "~1.5",
         "twig/twig": "^2.12"

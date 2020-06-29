@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block page_title %}{{ 'ra.registration.yubikey.title.enter_challenge'|trans }}{% endblock %}
+
+{% block page_header %}
+    {{ parent() }}
+
+    {% include 'SurfnetStepupRaRaBundle:vetting/partial:progress_bar.html.twig' with {'progress': 25, 'step': 2} only %}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ block('page_title') }}</h2>
+
+    <ul>
+        <li>{{ 'ra.vetting.yubikey.text.connect_yubikey_to_pc'|trans }}</li>
+        <li>{{ 'ra.vetting.yubikey.text.ensure_form_field_focus'|trans }}</li>
+        <li>{{ 'ra.vetting.yubikey.text.press_once_form_auto_submitted'|trans }}</li>
+    </ul>
+
+    <hr>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.otp, { value: '' }) }}
+
+    {{ form_end(form) }}
+
+    <hr>
+
+    {% include 'SurfnetStepupRaRaBundle:vetting/partial:cancel_vetting_procedure.html.twig' with { 'procedureId': app.request.attributes.get('procedureId') } only %}
+
+{% endblock %}

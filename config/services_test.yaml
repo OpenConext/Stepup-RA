@@ -1,0 +1,27 @@
+# Use this service definition file to override services and parameters in the test environment.
+# For example to mock certain services, or override a parameter for test.
+
+services:
+  surfnet_stepup.service.sms_second_factor:
+    class: Surfnet\StepupBundle\Tests\TestDouble\Service\SmsSecondFactorService
+    arguments:
+      - "@surfnet_stepup.service.challenge_handler"
+
+  # The middleware client bundle guzzle client is overloaded to be able to pass the testcookie to the ensure MW is
+  # loaded in test mode. This way people setting the testcookie in prod will not switch their mw api into testmode
+  # resulting in 500 errors.
+  surfnet_stepup_middleware_client.guzzle.api:
+    public: false
+    class: GuzzleHttp\Client
+    factory: ['Surfnet\StepupRa\RaBundle\Tests\TestDouble\Factory\GuzzleApiFactory', createApiGuzzleClient]
+    arguments:
+    - "%middleware_url_api%"
+    - "%middleware_credentials_username%"
+    - "secret"
+
+  surfnet_stepup_middleware_client.guzzle.commands:
+    public: false
+    class: GuzzleHttp\Client
+    factory: ['Surfnet\StepupRa\RaBundle\Tests\TestDouble\Factory\GuzzleApiFactory', createCommandGuzzleClient]
+    arguments:
+    - "%middleware_url_command_api%"

@@ -4,3 +4,4 @@ twig:
   exception_controller: SurfnetStepupRaRaBundle:Exception:show
   globals:
     global_view_parameters: "@ra.service.global_view_parameters"
+  form_themes: ['bootstrap_3_horizontal_layout.html.twig', '@SurfnetStepupRaRa/form/fields.html.twig']

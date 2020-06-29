@@ -49,7 +49,9 @@ class RoleAtInstitutionType extends AbstractType
         $builder ->add('role', ChoiceType::class, [
             'label' => false,
             'choices' => RaRoleChoiceList::create(),
-            'choices_as_values' => true,
+            'choice_value' => function ($choice) {
+                return $choice;
+            },
             'required' => $isRequired,
         ])->add('institution', ChoiceType::class, [
             'label' => 'ra.form.role_at_institution.label.institution',
@@ -64,7 +66,6 @@ class RoleAtInstitutionType extends AbstractType
             'data_class' => RoleAtInstitution::class,
             'choices' => [],
             'horizontal' => true,
-            'horizontal_input_wrapper_class' => 'role-at-institution col-sm-9',
             'error_bubbling' => false,
         ));
     }

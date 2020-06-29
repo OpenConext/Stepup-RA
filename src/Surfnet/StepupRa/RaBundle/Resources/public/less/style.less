@@ -1,4 +1,5 @@
-@import "../../../../../../../vendor/mopa/bootstrap-bundle/Mopa/Bundle/BootstrapBundle/Resources/public/less/bootstrap-fontawesome.less";
+@import "../../../../../../../node_modules/bootstrap-less/bootstrap/index";
+@import "../../../../../../../node_modules/font-awesome/less/font-awesome";
 
 // overriding the font path for correct loading.
 @FontAwesomePath: "/fonts";
@@ -169,27 +170,6 @@ select.form-control {
     }
 }
 
-form {
-    div.button-group {
-        div {
-            margin-top: 0.5em;
-
-            @media (max-width: @screen-sm-max) {
-                left: 0.5em;
-            }
-            div {
-                position: relative;
-                padding-left: 15px;
-                float: left;
-            }
-            div.form-group {
-                margin-right: 1em;
-            }
-        }
-    }
-}
-
-
 form[name="ra_search_ra_candidates"] {
     input#ra_search_ra_candidates_name {
         max-width: 300px;
@@ -204,11 +184,6 @@ form[name="ra_search_ra_candidates"] {
 
 form[name="logout"] button {
     line-height: 26px;
-}
-
-form[name="ra_search_ra_candidates"] button.search-button,
-form[name="ra_search_ra_listing"] button.search-button {
-    margin-left: 26%;
 }
 
 form[name="stepup_switch_locale"] {
@@ -243,31 +218,6 @@ select[name="stepup_switch_locale[locale]"] {
     min-width: 150px;
 }
 
-.role-at-institution {
-    display: flex;
-    .form-group {
-        margin: 0;
-        select {
-            min-width: 175px;
-        }
-        .control-label {
-            width: 20px;
-        }
-        &:first-child {
-            margin-left: -15px;
-        }
-    }
-
-    @media all and (-ms-high-contrast: none) {
-        /* IE10/11 specific layout tweak */
-        position: relative;
-        display: block;
-        .form-group {
-            float: left;
-        }
-    }
-}
-
 .hidden {
     display: none;
 }
@@ -297,4 +247,16 @@ select[name="stepup_switch_locale[locale]"] {
 
 .result-count {
     margin-top: 1em;
+}
+
+.break-all {
+    word-wrap: break-word; word-break: break-all
+}
+
+.identity-verified {
+    margin: 20px 0;
+
+    label {
+        font-weight: bold;
+    }
 }

@@ -68,12 +68,6 @@
     "moontoast/math": {
         "version": "1.2.1"
     },
-    "mopa/bootstrap-bundle": {
-        "version": "v3.3.0"
-    },
-    "mopa/composer-bridge": {
-        "version": "v1.5.0"
-    },
     "myclabs/deep-copy": {
         "version": "1.9.5"
     },
@@ -282,9 +276,6 @@
     },
     "symfony/cache-contracts": {
         "version": "v1.1.7"
-    },
-    "symfony/class-loader": {
-        "version": "v3.4.42"
     },
     "symfony/config": {
         "version": "v4.4.10"
@@ -571,6 +562,25 @@
             "config/packages/dev/web_profiler.yaml",
             "config/packages/test/web_profiler.yaml",
             "config/routes/dev/web_profiler.yaml"
+        ]
+    },
+    "symfony/webpack-encore-bundle": {
+        "version": "1.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.6",
+            "ref": "69e1d805ad95964088bd510c05995e87dc391564"
+        },
+        "files": [
+            "assets/css/app.css",
+            "assets/js/app.js",
+            "config/packages/assets.yaml",
+            "config/packages/prod/webpack_encore.yaml",
+            "config/packages/test/webpack_encore.yaml",
+            "config/packages/webpack_encore.yaml",
+            "package.json",
+            "webpack.config.js"
         ]
     },
     "symfony/yaml": {

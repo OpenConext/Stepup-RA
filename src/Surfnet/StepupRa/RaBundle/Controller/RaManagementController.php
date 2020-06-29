@@ -88,7 +88,7 @@ class RaManagementController extends Controller
         $raListings = $raList->getElements();
 
         return $this->render(
-            'SurfnetStepupRaRaBundle:RaManagement:manage.html.twig',
+            'SurfnetStepupRaRaBundle:ra_management:manage.html.twig',
             [
                 'form' => $form->createView(),
                 'raList' => $raListings,
@@ -146,7 +146,7 @@ class RaManagementController extends Controller
         ));
 
         return $this->render(
-            'SurfnetStepupRaRaBundle:RaManagement:raCandidateOverview.html.twig',
+            'SurfnetStepupRaRaBundle:ra_management:ra_candidate_overview.html.twig',
             [
                 'form'         => $form->createView(),
                 'raCandidates' => $raCandidateList,
@@ -206,7 +206,7 @@ class RaManagementController extends Controller
             $this->addFlash('error', 'ra.management.create_ra.error.middleware_command_failed');
         }
 
-        return $this->render('SurfnetStepupRaRaBundle:RaManagement:createRa.html.twig', [
+        return $this->render('SurfnetStepupRaRaBundle:ra_management:create_ra.html.twig', [
             'raCandidate' => $raCandidate->raCandidate,
             'form'        => $form->createView()
         ]);
@@ -253,7 +253,7 @@ class RaManagementController extends Controller
             $this->addFlash('error', 'ra.management.amend_ra_info.error.middleware_command_failed');
         }
 
-        return $this->render('SurfnetStepupRaRaBundle:RaManagement:amendRaInformation.html.twig', [
+        return $this->render('SurfnetStepupRaRaBundle:ra_management:amend_ra_information.html.twig', [
             'raListing' => $raListing,
             'form' => $form->createView(),
         ]);
@@ -284,7 +284,7 @@ class RaManagementController extends Controller
 
         $form = $this->createForm(RetractRegistrationAuthorityType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($form->get('cancel')->isClicked()) {
+            if ($form->get('button-group')->get('cancel')->isClicked()) {
                 $logger->notice('Retraction of registration authority cancelled');
                 return $this->redirectToRoute('ra_management_manage');
             }
@@ -305,7 +305,7 @@ class RaManagementController extends Controller
             $this->addFlash('error', 'ra.management.retract_ra.middleware_command_failed');
         }
 
-        return $this->render('SurfnetStepupRaRaBundle:RaManagement:confirmRetractRa.html.twig', [
+        return $this->render('SurfnetStepupRaRaBundle:ra_management:confirm_retract_ra.html.twig', [
             'raListing' => $raListing,
             'form'      => $form->createView()
         ]);

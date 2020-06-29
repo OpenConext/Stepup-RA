@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+
+            {{ form(form) }}
+
+            {% if raList|length > 0 %}
+                <div class="result-count">{{ 'ra.management.search.text.number_results'|transchoice(numberOfResults, {'count': numberOfResults}) }}</div>
+            {% endif %}
+
+            <hr>
+
+            <a href="{{ path('ra_management_ra_candidate_search') }}" class="btn btn-primary pull-right" role="button">
+                <i class="fa fa-plus"></i> {{ 'ra.management.overview.add_raa'|trans }}
+            </a>
+            <table class="table table-striped orderable">
+                <thead>
+                    <tr>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.management.overview.common_name'|trans, 'commonName') }}</th>
+                        <th>{{ 'ra.management.overview.email'|trans }}</th>
+                        <th>{{ 'ra.management.overview.institution'|trans }}</th>
+                        <th>{{ 'ra.management.overview.role'|trans }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for authority in raList %}
+                    <tr>
+                        <td>{{ authority.commonName }}</td>
+                        <td>{{ authority.email }}</td>
+                        <td>{{ authority.institution }}</td>
+                        <td>
+                            {{ ('ra.management.overview.role.value.'~authority.role)|trans }}
+                            @
+                            {{ authority.raInstitution }}
+                        </td>
+                        <td>
+                            <a href="{{ path('ra_management_amend_ra_information', {identityId: authority.identityId, raInstitution: authority.raInstitution}) }}" class="btn btn-primary" role="button">
+                                {{ 'ra.management.overview.update_information'|trans }}
+                            </a>
+                            <a href="{{ path('ra_management_retract_registration_authority', {identityId: authority.identityId, raInstitution: authority.raInstitution}) }}" class="btn btn-warning" role="button">
+                                {{ 'ra.management.overview.remove_as_ra'|trans }}
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {{ knp_pagination_render(pagination) }}
+
+        </div>
+    </div>
+{% endblock %}

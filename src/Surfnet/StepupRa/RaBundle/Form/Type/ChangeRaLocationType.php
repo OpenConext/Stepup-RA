@@ -19,7 +19,6 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -42,12 +41,14 @@ class ChangeRaLocationType extends AbstractType
             ->add(
                 $builder->create(
                     'button-group',
-                    FormType::class,
+                    ButtonGroupType::class,
                     [
                         'inherit_data' => true,
                         // The empty label ensures the buttons are positioned correctly
                         'label' => ' ',
-                        'widget_form_group_attr' => ['class' => 'form-group button-group'],
+                        'row_attr' => [
+                            'class' => 'form-group button-group'
+                        ],
                     ]
                 )
                 ->add('change_ra_location', SubmitType::class, [

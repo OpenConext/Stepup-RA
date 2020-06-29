@@ -19,7 +19,6 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -42,22 +41,19 @@ class CreateRaLocationType extends AbstractType
             ->add(
                 $builder->create(
                     'button-group',
-                    FormType::class,
+                    ButtonGroupType::class,
                     [
                         'inherit_data' => true,
-                        // The empty label ensures the buttons are positioned correctly
-                        'label' => ' ',
-                        'widget_form_group_attr' => ['class' => 'form-group button-group'],
                     ]
                 )
                 ->add('create_ra_location', SubmitType::class, [
                     'label' => 'ra.form.ra_create_ra_location.label.create_ra_location',
-                    'attr' => ['class' => 'btn btn-primary pull-right create-ra-location']
+                    'attr' => ['class' => 'btn btn-primary']
                 ])
                 ->add('cancel', AnchorType::class, [
                     'label' => 'ra.form.ra_create_ra_location.label.cancel',
                     'route' => 'ra_locations_manage',
-                    'attr'  => ['class' => 'btn btn-link pull-right cancel']
+                    'attr'  => ['class' => 'btn btn-link cancel']
                 ])
             )
         ;

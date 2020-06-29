@@ -27,7 +27,14 @@ class RetractRegistrationAuthorityType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
+        $builder->add(
+            $builder->create(
+                'button-group',
+                ButtonGroupType::class,
+                [
+                    'inherit_data' => true,
+                ]
+            )
             ->add('confirm', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-warning pull-right'],
                 'label' => 'ra.management.retract_ra.modal.confirm',
@@ -35,7 +42,8 @@ class RetractRegistrationAuthorityType extends AbstractType
             ->add('cancel', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-info pull-right'],
                 'label' => 'ra.management.retract_ra.modal.cancel',
-            ]);
+            ])
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
