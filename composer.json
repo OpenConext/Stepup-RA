@@ -28,6 +28,7 @@
         "surfnet/stepup-saml-bundle": "^4.1",
         "surfnet/stepup-u2f-bundle": "dev-develop",
         "symfony/asset": "4.4.*",
+        "symfony/expression-language": "4.4.*",
         "symfony/flex": "^1.8",
         "symfony/form": "4.4.*",
         "symfony/monolog-bundle": "^3.5",
