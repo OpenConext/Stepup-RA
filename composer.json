@@ -69,6 +69,24 @@
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "@auto-scripts"
+        ],
+        "frontend-install": [
+            "yarn install",
+            "yarn encore production"
+        ]
+    },
+    "archive": {
+        "exclude": [
+            "*",
+            ".*",
+            "*/Tests/*",
+            "!/bin",
+            "!/config",
+            "!/public",
+            "!/src",
+            "!/templates",
+            "!/var/cache/prod",
+            "!/vendor"
         ]
     },
     "config": {
