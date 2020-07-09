@@ -2,6 +2,7 @@ imports:
   - { resource: 'legacy/samlstepupproviders_parameters.yaml' }
   - { resource: 'legacy/global_view_parameters.yaml' }
   - { resource: 'legacy/parameters.yaml' }
+  - { resource: 'legacy/samlstepupproviders.yaml' }
 
 
 
