@@ -65,16 +65,22 @@ class VettingProcedure
     /**
      * @var boolean|null
      */
+    private $skipProvePossession;
+
+    /**
+     * @var boolean|null
+     */
     private $vetted;
 
     /**
-     * @param string               $id
-     * @param string               $authorityId
-     * @param string               $registrationCode
+     * @param string $id
+     * @param string $authorityId
+     * @param string $registrationCode
      * @param VerifiedSecondFactor $secondFactor
+     * @param bool $skipProvePossession
      * @return self
      */
-    public static function start($id, $authorityId, $registrationCode, VerifiedSecondFactor $secondFactor)
+    public static function start($id, $authorityId, $registrationCode, VerifiedSecondFactor $secondFactor, $skipProvePossession)
     {
         if (!is_string($id)) {
             throw InvalidArgumentException::invalidType('string', 'id', $id);
@@ -88,11 +94,16 @@ class VettingProcedure
             throw InvalidArgumentException::invalidType('string', 'registrationCode', $registrationCode);
         }
 
+        if (!is_bool($skipProvePossession)) {
+            throw InvalidArgumentException::invalidType('string', 'skipProvePossession', $skipProvePossession);
+        }
+
         $procedure = new self();
         $procedure->id = $id;
         $procedure->authorityId = $authorityId;
         $procedure->registrationCode = $registrationCode;
         $procedure->secondFactor = $secondFactor;
+        $procedure->skipProvePossession = $skipProvePossession;
 
         return $procedure;
     }
@@ -227,6 +238,14 @@ class VettingProcedure
     }
 
     /**
+     * @return bool|null
+     */
+    public function isProvePossessionSkippable()
+    {
+        return $this->skipProvePossession;
+    }
+
+    /**
      * @return bool
      */
     private function isReadyForSecondFactorToBeVerified()
@@ -239,8 +258,7 @@ class VettingProcedure
      */
     private function isReadyForIdentityVerification()
     {
-        return $this->inputSecondFactorIdentifier === $this->secondFactor->secondFactorIdentifier
-            && !empty($this->registrationCode);
+        return $this->isPossessionProvenOrCanItBeSkipped() && !empty($this->registrationCode);
     }
 
     /**
@@ -248,9 +266,17 @@ class VettingProcedure
      */
     private function isReadyForVetting()
     {
-        return $this->inputSecondFactorIdentifier === $this->secondFactor->secondFactorIdentifier
+        return $this->isPossessionProvenOrCanItBeSkipped()
             && !empty($this->registrationCode)
             && !empty($this->documentNumber)
             && $this->identityVerified === true;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isPossessionProvenOrCanItBeSkipped()
+    {
+        return ($this->inputSecondFactorIdentifier === $this->secondFactor->secondFactorIdentifier || $this->skipProvePossession);
     }
 }

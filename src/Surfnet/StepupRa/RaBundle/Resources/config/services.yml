@@ -118,6 +118,7 @@ services:
             - "@translator"
             - "@ra.service.identity"
             - "@surfnet_stepup.service.second_factor_type"
+            - "@surfnet_stepup_middleware_client.identity.service.second_factor"
 
     ra.service.yubikey:
         public: false
