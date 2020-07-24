@@ -35,8 +35,8 @@ Encore
     ])
 
     .addEntry('u2f', [
-        '@SurfnetStepupU2fBundle/Resources/public/u2f-api.js',
-        '@SurfnetStepupU2fBundle/Resources/public/u2f.js',
+        './public/bundles/surfnetstepupu2f/u2f-api.js',
+        './public/bundles/surfnetstepupu2f/u2f.js',
     ])
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
