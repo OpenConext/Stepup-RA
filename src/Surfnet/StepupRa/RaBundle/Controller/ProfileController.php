@@ -31,7 +31,7 @@ final class ProfileController extends Controller
 
         $identity = $this->getUser();
         $profile = $this->getProfileService()->findByIdentityId($identity->id);
-        return $this->render('SurfnetStepupRaRaBundle:Profile:profile.html.twig', ['profile' => $profile]);
+        return $this->render('SurfnetStepupRaRaBundle:profile:profile.html.twig', ['profile' => $profile]);
     }
 
     /**

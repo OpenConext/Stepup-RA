@@ -20,19 +20,19 @@ namespace Surfnet\StepupRa\RaBundle\Tests\Security\Session;
 
 use DateTime as CoreDateTime;
 use Mockery;
-use PHPUnit_Framework_TestCase as UnitTest;
+use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\AuthenticatedSessionStateHandler;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Session\SessionLifetimeGuard;
 use Surfnet\StepupRa\RaBundle\Value\DateTime;
 use Surfnet\StepupRa\RaBundle\Value\TimeFrame;
 
-class SessionLifetimeGuardTest extends UnitTest
+class SessionLifetimeGuardTest extends TestCase
 {
     /**
      * Ensures that any modifications to the time do not bleed through to other tests
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->setCurrentTime(null);
     }

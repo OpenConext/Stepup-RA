@@ -1,0 +1,10 @@
+jms_translation:
+  locales: "%locales%"
+  configs:
+    default:
+      dirs: ["%kernel.root_dir%/../src", "%kernel.root_dir%/../templates", "%kernel.root_dir%/../vendor/surfnet/stepup-middleware-client-bundle", "%kernel.root_dir%/../vendor/surfnet/stepup-bundle"]
+      output_dir: '%kernel.project_dir%/translations'
+      ignored_domains: []
+      excluded_names: ['*TestCase.php', '*Test.php']
+      excluded_dirs: [cache, data, logs, Tests, vendor]
+      extractors: []

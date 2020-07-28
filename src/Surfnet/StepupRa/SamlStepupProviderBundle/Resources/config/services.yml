@@ -1,5 +1,6 @@
 services:
     gssp.provider_repository:
+        public: true
         class: Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ProviderRepository
 
     gssp.sessionbag:

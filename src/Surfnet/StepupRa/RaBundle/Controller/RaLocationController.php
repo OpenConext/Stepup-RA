@@ -142,7 +142,7 @@ final class RaLocationController extends Controller
             $this->addFlash('error', 'ra.create_ra_location.error.middleware_command_failed');
         }
 
-        return $this->render('SurfnetStepupRaRaBundle:RaLocation:create.html.twig', [
+        return $this->render('SurfnetStepupRaRaBundle:ra_location:create.html.twig', [
             'form' => $form->createView()
         ]);
     }
@@ -191,7 +191,7 @@ final class RaLocationController extends Controller
             $this->addFlash('error', 'ra.create_ra_location.error.middleware_command_failed');
         }
 
-        return $this->render('SurfnetStepupRaRaBundle:RaLocation:change.html.twig', [
+        return $this->render('SurfnetStepupRaRaBundle:ra_location:change.html.twig', [
             'form' => $form->createView()
         ]);
     }

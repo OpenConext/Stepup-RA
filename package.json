@@ -1,0 +1,22 @@
+{
+    "devDependencies": {
+        "@symfony/webpack-encore": "^0.30.0",
+        "bootstrap-less": "^3.3.8",
+        "core-js": "^3.0.0",
+        "font-awesome": "^4.7.0",
+        "jquery": "^3.5.1",
+        "less": "^3.11.3",
+        "less-loader": "^4.1.0",
+        "moment": "^2.27.0",
+        "regenerator-runtime": "^0.13.2",
+        "webpack-notifier": "^1.6.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch --watch-poll=300",
+        "build": "encore production --progress"
+    }
+}

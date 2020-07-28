@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+{% block html_tag %}
+<html lang="{{ app.request.locale }}">
+{% endblock html_tag %}
+
+{% block head %}
+    <head>
+        <meta charset="{{ _charset }}" />
+        {% block head_style %}
+            {{ encore_entry_link_tags('global') }}
+        {% endblock head_style %}
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}
+                {% block page_title%}
+                {% endblock page_title%}
+                {%  if block('page_title') is not empty %}&mdash; {% endif %}
+
+                {{ 'app.name'|trans }}
+            {% endblock title %}
+        </title>
+        {% block favicon %}<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />{% endblock %}
+
+        {% block head_bottom %}
+            <base href="{{ app.request.schemeAndHttpHost ~ app.request.baseUrl }}">
+        {% endblock head_bottom %}
+    </head>
+{% endblock head %}
+
+{% block body_tag %}
+<body>
+{% endblock body_tag %}
+
+{% block body_start %}
+{% endblock body_start %}
+
+{% block body %}
+
+    {% block navbar %}{% endblock navbar %}
+
+    {% block container %}
+        {% block container_div_start %}<div class="{% block container_class %}container{% endblock container_class %}">{% endblock container_div_start %}
+        {% block header %}
+        {% endblock header %}
+
+    {% block content_div_start %}<div class="content">{% endblock content_div_start %}
+        {% block page_header %}
+            <div class="page-header clearfix">
+                <img src="/images/header-logo.png" class="pull-right logo" alt="OpenConext Stepup">
+                <h1>{{ 'app.name'|trans }}</h1>
+            </div>
+            {% block menu %}
+                {% if app.user %}
+                    <div class="row-fluid">
+                        <div class="col-sm-8">
+                            <ul class="nav nav-pills">
+                                <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_vetting' %} class="active"{% endif %}>
+                                    <a href="{{ path('ra_vetting_search') }}">{{ 'ra.menu.registration'|trans }}</a>
+                                </li>
+                                <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_second_factors' %} class="active"{% endif %}>
+                                    <a href="{{ path('ra_second_factors_search') }}">{{ 'ra.menu.search'|trans }}</a>
+                                </li>
+                                {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                                    <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_management' %} class="active"{% endif %}>
+                                        <a href="{{ path('ra_management_manage') }}">{{ 'ra.menu.ra_management'|trans }}</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                                    <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_locations' %} class="active"{% endif %}>
+                                        <a href="{{ path('ra_locations_manage') }}">{{ 'ra.menu.ra_locations'|trans }}</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                                    <li role="presentation"{% if app.request.attributes.get('_route') starts with 'institution-configuration' %} class="active"{% endif %}>
+                                        <a href="{{ path('institution-configuration') }}">{{ 'ra.menu.institution-configuration'|trans }}</a>
+                                    </li>
+                                {% endif %}
+
+                                <li role="presentation"{% if app.request.attributes.get('_route') == 'ra_profile' %} class="active"{% endif %}>
+                                    <a href="{{ path('ra_profile') }}">{{ 'ra.menu.ra_profile'|trans }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4">
+                            <form name="logout" method="post" action="{{ logout_url('saml_based') }}" class="pull-right">
+                                <button type="submit" class="btn btn-link"><i class="fa fa-sign-out"></i> {{ 'button.logout'|trans }}</button>
+                            </form>
+                            {% set locale_switcher = stepup_locale_switcher(app.request.locale, 'ra_switch_locale', {'return-url': app.request.uri}) %}
+                            {{ form_start(locale_switcher, { attr: { class: 'form-inline' }}) }}
+                            {{ form_widget(locale_switcher.locale) }}
+                            {{ form_widget(locale_switcher.switch) }}
+                            {{ form_end(locale_switcher) }}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr>
+                {% endif %}
+            {% endblock menu %}
+        {% endblock page_header %}
+
+        {% block form_errors %}
+            {% if app.session.flashbag.peekAll|length > 0 %}
+                <div class="row-fluid">
+                    <div id="flash" class="span12">
+                        {% for type, flashes in app.session.flashbag.all %}
+                            {% for flash in flashes %}
+                                <div class="alert alert-{{ type }} fade in">
+                                    {{ flash|trans }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endblock form_errors %}
+
+        {% block content_row %}
+            {% block content %}
+            {% endblock content %}
+        {% endblock content_row %}
+
+    {% block content_div_end %}</div>{% endblock content_div_end %}
+
+    {% block footer_tag_start %}
+        <footer>
+    {% endblock footer_tag_start %}
+
+        {% block footer %}
+            <div class="row-fluid">
+                <div class="span8 offset2">
+                    <hr>
+                    <ul class="nav nav-pills">
+                        <li><a href="{{ global_view_parameters.supportUrl }}" target="_blank">{{ 'footer.documentation'|trans }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        {% endblock footer %}
+
+    {% block footer_tag_end %}
+        </footer>
+    {% endblock footer_tag_end %}
+        {% block container_div_end %}</div>{% endblock container_div_end %}
+    {% endblock container %}
+
+    {% block body_end_before_js %}
+    {% endblock body_end_before_js %}
+
+    {% block foot_script %}
+
+
+        {{ encore_entry_script_tags('app') }}
+    {% endblock foot_script %}
+
+    {% block foot_script_additional %}
+    {% endblock foot_script_additional %}
+
+{% endblock body %}
+
+{% block body_end %}
+{% endblock body_end %}
+</body>
+</html>

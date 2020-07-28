@@ -18,27 +18,21 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
-use EE\DataExporterBundle\Service\DataExporter;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaSecondFactorExportCollection;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RaSecondFactorExport
 {
-    /**
-     * @var DataExporter
-     */
-    private $exporter;
-
     /**
      * @var \Psr\Log\LoggerInterface
      */
     private $logger;
 
     public function __construct(
-        DataExporter $exporter,
         LoggerInterface $logger
     ) {
-        $this->exporter = $exporter;
         $this->logger = $logger;
     }
 
@@ -46,10 +40,28 @@ class RaSecondFactorExport
     {
         $this->logger->notice(sprintf('Exporting %d rows to "%s"', $collection->count(), $fileName));
 
-        $this->exporter->setOptions('csv', ['fileName' => $fileName]);
-        $this->exporter->setColumns($collection->getColumnNames());
-        $this->exporter->setData($collection->getElements());
+        $keys = array_keys($collection->getColumnNames());
 
-        return $this->exporter->render();
+        return new StreamedResponse(
+            function () use ($collection, $keys) {
+                $handle = fopen('php://output', 'r+');
+                fputcsv($handle, $collection->getColumnNames());
+                foreach ($collection->getElements() as $row) {
+                    $cells = [];
+                    $array = (array)$row;
+                    foreach ($keys as $key) {
+                        $cells[$key] = $array[$key];
+                    }
+                    fputcsv($handle, $cells);
+                }
+                fflush($handle);
+                fclose($handle);
+            },
+            Response::HTTP_OK,
+            [
+                'Content-Type' => 'application/csv',
+                'Content-Disposition' => sprintf('attachment; filename="%s.csv"', $fileName),
+            ]
+        );
     }
 }

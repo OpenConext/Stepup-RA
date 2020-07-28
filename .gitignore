@@ -5,18 +5,51 @@
 /app/bootstrap.php.cache
 /web/css/*
 /web/js/*
-/app/config/*.crt
-/app/config/*.key
+/config/*.crt
+/config/*.key
+/config/keys
 /app/cache/*
-/app/config/parameters.yml
-/app/config/samlstepupproviders_parameters.yml
-/app/config/global_view_parameters.yml
+/config/legacy/parameters.yaml
+/config/legacy/samlstepupproviders_parameters.yaml
+/config/legacy/global_view_parameters.yaml
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep
 /build/
-/vendor/
 /composer.phar
 /cache.properties
 /app/SymfonyRequirements.php
 /app/check.php
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###

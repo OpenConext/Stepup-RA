@@ -31,19 +31,15 @@ class VerifyIdentityType extends AbstractType
     {
         $builder->add('documentNumber', TextType::class, [
             'label' => 'ra.form.verify_identity.document_number.label',
-            'horizontal_label_class' => 'col-sm-6 left-aligned',
-            'horizontal_input_wrapper_class' => 'col-sm-6',
             'attr' => [
                 'autofocus' => true,
                 'autocomplete' => 'off',
                 'maxlength' => 6,
-                'novalidate' => true
+                'novalidate' => true,
             ]
         ]);
         $builder->add('identityVerified', CheckboxType::class, [
             'label' => 'ra.form.verify_identity.identity_verified.label',
-            'widget_checkbox_label' => 'widget',
-            'widget_form_group_attr' => ['class' => 'form-group form-group-verify-identity'],
         ]);
         $builder->add('verifyIdentity', SubmitType::class, [
             'label' => 'ra.form.verify_identity.verify_identity.button',

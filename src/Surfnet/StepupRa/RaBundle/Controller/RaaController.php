@@ -73,7 +73,7 @@ class RaaController extends Controller
         }
 
         return $this->render(
-            '@SurfnetStepupRaRa/InstitutionConfiguration/overview.html.twig',
+            '@SurfnetStepupRaRa/institution_configuration/overview.html.twig',
             [
                 'configuration' => (array)$configuration,
                 'form' => isset($form) ? $form->createView() : null,
