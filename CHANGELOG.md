@@ -1,5 +1,9 @@
 # Changelog
 
+# 4.1.1
+**Feature**
+ * Bump lodash to 4.17.9 to mitigate vulnerability #240
+ 
 # 4.1.0
 **Feature**
  * Make the the prove possession step optional #238
