@@ -27,6 +27,7 @@ use Surfnet\StepupBundle\Service\SmsSecondFactor\OtpVerification;
 use Surfnet\StepupBundle\Service\SmsSecondFactorServiceInterface;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupBundle\Value\SecondFactorType;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\VetSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\CreateU2fSignRequestCommand;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
@@ -101,6 +102,14 @@ class VettingService
      */
     private $secondFactorTypeService;
 
+    /**
+     * @var SecondFactorService
+     */
+    private $secondFactorService;
+
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     */
     public function __construct(
         SmsSecondFactorServiceInterface $smsSecondFactorService,
         YubikeySecondFactorService $yubikeySecondFactorService,
@@ -110,7 +119,8 @@ class VettingService
         VettingProcedureRepository $vettingProcedureRepository,
         TranslatorInterface $translator,
         IdentityService $identityService,
-        SecondFactorTypeService $secondFactorTypeService
+        SecondFactorTypeService $secondFactorTypeService,
+        SecondFactorService $secondFactorService
     ) {
         $this->smsSecondFactorService = $smsSecondFactorService;
         $this->yubikeySecondFactorService = $yubikeySecondFactorService;
@@ -121,6 +131,7 @@ class VettingService
         $this->translator = $translator;
         $this->identityService = $identityService;
         $this->secondFactorTypeService = $secondFactorTypeService;
+        $this->secondFactorService = $secondFactorService;
     }
 
     /**
@@ -167,11 +178,14 @@ class VettingService
             );
         }
 
+        $provePossessionSkipped = $this->secondFactorService->getVerifiedCanSkipProvePossession($command->secondFactor->id);
+
         $procedure = VettingProcedure::start(
             $command->secondFactor->id,
             $command->authorityId,
             $command->registrationCode,
-            $command->secondFactor
+            $command->secondFactor,
+            $provePossessionSkipped
         );
 
         $this->vettingProcedureRepository->store($procedure);
@@ -396,9 +410,10 @@ class VettingService
         $command->secondFactorId = $procedure->getSecondFactor()->id;
         $command->registrationCode = $procedure->getRegistrationCode();
         $command->secondFactorType = $procedure->getSecondFactor()->type;
-        $command->secondFactorIdentifier = $procedure->getInputSecondFactorIdentifier();
+        $command->secondFactorIdentifier = $procedure->getSecondFactor()->secondFactorIdentifier;
         $command->documentNumber = $procedure->getDocumentNumber();
         $command->identityVerified = $procedure->isIdentityVerified();
+        $command->provePossessionSkipped = $procedure->isProvePossessionSkippable();
 
         $result = $this->commandService->execute($command);
 
@@ -417,6 +432,16 @@ class VettingService
     public function getIdentityCommonName($procedureId)
     {
         return $this->getProcedure($procedureId)->getSecondFactor()->commonName;
+    }
+
+    /**
+     * @param $procedureId
+     * @return string
+     * @throws UnknownVettingProcedureException
+     */
+    public function isProvePossessionSkippable($procedureId)
+    {
+        return $this->getProcedure($procedureId)->isProvePossessionSkippable();
     }
 
     /**

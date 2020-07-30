@@ -137,6 +137,15 @@ class VettingController extends Controller
             ->forProcedure($procedureId)
             ->notice(sprintf('Starting new Vetting Procedure for second factor of type "%s"', $secondFactor->type));
 
+
+        if ($this->getVettingService()->isProvePossessionSkippable($procedureId)) {
+            $this->get('ra.procedure_logger')
+                ->forProcedure($procedureId)
+                ->notice(sprintf('Vetting Procedure for second factor of type "%s" skips the possession proven step', $secondFactor->type));
+
+            return $this->redirectToRoute('ra_vetting_verify_identity', ['procedureId' => $procedureId]);
+        }
+
         $secondFactorType = new SecondFactorType($secondFactor->type);
         if ($secondFactorType->isYubikey()) {
             return $this->redirectToRoute('ra_vetting_yubikey_verify', ['procedureId' => $procedureId]);
