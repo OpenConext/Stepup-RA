@@ -18,5 +18,8 @@
         "dev": "encore dev",
         "watch": "encore dev --watch --watch-poll=300",
         "build": "encore production --progress"
+    },
+    "resolutions": {
+        "**/**/lodash": "^4.17.19"
     }
 }
