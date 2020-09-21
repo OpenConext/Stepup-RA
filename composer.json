@@ -77,7 +77,6 @@
     },
     "archive": {
         "exclude": [
-            "*",
             ".*",
             "*/Tests/*",
             "!/bin",
