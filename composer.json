@@ -81,6 +81,7 @@
             ".*",
             "*/Tests/*",
             "!/bin",
+            "!/component_info",
             "!/config",
             "!/public",
             "!/src",
