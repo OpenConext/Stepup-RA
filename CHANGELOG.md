@@ -1,5 +1,11 @@
 # Changelog
 
+# 4.1.2
+**Bugfix**
+ * Add component_info to archive
+ * Update Content Security Policy to allow images
+ * Update http-kernel #243
+
 # 4.1.1
 **Feature**
  * Bump lodash to 4.17.9 to mitigate vulnerability #240
