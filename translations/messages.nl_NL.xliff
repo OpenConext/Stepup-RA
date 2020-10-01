@@ -676,7 +676,7 @@
       </trans-unit>
       <trans-unit id="da2f16725402f6eb6734c3bd558eb7039de6d861" resname="ra.management.form.change_ra_location.label.change_ra_location">
         <source>ra.management.form.change_ra_location.label.change_ra_location</source>
-        <target>Bewerk</target>
+        <target>Opslaan</target>
         <jms:reference-file line="55">/src/../src/Surfnet/StepupRa/RaBundle/Form/Type/ChangeRaLocationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c46b2115a26b03ef1c8eb69d299b537486003056" resname="ra.management.form.change_ra_role.label.role">
