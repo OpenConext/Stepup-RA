@@ -7,6 +7,7 @@
         "jquery": "^3.5.1",
         "less": "^3.11.3",
         "less-loader": "^4.1.0",
+        "lodash": "^4.17.19",
         "moment": "^2.27.0",
         "regenerator-runtime": "^0.13.2",
         "webpack-notifier": "^1.6.0"
@@ -18,8 +19,5 @@
         "dev": "encore dev",
         "watch": "encore dev --watch --watch-poll=300",
         "build": "encore production --progress"
-    },
-    "resolutions": {
-        "**/**/lodash": "^4.17.19"
     }
 }
