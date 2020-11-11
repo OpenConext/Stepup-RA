@@ -25,7 +25,7 @@ cache:
 
 before_script:
   - phpenv config-add .travis.php.ini
-  - composer self-update 1.10.17
+  - composer self-update --1
   - composer install --prefer-dist
 
 script:
