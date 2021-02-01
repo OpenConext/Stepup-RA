@@ -20,6 +20,7 @@
 /cache.properties
 /app/SymfonyRequirements.php
 /app/check.php
+/local-php-security-checker
 
 ###> symfony/framework-bundle ###
 /.env.local
