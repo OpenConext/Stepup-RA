@@ -135,7 +135,7 @@ class SamlInteractionProvider
             throw new UnexpectedIssuerException(sprintf(
                 'Expected issuer to be configured remote IdP "%s", got "%s"',
                 $this->identityProvider->getEntityId(),
-                $assertion->getIssuer()
+                (string) $assertion->getIssuer()
             ));
         }
 
