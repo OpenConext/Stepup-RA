@@ -33,14 +33,9 @@ class SamlTokenTest extends TestCase
      */
     public function saml_token_is_correctly_serialized_and_unserialized()
     {
-        $institutionConfigurationOptions = new InstitutionConfigurationOptions();
-        $institutionConfigurationOptions->useRaLocations = true;
-        $institutionConfigurationOptions->showRaaContactInformation = false;
-
         $samlToken = new SamlToken(
             new Loa(Loa::LOA_1, 'http://some.url.tld/authentication/loa1'),
-            ['ROLE_RAA'],
-            $institutionConfigurationOptions
+            ['ROLE_RAA']
         );
 
         $serialized = $samlToken->serialize();
