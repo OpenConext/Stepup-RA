@@ -221,7 +221,7 @@ final class U2fService
 
         foreach ($violations as $violation) {
             /** @var ConstraintViolationInterface $violation */
-            $errors[] = sprintf('%s.%s: %s', $rootName, $violation->getPropertyPath(), $violation->getMessage());
+            $errors[] = sprintf('%s.%s: %s', $rootName, $violation->getPropertyPath(), (string) $violation->getMessage());
         }
 
         return $errors;
