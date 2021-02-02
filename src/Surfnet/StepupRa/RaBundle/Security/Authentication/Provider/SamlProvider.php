@@ -73,7 +73,7 @@ class SamlProvider implements AuthenticationProviderInterface
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)   might be changed by introducing additional utility classes.
      *                                                 Consider rebuilding this in the future.
      * @param SamlToken|TokenInterface $token
-     * @return TokenInterface|void
+     * @return TokenInterface
      */
     public function authenticate(TokenInterface $token)
     {
