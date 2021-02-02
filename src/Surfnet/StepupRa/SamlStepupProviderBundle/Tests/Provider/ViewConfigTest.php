@@ -78,7 +78,7 @@ final class ViewConfigTest extends TestCase
     }
 
     /**
-     * @param string $locale
+     * @param string|null $locale
      * @return ViewConfig
      */
     private function buildViewConfig($locale = '')
