@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\VerifyU2fPublicIdCommand;
+use Surfnet\StepupRa\RaBundle\Controller\Vetting\RegisterRequest;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Surfnet\StepupU2fBundle\Dto\SignResponse;
 use Surfnet\StepupU2fBundle\Form\Type\VerifyDeviceAuthenticationType;
