@@ -182,7 +182,6 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
      * @param array            $configuration
      * @param array            $routes
      * @param ContainerBuilder $container
-     * @return Definition
      */
     private function createMetadataDefinition(
         $provider,
