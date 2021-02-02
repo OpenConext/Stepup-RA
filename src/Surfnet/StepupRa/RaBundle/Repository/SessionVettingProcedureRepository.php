@@ -60,7 +60,7 @@ class SessionVettingProcedureRepository implements VettingProcedureRepository
 
     /**
      * @param string $id
-     * @return void
+     * @return mixed
      */
     public function remove($id)
     {
