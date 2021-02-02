@@ -24,7 +24,7 @@ use Surfnet\StepupRa\SamlStepupProviderBundle\Exception\UnknownProviderException
 final class ProviderRepository
 {
     /**
-     * @var []Provider
+     * @var Provider[]
      */
     private $providers;
 
