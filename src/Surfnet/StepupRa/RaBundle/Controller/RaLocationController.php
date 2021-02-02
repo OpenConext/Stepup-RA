@@ -29,6 +29,7 @@ use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaLocationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RemoveRaLocationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
+use Surfnet\StepupRa\RaBundle\Service\InstitutionListingService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
