@@ -116,7 +116,7 @@ class RaManagementController extends Controller
 
         $command                   = new SearchRaCandidatesCommand();
         $command->actorId          = $identity->id;
-        $command->actorInstitution = $institution;
+        $command->institution = $institution;
         $command->raInstitution    = null;
         $command->pageNumber       = (int) $request->get('p', 1);
         $command->orderBy          = $request->get('orderBy');
