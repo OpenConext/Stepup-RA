@@ -436,7 +436,7 @@ class VettingService
 
     /**
      * @param $procedureId
-     * @return string
+     * @return bool|null
      * @throws UnknownVettingProcedureException
      */
     public function isProvePossessionSkippable($procedureId)
