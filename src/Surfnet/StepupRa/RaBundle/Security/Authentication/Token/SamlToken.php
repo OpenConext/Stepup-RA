@@ -41,7 +41,7 @@ class SamlToken extends AbstractToken
         parent::__construct($roles);
 
         $this->loa = $loa;
-        $this->setAuthenticated(count($roles));
+        $this->setAuthenticated(!empty($roles));
     }
 
     /**
