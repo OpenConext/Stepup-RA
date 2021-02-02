@@ -171,8 +171,8 @@ class VettingService
         if (!$this->isLoaSufficientToStartProcedure($command)) {
             throw new LoaTooLowException(
                 sprintf(
-                    "Registration authority has LoA '%s', which is not enough to allow vetting of a '%s' second factor",
-                    $command->authorityLoa,
+                    "Registration authority has LoA '%u', which is not enough to allow vetting of a '%s' second factor",
+                    (string) $command->authorityLoa,
                     $command->secondFactor->type
                 )
             );
