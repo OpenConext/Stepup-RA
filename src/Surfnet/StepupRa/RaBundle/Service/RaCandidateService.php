@@ -24,6 +24,8 @@ use Surfnet\StepupBundle\Value\Loa;
 use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaCandidateSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AccreditIdentityCommand;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateCollection;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitutions;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaCandidateService as ApiRaCandidateService;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
@@ -70,7 +72,7 @@ class RaCandidateService
      * @param SearchRaCandidatesCommand $command
      * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateCollection
      */
-    public function search(SearchRaCandidatesCommand $command)
+    public function search(SearchRaCandidatesCommand $command): RaCandidateCollection
     {
         $query = new RaCandidateSearchQuery($command->actorId, $command->pageNumber);
 
@@ -108,7 +110,7 @@ class RaCandidateService
      * @param string $actorId
      * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitutions
      */
-    public function getRaCandidate($identityId, $actorId)
+    public function getRaCandidate($identityId, $actorId): RaCandidateInstitutions
     {
         if (!is_string($identityId)) {
             throw InvalidArgumentException::invalidType('string', 'identityId', $identityId);
@@ -121,7 +123,7 @@ class RaCandidateService
         return $this->apiRaCandidateService->get($identityId, $actorId);
     }
 
-    public function accreditCandidate(AccreditCandidateCommand $command)
+    public function accreditCandidate(AccreditCandidateCommand $command): bool
     {
         $apiCommand                     = new AccreditIdentityCommand();
         $apiCommand->raInstitution      = $command->roleAtInstitution->getInstitution();
@@ -152,7 +154,7 @@ class RaCandidateService
     /**
      * @return string[]
      */
-    private function getLoa3SecondFactorTypes()
+    private function getLoa3SecondFactorTypes(): array
     {
         $loa3 = new Loa(Loa::LOA_3, 'LOA3');
         return array_filter(

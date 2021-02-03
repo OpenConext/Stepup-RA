@@ -33,7 +33,7 @@ final class ViewConfigTest extends TestCase
      * @test
      * @group di
      */
-    public function view_config_translates_correctly()
+    public function view_config_translates_correctly(): void
     {
         $viewConfig = $this->buildViewConfig('nl_NL');
 
@@ -55,7 +55,7 @@ final class ViewConfigTest extends TestCase
      * @test
      * @group di
      */
-    public function translation_fails_when_no_current_language_set()
+    public function translation_fails_when_no_current_language_set(): void
     {
         $this->expectExceptionMessage("The current language is not set");
         $this->expectException(\Surfnet\StepupRa\RaBundle\Exception\LogicException::class);
@@ -68,7 +68,7 @@ final class ViewConfigTest extends TestCase
      * @test
      * @group di
      */
-    public function view_config_cannot_serve_french_translations()
+    public function view_config_cannot_serve_french_translations(): void
     {
         $this->expectExceptionMessage("The requested translation is not available in this language: fr_FR. Available languages: en_GB, nl_NL");
         $this->expectException(\Surfnet\StepupRa\RaBundle\Exception\LogicException::class);
@@ -81,7 +81,7 @@ final class ViewConfigTest extends TestCase
      * @param string|null $locale
      * @return ViewConfig
      */
-    private function buildViewConfig($locale = '')
+    private function buildViewConfig($locale = ''): ViewConfig
     {
         $request = m::mock(RequestStack::class);
         $request->shouldReceive('getCurrentRequest->getLocale')->andReturn($locale)->byDefault();
@@ -99,7 +99,7 @@ final class ViewConfigTest extends TestCase
      * @param $string
      * @return array
      */
-    private function getTranslationsArray($string)
+    private function getTranslationsArray($string): array
     {
         return [
             'en_GB' => 'EN ' . $string,

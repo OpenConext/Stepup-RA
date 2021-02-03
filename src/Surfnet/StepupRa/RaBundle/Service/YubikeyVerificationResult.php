@@ -43,7 +43,7 @@ class YubikeyVerificationResult
     /**
      * @return bool
      */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return !$this->clientError && !$this->serverError;
     }
@@ -51,7 +51,7 @@ class YubikeyVerificationResult
     /**
      * @return boolean
      */
-    public function isClientError()
+    public function isClientError(): bool
     {
         return $this->clientError;
     }
@@ -59,7 +59,7 @@ class YubikeyVerificationResult
     /**
      * @return boolean
      */
-    public function isServerError()
+    public function isServerError(): bool
     {
         return $this->serverError;
     }

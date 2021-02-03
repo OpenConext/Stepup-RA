@@ -43,7 +43,7 @@ final class LocaleListener implements EventSubscriberInterface
         $this->translator = $translator;
     }
 
-    public function setRequestLocale(GetResponseEvent $event)
+    public function setRequestLocale(GetResponseEvent $event): void
     {
         $token = $this->tokenStorage->getToken();
 
@@ -69,7 +69,7 @@ final class LocaleListener implements EventSubscriberInterface
         }
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             // Default locale listener listens at P16

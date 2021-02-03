@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication;
 
+use SAML2\Assertion;
 use Surfnet\SamlBundle\Entity\IdentityProvider;
 use Surfnet\SamlBundle\Entity\ServiceProvider;
 use Surfnet\SamlBundle\Http\PostBinding;
@@ -27,9 +28,9 @@ use Surfnet\StepupBundle\Service\LoaResolutionService;
 use Surfnet\StepupBundle\Value\Loa;
 use Surfnet\StepupRa\RaBundle\Exception\LoaTooLowException;
 use Surfnet\StepupRa\RaBundle\Exception\UnexpectedIssuerException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
@@ -91,7 +92,7 @@ class SamlInteractionProvider
     /**
      * @return bool
      */
-    public function isSamlAuthenticationInitiated()
+    public function isSamlAuthenticationInitiated(): bool
     {
         return $this->samlAuthenticationStateHandler->hasRequestId();
     }
@@ -99,7 +100,7 @@ class SamlInteractionProvider
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function initiateSamlRequest()
+    public function initiateSamlRequest(): RedirectResponse
     {
         $authnRequest = AuthnRequestFactory::createNewRequest(
             $this->serviceProvider,
@@ -120,7 +121,7 @@ class SamlInteractionProvider
      * @throws AuthenticationException When response LoA cannot be resolved
      * @throws UnexpectedIssuerException
      */
-    public function processSamlResponse(Request $request)
+    public function processSamlResponse(Request $request): Assertion
     {
         /** @var \SAML2\Assertion $assertion */
         $assertion = $this->postBinding->processResponse(
@@ -160,7 +161,7 @@ class SamlInteractionProvider
     /**
      * Resets the SAML flow.
      */
-    public function reset()
+    public function reset(): void
     {
         $this->samlAuthenticationStateHandler->clearRequestId();
     }

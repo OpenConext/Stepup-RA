@@ -101,6 +101,7 @@ class U2fController extends SecondFactorController
 
     /**
      * @Template
+     * @return array|Response
      */
     public function provePossessionAction(Request $request, $procedureId)
     {
@@ -145,7 +146,7 @@ class U2fController extends SecondFactorController
     /**
      * @return VettingService
      */
-    private function getVettingService()
+    private function getVettingService(): VettingService
     {
         return $this->get('ra.service.vetting');
     }

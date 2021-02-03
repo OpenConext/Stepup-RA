@@ -75,7 +75,7 @@ class SamlProvider implements AuthenticationProviderInterface
      * @param SamlToken|TokenInterface $token
      * @return TokenInterface
      */
-    public function authenticate(TokenInterface $token)
+    public function authenticate(TokenInterface $token): TokenInterface
     {
         $translatedAssertion = $this->attributeDictionary->translate($token->assertion);
 
@@ -122,7 +122,10 @@ class SamlProvider implements AuthenticationProviderInterface
         return $authenticatedToken;
     }
 
-    private function getSingleStringValue($attribute, AssertionAdapter $translatedAssertion)
+    /**
+     * @return string[]
+     */
+    private function getSingleStringValue($attribute, AssertionAdapter $translatedAssertion): array
     {
         $values = $translatedAssertion->getAttributeValue($attribute);
 
@@ -161,7 +164,7 @@ class SamlProvider implements AuthenticationProviderInterface
         return $value;
     }
 
-    public function supports(TokenInterface $token)
+    public function supports(TokenInterface $token): bool
     {
         return $token instanceof SamlToken;
     }

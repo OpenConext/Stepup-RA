@@ -55,7 +55,7 @@ class SecondFactorService
      * @param string $actorId
      * @return null|VerifiedSecondFactor
      */
-    public function findVerifiedSecondFactorByRegistrationCode($registrationCode, $actorId)
+    public function findVerifiedSecondFactorByRegistrationCode($registrationCode, $actorId): ?VerifiedSecondFactor
     {
         $query = new VerifiedSecondFactorSearchQuery();
         $query->setActorId($actorId);

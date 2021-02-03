@@ -70,7 +70,7 @@ class IdentityService implements UserProviderInterface
      *
      * If needed, the username is the UUID of the identity so it can be fetched rather easy
      */
-    public function loadUserByUsername($username)
+    public function loadUserByUsername($username): void
     {
         throw new RuntimeException(sprintf('Cannot Load User By Username "%s"', $username));
     }
@@ -78,7 +78,7 @@ class IdentityService implements UserProviderInterface
     /**
      * For now this functionality is disabled, unsure if actually needed
      */
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $user): void
     {
         throw new RuntimeException(sprintf('Cannot Refresh User "%s"', $user->getUsername()));
     }
@@ -90,7 +90,7 @@ class IdentityService implements UserProviderInterface
      *
      * @return bool
      */
-    public function supportsClass($class)
+    public function supportsClass($class): bool
     {
         return $class === 'Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity';
     }
@@ -99,7 +99,7 @@ class IdentityService implements UserProviderInterface
      * @param string $identityId the UUID of the identity to find
      * @return null|Identity
      */
-    public function findById($identityId)
+    public function findById($identityId): ?Identity
     {
         return $this->apiIdentityService->get($identityId);
     }
@@ -110,7 +110,7 @@ class IdentityService implements UserProviderInterface
      * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
      * @throws \Surfnet\StepupRa\RaBundle\Exception\RuntimeException
      */
-    public function findByNameIdAndInstitution($nameId, $institution)
+    public function findByNameIdAndInstitution($nameId, $institution): ?Identity
     {
         $searchQuery = new IdentitySearchQuery();
         $searchQuery->setNameId($nameId);
@@ -143,7 +143,7 @@ class IdentityService implements UserProviderInterface
      * @param Identity $identity
      * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RegistrationAuthorityCredentials|null
      */
-    public function getRaCredentials(Identity $identity)
+    public function getRaCredentials(Identity $identity): ?RegistrationAuthorityCredentials
     {
         try {
             $credentials = $this->apiIdentityService->getRegistrationAuthorityCredentials($identity);
@@ -161,7 +161,7 @@ class IdentityService implements UserProviderInterface
      * @param SwitchLocaleCommand $command
      * @return bool
      */
-    public function switchLocale(SwitchLocaleCommand $command)
+    public function switchLocale(SwitchLocaleCommand $command): bool
     {
         /** @var TokenInterface|null */
         $token = $this->tokenStorage->getToken();

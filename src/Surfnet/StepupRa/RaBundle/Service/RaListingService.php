@@ -51,7 +51,7 @@ final class RaListingService
      * @param SearchRaListingCommand $command
      * @return RaListingCollection
      */
-    public function search(SearchRaListingCommand $command)
+    public function search(SearchRaListingCommand $command): RaListingCollection
     {
         $query = new RaListingSearchQuery($command->actorId, $command->pageNumber);
 
@@ -92,7 +92,7 @@ final class RaListingService
      * @param string $actorId
      * @return null|RaListing
      */
-    public function get($identityId, $institution, $actorId)
+    public function get($identityId, $institution, $actorId): ?RaListing
     {
         if (!is_string($identityId)) {
             throw InvalidArgumentException::invalidType('string', 'identityId', $identityId);

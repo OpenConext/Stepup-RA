@@ -82,7 +82,7 @@ class ViewConfig implements ViewConfigInterface
     }
 
     /**
-     * @return array
+     * @return mixed
      */
     public function getTitle()
     {
@@ -90,7 +90,7 @@ class ViewConfig implements ViewConfigInterface
     }
 
     /**
-     * @return array
+     * @return mixed
      */
     public function getExplanation()
     {
@@ -98,7 +98,7 @@ class ViewConfig implements ViewConfigInterface
     }
 
     /**
-     * @return array
+     * @return mixed
      */
     public function getGssfIdMismatch()
     {
@@ -106,7 +106,7 @@ class ViewConfig implements ViewConfigInterface
     }
 
     /**
-     * @return array
+     * @return mixed
      */
     public function getInitiate()
     {
@@ -114,7 +114,7 @@ class ViewConfig implements ViewConfigInterface
     }
 
     /**
-     * @return array
+     * @return mixed
      */
     public function getPageTitle()
     {

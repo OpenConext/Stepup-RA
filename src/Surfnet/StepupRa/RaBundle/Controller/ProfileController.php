@@ -20,10 +20,11 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 final class ProfileController extends Controller
 {
-    public function profileAction()
+    public function profileAction(): Response
     {
         $logger = $this->get('logger');
 
@@ -37,7 +38,7 @@ final class ProfileController extends Controller
     /**
      * @return ProfileService
      */
-    private function getProfileService()
+    private function getProfileService(): ProfileService
     {
         return $this->get('ra.service.profile');
     }

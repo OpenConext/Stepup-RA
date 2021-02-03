@@ -23,12 +23,12 @@ class RaRoleChoiceList
     /**
      * @return array
      */
-    public static function create()
+    public static function create(): array
     {
         return self::buildChoices();
     }
 
-    private static function buildChoices()
+    private static function buildChoices(): array
     {
         $choices = self::getChoices();
         $labels = array_map(function ($choice) {
@@ -43,7 +43,7 @@ class RaRoleChoiceList
     /**
      * @return array
      */
-    public static function getChoices()
+    public static function getChoices(): array
     {
         return ['ra', 'raa'];
     }

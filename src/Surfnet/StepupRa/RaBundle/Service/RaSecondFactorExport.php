@@ -36,7 +36,7 @@ class RaSecondFactorExport
         $this->logger = $logger;
     }
 
-    public function export(RaSecondFactorExportCollection $collection, $fileName)
+    public function export(RaSecondFactorExportCollection $collection, $fileName): StreamedResponse
     {
         $this->logger->notice(sprintf('Exporting %d rows to "%s"', $collection->count(), $fileName));
 

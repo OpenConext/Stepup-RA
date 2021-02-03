@@ -34,19 +34,19 @@ final class SecondFactorType extends Twig_Extension
         $this->translator = $translator;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'ra.twig.second_factor_type';
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new Twig_SimpleFilter('trans_second_factor_type', [$this, 'translateSecondFactorType']),
         ];
     }
 
-    public function translateSecondFactorType($secondFactorType)
+    public function translateSecondFactorType($secondFactorType): string
     {
         return $this->translator->translate($secondFactorType, 'ra.second_factor.search.type.%s');
     }

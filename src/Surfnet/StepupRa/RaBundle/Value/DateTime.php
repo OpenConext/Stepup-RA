@@ -29,6 +29,8 @@ class DateTime
 {
     /**
      * This string can also be used with `DateTime::createFromString()`.
+     *
+     * @var string
      */
     const FORMAT = DATE_ATOM;
 
@@ -45,9 +47,17 @@ class DateTime
     private $dateTime;
 
     /**
+     * @param CoreDateTime|null $dateTime
+     */
+    public function __construct(CoreDateTime $dateTime = null)
+    {
+        $this->dateTime = $dateTime ?: new CoreDateTime();
+    }
+
+    /**
      * @return self
      */
-    public static function now()
+    public static function now(): self
     {
         return self::$now ?: new self(new CoreDateTime);
     }
@@ -56,7 +66,7 @@ class DateTime
      * @param string $string A date-time string formatted using `self::FORMAT` (eg. '2014-11-26T15:20:43+01:00').
      * @return DateTime
      */
-    public static function fromString($string)
+    public static function fromString($string): DateTime
     {
         if (!is_string($string)) {
             InvalidArgumentException::invalidType('string', 'string', $string);
@@ -72,18 +82,10 @@ class DateTime
     }
 
     /**
-     * @param CoreDateTime|null $dateTime
-     */
-    public function __construct(CoreDateTime $dateTime = null)
-    {
-        $this->dateTime = $dateTime ?: new CoreDateTime();
-    }
-
-    /**
      * @param DateInterval $interval
      * @return DateTime
      */
-    public function add(DateInterval $interval)
+    public function add(DateInterval $interval): DateTime
     {
         $dateTime = clone $this->dateTime;
         $dateTime->add($interval);
@@ -95,7 +97,7 @@ class DateTime
      * @param DateInterval $interval
      * @return DateTime
      */
-    public function sub(DateInterval $interval)
+    public function sub(DateInterval $interval): DateTime
     {
         $dateTime = clone $this->dateTime;
         $dateTime->sub($interval);
@@ -107,7 +109,7 @@ class DateTime
      * @param DateTime $dateTime
      * @return boolean
      */
-    public function comesBefore(DateTime $dateTime)
+    public function comesBefore(DateTime $dateTime): bool
     {
         return $this->dateTime < $dateTime->dateTime;
     }
@@ -116,7 +118,7 @@ class DateTime
      * @param DateTime $dateTime
      * @return boolean
      */
-    public function comesBeforeOrIsEqual(DateTime $dateTime)
+    public function comesBeforeOrIsEqual(DateTime $dateTime): bool
     {
         return $this->dateTime <= $dateTime->dateTime;
     }
@@ -125,7 +127,7 @@ class DateTime
      * @param DateTime $dateTime
      * @return boolean
      */
-    public function comesAfter(DateTime $dateTime)
+    public function comesAfter(DateTime $dateTime): bool
     {
         return $this->dateTime > $dateTime->dateTime;
     }
@@ -134,7 +136,7 @@ class DateTime
      * @param DateTime $dateTime
      * @return boolean
      */
-    public function comesAfterOrIsEqual(DateTime $dateTime)
+    public function comesAfterOrIsEqual(DateTime $dateTime): bool
     {
         return $this->dateTime >= $dateTime->dateTime;
     }
@@ -143,7 +145,7 @@ class DateTime
      * @param $format
      * @return string
      */
-    public function format($format)
+    public function format($format): string
     {
         $formatted = $this->dateTime->format($format);
 
@@ -162,7 +164,7 @@ class DateTime
     /**
      * @return string An ISO 8601 representation of this DateTime.
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->format(self::FORMAT);
     }

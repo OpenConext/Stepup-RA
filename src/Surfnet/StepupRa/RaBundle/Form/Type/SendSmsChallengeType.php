@@ -25,7 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SendSmsChallengeType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('send-challenge', SubmitType::class, [
             'label' => 'ra.form.ra_send_sms_challenge.button.send_challenge',
@@ -33,14 +33,14 @@ class SendSmsChallengeType extends AbstractType
         ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => 'Surfnet\StepupBundle\Command\SendSmsChallengeCommand',
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_send_sms_challenge';
     }

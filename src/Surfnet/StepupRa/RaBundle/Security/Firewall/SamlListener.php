@@ -56,7 +56,7 @@ class SamlListener implements ListenerInterface
         $this->logger = $logger;
     }
 
-    public function handle(GetResponseEvent $event)
+    public function handle(GetResponseEvent $event): void
     {
         try {
             $this->authenticationHandler->process($event);

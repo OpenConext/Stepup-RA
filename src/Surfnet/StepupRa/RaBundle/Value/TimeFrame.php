@@ -40,7 +40,7 @@ final class TimeFrame
      * @param int $seconds
      * @return TimeFrame
      */
-    public static function ofSeconds($seconds)
+    public static function ofSeconds($seconds): TimeFrame
     {
         if (!is_int($seconds) || $seconds < 1) {
             throw InvalidArgumentException::invalidType('positive integer', 'seconds', $seconds);
@@ -53,7 +53,7 @@ final class TimeFrame
      * @param DateTime $dateTime
      * @return DateTime
      */
-    public function getEndWhenStartingAt(DateTime $dateTime)
+    public function getEndWhenStartingAt(DateTime $dateTime): DateTime
     {
         return $dateTime->add($this->timeFrame);
     }
@@ -62,12 +62,12 @@ final class TimeFrame
      * @param TimeFrame $other
      * @return bool
      */
-    public function equals(TimeFrame $other)
+    public function equals(TimeFrame $other): bool
     {
         return $this->timeFrame->s === $other->timeFrame->s;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->timeFrame->format('%S');
     }

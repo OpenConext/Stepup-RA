@@ -31,7 +31,7 @@ class SamlTokenTest extends TestCase
      * @group security
      * @group serialization
      */
-    public function saml_token_is_correctly_serialized_and_unserialized()
+    public function saml_token_is_correctly_serialized_and_unserialized(): void
     {
         $samlToken = new SamlToken(
             new Loa(Loa::LOA_1, 'http://some.url.tld/authentication/loa1'),

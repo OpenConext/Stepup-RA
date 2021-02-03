@@ -169,7 +169,7 @@ class VettingController extends Controller
         }
     }
 
-    public function cancelProcedureAction($procedureId)
+    public function cancelProcedureAction($procedureId): RedirectResponse
     {
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
 
@@ -281,7 +281,7 @@ class VettingController extends Controller
     /**
      * @Template
      */
-    public function vettingCompletedAction()
+    public function vettingCompletedAction(): array
     {
         return [];
     }
@@ -289,7 +289,7 @@ class VettingController extends Controller
     /**
      * @return SecondFactorService
      */
-    private function getSecondFactorService()
+    private function getSecondFactorService(): SecondFactorService
     {
         return $this->get('ra.service.second_factor');
     }
@@ -297,7 +297,7 @@ class VettingController extends Controller
     /**
      * @return SecondFactorTypeService
      */
-    private function getSecondFactorTypeService()
+    private function getSecondFactorTypeService(): SecondFactorTypeService
     {
         return $this->get('surfnet_stepup.service.second_factor_type');
     }
@@ -305,7 +305,7 @@ class VettingController extends Controller
     /**
      * @return VettingService
      */
-    private function getVettingService()
+    private function getVettingService(): VettingService
     {
         return $this->get('ra.service.vetting');
     }
@@ -313,7 +313,7 @@ class VettingController extends Controller
     /**
      * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
      */
-    private function getIdentity()
+    private function getIdentity(): Identity
     {
         return $this->get('security.token_storage')->getToken()->getUser();
     }
@@ -321,7 +321,7 @@ class VettingController extends Controller
     /**
      * @return TranslatorInterface
      */
-    private function getTranslator()
+    private function getTranslator(): TranslatorInterface
     {
         return $this->get('translator');
     }

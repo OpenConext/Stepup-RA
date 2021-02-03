@@ -18,6 +18,8 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
+use Knp\Component\Pager\Paginator;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitution;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
@@ -29,10 +31,12 @@ use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaListingType;
+use Surfnet\StepupRa\RaBundle\Service\RaCandidateService;
 use Surfnet\StepupRa\RaBundle\Service\RaListingService;
 use Surfnet\StepupRa\RaBundle\Value\RoleAtInstitution;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -44,7 +48,7 @@ class RaManagementController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function manageAction(Request $request)
+    public function manageAction(Request $request): Response
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
@@ -102,7 +106,7 @@ class RaManagementController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function raCandidateSearchAction(Request $request)
+    public function raCandidateSearchAction(Request $request): Response
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
@@ -159,7 +163,7 @@ class RaManagementController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function createRaAction(Request $request)
+    public function createRaAction(Request $request): Response
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
         $logger = $this->get('logger');
@@ -314,7 +318,7 @@ class RaManagementController extends Controller
     /**
      * @return RaListingService
      */
-    private function getRaListingService()
+    private function getRaListingService(): RaListingService
     {
         return $this->get('ra.service.ra_listing');
     }
@@ -322,7 +326,7 @@ class RaManagementController extends Controller
     /**
      * @return \Surfnet\StepupRa\RaBundle\Service\RaCandidateService
      */
-    private function getRaCandidateService()
+    private function getRaCandidateService(): RaCandidateService
     {
         return $this->get('ra.service.ra_candidate');
     }
@@ -330,7 +334,7 @@ class RaManagementController extends Controller
     /**
      * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
      */
-    private function getCurrentUser()
+    private function getCurrentUser(): Identity
     {
         return $this->get('security.token_storage')->getToken()->getUser();
     }
@@ -338,7 +342,7 @@ class RaManagementController extends Controller
     /**
      * @return \Knp\Component\Pager\Paginator
      */
-    private function getPaginator()
+    private function getPaginator(): Paginator
     {
         return $this->get('knp_paginator');
     }

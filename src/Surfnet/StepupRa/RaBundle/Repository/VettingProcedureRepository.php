@@ -25,17 +25,17 @@ interface VettingProcedureRepository
     /**
      * @param VettingProcedure $vettingProcedure
      */
-    public function store(VettingProcedure $vettingProcedure);
+    public function store(VettingProcedure $vettingProcedure): void;
 
     /**
      * @param string $id
      * @return VettingProcedure|null
      */
-    public function retrieve($id);
+    public function retrieve($id): ?VettingProcedure;
 
     /**
      * @param string $id
      * @return void
      */
-    public function remove($id);
+    public function remove($id): void;
 }

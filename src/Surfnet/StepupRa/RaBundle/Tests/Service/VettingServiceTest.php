@@ -31,7 +31,7 @@ final class VettingServiceTest extends TestCase
      * @group vetting
      * @dataProvider validRegistrationDatesProvider
      */
-    public function registration_code_is_valid_within_two_weeks_after_verification($registrationRequestedAt)
+    public function registration_code_is_valid_within_two_weeks_after_verification($registrationRequestedAt): void
     {
         $command = new StartVettingProcedureCommand();
         $command->secondFactor = new VerifiedSecondFactor();
@@ -44,7 +44,8 @@ final class VettingServiceTest extends TestCase
         );
     }
 
-    public function validRegistrationDatesProvider() {
+    public function validRegistrationDatesProvider(): array
+    {
         return [
             [date_create('- 1 week')],
             [date_create('- 2 weeks')],
@@ -58,7 +59,7 @@ final class VettingServiceTest extends TestCase
      * @group vetting
      * @dataProvider expiredRegistrationDatesProvider
      */
-    public function registration_code_is_invalid_two_weeks_after_verification($registrationRequestedAt)
+    public function registration_code_is_invalid_two_weeks_after_verification($registrationRequestedAt): void
     {
         $command = new StartVettingProcedureCommand();
         $command->secondFactor = new VerifiedSecondFactor();
@@ -71,7 +72,8 @@ final class VettingServiceTest extends TestCase
         );
     }
 
-    public function expiredRegistrationDatesProvider() {
+    public function expiredRegistrationDatesProvider(): array
+    {
         return [
             [date_create('- 3 weeks')],
             [date_create('- 15 days')->setTime(0, 0, 0)],

@@ -72,7 +72,7 @@ class SecondFactorTypeChoiceList
     /**
      * @return array
      */
-    public function create()
+    public function create(): array
     {
         $selectOptions = [];
         $collection = $this->secondFactorTypeService->getAvailableSecondFactorTypes();

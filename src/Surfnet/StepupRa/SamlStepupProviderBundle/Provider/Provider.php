@@ -65,7 +65,7 @@ final class Provider
     /**
      * @return StateHandler
      */
-    public function getStateHandler()
+    public function getStateHandler(): StateHandler
     {
         return $this->stateHandler;
     }
@@ -73,7 +73,7 @@ final class Provider
     /**
      * @return IdentityProvider
      */
-    public function getRemoteIdentityProvider()
+    public function getRemoteIdentityProvider(): IdentityProvider
     {
         return $this->remoteIdentityProvider;
     }
@@ -81,7 +81,7 @@ final class Provider
     /**
      * @return ServiceProvider
      */
-    public function getServiceProvider()
+    public function getServiceProvider(): ServiceProvider
     {
         return $this->serviceProvider;
     }
@@ -89,7 +89,7 @@ final class Provider
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

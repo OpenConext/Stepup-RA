@@ -28,7 +28,7 @@ class GssfSessionBagSessionPass implements CompilerPassInterface
      * {@inheritdoc} This is required to ensure that our NamespacedAttributeBag is registered in the session handler
      * before the session is started.
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $container
             ->getDefinition('session')

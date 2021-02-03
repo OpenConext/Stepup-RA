@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use Surfnet\StepupMiddlewareClient\Service\ExecutionResult;
 use Surfnet\StepupMiddlewareClientBundle\Command\Command;
 use Surfnet\StepupMiddlewareClientBundle\Command\Metadata;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService as MiddlewareCommandService;
@@ -43,7 +44,7 @@ final class CommandService
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function execute(Command $command)
+    public function execute(Command $command): ExecutionResult
     {
         /** @var \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity $identity */
         $identity = $this->tokenStorage->getToken()->getUser();

@@ -27,7 +27,7 @@ class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('surfnet_stepup_ra_ra');
@@ -41,7 +41,7 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function appendLoaConfiguration(NodeBuilder $childNodes)
+    private function appendLoaConfiguration(NodeBuilder $childNodes): void
     {
         $childNodes
             ->scalarNode('required_loa')
@@ -59,7 +59,7 @@ class Configuration implements ConfigurationInterface
     /**
      * @param NodeBuilder $childNodes
      */
-    private function appendSecondFactorTypesConfiguration(NodeBuilder $childNodes)
+    private function appendSecondFactorTypesConfiguration(NodeBuilder $childNodes): void
     {
         $childNodes
             ->arrayNode('enabled_second_factors')
@@ -81,7 +81,7 @@ class Configuration implements ConfigurationInterface
     /**
      * @param NodeBuilder $childNodes
      */
-    private function appendSessionConfiguration(NodeBuilder $childNodes)
+    private function appendSessionConfiguration(NodeBuilder $childNodes): void
     {
         $childNodes
             ->arrayNode('session_lifetimes')
@@ -122,7 +122,7 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
-    private function appendUrlConfiguration(NodeBuilder $childNodes)
+    private function appendUrlConfiguration(NodeBuilder $childNodes): void
     {
         $childNodes
             ->scalarNode('self_service_url')

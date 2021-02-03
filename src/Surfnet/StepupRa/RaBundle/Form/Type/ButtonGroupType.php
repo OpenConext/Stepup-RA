@@ -31,7 +31,7 @@ class ButtonGroupType extends FormType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'button_group';
     }

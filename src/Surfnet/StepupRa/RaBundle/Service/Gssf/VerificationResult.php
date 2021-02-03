@@ -36,7 +36,7 @@ final class VerificationResult
      * @param string $procedureId
      * @return VerificationResult
      */
-    public static function verificationSucceeded($procedureId)
+    public static function verificationSucceeded($procedureId): VerificationResult
     {
         if (!is_string($procedureId)) {
             throw InvalidArgumentException::invalidType('string', 'procedureId', $procedureId);
@@ -49,7 +49,7 @@ final class VerificationResult
         return $result;
     }
 
-    public static function noSuchProcedure()
+    public static function noSuchProcedure(): self
     {
         $result = new self();
         $result->verificationSucceeded = false;
@@ -61,7 +61,7 @@ final class VerificationResult
      * @param string $procedureId
      * @return VerificationResult
      */
-    public static function verificationFailed($procedureId)
+    public static function verificationFailed($procedureId): self
     {
         if (!is_string($procedureId)) {
             throw InvalidArgumentException::invalidType('string', 'procedureId', $procedureId);
@@ -77,7 +77,7 @@ final class VerificationResult
     /**
      * @return bool
      */
-    public function isSuccess()
+    public function isSuccess(): bool
     {
         return $this->verificationSucceeded && $this->procedureId;
     }
@@ -85,7 +85,7 @@ final class VerificationResult
     /**
      * @return bool
      */
-    public function didVerificationSucceed()
+    public function didVerificationSucceed(): bool
     {
         return $this->verificationSucceeded;
     }
@@ -93,7 +93,7 @@ final class VerificationResult
     /**
      * @return null|string NULL if no procedure ID was known for given SAML request ID.
      */
-    public function getProcedureId()
+    public function getProcedureId(): ?string
     {
         return $this->procedureId;
     }

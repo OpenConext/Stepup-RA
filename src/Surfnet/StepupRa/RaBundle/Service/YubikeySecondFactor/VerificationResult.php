@@ -59,17 +59,17 @@ class VerificationResult
         $this->publicId = $publicId;
     }
 
-    public function didPublicIdMatch()
+    public function didPublicIdMatch(): bool
     {
         return $this->result === self::RESULT_PUBLIC_ID_MATCHED && $this->publicId !== null;
     }
 
-    public function wasOtpInvalid()
+    public function wasOtpInvalid(): bool
     {
         return $this->result === self::RESULT_OTP_INVALID;
     }
 
-    public function didOtpVerificationFail()
+    public function didOtpVerificationFail(): bool
     {
         return $this->result === self::RESULT_OTP_VERIFICATION_FAILED;
     }
@@ -77,7 +77,7 @@ class VerificationResult
     /**
      * @return YubikeyPublicId|null
      */
-    public function getPublicId()
+    public function getPublicId(): ?YubikeyPublicId
     {
         return $this->publicId;
     }

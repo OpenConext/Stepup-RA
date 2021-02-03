@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OtpType extends TextType
 {
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(
             [
@@ -36,12 +36,12 @@ class OtpType extends TextType
             ]
         );
     }
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'otp';
     }
 
-    public function getParent()
+    public function getParent(): ?string
     {
         return TextType::class;
     }

@@ -21,14 +21,16 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupBundle\Command\SwitchLocaleCommand;
 use Surfnet\StepupBundle\Form\Type\SwitchLocaleType;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 final class LocaleController extends Controller
 {
-    public function switchLocaleAction(Request $request)
+    public function switchLocaleAction(Request $request): RedirectResponse
     {
         $returnUrl = $request->query->get('return-url');
 
@@ -84,7 +86,7 @@ final class LocaleController extends Controller
     /**
      * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
      */
-    private function getIdentity()
+    private function getIdentity(): Identity
     {
         return $this->get('security.token_storage')->getToken()->getUser();
     }

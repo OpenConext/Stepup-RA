@@ -45,7 +45,7 @@ final class RaService
         $this->logger = $logger;
     }
 
-    public function amendRegistrationAuthorityInformation(AmendRegistrationAuthorityInformationCommand $command)
+    public function amendRegistrationAuthorityInformation(AmendRegistrationAuthorityInformationCommand $command): bool
     {
         $apiCommand = new AmendRegistrationAuthorityInformationApiCommand();
         $apiCommand->identityId = $command->identityId;
@@ -66,7 +66,7 @@ final class RaService
         return $result->isSuccessful();
     }
 
-    public function changeRegistrationAuthorityRole(ChangeRaRoleCommand $command)
+    public function changeRegistrationAuthorityRole(ChangeRaRoleCommand $command): bool
     {
         $apiCommand             = new AppointRoleCommand();
         $apiCommand->identityId = $command->identityId;
@@ -86,7 +86,7 @@ final class RaService
         return $result->isSuccessful();
     }
 
-    public function retractRegistrationAuthority(RetractRegistrationAuthorityCommand $command)
+    public function retractRegistrationAuthority(RetractRegistrationAuthorityCommand $command): bool
     {
         $apiCommand              = new ApiRetractRegistrationAuthorityCommand();
         $apiCommand->identityId  = $command->identityId;

@@ -29,12 +29,12 @@ interface AuthenticatedSessionStateHandler
      * @return void
      * @throws LogicException when an authentication moment was already logged
      */
-    public function logAuthenticationMoment();
+    public function logAuthenticationMoment(): void;
 
     /**
      * @return bool
      */
-    public function isAuthenticationMomentLogged();
+    public function isAuthenticationMomentLogged(): bool;
 
     /**
      * Gets the moment at which the user was authenticated
@@ -42,48 +42,52 @@ interface AuthenticatedSessionStateHandler
      * @return DateTime
      * @throws LogicException when no authentication moment was logged
      */
-    public function getAuthenticationMoment();
+    public function getAuthenticationMoment(): DateTime;
 
     /**
      * Updates the last interaction moment to the current moment
      *
      * @return void
      */
-    public function updateLastInteractionMoment();
+    public function updateLastInteractionMoment(): void;
 
     /**
      * Retrieves the last interaction moment
      *
      * @return DateTime
      */
-    public function getLastInteractionMoment();
+    public function getLastInteractionMoment(): DateTime;
 
     /**
      * @return bool
      */
-    public function hasSeenInteraction();
+    public function hasSeenInteraction(): bool;
 
     /**
      * @param string $uri
      */
-    public function setCurrentRequestUri($uri);
+    public function setCurrentRequestUri(string $uri): void;
 
     /**
      * @return string
      */
-    public function getCurrentRequestUri();
+    public function getCurrentRequestUri(): string;
 
     /**
      * Migrates the current session to a new session id while maintaining all
      * session attributes.
+     *
+     * @return void
      */
-    public function migrate();
+    public function migrate(): void;
 
     /**
      * Invalidates the session
      *
      * Clears all session attributes and flashes and regenerates the
      * session and deletes the old session from persistence
+     *
+     * @return void
      */
-    public function invalidate();
+    public function invalidate(): void;
 }

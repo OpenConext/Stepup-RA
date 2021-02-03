@@ -42,7 +42,7 @@ final class ProcedureAwareLogger implements LoggerInterface
         $this->logger = $logger;
     }
 
-    public function forProcedure($procedure)
+    public function forProcedure($procedure): self
     {
         if (!is_string($procedure)) {
             throw InvalidArgumentException::invalidType('string', 'procedure', $procedure);
@@ -54,47 +54,47 @@ final class ProcedureAwareLogger implements LoggerInterface
         return $logger;
     }
 
-    public function emergency($message, array $context = [])
+    public function emergency($message, array $context = []): void
     {
         $this->logger->emergency($message, $this->enrichContext($context));
     }
 
-    public function alert($message, array $context = [])
+    public function alert($message, array $context = []): void
     {
         $this->logger->alert($message, $this->enrichContext($context));
     }
 
-    public function critical($message, array $context = [])
+    public function critical($message, array $context = []): void
     {
         $this->logger->critical($message, $this->enrichContext($context));
     }
 
-    public function error($message, array $context = [])
+    public function error($message, array $context = []): void
     {
         $this->logger->error($message, $this->enrichContext($context));
     }
 
-    public function warning($message, array $context = [])
+    public function warning($message, array $context = []): void
     {
         $this->logger->warning($message, $this->enrichContext($context));
     }
 
-    public function notice($message, array $context = [])
+    public function notice($message, array $context = []): void
     {
         $this->logger->notice($message, $this->enrichContext($context));
     }
 
-    public function info($message, array $context = [])
+    public function info($message, array $context = []): void
     {
         $this->logger->info($message, $this->enrichContext($context));
     }
 
-    public function debug($message, array $context = [])
+    public function debug($message, array $context = []): void
     {
         $this->logger->debug($message, $this->enrichContext($context));
     }
 
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
         $this->logger->log($message, $this->enrichContext($context));
     }
@@ -107,7 +107,7 @@ final class ProcedureAwareLogger implements LoggerInterface
      * @return array
      * @throws RuntimeException
      */
-    private function enrichContext(array $context)
+    private function enrichContext(array $context): array
     {
         if (!$this->procedure) {
             throw new RuntimeException('Authentication logging context is unknown');

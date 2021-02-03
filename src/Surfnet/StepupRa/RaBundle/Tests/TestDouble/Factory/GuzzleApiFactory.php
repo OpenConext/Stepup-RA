@@ -32,10 +32,10 @@ class GuzzleApiFactory
      * @param $username
      * @param $password
      * @return Client
-     * 
+     *
      * @see \Surfnet\StepupMiddlewareClientBundle\DependencyInjection\SurfnetStepupMiddlewareClientExtension::configureMiddlewareReadApiClient
      */
-    public static function createApiGuzzleClient($apiUri, $username, $password)
+    public static function createApiGuzzleClient($apiUri, $username, $password): Client
     {
         $arguments = [
             'base_uri' => $apiUri,
@@ -56,10 +56,10 @@ class GuzzleApiFactory
     /**
      * @param $apiUri
      * @return Client
-     * 
+     *
      * @see \Surfnet\StepupMiddlewareClientBundle\DependencyInjection\SurfnetStepupMiddlewareClientExtension::configureMiddlewareCommandApiUrl
      */
-    public static function createCommandGuzzleClient($apiUri)
+    public static function createCommandGuzzleClient($apiUri): Client
     {
         return new Client(
             [
@@ -73,7 +73,7 @@ class GuzzleApiFactory
      * @param string $uri
      * @return CookieJar
      */
-    private static function makeCookieJar($uri)
+    private static function makeCookieJar($uri): CookieJar
     {
         $cookieDomain = parse_url($uri, PHP_URL_HOST);
 

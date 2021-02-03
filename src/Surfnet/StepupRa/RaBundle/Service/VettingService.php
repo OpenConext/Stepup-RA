@@ -138,7 +138,7 @@ class VettingService
      * @param StartVettingProcedureCommand $command
      * @return bool
      */
-    public function isLoaSufficientToStartProcedure(StartVettingProcedureCommand $command)
+    public function isLoaSufficientToStartProcedure(StartVettingProcedureCommand $command): bool
     {
         $secondFactorType = new SecondFactorType($command->secondFactor->type);
 
@@ -149,7 +149,7 @@ class VettingService
      * @param StartVettingProcedureCommand $command
      * @return bool
      */
-    public function isExpiredRegistrationCode(StartVettingProcedureCommand $command)
+    public function isExpiredRegistrationCode(StartVettingProcedureCommand $command): bool
     {
         return DateTime::now()->comesAfter(
             new DateTime(
@@ -164,7 +164,7 @@ class VettingService
      * @param StartVettingProcedureCommand $command
      * @return string The procedure ID.
      */
-    public function startProcedure(StartVettingProcedureCommand $command)
+    public function startProcedure(StartVettingProcedureCommand $command): string
     {
         $this->smsSecondFactorService->clearSmsVerificationState();
 
@@ -197,7 +197,7 @@ class VettingService
      * @param string $procedureId
      * @throws UnknownVettingProcedureException
      */
-    public function cancelProcedure($procedureId)
+    public function cancelProcedure($procedureId): void
     {
         if (!is_string($procedureId)) {
             throw InvalidArgumentException::invalidType('string', 'procedureId', $procedureId);
@@ -217,7 +217,7 @@ class VettingService
     /**
      * @return int
      */
-    public function getSmsOtpRequestsRemainingCount()
+    public function getSmsOtpRequestsRemainingCount(): int
     {
         return $this->smsSecondFactorService->getOtpRequestsRemainingCount();
     }
@@ -225,7 +225,7 @@ class VettingService
     /**
      * @return int
      */
-    public function getSmsMaximumOtpRequestsCount()
+    public function getSmsMaximumOtpRequestsCount(): int
     {
         return $this->smsSecondFactorService->getMaximumOtpRequestsCount();
     }
@@ -237,7 +237,7 @@ class VettingService
      * @throws UnknownVettingProcedureException
      * @throws RuntimeException
      */
-    public function sendSmsChallenge($procedureId, SendSmsChallengeCommand $command)
+    public function sendSmsChallenge($procedureId, SendSmsChallengeCommand $command): bool
     {
         $procedure = $this->getProcedure($procedureId);
 
@@ -266,7 +266,7 @@ class VettingService
      * @throws UnknownVettingProcedureException
      * @throws DomainException
      */
-    public function verifyPhoneNumber($procedureId, VerifyPossessionOfPhoneCommand $command)
+    public function verifyPhoneNumber($procedureId, VerifyPossessionOfPhoneCommand $command): OtpVerification
     {
         $procedure = $this->getProcedure($procedureId);
 
@@ -287,7 +287,7 @@ class VettingService
      * @param VerifyYubikeyPublicIdCommand $command
      * @return YubikeySecondFactor\VerificationResult
      */
-    public function verifyYubikeyPublicId($procedureId, VerifyYubikeyPublicIdCommand $command)
+    public function verifyYubikeyPublicId($procedureId, VerifyYubikeyPublicIdCommand $command): VerificationResult
     {
         $procedure = $this->getProcedure($procedureId);
 
@@ -309,7 +309,7 @@ class VettingService
     /**
      * @param string $procedureId
      */
-    public function startGssfVerification($procedureId)
+    public function startGssfVerification($procedureId): string
     {
         $procedure = $this->getProcedure($procedureId);
 
@@ -320,7 +320,7 @@ class VettingService
      * @param string $gssfId
      * @return GssfVerificationResult
      */
-    public function verifyGssfId($gssfId)
+    public function verifyGssfId($gssfId): GssfVerificationResult
     {
         $result = $this->gssfService->verify($gssfId);
 
@@ -340,7 +340,7 @@ class VettingService
      * @param string $procedureId
      * @return SignRequestCreationResult
      */
-    public function createU2fSignRequest($procedureId)
+    public function createU2fSignRequest($procedureId): SignRequestCreationResult
     {
         $procedure = $this->getProcedure($procedureId);
 
@@ -358,7 +358,7 @@ class VettingService
      * @param SignResponse $signResponse
      * @return AuthenticationVerificationResult
      */
-    public function verifyU2fAuthentication($procedureId, SignRequest $signRequest, SignResponse $signResponse)
+    public function verifyU2fAuthentication($procedureId, SignRequest $signRequest, SignResponse $signResponse): AuthenticationVerificationResult
     {
         $procedure = $this->getProcedure($procedureId);
 
@@ -385,7 +385,7 @@ class VettingService
      * @throws UnknownVettingProcedureException
      * @throws DomainException
      */
-    public function verifyIdentity($procedureId, VerifyIdentityCommand $command)
+    public function verifyIdentity($procedureId, VerifyIdentityCommand $command): void
     {
         $procedure = $this->getProcedure($procedureId);
         $procedure->verifyIdentity($command->documentNumber, $command->identityVerified);
@@ -399,7 +399,7 @@ class VettingService
      * @throws UnknownVettingProcedureException
      * @throws DomainException
      */
-    public function vet($procedureId)
+    public function vet($procedureId): ExecutionResult
     {
         $procedure = $this->getProcedure($procedureId);
         $procedure->vet();
@@ -429,7 +429,7 @@ class VettingService
      * @return string
      * @throws UnknownVettingProcedureException
      */
-    public function getIdentityCommonName($procedureId)
+    public function getIdentityCommonName($procedureId): string
     {
         return $this->getProcedure($procedureId)->getSecondFactor()->commonName;
     }
@@ -439,7 +439,7 @@ class VettingService
      * @return bool|null
      * @throws UnknownVettingProcedureException
      */
-    public function isProvePossessionSkippable($procedureId)
+    public function isProvePossessionSkippable($procedureId): ?bool
     {
         return $this->getProcedure($procedureId)->isProvePossessionSkippable();
     }
@@ -449,7 +449,7 @@ class VettingService
      * @return string
      * @throws UnknownVettingProcedureException
      */
-    public function getSecondFactorIdentifier($procedureId)
+    public function getSecondFactorIdentifier($procedureId): string
     {
         return $this->getProcedure($procedureId)->getSecondFactor()->secondFactorIdentifier;
     }
@@ -459,7 +459,7 @@ class VettingService
      * @return null|VettingProcedure
      * @throws UnknownVettingProcedureException
      */
-    private function getProcedure($procedureId)
+    private function getProcedure($procedureId): ?VettingProcedure
     {
         if (!is_string($procedureId)) {
             throw InvalidArgumentException::invalidType('string', 'procedureId', $procedureId);
@@ -480,7 +480,7 @@ class VettingService
      * @param string $procedureId
      * @return bool
      */
-    public function hasProcedure($procedureId)
+    public function hasProcedure($procedureId): bool
     {
         if (!is_string($procedureId)) {
             throw InvalidArgumentException::invalidType('string', 'procedureId', $procedureId);

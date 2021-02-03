@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\Provider;
 
 use DOMDocument;
+use DOMElement;
 use LogicException;
 use Surfnet\SamlBundle\Signing\Signable;
 
@@ -49,7 +50,7 @@ class Metadata implements Signable
      */
     public $document;
 
-    public function getRootDomElement()
+    public function getRootDomElement(): DOMElement
     {
         if (!$this->document) {
             throw new LogicException('Cannot get the rootElement of Metadata before the document has been generated');
@@ -58,7 +59,7 @@ class Metadata implements Signable
         return $this->document->documentElement;
     }
 
-    public function getAppendBeforeNode()
+    public function getAppendBeforeNode(): DOMNode
     {
         if (!$this->document) {
             throw new LogicException(
@@ -69,7 +70,7 @@ class Metadata implements Signable
         return $this->document->documentElement->childNodes->item(0);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->document->saveXML();
     }

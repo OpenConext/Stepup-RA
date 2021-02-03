@@ -38,7 +38,7 @@ class InstitutionListingService
     /**
      * @return array
      */
-    public function getAll()
+    public function getAll(): array
     {
         $collection = $this->institutionListingService->getAll();
         $listings = $collection->getElements();

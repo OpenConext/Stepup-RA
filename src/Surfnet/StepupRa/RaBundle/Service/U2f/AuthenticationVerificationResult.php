@@ -62,7 +62,12 @@ final class AuthenticationVerificationResult
      */
     private $status;
 
-    public static function success()
+    private function __construct(string $status)
+    {
+        $this->status = $status;
+    }
+
+    public static function success(): self
     {
         return new self(self::STATUS_SUCCESS);
     }
@@ -71,25 +76,20 @@ final class AuthenticationVerificationResult
      * @param string $status
      * @return AuthenticationVerificationResult
      */
-    public static function error($status)
+    public static function error($status): self
     {
         return new self($status);
     }
 
-    public static function apiError()
+    public static function apiError(): self
     {
         return new self(self::STATUS_API_ERROR);
-    }
-
-    private function __construct($status)
-    {
-        $this->status = $status;
     }
 
     /**
      * @return bool
      */
-    public function wasSuccessful()
+    public function wasSuccessful(): bool
     {
         return $this->status === self::STATUS_SUCCESS;
     }
@@ -97,7 +97,7 @@ final class AuthenticationVerificationResult
     /**
      * @return bool
      */
-    public function didDeviceReportAnyError()
+    public function didDeviceReportAnyError(): bool
     {
         return $this->status === self::STATUS_DEVICE_ERROR;
     }

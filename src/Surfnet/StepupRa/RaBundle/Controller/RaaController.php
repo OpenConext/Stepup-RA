@@ -26,9 +26,14 @@ use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RaaController extends Controller
 {
+    /**
+     * @return NotFoundHttpException|Response
+     */
     public function institutionConfigurationAction(Request $request)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
@@ -85,7 +90,7 @@ class RaaController extends Controller
     /**
      * @return InstitutionConfigurationOptionsService
      */
-    private function getInstitutionConfigurationOptionsService()
+    private function getInstitutionConfigurationOptionsService(): InstitutionConfigurationOptionsService
     {
         return $this->get('ra.service.institution_configuration_options');
     }
@@ -93,7 +98,7 @@ class RaaController extends Controller
     /**
      * @return ProfileService
      */
-    private function getProfileService()
+    private function getProfileService(): ProfileService
     {
         return $this->get('ra.service.profile');
     }
@@ -101,7 +106,7 @@ class RaaController extends Controller
     /**
      * @return InstitutionListingService
      */
-    private function getInstitutionListingService()
+    private function getInstitutionListingService(): InstitutionListingService
     {
         return $this->get('ra.service.institution_listing');
     }

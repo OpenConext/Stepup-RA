@@ -36,7 +36,7 @@ final class ProviderRepository
     /**
      * @param Provider $provider
      */
-    public function addProvider(Provider $provider)
+    public function addProvider(Provider $provider): void
     {
         if ($this->has($provider->getName())) {
             throw new InvalidConfigurationException(sprintf(
@@ -52,7 +52,7 @@ final class ProviderRepository
      * @param string $providerName
      * @return bool
      */
-    public function has($providerName)
+    public function has($providerName): bool
     {
         return array_key_exists($providerName, $this->providers);
     }
@@ -61,7 +61,7 @@ final class ProviderRepository
      * @param string $providerName
      * @return Provider
      */
-    public function get($providerName)
+    public function get($providerName): Provider
     {
         if (!$this->has($providerName)) {
             throw UnknownProviderException::create($providerName, array_keys($this->providers));

@@ -25,7 +25,7 @@ final class Assert extends Assertion
 {
     protected static $exceptionClass = '\Surfnet\StepupRa\RaBundle\Exception\AssertionFailedException';
 
-    public static function keysAre(array $array, array $expectedKeys, $propertyPath = null)
+    public static function keysAre(array $array, array $expectedKeys, $propertyPath = null): void
     {
         $givenKeys = array_keys($array);
 

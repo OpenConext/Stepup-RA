@@ -30,7 +30,7 @@ final class ConfigurationTest extends TestCase
      * @test
      * @group configuration
      */
-    public function it_requires_second_factors_to_be_configured()
+    public function it_requires_second_factors_to_be_configured(): void
     {
         $configuration = [
             'session_lifetimes'      => [
@@ -46,7 +46,7 @@ final class ConfigurationTest extends TestCase
      * @test
      * @group configuration
      */
-    public function it_requires_session_timeout_configuration()
+    public function it_requires_session_timeout_configuration(): void
     {
         $configuration = ['enabled_second_factors' => ['sms']];
 
@@ -57,7 +57,7 @@ final class ConfigurationTest extends TestCase
      * @test
      * @group configuration
      */
-    public function it_requires_maximum_absolute_timeout_to_be_configured()
+    public function it_requires_maximum_absolute_timeout_to_be_configured(): void
     {
         $configuration = [
             'enabled_second_factors' => ['sms'],
@@ -71,7 +71,7 @@ final class ConfigurationTest extends TestCase
      * @test
      * @group configuration
      */
-    public function it_requires_maximum_relative_timeout_to_be_configured()
+    public function it_requires_maximum_relative_timeout_to_be_configured(): void
     {
         $configuration = [
             'enabled_second_factors' => ['sms'],
@@ -85,7 +85,7 @@ final class ConfigurationTest extends TestCase
      * @test
      * @group configuration
      */
-    public function it_allows_one_enabled_second_factor()
+    public function it_allows_one_enabled_second_factor(): void
     {
         $this->assertConfigurationIsValid([['enabled_second_factors' => ['sms']]], 'enabled_second_factors');
     }
@@ -94,12 +94,12 @@ final class ConfigurationTest extends TestCase
      * @test
      * @group configuration
      */
-    public function it_allows_two_enabled_second_factors()
+    public function it_allows_two_enabled_second_factors(): void
     {
         $this->assertConfigurationIsValid([['enabled_second_factors' => ['sms', 'yubikey']]], 'enabled_second_factors');
     }
 
-    protected function getConfiguration()
+    protected function getConfiguration(): Configuration
     {
         return new Configuration();
     }

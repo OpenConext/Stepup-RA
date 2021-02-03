@@ -20,12 +20,17 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Knp\Component\Pager\Paginator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Surfnet\StepupMiddlewareClient\Service\ExecutionResult;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\ExportRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchSecondFactorAuditLogCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType;
+use Surfnet\StepupRa\RaBundle\Service\AuditLogService;
+use Surfnet\StepupRa\RaBundle\Service\IdentityService;
+use Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,7 +61,7 @@ final class SecondFactorController extends Controller
         $command->orderDirection = $request->get('orderDirection');
 
         $secondFactors = $this->getSecondFactorService()->search($command);
-        
+
         // The options that will populate the institution filter choice list.
         $command->institutionFilterOptions = $secondFactors->getFilterOption('institution');
 
@@ -100,7 +105,7 @@ final class SecondFactorController extends Controller
         ];
     }
 
-    public function exportAction(SearchRaSecondFactorsCommand $command)
+    public function exportAction(SearchRaSecondFactorsCommand $command): ExecutionResult
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA']);
 
@@ -115,7 +120,7 @@ final class SecondFactorController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function revokeAction(Request $request)
+    public function revokeAction(Request $request): RedirectResponse
     {
         $this->denyAccessUnlessGranted(['ROLE_RA']);
 
@@ -155,7 +160,7 @@ final class SecondFactorController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function auditLogAction(Request $request)
+    public function auditLogAction(Request $request): Response
     {
         $this->denyAccessUnlessGranted(['ROLE_RA']);
         $logger = $this->get('logger');
@@ -208,7 +213,7 @@ final class SecondFactorController extends Controller
     /**
      * @return \Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService
      */
-    private function getSecondFactorService()
+    private function getSecondFactorService(): RaSecondFactorService
     {
         return $this->get('ra.service.ra_second_factor');
     }
@@ -216,7 +221,7 @@ final class SecondFactorController extends Controller
     /**
      * @return \Surfnet\StepupRa\RaBundle\Service\IdentityService
      */
-    private function getIdentityService()
+    private function getIdentityService(): IdentityService
     {
         return $this->get('ra.service.identity');
     }
@@ -224,7 +229,7 @@ final class SecondFactorController extends Controller
     /**
      * @return \Surfnet\StepupRa\RaBundle\Service\AuditLogService
      */
-    private function getAuditLogService()
+    private function getAuditLogService(): AuditLogService
     {
         return $this->get('ra.service.audit_log');
     }
@@ -232,7 +237,7 @@ final class SecondFactorController extends Controller
     /**
      * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
      */
-    private function getCurrentUser()
+    private function getCurrentUser(): Identity
     {
         return $this->get('security.token_storage')->getToken()->getUser();
     }
@@ -240,7 +245,7 @@ final class SecondFactorController extends Controller
     /**
      * @return Paginator
      */
-    private function getPaginator()
+    private function getPaginator(): Paginator
     {
         return $this->get('knp_paginator');
     }

@@ -110,6 +110,9 @@ final class RaLocationController extends Controller
         ];
     }
 
+    /**
+     * @return Response|RedirectResponse
+     */
     public function createAction(Request $request)
     {
         $this->denyAccessUnlessGranted(['ROLE_RA']);
@@ -148,6 +151,9 @@ final class RaLocationController extends Controller
         ]);
     }
 
+    /**
+     * @return RedirectResponse|Response
+     */
     public function changeAction(Request $request)
     {
         $this->denyAccessUnlessGranted(['ROLE_RA']);
@@ -201,7 +207,7 @@ final class RaLocationController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function removeAction(Request $request)
+    public function removeAction(Request $request): RedirectResponse
     {
         $this->denyAccessUnlessGranted(['ROLE_RA']);
 
@@ -240,7 +246,7 @@ final class RaLocationController extends Controller
     /**
      * @return \Surfnet\StepupRa\RaBundle\Service\RaLocationService
      */
-    private function getRaLocationService()
+    private function getRaLocationService(): RaLocationService
     {
         return $this->get('ra.service.ra_location');
     }
@@ -248,7 +254,7 @@ final class RaLocationController extends Controller
     /**
      * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
      */
-    private function getCurrentUser()
+    private function getCurrentUser(): Identity
     {
         return $this->get('security.token_storage')->getToken()->getUser();
     }
@@ -256,7 +262,7 @@ final class RaLocationController extends Controller
     /**
      * @return ProfileService
      */
-    private function getProfileService()
+    private function getProfileService(): ProfileService
     {
         return $this->get('ra.service.profile');
     }
@@ -264,7 +270,7 @@ final class RaLocationController extends Controller
     /**
      * @return InstitutionListingService
      */
-    private function getInstitutionListingService()
+    private function getInstitutionListingService(): InstitutionListingService
     {
         return $this->get('ra.service.institution_listing');
     }

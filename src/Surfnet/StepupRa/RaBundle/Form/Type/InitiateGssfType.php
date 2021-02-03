@@ -36,7 +36,7 @@ class InitiateGssfType extends AbstractType
         $this->router = $router;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $action = $this->router->generate(
             'ra_vetting_gssf_authenticate',
@@ -52,14 +52,14 @@ class InitiateGssfType extends AbstractType
             ->setAction($action);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired(['procedureId', 'provider']);
         $resolver->setAllowedTypes('procedureId', 'string');
         $resolver->setAllowedTypes('provider', 'string');
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_initiate_gssf';
     }

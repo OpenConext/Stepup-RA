@@ -27,6 +27,7 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaSecondFactorService 
 use Surfnet\StepupRa\RaBundle\Command\ExportRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @SuppressWarnings(PHPMD.NPathComplexity) -- The command to query mapping in search and export exceed the
@@ -72,7 +73,7 @@ class RaSecondFactorService
         $this->logger = $logger;
     }
 
-    public function revoke(RevokeSecondFactorCommand $command)
+    public function revoke(RevokeSecondFactorCommand $command): bool
     {
         $middlewareCommand                 = new RevokeRegistrantsSecondFactorCommand();
         $middlewareCommand->secondFactorId = $command->secondFactorId;
@@ -98,7 +99,7 @@ class RaSecondFactorService
      * @param SearchRaSecondFactorsCommand $command
      * @return RaSecondFactorCollection
      */
-    public function search(SearchRaSecondFactorsCommand $command)
+    public function search(SearchRaSecondFactorsCommand $command): RaSecondFactorCollection
     {
         $query = new RaSecondFactorSearchQuery($command->pageNumber, $command->actorId);
 
@@ -144,7 +145,7 @@ class RaSecondFactorService
      * @param ExportRaSecondFactorsCommand $command
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function export(ExportRaSecondFactorsCommand $command)
+    public function export(ExportRaSecondFactorsCommand $command): Response
     {
         $query = new RaSecondFactorExportQuery($command->actorId);
 

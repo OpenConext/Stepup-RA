@@ -42,7 +42,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @group security
      * @group session
      */
-    public function an_authentication_session_without_logged_authentication_is_within_absolute_limit()
+    public function an_authentication_session_without_logged_authentication_is_within_absolute_limit(): void
     {
         $sessionLifetimeGuard = new SessionLifetimeGuard(TimeFrame::ofSeconds(1000), TimeFrame::ofSeconds(100));
 
@@ -56,7 +56,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @group security
      * @group session
      */
-    public function an_authentication_session_without_logged_authentication_is_within_relative_limit()
+    public function an_authentication_session_without_logged_authentication_is_within_relative_limit(): void
     {
         $sessionLifetimeGuard = new SessionLifetimeGuard(TimeFrame::ofSeconds(1000), TimeFrame::ofSeconds(100));
 
@@ -70,7 +70,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @group security
      * @group session
      */
-    public function an_authentication_session_without_logged_authentication_is_within_limits()
+    public function an_authentication_session_without_logged_authentication_is_within_limits(): void
     {
         $sessionLifetimeGuard = new SessionLifetimeGuard(TimeFrame::ofSeconds(1000), TimeFrame::ofSeconds(100));
 
@@ -84,7 +84,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @group security
      * @group session
      */
-    public function an_authentication_session_with_a_lifetime_within_the_absolute_timeframe_is_within_the_absolute_limit()
+    public function an_authentication_session_with_a_lifetime_within_the_absolute_timeframe_is_within_the_absolute_limit(): void
     {
         $sessionLifetimeGuard = new SessionLifetimeGuard(TimeFrame::ofSeconds(1000), TimeFrame::ofSeconds(1));
 
@@ -100,7 +100,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @group security
      * @group session
      */
-    public function an_authentication_session_with_a_lifetime_of_exactly_the_absolute_timeframe_is_within_the_absolute_limit()
+    public function an_authentication_session_with_a_lifetime_of_exactly_the_absolute_timeframe_is_within_the_absolute_limit(): void
     {
         $sessionLifetimeGuard = new SessionLifetimeGuard(TimeFrame::ofSeconds(1000), TimeFrame::ofSeconds(1));
 
@@ -117,7 +117,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @group security
      * @group session
      */
-    public function an_authentication_session_with_a_lifetime_longer_than_the_absolute_timeframe_is_outside_the_absolute_limit()
+    public function an_authentication_session_with_a_lifetime_longer_than_the_absolute_timeframe_is_outside_the_absolute_limit(): void
     {
         $sessionLifetimeGuard = new SessionLifetimeGuard(TimeFrame::ofSeconds(1000), TimeFrame::ofSeconds(1));
 
@@ -133,7 +133,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @group security
      * @group session
      */
-    public function an_authentication_session_with_an_interaction_within_the_relative_timeframe_is_within_the_relative_limit()
+    public function an_authentication_session_with_an_interaction_within_the_relative_timeframe_is_within_the_relative_limit(): void
     {
         $sessionLifetimeGuard = new SessionLifetimeGuard(TimeFrame::ofSeconds(1), TimeFrame::ofSeconds(1000));
 
@@ -149,7 +149,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @group security
      * @group session
      */
-    public function an_authentication_session_with_an_interaction_after_exactly_the_relative_timeframe_is_within_the_relative_limit()
+    public function an_authentication_session_with_an_interaction_after_exactly_the_relative_timeframe_is_within_the_relative_limit(): void
     {
         $sessionLifetimeGuard = new SessionLifetimeGuard(TimeFrame::ofSeconds(1), TimeFrame::ofSeconds(1000));
 
@@ -166,7 +166,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @group security
      * @group session
      */
-    public function an_authentication_session_with_an_interaction_after_the_relative_timeframe_is_outside_the_relative_limit()
+    public function an_authentication_session_with_an_interaction_after_the_relative_timeframe_is_outside_the_relative_limit(): void
     {
         $sessionLifetimeGuard = new SessionLifetimeGuard(TimeFrame::ofSeconds(1000), TimeFrame::ofSeconds(1));
 
@@ -191,7 +191,7 @@ class SessionLifetimeGuardTest extends TestCase
         $isValid,
         DateTime $authenticationMoment = null,
         DateTime $interactionMoment = null
-    ) {
+    ): void {
         $authenticatedSessionMock = Mockery::mock(AuthenticatedSessionStateHandler::class);
         $authenticatedSessionMock
             ->shouldReceive('isAuthenticationMomentLogged')
@@ -218,7 +218,7 @@ class SessionLifetimeGuardTest extends TestCase
     /**
      * @return array
      */
-    public function bothLimitsVerificationProvider()
+    public function bothLimitsVerificationProvider(): array
     {
         $withinLimit = new DateTime(new CoreDateTime('@1001'));
         $overLimit   = new DateTime(new CoreDateTime('@999'));
@@ -237,7 +237,7 @@ class SessionLifetimeGuardTest extends TestCase
      *
      * @param DateTime|null $now
      */
-    private function setCurrentTime(DateTime $now = null)
+    private function setCurrentTime(DateTime $now = null): void
     {
         $nowProperty = new ReflectionProperty(DateTime::class, 'now');
         $nowProperty->setAccessible(true);

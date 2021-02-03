@@ -63,7 +63,7 @@ final class U2fService
      * @param CreateU2fSignRequestCommand $command
      * @return SignRequestCreationResult
      */
-    public function createSignRequest(CreateU2fSignRequestCommand $command)
+    public function createSignRequest(CreateU2fSignRequestCommand $command): SignRequestCreationResult
     {
         $this->logger->info('Create U2F sign request');
 
@@ -138,7 +138,7 @@ final class U2fService
      * @param VerifyU2fAuthenticationCommand $command
      * @return AuthenticationVerificationResult
      */
-    public function verifyAuthentication(VerifyU2fAuthenticationCommand $command)
+    public function verifyAuthentication(VerifyU2fAuthenticationCommand $command): AuthenticationVerificationResult
     {
         $this->logger->info('Create U2F sign request');
 
@@ -215,7 +215,7 @@ final class U2fService
      * @param string $rootName
      * @return string[]
      */
-    private function mapViolationsToErrorStrings(ConstraintViolationListInterface $violations, $rootName)
+    private function mapViolationsToErrorStrings(ConstraintViolationListInterface $violations, $rootName): array
     {
         $errors = [];
 
