@@ -67,17 +67,17 @@ class RoleAtInstitution
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getRole(): string
+    public function getRole(): ?string
     {
         return $this->role;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getInstitution(): string
+    public function getInstitution(): ?string
     {
         return $this->institution;
     }

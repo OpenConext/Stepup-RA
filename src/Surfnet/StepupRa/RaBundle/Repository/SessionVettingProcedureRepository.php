@@ -44,12 +44,12 @@ class SessionVettingProcedureRepository implements VettingProcedureRepository
         $this->namespace = $namespace;
     }
 
-    public function store(VettingProcedure $vettingProcedure)
+    public function store(VettingProcedure $vettingProcedure): void
     {
         $this->session->set(sprintf('%s:%s', $this->namespace, $vettingProcedure->getId()), $vettingProcedure);
     }
 
-    public function retrieve(string $id)
+    public function retrieve(string $id): ?VettingProcedure
     {
         return $this->session->get(sprintf('%s:%s', $this->namespace, $id));
     }

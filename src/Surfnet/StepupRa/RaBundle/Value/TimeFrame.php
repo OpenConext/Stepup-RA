@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Value;
 
 use DateInterval;
+use Surfnet\StepupRa\RaBundle\Assert;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
 final class TimeFrame
@@ -42,7 +43,8 @@ final class TimeFrame
      */
     public static function ofSeconds(int $seconds): TimeFrame
     {
-        return new TimeFrame(new DateInterval('PT' . $seconds . 'S'));
+        Assert::true($seconds >= 0);
+        return new TimeFrame(new DateInterval('PT' . strval($seconds) . 'S'));
     }
 
     /**

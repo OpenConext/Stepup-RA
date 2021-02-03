@@ -31,11 +31,11 @@ interface VettingProcedureRepository
      * @param string $id
      * @return VettingProcedure|null
      */
-    public function retrieve($id): ?VettingProcedure;
+    public function retrieve(string $id): ?VettingProcedure;
 
     /**
      * @param string $id
-     * @return void
+     * @return mixed
      */
-    public function remove($id): void;
+    public function remove(string $id);
 }
