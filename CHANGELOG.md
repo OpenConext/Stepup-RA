@@ -1,20 +1,25 @@
 # Changelog
 
-# 4.1.2
+## Unreleased
+**Improvements**
+ * Move from security-checker to local-php-security-checker
+ * Bump lodash
+
+## 4.1.2
 **Bugfix**
  * Add component_info to archive
  * Update Content Security Policy to allow images
  * Update http-kernel #243
 
-# 4.1.1
+## 4.1.1
 **Feature**
  * Bump lodash to 4.17.9 to mitigate vulnerability #240
  
-# 4.1.0
+## 4.1.0
 **Feature**
  * Make the the prove possession step optional #238
 
-# 4.0.0
+## 4.0.0
 From this version PHP 7.2 is supported and support for PHP 5.6 is dropped.
 
 Be aware that the new Symfony directory structure is now used. So if you are overwriting for example config files it is recommended 
