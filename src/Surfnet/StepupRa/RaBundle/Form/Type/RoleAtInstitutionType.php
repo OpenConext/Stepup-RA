@@ -49,7 +49,12 @@ class RoleAtInstitutionType extends AbstractType
         $builder ->add('role', ChoiceType::class, [
             'label' => false,
             'choices' => RaRoleChoiceList::create(),
-            'choice_value' => function ($choice) {
+            'choice_value' =>
+            /**
+             * @param mixed $choice
+             * @return mixed
+             */
+            function ($choice) {
                 return $choice;
             },
             'required' => $isRequired,

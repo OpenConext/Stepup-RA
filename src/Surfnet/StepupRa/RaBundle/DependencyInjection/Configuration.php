@@ -48,10 +48,16 @@ class Configuration implements ConfigurationInterface
                 ->info('The required LOA to be able to log in, should match the loa defined at the gateway')
                 ->isRequired()
                     ->validate()
-                        ->ifTrue(function ($value) {
-                            return !is_string($value);
-                        })
-                        ->thenInvalid('the required loa must be a string')
+                        ->ifTrue(
+                            /**
+                             * @param mixed $value
+                             * @return bool
+                             */
+                             function ($value) {
+                                return !is_string($value);
+                             }
+                        )
+                    ->thenInvalid('the required loa must be a string')
                     ->end()
             ->end();
     }
@@ -94,11 +100,15 @@ class Configuration implements ConfigurationInterface
                         ->example('3600 -> 1 hour * 60 minutes * 60 seconds')
                         ->validate()
                             ->ifTrue(
+                                /**
+                                 * @param mixed $lifetime
+                                 * @return bool
+                                 */
                                 function ($lifetime) {
                                     return !is_int($lifetime);
                                 }
                             )
-                            ->thenInvalid('max_absolute_lifetime must be an integer')
+                        ->thenInvalid('max_absolute_lifetime must be an integer')
                         ->end()
                     ->end()
                     ->integerNode('max_relative_lifetime')
@@ -111,6 +121,10 @@ class Configuration implements ConfigurationInterface
                         ->example('600 -> 10 minutes * 60 seconds')
                         ->validate()
                             ->ifTrue(
+                                /**
+                                 * @param mixed $lifetime
+                                 * @return bool
+                                 */
                                 function ($lifetime) {
                                     return !is_int($lifetime);
                                 }
@@ -129,7 +143,11 @@ class Configuration implements ConfigurationInterface
                 ->info('The URL of Self Service, where a user can register and revoke second factors')
                 ->validate()
                     ->ifTrue(
-                        function ($url) {
+                        /**
+                         * @param string $url
+                         * @return bool
+                         */
+                        function (string $url) {
                             return filter_var($url, FILTER_VALIDATE_URL) === false;
                         }
                     )

@@ -33,7 +33,12 @@ class ChangeRaRoleType extends AbstractType
             ->add('role', ChoiceType::class, [
                 'label'       => 'ra.management.form.change_ra_role.label.role',
                 'choices' => RaRoleChoiceList::create(),
-                'choice_value' => function ($choice) {
+                'choice_value' =>
+                /**
+                 * @param mixed $choice
+                 * @return mixed
+                 */
+                function ($choice) {
                     return $choice;
                 },
             ])

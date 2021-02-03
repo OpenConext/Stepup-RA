@@ -50,18 +50,30 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('consume_assertion')
                         ->isRequired()
                         ->validate()
-                            ->ifTrue(function ($v) {
-                                return !is_string($v) || strlen($v) === 0;
-                            })
+                            ->ifTrue(
+                                /**
+                                 * @param mixed $v
+                                 * @return bool
+                                 */
+                                function ($v) {
+                                    return !is_string($v) || strlen($v) === 0;
+                                }
+                            )
                             ->thenInvalid('Consume assertion route must be a non-empty string')
                         ->end()
                     ->end()
                     ->scalarNode('metadata')
                         ->isRequired()
                         ->validate()
-                            ->ifTrue(function ($v) {
-                                return !is_string($v) || strlen($v) === 0;
-                            })
+                            ->ifTrue(
+                                /**
+                                 * @param mixed $v
+                                 * @return bool
+                                 */
+                                function ($v) {
+                                    return !is_string($v) || strlen($v) === 0;
+                                }
+                            )
                             ->thenInvalid('Metadata route must be a non-empty string')
                         ->end()
                     ->end()

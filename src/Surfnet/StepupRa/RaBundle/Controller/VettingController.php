@@ -222,7 +222,7 @@ class VettingController extends Controller
         $vettingService = $this->getVettingService();
         $commonName = $vettingService->getIdentityCommonName($procedureId);
 
-        $showForm = function ($error = null) use ($form, $commonName) {
+        $showForm = function (?string $error = null) use ($form, $commonName): array {
             if ($error) {
                 $this->addFlash('error', $error);
             }
