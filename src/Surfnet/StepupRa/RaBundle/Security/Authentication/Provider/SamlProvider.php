@@ -125,7 +125,7 @@ class SamlProvider implements AuthenticationProviderInterface
     /**
      * @return string
      */
-    private function getSingleStringValue(string $attribute, AssertionAdapter $translatedAssertion): array
+    private function getSingleStringValue(string $attribute, AssertionAdapter $translatedAssertion): string
     {
         $values = $translatedAssertion->getAttributeValue($attribute);
 

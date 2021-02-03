@@ -110,7 +110,7 @@ class RaCandidateService
      * @param string $actorId
      * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitutions
      */
-    public function getRaCandidate($identityId, $actorId): RaCandidateInstitutions
+    public function getRaCandidate($identityId, $actorId): ?RaCandidateInstitutions
     {
         if (!is_string($identityId)) {
             throw InvalidArgumentException::invalidType('string', 'identityId', $identityId);
