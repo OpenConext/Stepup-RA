@@ -123,7 +123,7 @@ class SamlProvider implements AuthenticationProviderInterface
     }
 
     /**
-     * @return string[]
+     * @return string
      */
     private function getSingleStringValue(string $attribute, AssertionAdapter $translatedAssertion): array
     {

@@ -106,7 +106,7 @@ final class SecondFactorController extends Controller
         ];
     }
 
-    public function exportAction(SearchRaSecondFactorsCommand $command): ExecutionResult
+    public function exportAction(SearchRaSecondFactorsCommand $command): Response
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA']);
 

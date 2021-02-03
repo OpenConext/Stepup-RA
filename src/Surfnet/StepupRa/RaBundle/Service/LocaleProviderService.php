@@ -34,7 +34,10 @@ final class LocaleProviderService implements StepupLocaleProviderService
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function determinePreferredLocale(): ?string
+    /**
+     * @return ?string
+     */
+    public function determinePreferredLocale()
     {
         $token = $this->tokenStorage->getToken();
 

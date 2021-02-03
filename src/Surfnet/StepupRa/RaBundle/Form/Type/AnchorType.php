@@ -27,7 +27,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AnchorType extends AbstractType implements ButtonTypeInterface
 {
-    public function getParent(): ?self
+    /**
+     * @return class-string
+     */
+    public function getParent()
     {
         return ButtonType::class;
     }

@@ -72,7 +72,11 @@ final class StateHandler
         $this->attributeBag->set($this->provider . '/' . $key, $value);
     }
 
-    protected function get(string $key): void
+    /**
+     * @param string $key
+     * @return mixed
+     */
+    protected function get(string $key)
     {
         return $this->attributeBag->get($this->provider . '/' . $key);
     }

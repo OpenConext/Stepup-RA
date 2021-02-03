@@ -20,10 +20,11 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class SecurityController extends Controller
 {
-    public function sessionExpiredAction(Request $request): void
+    public function sessionExpiredAction(Request $request): Response
     {
         $redirectToUrl = $this
             ->get('ra.security.authentication.session.session_storage')
