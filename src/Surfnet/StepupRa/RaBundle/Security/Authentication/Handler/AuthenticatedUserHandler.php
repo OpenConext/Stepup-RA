@@ -27,9 +27,9 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class AuthenticatedUserHandler implements AuthenticationHandler
 {
     /**
-     * @var AuthenticationHandler
+     * @var AuthenticationHandler|null
      */
-    private $nextHandler;
+    private $nextHandler = null;
 
     /**
      * @var TokenStorageInterface
@@ -82,7 +82,7 @@ class AuthenticatedUserHandler implements AuthenticationHandler
         }
     }
 
-    public function setNext(AuthenticationHandler $next)
+    public function setNext(AuthenticationHandler $next): void
     {
         $this->nextHandler = $next;
     }

@@ -40,12 +40,8 @@ final class TimeFrame
      * @param int $seconds
      * @return TimeFrame
      */
-    public static function ofSeconds($seconds): TimeFrame
+    public static function ofSeconds(int $seconds): TimeFrame
     {
-        if (!is_int($seconds) || $seconds < 1) {
-            throw InvalidArgumentException::invalidType('positive integer', 'seconds', $seconds);
-        }
-
         return new TimeFrame(new DateInterval('PT' . $seconds . 'S'));
     }
 

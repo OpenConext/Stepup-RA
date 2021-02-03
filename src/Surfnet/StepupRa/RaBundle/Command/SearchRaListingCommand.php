@@ -47,9 +47,9 @@ class SearchRaListingCommand
     public $email;
 
     /**
-     * @var RoleAtInstitution
+     * @var RoleAtInstitution|null
      */
-    public $roleAtInstitution;
+    public $roleAtInstitution = null;
 
     /**
      * @Assert\Choice(

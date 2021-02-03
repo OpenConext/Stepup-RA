@@ -23,14 +23,14 @@ use Surfnet\StepupRa\RaBundle\Assert;
 class RoleAtInstitution
 {
     /**
-     * @var string
+     * @var string|null
      */
-    private $role;
+    private $role = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    private $institution;
+    private $institution = null;
 
     /**
      * @param string $role
