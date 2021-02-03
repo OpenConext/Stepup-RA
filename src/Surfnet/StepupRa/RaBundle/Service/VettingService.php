@@ -288,7 +288,7 @@ class VettingService
     /**
      * @param string                       $procedureId
      * @param VerifyYubikeyPublicIdCommand $command
-     * @return VerificationResult
+     * @return YubikeyVerificationResult
      */
     public function verifyYubikeyPublicId(string $procedureId, VerifyYubikeyPublicIdCommand $command): YubikeyVerificationResult
     {
