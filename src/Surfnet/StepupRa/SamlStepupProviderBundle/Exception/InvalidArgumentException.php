@@ -22,7 +22,13 @@ use InvalidArgumentException as CoreInvalidArgumentException;
 
 class InvalidArgumentException extends CoreInvalidArgumentException
 {
-    public static function invalidType($expectedType, $parameter, $value): self
+    /**
+     * @param string $expectedType
+     * @param string $parameter
+     * @param mixed $value
+     * @return self
+     */
+    public static function invalidType(string $expectedType, string $parameter, $value): self
     {
         return new self(
             sprintf(

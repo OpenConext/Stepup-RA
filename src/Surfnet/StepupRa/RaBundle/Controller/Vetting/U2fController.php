@@ -36,7 +36,7 @@ class U2fController extends SecondFactorController
      * @param string  $procedureId
      * @return array|Response
      */
-    public function startAuthenticationAction(Request $request, $procedureId)
+    public function startAuthenticationAction(Request $request, string $procedureId)
     {
         $this->assertSecondFactorEnabled('u2f');
 
@@ -59,7 +59,7 @@ class U2fController extends SecondFactorController
      * @param string  $procedureId
      * @return array|Response
      */
-    public function authenticationAction(Request $request, $procedureId)
+    public function authenticationAction(Request $request, string $procedureId)
     {
         $this->assertSecondFactorEnabled('u2f');
 
@@ -103,7 +103,7 @@ class U2fController extends SecondFactorController
      * @Template
      * @return array|Response
      */
-    public function provePossessionAction(Request $request, $procedureId)
+    public function provePossessionAction(Request $request, string $procedureId)
     {
         $this->assertSecondFactorEnabled('u2f');
 

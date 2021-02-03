@@ -64,7 +64,7 @@ final class SignRequestCreationResult
         return new self(self::STATUS_API_ERROR);
     }
 
-    private function __construct($status)
+    private function __construct(string $status)
     {
         $this->status = $status;
     }

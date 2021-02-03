@@ -28,7 +28,7 @@ interface SamlAuthenticationStateHandler
     /**
      * @param string $requestId
      */
-    public function setRequestId($requestId): void;
+    public function setRequestId(string $requestId): void;
 
     /**
      * @return bool

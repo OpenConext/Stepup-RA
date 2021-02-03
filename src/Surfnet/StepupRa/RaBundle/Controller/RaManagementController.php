@@ -218,11 +218,11 @@ class RaManagementController extends Controller
 
     /**
      * @param Request $request
-     * @param         $identityId
-     * @param         $raInstitution
+     * @param string  $identityId
+     * @param string  $raInstitution
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function amendRaInformationAction(Request $request, $identityId, $raInstitution)
+    public function amendRaInformationAction(Request $request, string $identityId, string $raInstitution)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
 
@@ -265,11 +265,11 @@ class RaManagementController extends Controller
 
     /**
      * @param Request $request
-     * @param         $identityId
-     * @param         $raInstitution
+     * @param string  $identityId
+     * @param string  $raInstitution
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function retractRegistrationAuthorityAction(Request $request, $identityId, $raInstitution)
+    public function retractRegistrationAuthorityAction(Request $request, string $identityId, string $raInstitution)
     {
         $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
         $logger = $this->get('logger');

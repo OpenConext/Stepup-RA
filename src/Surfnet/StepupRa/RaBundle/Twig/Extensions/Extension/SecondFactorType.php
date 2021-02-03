@@ -46,7 +46,7 @@ final class SecondFactorType extends Twig_Extension
         ];
     }
 
-    public function translateSecondFactorType($secondFactorType): string
+    public function translateSecondFactorType(string $secondFactorType): string
     {
         return $this->translator->translate($secondFactorType, 'ra.second_factor.search.type.%s');
     }

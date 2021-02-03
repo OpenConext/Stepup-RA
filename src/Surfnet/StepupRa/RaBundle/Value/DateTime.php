@@ -66,7 +66,7 @@ class DateTime
      * @param string $string A date-time string formatted using `self::FORMAT` (eg. '2014-11-26T15:20:43+01:00').
      * @return DateTime
      */
-    public static function fromString($string): DateTime
+    public static function fromString(string $string): DateTime
     {
         if (!is_string($string)) {
             InvalidArgumentException::invalidType('string', 'string', $string);
@@ -142,10 +142,10 @@ class DateTime
     }
 
     /**
-     * @param $format
+     * @param string $format
      * @return string
      */
-    public function format($format): string
+    public function format(string $format): string
     {
         $formatted = $this->dateTime->format($format);
 

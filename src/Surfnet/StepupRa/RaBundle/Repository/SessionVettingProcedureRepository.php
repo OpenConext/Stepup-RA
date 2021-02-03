@@ -34,7 +34,7 @@ class SessionVettingProcedureRepository implements VettingProcedureRepository
      */
     private $namespace;
 
-    public function __construct(SessionInterface $session, $namespace)
+    public function __construct(SessionInterface $session, string $namespace)
     {
         if (!is_string($namespace)) {
             throw InvalidArgumentException::invalidType('string', 'namespace', $namespace);
@@ -49,12 +49,8 @@ class SessionVettingProcedureRepository implements VettingProcedureRepository
         $this->session->set(sprintf('%s:%s', $this->namespace, $vettingProcedure->getId()), $vettingProcedure);
     }
 
-    public function retrieve($id)
+    public function retrieve(string $id)
     {
-        if (!is_string($id)) {
-            throw InvalidArgumentException::invalidType('string', 'uuid', $id);
-        }
-
         return $this->session->get(sprintf('%s:%s', $this->namespace, $id));
     }
 
@@ -62,12 +58,8 @@ class SessionVettingProcedureRepository implements VettingProcedureRepository
      * @param string $id
      * @return mixed
      */
-    public function remove($id)
+    public function remove(string $id)
     {
-        if (!is_string($id)) {
-            throw InvalidArgumentException::invalidType('string', 'uuid', $id);
-        }
-
         return $this->session->remove(sprintf('%s:%s', $this->namespace, $id));
     }
 }

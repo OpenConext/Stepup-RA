@@ -169,7 +169,7 @@ class VettingController extends Controller
         }
     }
 
-    public function cancelProcedureAction($procedureId): RedirectResponse
+    public function cancelProcedureAction(string $procedureId): RedirectResponse
     {
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
 
@@ -193,7 +193,7 @@ class VettingController extends Controller
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
      */
-    public function verifyIdentityAction(Request $request, $procedureId)
+    public function verifyIdentityAction(Request $request, string $procedureId)
     {
         $this->denyAccessUnlessGranted(['ROLE_RA']);
 

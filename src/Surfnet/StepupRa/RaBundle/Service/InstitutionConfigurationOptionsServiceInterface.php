@@ -23,8 +23,8 @@ use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurat
 interface InstitutionConfigurationOptionsServiceInterface
 {
     /**
-     * @param $institution
+     * @param string $institution
      * @return null|InstitutionConfigurationOptions
      */
-    public function getInstitutionConfigurationOptionsFor($institution): ?InstitutionConfigurationOptions;
+    public function getInstitutionConfigurationOptionsFor(string $institution): ?InstitutionConfigurationOptions;
 }

@@ -76,7 +76,7 @@ final class AuthenticationVerificationResult
      * @param string $status
      * @return AuthenticationVerificationResult
      */
-    public static function error($status): self
+    public static function error(string $status): self
     {
         return new self($status);
     }

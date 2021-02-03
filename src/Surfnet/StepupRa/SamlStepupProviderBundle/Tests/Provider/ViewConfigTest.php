@@ -81,7 +81,7 @@ final class ViewConfigTest extends TestCase
      * @param string|null $locale
      * @return ViewConfig
      */
-    private function buildViewConfig($locale = ''): ViewConfig
+    private function buildViewConfig(?string $locale = ''): ViewConfig
     {
         $request = m::mock(RequestStack::class);
         $request->shouldReceive('getCurrentRequest->getLocale')->andReturn($locale)->byDefault();
@@ -99,7 +99,7 @@ final class ViewConfigTest extends TestCase
      * @param $string
      * @return array
      */
-    private function getTranslationsArray($string): array
+    private function getTranslationsArray(string $string): array
     {
         return [
             'en_GB' => 'EN ' . $string,

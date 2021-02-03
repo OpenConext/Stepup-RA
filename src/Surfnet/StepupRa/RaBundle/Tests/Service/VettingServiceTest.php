@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Tests\Service;
 
+use DateTime;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
@@ -30,8 +31,10 @@ final class VettingServiceTest extends TestCase
      * @test
      * @group vetting
      * @dataProvider validRegistrationDatesProvider
+     *
+     * @param DateTime $registrationRequestedAt
      */
-    public function registration_code_is_valid_within_two_weeks_after_verification($registrationRequestedAt): void
+    public function registration_code_is_valid_within_two_weeks_after_verification(DateTime $registrationRequestedAt): void
     {
         $command = new StartVettingProcedureCommand();
         $command->secondFactor = new VerifiedSecondFactor();
@@ -58,8 +61,10 @@ final class VettingServiceTest extends TestCase
      * @test
      * @group vetting
      * @dataProvider expiredRegistrationDatesProvider
+     *
+     * @param DateTime $registrationRequestedAt
      */
-    public function registration_code_is_invalid_two_weeks_after_verification($registrationRequestedAt): void
+    public function registration_code_is_invalid_two_weeks_after_verification(DateTime $registrationRequestedAt): void
     {
         $command = new StartVettingProcedureCommand();
         $command->secondFactor = new VerifiedSecondFactor();

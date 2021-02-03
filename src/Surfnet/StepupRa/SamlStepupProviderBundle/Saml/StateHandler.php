@@ -33,7 +33,7 @@ final class StateHandler
      */
     private $attributeBag;
 
-    public function __construct(NamespacedAttributeBag $attributeBag, $provider)
+    public function __construct(NamespacedAttributeBag $attributeBag, string $provider)
     {
         $this->attributeBag = $attributeBag;
         $this->provider = $provider;
@@ -43,7 +43,7 @@ final class StateHandler
      * @param string $originalRequestId
      * @return $this
      */
-    public function setRequestId($originalRequestId): self
+    public function setRequestId(string $originalRequestId): self
     {
         $this->set('request_id', $originalRequestId);
 
@@ -63,12 +63,16 @@ final class StateHandler
         $this->attributeBag->remove($this->provider);
     }
 
-    protected function set($key, $value): void
+    /**
+     * @param string $key
+     * @param mixed $value
+     */
+    protected function set(string $key, $value): void
     {
         $this->attributeBag->set($this->provider . '/' . $key, $value);
     }
 
-    protected function get($key): void
+    protected function get(string $key): void
     {
         return $this->attributeBag->get($this->provider . '/' . $key);
     }

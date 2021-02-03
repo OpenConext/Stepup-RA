@@ -20,6 +20,11 @@ namespace Surfnet\StepupRa\SamlStepupProviderBundle\Exception;
 
 class UnknownProviderException extends RuntimeException
 {
+    /**
+     * @param object|string $unknownProvider
+     * @param array $knownProviders
+     * @return self
+     */
     public static function create($unknownProvider, array $knownProviders): self
     {
         return new static(sprintf(
