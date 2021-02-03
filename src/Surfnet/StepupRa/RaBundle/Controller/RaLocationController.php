@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\ChangeRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\CreateRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\RemoveRaLocationCommand;
@@ -30,9 +31,11 @@ use Surfnet\StepupRa\RaBundle\Form\Type\RemoveRaLocationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionListingService;
+use Surfnet\StepupRa\RaBundle\Service\RaLocationService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

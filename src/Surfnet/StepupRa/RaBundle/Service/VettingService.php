@@ -27,6 +27,8 @@ use Surfnet\StepupBundle\Service\SmsSecondFactor\OtpVerification;
 use Surfnet\StepupBundle\Service\SmsSecondFactorServiceInterface;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupBundle\Value\SecondFactorType;
+use Surfnet\StepupMiddlewareClient\Service\ExecutionResult;
+use Surfnet\StepupMiddlewareClient\Service\VerificationResult;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\VetSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\CreateU2fSignRequestCommand;
@@ -42,6 +44,7 @@ use Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository;
 use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult as GssfVerificationResult;
 use Surfnet\StepupRa\RaBundle\Service\U2f\AuthenticationVerificationResult;
 use Surfnet\StepupRa\RaBundle\Service\U2f\SignRequestCreationResult;
+use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult as YubikeyVerificationResult;
 use Surfnet\StepupRa\RaBundle\Value\DateTime;
 use Surfnet\StepupRa\RaBundle\VettingProcedure;
 use Surfnet\StepupU2fBundle\Dto\SignRequest;
@@ -285,9 +288,9 @@ class VettingService
     /**
      * @param string                       $procedureId
      * @param VerifyYubikeyPublicIdCommand $command
-     * @return YubikeySecondFactor\VerificationResult
+     * @return VerificationResult
      */
-    public function verifyYubikeyPublicId(string $procedureId, VerifyYubikeyPublicIdCommand $command): VerificationResult
+    public function verifyYubikeyPublicId(string $procedureId, VerifyYubikeyPublicIdCommand $command): YubikeyVerificationResult
     {
         $procedure = $this->getProcedure($procedureId);
 

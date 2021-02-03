@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\SamlStepupProviderBundle\Provider;
 
 use DOMDocument;
 use DOMElement;
+use DOMNode;
 use LogicException;
 use Surfnet\SamlBundle\Signing\Signable;
 

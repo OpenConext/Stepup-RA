@@ -24,6 +24,7 @@ use Surfnet\StepupBundle\Command\SwitchLocaleCommand;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\IdentitySearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\ExpressLocalePreferenceCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RegistrationAuthorityCredentials;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService as ApiIdentityService;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
