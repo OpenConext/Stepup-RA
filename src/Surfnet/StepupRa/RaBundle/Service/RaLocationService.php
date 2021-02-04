@@ -20,9 +20,12 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Configuration\Dto\RaLocationSearchQuery;
-use Surfnet\StepupMiddlewareClientBundle\Configuration\Command\AddRaLocationCommand as MiddlewareCreateLocationCommand;
-use Surfnet\StepupMiddlewareClientBundle\Configuration\Command\ChangeRaLocationCommand as MiddlewareChangeRaLocationCommand;
-use Surfnet\StepupMiddlewareClientBundle\Configuration\Command\RemoveRaLocationCommand as MiddlewareRemoveRaLocationCommand;
+use Surfnet\StepupMiddlewareClientBundle\Configuration\Command\AddRaLocationCommand
+    as MiddlewareCreateLocationCommand;
+use Surfnet\StepupMiddlewareClientBundle\Configuration\Command\ChangeRaLocationCommand
+    as MiddlewareChangeRaLocationCommand;
+use Surfnet\StepupMiddlewareClientBundle\Configuration\Command\RemoveRaLocationCommand
+    as MiddlewareRemoveRaLocationCommand;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\RaLocation;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\RaLocationCollection;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Service\RaLocationService as ApiRaLocationService;

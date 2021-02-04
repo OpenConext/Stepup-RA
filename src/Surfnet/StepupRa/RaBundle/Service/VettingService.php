@@ -181,7 +181,8 @@ class VettingService
             );
         }
 
-        $provePossessionSkipped = $this->secondFactorService->getVerifiedCanSkipProvePossession($command->secondFactor->id);
+        $provePossessionSkipped = $this->secondFactorService
+            ->getVerifiedCanSkipProvePossession($command->secondFactor->id);
 
         $procedure = VettingProcedure::start(
             $command->secondFactor->id,
@@ -255,7 +256,12 @@ class VettingService
         }
 
         $command->phoneNumber = $phoneNumber;
-        $command->body        = $this->translator->trans('ra.vetting.sms.challenge_body', [], 'messages', $identity->preferredLocale);
+        $command->body        = $this->translator->trans(
+            'ra.vetting.sms.challenge_body',
+            [],
+            'messages',
+            $identity->preferredLocale
+        );
         $command->identity    = $procedure->getSecondFactor()->identityId;
         $command->institution = $procedure->getSecondFactor()->institution;
 
@@ -290,8 +296,10 @@ class VettingService
      * @param VerifyYubikeyPublicIdCommand $command
      * @return YubikeyVerificationResult
      */
-    public function verifyYubikeyPublicId(string $procedureId, VerifyYubikeyPublicIdCommand $command): YubikeyVerificationResult
-    {
+    public function verifyYubikeyPublicId(
+        string $procedureId,
+        VerifyYubikeyPublicIdCommand $command
+    ): YubikeyVerificationResult {
         $procedure = $this->getProcedure($procedureId);
 
         $command->expectedPublicId = $procedure->getSecondFactor()->secondFactorIdentifier;
@@ -361,8 +369,11 @@ class VettingService
      * @param SignResponse $signResponse
      * @return AuthenticationVerificationResult
      */
-    public function verifyU2fAuthentication(string $procedureId, SignRequest $signRequest, SignResponse $signResponse): AuthenticationVerificationResult
-    {
+    public function verifyU2fAuthentication(
+        string $procedureId,
+        SignRequest $signRequest,
+        SignResponse $signResponse
+    ): AuthenticationVerificationResult {
         $procedure = $this->getProcedure($procedureId);
 
         $command = new VerifyU2fAuthenticationCommand();

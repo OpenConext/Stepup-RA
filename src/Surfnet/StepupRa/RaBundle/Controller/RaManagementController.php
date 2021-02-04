@@ -278,7 +278,9 @@ class RaManagementController extends Controller
 
         $raListing = $this->getRaListingService()->get($identityId, $raInstitution, $this->getUser()->id);
         if (!$raListing) {
-            $logger->warning(sprintf("RA listing for identity ID '%s@%s' not found", $identityId, $this->getUser()->institution));
+            $logger->warning(
+                sprintf("RA listing for identity ID '%s@%s' not found", $identityId, $this->getUser()->institution)
+            );
             throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
         }
 

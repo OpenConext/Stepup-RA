@@ -53,9 +53,9 @@ class Configuration implements ConfigurationInterface
                              * @param mixed $value
                              * @return bool
                              */
-                             function ($value) {
+                            function ($value) {
                                 return !is_string($value);
-                             }
+                            }
                         )
                     ->thenInvalid('the required loa must be a string')
                     ->end()

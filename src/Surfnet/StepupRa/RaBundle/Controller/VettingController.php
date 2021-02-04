@@ -144,7 +144,12 @@ class VettingController extends Controller
         if ($this->getVettingService()->isProvePossessionSkippable($procedureId)) {
             $this->get('ra.procedure_logger')
                 ->forProcedure($procedureId)
-                ->notice(sprintf('Vetting Procedure for second factor of type "%s" skips the possession proven step', $secondFactor->type));
+                ->notice(
+                    sprintf(
+                        'Vetting Procedure for second factor of type "%s" skips the possession proven step',
+                        $secondFactor->type
+                    )
+                );
 
             return $this->redirectToRoute('ra_vetting_verify_identity', ['procedureId' => $procedureId]);
         }

@@ -84,24 +84,13 @@ class VettingProcedure
      * @param bool $skipProvePossession
      * @return self
      */
-    public static function start($id, $authorityId, $registrationCode, VerifiedSecondFactor $secondFactor, $skipProvePossession): self
-    {
-        if (!is_string($id)) {
-            throw InvalidArgumentException::invalidType('string', 'id', $id);
-        }
-
-        if (!is_string($authorityId)) {
-            throw InvalidArgumentException::invalidType('string', 'authorityId', $authorityId);
-        }
-
-        if (!is_string($registrationCode)) {
-            throw InvalidArgumentException::invalidType('string', 'registrationCode', $registrationCode);
-        }
-
-        if (!is_bool($skipProvePossession)) {
-            throw InvalidArgumentException::invalidType('string', 'skipProvePossession', $skipProvePossession);
-        }
-
+    public static function start(
+        string $id,
+        string $authorityId,
+        string $registrationCode,
+        VerifiedSecondFactor $secondFactor,
+        bool $skipProvePossession
+    ): self {
         $procedure = new self();
         $procedure->id = $id;
         $procedure->authorityId = $authorityId;
@@ -277,6 +266,9 @@ class VettingProcedure
      */
     private function isPossessionProvenOrCanItBeSkipped(): bool
     {
-        return ($this->inputSecondFactorIdentifier === $this->secondFactor->secondFactorIdentifier || $this->skipProvePossession);
+        return (
+            $this->inputSecondFactorIdentifier === $this->secondFactor->secondFactorIdentifier
+            || $this->skipProvePossession
+        );
     }
 }

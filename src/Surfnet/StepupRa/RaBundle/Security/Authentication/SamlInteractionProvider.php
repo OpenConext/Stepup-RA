@@ -31,6 +31,7 @@ use Surfnet\StepupRa\RaBundle\Exception\UnexpectedIssuerException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
