@@ -34,7 +34,7 @@ class YubikeyVerificationResult
      * @param bool $clientError
      * @param bool $serverError
      */
-    public function __construct($clientError, $serverError)
+    public function __construct(bool $clientError, bool $serverError)
     {
         $this->clientError = $clientError;
         $this->serverError = $serverError;

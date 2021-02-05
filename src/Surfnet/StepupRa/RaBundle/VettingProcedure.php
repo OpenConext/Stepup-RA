@@ -106,7 +106,7 @@ class VettingProcedure
      * @return void
      * @throws DomainException
      */
-    public function verifySecondFactorIdentifier($secondFactorIdentifier): void
+    public function verifySecondFactorIdentifier(string $secondFactorIdentifier): void
     {
         if (!$this->isReadyForSecondFactorToBeVerified()) {
             throw new DomainException(
@@ -128,7 +128,7 @@ class VettingProcedure
      * @return void
      * @throws DomainException
      */
-    public function verifyIdentity($documentNumber, $identityVerified): void
+    public function verifyIdentity(string $documentNumber, bool $identityVerified): void
     {
         if (!$this->isReadyForIdentityVerification()) {
             throw new DomainException(

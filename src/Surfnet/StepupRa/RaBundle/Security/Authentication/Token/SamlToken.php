@@ -57,11 +57,14 @@ class SamlToken extends AbstractToken
     /**
      * @return Loa
      */
-    public function getLoa()
+    public function getLoa(): Loa
     {
         return $this->loa;
     }
 
+    /**
+     * @return string
+     */
     public function serialize()
     {
         return serialize(
@@ -72,6 +75,10 @@ class SamlToken extends AbstractToken
         );
     }
 
+    /**
+     * @param string $serialized
+     * @return void
+     */
     public function unserialize($serialized)
     {
         list(

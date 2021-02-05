@@ -49,32 +49,53 @@ class FakeSession implements SessionInterface
         $this->sessionId = bin2hex(openssl_random_pseudo_bytes(16));
     }
 
-    public function start(): bool
+    /**
+     * @return bool
+     */
+    public function start()
     {
         return true;
     }
 
-    public function getId(): string
+    /**
+     * @return string
+     */
+    public function getId()
     {
         return $this->sessionId;
     }
 
-    public function setId($id): void
+    /**
+     * @param string $id
+     * @return void
+     */
+    public function setId($id)
     {
         $this->sessionId = $id;
     }
 
-    public function getName(): string
+    /**
+     * @return string
+     */
+    public function getName()
     {
         return $this->sessionName;
     }
 
-    public function setName($name): void
+    /**
+     * @param string $name
+     * @return void
+     */
+    public function setName($name)
     {
         $this->sessionName = $name;
     }
 
-    public function invalidate($lifetime = null): bool
+    /**
+     * @param int|null $lifetime
+     * @return bool
+     */
+    public function invalidate($lifetime = null)
     {
         $this->sessionContent = [];
         $this->bags = [];
@@ -83,7 +104,12 @@ class FakeSession implements SessionInterface
         return true;
     }
 
-    public function migrate($destroy = false, $lifetime = null): bool
+    /**
+     * @param bool $destroy
+     * @param int|null $lifetime
+     * @return bool
+     */
+    public function migrate($destroy = false, $lifetime = null)
     {
         if ($destroy) {
             $this->sessionContent = [];
@@ -95,17 +121,26 @@ class FakeSession implements SessionInterface
         return true;
     }
 
-    public function save(): void
+    /**
+     * @return void
+     */
+    public function save()
     {
         // noop
     }
 
-    public function has($name): bool
+    /**
+     * @param string $name
+     * @return bool
+     */
+    public function has($name)
     {
         return array_key_exists($name, $this->sessionContent);
     }
 
     /**
+     * @param string $name
+     * @param mixed $default
      * @return mixed
      */
     public function get($name, $default = null)
@@ -113,22 +148,35 @@ class FakeSession implements SessionInterface
         return $this->has($name) ? $this->sessionContent[$name] : $default;
     }
 
-    public function set($name, $value): void
+    /**
+     * @param string $name
+     * @param mixed $value
+     * @return void
+     */
+    public function set($name, $value)
     {
         $this->sessionContent[$name] = $value;
     }
 
-    public function all(): array
+    /**
+     * @return array
+     */
+    public function all()
     {
         return $this->sessionContent;
     }
 
-    public function replace(array $attributes): void
+    /**
+     * @param array $attributes
+     * @return void
+     */
+    public function replace(array $attributes)
     {
         $this->sessionContent = $attributes;
     }
 
     /**
+     * @param string $name
      * @return mixed
      */
     public function remove($name)
@@ -143,11 +191,17 @@ class FakeSession implements SessionInterface
         return $return;
     }
 
-    public function clear(): void
+    /**
+     * @return void
+     */
+    public function clear()
     {
         $this->sessionContent = [];
     }
 
+    /**
+     * @return bool
+     */
     public function isStarted(): bool
     {
         return true;
@@ -159,6 +213,7 @@ class FakeSession implements SessionInterface
     }
 
     /**
+     * @param string $name
      * @return mixed
      */
     public function getBag($name)

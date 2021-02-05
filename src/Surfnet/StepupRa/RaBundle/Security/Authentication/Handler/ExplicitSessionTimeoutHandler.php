@@ -67,6 +67,7 @@ class ExplicitSessionTimeoutHandler implements AuthenticationHandler
      * @var RouterInterface
      */
     private $router;
+
     /**
      * @var LoggerInterface
      */
@@ -90,7 +91,7 @@ class ExplicitSessionTimeoutHandler implements AuthenticationHandler
         $this->logger                      = $logger;
     }
 
-    public function process(GetResponseEvent $event)
+    public function process(GetResponseEvent $event): void
     {
         if ($this->tokenStorage->getToken() !== null
             && !$this->sessionLifetimeGuard->sessionLifetimeWithinLimits($this->authenticatedSession)
@@ -140,7 +141,7 @@ class ExplicitSessionTimeoutHandler implements AuthenticationHandler
         }
     }
 
-    public function setNext(AuthenticationHandler $handler)
+    public function setNext(AuthenticationHandler $handler): void
     {
         $this->nextHandler = $handler;
     }

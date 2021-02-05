@@ -53,7 +53,7 @@ class SessionLifetimeGuard
      * @param AuthenticatedSessionStateHandler $sessionStateHandler
      * @return bool
      */
-    public function sessionLifetimeWithinAbsoluteLimit(AuthenticatedSessionStateHandler $sessionStateHandler)
+    public function sessionLifetimeWithinAbsoluteLimit(AuthenticatedSessionStateHandler $sessionStateHandler): bool
     {
         if (!$sessionStateHandler->isAuthenticationMomentLogged()) {
             return true;
@@ -74,7 +74,7 @@ class SessionLifetimeGuard
      * @param AuthenticatedSessionStateHandler $sessionStateHandler
      * @return bool
      */
-    public function sessionLifetimeWithinRelativeLimit(AuthenticatedSessionStateHandler $sessionStateHandler)
+    public function sessionLifetimeWithinRelativeLimit(AuthenticatedSessionStateHandler $sessionStateHandler): bool
     {
         if (!$sessionStateHandler->hasSeenInteraction()) {
             return true;

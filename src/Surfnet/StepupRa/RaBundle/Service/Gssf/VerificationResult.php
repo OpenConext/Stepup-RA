@@ -36,12 +36,8 @@ final class VerificationResult
      * @param string $procedureId
      * @return VerificationResult
      */
-    public static function verificationSucceeded($procedureId): VerificationResult
+    public static function verificationSucceeded(string $procedureId): VerificationResult
     {
-        if (!is_string($procedureId)) {
-            throw InvalidArgumentException::invalidType('string', 'procedureId', $procedureId);
-        }
-
         $result = new self();
         $result->verificationSucceeded = true;
         $result->procedureId = $procedureId;
@@ -61,11 +57,8 @@ final class VerificationResult
      * @param string $procedureId
      * @return VerificationResult
      */
-    public static function verificationFailed($procedureId): self
+    public static function verificationFailed(string $procedureId): self
     {
-        if (!is_string($procedureId)) {
-            throw InvalidArgumentException::invalidType('string', 'procedureId', $procedureId);
-        }
 
         $result = new self();
         $result->verificationSucceeded = false;

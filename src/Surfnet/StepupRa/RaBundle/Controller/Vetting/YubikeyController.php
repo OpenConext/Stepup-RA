@@ -36,7 +36,7 @@ class YubikeyController extends SecondFactorController
      * @param string  $procedureId
      * @return array|Response
      */
-    public function verifyAction(Request $request, $procedureId)
+    public function verifyAction(Request $request, string $procedureId)
     {
         $this->assertSecondFactorEnabled('yubikey');
 
@@ -81,7 +81,7 @@ class YubikeyController extends SecondFactorController
     /**
      * @return VettingService
      */
-    private function getVettingService()
+    private function getVettingService(): VettingService
     {
         return $this->get('ra.service.vetting');
     }

@@ -87,7 +87,7 @@ class InitiateSamlAuthenticationHandler implements AuthenticationHandler
         $this->logger                         = $logger;
     }
 
-    public function process(GetResponseEvent $event)
+    public function process(GetResponseEvent $event): void
     {
         $acsUri = $this->router->generate('ra_serviceprovider_consume_assertion');
 
@@ -130,7 +130,7 @@ class InitiateSamlAuthenticationHandler implements AuthenticationHandler
         }
     }
 
-    public function setNext(AuthenticationHandler $handler)
+    public function setNext(AuthenticationHandler $handler): void
     {
         $this->nextHandler = $handler;
     }

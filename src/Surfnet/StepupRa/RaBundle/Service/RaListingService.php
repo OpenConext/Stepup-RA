@@ -92,7 +92,7 @@ final class RaListingService
      * @param string $actorId
      * @return null|RaListing
      */
-    public function get($identityId, $institution, $actorId): ?RaListing
+    public function get(string $identityId, string $institution, string $actorId): ?RaListing
     {
         if (!is_string($identityId)) {
             throw InvalidArgumentException::invalidType('string', 'identityId', $identityId);

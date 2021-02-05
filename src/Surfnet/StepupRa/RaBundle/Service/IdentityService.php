@@ -70,8 +70,11 @@ class IdentityService implements UserProviderInterface
      * For now this functionality is disabled, unsure if actually needed
      *
      * If needed, the username is the UUID of the identity so it can be fetched rather easy
+     *
+     * @param string $username
+     * @return void
      */
-    public function loadUserByUsername($username): void
+    public function loadUserByUsername($username)
     {
         throw new RuntimeException(sprintf('Cannot Load User By Username "%s"', $username));
     }
@@ -91,7 +94,7 @@ class IdentityService implements UserProviderInterface
      *
      * @return bool
      */
-    public function supportsClass($class): bool
+    public function supportsClass($class)
     {
         return $class === 'Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity';
     }
@@ -100,7 +103,7 @@ class IdentityService implements UserProviderInterface
      * @param string $identityId the UUID of the identity to find
      * @return null|Identity
      */
-    public function findById($identityId): ?Identity
+    public function findById(string $identityId): ?Identity
     {
         return $this->apiIdentityService->get($identityId);
     }
@@ -111,7 +114,7 @@ class IdentityService implements UserProviderInterface
      * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
      * @throws \Surfnet\StepupRa\RaBundle\Exception\RuntimeException
      */
-    public function findByNameIdAndInstitution($nameId, $institution): ?Identity
+    public function findByNameIdAndInstitution(string $nameId, string $institution): ?Identity
     {
         $searchQuery = new IdentitySearchQuery();
         $searchQuery->setNameId($nameId);

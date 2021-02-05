@@ -215,7 +215,7 @@ final class U2fService
      * @param string $rootName
      * @return string[]
      */
-    private function mapViolationsToErrorStrings(ConstraintViolationListInterface $violations, $rootName): array
+    private function mapViolationsToErrorStrings(ConstraintViolationListInterface $violations, string $rootName): array
     {
         $errors = [];
 

@@ -46,7 +46,7 @@ class ProfileService
      * @param string $identityId
      * @return null|Profile
      */
-    public function findByIdentityId($identityId): ?Profile
+    public function findByIdentityId(string $identityId): ?Profile
     {
         return $this->apiProfileService->get($identityId);
     }

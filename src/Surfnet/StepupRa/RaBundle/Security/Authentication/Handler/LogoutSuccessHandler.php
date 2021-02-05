@@ -45,7 +45,7 @@ final class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
         $this->logoutRedirectUrl = $logoutRedirectUrl;
     }
 
-    public function onLogoutSuccess(Request $request)
+    public function onLogoutSuccess(Request $request): RedirectResponse
     {
         $token    = $this->tokenStorage->getToken();
         $identity = $token->getUser();

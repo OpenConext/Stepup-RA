@@ -69,7 +69,7 @@ class RaLocationService
      * @param string $id
      * @return null|\Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\RaLocation
      */
-    public function find($id): ?RaLocation
+    public function find(string $id): ?RaLocation
     {
         return $this->apiRaLocationService->get($id);
     }

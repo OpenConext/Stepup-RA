@@ -103,7 +103,7 @@ class ProcessSamlAuthenticationHandler implements AuthenticationHandler
         $this->templating                 = $templating;
     }
 
-    public function process(GetResponseEvent $event)
+    public function process(GetResponseEvent $event): void
     {
         if ($this->tokenStorage->getToken() === null
             && $this->samlInteractionProvider->isSamlAuthenticationInitiated()
@@ -148,7 +148,7 @@ class ProcessSamlAuthenticationHandler implements AuthenticationHandler
         }
     }
 
-    public function setNext(AuthenticationHandler $handler)
+    public function setNext(AuthenticationHandler $handler): void
     {
         $this->nextHandler = $handler;
     }

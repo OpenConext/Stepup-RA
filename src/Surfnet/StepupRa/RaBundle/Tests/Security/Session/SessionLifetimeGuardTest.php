@@ -188,7 +188,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @param null|DateTime $interactionMoment
      */
     public function an_authentication_session_is_verified_against_both_limits(
-        $isValid,
+        bool $isValid,
         DateTime $authenticationMoment = null,
         DateTime $interactionMoment = null
     ): void {

@@ -35,7 +35,7 @@ class RoleAtInstitution
     /**
      * @param string $role
      */
-    public function setRole($role): void
+    public function setRole(string $role): void
     {
         Assert::nullOrString($role, 'Role must be null or a string value');
         $this->role = $role;
@@ -44,7 +44,7 @@ class RoleAtInstitution
     /**
      * @param string $institution
      */
-    public function setInstitution($institution): void
+    public function setInstitution(string $institution): void
     {
         Assert::nullOrString($institution, 'Institution must be null or a string value');
         $this->institution = $institution;

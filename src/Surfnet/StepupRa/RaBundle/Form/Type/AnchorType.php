@@ -30,7 +30,7 @@ class AnchorType extends AbstractType implements ButtonTypeInterface
     /**
      * @return class-string
      */
-    public function getParent()
+    public function getParent(): string
     {
         return ButtonType::class;
     }

@@ -37,7 +37,7 @@ final class GssfService
      * @param string $gssfId
      * @param string $procedureId
      */
-    public function startVerification($gssfId, $procedureId): void
+    public function startVerification(string $gssfId, string $procedureId): void
     {
         $this->state->set('current_verification', ['procedureId' => $procedureId, 'gssfId' => $gssfId]);
     }
@@ -46,7 +46,7 @@ final class GssfService
      * @param string $gssfId
      * @return VerificationResult
      */
-    public function verify($gssfId): VerificationResult
+    public function verify(string $gssfId): VerificationResult
     {
         $verification = $this->state->remove('current_verification');
 

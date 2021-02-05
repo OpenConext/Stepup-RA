@@ -45,7 +45,7 @@ final class GssfController extends SecondFactorController
      * @param string $provider
      * @return array|Response
      */
-    public function initiateAction($procedureId, $provider)
+    public function initiateAction(string $procedureId, string $provider)
     {
         $this->assertSecondFactorEnabled($provider);
 
@@ -67,7 +67,7 @@ final class GssfController extends SecondFactorController
      * @param string $provider
      * @return array|Response
      */
-    public function authenticateAction($procedureId, $provider)
+    public function authenticateAction(string $procedureId, string $provider)
     {
         $this->assertSecondFactorEnabled($provider);
 
@@ -118,7 +118,7 @@ final class GssfController extends SecondFactorController
      * @param string  $provider
      * @return array|Response
      */
-    public function verifyAction(Request $httpRequest, $provider)
+    public function verifyAction(Request $httpRequest, string $provider)
     {
         $this->assertSecondFactorEnabled($provider);
 
@@ -199,7 +199,7 @@ final class GssfController extends SecondFactorController
      * @param string $provider
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function metadataAction($provider)
+    public function metadataAction(string $provider): Response
     {
         $this->assertSecondFactorEnabled($provider);
 
@@ -216,7 +216,7 @@ final class GssfController extends SecondFactorController
      * @return \Surfnet\StepupRa\SamlStepupProviderBundle\Provider\Provider
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    private function getProvider($provider)
+    private function getProvider(string $provider): Provider
     {
         /** @var \Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ProviderRepository $providerRepository */
         $providerRepository = $this->get('gssp.provider_repository');
@@ -233,7 +233,7 @@ final class GssfController extends SecondFactorController
     /**
      * @return \Psr\Log\LoggerInterface
      */
-    private function getLogger()
+    private function getLogger(): LoggerInterface
     {
         return $this->get('logger');
     }
@@ -241,7 +241,7 @@ final class GssfController extends SecondFactorController
     /**
      * @return VettingService
      */
-    private function getVettingService()
+    private function getVettingService(): VettingService
     {
         return $this->get('ra.service.vetting');
     }
@@ -252,7 +252,7 @@ final class GssfController extends SecondFactorController
      * @param array  $parameters
      * @return Response
      */
-    private function renderInitiateForm($procedureId, $provider, array $parameters = [])
+    private function renderInitiateForm(string $procedureId, string $provider, array $parameters = []): array
     {
         $collection = $this->get("surfnet_stepup.provider.collection");
         $secondFactorConfig = $collection->getByIdentifier($provider);

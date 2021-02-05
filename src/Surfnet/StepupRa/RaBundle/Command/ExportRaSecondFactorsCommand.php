@@ -92,7 +92,7 @@ final class ExportRaSecondFactorsCommand
      * @param SearchRaSecondFactorsCommand $command
      * @return ExportRaSecondFactorsCommand
      */
-    public static function fromSearchCommand(SearchRaSecondFactorsCommand $command)
+    public static function fromSearchCommand(SearchRaSecondFactorsCommand $command): self
     {
         $exportCommand = new self;
 

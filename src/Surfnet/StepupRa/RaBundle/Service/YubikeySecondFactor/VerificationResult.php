@@ -42,7 +42,7 @@ class VerificationResult
      * @param int $result
      * @param YubikeyPublicId|null $publicId
      */
-    public function __construct($result, YubikeyPublicId $publicId = null)
+    public function __construct(int $result, YubikeyPublicId $publicId = null)
     {
         $acceptableResults = [
             self::RESULT_PUBLIC_ID_MATCHED,

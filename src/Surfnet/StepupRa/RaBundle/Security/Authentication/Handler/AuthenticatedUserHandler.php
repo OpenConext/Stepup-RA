@@ -40,11 +40,13 @@ class AuthenticatedUserHandler implements AuthenticationHandler
      * @var AuthenticatedSessionStateHandler
      */
     private $sessionStateHandler;
+
     /**
      * @var SessionLifetimeGuard
      */
     private $sessionLifetimeGuard;
     /**
+
      * @var LoggerInterface
      */
     private $logger;
@@ -61,7 +63,7 @@ class AuthenticatedUserHandler implements AuthenticationHandler
         $this->logger               = $logger;
     }
 
-    public function process(GetResponseEvent $event)
+    public function process(GetResponseEvent $event): void
     {
         if ($this->tokenStorage->getToken() !== null
             && $this->sessionLifetimeGuard->sessionLifetimeWithinLimits($this->sessionStateHandler)

@@ -39,7 +39,7 @@ final class InstitutionConfigurationOptionsService implements InstitutionConfigu
      * @param string $institution
      * @return null|InstitutionConfigurationOptions
      */
-    public function getInstitutionConfigurationOptionsFor($institution): ?InstitutionConfigurationOptions
+    public function getInstitutionConfigurationOptionsFor(string $institution): ?InstitutionConfigurationOptions
     {
         $configuration = $this->apiInstitutionConfigurationOptionsService
             ->getInstitutionConfigurationOptionsFor($institution);
