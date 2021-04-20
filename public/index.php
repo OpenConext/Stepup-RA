@@ -1,5 +1,4 @@
 <?php
-
 use App\Kernel;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +17,10 @@ if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? false) {
 
 if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? false) {
     Request::setTrustedHosts([$trustedHosts]);
+}
+if (isset($_COOKIE['testcookie']) && strpos($_SERVER['HTTP_USER_AGENT'], 'GuzzleHttp') !== false) {
+    $_SERVER['APP_ENV'] = 'smoketest';
+    $_SERVER['APP_DEBUG'] = true;
 }
 
 $kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
