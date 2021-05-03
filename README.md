@@ -18,7 +18,11 @@ This component is part of "Step-up Authentication as-a Service" and requires oth
 
 Clone the repository or download the archive to a directory. Install the dependencies by running `composer install`.
 
-Run `app/console mopa:bootstrap:symlink:less` to configure Bootstrap symlinks.
+Install the JS dependencies: `yarn`
+
+Symlink assets from external packages: `php72 ./bin/console assets:install`
+
+Finally build the front-end resources: `yarn encore dev` or `yarn encore production`
 
 ## Release strategy
-Please read: https://github.com/OpenConext/Stepup-Deploy/wiki/Release-Management fro more information on the release strategy used in Stepup projects.
+Please read: https://github.com/OpenConext/Stepup-Deploy/wiki/Release-Management for more information on the release strategy used in Stepup projects.
