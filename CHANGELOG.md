@@ -1,9 +1,9 @@
 # Changelog
 
-## Unreleased
+## 4.1.3
 **Improvements**
  * Move from security-checker to local-php-security-checker
- * Bump lodash
+ * Update dependencies
 
 ## 4.1.2
 **Bugfix**
