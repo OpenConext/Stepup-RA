@@ -2,7 +2,7 @@
 
 ## 4.2.0
 **Feature**
-Show migrated tokens in the audit log
+ * Show migrated tokens in the audit log
 
 ## 4.1.3
 **Improvements**
