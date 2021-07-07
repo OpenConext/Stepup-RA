@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.2.0
+**Feature**
+Show migrated tokens in the audit log
+
 ## 4.1.3
 **Improvements**
  * Move from security-checker to local-php-security-checker
