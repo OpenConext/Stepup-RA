@@ -21,6 +21,7 @@
         "build": "encore production --progress"
     },
     "resolutions": {
+        "@nuxt/friendly-errors-webpack-plugin": ">=2.5.2",
         "lodash": "^4.17.20"
     }
 }
