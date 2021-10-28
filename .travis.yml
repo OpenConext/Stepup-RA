@@ -27,10 +27,10 @@ before_script:
   - phpenv config-add .travis.php.ini
   - composer self-update --1
   - composer install --prefer-dist
-  - composer test
 
 script:
   - ant
+  - composer test
 
 branches:
   only:
