@@ -29,8 +29,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('surfnet_stepup_ra_ra');
+        $treeBuilder = new TreeBuilder('surfnet_stepup_ra_ra');
+        $rootNode = $treeBuilder->getRootNode();
 
         $childNodes = $rootNode->children();
         $this->appendLoaConfiguration($childNodes);
