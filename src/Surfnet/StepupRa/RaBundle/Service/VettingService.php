@@ -153,7 +153,7 @@ class VettingService
      */
     public function startProcedure(StartVettingProcedureCommand $command)
     {
-        $this->smsSecondFactorService->clearSmsVerificationState();
+        $this->smsSecondFactorService->clearSmsVerificationState($command->secondFactor->id);
 
         if (!$this->isLoaSufficientToStartProcedure($command)) {
             throw new LoaTooLowException(
@@ -204,9 +204,9 @@ class VettingService
     /**
      * @return int
      */
-    public function getSmsOtpRequestsRemainingCount()
+    public function getSmsOtpRequestsRemainingCount(string $secondFactorId)
     {
-        return $this->smsSecondFactorService->getOtpRequestsRemainingCount();
+        return $this->smsSecondFactorService->getOtpRequestsRemainingCount($secondFactorId);
     }
 
     /**
@@ -247,6 +247,7 @@ class VettingService
         );
         $command->identity = $procedure->getSecondFactor()->identityId;
         $command->institution = $procedure->getSecondFactor()->institution;
+        $command->secondFactorId = $procedure->getSecondFactor()->id;
 
         return $this->smsSecondFactorService->sendChallenge($command);
     }
@@ -261,6 +262,7 @@ class VettingService
     public function verifyPhoneNumber($procedureId, VerifyPossessionOfPhoneCommand $command)
     {
         $procedure = $this->getProcedure($procedureId);
+        $command->secondFactorId = $procedure->getSecondFactor()->id;
 
         $verification = $this->smsSecondFactorService->verifyPossession($command);
 
@@ -403,6 +405,17 @@ class VettingService
     public function getSecondFactorIdentifier($procedureId)
     {
         return $this->getProcedure($procedureId)->getSecondFactor()->secondFactorIdentifier;
+    }
+
+
+    /**
+     * @param $procedureId
+     * @return string
+     * @throws UnknownVettingProcedureException
+     */
+    public function getSecondFactorId($procedureId)
+    {
+        return $this->getProcedure($procedureId)->getSecondFactor()->id;
     }
 
     /**
