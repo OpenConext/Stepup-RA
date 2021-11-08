@@ -34,11 +34,6 @@ Encore
         './vendor/surfnet/stepup-bundle/src/Resources/public/less/stepup.less',
     ])
 
-    .addEntry('u2f', [
-        './public/bundles/surfnetstepupu2f/u2f-api.js',
-        './public/bundles/surfnetstepupu2f/u2f.js',
-    ])
-
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
 
