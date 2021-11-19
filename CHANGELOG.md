@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.3.0
+**Bugfix**
+ * Update Stepup-Bundle
+
 ## 4.2.0
 **Feature**
  * Show migrated tokens in the audit log
