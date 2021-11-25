@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.3.1
+ * Update stepup-bundle and stepup-saml-bundle
+
 ## 4.3.0
 **Bugfix**
  * Update Stepup-Bundle
