@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.3.2
+* Update Stepup Bundle and Http Foundation to prevent deprecation warnings
+
 ## 4.3.1
  * Update stepup-bundle and stepup-saml-bundle
 
