@@ -1,4 +1,6 @@
 # Changelog
+## 4.3.3
+- Added browserlist entry in package.json to ensure IE 11 support
 
 ## 4.3.2
 * Update Stepup Bundle and Http Foundation to prevent deprecation warnings
