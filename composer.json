@@ -23,7 +23,7 @@
         "ramsey/uuid": "^3.5",
         "sensio/framework-extra-bundle": "^5.5",
         "sensiolabs/security-checker": "^6.0",
-        "surfnet/stepup-bundle": "^4.2.2",
+        "surfnet/stepup-bundle": "^4.2",
         "surfnet/stepup-middleware-client-bundle": "^4.1",
         "surfnet/stepup-saml-bundle": "^4.3.2",
         "symfony/asset": "4.4.*",
@@ -56,12 +56,6 @@
         "symfony/stopwatch": "4.4.*",
         "symfony/web-profiler-bundle": "4.4.*"
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "git@github.com:ibuildingsnl/Stepup-bundle.git"
-        }
-    ], 
     "conflict": {
         "symfony/symfony": "*"
     },
