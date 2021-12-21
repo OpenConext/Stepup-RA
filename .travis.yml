@@ -10,10 +10,12 @@ language: php
 php:
   - 7.2
   - 7.4
+  - 8.0
 
 matrix:
   allow_failures:
   - php: 7.4
+  - php: 8.0
 
 env:
   global:
@@ -27,10 +29,10 @@ before_script:
   - phpenv config-add .travis.php.ini
   - composer self-update --1
   - composer install --prefer-dist
-  - composer test
 
 script:
   - ant
+  - composer test
 
 branches:
   only:

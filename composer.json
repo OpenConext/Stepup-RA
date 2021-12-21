@@ -23,22 +23,23 @@
         "ramsey/uuid": "^3.5",
         "sensio/framework-extra-bundle": "^5.5",
         "sensiolabs/security-checker": "^6.0",
-        "surfnet/stepup-bundle": "^4.0",
+        "surfnet/stepup-bundle": "^4.2",
         "surfnet/stepup-middleware-client-bundle": "^4.1",
-        "surfnet/stepup-saml-bundle": "^4.1",
-        "surfnet/stepup-u2f-bundle": "dev-develop",
+        "surfnet/stepup-saml-bundle": "^4.3.2",
         "symfony/asset": "4.4.*",
         "symfony/expression-language": "4.4.*",
         "symfony/flex": "^1.8",
         "symfony/form": "4.4.*",
+        "symfony/http-foundation": "^5.0",
         "symfony/monolog-bundle": "^3.5",
         "symfony/security-bundle": "4.4.*",
         "symfony/translation": "4.4.*",
-        "symfony/twig-pack": "^1.0",
+        "symfony/twig-bundle": "4.4.*",
         "symfony/validator": "4.4.*",
         "symfony/webpack-encore-bundle": "^1.7",
         "twbs/bootstrap": "~3.3.0",
         "twig/extensions": "~1.5",
+        "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12"
     },
     "require-dev": {
@@ -52,7 +53,8 @@
         "symfony/dotenv": "4.4.*",
         "symfony/maker-bundle": "^1.19",
         "symfony/phpunit-bridge": "^3.0",
-        "symfony/profiler-pack": "^1.0"
+        "symfony/stopwatch": "4.4.*",
+        "symfony/web-profiler-bundle": "4.4.*"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -103,7 +105,7 @@
         "optimize-autoloader": true,
         "sort-packages": true,
         "platform": {
-            "php": "7.2"
+            "php": "7.2.5"
         }
     },
     "extra": {

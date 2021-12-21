@@ -1,6 +1,7 @@
 {
+    "browserslist": "last 2 versions, ie 11, > 1%",
     "devDependencies": {
-        "@symfony/webpack-encore": "^1`",
+        "@symfony/webpack-encore": "^1",
         "bootstrap-less": "^3.3.8",
         "core-js": "^3.0.0",
         "font-awesome": "^4.7.0",
@@ -21,6 +22,7 @@
         "build": "encore production --progress"
     },
     "resolutions": {
+        "@nuxt/friendly-errors-webpack-plugin": ">=2.5.2",
         "lodash": "^4.17.20"
     }
 }

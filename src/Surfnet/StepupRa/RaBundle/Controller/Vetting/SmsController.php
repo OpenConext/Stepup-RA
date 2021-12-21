@@ -58,11 +58,14 @@ class SmsController extends SecondFactorController
         $form = $this->createForm(SendSmsChallengeType::class, $command)->handleRequest($request);
 
         $vettingService = $this->getVettingService();
-        $phoneNumber = InternationalPhoneNumber::fromStringFormat(
-            $vettingService->getSecondFactorIdentifier($procedureId)
-        );
+        // Identifier = phone number as it is stored in the verified second factor event
+        $secondFactorIdentifier = $vettingService->getSecondFactorIdentifier($procedureId);
+        // Id = the UUID identifier of the second factor token
+        $secondFactorId = $vettingService->getSecondFactorId($procedureId);
 
-        $otpRequestsRemaining = $vettingService->getSmsOtpRequestsRemainingCount();
+        $phoneNumber = InternationalPhoneNumber::fromStringFormat($secondFactorIdentifier);
+
+        $otpRequestsRemaining = $vettingService->getSmsOtpRequestsRemainingCount($secondFactorId);
         $maximumOtpRequests = $vettingService->getSmsMaximumOtpRequestsCount();
         $viewVariables = ['otpRequestsRemaining' => $otpRequestsRemaining, 'maximumOtpRequests' => $maximumOtpRequests];
 
@@ -109,8 +112,9 @@ class SmsController extends SecondFactorController
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
 
         $logger->notice('Received request for Proof of Possession of SMS Second Factor page');
-
+        $vettingService = $this->getVettingService();
         $command = new VerifyPossessionOfPhoneCommand();
+        $command->secondFactorId = $vettingService->getSecondFactorId($procedureId);
         $form = $this
             ->createForm(VerifyPhoneNumberType::class, $command, ['procedureId' => $procedureId])
             ->handleRequest($request);
@@ -118,7 +122,8 @@ class SmsController extends SecondFactorController
         /** @var SubmitButton $cancelButton */
         $cancelButton = $form->get('cancel');
         if ($cancelButton->isClicked()) {
-            $this->getVettingService()->cancelProcedure($procedureId);
+            $vettingService->cancelProcedure($procedureId);
+
             $this->addFlash('info', $this->get('translator')->trans('ra.vetting.flash.cancelled'));
 
             return $this->redirectToRoute('ra_vetting_search');
@@ -133,7 +138,7 @@ class SmsController extends SecondFactorController
         }
 
         $logger->notice('SMS OTP has been entered, attempting to verify Proof of Possession');
-        $verification = $this->getVettingService()->verifyPhoneNumber($procedureId, $command);
+        $verification = $vettingService->verifyPhoneNumber($procedureId, $command);
         if ($verification->wasSuccessful()) {
             $logger->notice('SMS OTP was valid, Proof of Possession given, redirecting to Identity Vetting page');
 
