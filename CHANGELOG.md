@@ -1,4 +1,8 @@
 # Changelog
+
+## 4.3.4
+- Added Github Action for tag release automation
+
 ## 4.3.3
 - Added browserlist entry in package.json to ensure IE 11 support
 
