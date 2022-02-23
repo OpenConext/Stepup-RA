@@ -79,9 +79,12 @@
         ],
         "test": [
             "@phplint",
+            "@phpmd",
             "@security-tests"
         ],
         "phplint": "./ci/qa/phplint",
+        "phpmd": "./ci/qa/phpmd",
+
         "security-tests": [
           "wget -q https://github.com/fabpot/local-php-security-checker/releases/download/v1.0.0/local-php-security-checker_1.0.0_linux_amd64 -O local-php-security-checker && chmod +x ./local-php-security-checker && ./local-php-security-checker",
           "yarn audit"
