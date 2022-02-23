@@ -21,6 +21,7 @@
 /app/SymfonyRequirements.php
 /app/check.php
 /local-php-security-checker
+.idea/
 
 ###> symfony/framework-bundle ###
 /.env.local
