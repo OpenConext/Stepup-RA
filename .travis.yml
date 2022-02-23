@@ -25,7 +25,6 @@ before_script:
 
 script:
   - ant
-  - composer check
   - composer test
 
 
