@@ -6,6 +6,7 @@ env:
     APP_ENV: test
 jobs:
     run_test:
+        ##should be changed to the correct docker image
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v1
@@ -19,5 +20,6 @@ jobs:
             - name: install packages
             #install ant
             - name: run scripts
-            #    - ant
-            #    - composer test
+            ## ant should be changed to a composer script somehow
+                - ant
+                - composer test
