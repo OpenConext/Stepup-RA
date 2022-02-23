@@ -45,6 +45,7 @@
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.0",
         "mockery/mockery": "~1.0",
+        "overtrue/phplint": "^2.3",
         "phpmd/phpmd": "^2.6",
         "phpunit/phpunit": "8.5.*",
         "sebastian/exporter": "3.1.*",
@@ -76,6 +77,11 @@
             "yarn install",
             "yarn encore production"
         ],
+        "check": [
+            "@phplint"
+        ],
+        "phplint": "./ci/qa/phplint",
+
         "test": [
           "@security-tests"
         ],

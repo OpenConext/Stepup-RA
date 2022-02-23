@@ -1,7 +1,7 @@
-#!/bin/bash
-echo "reached phplint script"
-cd -c||exit
-echo "${changeset.php.spacesep}" | xargs -n 1 -P 4 php -l 1>/dev/null
-echo OK
-## https://github.com/overtrue/phplint
-#./vendor/bin/phplint --configuration=ci/qa/phplint.yaml $1
+#!/usr/bin/env bash
+
+cd $(dirname $0)/../../
+mkdir -p var/qa
+
+# https://github.com/overtrue/phplint
+./vendor/bin/phplint --configuration=ci/qa/phplint.yaml $1
