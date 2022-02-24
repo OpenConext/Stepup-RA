@@ -34,7 +34,7 @@
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
-/phpunit.xml
+/ci/qa/phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
 
@@ -46,7 +46,7 @@
 ###> symfony/phpunit-bridge ###
 .phpunit
 .phpunit.result.cache
-/phpunit.xml
+/ci/qa/phpunit.xml
 ###< symfony/phpunit-bridge ###
 
 ###> symfony/webpack-encore-bundle ###
