@@ -40,7 +40,7 @@
 
 ###> squizlabs/php_codesniffer ###
 /.phpcs-cache
-/phpcs.xml
+/ci/qa/phpcs.xml
 ###< squizlabs/php_codesniffer ###
 
 ###> symfony/phpunit-bridge ###
