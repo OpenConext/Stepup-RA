@@ -35,14 +35,6 @@
         </loadresource>
     </target>\
 
-    <target name="phpcpd-ci" description="Find duplicate code using PHPCPD">
-        <exec executable="vendor/bin/phpcpd" failonerror="false">
-            <arg value="--exclude"/>
-            <arg value="src/*/Tests/*"/>
-            <arg path="src"/>
-        </exec>
-    </target>
-
     <target name="phpunit-ci" description="Run unit tests with PHPUnit">
         <exec executable="vendor/bin/phpunit" failonerror="true">
             <arg line="--configuration=${basedir}/phpunit.xml.dist"/>
