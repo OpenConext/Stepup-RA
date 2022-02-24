@@ -33,27 +33,7 @@
                 </tokenfilter>
             </filterchain>
         </loadresource>
-    </target>
-
-    <target name="php-lint-ci" depends="get-changeset.php.spacesep" if="changeset.php.notempty"
-            description="Perform syntax check of sourcecode files in parallel">
-        <exec executable="sh" failonerror="true">
-            <arg value="-c"/>
-            <arg value="echo '${changeset.php.spacesep}' | xargs -n 1 -P 4 php -l 1>/dev/null"/>
-        </exec>
-        <echo message="OK"/>
-    </target>
-
-    <target name="phpmd-ci"
-            description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
-        <exec executable="vendor/bin/phpmd" failonerror="true">
-            <arg path="src"/>
-            <arg value="xml"/>
-            <arg value="phpmd.xml"/>
-            <arg value="--exclude"/>
-            <arg value="*/Tests/*"/>
-        </exec>
-    </target>
+    </target>\
 
     <target name="phpcpd-ci" description="Find duplicate code using PHPCPD">
         <exec executable="vendor/bin/phpcpd" failonerror="false">
