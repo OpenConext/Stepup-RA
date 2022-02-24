@@ -4,4 +4,3 @@ cd $(dirname $0)/../../
 
 # https://github.com/sebastianbergmann/phpcpd
 ./vendor/bin/phpcpd --exclude src/*/Tests/* src
-
