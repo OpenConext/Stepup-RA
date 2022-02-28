@@ -24,16 +24,9 @@ before_script:
   - composer install --prefer-dist
 
 script:
-  - ant
   - composer test
 
 branches:
   only:
     - master
     - develop
-    - feature/fine-grained-authorization
-
-addons:
-  apt:
-    packages:
-      - ant

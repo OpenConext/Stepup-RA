@@ -45,6 +45,7 @@
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.0",
         "mockery/mockery": "~1.0",
+        "overtrue/phplint": "^2.3",
         "phpmd/phpmd": "^2.6",
         "phpunit/phpunit": "8.5.*",
         "sebastian/exporter": "3.1.*",
@@ -77,8 +78,20 @@
             "yarn encore production"
         ],
         "test": [
-          "@security-tests"
+            "@phplint",
+            "@phpmd",
+            "@phpcs",
+            "@phpcpd",
+            "@phpunit",
+            "@security-tests"
         ],
+        "phplint": "./ci/qa/phplint",
+        "phpmd": "./ci/qa/phpmd",
+        "phpcs": "./ci/qa/phpcs",
+        "phpcbf": "./ci/qa/phpcbf",
+        "phpcpd": "./ci/qa/phpcpd",
+        "phpunit": "./ci/qa/phpunit",
+
         "security-tests": [
           "wget -q https://github.com/fabpot/local-php-security-checker/releases/download/v1.0.0/local-php-security-checker_1.0.0_linux_amd64 -O local-php-security-checker && chmod +x ./local-php-security-checker && ./local-php-security-checker",
           "yarn audit"
