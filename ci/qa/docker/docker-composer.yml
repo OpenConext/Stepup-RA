@@ -1,0 +1,11 @@
+version: '2.2'
+
+services:
+  php-test.stepup.example.com:
+    stdin_open: true
+    image: ghcr.io/openconext/openconext-containers/openconext-php-test-stepup:latest
+    container_name: ra-test
+    volumes:
+      - ../../:/var/www
+    environment:
+      APP_ENV: test
