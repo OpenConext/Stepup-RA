@@ -1,25 +1,32 @@
+name: test-integration
 on:
-    pull_request:
-    push:
-        branches: [master, develop, feature/gha-testintegration]
-env:
-    APP_ENV: test
+  pull_request:
+  push:
+    branches: [master, develop]
 jobs:
-    run_test:
-        ##should be changed to the correct docker image
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v1
-
-            ## installing composer should be obselete due to running on a provisioned docker container soon.
-#            - name: install composer and update to latest version
-            #    - composer self-update --1
-            #    - composer install --prefer-dist
-
-            ## looking into how to change ant to composer scripts in the future.
-            - name: install packages
-            #install ant
-            - name: run scripts
-            ## ant should be changed to a composer script somehow
-                - ant
-                - composer test
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+      - name: Init environment
+        run: |
+          cd ci/docker
+          docker-compose up -d
+          docker-compose exec -t ra-test bash
+      - name: Composer install
+        run: composer install
+      - name: Run test scripts
+        run: composer test
+      - name: Output log files on failure
+        if: failure()
+        run: cd ci/docker && docker-compose exec -T ra-test cat var/log/error.log
