@@ -2,7 +2,7 @@ name: test-integration
 on:
   pull_request:
   push:
-    branches: [ master, develop ]
+#    branches: [ master, develop ]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -32,16 +32,17 @@ jobs:
         run: |
           cd ci/docker
           docker-compose up -d
-          docker-compose exec -t ra-test bash
       - name: Install dependencies
         run: |
+          docker-compose exec -T ra-test bash -c '
           composer install
           yarn
           ./bin/console assets:install
+          '
       - name: Build frontend assets
-        run: yarn encore production
+        run: docker-compose exec -T ra-test bash -c 'yarn encore production'
       - name: Run test scripts
-        run: composer test
+        run: docker-compose exec -T ra-test bash -c 'composer test'
       - name: Output log files on failure
         if: failure()
         run: cd ci/docker && docker-compose exec -T ra-test cat var/log/webtest.log
