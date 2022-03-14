@@ -5,6 +5,9 @@ on:
 #    branches: [ master, develop ]
 jobs:
   build:
+    env:
+      DOCKER_COMPOSE: cd ci/docker && docker-compose exec -T stepup-ra bash -c
+      YARN_SOURCE : source "/usr/local/nvm/nvm.sh"
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -34,16 +37,16 @@ jobs:
           docker-compose up -d
       - name: Install dependencies
         run: |
-          cd ci/docker && docker-compose exec -T stepup-ra bash -c '
+          ${DOCKER_COMPOSE} '
           composer install
-          source "/usr/local/nvm/nvm.sh"
+          ${YARN_SOURCE}
           yarn
           ./bin/console assets:install
           '
       - name: Build frontend assets
-        run: cd ci/docker && docker-compose exec -T stepup-ra bash -c 'source "/usr/local/nvm/nvm.sh" && yarn encore production'
+        run: ${DOCKER_COMPOSE} ' ${YARN_SOURCE} && yarn encore production '
       - name: Run test scripts
-        run: cd ci/docker && docker-compose exec -T stepup-ra bash -c ' composer test '
+        run: ${DOCKER_COMPOSE} ' composer test '
       - name: Output log files on failure
         if: failure()
-        run: cd ci/docker && docker-compose exec -T stepup-ra -c 'cat var/log/webtest.log'
+        run: ${DOCKER_COMPOSE} ' cat var/log/webtest.log '
