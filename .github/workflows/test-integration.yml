@@ -2,6 +2,7 @@ name: test-integration
 on:
   pull_request:
   push:
+
 #    branches: [ master, develop ]
 jobs:
   build:
@@ -43,7 +44,7 @@ jobs:
       - name: Build frontend assets
         run: cd ci/docker && docker-compose exec -T stepup-ra bash -c 'source "/usr/local/nvm/nvm.sh" && yarn encore production'
       - name: Run test scripts
-        run: cd ci/docker && docker-compose exec -T stepup-ra bash -c ' composer test && source "/usr/local/nvm/nvm.sh" && yarn audit '
+        run: cd ci/docker && docker-compose exec -T stepup-ra bash -c ' composer test '
       - name: Output log files on failure
         if: failure()
         run: cd ci/docker && docker-compose exec -T stepup-ra -c 'cat var/log/webtest.log'
