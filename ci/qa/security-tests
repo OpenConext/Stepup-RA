@@ -10,5 +10,4 @@ else
     printf 'Curl failed downloading php-security-checker with error code "%d"\n' "$?" >&2
     exit 1
 fi
-source "/usr/local/nvm/nvm.sh"
 yarn audit
