@@ -245,7 +245,7 @@
       </trans-unit>
       <trans-unit id="5349450b9c65b0e168b1468704c538dfbcddf6a9" resname="ra.form.ra_search_ra_candidates.label.institution">
         <source>ra.form.ra_search_ra_candidates.label.institution</source>
-        <target>Instituut</target>
+        <target>Instelling</target>
         <jms:reference-file line="44">/src/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaCandidatesType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9f4c34138ef487cdf008770c1257b06291343831" resname="ra.form.ra_search_ra_candidates.label.name">
@@ -266,7 +266,7 @@
       </trans-unit>
       <trans-unit id="780e800b136d61f0391f8dcc8a9b99c5defafadd" resname="ra.form.ra_search_ra_listing.label.institution">
         <source>ra.form.ra_search_ra_listing.label.institution</source>
-        <target>Instituut</target>
+        <target>Instelling</target>
         <jms:reference-file line="43">/src/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaListingType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="61f7a2bd44b213f18e79aae405b8365e9f2c9eee" resname="ra.form.ra_search_ra_listing.label.name">
