@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.3.5
+- QA tests where moved from running on Travis, to reside on GitHub Actions #271, #273, #274
+
 ## 4.3.4
 - Added Github Action for tag release automation
 
