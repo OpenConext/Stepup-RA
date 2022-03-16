@@ -32,16 +32,17 @@ jobs:
         run: |
           cd ci/docker
           docker-compose up -d
-          docker-compose exec -t ra-test bash
       - name: Install dependencies
         run: |
+          cd ci/docker && docker-compose exec -T stepup-ra bash -lc '
           composer install
           yarn
           ./bin/console assets:install
+          '
       - name: Build frontend assets
-        run: yarn encore production
+        run: cd ci/docker && docker-compose exec -T stepup-ra bash -lc 'yarn encore production'
       - name: Run test scripts
-        run: composer test
+        run: cd ci/docker && docker-compose exec -T stepup-ra bash -lc ' composer test '
       - name: Output log files on failure
         if: failure()
-        run: cd ci/docker && docker-compose exec -T ra-test cat var/log/webtest.log
+        run: cd ci/docker && docker-compose exec -T stepup-ra -c 'cat var/log/webtest.log'

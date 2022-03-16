@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Run the JS CPD tool:
+# - ignoring the test files and public resources
+# - allowing for 30 lines of duplicate code
+# - and setting a total copy paste limit to 1% project wide
+# More info about jscpd usage: https://github.com/kucherenko/jscpd/tree/master/packages/jscpd#usage
+
+cd $(dirname $0)/../../
+
+./node_modules/.bin/jscpd --ignore "**/Tests/*.php,**/Resources/public/**/*" src  -l 30 -t 1
