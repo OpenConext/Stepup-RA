@@ -1110,8 +1110,8 @@
       </trans-unit>
       <trans-unit id="84f37c6a368764afa165539b1cd50b400f098f8d" resname="ra.second_factor.search.status.forgotten">
         <source>ra.second_factor.search.status.forgotten</source>
-        <target>Forgotten</target>
         <jms:reference-file line="29">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+        <target>User deprovisioned</target>
       </trans-unit>
       <trans-unit id="5396da3d169284da408b7e41c919fc3cbb0a7789" resname="ra.second_factor.search.status.revoked">
         <source>ra.second_factor.search.status.revoked</source>

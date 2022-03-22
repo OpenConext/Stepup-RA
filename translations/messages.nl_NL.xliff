@@ -1109,7 +1109,7 @@
         <jms:reference-file line="21">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="84f37c6a368764afa165539b1cd50b400f098f8d" resname="ra.second_factor.search.status.forgotten">
-        <source>Vergeten</source>
+        <source>Uitgeschreven</source>
         <target></target>
         <jms:reference-file line="29">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
