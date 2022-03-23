@@ -29,7 +29,11 @@
                     </thead>
                     <tbody>
                     {% for secondFactor in secondFactors.elements %}
-                        <tr>
+
+                        {% set isDeprovisioned = (secondFactor.status == 'forgotten') %}
+                        {% set isRevoked = (secondFactor.status == 'revoked') %}
+
+                        <tr{% if isDeprovisioned %} class="forgotten"{% endif %}>
                             <td class="break-all">{{ secondFactor.secondFactorId }}</td>
                             <td>{{ secondFactor.type|trans_second_factor_type }}</td>
                             <td>{{ secondFactor.name }}</td>
@@ -39,7 +43,7 @@
                             <td>{{ ('ra.second_factor.search.status.'~secondFactor.status)|trans }}</td>
                             <td class="button-column">
                                 <a href="{{ path('ra_second_factor_auditlog', {identityId: secondFactor.identityId}) }}" class="btn btn-info audit-log">{{ 'ra.secondfactor.auditlog'|trans }}</a>
-                                {% if secondFactor.status != 'revoked' %}
+                                {% if not isRevoked and not isDeprovisioned %}
                                 <button class="btn btn-warning revoke" data-toggle="modal" data-target="#revocationModal"
                                         data-sfid="{{ secondFactor.id }}"
                                         data-sfidentifier="{{ secondFactor.secondFactorId }}"
