@@ -24,5 +24,8 @@
     },
     "resolutions": {
         "postcss": ">=8.2.13"
+    },
+    "dependencies": {
+        "postcss": ">=8.2.13"
     }
 }
