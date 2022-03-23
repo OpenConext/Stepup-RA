@@ -1,4 +1,7 @@
 # Changelog
+## 4.3.6
+- Display forgotten Second Factor tokens and their audit logs #275 #277
+- Install security upgrades #276
 
 ## 4.3.5
 - QA tests where moved from running on Travis, to reside on GitHub Actions #271, #273, #274
