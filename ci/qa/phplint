@@ -5,3 +5,6 @@ mkdir -p var/qa
 
 # https://github.com/overtrue/phplint
 ./vendor/bin/phplint --configuration=ci/qa/phplint.yaml $1
+
+printf "\nComposer validate\n"
+composer validate
