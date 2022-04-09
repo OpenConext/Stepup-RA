@@ -10,7 +10,7 @@
         "less": "^3.11.3",
         "less-loader": "^10.0",
         "lodash": "^4.17.20",
-        "moment": "^2.27.0",
+        "moment": "^2.29.2",
         "regenerator-runtime": "^0.13.2",
         "webpack-notifier": "^1.6.0"
     },
