@@ -56,7 +56,7 @@ final class SecondFactorController extends Controller
         $command->orderDirection = $request->get('orderDirection');
 
         $secondFactors = $this->getSecondFactorService()->search($command);
-        
+
         // The options that will populate the institution filter choice list.
         $command->institutionFilterOptions = $secondFactors->getFilterOption('institution');
 
@@ -186,6 +186,8 @@ final class SecondFactorController extends Controller
 
         $auditLog = $this->getAuditLogService()->getAuditlog($command);
 
+        $timezone = date_default_timezone_get();
+
         $pagination = $this->getPaginator()->paginate(
             $auditLog->getElements(),
             $auditLog->getCurrentPage(),
@@ -201,6 +203,7 @@ final class SecondFactorController extends Controller
                 'pagination' => $pagination,
                 'auditLog'   => $auditLog,
                 'identity'   => $identity,
+                'timezone'   => $timezone,
             ]
         );
     }

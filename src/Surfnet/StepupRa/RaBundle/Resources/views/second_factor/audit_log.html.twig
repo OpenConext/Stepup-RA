@@ -41,7 +41,7 @@
                     <td>{{ logEntry.recoveryTokenIdentifier|trans }}</td>
                     <td>{{ logEntry.recoveryTokenType|trans }}</td>
                     <td>{{ ('ra.auditlog.action.' ~ logEntry.action)|trans({'%ra_institution%': logEntry.raInstitution}) }}</td>
-                    <td><time datetime="{{ logEntry.recordedOn.format('c') }}">{{ logEntry.recordedOn.format("Y-m-d H:i e") }}</time></td>
+                    <td><time datetime="{{ logEntry.recordedOn.format('c') }}">{{ logEntry.recordedOn|date("Y-m-d H:i P", timezone) }}</time></td>
                     <td>{{ logEntry.actorCommonName }}</td>
                     <td>{{ logEntry.actorInstitution }}</td>
                 </tr>
