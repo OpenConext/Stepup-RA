@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'ra.recovery_token.search.title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="search-recovery-tokens row">
+        <div class="col-sm-12">
+            {{ form(form) }}
+
+            {% if recoveryTokens.elements|length > 0 %}
+                <div class="result-count">{{ 'ra.recovery_token.search.text.number_of_recovery_tokens'|transchoice(numberOfRecoveryTokens, {'count': numberOfRecoveryTokens}) }}</div>
+            {% endif %}
+
+            <hr>
+
+            {% if recoveryTokens.elements|length > 0 %}
+                <table class="table table-striped orderable">
+                    <thead>
+                    <tr>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.recovery_token.search.column.type'|trans, 'type') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.recovery_token.search.column.name'|trans, 'name') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.recovery_token.search.column.email'|trans, 'email') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.recovery_token.search.column.institution'|trans, 'institution') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.recovery_token.search.column.status'|trans, 'status') }}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for recoveryToken in recoveryTokens.elements %}
+                        {% set showRevoke = recoveryToken.status == 'active' %}
+                        <tr>
+                            <td>{{ recoveryToken.type|trans }}</td>
+                            <td>{{ recoveryToken.name }}</td>
+                            <td>{{ recoveryToken.email }}</td>
+                            <td>{{ recoveryToken.institution }}</td>
+                            <td>{{ recoveryToken.status|trans }}</td>
+                            <td class="button-column">
+                                {% if showRevoke %}
+                                <button class="btn btn-warning revoke" data-toggle="modal" data-target="#revocationModal"
+                                        data-rtid="{{ recoveryToken.recoveryTokenId }}"
+                                        data-rttype="{{ recoveryToken.type|trans }}"
+                                        data-rtname="{{ recoveryToken.name }}"
+                                        data-rtemail="{{ recoveryToken.email }}"
+                                        data-rtinstitution="{{ recoveryToken.institution }}"
+                                >
+                                    {{ 'ra.recovery_token.revoke'|trans }}
+                                </button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                {{ knp_pagination_render(pagination) }}
+            {% else %}
+                <p>
+                    {{ 'ra.recovery_token.search.text.no_recovery_tokens'|trans }}
+                </p>
+            {% endif %}
+        </div>
+        <div class="modal fade" id="revokeRecoveryTokenModal" tabindex="-1" role="dialog" aria-labelledby="revocationModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'ra.recovery_token.revocation.modal.close'|trans}}"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">{{ 'ra.recovery_token.revocation.modal.confirm'|trans }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            {{ 'ra.recovery_token.revocation.modal.are_you_sure'|trans }}
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>{{ 'ra.recovery_token.revocation.modal.rt_type'|trans }}</th>
+                                <td class="type"></td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'ra.recovery_token.revocation.modal.rt_name'|trans }}</th>
+                                <td class="name"></td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'ra.recovery_token.revocation.modal.rt_email'|trans }}</th>
+                                <td class="email"></td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'ra.recovery_token.revocation.modal.rt_institution'|trans }}</th>
+                                <td class="institution"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'ra.recovery_token.revocation.modal.cancel'|trans }}</button>
+                        <button type="button" class="btn btn-warning revoke">{{ 'ra.recovery_token.revocation.modal.confirm'|trans }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hidden">
+            {{ form(revocationForm, {'action': path('ra_recovery_tokens_revoke')}) }}
+        </div>
+    </div>
+{% endblock %}

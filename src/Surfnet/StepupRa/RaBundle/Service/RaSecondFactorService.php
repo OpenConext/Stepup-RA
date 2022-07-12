@@ -101,39 +101,7 @@ class RaSecondFactorService
     public function search(SearchRaSecondFactorsCommand $command)
     {
         $query = new RaSecondFactorSearchQuery($command->pageNumber, $command->actorId);
-
-        if ($command->name) {
-            $query->setName($command->name);
-        }
-
-        if ($command->type) {
-            $query->setType($command->type);
-        }
-
-        if ($command->secondFactorId) {
-            $query->setSecondFactorId($command->secondFactorId);
-        }
-
-        if ($command->email) {
-            $query->setEmail($command->email);
-        }
-
-        if ($command->institution) {
-            $query->setInstitution($command->institution);
-        }
-
-        if ($command->status) {
-            $query->setStatus($command->status);
-        }
-
-        if ($command->orderBy) {
-            $query->setOrderBy($command->orderBy);
-        }
-
-        if ($command->orderDirection) {
-            $query->setOrderDirection($command->orderDirection);
-        }
-
+        $this->buildQuery($command, $query);
         return $this->apiRaSecondFactorService->search($query);
     }
 
@@ -147,7 +115,13 @@ class RaSecondFactorService
     public function export(ExportRaSecondFactorsCommand $command)
     {
         $query = new RaSecondFactorExportQuery($command->actorId);
+        $this->buildQuery($command, $query);
+        $collection = $this->apiRaSecondFactorService->searchForExport($query);
+        return $this->exporter->export($collection, $query->getFileName());
+    }
 
+    private function buildQuery($command, $query)
+    {
         if ($command->name) {
             $query->setName($command->name);
         }
@@ -179,9 +153,5 @@ class RaSecondFactorService
         if ($command->orderDirection) {
             $query->setOrderDirection($command->orderDirection);
         }
-
-        $collection = $this->apiRaSecondFactorService->searchForExport($query);
-
-        return $this->exporter->export($collection, $query->getFileName());
     }
 }
