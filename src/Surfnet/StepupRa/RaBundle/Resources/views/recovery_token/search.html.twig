@@ -35,6 +35,7 @@
                             <td>{{ recoveryToken.institution }}</td>
                             <td>{{ recoveryToken.status|trans }}</td>
                             <td class="button-column">
+                                <a href="{{ path('ra_recovery_tokens_auditlog', {identityId: recoveryToken.identityId}) }}" class="btn btn-info audit-log">{{ 'ra.secondfactor.auditlog'|trans }}</a>
                                 {% if showRevoke %}
                                 <button class="btn btn-warning revoke" data-toggle="modal" data-target="#revokeRecoveryTokenModal"
                                         data-rtid="{{ recoveryToken.recoveryTokenId }}"
