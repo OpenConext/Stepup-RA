@@ -36,8 +36,9 @@
                             <td>{{ recoveryToken.status|trans }}</td>
                             <td class="button-column">
                                 {% if showRevoke %}
-                                <button class="btn btn-warning revoke" data-toggle="modal" data-target="#revocationModal"
+                                <button class="btn btn-warning revoke" data-toggle="modal" data-target="#revokeRecoveryTokenModal"
                                         data-rtid="{{ recoveryToken.recoveryTokenId }}"
+                                        data-rtidentityid="{{ recoveryToken.identityId }}"
                                         data-rttype="{{ recoveryToken.type|trans }}"
                                         data-rtname="{{ recoveryToken.name }}"
                                         data-rtemail="{{ recoveryToken.email }}"

@@ -21,12 +21,15 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 use Knp\Component\Pager\Paginator;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupRa\RaBundle\Command\RevokeRecoveryTokenCommand;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRecoveryTokensCommand;
+use Surfnet\StepupRa\RaBundle\Form\Type\RevokeRecoveryTokenType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRecoveryTokensType;
 use Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -95,8 +98,7 @@ final class RecoveryTokenController extends Controller
         );
         $pagination->setTotalItemCount($recoveryTokenCount);
 
-        // TODO, revocation will be handled on the next PR
-        $revocationForm = $this->createForm(RevokeSecondFactorType::class, new RevokeSecondFactorCommand());
+        $revocationForm = $this->createForm(RevokeRecoveryTokenType::class, new RevokeRecoveryTokenCommand());
 
         $this->logger->notice(sprintf(
             'Searching for recovery tokens yielded "%d" results',
@@ -116,6 +118,38 @@ final class RecoveryTokenController extends Controller
                 'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',
             ]
         );
+    }
+
+    public function revokeAction(Request $request): RedirectResponse
+    {
+        $this->denyAccessUnlessGranted(['ROLE_RA']);
+
+        $this->logger->notice('Received request to revoke recovery token');
+
+        $command = new RevokeRecoveryTokenCommand();
+        $command->currentUserId = $this->getCurrentUser()->id;
+
+        $form = $this->createForm(RevokeRecoveryTokenType::class, $command);
+        $form->handleRequest($request);
+
+        $this->logger->info(sprintf(
+            'Sending middleware request to revoke recovery token "%s" belonging to "%s" on behalf of "%s"',
+            $command->recoveryTokenId,
+            $command->identityId,
+            $command->currentUserId
+        ));
+
+        if ($this->recoveryTokenService->revoke($command)) {
+            $this->logger->notice('Recovery token revocation succeeded');
+            $this->addFlash('success', 'ra.recovery_token.revocation.revoked');
+        } else {
+            $this->logger->notice('Recovery token revocation failed');
+            $this->addFlash('error', 'ra.recovery_token.revocation.could_not_revoke');
+        }
+
+        $this->logger->notice('Redirecting back to recovery tokens search overview');
+
+        return $this->redirectToRoute('ra_recovery_tokens_search');
     }
 
     private function getCurrentUser(): Identity
