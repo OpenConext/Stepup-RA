@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2022-07-13T08:43:04Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2022-07-13T15:22:42Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -11,10 +11,15 @@
         <target state="needs-translation"/>
         <jms:reference-file line="48">/src/../src/Surfnet/StepupRa/RaBundle/Form/Type/ChangeRaLocationType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="8d433839398d3a09c4597aeb5d124013e01b6aa8" resname="SECRET-HIDDEN">
+        <source>SECRET-HIDDEN</source>
+        <target state="translated">Niet weergegeven</target>
+        <jms:reference-file line="79">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="2bb6b986c5d6fb26dd9dd1054b545ce022371b0c" resname="active">
         <source>active</source>
         <target state="translated">Actief</target>
-        <jms:reference-file line="4">/src/../templates/translations.twig</jms:reference-file>
+        <jms:reference-file line="76">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0c3112826a8c897ac0b6a3d3a8432059b74dd996" resname="app.name">
         <source>app.name</source>
@@ -35,7 +40,7 @@
       <trans-unit id="b70686c582e1b6a0d8084f0b51c12df750a43ae8" resname="forgotten">
         <source>forgotten</source>
         <target state="translated">Vergeten</target>
-        <jms:reference-file line="6">/src/../templates/translations.twig</jms:reference-file>
+        <jms:reference-file line="78">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a08764057e3607049e3495943676b29f7baefba9" resname="locale.en_GB">
         <source>locale.en_GB</source>
@@ -50,7 +55,7 @@
       <trans-unit id="fb2b9eca64fdf06848a11b0636ff4e92ac288d06" resname="ra">
         <source>ra</source>
         <target>RA</target>
-        <jms:reference-file line="66">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="70">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="37836182b3260cbaf343a44bfb622776839666cc" resname="ra.auditlog.action.accredited_as_ra">
         <source>ra.auditlog.action.accredited_as_ra</source>
@@ -107,6 +112,22 @@
         <target>Bezit aangetoond</target>
         <jms:reference-file line="38">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="3b5a3100954f8a9485d317ef06a72603b2b23ada" resname="ra.auditlog.action.recovery_token_possession_promised">
+        <source>ra.auditlog.action.recovery_token_possession_promised</source>
+        <target state="translated">[Safe-store] token opgeslagen</target>
+        <jms:reference-file line="53">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ff29c40c7bd08ab0d9c7127fe941f42b2c700517" resname="ra.auditlog.action.recovery_token_possession_proven">
+        <source>ra.auditlog.action.recovery_token_possession_proven</source>
+        <target state="translated">Recovery token bezit aangetoond</target>
+        <jms:reference-file line="55">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="8fcb2158ec45da48375379a9a0105a2e95ed8ebc" resname="ra.auditlog.action.recovery_token_revoked">
+        <source>ra.auditlog.action.recovery_token_revoked</source>
+        <target state="translated">[Recovery token] verwijderd</target>
+        <jms:reference-file line="54">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="56">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="6182cba621f2930f0600729d0cf846477b645851" resname="ra.auditlog.action.renamed">
         <source>ra.auditlog.action.renamed</source>
         <target>Naam gewijzigd</target>
@@ -140,7 +161,7 @@
       <trans-unit id="d2c7e70ded524ca93e7cadba4950ae1d2a22889a" resname="ra.auditlog.actor">
         <source>ra.auditlog.actor</source>
         <target>Door</target>
-        <jms:reference-file line="30">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
+        <jms:reference-file line="32">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c9c0a8094aed4936c18a61dfcbf86f72e2429ed1" resname="ra.auditlog.commonName">
         <source>ra.auditlog.commonName</source>
@@ -155,18 +176,28 @@
       <trans-unit id="5f6db090607f031547304b8d4eaaf0b57c9a76a9" resname="ra.auditlog.event">
         <source>ra.auditlog.event</source>
         <target>Gebeurtenis</target>
-        <jms:reference-file line="28">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
+        <jms:reference-file line="30">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3049053dba19e9aeae8dd4b8045710e61f8d01ce" resname="ra.auditlog.institution">
         <source>ra.auditlog.institution</source>
         <target>Instelling</target>
         <jms:reference-file line="18">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
-        <jms:reference-file line="31">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
+        <jms:reference-file line="33">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8a542621cac70df8e15d200c8bd2f2b650663849" resname="ra.auditlog.no_entries">
         <source>ra.auditlog.no_entries</source>
         <target>Er zijn geen records in de audit log gevonden</target>
-        <jms:reference-file line="50">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
+        <jms:reference-file line="54">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="aff81da0198b00364de4431c70d2c211b5f136b1" resname="ra.auditlog.recovery_token_identifier">
+        <source>ra.auditlog.recovery_token_identifier</source>
+        <target state="translated">[Recovery token] identifier</target>
+        <jms:reference-file line="28">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4c78999da0bb06ba34dc4110f9237678c54e28fc" resname="ra.auditlog.recovery_token_type">
+        <source>ra.auditlog.recovery_token_type</source>
+        <target state="translated">[Recovery token] type</target>
+        <jms:reference-file line="29">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5e0d6e050bc563d5e4b8f419651120cd8f250825" resname="ra.auditlog.second_factor_identifier">
         <source>ra.auditlog.second_factor_identifier</source>
@@ -186,7 +217,7 @@
       <trans-unit id="d3a72dffd0d2d209bd5948e6072af503c2ee360b" resname="ra.auditlog.when">
         <source>ra.auditlog.when</source>
         <target>Datum</target>
-        <jms:reference-file line="29">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
+        <jms:reference-file line="31">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="dae6a1cc0ab3be03b10145c4af4996c87111e961" resname="ra.create_ra_location.changed">
         <source>ra.create_ra_location.changed</source>
@@ -322,12 +353,12 @@
       <trans-unit id="82620c7566024bc53940025d305ad74317ac5b42" resname="ra.form.ra_search_ra_second_factors.choice.type.sms">
         <source>ra.form.ra_search_ra_second_factors.choice.type.sms</source>
         <target>SMS</target>
-        <jms:reference-file line="62">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="66">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="bcf762515b0675a4cf9296ce0b4d538de8ec05c5" resname="ra.form.ra_search_ra_second_factors.choice.type.yubikey">
         <source>ra.form.ra_search_ra_second_factors.choice.type.yubikey</source>
         <target>Yubikey</target>
-        <jms:reference-file line="63">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="67">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3bd13a55b07cf257fe610075cfcb65c04feca493" resname="ra.form.ra_search_ra_second_factors.label.email">
         <source>ra.form.ra_search_ra_second_factors.label.email</source>
@@ -556,7 +587,7 @@
       <trans-unit id="584ef35d6af2f2917e708a1a6092f0b0938151e4" resname="ra.management.amend_ra_info.error.middleware_command_failed">
         <source>ra.management.amend_ra_info.error.middleware_command_failed</source>
         <target>Het wijzigen van de gegevens van de RA is mislukt vanwege een serverfout.</target>
-        <jms:reference-file line="59">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="63">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5fa5dfb0514d509432e81f5b2344b12d7351715b" resname="ra.management.amend_ra_info.info_amended">
         <source>ra.management.amend_ra_info.info_amended</source>
@@ -639,7 +670,7 @@
       <trans-unit id="f2d212150076ce42ffe47d514f182ad5e7a6c9fe" resname="ra.management.create_ra.error.middleware_command_failed">
         <source>ra.management.create_ra.error.middleware_command_failed</source>
         <target>De gekozen rol kon niet aan de identiteit toegekend worden vanwege een serverfout.</target>
-        <jms:reference-file line="58">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="62">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4029e4383ef4a57077b346cc66f971c9cafb71c3" resname="ra.management.create_ra.identity_accredited">
         <source>ra.management.create_ra.identity_accredited</source>
@@ -810,17 +841,17 @@
       <trans-unit id="64d8691325da6d2b996fd48f7da7a382fdeb22e7" resname="ra.management.overview.role.value.ra">
         <source>ra.management.overview.role.value.ra</source>
         <target>RA</target>
-        <jms:reference-file line="55">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="59">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ac982ab35b7b5438a72cb6e243975c8ddd35e148" resname="ra.management.overview.role.value.raa">
         <source>ra.management.overview.role.value.raa</source>
         <target>RAA</target>
-        <jms:reference-file line="56">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="60">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="53c4452d09c417bfb728d1e738b2ae2bbff3c883" resname="ra.management.overview.role.value.sraa">
         <source>ra.management.overview.role.value.sraa</source>
         <target>SRAA</target>
-        <jms:reference-file line="57">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="61">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3d101556c7d65068f5e964ba8c5a9b8709e23266" resname="ra.management.overview.update_information">
         <source>ra.management.overview.update_information</source>
@@ -1071,58 +1102,58 @@
       <trans-unit id="b09ca683a805b5073bdd6188d77f22f11325f337" resname="ra.recovery_token.revocation.could_not_revoke">
         <source>ra.recovery_token.revocation.could_not_revoke</source>
         <target state="translated">Het verwijderen van het [recovery token] is mislukt. Probeer het opnieuw.</target>
-        <jms:reference-file line="10">/src/../templates/translations.twig</jms:reference-file>
+        <jms:reference-file line="83">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8e163db19be077e7d5a6052fe096579447ba5d4a" resname="ra.recovery_token.revocation.modal.are_you_sure">
         <source>ra.recovery_token.revocation.modal.are_you_sure</source>
         <target state="translated">Weet je zeker dat je dit [recovery token] wilt verwijderen?</target>
-        <jms:reference-file line="73">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
+        <jms:reference-file line="74">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="37fda4b797990b89ab361954f2cb6decb1bbbde9" resname="ra.recovery_token.revocation.modal.cancel">
         <source>ra.recovery_token.revocation.modal.cancel</source>
         <target state="translated">Terug</target>
-        <jms:reference-file line="95">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
+        <jms:reference-file line="96">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9330a24576485ca95f33f766c685bb8119ab6a83" resname="ra.recovery_token.revocation.modal.close">
         <source>ra.recovery_token.revocation.modal.close</source>
         <target state="translated">Sluiten</target>
-        <jms:reference-file line="68">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
+        <jms:reference-file line="69">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3fd2015859ca223a1c14cc3fea1e957eb6886cc0" resname="ra.recovery_token.revocation.modal.confirm">
         <source>ra.recovery_token.revocation.modal.confirm</source>
         <target state="translated">Verder</target>
-        <jms:reference-file line="69">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
-        <jms:reference-file line="96">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
+        <jms:reference-file line="70">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
+        <jms:reference-file line="97">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="77a6007facb8b0fcc795154386864265a7eea4bb" resname="ra.recovery_token.revocation.modal.rt_email">
         <source>ra.recovery_token.revocation.modal.rt_email</source>
         <target state="translated">E-mail</target>
-        <jms:reference-file line="85">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
+        <jms:reference-file line="86">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f57ace05c541b2e019b904c8b05954672061b994" resname="ra.recovery_token.revocation.modal.rt_institution">
         <source>ra.recovery_token.revocation.modal.rt_institution</source>
         <target state="translated">Instelling</target>
-        <jms:reference-file line="89">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
+        <jms:reference-file line="90">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2c6a7db43d9d4a7aad04170a5a417fbc1b6e72d8" resname="ra.recovery_token.revocation.modal.rt_name">
         <source>ra.recovery_token.revocation.modal.rt_name</source>
         <target state="translated">Naam</target>
-        <jms:reference-file line="81">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
+        <jms:reference-file line="82">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f85d924f4e1102aafe3157753f06f61a8928595f" resname="ra.recovery_token.revocation.modal.rt_type">
         <source>ra.recovery_token.revocation.modal.rt_type</source>
         <target state="translated">Type</target>
-        <jms:reference-file line="77">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
+        <jms:reference-file line="78">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5b90c3c6b43668a13efa9de6a75c8707c3b616be" resname="ra.recovery_token.revocation.revoked">
         <source>ra.recovery_token.revocation.revoked</source>
         <target state="translated">Het verwijderen van het [recovery token] is gelukt.</target>
-        <jms:reference-file line="9">/src/../templates/translations.twig</jms:reference-file>
+        <jms:reference-file line="82">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="6474eabdc0538bed02d0343f8119de538b8ca353" resname="ra.recovery_token.revoke">
         <source>ra.recovery_token.revoke</source>
         <target state="translated">Verwijderen</target>
-        <jms:reference-file line="47">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
+        <jms:reference-file line="48">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="68c7daafca87f421d8f0800e5f399066dc2dbe19" resname="ra.recovery_token.search.column.email">
         <source>ra.recovery_token.search.column.email</source>
@@ -1152,7 +1183,7 @@
       <trans-unit id="7cd6e960fe366ea7f42a30e2b9f37e8a51a971b7" resname="ra.recovery_token.search.text.no_recovery_tokens">
         <source>ra.recovery_token.search.text.no_recovery_tokens</source>
         <target state="translated">Er zijn geen [recovery tokens] gevonden</target>
-        <jms:reference-file line="59">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
+        <jms:reference-file line="60">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4292d16545d77ea6d0d8dcc6b51dc067b49d216b" resname="ra.recovery_token.search.text.number_of_recovery_tokens">
         <source>ra.recovery_token.search.text.number_of_recovery_tokens</source>
@@ -1313,6 +1344,7 @@
       <trans-unit id="eac92ad5c53846aea116ad96b3f985d4c765088a" resname="ra.secondfactor.auditlog">
         <source>ra.secondfactor.auditlog</source>
         <target>Audit log</target>
+        <jms:reference-file line="38">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
         <jms:reference-file line="45">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="512d5614cc27358eb50068a1ba510983e3e0c620" resname="ra.secondfactor.revoke">
@@ -1514,24 +1546,24 @@ Het token is nu geactiveerd en klaar voor gebruik.</target>
       <trans-unit id="21ae742a4f478c0afe9accf5d448335bf530a4f9" resname="raa">
         <source>raa</source>
         <target>RAA</target>
-        <jms:reference-file line="67">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+        <jms:reference-file line="71">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8375cdf2758cf48c9c9ab140326bdaef30f59406" resname="revoked">
         <source>revoked</source>
         <target state="translated">Verwijderd</target>
-        <jms:reference-file line="5">/src/../templates/translations.twig</jms:reference-file>
+        <jms:reference-file line="77">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e59d5dbfb886036d6a99e85bf857442d4ea4009c" resname="safe-store">
         <source>safe-store</source>
         <target state="needs-l10n">[Safe-store]</target>
         <jms:reference-file line="40">/src/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRecoveryTokensType.php</jms:reference-file>
-        <jms:reference-file line="3">/src/../templates/translations.twig</jms:reference-file>
+        <jms:reference-file line="75">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="83b04e2653917150804a1a71da678664e3e509b5" resname="sms">
         <source>sms</source>
         <target state="translated">SMS</target>
         <jms:reference-file line="39">/src/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRecoveryTokensType.php</jms:reference-file>
-        <jms:reference-file line="2">/src/../templates/translations.twig</jms:reference-file>
+        <jms:reference-file line="74">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c50aaca50072a446eab71327c6bfc5e5de8698f5" resname="stepup.error.authentication_error.description">
         <source>stepup.error.authentication_error.description</source>
