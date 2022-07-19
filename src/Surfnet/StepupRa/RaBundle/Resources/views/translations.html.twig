@@ -50,6 +50,10 @@
 {{ ('ra.auditlog.action.retracted_as_ra'|trans) }}
 {{ ('ra.auditlog.action.migrated_to'|trans) }}
 {{ ('ra.auditlog.action.migrated_from'|trans) }}
+{{ ('ra.auditlog.action.recovery_token_possession_promised'|trans) }}
+{{ ('ra.auditlog.action.recovery_token_revoked'|trans) }}
+{{ ('ra.auditlog.action.recovery_token_possession_proven'|trans) }}
+{{ ('ra.auditlog.action.recovery_token_revoked'|trans) }}
 
 {# RA management #}
 {{ 'ra.management.overview.role.value.ra'|trans }}
@@ -65,3 +69,15 @@
 {# Profile authorization types #}
 {{ 'ra'|trans }}
 {{ 'raa'|trans }}
+
+{# Recovery Token translations #}
+{{ 'sms'|trans }}
+{{ 'safe-store'|trans }}
+{{ 'active'|trans }}
+{{ 'revoked'|trans }}
+{{ 'forgotten'|trans }}
+{{ 'SECRET-HIDDEN'|trans }}
+
+{# Recovery Token flash messages #}
+{{ 'ra.recovery_token.revocation.revoked'|trans }}
+{{ 'ra.recovery_token.revocation.could_not_revoke'|trans }}

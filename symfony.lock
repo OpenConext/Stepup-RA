@@ -5,6 +5,12 @@
     "composer/ca-bundle": {
         "version": "1.2.7"
     },
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99.5"
+    },
+    "composer/pcre": {
+        "version": "1.0.1"
+    },
     "composer/xdebug-handler": {
         "version": "1.4.2"
     },
@@ -20,6 +26,24 @@
             "config/routes/annotations.yaml"
         ]
     },
+    "doctrine/cache": {
+        "version": "2.2.0"
+    },
+    "doctrine/collections": {
+        "version": "1.6.8"
+    },
+    "doctrine/common": {
+        "version": "3.3.0"
+    },
+    "doctrine/dbal": {
+        "version": "2.13.8"
+    },
+    "doctrine/deprecations": {
+        "version": "v0.5.3"
+    },
+    "doctrine/event-manager": {
+        "version": "1.1.1"
+    },
     "doctrine/inflector": {
         "version": "1.4.3"
     },
@@ -28,6 +52,12 @@
     },
     "doctrine/lexer": {
         "version": "1.2.1"
+    },
+    "doctrine/orm": {
+        "version": "2.10.5"
+    },
+    "doctrine/persistence": {
+        "version": "2.5.3"
     },
     "fortawesome/font-awesome": {
         "version": "v4.2.0"
@@ -109,9 +139,6 @@
     },
     "phar-io/version": {
         "version": "2.0.1"
-    },
-    "php": {
-        "version": "7.2"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.1.0"
@@ -199,9 +226,6 @@
     "sebastian/exporter": {
         "version": "3.1.2"
     },
-    "sebastian/finder-facade": {
-        "version": "1.2.3"
-    },
     "sebastian/global-state": {
         "version": "3.0.0"
     },
@@ -210,9 +234,6 @@
     },
     "sebastian/object-reflector": {
         "version": "1.1.1"
-    },
-    "sebastian/phpcpd": {
-        "version": "4.1.0"
     },
     "sebastian/recursion-context": {
         "version": "3.0.0"
@@ -445,9 +466,6 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.17.1"
     },
-    "symfony/polyfill-php70": {
-        "version": "v1.18.1"
-    },
     "symfony/polyfill-php72": {
         "version": "v1.17.0"
     },
@@ -600,9 +618,6 @@
     },
     "symfony/yaml": {
         "version": "v4.4.10"
-    },
-    "theseer/fdomdocument": {
-        "version": "1.6.6"
     },
     "theseer/tokenizer": {
         "version": "1.1.3"

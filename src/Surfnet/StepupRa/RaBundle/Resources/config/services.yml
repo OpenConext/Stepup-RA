@@ -60,6 +60,10 @@ services:
             - "@ra.form.extension.second_factor_type_choice_list"
         tags: [{ name: form.type, alias: ra_search_ra_second_factors }]
 
+    ra.form.type.search_recovery_tokens:
+        class: Surfnet\StepupRa\RaBundle\Form\Type\SearchRecoveryTokensType
+        tags: [{ name: form.type, alias: ra_search_ra_second_factors }]
+
     ra.form.type.ra_revoke_second_factor:
         class: Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType
         tags: [{ name: form.type, alias: ra_revoke_second_factor }]
@@ -240,6 +244,12 @@ services:
         arguments:
             - "@surfnet_stepup_middleware_client.identity.service.institution_listing"
 
+    Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService:
+        arguments:
+            - "@ra.service.command"
+            - '@Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService'
+            - '@logger'
+
     # Repositories
     ra.repository.vetting_procedure:
         class: Surfnet\StepupRa\RaBundle\Repository\SessionVettingProcedureRepository
@@ -288,4 +298,12 @@ services:
         class: Surfnet\StepupRa\RaBundle\Controller\ProfileController
         arguments:
             - "@ra.service.profile"
+        tags: ['controller.service_arguments']
+
+    Surfnet\StepupRa\RaBundle\Controller\RecoveryTokenController:
+        arguments:
+            - '@Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService'
+            - '@Knp\Component\Pager\PaginatorInterface'
+            - '@security.token_storage'
+            - "@logger"
         tags: ['controller.service_arguments']

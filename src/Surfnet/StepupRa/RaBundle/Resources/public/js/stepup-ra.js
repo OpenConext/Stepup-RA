@@ -54,6 +54,43 @@
             });
         });
 
+
+        $('#revokeRecoveryTokenModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget),
+                data = button.data(),
+                rt = {
+                    id: data.rtid,
+                    type: data.rttype,
+                    identityId: data.rtidentityid,
+                    name: data.rtname,
+                    institution: data.rtinstitution,
+                    email: data.rtemail
+                },
+                modal = $(this);
+
+            modal.find('.modal-body td.type').text(rt.type);
+            modal.find('.modal-body td.name').text(rt.name);
+            modal.find('.modal-body td.email').text(rt.email);
+            modal.find('.modal-body td.institution').text(rt.institution);
+
+            modal.on('click', 'button.revoke', function (event) {
+                var form = $('form[name="ra_revoke_recovery_token"]'),
+                    identityIdInput = $('#ra_revoke_recovery_token_identityId'),
+                    recoveryTokenIdIdInput = $('#ra_revoke_recovery_token_recoveryTokenId');
+
+                modal.find('button').prop('disabled', true);
+                modal.on('hide.bs.modal', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                });
+
+                identityIdInput.val(rt.identityId);
+                recoveryTokenIdIdInput.val(rt.id);
+
+                form.submit();
+            });
+        });
+
         $('#removalModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget),
                 data = button.data(),

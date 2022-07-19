@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2022-03-21T16:31:57Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2022-07-13T15:22:42Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="e4360330d80b74e7def492078137d149364a8db1" resname="middleware_client.dto.configuration.allow_self_asserted_tokens.must_be_boolean">
+        <source>middleware_client.dto.configuration.allow_self_asserted_tokens.must_be_boolean</source>
+        <target state="translated">SAT option must be boolean</target>
+      </trans-unit>
       <trans-unit id="9fe9614ee06100ffa9474b193d1aec7a4c1d1334" resname="middleware_client.dto.configuration.allowed_second_factors.must_be_array">
         <source>middleware_client.dto.configuration.allowed_second_factors.must_be_array</source>
-        <target state="new">middleware_client.dto.configuration.allowed_second_factors.must_be_array</target>
+        <target state="needs-translation"></target>
       </trans-unit>
       <trans-unit id="52a2dab4b580fea4ff59fc6a51bc2c0ba0f3b728" resname="middleware_client.dto.configuration.number_of_tokens_per_identity.must_be_integer">
         <source>middleware_client.dto.configuration.number_of_tokens_per_identity.must_be_integer</source>
@@ -363,6 +367,14 @@
         <source>middleware_client.dto.vetted_second_factor.type.must_not_be_blank</source>
         <target>Vetted second factor's type may not be blank.</target>
       </trans-unit>
+      <trans-unit id="206b3baa3328ecbba2acf5ffd656d07e1550eb33" resname="middleware_client.dto.vetted_second_factor.veting_type.must_be_string">
+        <source>middleware_client.dto.vetted_second_factor.veting_type.must_be_string</source>
+        <target state="new">middleware_client.dto.vetted_second_factor.veting_type.must_be_string</target>
+      </trans-unit>
+      <trans-unit id="79ec021e919bdadfc0ab50569cfbb52676ce1502" resname="middleware_client.dto.vetted_second_factor.vetting_typ.must_not_be_blank">
+        <source>middleware_client.dto.vetted_second_factor.vetting_typ.must_not_be_blank</source>
+        <target state="new">middleware_client.dto.vetted_second_factor.vetting_typ.must_not_be_blank</target>
+      </trans-unit>
       <trans-unit id="bcdfe3ce9a1c207e6cefccc3b20bdcbeb2370a62" resname="ra.accredit_candidate.contact_information.may_not_be_blank">
         <source>ra.accredit_candidate.contact_information.may_not_be_blank</source>
         <target>Contactinformatie moet gevuld zijn</target>
@@ -406,6 +418,30 @@
       <trans-unit id="1e5e921ec2fbeeb305e0c20d6e0c0a48fb38a8fe" resname="ra.search_ra_candidates.page_number.type">
         <source>ra.search_ra_candidates.page_number.type</source>
         <target>Het paginanummer moet een geheel getal zijn</target>
+      </trans-unit>
+      <trans-unit id="2d9d40025c060c0652f8f4f26c8c57c3266318cc" resname="ra.search_ra_recovery_tokens.actor.blank">
+        <source>ra.search_ra_recovery_tokens.actor.blank</source>
+        <target state="translated">Recovery token actor must be set</target>
+      </trans-unit>
+      <trans-unit id="d4b791fa7a94ab34468682dab9e997867c4dc861" resname="ra.search_ra_recovery_tokens.actor.type">
+        <source>ra.search_ra_recovery_tokens.actor.type</source>
+        <target state="translated">Recovery token actor must be of type string</target>
+      </trans-unit>
+      <trans-unit id="5449a408d035a742a1997e48835e89bfcd1d2ab7" resname="ra.search_ra_recovery_tokens.order_by.invalid_choice">
+        <source>ra.search_ra_recovery_tokens.order_by.invalid_choice</source>
+        <target state="translated">Recovery token order by must be of one of the valid options</target>
+      </trans-unit>
+      <trans-unit id="d2aea3d6fed3cd7ef87311a4ea8abeacb63bc75f" resname="ra.search_ra_recovery_tokens.order_direction.invalid_choice">
+        <source>ra.search_ra_recovery_tokens.order_direction.invalid_choice</source>
+        <target state="translated">Order direction muste be one of 'asc' or 'desc'</target>
+      </trans-unit>
+      <trans-unit id="f74c0135130c3b019eba24ac1f4e625fbfea0b39" resname="ra.search_ra_recovery_tokens.page_number.greater_than_zero">
+        <source>ra.search_ra_recovery_tokens.page_number.greater_than_zero</source>
+        <target state="translated">Page number must be greater or equal to 1</target>
+      </trans-unit>
+      <trans-unit id="8817e29ee436da4f64221ec81eb1d68806cef1fa" resname="ra.search_ra_recovery_tokens.page_number.type">
+        <source>ra.search_ra_recovery_tokens.page_number.type</source>
+        <target state="translated">Page number must be of type string</target>
       </trans-unit>
       <trans-unit id="d64bbeccc3139dbd1700b23a16a4bb1dfd4dd518" resname="ra.search_ra_second_factors.actor.blank">
         <source>ra.search_ra_second_factors.actor.blank</source>
@@ -498,6 +534,10 @@
       <trans-unit id="8b87f20ba80c487ed07070e32d031343571d34b9" resname="stepup.verify_possession_of_phone_command.challenge.must_be_string">
         <source>stepup.verify_possession_of_phone_command.challenge.must_be_string</source>
         <target>Challenge must be a string</target>
+      </trans-unit>
+      <trans-unit id="3d4708329f9161da18a0b3089e978c2d60175cbc" resname="stepup.verify_possession_of_phone_command.recovery_token_id.must_be_string">
+        <source>stepup.verify_possession_of_phone_command.recovery_token_id.must_be_string</source>
+        <target state="translated">Proof of possession SMS recovery token, id must be of type string</target>
       </trans-unit>
       <trans-unit id="e835d8b451f38086986c8e10ae614aacf5e5d8e8" resname="stepup.verify_possession_of_phone_command.second_factor_id.must_be_string">
         <source>stepup.verify_possession_of_phone_command.second_factor_id.must_be_string</source>
