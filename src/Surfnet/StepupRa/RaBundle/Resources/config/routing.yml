@@ -51,7 +51,7 @@ ra_recovery_tokens_search:
 ra_recovery_tokens_revoke:
     path:     /recovery-tokens/revoke
     methods:  [POST]
-#    defaults: { _controller: SurfnetStepupRaRaBundle:RecoveryToken:revoke }
+    defaults: { _controller: SurfnetStepupRaRaBundle:RecoveryToken:revoke }
 
 ra_vetting_search:
     path:     /

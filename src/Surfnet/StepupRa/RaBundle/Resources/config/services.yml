@@ -248,6 +248,7 @@ services:
         arguments:
             - "@ra.service.command"
             - '@Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService'
+            - '@logger'
 
     # Repositories
     ra.repository.vetting_procedure:

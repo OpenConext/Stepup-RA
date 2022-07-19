@@ -18,10 +18,12 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RecoveryTokenSearchQuery;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Command\RevokeRegistrantsRecoveryTokenCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RecoveryTokenCollection;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService as ApiRecoveryTokenService;
-use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
+use Surfnet\StepupRa\RaBundle\Command\RevokeRecoveryTokenCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRecoveryTokensCommand;
 
 class RecoveryTokenService
@@ -33,15 +35,41 @@ class RecoveryTokenService
      */
     private $apiRecoveryTokenService;
 
-    public function __construct(CommandService $commandService, ApiRecoveryTokenService $apiRecoveryTokenService)
-    {
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(
+        CommandService $commandService,
+        ApiRecoveryTokenService $apiRecoveryTokenService,
+        LoggerInterface $logger
+    ) {
         $this->commandService = $commandService;
         $this->apiRecoveryTokenService = $apiRecoveryTokenService;
+        $this->logger = $logger;
     }
 
-    public function revoke(RevokeSecondFactorCommand $command)
+    public function revoke(RevokeRecoveryTokenCommand $command)
     {
-        // Todo
+        $middlewareCommand = new RevokeRegistrantsRecoveryTokenCommand();
+        $middlewareCommand->recoveryTokenId = $command->recoveryTokenId;
+        $middlewareCommand->identityId = $command->identityId;
+        $middlewareCommand->authorityId = $command->currentUserId;
+
+        $result = $this->commandService->execute($middlewareCommand);
+
+        if (!$result->isSuccessful()) {
+            $this->logger->critical(sprintf(
+                'Revocation of recovery token "%s" of Identity "%s" by user "%s" failed: "%s"',
+                $middlewareCommand->recoveryTokenId,
+                $middlewareCommand->identityId,
+                $middlewareCommand->authorityId,
+                implode(", ", $result->getErrors())
+            ));
+        }
+
+        return $result->isSuccessful();
     }
 
     public function search(SearchRecoveryTokensCommand $command): RecoveryTokenCollection
