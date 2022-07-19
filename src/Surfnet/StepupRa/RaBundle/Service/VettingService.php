@@ -27,6 +27,7 @@ use Surfnet\StepupBundle\Service\SmsSecondFactor\OtpVerification;
 use Surfnet\StepupBundle\Service\SmsSecondFactorServiceInterface;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupBundle\Value\SecondFactorType;
+use Surfnet\StepupBundle\Value\VettingType;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\VetSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
@@ -129,7 +130,11 @@ class VettingService
     {
         $secondFactorType = new SecondFactorType($command->secondFactor->type);
 
-        return $this->secondFactorTypeService->isSatisfiedBy($secondFactorType, $command->authorityLoa);
+        return $this->secondFactorTypeService->isSatisfiedBy(
+            $secondFactorType,
+            $command->authorityLoa,
+            new VettingType(VettingType::TYPE_ON_PREMISE)
+        );
     }
 
     /**
