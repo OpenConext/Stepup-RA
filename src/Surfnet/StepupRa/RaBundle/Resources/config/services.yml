@@ -250,6 +250,12 @@ services:
             - '@Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService'
             - '@logger'
 
+    Surfnet\StepupRa\RaBundle\Service\VettingTypeHintService:
+        arguments:
+            - '@ra.service.command'
+            - '@Surfnet\StepupMiddlewareClientBundle\Identity\Service\VettingTypeHintService'
+            - '@logger'
+
     # Repositories
     ra.repository.vetting_procedure:
         class: Surfnet\StepupRa\RaBundle\Repository\SessionVettingProcedureRepository
@@ -306,4 +312,13 @@ services:
             - '@Knp\Component\Pager\PaginatorInterface'
             - '@security.token_storage'
             - "@logger"
+        tags: ['controller.service_arguments']
+
+    Surfnet\StepupRa\RaBundle\Controller\VettingTypeHintController:
+        arguments:
+            - '@logger'
+            - '@ra.service.institution_listing'
+            - '@ra.service.profile'
+            - '@Surfnet\StepupRa\RaBundle\Service\VettingTypeHintService'
+            - '%locales%'
         tags: ['controller.service_arguments']

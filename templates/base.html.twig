@@ -82,6 +82,11 @@
                                         <a href="{{ path('institution-configuration') }}">{{ 'ra.menu.institution-configuration'|trans }}</a>
                                     </li>
                                 {% endif %}
+                                {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                                    <li role="presentation"{% if app.request.attributes.get('_route') starts with 'vetting_type_hint' %} class="active"{% endif %}>
+                                        <a href="{{ path('vetting_type_hint') }}">{{ 'ra.menu.vetting-type-hint'|trans }}</a>
+                                    </li>
+                                {% endif %}
 
                                 <li role="presentation"{% if app.request.attributes.get('_route') == 'ra_profile' %} class="active"{% endif %}>
                                     <a href="{{ path('ra_profile') }}">{{ 'ra.menu.ra_profile'|trans }}</a>

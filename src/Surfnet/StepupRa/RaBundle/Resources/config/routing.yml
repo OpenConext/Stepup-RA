@@ -144,6 +144,12 @@ institution-configuration:
     defaults:
         _controller: SurfnetStepupRaRaBundle:Raa:institutionConfiguration
 
+vetting_type_hint:
+    path: /vetting-type-hint
+    methods: [GET, POST]
+    defaults:
+        _controller: SurfnetStepupRaRaBundle:VettingTypeHint:vettingTypeHint
+
 ra_switch_locale:
     path:     /switch-locale
     methods:  [POST]
