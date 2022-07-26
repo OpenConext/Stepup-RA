@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2022-07-13T15:22:45Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2022-07-26T15:44:24Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -30,12 +30,17 @@
       <trans-unit id="ff6230b38fe127145d864f4d4920ceb4d857af18" resname="button.logout">
         <source>button.logout</source>
         <target>Sign out</target>
-        <jms:reference-file line="93">/src/../templates/base.html.twig</jms:reference-file>
+        <jms:reference-file line="98">/src/../templates/base.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4536d3e30c30ee352fda7e275bb682661cc32585" resname="en_GB">
+        <source>en_GB</source>
+        <target state="translated">English</target>
+        <jms:reference-file line="91">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5f1e0c5b2426bfd27630e1a79ced536d4ef05d10" resname="footer.documentation">
         <source>footer.documentation</source>
         <target>Manual</target>
-        <jms:reference-file line="140">/src/../templates/base.html.twig</jms:reference-file>
+        <jms:reference-file line="145">/src/../templates/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b70686c582e1b6a0d8084f0b51c12df750a43ae8" resname="forgotten">
         <source>forgotten</source>
@@ -51,6 +56,11 @@
         <source>locale.nl_NL</source>
         <target>Nederlands</target>
         <jms:reference-file line="3">/src/../vendor/surfnet/stepup-bundle/src/Resources/views/translations.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c2a655f18ad648ae4de40dd62ccb9103d6b52a8d" resname="nl_NL">
+        <source>nl_NL</source>
+        <target state="translated">Dutch</target>
+        <jms:reference-file line="90">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="fb2b9eca64fdf06848a11b0636ff4e92ac288d06" resname="ra">
         <source>ra</source>
@@ -508,6 +518,11 @@
         <target>Verify identity</target>
         <jms:reference-file line="45">/src/../src/Surfnet/StepupRa/RaBundle/Form/Type/VerifyIdentityType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="cd1693a1f3fe68e4d10ee970ea968383e8995955" resname="ra.form.vetting_type_hint.button.continue">
+        <source>ra.form.vetting_type_hint.button.continue</source>
+        <target>Save</target>
+        <jms:reference-file line="53">/src/../src/Surfnet/StepupRa/RaBundle/Form/Type/VettingTypeHintType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="17ab744355f1655994692471da5d40bebb69b116" resname="ra.institution_configuration.all_second_factors_enabled">
         <source>ra.institution_configuration.all_second_factors_enabled</source>
         <target>All enabled tokens are available</target>
@@ -926,7 +941,7 @@
       <trans-unit id="3e81619fb5ba21daeb0d44b21d6e13071f33cd74" resname="ra.menu.ra_profile">
         <source>ra.menu.ra_profile</source>
         <target>My profile</target>
-        <jms:reference-file line="87">/src/../templates/base.html.twig</jms:reference-file>
+        <jms:reference-file line="92">/src/../templates/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7d6a9d74b9561d924dc4411c3ceebc63a01c83ae" resname="ra.menu.registration">
         <source>ra.menu.registration</source>
@@ -942,6 +957,11 @@
         <source>ra.menu.search_recovery_tokens</source>
         <target state="needs-l10n">[Recovery tokens]</target>
         <jms:reference-file line="66">/src/../templates/base.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ccf5f7d17e35ed6fd11aad7f781786f7e864d5e5" resname="ra.menu.vetting-type-hint">
+        <source>ra.menu.vetting-type-hint</source>
+        <target state="translated">[Vetting type hint]</target>
+        <jms:reference-file line="87">/src/../templates/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5f584865ad00e62914ac47108d14ee076f33c35e" resname="ra.profile.overview.authorizations">
         <source>ra.profile.overview.authorizations</source>
@@ -1449,7 +1469,7 @@
       <trans-unit id="8e4a356a46fe95b04ae1cbb201b8d62e15670b2e" resname="ra.vetting.sms.challenge_body">
         <source>ra.vetting.sms.challenge_body</source>
         <target>Your code: %challenge%</target>
-        <jms:reference-file line="242">/src/../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php</jms:reference-file>
+        <jms:reference-file line="247">/src/../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6d55aa46fb97f555148f92291a878be8ed732361" resname="ra.vetting.sms.prove_possession.title.page">
         <source>ra.vetting.sms.prove_possession.title.page</source>
@@ -1542,6 +1562,26 @@ The token is now activated and ready to be used.</target>
         <source>ra.vetting.yubikey.text.press_once_form_auto_submitted</source>
         <target>Press and hold the button on the personal Yubikey of the user once; a OTP will be generated in the field below.</target>
         <jms:reference-file line="17">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/vetting/yubikey/verify.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="aeaa50cfa81a57a14d0bcdb5179bf1fdb528a09e" resname="ra.vetting_type_hint.error">
+        <source>ra.vetting_type_hint.error</source>
+        <target state="translated">Saving the [vetting type hints] failed, please try again</target>
+        <jms:reference-file line="87">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="503e7024cbbeed07de169176e2e34729e2912693" resname="ra.vetting_type_hint.subtitle">
+        <source>ra.vetting_type_hint.subtitle</source>
+        <target state="translated">[Vetting type hints of] %institution%</target>
+        <jms:reference-file line="14">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/vetting_type_hint/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9e3439b0a5b23046bd4e327b2a802446ab119d3c" resname="ra.vetting_type_hint.success">
+        <source>ra.vetting_type_hint.success</source>
+        <target state="translated">Saving of the [vetting type hint] was successful</target>
+        <jms:reference-file line="86">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="13411e66cc269e4b4517d14f54a8999680cb5a3e" resname="ra.vetting_type_hint.title">
+        <source>ra.vetting_type_hint.title</source>
+        <target state="translated">[Vetting type hints]</target>
+        <jms:reference-file line="3">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/vetting_type_hint/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="21ae742a4f478c0afe9accf5d448335bf530a4f9" resname="raa">
         <source>raa</source>

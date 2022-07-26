@@ -38,7 +38,7 @@ class VettingTypeHintType extends AbstractType
                     self::HINT_TEXTAREA_NAME_PREFIX . $locale,
                     TextareaType::class,
                     [
-                        'label' => 'ra.form.vetting_type_hint.label.hint' . $locale,
+                        'label' => $locale,
                     ]
                 );
         }
