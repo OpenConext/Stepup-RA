@@ -39,11 +39,13 @@ class VettingTypeHintType extends AbstractType
                     TextareaType::class,
                     [
                         'label' => $locale,
+                        'required' => false,
                     ]
                 );
         }
         $builder
-            ->add('institution',
+            ->add(
+                'institution',
                 HiddenType::class
             )
             ->add(

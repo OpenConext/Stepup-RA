@@ -79,7 +79,7 @@ class VettingTypeHintCommand
         $this->assertValidLanguageInName($name);
         $locale = $this->extractLocaleFromFormFieldName($name);
         if ($this->__isset($name)) {
-            return $this->hints[$locale];
+            return $this->hints[$locale] ?: '';
         }
         return '';
     }
