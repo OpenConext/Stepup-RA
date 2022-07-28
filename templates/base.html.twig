@@ -78,13 +78,14 @@
                                 {% endif %}
 
                                 {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
-                                    <li role="presentation"{% if app.request.attributes.get('_route') starts with 'institution-configuration' %} class="active"{% endif %}>
-                                        <a href="{{ path('institution-configuration') }}">{{ 'ra.menu.institution-configuration'|trans }}</a>
-                                    </li>
-                                {% endif %}
-                                {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
                                     <li role="presentation"{% if app.request.attributes.get('_route') starts with 'vetting_type_hint' %} class="active"{% endif %}>
                                         <a href="{{ path('vetting_type_hint') }}">{{ 'ra.menu.vetting-type-hint'|trans }}</a>
+                                    </li>
+                                {% endif %}
+
+                                {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                                    <li role="presentation"{% if app.request.attributes.get('_route') starts with 'institution-configuration' %} class="active"{% endif %}>
+                                        <a href="{{ path('institution-configuration') }}">{{ 'ra.menu.institution-configuration'|trans }}</a>
                                     </li>
                                 {% endif %}
 
