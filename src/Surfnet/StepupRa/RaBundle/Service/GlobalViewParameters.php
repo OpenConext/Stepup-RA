@@ -59,4 +59,12 @@ final class GlobalViewParameters
     {
         return $this->supportUrl[$this->translator->getLocale()];
     }
+
+    /**
+     * @return string[]
+     */
+    public function getLocales(): array
+    {
+        return $this->locales;
+    }
 }

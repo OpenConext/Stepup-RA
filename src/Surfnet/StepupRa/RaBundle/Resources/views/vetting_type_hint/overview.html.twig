@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'ra.vetting_type_hint.title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12" >
+            {% include 'SurfnetStepupRaRaBundle:partial:language_switcher.html.twig' with {'form': form} only %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>{{ 'ra.vetting_type_hint.subtitle'|trans({'%institution%': institution}) }}</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            {{ form(hintForm) }}
+        </div>
+    </div>
+{% endblock content %}
