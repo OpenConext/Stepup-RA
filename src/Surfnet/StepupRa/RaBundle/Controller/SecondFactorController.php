@@ -185,9 +185,6 @@ final class SecondFactorController extends Controller
         $command->orderDirection = $request->get('orderDirection', 'desc');
 
         $auditLog = $this->getAuditLogService()->getAuditlog($command);
-
-        $timezone = date_default_timezone_get();
-
         $pagination = $this->getPaginator()->paginate(
             $auditLog->getElements(),
             $auditLog->getCurrentPage(),
@@ -203,7 +200,6 @@ final class SecondFactorController extends Controller
                 'pagination' => $pagination,
                 'auditLog'   => $auditLog,
                 'identity'   => $identity,
-                'timezone'   => $timezone,
             ]
         );
     }

@@ -58,3 +58,7 @@ parameters:
     session_max_absolute_lifetime: 28800 # 8 hours * 60 minutes * 60 seconds
     session_max_relative_lifetime: 1800  # 30 minutes * 60 seconds
     self_service_url: 'https://selfservice.tld/'
+
+    # Date format defaults for Twig date functions
+    date_format: 'Y-m-d H:i P'
+    date_timezone: Europe/Amsterdam
