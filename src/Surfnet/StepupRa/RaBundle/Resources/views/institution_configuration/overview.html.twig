@@ -84,6 +84,14 @@
                         {% endif %}
                     </td>
                 </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.allow_self_vet'|trans }}</th>
+                    <td>{{ configuration.selfVet ? 'ra.institution_configuration.allow'|trans : 'ra.institution_configuration.disallow'|trans }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.allow_self_assertedTokens'|trans }}</th>
+                    <td>{{ configuration.allowSelfAssertedTokens ? 'ra.institution_configuration.allow'|trans : 'ra.institution_configuration.disallow'|trans }}</td>
+                </tr>
                 </tbody>
             </table>
         </div>
