@@ -22,6 +22,7 @@ use Psr\Log\LoggerInterface;
 use Surfnet\StepupBundle\Service\SecondFactorTypeService;
 use Surfnet\StepupBundle\Value\Loa;
 use Surfnet\StepupBundle\Value\SecondFactorType;
+use Surfnet\StepupBundle\Value\VettingType;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaCandidateSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AccreditIdentityCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaCandidateService as ApiRaCandidateService;
@@ -159,7 +160,11 @@ class RaCandidateService
             $this->secondFactorTypeService->getAvailableSecondFactorTypes(),
             function ($secondFactorType) use ($loa3) {
                 $secondFactorType = new SecondFactorType($secondFactorType);
-                return $this->secondFactorTypeService->canSatisfy($secondFactorType, $loa3);
+                return $this->secondFactorTypeService->canSatisfy(
+                    $secondFactorType,
+                    $loa3,
+                    new VettingType(VettingType::TYPE_ON_PREMISE)
+                );
             }
         );
     }
