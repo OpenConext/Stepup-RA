@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2022-07-26T15:44:21Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
+  <file date="2022-10-24T10:42:23Z" source-language="en" target-language="nl_NL" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -8,7 +8,7 @@
     <body>
       <trans-unit id="b858cb282617fb0956d960215c8e84d1ccf909c6" resname=" ">
         <source> </source>
-        <target state="needs-translation"/>
+        <target state="needs-translation"></target>
         <jms:reference-file line="48">/src/../src/Surfnet/StepupRa/RaBundle/Form/Type/ChangeRaLocationType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="8d433839398d3a09c4597aeb5d124013e01b6aa8" resname="SECRET-HIDDEN">
@@ -30,7 +30,7 @@
       <trans-unit id="ff6230b38fe127145d864f4d4920ceb4d857af18" resname="button.logout">
         <source>button.logout</source>
         <target>Uitloggen</target>
-        <jms:reference-file line="98">/src/../templates/base.html.twig</jms:reference-file>
+        <jms:reference-file line="99">/src/../templates/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4536d3e30c30ee352fda7e275bb682661cc32585" resname="en_GB">
         <source>en_GB</source>
@@ -40,7 +40,7 @@
       <trans-unit id="5f1e0c5b2426bfd27630e1a79ced536d4ef05d10" resname="footer.documentation">
         <source>footer.documentation</source>
         <target>Handleiding</target>
-        <jms:reference-file line="145">/src/../templates/base.html.twig</jms:reference-file>
+        <jms:reference-file line="146">/src/../templates/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b70686c582e1b6a0d8084f0b51c12df750a43ae8" resname="forgotten">
         <source>forgotten</source>
@@ -521,17 +521,39 @@
       <trans-unit id="cd1693a1f3fe68e4d10ee970ea968383e8995955" resname="ra.form.vetting_type_hint.button.continue">
         <source>ra.form.vetting_type_hint.button.continue</source>
         <target state="translated">Opslaan</target>
-        <jms:reference-file line="53">/src/../src/Surfnet/StepupRa/RaBundle/Form/Type/VettingTypeHintType.php</jms:reference-file>
+        <jms:reference-file line="55">/src/../src/Surfnet/StepupRa/RaBundle/Form/Type/VettingTypeHintType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="17ab744355f1655994692471da5d40bebb69b116" resname="ra.institution_configuration.all_second_factors_enabled">
         <source>ra.institution_configuration.all_second_factors_enabled</source>
         <target>Alle beschikbare tokens zijn toegestaan</target>
         <jms:reference-file line="39">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="e2166906acc94fc4d773e8315d730db9a85ed6cd" resname="ra.institution_configuration.allow">
+        <source>ra.institution_configuration.allow</source>
+        <target>Toegestaan</target>
+        <jms:reference-file line="89">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="93">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="dbed065dd56fadef9c603bcab70de321d2fc700a" resname="ra.institution_configuration.allow_self_assertedTokens">
+        <source>ra.institution_configuration.allow_self_assertedTokens</source>
+        <target>Token activeren zonder servicedesk of bestaand token</target>
+        <jms:reference-file line="92">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="aff374c5f31e82138314fe206faa291caa8ebe44" resname="ra.institution_configuration.allow_self_vet">
+        <source>ra.institution_configuration.allow_self_vet</source>
+        <target>Bestaand token gebruiken om te activeren</target>
+        <jms:reference-file line="88">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="217097881ba32fe3854fc0b41f3a71437a22861d" resname="ra.institution_configuration.allowed_second_factors">
         <source>ra.institution_configuration.allowed_second_factors</source>
         <target>Toegestane tokens</target>
         <jms:reference-file line="36">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6f7d19ff83c45e965fda8e426253203e0a95a794" resname="ra.institution_configuration.disallow">
+        <source>ra.institution_configuration.disallow</source>
+        <target>Niet toegestaan</target>
+        <jms:reference-file line="89">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="93">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="61dd68e8cba8bedbd5c69f57846161be150580a2" resname="ra.institution_configuration.no">
         <source>ra.institution_configuration.no</source>
@@ -926,7 +948,7 @@
       <trans-unit id="ea11cd6d8f399195aeb56a640ac0a946a5302fce" resname="ra.menu.institution-configuration">
         <source>ra.menu.institution-configuration</source>
         <target>Instellingconfiguratie</target>
-        <jms:reference-file line="82">/src/../templates/base.html.twig</jms:reference-file>
+        <jms:reference-file line="88">/src/../templates/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b4a82e0141a37a71ca4197275026c666429430cc" resname="ra.menu.ra_locations">
         <source>ra.menu.ra_locations</source>
@@ -941,7 +963,7 @@
       <trans-unit id="3e81619fb5ba21daeb0d44b21d6e13071f33cd74" resname="ra.menu.ra_profile">
         <source>ra.menu.ra_profile</source>
         <target>Mijn profiel</target>
-        <jms:reference-file line="92">/src/../templates/base.html.twig</jms:reference-file>
+        <jms:reference-file line="93">/src/../templates/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7d6a9d74b9561d924dc4411c3ceebc63a01c83ae" resname="ra.menu.registration">
         <source>ra.menu.registration</source>
@@ -961,7 +983,7 @@
       <trans-unit id="ccf5f7d17e35ed6fd11aad7f781786f7e864d5e5" resname="ra.menu.vetting-type-hint">
         <source>ra.menu.vetting-type-hint</source>
         <target state="translated">[Activatie methode hulp]</target>
-        <jms:reference-file line="87">/src/../templates/base.html.twig</jms:reference-file>
+        <jms:reference-file line="82">/src/../templates/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5f584865ad00e62914ac47108d14ee076f33c35e" resname="ra.profile.overview.authorizations">
         <source>ra.profile.overview.authorizations</source>
