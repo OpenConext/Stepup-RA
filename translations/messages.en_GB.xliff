@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2022-10-24T10:42:26Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
+  <file date="2022-11-25T11:05:12Z" source-language="en" target-language="en_GB" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -124,17 +124,17 @@
       </trans-unit>
       <trans-unit id="3b5a3100954f8a9485d317ef06a72603b2b23ada" resname="ra.auditlog.action.recovery_token_possession_promised">
         <source>ra.auditlog.action.recovery_token_possession_promised</source>
-        <target state="translated">[Safe-store] token possession promised</target>
+        <target state="translated">Recovery method stored</target>
         <jms:reference-file line="53">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ff29c40c7bd08ab0d9c7127fe941f42b2c700517" resname="ra.auditlog.action.recovery_token_possession_proven">
         <source>ra.auditlog.action.recovery_token_possession_proven</source>
-        <target state="translated">[Recovery token] possession proven</target>
+        <target state="translated">Recovery methode possession proven</target>
         <jms:reference-file line="55">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8fcb2158ec45da48375379a9a0105a2e95ed8ebc" resname="ra.auditlog.action.recovery_token_revoked">
         <source>ra.auditlog.action.recovery_token_revoked</source>
-        <target state="translated">[Recovery token] removed</target>
+        <target state="translated">Recovery methode removed</target>
         <jms:reference-file line="54">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
         <jms:reference-file line="56">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
@@ -201,7 +201,7 @@
       </trans-unit>
       <trans-unit id="aff81da0198b00364de4431c70d2c211b5f136b1" resname="ra.auditlog.recovery_token_identifier">
         <source>ra.auditlog.recovery_token_identifier</source>
-        <target state="translated">[Recovery token] identifier</target>
+        <target state="translated">Recovery method identifier</target>
         <jms:reference-file line="28">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4c78999da0bb06ba34dc4110f9237678c54e28fc" resname="ra.auditlog.recovery_token_type">
@@ -977,12 +977,12 @@
       </trans-unit>
       <trans-unit id="369112a278b7b4663a4ba31f26aa28a8167f12e4" resname="ra.menu.search_recovery_tokens">
         <source>ra.menu.search_recovery_tokens</source>
-        <target state="needs-l10n">[Recovery tokens]</target>
+        <target state="needs-l10n">Recovery methods</target>
         <jms:reference-file line="66">/src/../templates/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ccf5f7d17e35ed6fd11aad7f781786f7e864d5e5" resname="ra.menu.vetting-type-hint">
         <source>ra.menu.vetting-type-hint</source>
-        <target state="translated">[Vetting type hint]</target>
+        <target state="translated">Activation help texts</target>
         <jms:reference-file line="82">/src/../templates/base.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5f584865ad00e62914ac47108d14ee076f33c35e" resname="ra.profile.overview.authorizations">
@@ -1587,17 +1587,22 @@ The token is now activated and ready to be used.</target>
       </trans-unit>
       <trans-unit id="aeaa50cfa81a57a14d0bcdb5179bf1fdb528a09e" resname="ra.vetting_type_hint.error">
         <source>ra.vetting_type_hint.error</source>
-        <target state="translated">Saving the [vetting type hints] failed, please try again</target>
+        <target state="translated">Saving the activation help texts failed, please try again</target>
         <jms:reference-file line="87">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="291e6af8279dc3d36da45b10c4dd525f44d9bb68" resname="ra.vetting_type_hint.help">
+        <source>ra.vetting_type_hint.help</source>
+        <target>To help your users choose an activation method, you can enter a help text here that the user will see when the choice must be made</target>
+        <jms:reference-file line="15">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/vetting_type_hint/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="503e7024cbbeed07de169176e2e34729e2912693" resname="ra.vetting_type_hint.subtitle">
         <source>ra.vetting_type_hint.subtitle</source>
-        <target state="translated">[Vetting type hints of] %institution%</target>
+        <target state="translated">Activation help texts for %institution%</target>
         <jms:reference-file line="14">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/vetting_type_hint/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9e3439b0a5b23046bd4e327b2a802446ab119d3c" resname="ra.vetting_type_hint.success">
         <source>ra.vetting_type_hint.success</source>
-        <target state="translated">Saving of the [vetting type hint] was successful</target>
+        <target state="translated">The activation help texts were saved</target>
         <jms:reference-file line="86">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="13411e66cc269e4b4517d14f54a8999680cb5a3e" resname="ra.vetting_type_hint.title">
@@ -1617,13 +1622,13 @@ The token is now activated and ready to be used.</target>
       </trans-unit>
       <trans-unit id="e59d5dbfb886036d6a99e85bf857442d4ea4009c" resname="safe-store">
         <source>safe-store</source>
-        <target state="needs-l10n">[Safe-store]</target>
+        <target>Recovery code</target>
         <jms:reference-file line="40">/src/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRecoveryTokensType.php</jms:reference-file>
         <jms:reference-file line="75">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="83b04e2653917150804a1a71da678664e3e509b5" resname="sms">
         <source>sms</source>
-        <target state="translated">SMS</target>
+        <target state="translated">Recovery phone number</target>
         <jms:reference-file line="39">/src/../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRecoveryTokensType.php</jms:reference-file>
         <jms:reference-file line="74">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
