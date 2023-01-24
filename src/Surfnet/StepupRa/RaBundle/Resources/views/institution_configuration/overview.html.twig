@@ -33,6 +33,10 @@
                     <td>{{ configuration.verifyEmail ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
                 </tr>
                 <tr>
+                    <th>{{ 'ra.institution_configuration.sso_on_2fa'|trans }}</th>
+                    <td>{{ configuration.ssoOn2fa ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
+                </tr>
+                <tr>
                     <th>{{ 'ra.institution_configuration.allowed_second_factors'|trans }}</th>
                     <td>
                         {% if configuration.allowedSecondFactors is empty %}

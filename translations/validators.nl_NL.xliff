@@ -26,6 +26,10 @@
         <source>middleware_client.dto.configuration.show_raa_contact_information.must_be_boolean</source>
         <target>Show RAA Contact Information option must be boolean.</target>
       </trans-unit>
+      <trans-unit id="889fc847b134f0541df867cb566234cdab46006d" resname="middleware_client.dto.configuration.sso_on_2fa.must_be_boolean">
+        <source>middleware_client.dto.configuration.sso_on_2fa.must_be_boolean</source>
+        <target state="new">middleware_client.dto.configuration.sso_on_2fa.must_be_boolean</target>
+      </trans-unit>
       <trans-unit id="53ef4f54259698cee5e0aaba2d7f20417cd8e9fb" resname="middleware_client.dto.configuration.use_ra_locations.must_be_boolean">
         <source>middleware_client.dto.configuration.use_ra_locations.must_be_boolean</source>
         <target xml:space="preserve">Use RA locations option must be boolean.

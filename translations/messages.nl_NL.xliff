@@ -531,29 +531,29 @@
       <trans-unit id="e2166906acc94fc4d773e8315d730db9a85ed6cd" resname="ra.institution_configuration.allow">
         <source>ra.institution_configuration.allow</source>
         <target>Toegestaan</target>
-        <jms:reference-file line="89">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
         <jms:reference-file line="93">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="97">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="dbed065dd56fadef9c603bcab70de321d2fc700a" resname="ra.institution_configuration.allow_self_assertedTokens">
         <source>ra.institution_configuration.allow_self_assertedTokens</source>
         <target>Token activeren zonder servicedesk of bestaand token</target>
-        <jms:reference-file line="92">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="96">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="aff374c5f31e82138314fe206faa291caa8ebe44" resname="ra.institution_configuration.allow_self_vet">
         <source>ra.institution_configuration.allow_self_vet</source>
         <target>Bestaand token gebruiken om te activeren</target>
-        <jms:reference-file line="88">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="92">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="217097881ba32fe3854fc0b41f3a71437a22861d" resname="ra.institution_configuration.allowed_second_factors">
         <source>ra.institution_configuration.allowed_second_factors</source>
         <target>Toegestane tokens</target>
-        <jms:reference-file line="36">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="40">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="6f7d19ff83c45e965fda8e426253203e0a95a794" resname="ra.institution_configuration.disallow">
         <source>ra.institution_configuration.disallow</source>
         <target>Niet toegestaan</target>
-        <jms:reference-file line="89">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
         <jms:reference-file line="93">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="97">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="61dd68e8cba8bedbd5c69f57846161be150580a2" resname="ra.institution_configuration.no">
         <source>ra.institution_configuration.no</source>
@@ -561,28 +561,34 @@
         <jms:reference-file line="25">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
         <jms:reference-file line="29">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
         <jms:reference-file line="33">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="37">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7eeb4b6c226dadecd3593c7e0de34d5fdeb85ec3" resname="ra.institution_configuration.no_entries">
         <source>ra.institution_configuration.no_entries</source>
         <target>Geen resultaten gevonden</target>
-        <jms:reference-file line="59">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
-        <jms:reference-file line="71">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
-        <jms:reference-file line="83">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="63">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="75">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="87">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7c2f87e0fb31a1da5050b865323409759b727336" resname="ra.institution_configuration.number_of_tokens_per_identity">
         <source>ra.institution_configuration.number_of_tokens_per_identity</source>
         <target>Aantal tokens per identiteit</target>
-        <jms:reference-file line="48">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="52">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="817cff31f9baf1c7bce18b5c6332c1be54bf44ef" resname="ra.institution_configuration.select_raa">
         <source>ra.institution_configuration.select_raa</source>
         <target>Van welke instelling(en) kunnen de gebruikers de RA(A) rol krijgen voor deze instelling?</target>
-        <jms:reference-file line="52">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="56">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b5fdeda8565fa6fa18934ced8039240beaf5ebea" resname="ra.institution_configuration.show_ra_contact_information">
         <source>ra.institution_configuration.show_ra_contact_information</source>
         <target>Laat RAA contact informatie zien?</target>
         <jms:reference-file line="28">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="757d7253719e105e2bda918c874d29b788b26cbd" resname="ra.institution_configuration.sso_on_2fa">
+        <source>ra.institution_configuration.sso_on_2fa</source>
+        <target>Single sign on op second factor token authenticaties?</target>
+        <jms:reference-file line="36">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="6cb525e1f60344d3cd554ebf348b2b850086b7b7" resname="ra.institution_configuration.subtitle">
         <source>ra.institution_configuration.subtitle</source>
@@ -597,7 +603,7 @@
       <trans-unit id="0344c705268b0d366e23e4a9f3e90df9aa55960b" resname="ra.institution_configuration.use_ra">
         <source>ra.institution_configuration.use_ra</source>
         <target>Van welke instelling(en) zijn de RA's een RA voor deze instelling?</target>
-        <jms:reference-file line="64">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="68">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="98471184366a598d348e400875f1fe3ba1cf6c2f" resname="ra.institution_configuration.use_ra_locations">
         <source>ra.institution_configuration.use_ra_locations</source>
@@ -607,7 +613,7 @@
       <trans-unit id="63cd93b650cdeb407293c1cdef07ce9d49e0976a" resname="ra.institution_configuration.use_raa">
         <source>ra.institution_configuration.use_raa</source>
         <target>Van welke instelling(en) zijn de RAA's een RAA voor deze instelling?</target>
-        <jms:reference-file line="76">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="80">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d6ea1d4efa906c5056f389f4fde35bbb26511521" resname="ra.institution_configuration.verify_email">
         <source>ra.institution_configuration.verify_email</source>
@@ -620,6 +626,7 @@
         <jms:reference-file line="25">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
         <jms:reference-file line="29">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
         <jms:reference-file line="33">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
+        <jms:reference-file line="37">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="584ef35d6af2f2917e708a1a6092f0b0938151e4" resname="ra.management.amend_ra_info.error.middleware_command_failed">
         <source>ra.management.amend_ra_info.error.middleware_command_failed</source>
