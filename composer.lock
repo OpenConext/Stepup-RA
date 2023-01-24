@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb75cd9d4b7eb5ce84a949820005bd6d",
+    "content-hash": "2b20c57bf067b0ba1d3d602b697aaab8",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2201,16 +2201,16 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "4.1.4",
+            "version": "dev-feature/sso-2fa",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-Middleware-clientbundle.git",
-                "reference": "81143bbec44ecc7f20bd281cdb491e2e8b985dad"
+                "reference": "392c32829fad752357ac10c15b0df4143c07f5cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/81143bbec44ecc7f20bd281cdb491e2e8b985dad",
-                "reference": "81143bbec44ecc7f20bd281cdb491e2e8b985dad",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/392c32829fad752357ac10c15b0df4143c07f5cf",
+                "reference": "392c32829fad752357ac10c15b0df4143c07f5cf",
                 "shasum": ""
             },
             "require": {
@@ -2253,9 +2253,9 @@
             "description": "Symfony2 bundle for consuming the Step-up Middleware API.",
             "support": {
                 "issues": "https://github.com/OpenConext/Stepup-Middleware-clientbundle/issues",
-                "source": "https://github.com/OpenConext/Stepup-Middleware-clientbundle/tree/4.1.4"
+                "source": "https://github.com/OpenConext/Stepup-Middleware-clientbundle/tree/feature/sso-2fa"
             },
-            "time": "2022-08-02T12:52:00+00:00"
+            "time": "2022-11-03T14:55:04+00:00"
         },
         {
             "name": "surfnet/stepup-saml-bundle",
@@ -9911,7 +9911,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "surfnet/stepup-middleware-client-bundle": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
