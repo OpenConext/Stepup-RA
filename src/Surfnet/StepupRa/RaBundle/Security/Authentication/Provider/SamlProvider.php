@@ -95,7 +95,7 @@ class SamlProvider implements AuthenticationProviderInterface
         // if no credentials can be found, we're done.
         if (!$profile->isSraa && empty($profile->authorizations) && empty($profile->management)) {
             throw new UserNotRaException(
-                'The Identity is not registered as (S)RA(A) and therefor does not have access to this application'
+                'The Identity is not registered as (S)RA(A) and therefore does not have access to this application'
             );
         }
 
