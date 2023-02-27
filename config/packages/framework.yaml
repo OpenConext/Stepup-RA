@@ -1,5 +1,5 @@
 framework:
-  #esi:             ~
+  esi:             false
   translator:      { fallback: "%default_locale%" }
   secret:          "%secret%"
   form:            ~
@@ -15,5 +15,5 @@ framework:
     name: sess_ra
     cookie_httponly: true
     cookie_secure: true
-  fragments:       ~
+  fragments:       false
   http_method_override: true
