@@ -1,4 +1,19 @@
 # Changelog
+
+## 5.0.1..5.0.4
+- Display vetting types in institution overview #292
+- Correctly check if LoA is satisfied #293
+- Display the SSO 2FA feature toggle on the Institution configuration page on the RA #294
+- Upgrade dev (build) dependencies #297
+
+## 5.0.0
+**Self-asserted token registration**
+- Display recovery token data in audit log #287
+- Implement recovery tokens overview (search) page #285
+- Implement recovery token revocation #286
+- Manage the institution specific vetting type hints #290
+- Audit log: display timestamps in the local system timezone #284
+
 ## 4.3.6
 - Display forgotten Second Factor tokens and their audit logs #275 #277
 - Install security upgrades #276

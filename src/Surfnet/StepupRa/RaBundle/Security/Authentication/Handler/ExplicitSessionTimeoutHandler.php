@@ -115,7 +115,7 @@ class ExplicitSessionTimeoutHandler implements AuthenticationHandler
             $request = $event->getRequest();
 
             // if the current request was not a GET request we cannot safely redirect to that page after login as it
-            // may require a form resubmit for instance. Therefor, we redirect to the last GET request (either current
+            // may require a form resubmit for instance. Therefore, we redirect to the last GET request (either current
             // or previous).
             $afterLoginRedirectTo = $this->authenticatedSession->getCurrentRequestUri();
             if ($event->getRequest()->getMethod() === 'GET') {

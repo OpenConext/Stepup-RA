@@ -25,6 +25,8 @@
                 <tr>
                     <th scope="col">{{ knp_pagination_sortable(pagination, 'ra.auditlog.second_factor_identifier'|trans, 'secondFactorIdentifier') }}</th>
                     <th scope="col">{{ knp_pagination_sortable(pagination, 'ra.auditlog.second_factor_type'|trans, 'secondFactorType') }}</th>
+                    <th scope="col">{{ knp_pagination_sortable(pagination, 'ra.auditlog.recovery_token_identifier'|trans, 'recoveryTokenIdentifier') }}</th>
+                    <th scope="col">{{ knp_pagination_sortable(pagination, 'ra.auditlog.recovery_token_type'|trans, 'recoveryTokenType') }}</th>
                     <th scope="col">{{ 'ra.auditlog.event'|trans }}</th>
                     <th scope="col">{{ knp_pagination_sortable(pagination, 'ra.auditlog.when'|trans, 'recordedOn') }}</th>
                     <th scope="col">{{ knp_pagination_sortable(pagination, 'ra.auditlog.actor'|trans, 'actorCommonName') }}</th>
@@ -36,8 +38,10 @@
                 <tr>
                     <td>{{ logEntry.secondFactorIdentifier }}</td>
                     <td>{{ logEntry.secondFactorType|trans_second_factor_type }}</td>
+                    <td>{{ logEntry.recoveryTokenIdentifier|trans }}</td>
+                    <td>{{ logEntry.recoveryTokenType|trans }}</td>
                     <td>{{ ('ra.auditlog.action.' ~ logEntry.action)|trans({'%ra_institution%': logEntry.raInstitution}) }}</td>
-                    <td><time datetime="{{ logEntry.recordedOn.format('c') }}">{{ logEntry.recordedOn.format("Y-m-d H:i e") }}</time></td>
+                    <td><time datetime="{{ logEntry.recordedOn.format('c') }}">{{ logEntry.recordedOn|date }}</time></td>
                     <td>{{ logEntry.actorCommonName }}</td>
                     <td>{{ logEntry.actorInstitution }}</td>
                 </tr>

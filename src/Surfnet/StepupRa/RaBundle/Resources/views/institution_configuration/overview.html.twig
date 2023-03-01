@@ -33,6 +33,10 @@
                     <td>{{ configuration.verifyEmail ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
                 </tr>
                 <tr>
+                    <th>{{ 'ra.institution_configuration.sso_on_2fa'|trans }}</th>
+                    <td>{{ configuration.ssoOn2fa ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
+                </tr>
+                <tr>
                     <th>{{ 'ra.institution_configuration.allowed_second_factors'|trans }}</th>
                     <td>
                         {% if configuration.allowedSecondFactors is empty %}
@@ -83,6 +87,14 @@
                             {{ 'ra.institution_configuration.no_entries'|trans }}
                         {% endif %}
                     </td>
+                </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.allow_self_vet'|trans }}</th>
+                    <td>{{ configuration.selfVet ? 'ra.institution_configuration.allow'|trans : 'ra.institution_configuration.disallow'|trans }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.allow_self_assertedTokens'|trans }}</th>
+                    <td>{{ configuration.allowSelfAssertedTokens ? 'ra.institution_configuration.allow'|trans : 'ra.institution_configuration.disallow'|trans }}</td>
                 </tr>
                 </tbody>
             </table>
