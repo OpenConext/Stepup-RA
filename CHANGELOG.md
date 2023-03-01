@@ -1,4 +1,11 @@
 # Changelog
+
+## 5.0.1..5.0.4
+- Display vetting types in institution overview #292
+- Correctly check if LoA is satisfied #293
+- Display the SSO 2FA feature toggle on the Institution configuration page on the RA #294
+- Upgrade dev (build) dependencies #297
+
 ## 5.0.0
 **Self-asserted token registration**
 - Display recovery token data in audit log #287
