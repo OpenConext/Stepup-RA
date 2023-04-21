@@ -206,7 +206,7 @@
       </trans-unit>
       <trans-unit id="4c78999da0bb06ba34dc4110f9237678c54e28fc" resname="ra.auditlog.recovery_token_type">
         <source>ra.auditlog.recovery_token_type</source>
-        <target state="translated">Recoverymethod type</target>
+        <target state="translated">Recovery method type</target>
         <jms:reference-file line="29">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5e0d6e050bc563d5e4b8f419651120cd8f250825" resname="ra.auditlog.second_factor_identifier">
