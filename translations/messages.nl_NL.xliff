@@ -206,7 +206,7 @@
       </trans-unit>
       <trans-unit id="4c78999da0bb06ba34dc4110f9237678c54e28fc" resname="ra.auditlog.recovery_token_type">
         <source>ra.auditlog.recovery_token_type</source>
-        <target state="translated">[Recovery token] type</target>
+        <target state="translated">Type herstelmethode</target>
         <jms:reference-file line="29">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/second_factor/audit_log.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5e0d6e050bc563d5e4b8f419651120cd8f250825" resname="ra.auditlog.second_factor_identifier">
@@ -1150,12 +1150,12 @@
       </trans-unit>
       <trans-unit id="b09ca683a805b5073bdd6188d77f22f11325f337" resname="ra.recovery_token.revocation.could_not_revoke">
         <source>ra.recovery_token.revocation.could_not_revoke</source>
-        <target state="translated">Het verwijderen van het [recovery token] is mislukt. Probeer het opnieuw.</target>
+        <target state="translated">Het verwijderen van de herstelmethode is mislukt. Probeer het opnieuw.</target>
         <jms:reference-file line="83">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8e163db19be077e7d5a6052fe096579447ba5d4a" resname="ra.recovery_token.revocation.modal.are_you_sure">
         <source>ra.recovery_token.revocation.modal.are_you_sure</source>
-        <target state="translated">Weet je zeker dat je dit [recovery token] wilt verwijderen?</target>
+        <target state="translated">Weet je zeker dat je deze herstelmethode wilt verwijderen?</target>
         <jms:reference-file line="74">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="37fda4b797990b89ab361954f2cb6decb1bbbde9" resname="ra.recovery_token.revocation.modal.cancel">
@@ -1196,7 +1196,7 @@
       </trans-unit>
       <trans-unit id="5b90c3c6b43668a13efa9de6a75c8707c3b616be" resname="ra.recovery_token.revocation.revoked">
         <source>ra.recovery_token.revocation.revoked</source>
-        <target state="translated">Het verwijderen van het [recovery token] is gelukt.</target>
+        <target state="translated">Het verwijderen van de herstelmethode is gelukt.</target>
         <jms:reference-file line="82">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="6474eabdc0538bed02d0343f8119de538b8ca353" resname="ra.recovery_token.revoke">
@@ -1231,7 +1231,7 @@
       </trans-unit>
       <trans-unit id="7cd6e960fe366ea7f42a30e2b9f37e8a51a971b7" resname="ra.recovery_token.search.text.no_recovery_tokens">
         <source>ra.recovery_token.search.text.no_recovery_tokens</source>
-        <target state="translated">Er zijn geen [recovery tokens] gevonden</target>
+        <target state="translated">Er zijn geen herstelmethodes gevonden</target>
         <jms:reference-file line="60">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4292d16545d77ea6d0d8dcc6b51dc067b49d216b" resname="ra.recovery_token.search.text.number_of_recovery_tokens">
@@ -1241,7 +1241,7 @@
       </trans-unit>
       <trans-unit id="c6a8ca63fb65eca2a27a29e12c249f2426bf9bfa" resname="ra.recovery_token.search.title">
         <source>ra.recovery_token.search.title</source>
-        <target state="needs-l10n">[Recovery tokens]</target>
+        <target state="needs-l10n">Herstelmethodes</target>
         <jms:reference-file line="3">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/recovery_token/search.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f12e743e43bca49fe86f99db331ded47fb88f1da" resname="ra.registration.sms.text.otp_requests_remaining">
