@@ -1614,7 +1614,7 @@ Het token is nu geactiveerd en klaar voor gebruik.</target>
       </trans-unit>
       <trans-unit id="13411e66cc269e4b4517d14f54a8999680cb5a3e" resname="ra.vetting_type_hint.title">
         <source>ra.vetting_type_hint.title</source>
-        <target state="new">ra.vetting_type_hint.title</target>
+        <target state="translated">Activatie hulpteksten</target>
         <jms:reference-file line="3">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/vetting_type_hint/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="21ae742a4f478c0afe9accf5d448335bf530a4f9" resname="raa">
