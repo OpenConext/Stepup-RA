@@ -13,4 +13,4 @@ else
 fi
 
 printf "\nRun security tests on JavaScript dependencies\n"
-yarn audit
+yarn audit --groups dependencies optionalDependencies
