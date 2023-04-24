@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.0.5
+- Translate remaining [Recovery token] occurrences #303
+- Installed security updates for phpseclib/phpseclib and guzzlehttp/psr7
+
 ## 5.0.1..5.0.4
 - Display vetting types in institution overview #292
 - Correctly check if LoA is satisfied #293
