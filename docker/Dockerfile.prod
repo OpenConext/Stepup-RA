@@ -9,7 +9,7 @@ COPY config/legacy/samlstepupproviders_parameters.yaml.dist config/legacy/samlst
 
 # Add the config files for Apache2
 RUN rm -rf /etc/apache2/sites-enabled/*
-COPY ./docker/conf/apache2.conf /etc/apache2/sites-enabled/apache2.conf
+COPY ./docker/conf/ra-apache2.conf /etc/apache2/sites-enabled/ra.conf
 RUN rm -rf /var/www/html/var/cache/prod && chown -R www-data /var/www/html/var
 
 # Set the default workdir
