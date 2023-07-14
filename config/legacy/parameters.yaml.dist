@@ -39,9 +39,20 @@ parameters:
     enabled_second_factors:
         - sms
         - yubikey
+        - tiqr
+        - demo_gssp
+        - webauthn
+        - azuremfa
     enabled_generic_second_factors:
-            tiqr:
-                loa: 3
+        azuremfa:
+            loa: 2
+        tiqr:
+            loa: 2
+        webauthn:
+            loa: 3
+        demo_gssp:
+            loa: 3
+
     asset_version: 1
 
     stepup_loa_loa1: https://dev.openconext.local/authentication/loa1
