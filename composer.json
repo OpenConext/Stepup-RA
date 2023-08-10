@@ -24,7 +24,7 @@
         "sensio/framework-extra-bundle": "^5.5",
         "sensiolabs/security-checker": "^6.0",
         "surfnet/stepup-bundle": "^5.0",
-        "surfnet/stepup-middleware-client-bundle": "dev-feature/sso-2fa",
+        "surfnet/stepup-middleware-client-bundle": "^4.1",
         "surfnet/stepup-saml-bundle": "^4.3.2",
         "symfony/asset": "4.4.*",
         "symfony/expression-language": "4.4.*",
