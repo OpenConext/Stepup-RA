@@ -46,13 +46,3 @@ jobs:
             ghcr.io/openconext/stepup-ra/stepup-ra:prod
             ghcr.io/openconext/stepup-ra/stepup-ra:${{ github.sha }}
             ghcr.io/openconext/stepup-ra/stepup-ra:${{ steps.release.outputs.tag_name }}
-
-      - name: Build and push the Development image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: docker/Dockerfile.dev
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            ghcr.io/openconext/stepup-ra/stepup-ra:dev
