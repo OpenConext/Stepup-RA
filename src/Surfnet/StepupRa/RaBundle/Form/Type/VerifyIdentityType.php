@@ -35,7 +35,8 @@ class VerifyIdentityType extends AbstractType
                 'autofocus' => true,
                 'autocomplete' => 'off',
                 'maxlength' => 6,
-                'novalidate' => true,
+                'required' => true,
+                'pattern' => '[a-z0-9-]{6}',
             ]
         ]);
         $builder->add('identityVerified', CheckboxType::class, [
