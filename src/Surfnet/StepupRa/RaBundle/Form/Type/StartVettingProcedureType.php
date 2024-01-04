@@ -36,6 +36,7 @@ class StartVettingProcedureType extends AbstractType
                 'autocomplete' => 'off',
                 'placeholder' => 'ra.form.start_vetting_procedure.enter_activation_code_here',
                 'class' => 'fa-search',
+                'pattern' => '[a-z0-9]{8}',
             )
         ]);
         $builder->add('search', SubmitType::class, [
