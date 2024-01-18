@@ -1,0 +1,16 @@
+FROM ghcr.io/openconext/openconext-basecontainers/php72-apache2:latest AS php-build
+ADD output.tar /var/www/html/
+# Set the default workdir
+WORKDIR /var/www/html
+# Add the application configuration files
+COPY config/legacy/parameters.yaml.dist config/legacy/parameters.yaml
+COPY config/legacy/samlstepupproviders_parameters.yaml.dist config/legacy/samlstepupproviders_parameters.yaml
+COPY config/packages/prod/monolog.yaml.docker config/packages/prod/monolog.yaml
+# Add the config files for Apache2
+RUN rm -rf /etc/apache2/sites-enabled/*
+COPY ./docker/conf/ra-apache2.conf /etc/apache2/sites-enabled/ra.conf
+RUN rm -rf /var/www/html/var/cache/prod && \
+  mkdir /var/www/html/var && \
+  chown -R www-data /var/www/html/var
+
+CMD ["apache2-foreground"]
