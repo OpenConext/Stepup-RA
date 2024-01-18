@@ -53,42 +53,42 @@ class VettingService
         'Surfnet\Stepup\Exception\DomainException: Cannot vet second factor, the registration window is closed.';
 
     /**
-     * @var \Surfnet\StepupBundle\Service\SmsSecondFactorServiceInterface
+     * @var SmsSecondFactorServiceInterface
      */
     private $smsSecondFactorService;
 
     /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorService
+     * @var YubikeySecondFactorServiceInterface
      */
     private $yubikeySecondFactorService;
 
     /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\GssfService
+     * @var GssfService
      */
     private $gssfService;
 
     /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
+     * @var CommandService
      */
     private $commandService;
 
     /**
-     * @var \Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository
+     * @var VettingProcedureRepository
      */
     private $vettingProcedureRepository;
 
     /**
-     * @var \Symfony\Component\Translation\TranslatorInterface
+     * @var TranslatorInterface
      */
     private $translator;
 
     /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\IdentityService
+     * @var IdentityService
      */
     private $identityService;
 
     /**
-     * @var \Surfnet\StepupBundle\Service\SecondFactorTypeService
+     * @var SecondFactorTypeService
      */
     private $secondFactorTypeService;
 
@@ -102,7 +102,7 @@ class VettingService
      */
     public function __construct(
         SmsSecondFactorServiceInterface $smsSecondFactorService,
-        YubikeySecondFactorService $yubikeySecondFactorService,
+        YubikeySecondFactorServiceInterface $yubikeySecondFactorService,
         GssfService $gssfService,
         CommandService $commandService,
         VettingProcedureRepository $vettingProcedureRepository,

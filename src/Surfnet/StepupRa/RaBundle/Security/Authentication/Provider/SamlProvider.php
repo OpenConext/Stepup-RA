@@ -127,6 +127,7 @@ class SamlProvider implements AuthenticationProviderInterface
         $values = $translatedAssertion->getAttributeValue($attribute);
 
         if (empty($values)) {
+            // Moved to Stepup-bundle (6.0)
             throw new MissingRequiredAttributeException(
                 sprintf(
                     'Missing a required SAML attribute. This application requires the "%s" attribute to function.',
@@ -154,7 +155,7 @@ class SamlProvider implements AuthenticationProviderInterface
             );
 
             $this->logger->warning($message);
-
+            // Moved to Stepup-bundle (6.0)
             throw new MissingRequiredAttributeException($message);
         }
 

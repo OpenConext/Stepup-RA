@@ -25,7 +25,7 @@ use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyOtpCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult;
 
-class YubikeySecondFactorService
+class YubikeySecondFactorService implements YubikeySecondFactorServiceInterface
 {
     /**
      * @var YubikeyService
@@ -47,11 +47,7 @@ class YubikeySecondFactorService
         $this->logger = $logger;
     }
 
-    /**
-     * @param VerifyYubikeyPublicIdCommand $command
-     * @return VerificationResult
-     */
-    public function verifyYubikeyPublicId(VerifyYubikeyPublicIdCommand $command)
+    public function verifyYubikeyPublicId(VerifyYubikeyPublicIdCommand $command): VerificationResult
     {
         $verifyOtpCommand = new VerifyYubikeyOtpCommand();
         $verifyOtpCommand->otp = $command->otp;
