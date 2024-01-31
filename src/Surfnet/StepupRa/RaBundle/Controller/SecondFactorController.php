@@ -26,7 +26,7 @@ use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchSecondFactorAuditLogCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -35,7 +35,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects) By making the Form Type classes explicit, MD now realizes couping
  *                                                 is to high.
  */
-final class SecondFactorController extends Controller
+final class SecondFactorController extends AbstractController
 {
     /**
      * @Template
@@ -44,7 +44,7 @@ final class SecondFactorController extends Controller
      */
     public function searchAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $identity = $this->getCurrentUser();
         $this->get('logger')->notice('Starting search for second factors');
@@ -62,7 +62,7 @@ final class SecondFactorController extends Controller
 
         $form = $this->createForm(SearchRaSecondFactorsType::class, $command, [
             'method' => 'get',
-            'enable_export_button' => $this->isGranted(['ROLE_RAA']),
+            'enable_export_button' => $this->isGranted('ROLE_RAA'),
         ]);
         $form->handleRequest($request);
 
@@ -102,7 +102,7 @@ final class SecondFactorController extends Controller
 
     public function exportAction(SearchRaSecondFactorsCommand $command)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA']);
+        $this->denyAccessUnlessGranted('ROLE_RAA');
 
         $this->get('logger')->notice('Starting export of searched second factors');
 
@@ -117,7 +117,7 @@ final class SecondFactorController extends Controller
      */
     public function revokeAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $logger = $this->get('logger');
 
@@ -157,7 +157,7 @@ final class SecondFactorController extends Controller
      */
     public function auditLogAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
         $logger = $this->get('logger');
 
         $identityId = $request->get('identityId');

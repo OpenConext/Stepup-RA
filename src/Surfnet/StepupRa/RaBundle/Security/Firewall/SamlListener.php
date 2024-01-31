@@ -22,41 +22,22 @@ use Exception;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Handler\AuthenticationHandler;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SamlInteractionProvider;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Http\Firewall\ListenerInterface;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class SamlListener implements ListenerInterface
+class SamlListener
 {
-    /**
-     * @var AuthenticationHandler
-     */
-    private $authenticationHandler;
-
-    /**
-     * @var SamlInteractionProvider
-     */
-    private $samlInteractionProvider;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        AuthenticationHandler $authenticationHandler,
-        SamlInteractionProvider $samlInteractionProvider,
-        LoggerInterface $logger
+        private readonly AuthenticationHandler   $authenticationHandler,
+        private readonly SamlInteractionProvider $samlInteractionProvider,
+        private readonly LoggerInterface         $logger
     ) {
-        $this->authenticationHandler = $authenticationHandler;
-        $this->samlInteractionProvider = $samlInteractionProvider;
-        $this->logger = $logger;
     }
 
-    public function handle(GetResponseEvent $event)
+    public function __invoke(RequestEvent $event): void
     {
         try {
             $this->authenticationHandler->process($event);

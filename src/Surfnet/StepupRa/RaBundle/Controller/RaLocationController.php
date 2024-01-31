@@ -29,7 +29,7 @@ use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaLocationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RemoveRaLocationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,7 +39,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects) By making the Form Type classes explicit, MD now realizes couping
  *                                                 is to high.
  */
-final class RaLocationController extends Controller
+final class RaLocationController extends AbstractController
 {
     /**
      * @Template
@@ -48,7 +48,7 @@ final class RaLocationController extends Controller
      */
     public function manageAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $institutionParameter = $request->get('institution');
 
@@ -111,7 +111,7 @@ final class RaLocationController extends Controller
 
     public function createAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
         $logger = $this->get('logger');
 
         $institution = $request->get('institution');
@@ -149,7 +149,7 @@ final class RaLocationController extends Controller
 
     public function changeAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
         $logger = $this->get('logger');
 
         $requestedLocationId = $request->get('locationId');
@@ -202,7 +202,7 @@ final class RaLocationController extends Controller
      */
     public function removeAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $logger = $this->get('logger');
 

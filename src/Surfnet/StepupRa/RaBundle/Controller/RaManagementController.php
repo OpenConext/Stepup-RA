@@ -31,22 +31,24 @@ use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaListingType;
 use Surfnet\StepupRa\RaBundle\Service\RaListingService;
 use Surfnet\StepupRa\RaBundle\Value\RoleAtInstitution;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class RaManagementController extends Controller
+class RaManagementController extends AbstractController
 {
     /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    public function manageAction(Request $request)
+    public function manageAction(Request $request): Response
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+        $this->denyAccessUnlessGranted('ROLE_RAA');
+        $this->denyAccessUnlessGranted('ROLE_SRAA');
 
         $logger = $this->get('logger');
         $institution = $this->getUser()->institution;
@@ -100,11 +102,12 @@ class RaManagementController extends Controller
 
     /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function raCandidateSearchAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+        $this->denyAccessUnlessGranted('ROLE_RAA');
+        $this->denyAccessUnlessGranted('ROLE_SRAA');
 
         $logger = $this->get('logger');
         $identity = $this->getCurrentUser();
@@ -157,11 +160,12 @@ class RaManagementController extends Controller
 
     /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function createRaAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+        $this->denyAccessUnlessGranted('ROLE_RAA');
+        $this->denyAccessUnlessGranted('ROLE_SRAA');
         $logger = $this->get('logger');
 
         $logger->notice('Page for Accreditation of Identity to Ra or Raa requested');
@@ -216,11 +220,12 @@ class RaManagementController extends Controller
      * @param Request $request
      * @param         $identityId
      * @param         $raInstitution
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function amendRaInformationAction(Request $request, $identityId, $raInstitution)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+        $this->denyAccessUnlessGranted('ROLE_RAA');
+        $this->denyAccessUnlessGranted('ROLE_SRAA');
 
         $logger = $this->get('logger');
         $logger->notice(sprintf("Loading information amendment form for RA(A) '%s'", $identityId));
@@ -263,11 +268,12 @@ class RaManagementController extends Controller
      * @param Request $request
      * @param         $identityId
      * @param         $raInstitution
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
     public function retractRegistrationAuthorityAction(Request $request, $identityId, $raInstitution)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+        $this->denyAccessUnlessGranted('ROLE_RAA');
+        $this->denyAccessUnlessGranted('ROLE_SRAA');
         $logger = $this->get('logger');
 
         $logger->notice(sprintf("Loading retract registration authority form for RA(A) '%s'", $identityId));

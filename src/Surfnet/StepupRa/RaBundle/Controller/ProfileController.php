@@ -19,9 +19,9 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-final class ProfileController extends Controller
+final class ProfileController extends AbstractController
 {
     public function profileAction()
     {

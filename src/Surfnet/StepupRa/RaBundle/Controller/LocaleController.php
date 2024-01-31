@@ -21,12 +21,12 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupBundle\Command\SwitchLocaleCommand;
 use Surfnet\StepupBundle\Form\Type\SwitchLocaleType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-final class LocaleController extends Controller
+final class LocaleController extends AbstractController
 {
     public function switchLocaleAction(Request $request)
     {

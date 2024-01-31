@@ -39,7 +39,7 @@ class YubikeyController extends SecondFactorController
     {
         $this->assertSecondFactorEnabled('yubikey');
 
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
         $logger->notice('Requested Yubikey Verfication');

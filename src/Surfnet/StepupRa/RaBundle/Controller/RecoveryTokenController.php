@@ -28,13 +28,13 @@ use Surfnet\StepupRa\RaBundle\Form\Type\RevokeRecoveryTokenType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRecoveryTokensType;
 use Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-final class RecoveryTokenController extends Controller
+final class RecoveryTokenController extends AbstractController
 {
     /**
      * @var RecoveryTokenService
@@ -68,7 +68,7 @@ final class RecoveryTokenController extends Controller
 
     public function searchAction(Request $request): Response
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $identity = $this->getCurrentUser();
         $this->get('logger')->notice('Starting search for recovery tokens');
@@ -122,7 +122,7 @@ final class RecoveryTokenController extends Controller
 
     public function revokeAction(Request $request): RedirectResponse
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $this->logger->notice('Received request to revoke recovery token');
 

@@ -18,9 +18,9 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-abstract class SecondFactorController extends Controller
+abstract class SecondFactorController extends AbstractController
 {
     /**
      * @param string $type

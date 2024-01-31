@@ -27,10 +27,11 @@ use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionListingService;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Surfnet\StepupRa\RaBundle\Service\VettingTypeHintService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-class VettingTypeHintController extends Controller
+class VettingTypeHintController extends AbstractController
 {
     /**
      * @var LoggerInterface
@@ -74,9 +75,10 @@ class VettingTypeHintController extends Controller
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity) Given the two forms being handled in this action, cc is higher.
      */
-    public function vettingTypeHintAction(Request $request)
+    public function vettingTypeHintAction(Request $request): Response
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+        $this->denyAccessUnlessGranted('ROLE_RAA');
+        $this->denyAccessUnlessGranted('ROLE_SRAA');
 
         /** @var Identity $identity */
         $identity = $this->getUser();

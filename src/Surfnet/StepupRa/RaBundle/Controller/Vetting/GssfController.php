@@ -49,7 +49,7 @@ final class GssfController extends SecondFactorController
     {
         $this->assertSecondFactorEnabled($provider);
 
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
         $logger->notice('Showing Initiate GSSF Verification Screen', ['provider' => $provider]);
@@ -71,7 +71,7 @@ final class GssfController extends SecondFactorController
     {
         $this->assertSecondFactorEnabled($provider);
 
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
         $logger->notice('Generating GSSF verification request', ['provider' => $provider]);

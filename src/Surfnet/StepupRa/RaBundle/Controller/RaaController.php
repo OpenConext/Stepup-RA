@@ -24,14 +24,15 @@ use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-class RaaController extends Controller
+class RaaController extends AbstractController
 {
     public function institutionConfigurationAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+        $this->denyAccessUnlessGranted('ROLE_RAA');
+        $this->denyAccessUnlessGranted('ROLE_SRAA');
 
         $logger = $this->get('logger');
         /** @var Identity $identity */

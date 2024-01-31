@@ -31,22 +31,22 @@ ra_location_remove:
 ra_second_factors_search:
     path:     /second-factors
     methods: [GET, POST]
-    defaults: { _controller: SurfnetStepupRaRaBundle:SecondFactor:search }
+    defaults: { _controller: Surfnet\StepupRa\RaBundle\Controller\SecondFactorController::searchAction}
 
 ra_second_factor_revoke:
     path:     /second-factors/revoke
     methods:  [POST]
-    defaults: { _controller: SurfnetStepupRaRaBundle:SecondFactor:revoke }
+    defaults: { _controller: Surfnet\StepupRa\RaBundle\Controller\SecondFactorController::revokeAction }
 
 ra_second_factor_auditlog:
     path:     /second-factors/{identityId}/auditlog
     methods:  [GET]
-    defaults: { _controller: SurfnetStepupRaRaBundle:SecondFactor:auditLog }
+    defaults: { _controller: Surfnet\StepupRa\RaBundle\Controller\SecondFactorController::auditLogAction }
 
 ra_recovery_tokens_search:
     path:     /recovery-tokens
     methods: [GET, POST]
-    defaults: { _controller: SurfnetStepupRaRaBundle:RecoveryToken:search }
+    defaults: { _controller: Surfnet\StepupRa\RaBundle\Controller\RecoveryTokenController::searchAction }
 
 ra_recovery_tokens_revoke:
     path:     /recovery-tokens/revoke
@@ -116,7 +116,7 @@ ra_vetting_completed:
 ra_management_manage:
     path:     /management/ra
     methods:  [GET]
-    defaults: { _controller: SurfnetStepupRaRaBundle:RaManagement:manage }
+    defaults: { _controller: Surfnet\StepupRa\RaBundle\Controller\RaManagementController::manageAction }
 
 ra_management_ra_candidate_search:
     path:     /management/search-ra-candidate
