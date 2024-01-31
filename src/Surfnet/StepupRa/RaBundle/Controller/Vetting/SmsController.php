@@ -44,7 +44,7 @@ class SmsController extends SecondFactorController
     {
         $this->assertSecondFactorEnabled('sms');
 
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
         $logger->notice('Received request for Send SMS Challenge page');
@@ -108,7 +108,7 @@ class SmsController extends SecondFactorController
     public function provePossessionAction(Request $request, $procedureId)
     {
         $this->assertSecondFactorEnabled('sms');
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
 
         $logger->notice('Received request for Proof of Possession of SMS Second Factor page');

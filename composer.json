@@ -16,10 +16,10 @@
         "fortawesome/font-awesome": "~4.2.0",
         "guzzlehttp/guzzle": "^6",
         "incenteev/composer-parameter-handler": "~2.0",
-        "jms/translation-bundle": "^1.5",
-        "knplabs/knp-paginator-bundle": "^5.0",
-        "nelmio/security-bundle": "2.9.*",
-        "openconext/monitor-bundle": "^2.0",
+        "jms/translation-bundle": "^2.1",
+        "knplabs/knp-paginator-bundle": "^5.9",
+        "nelmio/security-bundle": "^2.12",
+        "openconext/monitor-bundle": "^3.0",
         "ramsey/uuid": "^3.5",
         "sensio/framework-extra-bundle": "^5.5",
         "sensiolabs/security-checker": "^6.0",
@@ -29,18 +29,18 @@
         "symfony/asset": "4.4.*",
         "symfony/expression-language": "4.4.*",
         "symfony/flex": "^v2.4.3",
-        "symfony/form": "4.4.*",
+        "symfony/form": "4.4.* || ^5.1",
         "symfony/http-foundation": "^5.0",
         "symfony/monolog-bundle": "^3.5",
         "symfony/security-bundle": "4.4.*",
         "symfony/translation": "4.4.*",
-        "symfony/twig-bundle": "4.4.*",
+        "symfony/twig-bundle": "4.4.* |^5.1",
         "symfony/validator": "4.4.*",
         "symfony/webpack-encore-bundle": "^1.7",
         "twbs/bootstrap": "~3.3.0",
         "twig/extensions": "~1.5",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12"
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.0",
@@ -117,13 +117,13 @@
         "optimize-autoloader": true,
         "sort-packages": true,
         "platform": {
-            "php": "7.2.5"
+            "php": "8.2.5"
         }
     },
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.4.*"
+            "require": "4.4.* || ^5.0"
         },
         "symfony-app-dir": "app",
         "symfony-var-dir": "var",

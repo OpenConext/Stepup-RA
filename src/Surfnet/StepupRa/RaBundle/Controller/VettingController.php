@@ -30,7 +30,7 @@ use Surfnet\StepupRa\RaBundle\Form\Type\VerifyIdentityType;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +41,7 @@ use Symfony\Component\Translation\TranslatorInterface;
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
  */
-class VettingController extends Controller
+class VettingController extends AbstractController
 {
     /**
      * @Template
@@ -53,7 +53,7 @@ class VettingController extends Controller
      */
     public function startProcedureAction(Request $request)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
         $logger = $this->get('logger');
         $identity = $this->getIdentity();
 
@@ -192,7 +192,7 @@ class VettingController extends Controller
      */
     public function verifyIdentityAction(Request $request, $procedureId)
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
         $logger->notice('Verify Identity Form requested');

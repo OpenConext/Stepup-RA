@@ -18,10 +18,10 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-class SecurityController extends Controller
+class SecurityController extends AbstractController
 {
     public function sessionExpiredAction(Request $request)
     {
