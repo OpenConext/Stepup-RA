@@ -48,7 +48,7 @@ class RaManagementController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
 
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
         $institution = $this->getUser()->institution;
         $logger->notice(sprintf('Loading overview of RA(A)s for institution "%s"', $institution));
 
@@ -103,7 +103,7 @@ class RaManagementController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
 
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
         $identity = $this->getCurrentUser();
         $institution = $identity->institution;
 
@@ -156,7 +156,7 @@ class RaManagementController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
 
         $logger->notice('Page for Accreditation of Identity to Ra or Raa requested');
         $identityId = $request->get('identityId');
@@ -187,7 +187,7 @@ class RaManagementController extends AbstractController
             if ($success) {
                 $this->addFlash(
                     'success',
-                    $this->get('translator')->trans('ra.management.create_ra.identity_accredited'),
+                    $this->container->get('translator')->trans('ra.management.create_ra.identity_accredited'),
                 );
 
                 $logger->debug('Identity Accredited, redirecting to candidate overview');
@@ -213,7 +213,7 @@ class RaManagementController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
 
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
         $logger->notice(sprintf("Loading information amendment form for RA(A) '%s'", $identityId));
 
         $raListing = $this->getRaListingService()->get($identityId, $raInstitution, $this->getUser()->id);
@@ -233,8 +233,8 @@ class RaManagementController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $logger->notice(sprintf("RA(A) '%s' information amendment form submitted, processing", $identityId));
 
-            if ($this->get('ra.service.ra')->amendRegistrationAuthorityInformation($command)) {
-                $this->addFlash('success', $this->get('translator')->trans('ra.management.amend_ra_info.info_amended'));
+            if ($this->container->get('ra.service.ra')->amendRegistrationAuthorityInformation($command)) {
+                $this->addFlash('success', $this->container->get('translator')->trans('ra.management.amend_ra_info.info_amended'));
 
                 $logger->notice(sprintf("RA(A) '%s' information successfully amended", $identityId));
                 return $this->redirectToRoute('ra_management_manage');
@@ -259,7 +259,7 @@ class RaManagementController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
 
         $logger->notice(sprintf("Loading retract registration authority form for RA(A) '%s'", $identityId));
 
@@ -282,10 +282,10 @@ class RaManagementController extends AbstractController
 
             $logger->notice(sprintf('Confirmed retraction of RA credentials for identity "%s"', $identityId));
 
-            if ($this->get('ra.service.ra')->retractRegistrationAuthority($command)) {
+            if ($this->container->get('ra.service.ra')->retractRegistrationAuthority($command)) {
                 $logger->notice(sprintf('Registration authority for identity "%s" retracted', $identityId));
 
-                $this->addFlash('success', $this->get('translator')->trans('ra.management.retract_ra.success'));
+                $this->addFlash('success', $this->container->get('translator')->trans('ra.management.retract_ra.success'));
                 return $this->redirectToRoute('ra_management_manage');
             }
 
@@ -307,7 +307,7 @@ class RaManagementController extends AbstractController
      */
     private function getRaListingService()
     {
-        return $this->get('ra.service.ra_listing');
+        return $this->container->get('ra.service.ra_listing');
     }
 
     /**
@@ -315,7 +315,7 @@ class RaManagementController extends AbstractController
      */
     private function getRaCandidateService()
     {
-        return $this->get('ra.service.ra_candidate');
+        return $this->container->get('ra.service.ra_candidate');
     }
 
     /**
@@ -323,7 +323,7 @@ class RaManagementController extends AbstractController
      */
     private function getCurrentUser()
     {
-        return $this->get('security.token_storage')->getToken()->getUser();
+        return $this->container->get('security.token_storage')->getToken()->getUser();
     }
 
     /**
@@ -331,6 +331,6 @@ class RaManagementController extends AbstractController
      */
     private function getPaginator()
     {
-        return $this->get('knp_paginator');
+        return $this->container->get('knp_paginator');
     }
 }

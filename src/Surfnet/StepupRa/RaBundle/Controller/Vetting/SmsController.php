@@ -45,7 +45,7 @@ class SmsController extends SecondFactorController
 
         $this->denyAccessUnlessGranted('ROLE_RA');
 
-        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
+        $logger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
         $logger->notice('Received request for Send SMS Challenge page');
 
         if (!$this->getVettingService()->hasProcedure($procedureId)) {
@@ -107,7 +107,7 @@ class SmsController extends SecondFactorController
     {
         $this->assertSecondFactorEnabled('sms');
         $this->denyAccessUnlessGranted('ROLE_RA');
-        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
+        $logger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
 
         $logger->notice('Received request for Proof of Possession of SMS Second Factor page');
         $vettingService = $this->getVettingService();
@@ -122,7 +122,7 @@ class SmsController extends SecondFactorController
         if ($cancelButton->isClicked()) {
             $vettingService->cancelProcedure($procedureId);
 
-            $this->addFlash('info', $this->get('translator')->trans('ra.vetting.flash.cancelled'));
+            $this->addFlash('info', $this->container->get('translator')->trans('ra.vetting.flash.cancelled'));
 
             return $this->redirectToRoute('ra_vetting_search');
         }
@@ -162,6 +162,6 @@ class SmsController extends SecondFactorController
      */
     private function getVettingService()
     {
-        return $this->get('ra.service.vetting');
+        return $this->container->get('ra.service.vetting');
     }
 }

@@ -25,7 +25,7 @@ final class ProfileController extends AbstractController
 {
     public function profile()
     {
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
 
         $logger->notice('Opening profile page');
 
@@ -39,6 +39,6 @@ final class ProfileController extends AbstractController
      */
     private function getProfileService()
     {
-        return $this->get('ra.service.profile');
+        return $this->container->get('ra.service.profile');
     }
 }
