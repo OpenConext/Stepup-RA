@@ -25,22 +25,15 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class SessionVettingProcedureRepository implements VettingProcedureRepository
 {
     /**
-     * @var SessionInterface
-     */
-    private $session;
-
-    /**
      * @var string
      */
     private $namespace;
 
-    public function __construct(SessionInterface $session, $namespace)
+    public function __construct(private readonly SessionInterface $session, $namespace)
     {
         if (!is_string($namespace)) {
             throw InvalidArgumentException::invalidType('string', 'namespace', $namespace);
         }
-
-        $this->session = $session;
         $this->namespace = $namespace;
     }
 

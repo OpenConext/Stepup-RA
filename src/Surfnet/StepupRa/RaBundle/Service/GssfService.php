@@ -21,16 +21,10 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
 
-final class GssfService
+final readonly class GssfService
 {
-    /**
-     * @var \Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface
-     */
-    private $state;
-
-    public function __construct(AttributeBagInterface $state)
+    public function __construct(private AttributeBagInterface $state)
     {
-        $this->state = $state;
     }
 
     /**

@@ -28,7 +28,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VettingTypeHintType extends AbstractType
 {
-    public const HINT_TEXTAREA_NAME_PREFIX = 'vetting_type_hint_';
+    final public const HINT_TEXTAREA_NAME_PREFIX = 'vetting_type_hint_';
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -40,13 +40,13 @@ class VettingTypeHintType extends AbstractType
                     [
                         'label' => $locale,
                         'required' => false,
-                    ]
+                    ],
                 );
         }
         $builder
             ->add(
                 'institution',
-                HiddenType::class
+                HiddenType::class,
             )
             ->add(
                 'continue',
@@ -54,7 +54,7 @@ class VettingTypeHintType extends AbstractType
                 [
                     'label' => 'ra.form.vetting_type_hint.button.continue',
                     'attr' => ['class' => 'btn btn-primary pull-right'],
-                ]
+                ],
             );
     }
 
@@ -63,7 +63,7 @@ class VettingTypeHintType extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => VettingTypeHintCommand::class,
-            ]
+            ],
         );
     }
 

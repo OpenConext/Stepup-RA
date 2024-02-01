@@ -24,19 +24,13 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 class InconsistentStateListener
 {
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    public function __construct(LoggerInterface $logger)
+    public function __construct(private readonly LoggerInterface $logger)
     {
-        $this->logger = $logger;
     }
 
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        $exception = $event->getException();
+        $exception = $event->getThrowable();
 
         if (!$exception instanceof InconsistentStateException) {
             return;
@@ -44,7 +38,7 @@ class InconsistentStateListener
 
         $this->logger->critical(
             sprintf('An inconsistent state has been reached: "%s"', $exception->getMessage()),
-            ['exception' => $exception]
+            ['exception' => $exception],
         );
     }
 }

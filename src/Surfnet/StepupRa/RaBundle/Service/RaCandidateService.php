@@ -35,40 +35,15 @@ use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
  */
 class RaCandidateService
 {
-    /**
-     * @var \Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaCandidateService
-     */
-    private $apiRaCandidateService;
-
-    /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @var SecondFactorTypeService
-     */
-    private $secondFactorTypeService;
-
     public function __construct(
-        ApiRaCandidateService $raCandidateService,
-        CommandService $commandService,
-        LoggerInterface $logger,
-        SecondFactorTypeService $secondFactorTypeService
+        private readonly ApiRaCandidateService $apiRaCandidateService,
+        private readonly CommandService $commandService,
+        private readonly LoggerInterface $logger,
+        private readonly SecondFactorTypeService $secondFactorTypeService,
     ) {
-        $this->apiRaCandidateService = $raCandidateService;
-        $this->commandService = $commandService;
-        $this->logger = $logger;
-        $this->secondFactorTypeService = $secondFactorTypeService;
     }
 
     /**
-     * @param SearchRaCandidatesCommand $command
      * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateCollection
      */
     public function search(SearchRaCandidatesCommand $command)
@@ -142,8 +117,8 @@ class RaCandidateService
                     $apiCommand->institution,
                     $apiCommand->raInstitution,
                     $apiCommand->role,
-                    implode(", ", $result->getErrors())
-                )
+                    implode(", ", $result->getErrors()),
+                ),
             );
         }
 
@@ -163,9 +138,9 @@ class RaCandidateService
                 return $this->secondFactorTypeService->canSatisfy(
                     $secondFactorType,
                     $loa3,
-                    new VettingType(VettingType::TYPE_ON_PREMISE)
+                    new VettingType(VettingType::TYPE_ON_PREMISE),
                 );
-            }
+            },
         );
     }
 }

@@ -31,34 +31,12 @@ class AuthenticatedUserHandler implements AuthenticationHandler
      */
     private $nextHandler;
 
-    /**
-     * @var TokenStorageInterface
-     */
-    private $tokenStorage;
-
-    /**
-     * @var AuthenticatedSessionStateHandler
-     */
-    private $sessionStateHandler;
-    /**
-     * @var SessionLifetimeGuard
-     */
-    private $sessionLifetimeGuard;
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        TokenStorageInterface $tokenStorage,
-        SessionLifetimeGuard $sessionLifetimeGuard,
-        AuthenticatedSessionStateHandler $sessionStateHandler,
-        LoggerInterface $logger
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly SessionLifetimeGuard $sessionLifetimeGuard,
+        private readonly AuthenticatedSessionStateHandler $sessionStateHandler,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->tokenStorage         = $tokenStorage;
-        $this->sessionLifetimeGuard = $sessionLifetimeGuard;
-        $this->sessionStateHandler  = $sessionStateHandler;
-        $this->logger               = $logger;
     }
 
     public function process(GetResponseEvent $event)

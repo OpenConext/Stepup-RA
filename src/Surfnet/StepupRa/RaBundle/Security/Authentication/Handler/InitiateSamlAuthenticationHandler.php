@@ -34,57 +34,15 @@ class InitiateSamlAuthenticationHandler implements AuthenticationHandler
      */
     private $nextHandler;
 
-    /**
-     * @var TokenStorageInterface
-     */
-    private $tokenStorage;
-
-    /**
-     * @var AuthenticatedSessionStateHandler
-     */
-    private $authenticatedSession;
-
-    /**
-     * @var SamlAuthenticationStateHandler
-     */
-    private $samlAuthenticationStateHandler;
-
-    /**
-     * @var SamlInteractionProvider
-     */
-    private $samlInteractionProvider;
-
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
-    /**
-     * @var SamlAuthenticationLogger
-     */
-    private $authenticationLogger;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        TokenStorageInterface $tokenStorageInterface,
-        AuthenticatedSessionStateHandler $authenticatedSession,
-        SamlAuthenticationStateHandler $samlAuthenticationStateHandler,
-        SamlInteractionProvider $samlInteractionProvider,
-        RouterInterface $router,
-        SamlAuthenticationLogger $authenticationLogger,
-        LoggerInterface $logger
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly AuthenticatedSessionStateHandler $authenticatedSession,
+        private readonly SamlAuthenticationStateHandler $samlAuthenticationStateHandler,
+        private readonly SamlInteractionProvider $samlInteractionProvider,
+        private readonly RouterInterface $router,
+        private readonly SamlAuthenticationLogger $authenticationLogger,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->tokenStorage                   = $tokenStorageInterface;
-        $this->authenticatedSession           = $authenticatedSession;
-        $this->samlAuthenticationStateHandler = $samlAuthenticationStateHandler;
-        $this->samlInteractionProvider        = $samlInteractionProvider;
-        $this->router                         = $router;
-        $this->authenticationLogger           = $authenticationLogger;
-        $this->logger                         = $logger;
     }
 
     public function process(GetResponseEvent $event)
@@ -103,7 +61,7 @@ class InitiateSamlAuthenticationHandler implements AuthenticationHandler
             $this->logger->notice(
                 'No authenticated user, a AuthnRequest was sent, but the current request is not a POST to our ACS '
                 . 'thus we assume the user attempts to access the application again (possibly after a browser '
-                . 'prefetch). Resetting the login state so that a new AuthnRequest can be sent.'
+                . 'prefetch). Resetting the login state so that a new AuthnRequest can be sent.',
             );
 
             $this->samlInteractionProvider->reset();
@@ -118,7 +76,7 @@ class InitiateSamlAuthenticationHandler implements AuthenticationHandler
             $event->setResponse($this->samlInteractionProvider->initiateSamlRequest());
 
             $logger = $this->authenticationLogger->forAuthentication(
-                $this->samlAuthenticationStateHandler->getRequestId()
+                $this->samlAuthenticationStateHandler->getRequestId(),
             );
             $logger->notice('Sending AuthnRequest');
 

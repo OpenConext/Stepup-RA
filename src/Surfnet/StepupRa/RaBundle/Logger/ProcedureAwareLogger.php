@@ -32,14 +32,8 @@ final class ProcedureAwareLogger implements LoggerInterface
      */
     private $procedure;
 
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    public function __construct(LoggerInterface $logger)
+    public function __construct(private readonly LoggerInterface $logger)
     {
-        $this->logger = $logger;
     }
 
     public function forProcedure($procedure)
@@ -103,7 +97,6 @@ final class ProcedureAwareLogger implements LoggerInterface
     /**
      * Adds the procedure to the log context.
      *
-     * @param array $context
      * @return array
      * @throws RuntimeException
      */

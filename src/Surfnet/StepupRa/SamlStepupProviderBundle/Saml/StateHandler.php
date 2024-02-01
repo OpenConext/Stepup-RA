@@ -24,19 +24,10 @@ use Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag;
 final class StateHandler
 {
     /**
-     * @var string
+     * @param string $provider
      */
-    private $provider;
-
-    /**
-     * @var NamespacedAttributeBag
-     */
-    private $attributeBag;
-
-    public function __construct(NamespacedAttributeBag $attributeBag, $provider)
+    public function __construct(private readonly NamespacedAttributeBag $attributeBag, private $provider)
     {
-        $this->attributeBag = $attributeBag;
-        $this->provider = $provider;
     }
 
     /**

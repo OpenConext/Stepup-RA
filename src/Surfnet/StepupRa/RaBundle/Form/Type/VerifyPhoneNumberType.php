@@ -23,6 +23,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
 
 class VerifyPhoneNumberType extends AbstractType
 {
@@ -31,9 +32,7 @@ class VerifyPhoneNumberType extends AbstractType
         $builder->add('challenge', TextType::class, [
             'label' => 'ra.form.ra_verify_phone_number.text.challenge',
             'required' => true,
-            'attr' => array(
-                'autofocus' => true,
-            ),
+            'attr' => ['autofocus' => true],
         ]);
         $builder->add('verifyChallenge', SubmitType::class, [
             'label' => 'ra.form.ra_verify_phone_number.button.verify_challenge',
@@ -54,7 +53,7 @@ class VerifyPhoneNumberType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand',
+            'data_class' => VerifyPossessionOfPhoneCommand::class,
             'procedureId' => null,
         ]);
 

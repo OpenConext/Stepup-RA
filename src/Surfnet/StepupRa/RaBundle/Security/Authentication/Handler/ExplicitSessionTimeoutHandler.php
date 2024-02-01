@@ -38,56 +38,15 @@ class ExplicitSessionTimeoutHandler implements AuthenticationHandler
      */
     private $nextHandler;
 
-    /**
-     * @var TokenStorageInterface
-     */
-    private $tokenStorage;
-
-    /**
-     * @var SessionLifetimeGuard
-     */
-    private $sessionLifetimeGuard;
-
-    /**
-     * @var AuthenticatedSessionStateHandler
-     */
-    private $authenticatedSession;
-
-    /**
-     * @var SessionLogoutHandler
-     */
-    private $sessionLogoutHandler;
-
-    /**
-     * @var CookieClearingLogoutHandler
-     */
-    private $cookieClearingLogoutHandler;
-
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        TokenStorageInterface $tokenStorageInterface,
-        AuthenticatedSessionStateHandler $authenticatedSessionStateHandler,
-        SessionLifetimeGuard $sessionLifetimeGuard,
-        SessionLogoutHandler $sessionLogoutHandler,
-        CookieClearingLogoutHandler $cookieClearingLogoutHandler,
-        RouterInterface $router,
-        LoggerInterface $logger
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly AuthenticatedSessionStateHandler $authenticatedSession,
+        private readonly SessionLifetimeGuard $sessionLifetimeGuard,
+        private readonly SessionLogoutHandler $sessionLogoutHandler,
+        private readonly CookieClearingLogoutHandler $cookieClearingLogoutHandler,
+        private readonly RouterInterface $router,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->tokenStorage                = $tokenStorageInterface;
-        $this->authenticatedSession        = $authenticatedSessionStateHandler;
-        $this->sessionLifetimeGuard        = $sessionLifetimeGuard;
-        $this->sessionLogoutHandler        = $sessionLogoutHandler;
-        $this->cookieClearingLogoutHandler = $cookieClearingLogoutHandler;
-        $this->router                      = $router;
-        $this->logger                      = $logger;
     }
 
     public function process(GetResponseEvent $event)
@@ -107,7 +66,7 @@ class ExplicitSessionTimeoutHandler implements AuthenticationHandler
             $this->logger->notice(sprintf(
                 'Authenticated user found, but session was determined to be outside of the "%s" time limit. User will '
                 . 'be logged out and redirected to session-expired page to attempt new login.',
-                implode(' and ', $invalidatedBy)
+                implode(' and ', $invalidatedBy),
             ));
 
 

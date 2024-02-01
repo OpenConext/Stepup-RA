@@ -24,22 +24,10 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Service\ProfileService as ApiP
 
 class ProfileService
 {
-    /**
-     * @var ApiProfileService
-     */
-    private $apiProfileService;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        ApiProfileService $apiProfileService,
-        LoggerInterface $logger
+        private readonly ApiProfileService $apiProfileService,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->apiProfileService = $apiProfileService;
-        $this->logger = $logger;
     }
 
     /**

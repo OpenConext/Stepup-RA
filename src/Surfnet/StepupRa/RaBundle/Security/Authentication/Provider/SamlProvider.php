@@ -36,36 +36,12 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
  */
 class SamlProvider implements AuthenticationProviderInterface
 {
-    /**
-     * @var IdentityService
-     */
-    private $identityService;
-
-    /**
-     * @var ProfileService
-     */
-    private $profileService;
-
-    /**
-     * @var AttributeDictionary
-     */
-    private $attributeDictionary;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        IdentityService $identityService,
-        ProfileService $profileService,
-        AttributeDictionary $attributeDictionary,
-        LoggerInterface $logger
+        private readonly IdentityService $identityService,
+        private readonly ProfileService $profileService,
+        private readonly AttributeDictionary $attributeDictionary,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->identityService                        = $identityService;
-        $this->profileService                        = $profileService;
-        $this->attributeDictionary                    = $attributeDictionary;
-        $this->logger                                 = $logger;
     }
 
     /**
@@ -86,7 +62,7 @@ class SamlProvider implements AuthenticationProviderInterface
         // if no identity can be found, we're done.
         if ($identity === null) {
             throw new BadCredentialsException(
-                'Unable to find Identity matching the criteria. Has the identity been registered before?'
+                'Unable to find Identity matching the criteria. Has the identity been registered before?',
             );
         }
 
@@ -95,7 +71,7 @@ class SamlProvider implements AuthenticationProviderInterface
         // if no credentials can be found, we're done.
         if (!$profile->isSraa && empty($profile->authorizations) && empty($profile->management)) {
             throw new UserNotRaException(
-                'The Identity is not registered as (S)RA(A) and therefore does not have access to this application'
+                'The Identity is not registered as (S)RA(A) and therefore does not have access to this application',
             );
         }
 
@@ -130,8 +106,8 @@ class SamlProvider implements AuthenticationProviderInterface
             throw new MissingRequiredAttributeException(
                 sprintf(
                     'Missing a required SAML attribute. This application requires the "%s" attribute to function.',
-                    $attribute
-                )
+                    $attribute,
+                ),
             );
         }
 
@@ -140,7 +116,7 @@ class SamlProvider implements AuthenticationProviderInterface
             $this->logger->warning(sprintf(
                 'Found "%d" values for attribute "%s", using first value',
                 count($values),
-                $attribute
+                $attribute,
             ));
         }
 
@@ -150,7 +126,7 @@ class SamlProvider implements AuthenticationProviderInterface
             $message = sprintf(
                 'First value of attribute "%s" must be a string, "%s" given',
                 $attribute,
-                is_object($value) ? get_class($value) : gettype($value)
+                get_debug_type($value),
             );
 
             $this->logger->warning($message);

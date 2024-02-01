@@ -23,6 +23,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Surfnet\StepupRa\RaBundle\Command\CreateRaLocationCommand;
 
 class CreateRaLocationType extends AbstractType
 {
@@ -44,7 +45,7 @@ class CreateRaLocationType extends AbstractType
                     ButtonGroupType::class,
                     [
                         'inherit_data' => true,
-                    ]
+                    ],
                 )
                 ->add('create_ra_location', SubmitType::class, [
                     'label' => 'ra.form.ra_create_ra_location.label.create_ra_location',
@@ -54,7 +55,7 @@ class CreateRaLocationType extends AbstractType
                     'label' => 'ra.form.ra_create_ra_location.label.cancel',
                     'route' => 'ra_locations_manage',
                     'attr'  => ['class' => 'btn btn-link cancel']
-                ])
+                ]),
             )
         ;
     }
@@ -62,7 +63,7 @@ class CreateRaLocationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\CreateRaLocationCommand'
+            'data_class' => CreateRaLocationCommand::class
         ]);
     }
 

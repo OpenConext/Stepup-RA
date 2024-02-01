@@ -31,16 +31,9 @@ class SamlToken extends AbstractToken
      */
     public $assertion;
 
-    /**
-     * @var \Surfnet\StepupBundle\Value\Loa
-     */
-    private $loa;
-
-    public function __construct(Loa $loa, array $roles = [])
+    public function __construct(private readonly Loa $loa, array $roles = [])
     {
         parent::__construct($roles);
-
-        $this->loa = $loa;
         $this->setAuthenticated(count($roles));
     }
 
@@ -68,18 +61,15 @@ class SamlToken extends AbstractToken
             [
                 parent::serialize(),
                 $this->loa,
-            ]
+            ],
         );
     }
 
     public function unserialize($serialized)
     {
-        list(
-            $parent,
-            $this->loa,
-            ) = unserialize(
-                $serialized
-            );
+        [$parent, $this->loa, ] = unserialize(
+            $serialized,
+        );
 
         parent::unserialize($parent);
     }

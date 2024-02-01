@@ -31,9 +31,7 @@ class RaRoleChoiceList
     private static function buildChoices()
     {
         $choices = self::getChoices();
-        $labels = array_map(function ($choice) {
-            return 'ra.form.extension.ra_role_choice.' . $choice;
-        }, $choices);
+        $labels = array_map(fn($choice) => 'ra.form.extension.ra_role_choice.' . $choice, $choices);
 
         $combined = array_combine($labels, $choices);
 

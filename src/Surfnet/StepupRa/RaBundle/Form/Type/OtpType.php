@@ -33,7 +33,7 @@ class OtpType extends TextType
                     'autofocus' => true,
                     'autocomplete' => 'off',
                 ]
-            ]
+            ],
         );
     }
     public function getBlockPrefix()

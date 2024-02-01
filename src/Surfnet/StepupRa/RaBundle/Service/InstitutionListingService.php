@@ -21,18 +21,8 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Service\InstitutionListingServ
 
 class InstitutionListingService
 {
-    /**
-     * @var ApiInstitutionListingService
-     */
-    private $institutionListingService;
-
-    /**
-     * @param ApiInstitutionListingService $institutionListingService
-     */
-    public function __construct(
-        ApiInstitutionListingService $institutionListingService
-    ) {
-        $this->institutionListingService = $institutionListingService;
+    public function __construct(private readonly ApiInstitutionListingService $institutionListingService)
+    {
     }
 
     /**

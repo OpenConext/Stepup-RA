@@ -50,30 +50,18 @@ class ViewConfig implements ViewConfigInterface
     public $gssfIdMismatch;
 
     /**
-     * @var RequestStack
-     */
-    private $requestStack;
-
-    /**
      * The arrays are arrays of translated text, indexed on locale.
      *
-     * @param RequestStack $requestStack
-     * @param array $title
-     * @param array $pageTitle
-     * @param array $explanation
-     * @param array $initiate
-     * @param array $gssfIdMismatch
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        RequestStack $requestStack,
+        private readonly RequestStack $requestStack,
         array $title,
         array $pageTitle,
         array $explanation,
         array $initiate,
-        array $gssfIdMismatch
+        array $gssfIdMismatch,
     ) {
-        $this->requestStack = $requestStack;
         $this->title = $title;
         $this->pageTitle = $pageTitle;
         $this->explanation = $explanation;
@@ -122,7 +110,6 @@ class ViewConfig implements ViewConfigInterface
     }
 
     /**
-     * @param array $translations
      * @return mixed
      * @throws LogicException
      */
@@ -139,8 +126,8 @@ class ViewConfig implements ViewConfigInterface
             sprintf(
                 'The requested translation is not available in this language: %s. Available languages: %s',
                 $currentLocale,
-                implode(', ', array_keys($translations))
-            )
+                implode(', ', array_keys($translations)),
+            ),
         );
     }
 }

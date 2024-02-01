@@ -23,24 +23,12 @@ use Surfnet\StepupMiddlewareClientBundle\Command\Metadata;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService as MiddlewareCommandService;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-final class CommandService
+final readonly class CommandService
 {
-    /**
-     * @var \Surfnet\StepupMiddlewareClientBundle\Service\CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
-     */
-    private $tokenStorage;
-
     public function __construct(
-        MiddlewareCommandService $commandService,
-        TokenStorageInterface $tokenStorage
+        private MiddlewareCommandService $commandService,
+        private TokenStorageInterface $tokenStorage,
     ) {
-        $this->commandService = $commandService;
-        $this->tokenStorage = $tokenStorage;
     }
 
     public function execute(Command $command)

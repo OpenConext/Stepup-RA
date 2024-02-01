@@ -26,29 +26,16 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaListingService as Ap
 use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
-final class RaListingService
+final readonly class RaListingService
 {
-    /**
-     * @var ApiRaListingService
-     */
-    private $apiRaListingService;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    public function __construct(ApiRaListingService $raListingService, LoggerInterface $logger)
+    public function __construct(private ApiRaListingService $apiRaListingService, private LoggerInterface $logger)
     {
-        $this->apiRaListingService = $raListingService;
-        $this->logger = $logger;
     }
 
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)  -- The command to query mapping in search exceed the
      * @SuppressWarnings(PHPMD.NPathComplexity)          CyclomaticComplexity and NPathComplexity threshold.
      *
-     * @param SearchRaListingCommand $command
      * @return RaListingCollection
      */
     public function search(SearchRaListingCommand $command)

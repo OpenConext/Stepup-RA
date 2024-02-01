@@ -42,7 +42,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class RaManagementController extends AbstractController
 {
     /**
-     * @param Request $request
      * @return Response
      */
     public function manageAction(Request $request): Response
@@ -77,13 +76,13 @@ class RaManagementController extends AbstractController
         $pagination = $this->getPaginator()->paginate(
             $raList->getTotalItems() > 0 ? $raList->getElements() : [],
             $raList->getCurrentPage(),
-            $raList->getItemsPerPage()
+            $raList->getItemsPerPage(),
         );
         $pagination->setTotalItemCount($raList->getTotalItems());
 
         $logger->notice(sprintf(
             'Searching for RA(A)s yielded "%d" results',
-            $raList->getTotalItems()
+            $raList->getTotalItems(),
         ));
 
         /** @var \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing[] $raListings */
@@ -96,12 +95,11 @@ class RaManagementController extends AbstractController
                 'raList' => $raListings,
                 'numberOfResults' => $raList->getTotalItems(),
                 'pagination' => $pagination,
-            ]
+            ],
         );
     }
 
     /**
-     * @param Request $request
      * @return Response
      */
     public function raCandidateSearchAction(Request $request)
@@ -138,14 +136,14 @@ class RaManagementController extends AbstractController
         $pagination = $this->getPaginator()->paginate(
             $raCandidateList->getTotalItems() > 0 ? $raCandidateList->getElements() : [],
             $raCandidateList->getCurrentPage(),
-            $raCandidateList->getItemsPerPage()
+            $raCandidateList->getItemsPerPage(),
         );
         $pagination->setTotalItemCount($raCandidateList->getTotalItems());
 
         $logger->notice(sprintf(
             'Searching for RaCandidates within institution "%s" yielded "%s" results',
             $institution,
-            $raCandidateList->getTotalItems()
+            $raCandidateList->getTotalItems(),
         ));
 
         return $this->render(
@@ -154,12 +152,11 @@ class RaManagementController extends AbstractController
                 'form'         => $form->createView(),
                 'raCandidates' => $raCandidateList,
                 'pagination'   => $pagination
-            ]
+            ],
         );
     }
 
     /**
-     * @param Request $request
      * @return Response
      */
     public function createRaAction(Request $request)
@@ -178,9 +175,7 @@ class RaManagementController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        $options = array_map(function (RaCandidateInstitution $institution) {
-            return $institution->institution;
-        }, $raCandidate->institutions->getElements());
+        $options = array_map(fn(RaCandidateInstitution $institution) => $institution->institution, $raCandidate->institutions->getElements());
         $selectOptions = array_combine($options, $options);
 
         $command = new AccreditCandidateCommand();
@@ -199,7 +194,7 @@ class RaManagementController extends AbstractController
             if ($success) {
                 $this->addFlash(
                     'success',
-                    $this->get('translator')->trans('ra.management.create_ra.identity_accredited')
+                    $this->get('translator')->trans('ra.management.create_ra.identity_accredited'),
                 );
 
                 $logger->debug('Identity Accredited, redirecting to candidate overview');
@@ -217,7 +212,6 @@ class RaManagementController extends AbstractController
     }
 
     /**
-     * @param Request $request
      * @param         $identityId
      * @param         $raInstitution
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
@@ -265,7 +259,6 @@ class RaManagementController extends AbstractController
     }
 
     /**
-     * @param Request $request
      * @param         $identityId
      * @param         $raInstitution
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
@@ -306,7 +299,7 @@ class RaManagementController extends AbstractController
 
             $logger->notice(sprintf(
                 'Could not retract Registration Authority credentials for identity "%s"',
-                $identityId
+                $identityId,
             ));
             $this->addFlash('error', 'ra.management.retract_ra.middleware_command_failed');
         }

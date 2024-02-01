@@ -24,14 +24,8 @@ use Twig_SimpleFilter;
 
 final class SecondFactorType extends Twig_Extension
 {
-    /**
-     * @var SecondFactorTypeTranslationService
-     */
-    private $translator;
-
-    public function __construct(SecondFactorTypeTranslationService $translator)
+    public function __construct(private readonly SecondFactorTypeTranslationService $translator)
     {
-        $this->translator = $translator;
     }
 
     public function getName()
@@ -42,7 +36,7 @@ final class SecondFactorType extends Twig_Extension
     public function getFilters()
     {
         return [
-            new Twig_SimpleFilter('trans_second_factor_type', [$this, 'translateSecondFactorType']),
+            new Twig_SimpleFilter('trans_second_factor_type', $this->translateSecondFactorType(...)),
         ];
     }
 

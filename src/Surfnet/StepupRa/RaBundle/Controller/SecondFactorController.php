@@ -39,7 +39,6 @@ final class SecondFactorController extends AbstractController
 {
     /**
      * @Template
-     * @param Request $request
      * @return array|Response
      */
     public function searchAction(Request $request)
@@ -77,7 +76,7 @@ final class SecondFactorController extends AbstractController
         $pagination = $this->getPaginator()->paginate(
             $secondFactors->getElements(),
             $secondFactors->getCurrentPage(),
-            $secondFactors->getItemsPerPage()
+            $secondFactors->getItemsPerPage(),
         );
         $pagination->setTotalItemCount($secondFactors->getTotalItems());
 
@@ -85,7 +84,7 @@ final class SecondFactorController extends AbstractController
 
         $this->get('logger')->notice(sprintf(
             'Searching for second factors yielded "%d" results',
-            $secondFactors->getTotalItems()
+            $secondFactors->getTotalItems(),
         ));
 
         return [
@@ -112,7 +111,6 @@ final class SecondFactorController extends AbstractController
     }
 
     /**
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function revokeAction(Request $request)
@@ -133,7 +131,7 @@ final class SecondFactorController extends AbstractController
             'Sending middleware request to revoke Second Factor "%s" belonging to "%s" on behalf of "%s"',
             $command->secondFactorId,
             $command->identityId,
-            $command->currentUserId
+            $command->currentUserId,
         ));
 
         $translator = $this->get('translator');
@@ -152,7 +150,6 @@ final class SecondFactorController extends AbstractController
     }
 
     /**
-     * @param Request $request
      * @return Response
      */
     public function auditLogAction(Request $request)
@@ -169,7 +166,7 @@ final class SecondFactorController extends AbstractController
             $logger->notice(sprintf(
                 'User with Identity "%s" requested non-existent identity "%s"',
                 $this->getCurrentUser()->id,
-                $identityId
+                $identityId,
             ));
 
             throw new NotFoundHttpException();
@@ -188,7 +185,7 @@ final class SecondFactorController extends AbstractController
         $pagination = $this->getPaginator()->paginate(
             $auditLog->getElements(),
             $auditLog->getCurrentPage(),
-            $auditLog->getItemsPerPage()
+            $auditLog->getItemsPerPage(),
         );
         $pagination->setTotalItemCount($auditLog->getTotalItems());
 
@@ -200,7 +197,7 @@ final class SecondFactorController extends AbstractController
                 'pagination' => $pagination,
                 'auditLog'   => $auditLog,
                 'identity'   => $identity,
-            ]
+            ],
         );
     }
 

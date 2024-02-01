@@ -49,9 +49,7 @@ class RoleAtInstitutionType extends AbstractType
         $builder ->add('role', ChoiceType::class, [
             'label' => false,
             'choices' => RaRoleChoiceList::create(),
-            'choice_value' => function ($choice) {
-                return $choice;
-            },
+            'choice_value' => fn($choice) => $choice,
             'required' => $isRequired,
         ])->add('institution', ChoiceType::class, [
             'label' => 'ra.form.role_at_institution.label.institution',
@@ -62,12 +60,7 @@ class RoleAtInstitutionType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => RoleAtInstitution::class,
-            'choices' => [],
-            'horizontal' => true,
-            'error_bubbling' => false,
-        ));
+        $resolver->setDefaults(['data_class' => RoleAtInstitution::class, 'choices' => [], 'horizontal' => true, 'error_bubbling' => false]);
     }
 
     public function getBlockPrefix()

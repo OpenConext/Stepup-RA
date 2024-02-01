@@ -23,6 +23,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Surfnet\StepupRa\RaBundle\Command\ChangeRaLocationCommand;
 
 class ChangeRaLocationType extends AbstractType
 {
@@ -49,7 +50,7 @@ class ChangeRaLocationType extends AbstractType
                         'row_attr' => [
                             'class' => 'form-group button-group'
                         ],
-                    ]
+                    ],
                 )
                 ->add('change_ra_location', SubmitType::class, [
                     'label' => 'ra.management.form.change_ra_location.label.change_ra_location',
@@ -59,7 +60,7 @@ class ChangeRaLocationType extends AbstractType
                     'label' => 'ra.management.form.change_ra_location.label.cancel',
                     'route' => 'ra_locations_manage',
                     'attr' => ['class' => 'btn btn-link pull-right cancel'],
-                ])
+                ]),
             )
         ;
     }
@@ -67,7 +68,7 @@ class ChangeRaLocationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\ChangeRaLocationCommand'
+            'data_class' => ChangeRaLocationCommand::class
         ]);
     }
 

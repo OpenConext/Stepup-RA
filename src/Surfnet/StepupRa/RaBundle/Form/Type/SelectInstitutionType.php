@@ -36,14 +36,14 @@ class SelectInstitutionType extends AbstractType
                 [
                     'label' => 'ra.form.select_institution.label.institution',
                     'choices' => $builder->getData()->availableInstitutions,
-                ]
+                ],
             )->add(
                 'select_and_apply',
                 SubmitType::class,
                 [
                     'label' => 'ra.form.select_institution.button.switch',
                     'attr' => ['class' => 'btn btn-primary pull-right'],
-                ]
+                ],
             );
     }
 
@@ -52,7 +52,7 @@ class SelectInstitutionType extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => SelectInstitutionCommand::class,
-            ]
+            ],
         );
     }
 

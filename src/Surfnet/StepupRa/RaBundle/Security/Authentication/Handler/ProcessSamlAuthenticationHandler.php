@@ -43,64 +43,16 @@ class ProcessSamlAuthenticationHandler implements AuthenticationHandler
      */
     private $nextHandler;
 
-    /**
-     * @var TokenStorageInterface
-     */
-    private $tokenStorage;
-
-    /**
-     * @var SamlInteractionProvider
-     */
-    private $samlInteractionProvider;
-
-    /**
-     * @var SamlAuthenticationStateHandler
-     */
-    private $authenticationStateHandler;
-
-    /**
-     * @var AuthenticatedSessionStateHandler
-     */
-    private $authenticatedSession;
-
-    /**
-     * @var AuthenticationManagerInterface
-     */
-    private $authenticationManager;
-
-    /**
-     * @var LoaResolutionService
-     */
-    private $loaResolutionService;
-
-    /**
-     * @var SamlAuthenticationLogger
-     */
-    private $authenticationLogger;
-
-    /**
-     * @var EngineInterface
-     */
-    private $templating;
-
     public function __construct(
-        TokenStorageInterface $tokenStorage,
-        SamlInteractionProvider $samlInteractionProvider,
-        SamlAuthenticationStateHandler $authenticationStateHandler,
-        AuthenticatedSessionStateHandler $authenticatedSession,
-        AuthenticationManagerInterface $authenticationManager,
-        LoaResolutionService $loaResolutionService,
-        SamlAuthenticationLogger $authenticationLogger,
-        EngineInterface $templating
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly SamlInteractionProvider $samlInteractionProvider,
+        private readonly SamlAuthenticationStateHandler $authenticationStateHandler,
+        private readonly AuthenticatedSessionStateHandler $authenticatedSession,
+        private readonly AuthenticationManagerInterface $authenticationManager,
+        private readonly LoaResolutionService $loaResolutionService,
+        private readonly SamlAuthenticationLogger $authenticationLogger,
+        private readonly EngineInterface $templating,
     ) {
-        $this->tokenStorage               = $tokenStorage;
-        $this->samlInteractionProvider    = $samlInteractionProvider;
-        $this->authenticationStateHandler = $authenticationStateHandler;
-        $this->authenticatedSession       = $authenticatedSession;
-        $this->authenticationManager      = $authenticationManager;
-        $this->loaResolutionService       = $loaResolutionService;
-        $this->authenticationLogger       = $authenticationLogger;
-        $this->templating                 = $templating;
     }
 
     public function process(GetResponseEvent $event)

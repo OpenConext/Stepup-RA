@@ -21,23 +21,11 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 class YubikeyVerificationResult
 {
     /**
-     * @var bool
-     */
-    private $clientError;
-
-    /**
-     * @var bool
-     */
-    private $serverError;
-
-    /**
      * @param bool $clientError
      * @param bool $serverError
      */
-    public function __construct($clientError, $serverError)
+    public function __construct(private $clientError, private $serverError)
     {
-        $this->clientError = $clientError;
-        $this->serverError = $serverError;
     }
 
     /**

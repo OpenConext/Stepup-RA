@@ -79,7 +79,7 @@ class RaaController extends AbstractController
                 'configuration' => (array)$configuration,
                 'form' => isset($form) ? $form->createView() : null,
                 'institution' => $institution,
-            ]
+            ],
         );
     }
 

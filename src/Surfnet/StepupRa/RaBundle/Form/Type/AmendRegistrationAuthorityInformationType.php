@@ -23,6 +23,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
 
 class AmendRegistrationAuthorityInformationType extends AbstractType
 {
@@ -42,7 +43,7 @@ class AmendRegistrationAuthorityInformationType extends AbstractType
                     ButtonGroupType::class,
                     [
                         'inherit_data' => true,
-                    ]
+                    ],
                 )
                 ->add('amend_ra_info', SubmitType::class, [
                     'label' => 'ra.management.form.amend_ra_info.label.amend_ra_info',
@@ -52,7 +53,7 @@ class AmendRegistrationAuthorityInformationType extends AbstractType
                     'label' => 'ra.management.form.amend_ra_info.label.cancel',
                     'route' => 'ra_management_manage',
                     'attr'  => ['class' => 'btn btn-link cancel']
-                ])
+                ]),
             )
         ;
     }
@@ -60,7 +61,7 @@ class AmendRegistrationAuthorityInformationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand'
+            'data_class' => AmendRegistrationAuthorityInformationCommand::class
         ]);
     }
 

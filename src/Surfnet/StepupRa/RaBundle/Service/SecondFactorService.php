@@ -27,26 +27,10 @@ use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 
 class SecondFactorService
 {
-    /**
-     * @var \Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService
-     */
-    private $apiSecondFactorService;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @param ApiSecondFactorService $apiSecondFactorService
-     * @param LoggerInterface        $logger
-     */
     public function __construct(
-        ApiSecondFactorService $apiSecondFactorService,
-        LoggerInterface $logger
+        private readonly ApiSecondFactorService $apiSecondFactorService,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->apiSecondFactorService = $apiSecondFactorService;
-        $this->logger = $logger;
     }
 
     /**
@@ -82,7 +66,7 @@ class SecondFactorService
         }
 
         throw new RuntimeException(
-            sprintf('Got an unexpected amount of identities, expected 0 or 1, got "%d"', $elementCount)
+            sprintf('Got an unexpected amount of identities, expected 0 or 1, got "%d"', $elementCount),
         );
     }
 }

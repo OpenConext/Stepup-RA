@@ -45,7 +45,6 @@ class VettingController extends AbstractController
 {
     /**
      * @Template
-     * @param Request $request
      * @return array|Response
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity) https://www.pivotaltracker.com/story/show/135045063
@@ -85,14 +84,14 @@ class VettingController extends AbstractController
                 sprintf(
                     'An RA attempted vetting of disabled second factor "%s" of type "%s"',
                     $secondFactor->id,
-                    $secondFactor->type
-                )
+                    $secondFactor->type,
+                ),
             );
 
             return $this
                 ->render(
                     'SurfnetStepupRaRaBundle:vetting:second_factor_type_disabled.html.twig',
-                    ['secondFactorType' => $secondFactor->type]
+                    ['secondFactorType' => $secondFactor->type],
                 )
                 ->setStatusCode(Response::HTTP_BAD_REQUEST);
         }
@@ -111,13 +110,13 @@ class VettingController extends AbstractController
                         'ra.verify_identity.registration_code_expired',
                         [
                             '%self_service_url%' => $this->getParameter('surfnet_stepup_ra.self_service_url'),
-                        ]
-                    )
+                        ],
+                    ),
             );
 
             $logger->notice(
                 'Second factor registration code is expired',
-                ['registration_requested_at' => $secondFactor->registrationRequestedAt->format('Y-m-d')]
+                ['registration_requested_at' => $secondFactor->registrationRequestedAt->format('Y-m-d')],
             );
 
             return ['form' => $form->createView()];
@@ -157,11 +156,11 @@ class VettingController extends AbstractController
                 [
                     'procedureId' => $procedureId,
                     'provider'    => $secondFactor->type
-                ]
+                ],
             );
         } else {
             throw new RuntimeException(
-                sprintf('RA does not support vetting procedure for second factor type "%s"', $secondFactor->type)
+                sprintf('RA does not support vetting procedure for second factor type "%s"', $secondFactor->type),
             );
         }
     }
@@ -183,7 +182,6 @@ class VettingController extends AbstractController
 
     /**
      * @Template
-     * @param Request $request
      * @param string $procedureId
      * @return array|Response
      *
@@ -236,7 +234,7 @@ class VettingController extends AbstractController
         } catch (DomainException $e) {
             $this->get('logger')->error(
                 "RA attempted to verify identity, but the vetting procedure does not allow it",
-                ['exception' => $e, 'procedure' => $procedureId]
+                ['exception' => $e, 'procedure' => $procedureId],
             );
 
             return $showForm('ra.verify_identity.identity_verification_failed');
@@ -258,7 +256,7 @@ class VettingController extends AbstractController
                         'ra.verify_identity.registration_code_expired',
                         [
                             '%self_service_url%' => $this->getParameter('surfnet_stepup_ra.self_service_url'),
-                        ]
+                        ],
                     );
 
                 return $showForm($registrationCodeExpiredError);
@@ -268,7 +266,7 @@ class VettingController extends AbstractController
         } catch (DomainException $e) {
             $logger->error(
                 "RA attempted to vet second factor, but the vetting procedure didn't allow it",
-                ['exception' => $e]
+                ['exception' => $e],
             );
 
             return $showForm('ra.verify_identity.second_factor_vetting_failed');

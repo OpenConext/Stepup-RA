@@ -30,23 +30,23 @@ class SamlFactory implements SecurityFactoryInterface
         $providerId = 'security.authentication.provider.saml.' . $id;
         $container->setDefinition(
             $providerId,
-            new ChildDefinition('ra.security.authentication.provider.saml')
+            new ChildDefinition('ra.security.authentication.provider.saml'),
         );
 
         $listenerId = 'security.authentication.listener.saml.' . $id;
         $container->setDefinition(
             $listenerId,
-            new ChildDefinition('ra.security.authentication.listener')
+            new ChildDefinition('ra.security.authentication.listener'),
         );
 
         $cookieHandlerId = 'security.logout.handler.cookie_clearing.' . $id;
         $cookieHandler   = $container->setDefinition(
             $cookieHandlerId,
-            new ChildDefinition('security.logout.handler.cookie_clearing')
+            new ChildDefinition('security.logout.handler.cookie_clearing'),
         );
         $cookieHandler->addArgument([]);
 
-        return array($providerId, $listenerId, $defaultEntryPoint);
+        return [$providerId, $listenerId, $defaultEntryPoint];
     }
 
     public function getPosition()

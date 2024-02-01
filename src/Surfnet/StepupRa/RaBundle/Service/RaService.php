@@ -27,22 +27,10 @@ use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationComma
 use Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand;
 use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 
-final class RaService
+final readonly class RaService
 {
-    /**
-     * @var CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    public function __construct(CommandService $commandService, LoggerInterface $logger)
+    public function __construct(private CommandService $commandService, private LoggerInterface $logger)
     {
-        $this->commandService = $commandService;
-        $this->logger = $logger;
     }
 
     public function amendRegistrationAuthorityInformation(AmendRegistrationAuthorityInformationCommand $command)
@@ -59,7 +47,7 @@ final class RaService
             $this->logger->error(sprintf(
                 "Amending of registration authority %s's information failed: '%s'",
                 $apiCommand->identityId,
-                implode("', '", $result->getErrors())
+                implode("', '", $result->getErrors()),
             ));
         }
 
@@ -79,7 +67,7 @@ final class RaService
                 'Could not change Identity "%s" role to "%s": "%s"',
                 $apiCommand->identityId,
                 $apiCommand->role,
-                implode("', '", $result->getErrors())
+                implode("', '", $result->getErrors()),
             ));
         }
 
@@ -98,7 +86,7 @@ final class RaService
             $this->logger->error(sprintf(
                 'Could not retract registration authority for identity "%s": "%s"',
                 $apiCommand->identityId,
-                implode("', '", $result->getErrors())
+                implode("', '", $result->getErrors()),
             ));
         }
 

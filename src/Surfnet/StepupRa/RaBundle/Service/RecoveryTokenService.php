@@ -28,26 +28,11 @@ use Surfnet\StepupRa\RaBundle\Command\SearchRecoveryTokensCommand;
 
 class RecoveryTokenService
 {
-    private $commandService;
-
-    /**
-     * @var ApiRecoveryTokenService
-     */
-    private $apiRecoveryTokenService;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        CommandService $commandService,
-        ApiRecoveryTokenService $apiRecoveryTokenService,
-        LoggerInterface $logger
+        private readonly CommandService $commandService,
+        private readonly ApiRecoveryTokenService $apiRecoveryTokenService,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->commandService = $commandService;
-        $this->apiRecoveryTokenService = $apiRecoveryTokenService;
-        $this->logger = $logger;
     }
 
     public function revoke(RevokeRecoveryTokenCommand $command)
@@ -65,7 +50,7 @@ class RecoveryTokenService
                 $middlewareCommand->recoveryTokenId,
                 $middlewareCommand->identityId,
                 $middlewareCommand->authorityId,
-                implode(", ", $result->getErrors())
+                implode(", ", $result->getErrors()),
             ));
         }
 

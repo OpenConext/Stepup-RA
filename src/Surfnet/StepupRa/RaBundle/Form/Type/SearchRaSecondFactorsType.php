@@ -28,14 +28,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchRaSecondFactorsType extends AbstractType
 {
-    /**
-     * @var SecondFactorTypeChoiceList
-     */
-    private $secondFactorTypeChoiseList;
-
-    public function __construct(SecondFactorTypeChoiceList $secondFactorTypeChoiceList)
+    public function __construct(private readonly SecondFactorTypeChoiceList $secondFactorTypeChoiseList)
     {
-        $this->secondFactorTypeChoiseList = $secondFactorTypeChoiceList;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -79,7 +73,7 @@ class SearchRaSecondFactorsType extends AbstractType
             ButtonGroupType::class,
             [
                 'inherit_data' => true,
-            ]
+            ],
         )
             ->add('search', SubmitType::class, [
                 'label' => 'ra.form.ra_search_ra_second_factors.button.search',
@@ -99,7 +93,7 @@ class SearchRaSecondFactorsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand',
+            'data_class' => SearchRaSecondFactorsCommand::class,
             'enable_export_button' => true,
         ]);
 

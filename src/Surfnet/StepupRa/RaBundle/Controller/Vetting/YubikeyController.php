@@ -31,7 +31,6 @@ class YubikeyController extends SecondFactorController
 {
     /**
      * @Template
-     * @param Request $request
      * @param string  $procedureId
      * @return array|Response
      */

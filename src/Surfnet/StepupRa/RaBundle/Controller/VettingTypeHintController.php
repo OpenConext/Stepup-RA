@@ -33,43 +33,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class VettingTypeHintController extends AbstractController
 {
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @var ProfileService
-     */
-    private $profileService;
-
-    /**
-     * @var VettingTypeHintService
-     */
-    private $vettingTypeHintService;
-
-    /**
-     * @var InstitutionListingService
-     */
-    private $institutionListingService;
-
-    /**
-     * @var string[]
-     */
-    private $locales;
-
     public function __construct(
-        LoggerInterface $logger,
-        InstitutionListingService $institutionListingService,
-        ProfileService $profileService,
-        VettingTypeHintService $vettingTypeHintService,
-        array $locales
+        private readonly LoggerInterface $logger,
+        private readonly InstitutionListingService $institutionListingService,
+        private readonly ProfileService $profileService,
+        private readonly VettingTypeHintService $vettingTypeHintService,
+        /**
+         * @var string[]
+         */
+        private array $locales,
     ) {
-        $this->institutionListingService = $institutionListingService;
-        $this->profileService = $profileService;
-        $this->vettingTypeHintService = $vettingTypeHintService;
-        $this->locales = $locales;
-        $this->logger = $logger;
     }
 
     /**
@@ -140,7 +113,7 @@ class VettingTypeHintController extends AbstractController
                 'form' => isset($form) ? $form->createView() : null,
                 'hintForm' => $hintForm->createView(),
                 'institution' => $institution,
-            ]
+            ],
         );
     }
 }

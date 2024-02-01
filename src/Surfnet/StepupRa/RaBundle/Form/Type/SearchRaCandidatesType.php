@@ -54,7 +54,7 @@ class SearchRaCandidatesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand',
+            'data_class' => SearchRaCandidatesCommand::class,
         ]);
     }
 

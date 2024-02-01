@@ -22,6 +22,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Surfnet\StepupRa\RaBundle\Command\RemoveRaLocationCommand;
 
 class RemoveRaLocationType extends AbstractType
 {
@@ -35,7 +36,7 @@ class RemoveRaLocationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\RemoveRaLocationCommand',
+            'data_class' => RemoveRaLocationCommand::class,
         ]);
     }
 

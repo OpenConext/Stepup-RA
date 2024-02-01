@@ -27,28 +27,13 @@ use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult;
 
 class YubikeySecondFactorService
 {
-    /**
-     * @var YubikeyService
-     */
-    private $yubikeyService;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @param YubikeyService $yubikeyService
-     * @param LoggerInterface $logger
-     */
-    public function __construct(YubikeyService $yubikeyService, LoggerInterface $logger)
-    {
-        $this->yubikeyService = $yubikeyService;
-        $this->logger = $logger;
+    public function __construct(
+        private readonly YubikeyService $yubikeyService,
+        private readonly LoggerInterface $logger,
+    ) {
     }
 
     /**
-     * @param VerifyYubikeyPublicIdCommand $command
      * @return VerificationResult
      */
     public function verifyYubikeyPublicId(VerifyYubikeyPublicIdCommand $command)
@@ -75,14 +60,14 @@ class YubikeySecondFactorService
 
         if ($publicId->getYubikeyPublicId() !== $command->expectedPublicId) {
             $this->logger->notice(
-                'Yubikey used by registrant during vetting did not match the one used during registration.'
+                'Yubikey used by registrant during vetting did not match the one used during registration.',
             );
 
             return new VerificationResult(VerificationResult::RESULT_PUBLIC_ID_DID_NOT_MATCH, $publicId);
         }
 
         $this->logger->info(
-            'Yubikey used by registrant during vetting matches the one used during registration.'
+            'Yubikey used by registrant during vetting matches the one used during registration.',
         );
 
         return new VerificationResult(VerificationResult::RESULT_PUBLIC_ID_MATCHED, $publicId);

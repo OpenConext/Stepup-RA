@@ -36,7 +36,6 @@ class SmsController extends SecondFactorController
 {
     /**
      * @Template
-     * @param Request $request
      * @param string $procedureId
      * @return array|Response
      */
@@ -74,14 +73,14 @@ class SmsController extends SecondFactorController
 
             return array_merge(
                 $viewVariables,
-                ['phoneNumber' => $phoneNumber, 'form' => $form->createView()]
+                ['phoneNumber' => $phoneNumber, 'form' => $form->createView()],
             );
         }
 
         $logger->notice('Sending of SMS Challenge has been requested, sending OTP via SMS');
         if ($vettingService->sendSmsChallenge($procedureId, $command)) {
             $logger->notice(
-                'SMS Challenge successfully sent, redirecting to Proof of Possession page to verify challenge'
+                'SMS Challenge successfully sent, redirecting to Proof of Possession page to verify challenge',
             );
 
             return $this->redirectToRoute('ra_vetting_sms_prove_possession', ['procedureId' => $procedureId]);
@@ -90,18 +89,17 @@ class SmsController extends SecondFactorController
         $this->addFlash('error', 'ra.sms_send_challenge.send_sms_challenge_failed');
 
         $logger->notice(
-            'SMS Challenge could not be sent, added error to page to notify user and re-rendering send challenge page'
+            'SMS Challenge could not be sent, added error to page to notify user and re-rendering send challenge page',
         );
 
         return array_merge(
             $viewVariables,
-            ['phoneNumber' => $phoneNumber, 'form' => $form->createView()]
+            ['phoneNumber' => $phoneNumber, 'form' => $form->createView()],
         );
     }
 
     /**
      * @Template
-     * @param Request $request
      * @param string $procedureId
      * @return array|Response
      */
@@ -131,7 +129,7 @@ class SmsController extends SecondFactorController
 
         if (!$form->isSubmitted() || !$form->isValid()) {
             $logger->notice(
-                'SMS OTP was not submitted through form, rendering Proof of Possession of SMS Second Factor page'
+                'SMS OTP was not submitted through form, rendering Proof of Possession of SMS Second Factor page',
             );
 
             return ['form' => $form->createView()];
@@ -144,7 +142,7 @@ class SmsController extends SecondFactorController
 
             return $this->redirectToRoute(
                 'ra_vetting_verify_identity',
-                ['procedureId' => $procedureId]
+                ['procedureId' => $procedureId],
             );
         } elseif ($verification->didOtpExpire()) {
             $this->addFlash('error', 'ra.prove_phone_possession.challenge_expired');

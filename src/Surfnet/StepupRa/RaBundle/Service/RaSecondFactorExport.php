@@ -25,15 +25,8 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RaSecondFactorExport
 {
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
-    public function __construct(
-        LoggerInterface $logger
-    ) {
-        $this->logger = $logger;
+    public function __construct(private readonly LoggerInterface $logger)
+    {
     }
 
     public function export(RaSecondFactorExportCollection $collection, $fileName)
@@ -61,7 +54,7 @@ class RaSecondFactorExport
             [
                 'Content-Type' => 'application/csv',
                 'Content-Disposition' => sprintf('attachment; filename="%s.csv"', $fileName),
-            ]
+            ],
         );
     }
 }

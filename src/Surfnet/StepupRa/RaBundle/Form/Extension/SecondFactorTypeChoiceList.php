@@ -40,33 +40,11 @@ use Surfnet\StepupBundle\Service\SecondFactorTypeTranslationService;
  */
 class SecondFactorTypeChoiceList
 {
-    /**
-     * @var SecondFactorTypeService
-     */
-    private $secondFactorTypeService;
-
-    /**
-     * @var SecondFactorTypeTranslationService
-     */
-    private $translator;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @param SecondFactorTypeService $service
-     * @param SecondFactorTypeTranslationService $translator
-     */
     public function __construct(
-        SecondFactorTypeService $service,
-        SecondFactorTypeTranslationService $translator,
-        LoggerInterface $logger
+        private readonly SecondFactorTypeService $secondFactorTypeService,
+        private readonly SecondFactorTypeTranslationService $translator,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->secondFactorTypeService = $service;
-        $this->translator = $translator;
-        $this->logger = $logger;
     }
 
     /**
@@ -82,7 +60,7 @@ class SecondFactorTypeChoiceList
         foreach ($collection as $sfTypeIdentifier) {
             $translation = $this->translator->translate(
                 $sfTypeIdentifier,
-                'ra.form.ra_search_ra_second_factors.choice.type.%s'
+                'ra.form.ra_search_ra_second_factors.choice.type.%s',
             );
 
             // Test if the translator was able to translate the second factor type
@@ -90,8 +68,8 @@ class SecondFactorTypeChoiceList
                 $this->logger->warning(
                     sprintf(
                         'Unable to add a filter option on the second factor type select list for type: "%s"',
-                        $sfTypeIdentifier
-                    )
+                        $sfTypeIdentifier,
+                    ),
                 );
                 continue;
             }
