@@ -27,6 +27,7 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaSecondFactorService 
 use Surfnet\StepupRa\RaBundle\Command\ExportRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @SuppressWarnings(PHPMD.NPathComplexity) -- The command to query mapping in search and export exceed the
@@ -42,7 +43,7 @@ class RaSecondFactorService
     ) {
     }
 
-    public function revoke(RevokeSecondFactorCommand $command)
+    public function revoke(RevokeSecondFactorCommand $command): bool
     {
         $middlewareCommand                 = new RevokeRegistrantsSecondFactorCommand();
         $middlewareCommand->secondFactorId = $command->secondFactorId;
@@ -64,10 +65,7 @@ class RaSecondFactorService
         return $result->isSuccessful();
     }
 
-    /**
-     * @return RaSecondFactorCollection
-     */
-    public function search(SearchRaSecondFactorsCommand $command)
+    public function search(SearchRaSecondFactorsCommand $command): RaSecondFactorCollection
     {
         $query = new RaSecondFactorSearchQuery($command->pageNumber, $command->actorId);
         $this->buildQuery($command, $query);
@@ -77,10 +75,8 @@ class RaSecondFactorService
     /**
      * Searches for a collection of second factor tokens and returns a Http response with an attachment
      * Content-Disposition.
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function export(ExportRaSecondFactorsCommand $command)
+    public function export(ExportRaSecondFactorsCommand $command): Response
     {
         $query = new RaSecondFactorExportQuery($command->actorId);
         $this->buildQuery($command, $query);
@@ -88,7 +84,7 @@ class RaSecondFactorService
         return $this->exporter->export($collection, $query->getFileName());
     }
 
-    private function buildQuery($command, $query)
+    private function buildQuery($command, $query): void
     {
         if ($command->name) {
             $query->setName($command->name);

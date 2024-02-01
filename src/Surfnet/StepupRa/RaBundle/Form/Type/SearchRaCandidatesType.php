@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -27,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchRaCandidatesType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         /** @var $command SearchRaCandidatesCommand */
         $command = $builder->getData();
@@ -51,14 +53,14 @@ class SearchRaCandidatesType extends AbstractType
             ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => SearchRaCandidatesCommand::class,
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_search_ra_candidates';
     }
