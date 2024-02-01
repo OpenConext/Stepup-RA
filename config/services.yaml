@@ -1,12 +1,16 @@
 imports:
-  - { resource: 'legacy/samlstepupproviders_parameters.yaml' }
-  - { resource: 'legacy/global_view_parameters.yaml' }
-  - { resource: 'legacy/parameters.yaml' }
-  - { resource: 'legacy/samlstepupproviders.yaml' }
-
-
+  - { resource: 'openconext/samlstepupproviders_parameters.yaml' }
+  - { resource: 'openconext/global_view_parameters.yaml' }
+  - { resource: 'openconext/parameters.yaml' }
+  - { resource: 'openconext/samlstepupproviders.yaml' }
 
 services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: true
+
   twig.extension.text: # Required by JMSTranslationBundle
     class: Twig_Extensions_Extension_Text
     tags: [{ name: twig.extension }]
