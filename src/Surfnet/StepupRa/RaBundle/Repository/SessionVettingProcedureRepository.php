@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -18,49 +20,29 @@
 
 namespace Surfnet\StepupRa\RaBundle\Repository;
 
-use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 use Surfnet\StepupRa\RaBundle\VettingProcedure;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class SessionVettingProcedureRepository implements VettingProcedureRepository
 {
-    /**
-     * @var string
-     */
-    private $namespace;
-
-    public function __construct(private readonly SessionInterface $session, $namespace)
+    public function __construct(
+        private readonly RequestStack $requestStack,
+        private readonly string $namespace)
     {
-        if (!is_string($namespace)) {
-            throw InvalidArgumentException::invalidType('string', 'namespace', $namespace);
-        }
-        $this->namespace = $namespace;
     }
 
-    public function store(VettingProcedure $vettingProcedure)
+    public function store(VettingProcedure $vettingProcedure): void
     {
-        $this->session->set(sprintf('%s:%s', $this->namespace, $vettingProcedure->getId()), $vettingProcedure);
+        $this->requestStack->getSession()->set(sprintf('%s:%s', $this->namespace, $vettingProcedure->getId()), $vettingProcedure);
     }
 
-    public function retrieve($id)
+    public function retrieve(string $id): ?VettingProcedure
     {
-        if (!is_string($id)) {
-            throw InvalidArgumentException::invalidType('string', 'uuid', $id);
-        }
-
-        return $this->session->get(sprintf('%s:%s', $this->namespace, $id));
+        return $this->requestStack->getSession()->get(sprintf('%s:%s', $this->namespace, $id));
     }
 
-    /**
-     * @param string $id
-     * @return void
-     */
-    public function remove($id)
+    public function remove(string $id): mixed
     {
-        if (!is_string($id)) {
-            throw InvalidArgumentException::invalidType('string', 'uuid', $id);
-        }
-
-        return $this->session->remove(sprintf('%s:%s', $this->namespace, $id));
+        return $this->requestStack->getSession()->remove(sprintf('%s:%s', $this->namespace, $id));
     }
 }
