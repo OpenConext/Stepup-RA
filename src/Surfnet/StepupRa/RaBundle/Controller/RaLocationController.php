@@ -68,7 +68,7 @@ final class RaLocationController extends AbstractController
             $institution = $institutionParameter;
         }
 
-        // Only show the form if more than one institutions where found.
+        // Only show the form if more than one institution where found.
         if (count($choices) > 1) {
             $command = new SelectInstitutionCommand();
             $command->institution = $institution;
