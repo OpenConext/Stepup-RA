@@ -1,4 +1,6 @@
 twig:
+  paths:
+    '%kernel.project_dir%/templates': SurfnetStepupRaRa
   debug:            "%kernel.debug%"
   strict_variables: "%kernel.debug%"
   exception_controller: SurfnetStepupRaRaBundle:Exception:show
@@ -7,4 +9,4 @@ twig:
     timezone: "%date_timezone%"
   globals:
     global_view_parameters: "@ra.service.global_view_parameters"
-  form_themes: ['bootstrap_3_horizontal_layout.html.twig', '@SurfnetStepupRaRa/form/fields.html.twig']
+  form_themes: ['bootstrap_3_horizontal_layout.html.twig', 'form/fields.html.twig']

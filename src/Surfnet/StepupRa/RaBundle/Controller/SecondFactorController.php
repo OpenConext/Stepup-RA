@@ -192,7 +192,7 @@ final class SecondFactorController extends AbstractController
         $logger->notice(sprintf('Audit log yielded "%d" results, rendering page', $auditLog->getTotalItems()));
 
         return $this->render(
-            'SurfnetStepupRaRaBundle:second_factor:audit_log.html.twig',
+            'second_factor/audit_log.html.twig',
             [
                 'pagination' => $pagination,
                 'auditLog'   => $auditLog,

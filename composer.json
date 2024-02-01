@@ -26,16 +26,16 @@
         "surfnet/stepup-bundle": "^5.0",
         "surfnet/stepup-middleware-client-bundle": "^4.1",
         "surfnet/stepup-saml-bundle": "^4.3.2",
-        "symfony/asset": "4.4.*",
-        "symfony/expression-language": "4.4.*",
+        "symfony/asset": "4.4.* || ^5.1",
+        "symfony/expression-language": "4.4.* || ^5.1",
         "symfony/flex": "^v2.4.3",
         "symfony/form": "4.4.* || ^5.1",
         "symfony/http-foundation": "^5.0",
         "symfony/monolog-bundle": "^3.5",
-        "symfony/security-bundle": "4.4.*",
-        "symfony/translation": "4.4.*",
+        "symfony/security-bundle": "4.4.* || ^5.1",
+        "symfony/translation": "4.4.* || ^5.1",
         "symfony/twig-bundle": "4.4.* |^5.1",
-        "symfony/validator": "4.4.*",
+        "symfony/validator": "4.4.* || ^5.1",
         "symfony/webpack-encore-bundle": "^1.7",
         "twbs/bootstrap": "~3.3.0",
         "twig/extensions": "~1.5",
@@ -44,18 +44,18 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.0",
-        "mockery/mockery": "~1.0",
+        "mockery/mockery": "^1.0",
         "overtrue/phplint": "^2.3",
         "phpmd/phpmd": "^2.6",
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.19.5",
         "slevomat/coding-standard": "^8.13",
         "squizlabs/php_codesniffer": "^3.4",
-        "symfony/dotenv": "4.4.*",
+        "symfony/dotenv": "^5.1",
         "symfony/maker-bundle": "^1.19",
-        "symfony/phpunit-bridge": "^3.0",
-        "symfony/stopwatch": "4.4.*",
-        "symfony/web-profiler-bundle": "4.4.*"
+        "symfony/phpunit-bridge": "^6.0",
+        "symfony/stopwatch": "^5.1",
+        "symfony/web-profiler-bundle": "4.4.* || ^5.1"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -133,13 +133,13 @@
         "src-dir": "src/Surfnet",
         "incenteev-parameters": [
             {
-                "file": "config/legacy/parameters.yaml"
+                "file": "config/openconext/parameters.yaml"
             },
             {
-                "file": "config/legacy/samlstepupproviders_parameters.yaml"
+                "file": "config/openconext/samlstepupproviders_parameters.yaml"
             },
             {
-                "file": "config/legacy/global_view_parameters.yaml"
+                "file": "config/openconext/global_view_parameters.yaml"
             }
         ]
     }

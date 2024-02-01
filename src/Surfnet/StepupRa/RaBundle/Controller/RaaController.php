@@ -74,7 +74,7 @@ class RaaController extends AbstractController
         }
 
         return $this->render(
-            '@SurfnetStepupRaRa/institution_configuration/overview.html.twig',
+            'institution_configuration/overview.html.twig',
             [
                 'configuration' => (array)$configuration,
                 'form' => isset($form) ? $form->createView() : null,

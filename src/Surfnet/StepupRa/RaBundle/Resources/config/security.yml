@@ -91,7 +91,7 @@ services:
         public: true
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\Session\SessionStorage
         arguments:
-            - "@session"
+            - "@request_stack"
 
     ra.security.authentication.session.session_lifetime_guard:
         public: false
