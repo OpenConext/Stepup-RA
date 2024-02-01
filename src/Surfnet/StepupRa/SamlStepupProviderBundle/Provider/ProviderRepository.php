@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -24,16 +26,16 @@ use Surfnet\StepupRa\SamlStepupProviderBundle\Exception\UnknownProviderException
 final class ProviderRepository
 {
     /**
-     * @var []Provider
+     * @var Provider[]
      */
-    private $providers;
+    private array $providers;
 
     public function __construct()
     {
         $this->providers = [];
     }
 
-    public function addProvider(Provider $provider)
+    public function addProvider(Provider $provider): void
     {
         if ($this->has($provider->getName())) {
             throw new InvalidConfigurationException(sprintf(
@@ -45,20 +47,12 @@ final class ProviderRepository
         $this->providers[$provider->getName()] = $provider;
     }
 
-    /**
-     * @param string $providerName
-     * @return bool
-     */
-    public function has($providerName)
+    public function has(string $providerName): bool
     {
         return array_key_exists($providerName, $this->providers);
     }
 
-    /**
-     * @param string $providerName
-     * @return Provider
-     */
-    public function get($providerName)
+    public function get(string $providerName): Provider
     {
         if (!$this->has($providerName)) {
             throw UnknownProviderException::create($providerName, array_keys($this->providers));
