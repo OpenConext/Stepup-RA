@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -33,13 +35,10 @@ class SecondFactorService
     ) {
     }
 
-    /**
-     * @param string $registrationCode
-     * @param string $actorInstitution
-     * @param string $actorId
-     * @return null|VerifiedSecondFactor
-     */
-    public function findVerifiedSecondFactorByRegistrationCode($registrationCode, $actorId)
+    public function findVerifiedSecondFactorByRegistrationCode(
+        string $registrationCode,
+        string $actorId,
+    ): ?VerifiedSecondFactor
     {
         $query = new VerifiedSecondFactorSearchQuery();
         $query->setActorId($actorId);
