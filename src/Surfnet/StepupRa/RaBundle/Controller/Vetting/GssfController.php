@@ -19,13 +19,21 @@
 namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
 use Exception;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use JMS\TranslationBundle\Annotation\Ignore;
+use Psr\Log\LoggerInterface;
+use Surfnet\SamlBundle\Http\PostBinding;
+use Surfnet\SamlBundle\Http\RedirectBinding;
 use Surfnet\SamlBundle\Http\XMLResponse;
+use Surfnet\SamlBundle\Metadata\MetadataFactory;
+use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
 use Surfnet\SamlBundle\SAML2\AuthnRequestFactory;
 use Surfnet\SamlBundle\SAML2\Response\Assertion\InResponseTo;
+use Surfnet\StepupBundle\Value\Provider\ViewConfigCollection;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Form\Type\InitiateGssfType;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
+use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\Provider;
+use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ProviderRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -37,47 +45,48 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class GssfController extends SecondFactorController
 {
+    public function __construct(
+        private readonly ProviderRepository   $providerRepository,
+        private readonly VettingService       $vettingService,
+        private readonly LoggerInterface      $logger,
+        private readonly RedirectBinding      $redirectBinding,
+        private readonly PostBinding          $postBinding,
+        private readonly AttributeDictionary  $attributeDictionary,
+        private readonly ViewConfigCollection $collection,
+    ) {
+    }
+    
     /**
      * Initiates verification of a GSSF.
-     *
-     * @Template
-     * @param string $procedureId
-     * @param string $provider
-     * @return array|Response
      */
-    public function initiate($procedureId, $provider)
+    public function initiate(string $procedureId, string $provider): Response
     {
         $this->assertSecondFactorEnabled($provider);
 
         $this->denyAccessUnlessGranted('ROLE_RA');
 
-        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
-        $logger->notice('Showing Initiate GSSF Verification Screen', ['provider' => $provider]);
+        $procedureLogger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
+        $procedureLogger->notice('Showing Initiate GSSF Verification Screen', ['provider' => $provider]);
 
-        if (!$this->getVettingService()->hasProcedure($procedureId)) {
-            $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
+        if (!$this->vettingService->hasProcedure($procedureId)) {
+            $procedureLogger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
             throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
         }
 
         return $this->renderInitiateForm($procedureId, $this->getProvider($provider)->getName());
     }
 
-    /**
-     * @param string $procedureId
-     * @param string $provider
-     * @return array|Response
-     */
-    public function authenticate($procedureId, $provider)
+    public function authenticate(string $procedureId, string $provider): Response
     {
         $this->assertSecondFactorEnabled($provider);
 
         $this->denyAccessUnlessGranted('ROLE_RA');
 
-        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
-        $logger->notice('Generating GSSF verification request', ['provider' => $provider]);
+        $procedureLogger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
+        $procedureLogger->notice('Generating GSSF verification request', ['provider' => $provider]);
 
-        if (!$this->getVettingService()->hasProcedure($procedureId)) {
-            $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
+        if (!$this->vettingService->hasProcedure($procedureId)) {
+            $procedureLogger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
             throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
         }
 
@@ -88,17 +97,12 @@ final class GssfController extends SecondFactorController
             $provider->getRemoteIdentityProvider(),
         );
 
-        /** @var \Surfnet\StepupRa\RaBundle\Service\VettingService $vettingService */
-        $vettingService = $this->get('ra.service.vetting');
-        $authnRequest->setSubject($vettingService->getSecondFactorIdentifier($procedureId));
+        $authnRequest->setSubject($this->vettingService->getSecondFactorIdentifier($procedureId));
 
         $stateHandler = $provider->getStateHandler();
         $stateHandler->setRequestId($authnRequest->getRequestId());
 
-        /** @var \Surfnet\SamlBundle\Http\RedirectBinding $redirectBinding */
-        $redirectBinding = $this->get('surfnet_saml.http.redirect_binding');
-
-        $logger->notice(
+        $procedureLogger->notice(
             sprintf(
                 'Sending AuthnRequest with request ID: "%s" to GSSP "%s" at "%s"',
                 $authnRequest->getRequestId(),
@@ -108,36 +112,30 @@ final class GssfController extends SecondFactorController
             ['provider' => $provider],
         );
 
-        $vettingService->startGssfVerification($procedureId);
+        $this->vettingService->startGssfVerification($procedureId);
 
-        return $redirectBinding->createRedirectResponseFor($authnRequest);
+        return $this->redirectBinding->createResponseFor($authnRequest);
     }
 
-    /**
-     * @param string  $provider
-     * @return array|Response
-     */
-    public function verify(Request $httpRequest, $provider)
+    public function verify(Request $httpRequest, string $provider): Response
     {
         $this->assertSecondFactorEnabled($provider);
 
         $provider = $this->getProvider($provider);
 
-        $this->get('logger')->notice(
+        $this->logger->notice(
             sprintf('Received GSSP "%s" SAMLResponse through Gateway, attempting to process', $provider->getName()),
         );
 
         try {
-            /** @var \Surfnet\SamlBundle\Http\PostBinding $postBinding */
-            $postBinding = $this->get('surfnet_saml.http.post_binding');
-            $assertion = $postBinding->processResponse(
+            $assertion = $this->postBinding->processResponse(
                 $httpRequest,
                 $provider->getRemoteIdentityProvider(),
                 $provider->getServiceProvider(),
             );
         } catch (Exception $exception) {
             $provider->getStateHandler()->clear();
-            $this->getLogger()->error(
+            $this->logger->error(
                 sprintf('Could not process received Response, error: "%s"', $exception->getMessage()),
             );
 
@@ -150,7 +148,7 @@ final class GssfController extends SecondFactorController
         $provider->getStateHandler()->clear();
 
         if (!InResponseTo::assertEquals($assertion, $expectedResponseTo)) {
-            $this->getLogger()->critical(sprintf(
+            $this->logger->critical(sprintf(
                 'Received Response with unexpected InResponseTo: %s',
                 ($expectedResponseTo ? 'expected "' . $expectedResponseTo . '"' : ' no response expected'),
             ));
@@ -158,20 +156,16 @@ final class GssfController extends SecondFactorController
             throw new BadRequestHttpException('Received unexpected SAML response, cannot return to vetting procedure');
         }
 
-        $this->get('logger')->notice(
+        $this->logger->notice(
             sprintf('Processed GSSP "%s" SAMLResponse received through Gateway successfully', $provider->getName()),
         );
+        
+        $gssfId = $this->attributeDictionary->translate($assertion)->getNameID();
 
-        /** @var \Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary $attributeDictionary */
-        $attributeDictionary = $this->get('surfnet_saml.saml.attribute_dictionary');
-        $gssfId = $attributeDictionary->translate($assertion)->getNameID();
-
-        /** @var \Surfnet\StepupRa\RaBundle\Service\VettingService $vettingService */
-        $vettingService = $this->get('ra.service.vetting');
-        $result = $vettingService->verifyGssfId($gssfId);
+        $result = $this->vettingService->verifyGssfId($gssfId);
 
         if ($result->isSuccess()) {
-            $this->getLogger()->notice('GSSP possession proven successfully');
+            $this->logger->notice('GSSP possession proven successfully');
 
             return $this->redirectToRoute('ra_vetting_verify_identity', ['procedureId' => $result->getProcedureId()]);
         }
@@ -182,7 +176,7 @@ final class GssfController extends SecondFactorController
             throw new RuntimeException('Procedure ID for GSSF verification procedure could not be recovered.');
         }
 
-        $this->getLogger()->notice(
+        $this->logger->notice(
             'Unable to prove possession of correct GSSF: ' .
             'GSSF ID registered in Self-Service does not match current GSSF ID',
         );
@@ -194,66 +188,35 @@ final class GssfController extends SecondFactorController
         );
     }
 
-    /**
-     * @param string $provider
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function metadata($provider)
+    public function metadata(string $provider): XMLResponse
     {
         $this->assertSecondFactorEnabled($provider);
 
         $provider = $this->getProvider($provider);
 
-        /** @var \Surfnet\SamlBundle\Metadata\MetadataFactory $factory */
-        $factory = $this->get('gssp.provider.' . $provider->getName() . '.metadata.factory');
+        /** @var MetadataFactory $factory */
+        $factory = $this->container->get('gssp.provider.' . $provider->getName() . '.metadata.factory');
 
         return new XMLResponse($factory->generate());
     }
 
     /**
-     * @param string $provider
-     * @return \Surfnet\StepupRa\SamlStepupProviderBundle\Provider\Provider
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @throws NotFoundHttpException
      */
-    private function getProvider($provider)
+    private function getProvider(string $provider): Provider
     {
-        /** @var \Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ProviderRepository $providerRepository */
-        $providerRepository = $this->get('gssp.provider_repository');
-
-        if (!$providerRepository->has($provider)) {
-            $this->get('logger')->info(sprintf('Requested GSSP "%s" does not exist or is not registered', $provider));
+        if (!$this->providerRepository->has($provider)) {
+            $this->logger->info(sprintf('Requested GSSP "%s" does not exist or is not registered', $provider));
 
             throw new NotFoundHttpException('Requested provider does not exist');
         }
 
-        return $providerRepository->get($provider);
+        return $this->providerRepository->get($provider);
     }
-
-    /**
-     * @return \Psr\Log\LoggerInterface
-     */
-    private function getLogger()
+    private function renderInitiateForm(string $procedureId, string $provider, array $parameters = []): Response
     {
-        return $this->get('logger');
-    }
-
-    /**
-     * @return VettingService
-     */
-    private function getVettingService()
-    {
-        return $this->get('ra.service.vetting');
-    }
-
-    /**
-     * @param string $procedureId
-     * @param string $provider
-     * @return Response
-     */
-    private function renderInitiateForm($procedureId, $provider, array $parameters = [])
-    {
-        $collection = $this->get("surfnet_stepup.provider.collection");
-        $secondFactorConfig = $collection->getByIdentifier($provider);
+        
+        $secondFactorConfig = $this->collection->getByIdentifier($provider);
 
         $form = $this->createForm(
             InitiateGssfType::class,
