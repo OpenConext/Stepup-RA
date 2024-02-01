@@ -43,7 +43,7 @@ final class SecondFactorController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_RA');
 
         $identity = $this->getCurrentUser();
-        $this->get('logger')->notice('Starting search for second factors');
+        $this->container->get('logger')->notice('Starting search for second factors');
 
         $command = new SearchRaSecondFactorsCommand();
         $command->actorId = $identity->id;
@@ -66,7 +66,7 @@ final class SecondFactorController extends AbstractController
         $secondFactorCount = $secondFactors->getTotalItems();
 
         if ($form->isSubmitted() && $form->getClickedButton()->getName() == 'export') {
-            $this->get('logger')->notice('Forwarding to export second factors action');
+            $this->container->get('logger')->notice('Forwarding to export second factors action');
             return $this->forward('\Surfnet\StepupRa\RaBundle\Controller\SecondFactorController::export', ['command' => $command]);
         }
 
@@ -79,7 +79,7 @@ final class SecondFactorController extends AbstractController
 
         $revocationForm = $this->createForm(RevokeSecondFactorType::class, new RevokeSecondFactorCommand());
 
-        $this->get('logger')->notice(sprintf(
+        $this->container->get('logger')->notice(sprintf(
             'Searching for second factors yielded "%d" results',
             $secondFactors->getTotalItems(),
         ));
@@ -100,7 +100,7 @@ final class SecondFactorController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
 
-        $this->get('logger')->notice('Starting export of searched second factors');
+        $this->container->get('logger')->notice('Starting export of searched second factors');
 
         $exportCommand = ExportRaSecondFactorsCommand::fromSearchCommand($command);
 
@@ -111,7 +111,7 @@ final class SecondFactorController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
 
         $logger->notice('Received request to revoke Second Factor');
 
@@ -128,8 +128,8 @@ final class SecondFactorController extends AbstractController
             $command->currentUserId,
         ));
 
-        $translator = $this->get('translator');
-        $flashBag = $this->get('session')->getFlashBag();
+        $translator = $this->container->get('translator');
+        $flashBag = $this->container->get('session')->getFlashBag();
         if ($this->getSecondFactorService()->revoke($command)) {
             $logger->notice('Second Factor revocation Succeeded');
             $flashBag->add('success', $translator->trans('ra.second_factor.revocation.revoked'));
@@ -146,7 +146,7 @@ final class SecondFactorController extends AbstractController
     public function auditLog(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
 
         $identityId = $request->get('identityId');
 
@@ -197,7 +197,7 @@ final class SecondFactorController extends AbstractController
      */
     private function getSecondFactorService()
     {
-        return $this->get('ra.service.ra_second_factor');
+        return $this->container->get('ra.service.ra_second_factor');
     }
 
     /**
@@ -205,7 +205,7 @@ final class SecondFactorController extends AbstractController
      */
     private function getIdentityService()
     {
-        return $this->get('ra.service.identity');
+        return $this->container->get('ra.service.identity');
     }
 
     /**
@@ -213,7 +213,7 @@ final class SecondFactorController extends AbstractController
      */
     private function getAuditLogService()
     {
-        return $this->get('ra.service.audit_log');
+        return $this->container->get('ra.service.audit_log');
     }
 
     /**
@@ -221,7 +221,7 @@ final class SecondFactorController extends AbstractController
      */
     private function getCurrentUser()
     {
-        return $this->get('security.token_storage')->getToken()->getUser();
+        return $this->container->get('security.token_storage')->getToken()->getUser();
     }
 
     /**
@@ -229,6 +229,6 @@ final class SecondFactorController extends AbstractController
      */
     private function getPaginator()
     {
-        return $this->get('knp_paginator');
+        return $this->container->get('knp_paginator');
     }
 }

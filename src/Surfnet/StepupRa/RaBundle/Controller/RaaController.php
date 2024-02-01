@@ -34,7 +34,7 @@ class RaaController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
 
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
         /** @var Identity $identity */
         $identity = $this->getUser();
 
@@ -88,7 +88,7 @@ class RaaController extends AbstractController
      */
     private function getInstitutionConfigurationOptionsService()
     {
-        return $this->get('ra.service.institution_configuration_options');
+        return $this->container->get('ra.service.institution_configuration_options');
     }
 
     /**
@@ -96,7 +96,7 @@ class RaaController extends AbstractController
      */
     private function getProfileService()
     {
-        return $this->get('ra.service.profile');
+        return $this->container->get('ra.service.profile');
     }
 
     /**
@@ -104,6 +104,6 @@ class RaaController extends AbstractController
      */
     private function getInstitutionListingService()
     {
-        return $this->get('ra.service.institution_listing');
+        return $this->container->get('ra.service.institution_listing');
     }
 }

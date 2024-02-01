@@ -30,12 +30,12 @@ class SamlController extends AbstractController
     public function consumeAssertion(Request $httpRequest): Response
     {
         /** @var PostBinding $postBinding */
-        $postBinding = $this->get('surfnet_saml.http.post_binding');
+        $postBinding = $this->container->get('surfnet_saml.http.post_binding');
 
         $assertion = $postBinding->processResponse(
             $httpRequest,
-            $this->get('surfnet_saml.remote.idp'),
-            $this->get('surfnet_saml.hosted.service_provider'),
+            $this->container->get('surfnet_saml.remote.idp'),
+            $this->container->get('surfnet_saml.hosted.service_provider'),
         );
         return $this->render('saml/consume_assertion.html.twig',
             ['assertion' => $assertion]);
@@ -44,7 +44,7 @@ class SamlController extends AbstractController
     public function metadata(): XMLResponse
     {
         /** @var MetadataFactory $metadataFactory */
-        $metadataFactory = $this->get('surfnet_saml.metadata_factory');
+        $metadataFactory = $this->container->get('surfnet_saml.metadata_factory');
 
         return new XMLResponse($metadataFactory->generate());
     }

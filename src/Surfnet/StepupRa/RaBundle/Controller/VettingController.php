@@ -53,7 +53,7 @@ class VettingController extends AbstractController
     public function startProcedure(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
         $identity = $this->getIdentity();
 
         $logger->notice('Vetting Procedure Search started');
@@ -97,7 +97,7 @@ class VettingController extends AbstractController
         }
 
         /** @var SamlToken $token */
-        $token = $this->get('security.token_storage')->getToken();
+        $token = $this->container->get('security.token_storage')->getToken();
         $command->authorityId = $this->getIdentity()->id;
         $command->authorityLoa = $token->getLoa();
         $command->secondFactor = $secondFactor;
@@ -132,13 +132,13 @@ class VettingController extends AbstractController
 
         $procedureId = $this->getVettingService()->startProcedure($command);
 
-        $this->get('ra.procedure_logger')
+        $this->container->get('ra.procedure_logger')
             ->forProcedure($procedureId)
             ->notice(sprintf('Starting new Vetting Procedure for second factor of type "%s"', $secondFactor->type));
 
 
         if ($this->getVettingService()->isProvePossessionSkippable($procedureId)) {
-            $this->get('ra.procedure_logger')
+            $this->container->get('ra.procedure_logger')
                 ->forProcedure($procedureId)
                 ->notice(sprintf('Vetting Procedure for second factor of type "%s" skips the possession proven step', $secondFactor->type));
 
@@ -167,7 +167,7 @@ class VettingController extends AbstractController
 
     public function cancelProcedure($procedureId)
     {
-        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
+        $logger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
 
         if (!$this->getVettingService()->hasProcedure($procedureId)) {
             $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
@@ -175,7 +175,7 @@ class VettingController extends AbstractController
         }
 
         $this->getVettingService()->cancelProcedure($procedureId);
-        $this->addFlash('info', $this->get('translator')->trans('ra.vetting.flash.cancelled'));
+        $this->addFlash('info', $this->container->get('translator')->trans('ra.vetting.flash.cancelled'));
 
         return $this->redirectToRoute('ra_vetting_search');
     }
@@ -192,7 +192,7 @@ class VettingController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 
-        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
+        $logger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
         $logger->notice('Verify Identity Form requested');
 
         if (!$this->getVettingService()->hasProcedure($procedureId)) {
@@ -207,7 +207,7 @@ class VettingController extends AbstractController
         $cancelButton = $form->get('cancel');
         if ($cancelButton->isClicked()) {
             $this->getVettingService()->cancelProcedure($procedureId);
-            $this->addFlash('info', $this->get('translator')->trans('ra.vetting.flash.cancelled'));
+            $this->addFlash('info', $this->container->get('translator')->trans('ra.vetting.flash.cancelled'));
 
             return $this->redirectToRoute('ra_vetting_search');
         }
@@ -232,7 +232,7 @@ class VettingController extends AbstractController
         try {
             $vettingService->verifyIdentity($procedureId, $command);
         } catch (DomainException $e) {
-            $this->get('logger')->error(
+            $this->container->get('logger')->error(
                 "RA attempted to verify identity, but the vetting procedure does not allow it",
                 ['exception' => $e, 'procedure' => $procedureId],
             );
@@ -286,7 +286,7 @@ class VettingController extends AbstractController
      */
     private function getSecondFactorService()
     {
-        return $this->get('ra.service.second_factor');
+        return $this->container->get('ra.service.second_factor');
     }
 
     /**
@@ -294,7 +294,7 @@ class VettingController extends AbstractController
      */
     private function getSecondFactorTypeService()
     {
-        return $this->get('surfnet_stepup.service.second_factor_type');
+        return $this->container->get('surfnet_stepup.service.second_factor_type');
     }
 
     /**
@@ -302,7 +302,7 @@ class VettingController extends AbstractController
      */
     private function getVettingService()
     {
-        return $this->get('ra.service.vetting');
+        return $this->container->get('ra.service.vetting');
     }
 
     /**
@@ -310,7 +310,7 @@ class VettingController extends AbstractController
      */
     private function getIdentity()
     {
-        return $this->get('security.token_storage')->getToken()->getUser();
+        return $this->container->get('security.token_storage')->getToken()->getUser();
     }
 
     /**
@@ -318,6 +318,6 @@ class VettingController extends AbstractController
      */
     private function getTranslator()
     {
-        return $this->get('translator');
+        return $this->container->get('translator');
     }
 }

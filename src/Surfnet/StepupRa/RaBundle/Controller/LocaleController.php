@@ -36,7 +36,7 @@ final class LocaleController extends AbstractController
         // @see https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php#L878
         $domain = $request->getSchemeAndHttpHost() . '/';
         if (!str_starts_with($returnUrl, $domain)) {
-            $this->get('logger')->error(sprintf(
+            $this->container->get('logger')->error(sprintf(
                 'Identity "%s" used illegal return-url for redirection after changing locale, aborting request',
                 $this->getIdentity()->id,
             ));
@@ -45,7 +45,7 @@ final class LocaleController extends AbstractController
         }
 
         /** @var LoggerInterface $logger */
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
         $logger->info('Switching locale...');
 
         $identity = $this->getIdentity();
@@ -64,14 +64,14 @@ final class LocaleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && !$form->isValid()) {
-            $this->addFlash('error', $this->get('translator')->trans('ra.flash.invalid_switch_locale_form'));
+            $this->addFlash('error', $this->container->get('translator')->trans('ra.flash.invalid_switch_locale_form'));
             $logger->error('The switch locale form unexpectedly contained invalid data');
             return $this->redirect($returnUrl);
         }
 
-        $service = $this->get('ra.service.identity');
+        $service = $this->container->get('ra.service.identity');
         if (!$service->switchLocale($command)) {
-            $this->addFlash('error', $this->get('translator')->trans('ra.flash.error_while_switching_locale'));
+            $this->addFlash('error', $this->container->get('translator')->trans('ra.flash.error_while_switching_locale'));
             $logger->error('An error occurred while switching locales');
             return $this->redirect($returnUrl);
         }
@@ -86,6 +86,6 @@ final class LocaleController extends AbstractController
      */
     private function getIdentity()
     {
-        return $this->get('security.token_storage')->getToken()->getUser();
+        return $this->container->get('security.token_storage')->getToken()->getUser();
     }
 }

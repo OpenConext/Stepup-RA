@@ -50,7 +50,7 @@ final class RaLocationController extends AbstractController
         $institutionParameter = $request->get('institution');
 
         $identity = $this->getCurrentUser();
-        $this->get('logger')->notice('Starting search for locations');
+        $this->container->get('logger')->notice('Starting search for locations');
 
         $profile = $this->getProfileService()->findByIdentityId($identity->id);
 
@@ -89,7 +89,7 @@ final class RaLocationController extends AbstractController
 
         $removalForm = $this->createForm(RemoveRaLocationType::class, new RemoveRaLocationCommand());
 
-        $this->get('logger')->notice(sprintf(
+        $this->container->get('logger')->notice(sprintf(
             'Searching for RA locations yielded "%d" results',
             $locations->getTotalItems(),
         ));
@@ -108,7 +108,7 @@ final class RaLocationController extends AbstractController
     public function create(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
 
         $institution = $request->get('institution');
 
@@ -127,7 +127,7 @@ final class RaLocationController extends AbstractController
             if ($success) {
                 $this->addFlash(
                     'success',
-                    $this->get('translator')->trans('ra.create_ra_location.created'),
+                    $this->container->get('translator')->trans('ra.create_ra_location.created'),
                 );
 
                 $logger->debug('RA Location added, redirecting to the RA location overview');
@@ -146,7 +146,7 @@ final class RaLocationController extends AbstractController
     public function change(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
 
         $requestedLocationId = $request->get('locationId');
         $raLocation = $this->getRaLocationService()->find($requestedLocationId);
@@ -176,7 +176,7 @@ final class RaLocationController extends AbstractController
             if ($success) {
                 $this->addFlash(
                     'success',
-                    $this->get('translator')->trans('ra.create_ra_location.changed'),
+                    $this->container->get('translator')->trans('ra.create_ra_location.changed'),
                 );
 
                 $logger->debug('RA Location added, redirecting to the RA location overview');
@@ -196,7 +196,7 @@ final class RaLocationController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 
-        $logger = $this->get('logger');
+        $logger = $this->container->get('logger');
 
         $logger->notice('Received request to remove RA location');
 
@@ -213,8 +213,8 @@ final class RaLocationController extends AbstractController
             $command->currentUserId,
         ));
 
-        $translator = $this->get('translator');
-        $flashBag = $this->get('session')->getFlashBag();
+        $translator = $this->container->get('translator');
+        $flashBag = $this->container->get('session')->getFlashBag();
         if ($this->getRaLocationService()->remove($command)) {
             $logger->notice('RA Location removal Succeeded');
             $flashBag->add('success', $translator->trans('ra.ra_location.revocation.removed'));
@@ -230,21 +230,21 @@ final class RaLocationController extends AbstractController
 
     private function getRaLocationService(): RaLocationService
     {
-        return $this->get('ra.service.ra_location');
+        return $this->container->get('ra.service.ra_location');
     }
 
     private function getCurrentUser(): Identity
     {
-        return $this->get('security.token_storage')->getToken()->getUser();
+        return $this->container->get('security.token_storage')->getToken()->getUser();
     }
 
     private function getProfileService(): ProfileService
     {
-        return $this->get('ra.service.profile');
+        return $this->container->get('ra.service.profile');
     }
 
     private function getInstitutionListingService(): InstitutionListingService
     {
-        return $this->get('ra.service.institution_listing');
+        return $this->container->get('ra.service.institution_listing');
     }
 }

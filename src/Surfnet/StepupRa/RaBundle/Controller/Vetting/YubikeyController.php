@@ -40,7 +40,7 @@ class YubikeyController extends SecondFactorController
 
         $this->denyAccessUnlessGranted('ROLE_RA');
 
-        $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
+        $logger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
         $logger->notice('Requested Yubikey Verfication');
 
         if (!$this->getVettingService()->hasProcedure($procedureId)) {
@@ -81,6 +81,6 @@ class YubikeyController extends SecondFactorController
      */
     private function getVettingService()
     {
-        return $this->get('ra.service.vetting');
+        return $this->container->get('ra.service.vetting');
     }
 }

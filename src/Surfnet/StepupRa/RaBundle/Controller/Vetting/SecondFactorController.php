@@ -28,7 +28,7 @@ abstract class SecondFactorController extends AbstractController
     protected function assertSecondFactorEnabled($type)
     {
         if (!in_array($type, $this->getParameter('surfnet_stepup_ra.enabled_second_factors'))) {
-            $this->get('logger')->warning('A controller action was called for a disabled second factor');
+            $this->container->get('logger')->warning('A controller action was called for a disabled second factor');
 
             throw $this->createNotFoundException();
         }
