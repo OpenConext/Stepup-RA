@@ -22,31 +22,18 @@ use GuzzleHttp\Client;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupBundle\Http\JsonHelper;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyOtpCommand;
+use RuntimeException;
 
 class YubikeyService
 {
     /**
-     * @var Client
-     */
-    private $guzzleClient;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * @param Client $guzzleClient A Guzzle client configured with the Yubikey API base URL and authentication.
-     * @param LoggerInterface $logger
      */
-    public function __construct(Client $guzzleClient, LoggerInterface $logger)
+    public function __construct(private readonly Client $guzzleClient, private readonly LoggerInterface $logger)
     {
-        $this->guzzleClient = $guzzleClient;
-        $this->logger = $logger;
     }
 
     /**
-     * @param VerifyYubikeyOtpCommand $command
      * @return YubikeyVerificationResult
      */
     public function verify(VerifyYubikeyOtpCommand $command)
@@ -69,7 +56,7 @@ class YubikeyService
 
         try {
             $result = JsonHelper::decode((string) $response->getBody());
-        } catch (\RuntimeException $e) {
+        } catch (RuntimeException) {
             $this->logger->error('Yubikey OTP verification failed; server responded with malformed JSON.');
 
             return new YubikeyVerificationResult(false, true);

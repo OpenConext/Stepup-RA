@@ -23,6 +23,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 
 class StartVettingProcedureType extends AbstractType
 {
@@ -31,12 +32,7 @@ class StartVettingProcedureType extends AbstractType
         $builder->add('registrationCode', TextType::class, [
             'label' => /** @Ignore */ false,
             'required' => true,
-            'attr' => array(
-                'autofocus' => true,
-                'autocomplete' => 'off',
-                'placeholder' => 'ra.form.start_vetting_procedure.enter_activation_code_here',
-                'class' => 'fa-search',
-            )
+            'attr' => ['autofocus' => true, 'autocomplete' => 'off', 'placeholder' => 'ra.form.start_vetting_procedure.enter_activation_code_here', 'class' => 'fa-search']
         ]);
         $builder->add('search', SubmitType::class, [
             'label' => 'ra.form.start_vetting_procedure.search',
@@ -47,7 +43,7 @@ class StartVettingProcedureType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand',
+            'data_class' => StartVettingProcedureCommand::class,
         ]);
     }
 

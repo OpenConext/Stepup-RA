@@ -36,34 +36,12 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 final class RecoveryTokenController extends AbstractController
 {
-    /**
-     * @var RecoveryTokenService
-     */
-    private $recoveryTokenService;
-
-    /**
-     * @var Paginator
-     */
-    private $paginator;
-
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        RecoveryTokenService $recoveryTokenService,
-        Paginator $paginator,
-        TokenStorageInterface $tokenStorage,
-        LoggerInterface $logger
+        private readonly RecoveryTokenService $recoveryTokenService,
+        private readonly Paginator $paginator,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->recoveryTokenService = $recoveryTokenService;
-        $this->paginator = $paginator;
-        $this->tokenStorage = $tokenStorage;
-        $this->logger = $logger;
     }
 
     public function searchAction(Request $request): Response
@@ -94,7 +72,7 @@ final class RecoveryTokenController extends AbstractController
         $pagination = $this->paginator->paginate(
             $recoveryTokens->getElements(),
             $recoveryTokens->getCurrentPage(),
-            $recoveryTokens->getItemsPerPage()
+            $recoveryTokens->getItemsPerPage(),
         );
         $pagination->setTotalItemCount($recoveryTokenCount);
 
@@ -102,7 +80,7 @@ final class RecoveryTokenController extends AbstractController
 
         $this->logger->notice(sprintf(
             'Searching for recovery tokens yielded "%d" results',
-            $recoveryTokenCount
+            $recoveryTokenCount,
         ));
 
         return $this->render(
@@ -116,7 +94,7 @@ final class RecoveryTokenController extends AbstractController
                 'orderBy' => $command->orderBy,
                 'orderDirection' => $command->orderDirection ?: 'asc',
                 'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',
-            ]
+            ],
         );
     }
 
@@ -136,7 +114,7 @@ final class RecoveryTokenController extends AbstractController
             'Sending middleware request to revoke recovery token "%s" belonging to "%s" on behalf of "%s"',
             $command->recoveryTokenId,
             $command->identityId,
-            $command->currentUserId
+            $command->currentUserId,
         ));
 
         if ($this->recoveryTokenService->revoke($command)) {

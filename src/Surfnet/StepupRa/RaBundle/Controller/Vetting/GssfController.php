@@ -85,7 +85,7 @@ final class GssfController extends SecondFactorController
 
         $authnRequest = AuthnRequestFactory::createNewRequest(
             $provider->getServiceProvider(),
-            $provider->getRemoteIdentityProvider()
+            $provider->getRemoteIdentityProvider(),
         );
 
         /** @var \Surfnet\StepupRa\RaBundle\Service\VettingService $vettingService */
@@ -103,9 +103,9 @@ final class GssfController extends SecondFactorController
                 'Sending AuthnRequest with request ID: "%s" to GSSP "%s" at "%s"',
                 $authnRequest->getRequestId(),
                 $provider->getName(),
-                $provider->getRemoteIdentityProvider()->getSsoUrl()
+                $provider->getRemoteIdentityProvider()->getSsoUrl(),
             ),
-            ['provider' => $provider]
+            ['provider' => $provider],
         );
 
         $vettingService->startGssfVerification($procedureId);
@@ -114,7 +114,6 @@ final class GssfController extends SecondFactorController
     }
 
     /**
-     * @param Request $httpRequest
      * @param string  $provider
      * @return array|Response
      */
@@ -125,7 +124,7 @@ final class GssfController extends SecondFactorController
         $provider = $this->getProvider($provider);
 
         $this->get('logger')->notice(
-            sprintf('Received GSSP "%s" SAMLResponse through Gateway, attempting to process', $provider->getName())
+            sprintf('Received GSSP "%s" SAMLResponse through Gateway, attempting to process', $provider->getName()),
         );
 
         try {
@@ -134,16 +133,16 @@ final class GssfController extends SecondFactorController
             $assertion = $postBinding->processResponse(
                 $httpRequest,
                 $provider->getRemoteIdentityProvider(),
-                $provider->getServiceProvider()
+                $provider->getServiceProvider(),
             );
         } catch (Exception $exception) {
             $provider->getStateHandler()->clear();
             $this->getLogger()->error(
-                sprintf('Could not process received Response, error: "%s"', $exception->getMessage())
+                sprintf('Could not process received Response, error: "%s"', $exception->getMessage()),
             );
 
             throw new BadRequestHttpException(
-                'Could not process received SAML response, cannot return to vetting procedure'
+                'Could not process received SAML response, cannot return to vetting procedure',
             );
         }
 
@@ -153,14 +152,14 @@ final class GssfController extends SecondFactorController
         if (!InResponseTo::assertEquals($assertion, $expectedResponseTo)) {
             $this->getLogger()->critical(sprintf(
                 'Received Response with unexpected InResponseTo: %s',
-                ($expectedResponseTo ? 'expected "' . $expectedResponseTo . '"' : ' no response expected')
+                ($expectedResponseTo ? 'expected "' . $expectedResponseTo . '"' : ' no response expected'),
             ));
 
             throw new BadRequestHttpException('Received unexpected SAML response, cannot return to vetting procedure');
         }
 
         $this->get('logger')->notice(
-            sprintf('Processed GSSP "%s" SAMLResponse received through Gateway successfully', $provider->getName())
+            sprintf('Processed GSSP "%s" SAMLResponse received through Gateway successfully', $provider->getName()),
         );
 
         /** @var \Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary $attributeDictionary */
@@ -185,13 +184,13 @@ final class GssfController extends SecondFactorController
 
         $this->getLogger()->notice(
             'Unable to prove possession of correct GSSF: ' .
-            'GSSF ID registered in Self-Service does not match current GSSF ID'
+            'GSSF ID registered in Self-Service does not match current GSSF ID',
         );
 
         return $this->renderInitiateForm(
             $result->getProcedureId(),
             $provider->getName(),
-            ['gssfIdMismatch' => true]
+            ['gssfIdMismatch' => true],
         );
     }
 
@@ -249,7 +248,6 @@ final class GssfController extends SecondFactorController
     /**
      * @param string $procedureId
      * @param string $provider
-     * @param array  $parameters
      * @return Response
      */
     private function renderInitiateForm($procedureId, $provider, array $parameters = [])
@@ -265,7 +263,7 @@ final class GssfController extends SecondFactorController
                 'provider' => $provider,
                 /** @Ignore from translation message extraction */
                 'label' => $secondFactorConfig->getInitiate()
-            ]
+            ],
         );
 
         $templateParameters = array_merge(
@@ -275,7 +273,7 @@ final class GssfController extends SecondFactorController
                 'procedureId' => $procedureId,
                 'provider' => $provider,
                 'secondFactorConfig' => $secondFactorConfig
-            ]
+            ],
         );
 
         return $this->render('SurfnetStepupRaRaBundle:vetting/gssf:initiate.html.twig', $templateParameters);

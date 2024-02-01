@@ -48,17 +48,12 @@ class Configuration implements ConfigurationInterface
                 ->info('The required LOA to be able to log in, should match the loa defined at the gateway')
                 ->isRequired()
                     ->validate()
-                        ->ifTrue(function ($value) {
-                            return !is_string($value);
-                        })
+                        ->ifTrue(fn($value) => !is_string($value))
                         ->thenInvalid('the required loa must be a string')
                     ->end()
             ->end();
     }
 
-    /**
-     * @param NodeBuilder $childNodes
-     */
     private function appendSecondFactorTypesConfiguration(NodeBuilder $childNodes)
     {
         $childNodes
@@ -78,9 +73,6 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
-    /**
-     * @param NodeBuilder $childNodes
-     */
     private function appendSessionConfiguration(NodeBuilder $childNodes)
     {
         $childNodes
@@ -94,9 +86,7 @@ class Configuration implements ConfigurationInterface
                         ->example('3600 -> 1 hour * 60 minutes * 60 seconds')
                         ->validate()
                             ->ifTrue(
-                                function ($lifetime) {
-                                    return !is_int($lifetime);
-                                }
+                                fn($lifetime) => !is_int($lifetime)
                             )
                             ->thenInvalid('max_absolute_lifetime must be an integer')
                         ->end()
@@ -106,14 +96,12 @@ class Configuration implements ConfigurationInterface
                         ->defaultValue(600)
                         ->info(
                             'The maximum relative lifetime of a session; the maximum allowed time between two '
-                            . 'interactions by the user'
+                            . 'interactions by the user',
                         )
                         ->example('600 -> 10 minutes * 60 seconds')
                         ->validate()
                             ->ifTrue(
-                                function ($lifetime) {
-                                    return !is_int($lifetime);
-                                }
+                                fn($lifetime) => !is_int($lifetime)
                             )
                             ->thenInvalid('max_relative_lifetime must be an integer')
                         ->end()
@@ -129,9 +117,7 @@ class Configuration implements ConfigurationInterface
                 ->info('The URL of Self Service, where a user can register and revoke second factors')
                 ->validate()
                     ->ifTrue(
-                        function ($url) {
-                            return filter_var($url, FILTER_VALIDATE_URL) === false;
-                        }
+                        fn($url) => filter_var($url, FILTER_VALIDATE_URL) === false
                     )
                     ->thenInvalid('self_service_url must be a valid url')
             ->end();

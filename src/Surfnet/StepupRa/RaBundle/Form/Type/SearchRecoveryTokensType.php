@@ -70,7 +70,7 @@ class SearchRecoveryTokensType extends AbstractType
             ButtonGroupType::class,
             [
                 'inherit_data' => true,
-            ]
+            ],
         )
         ->add('search', SubmitType::class, [
             'label' => 'ra.form.ra_search_recovery_tokens.button.search',

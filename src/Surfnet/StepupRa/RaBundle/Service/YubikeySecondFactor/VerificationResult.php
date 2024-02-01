@@ -23,15 +23,10 @@ use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 
 class VerificationResult
 {
-    const RESULT_PUBLIC_ID_MATCHED = 0;
-    const RESULT_PUBLIC_ID_DID_NOT_MATCH = 1;
-    const RESULT_OTP_VERIFICATION_FAILED = 2;
-    const RESULT_OTP_INVALID = 3;
-
-    /**
-     * @var \Surfnet\StepupBundle\Value\YubikeyPublicId|null
-     */
-    private $publicId;
+    final public const RESULT_PUBLIC_ID_MATCHED = 0;
+    final public const RESULT_PUBLIC_ID_DID_NOT_MATCH = 1;
+    final public const RESULT_OTP_VERIFICATION_FAILED = 2;
+    final public const RESULT_OTP_INVALID = 3;
 
     /**
      * @var int One of the RESULT constants.
@@ -42,7 +37,7 @@ class VerificationResult
      * @param int $result
      * @param YubikeyPublicId|null $publicId
      */
-    public function __construct($result, YubikeyPublicId $publicId = null)
+    public function __construct($result, private readonly ?YubikeyPublicId $publicId = null)
     {
         $acceptableResults = [
             self::RESULT_PUBLIC_ID_MATCHED,
@@ -56,7 +51,6 @@ class VerificationResult
         }
 
         $this->result = $result;
-        $this->publicId = $publicId;
     }
 
     public function didPublicIdMatch()

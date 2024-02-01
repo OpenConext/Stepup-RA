@@ -24,6 +24,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand;
 
 class ChangeRaRoleType extends AbstractType
 {
@@ -33,9 +34,7 @@ class ChangeRaRoleType extends AbstractType
             ->add('role', ChoiceType::class, [
                 'label'       => 'ra.management.form.change_ra_role.label.role',
                 'choices' => RaRoleChoiceList::create(),
-                'choice_value' => function ($choice) {
-                    return $choice;
-                },
+                'choice_value' => fn($choice) => $choice,
             ])
 
             ->add(
@@ -44,7 +43,7 @@ class ChangeRaRoleType extends AbstractType
                     ButtonGroupType::class,
                     [
                         'inherit_data' => true,
-                    ]
+                    ],
                 )
                 ->add('create_ra', SubmitType::class, [
                     'label' => 'ra.management.form.change_ra_role.label.save',
@@ -54,7 +53,7 @@ class ChangeRaRoleType extends AbstractType
                     'label' => 'ra.management.form.create_ra.label.cancel',
                     'route' => 'ra_management_ra_candidate_search',
                     'attr'  => ['class' => 'btn btn-link']
-                ])
+                ]),
             )
         ;
     }
@@ -62,7 +61,7 @@ class ChangeRaRoleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand'
+            'data_class' => ChangeRaRoleCommand::class
         ]);
     }
 

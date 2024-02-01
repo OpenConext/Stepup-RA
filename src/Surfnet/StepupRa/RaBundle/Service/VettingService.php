@@ -49,81 +49,26 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class VettingService
 {
-    const REGISTRATION_CODE_EXPIRED_ERROR =
+    final public const REGISTRATION_CODE_EXPIRED_ERROR =
         'Surfnet\Stepup\Exception\DomainException: Cannot vet second factor, the registration window is closed.';
-
-    /**
-     * @var \Surfnet\StepupBundle\Service\SmsSecondFactorServiceInterface
-     */
-    private $smsSecondFactorService;
-
-    /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorService
-     */
-    private $yubikeySecondFactorService;
-
-    /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\GssfService
-     */
-    private $gssfService;
-
-    /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var \Surfnet\StepupRa\RaBundle\Repository\VettingProcedureRepository
-     */
-    private $vettingProcedureRepository;
-
-    /**
-     * @var \Symfony\Component\Translation\TranslatorInterface
-     */
-    private $translator;
-
-    /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\IdentityService
-     */
-    private $identityService;
-
-    /**
-     * @var \Surfnet\StepupBundle\Service\SecondFactorTypeService
-     */
-    private $secondFactorTypeService;
-
-    /**
-     * @var SecondFactorService
-     */
-    private $secondFactorService;
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        SmsSecondFactorServiceInterface $smsSecondFactorService,
-        YubikeySecondFactorService $yubikeySecondFactorService,
-        GssfService $gssfService,
-        CommandService $commandService,
-        VettingProcedureRepository $vettingProcedureRepository,
-        TranslatorInterface $translator,
-        IdentityService $identityService,
-        SecondFactorTypeService $secondFactorTypeService,
-        SecondFactorService $secondFactorService
+        private readonly SmsSecondFactorServiceInterface $smsSecondFactorService,
+        private readonly YubikeySecondFactorService $yubikeySecondFactorService,
+        private readonly GssfService $gssfService,
+        private readonly CommandService $commandService,
+        private readonly VettingProcedureRepository $vettingProcedureRepository,
+        private readonly TranslatorInterface $translator,
+        private readonly IdentityService $identityService,
+        private readonly SecondFactorTypeService $secondFactorTypeService,
+        private readonly SecondFactorService $secondFactorService,
     ) {
-        $this->smsSecondFactorService = $smsSecondFactorService;
-        $this->yubikeySecondFactorService = $yubikeySecondFactorService;
-        $this->gssfService = $gssfService;
-        $this->commandService = $commandService;
-        $this->vettingProcedureRepository = $vettingProcedureRepository;
-        $this->translator = $translator;
-        $this->identityService = $identityService;
-        $this->secondFactorTypeService = $secondFactorTypeService;
-        $this->secondFactorService = $secondFactorService;
     }
 
     /**
-     * @param StartVettingProcedureCommand $command
      * @return bool
      */
     public function isLoaSufficientToStartProcedure(StartVettingProcedureCommand $command)
@@ -133,12 +78,11 @@ class VettingService
         return $this->secondFactorTypeService->isSatisfiedBy(
             $secondFactorType,
             $command->authorityLoa,
-            new VettingType(VettingType::TYPE_ON_PREMISE)
+            new VettingType(VettingType::TYPE_ON_PREMISE),
         );
     }
 
     /**
-     * @param StartVettingProcedureCommand $command
      * @return bool
      */
     public function isExpiredRegistrationCode(StartVettingProcedureCommand $command)
@@ -147,13 +91,12 @@ class VettingService
             new DateTime(
                 $command->secondFactor->registrationRequestedAt
                     ->add(new DateInterval('P14D'))
-                    ->setTime(23, 59, 59)
-            )
+                    ->setTime(23, 59, 59),
+            ),
         );
     }
 
     /**
-     * @param StartVettingProcedureCommand $command
      * @return string The procedure ID.
      */
     public function startProcedure(StartVettingProcedureCommand $command)
@@ -165,8 +108,8 @@ class VettingService
                 sprintf(
                     "Registration authority has LoA '%s', which is not enough to allow vetting of a '%s' second factor",
                     $command->authorityLoa,
-                    $command->secondFactor->type
-                )
+                    $command->secondFactor->type,
+                ),
             );
         }
 
@@ -177,7 +120,7 @@ class VettingService
             $command->authorityId,
             $command->registrationCode,
             $command->secondFactor,
-            $provePossessionSkipped
+            $provePossessionSkipped,
         );
 
         $this->vettingProcedureRepository->store($procedure);
@@ -199,7 +142,7 @@ class VettingService
 
         if (!$procedure) {
             throw new UnknownVettingProcedureException(
-                sprintf("No vetting procedure with id '%s' is known.", $procedureId)
+                sprintf("No vetting procedure with id '%s' is known.", $procedureId),
             );
         }
 
@@ -224,7 +167,6 @@ class VettingService
 
     /**
      * @param string $procedureId
-     * @param SendSmsChallengeCommand $command
      * @return bool
      * @throws UnknownVettingProcedureException
      * @throws RuntimeException
@@ -234,7 +176,7 @@ class VettingService
         $procedure = $this->getProcedure($procedureId);
 
         $phoneNumber = InternationalPhoneNumber::fromStringFormat(
-            $procedure->getSecondFactor()->secondFactorIdentifier
+            $procedure->getSecondFactor()->secondFactorIdentifier,
         );
 
         $identity = $this->identityService->findById($procedure->getSecondFactor()->identityId);
@@ -248,7 +190,7 @@ class VettingService
             'ra.vetting.sms.challenge_body',
             [],
             'messages',
-            $identity->preferredLocale
+            $identity->preferredLocale,
         );
         $command->identity = $procedure->getSecondFactor()->identityId;
         $command->institution = $procedure->getSecondFactor()->institution;
@@ -259,7 +201,6 @@ class VettingService
 
     /**
      * @param string $procedureId
-     * @param VerifyPossessionOfPhoneCommand $command
      * @return OtpVerification
      * @throws UnknownVettingProcedureException
      * @throws DomainException
@@ -283,7 +224,6 @@ class VettingService
 
     /**
      * @param string $procedureId
-     * @param VerifyYubikeyPublicIdCommand $command
      * @return YubikeySecondFactor\VerificationResult
      */
     public function verifyYubikeyPublicId($procedureId, VerifyYubikeyPublicIdCommand $command)
@@ -338,7 +278,6 @@ class VettingService
 
     /**
      * @param string $procedureId
-     * @param VerifyIdentityCommand $command
      * @return void
      * @throws UnknownVettingProcedureException
      * @throws DomainException
@@ -438,7 +377,7 @@ class VettingService
 
         if (!$procedure) {
             throw new UnknownVettingProcedureException(
-                sprintf("No vetting procedure with id '%s' is known.", $procedureId)
+                sprintf("No vetting procedure with id '%s' is known.", $procedureId),
             );
         }
 

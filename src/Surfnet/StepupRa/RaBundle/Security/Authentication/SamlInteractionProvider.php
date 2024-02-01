@@ -35,57 +35,15 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
  */
 class SamlInteractionProvider
 {
-    /**
-     * @var \Surfnet\SamlBundle\Entity\ServiceProvider
-     */
-    private $serviceProvider;
-
-    /**
-     * @var \Surfnet\SamlBundle\Entity\IdentityProvider
-     */
-    private $identityProvider;
-
-    /**
-     * @var \Surfnet\SamlBundle\Http\RedirectBinding
-     */
-    private $redirectBinding;
-
-    /**
-     * @var \Surfnet\SamlBundle\Http\PostBinding
-     */
-    private $postBinding;
-
-    /**
-     * @var \Surfnet\StepupRa\RaBundle\Security\Authentication\SamlAuthenticationStateHandler
-     */
-    private $samlAuthenticationStateHandler;
-
-    /**
-     * @var \Surfnet\StepupBundle\Service\LoaResolutionService
-     */
-    private $loaResolutionService;
-
-    /**
-     * @var \Surfnet\StepupBundle\Value\Loa
-     */
-    private $requiredLoa;
-
     public function __construct(
-        ServiceProvider $serviceProvider,
-        IdentityProvider $identityProvider,
-        RedirectBinding $redirectBinding,
-        PostBinding $postBinding,
-        SamlAuthenticationStateHandler $samlAuthenticationStateHandler,
-        LoaResolutionService $loaResolutionService,
-        Loa $requiredLoa
+        private readonly ServiceProvider $serviceProvider,
+        private readonly IdentityProvider $identityProvider,
+        private readonly RedirectBinding $redirectBinding,
+        private readonly PostBinding $postBinding,
+        private readonly SamlAuthenticationStateHandler $samlAuthenticationStateHandler,
+        private readonly LoaResolutionService $loaResolutionService,
+        private readonly Loa $requiredLoa,
     ) {
-        $this->serviceProvider                = $serviceProvider;
-        $this->identityProvider               = $identityProvider;
-        $this->redirectBinding                = $redirectBinding;
-        $this->postBinding                    = $postBinding;
-        $this->loaResolutionService           = $loaResolutionService;
-        $this->requiredLoa                    = $requiredLoa;
-        $this->samlAuthenticationStateHandler = $samlAuthenticationStateHandler;
     }
 
     /**
@@ -103,7 +61,7 @@ class SamlInteractionProvider
     {
         $authnRequest = AuthnRequestFactory::createNewRequest(
             $this->serviceProvider,
-            $this->identityProvider
+            $this->identityProvider,
         );
 
         $authnRequest->setAuthenticationContextClassRef((string) $this->requiredLoa);
@@ -114,7 +72,6 @@ class SamlInteractionProvider
     }
 
     /**
-     * @param Request $request
      * @return \SAML2\Assertion
      * @throws LoaTooLowException When required LoA is not met by response
      * @throws AuthenticationException When response LoA cannot be resolved
@@ -126,7 +83,7 @@ class SamlInteractionProvider
         $assertion = $this->postBinding->processResponse(
             $request,
             $this->identityProvider,
-            $this->serviceProvider
+            $this->serviceProvider,
         );
 
         $this->samlAuthenticationStateHandler->clearRequestId();
@@ -135,7 +92,7 @@ class SamlInteractionProvider
             throw new UnexpectedIssuerException(sprintf(
                 'Expected issuer to be configured remote IdP "%s", got "%s"',
                 $this->identityProvider->getEntityId(),
-                $assertion->getIssuer()
+                $assertion->getIssuer(),
             ));
         }
 
@@ -149,8 +106,8 @@ class SamlInteractionProvider
                 sprintf(
                     "Gateway responded with LoA '%s', which is lower than required LoA '%s'",
                     $assertion->getAuthnContextClassRef(),
-                    (string) $this->requiredLoa
-                )
+                    (string) $this->requiredLoa,
+                ),
             );
         }
 

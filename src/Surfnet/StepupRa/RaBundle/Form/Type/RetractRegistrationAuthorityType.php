@@ -22,6 +22,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 
 class RetractRegistrationAuthorityType extends AbstractType
 {
@@ -33,7 +34,7 @@ class RetractRegistrationAuthorityType extends AbstractType
                 ButtonGroupType::class,
                 [
                     'inherit_data' => true,
-                ]
+                ],
             )
             ->add('confirm', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-warning pull-right'],
@@ -42,14 +43,14 @@ class RetractRegistrationAuthorityType extends AbstractType
             ->add('cancel', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-info pull-right'],
                 'label' => 'ra.management.retract_ra.modal.cancel',
-            ])
+            ]),
         );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand'
+            'data_class' => RetractRegistrationAuthorityCommand::class
         ]);
     }
 

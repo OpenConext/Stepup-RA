@@ -38,9 +38,6 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNode
-     */
     private function addRoutesSection(ArrayNodeDefinition $rootNode)
     {
         $rootNode
@@ -50,18 +47,14 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('consume_assertion')
                         ->isRequired()
                         ->validate()
-                            ->ifTrue(function ($v) {
-                                return !is_string($v) || strlen($v) === 0;
-                            })
+                            ->ifTrue(fn($v) => !is_string($v) || strlen($v) === 0)
                             ->thenInvalid('Consume assertion route must be a non-empty string')
                         ->end()
                     ->end()
                     ->scalarNode('metadata')
                         ->isRequired()
                         ->validate()
-                            ->ifTrue(function ($v) {
-                                return !is_string($v) || strlen($v) === 0;
-                            })
+                            ->ifTrue(fn($v) => !is_string($v) || strlen($v) === 0)
                             ->thenInvalid('Metadata route must be a non-empty string')
                         ->end()
                     ->end()
@@ -69,9 +62,6 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNode
-     */
     private function addProvidersSection(ArrayNodeDefinition $rootNode)
     {
         /** @var ArrayNodeDefinition $protoType */
@@ -127,7 +117,7 @@ class Configuration implements ConfigurationInterface
                             ->isRequired()
                             ->info(
                                 'The contents of the certificate used to sign the AuthnResponse with, if different from'
-                                . ' the public key configured below'
+                                . ' the public key configured below',
                             )
                         ->end()
                     ->end()

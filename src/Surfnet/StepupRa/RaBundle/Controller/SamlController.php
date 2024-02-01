@@ -38,7 +38,7 @@ class SamlController extends AbstractController
         $assertion = $postBinding->processResponse(
             $httpRequest,
             $this->get('surfnet_saml.remote.idp'),
-            $this->get('surfnet_saml.hosted.service_provider')
+            $this->get('surfnet_saml.hosted.service_provider'),
         );
 
         return $assertion->getAttributes();

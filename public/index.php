@@ -12,13 +12,13 @@ if ($_SERVER['APP_DEBUG']) {
 }
 
 if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? false) {
-    Request::setTrustedProxies(explode(',', $trustedProxies), Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);
+    Request::setTrustedProxies(explode(',', (string) $trustedProxies), Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);
 }
 
 if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? false) {
     Request::setTrustedHosts([$trustedHosts]);
 }
-if (isset($_COOKIE['testcookie']) && strpos($_SERVER['HTTP_USER_AGENT'], 'GuzzleHttp') !== false) {
+if (isset($_COOKIE['testcookie']) && str_contains((string) $_SERVER['HTTP_USER_AGENT'], 'GuzzleHttp')) {
     $_SERVER['APP_ENV'] = 'smoketest';
     $_SERVER['APP_DEBUG'] = true;
 }

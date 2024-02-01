@@ -43,7 +43,6 @@ final class RaLocationController extends AbstractController
 {
     /**
      * @Template
-     * @param Request $request
      * @return array|Response
      */
     public function manageAction(Request $request)
@@ -95,7 +94,7 @@ final class RaLocationController extends AbstractController
 
         $this->get('logger')->notice(sprintf(
             'Searching for RA locations yielded "%d" results',
-            $locations->getTotalItems()
+            $locations->getTotalItems(),
         ));
 
         return [
@@ -131,7 +130,7 @@ final class RaLocationController extends AbstractController
             if ($success) {
                 $this->addFlash(
                     'success',
-                    $this->get('translator')->trans('ra.create_ra_location.created')
+                    $this->get('translator')->trans('ra.create_ra_location.created'),
                 );
 
                 $logger->debug('RA Location added, redirecting to the RA location overview');
@@ -180,7 +179,7 @@ final class RaLocationController extends AbstractController
             if ($success) {
                 $this->addFlash(
                     'success',
-                    $this->get('translator')->trans('ra.create_ra_location.changed')
+                    $this->get('translator')->trans('ra.create_ra_location.changed'),
                 );
 
                 $logger->debug('RA Location added, redirecting to the RA location overview');
@@ -197,7 +196,6 @@ final class RaLocationController extends AbstractController
     }
 
     /**
-     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function removeAction(Request $request)
@@ -218,7 +216,7 @@ final class RaLocationController extends AbstractController
             'Sending middleware request to remove RA location "%s" belonging to "%s" on behalf of "%s"',
             $command->locationId,
             $command->institution,
-            $command->currentUserId
+            $command->currentUserId,
         ));
 
         $translator = $this->get('translator');

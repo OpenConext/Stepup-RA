@@ -21,16 +21,17 @@ namespace Surfnet\StepupRa\RaBundle\Value;
 use DateInterval;
 use DateTime as CoreDateTime;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
+use Stringable;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyPublicMethods) due to comparison methods
  */
-class DateTime
+class DateTime implements Stringable
 {
     /**
      * This string can also be used with `DateTime::createFromString()`.
      */
-    const FORMAT = DATE_ATOM;
+    final public const FORMAT = DATE_ATOM;
 
     /**
      * Allows for mocking of time.
@@ -80,7 +81,6 @@ class DateTime
     }
 
     /**
-     * @param DateInterval $interval
      * @return DateTime
      */
     public function add(DateInterval $interval)
@@ -92,7 +92,6 @@ class DateTime
     }
 
     /**
-     * @param DateInterval $interval
      * @return DateTime
      */
     public function sub(DateInterval $interval)
@@ -104,7 +103,6 @@ class DateTime
     }
 
     /**
-     * @param DateTime $dateTime
      * @return boolean
      */
     public function comesBefore(DateTime $dateTime)
@@ -113,7 +111,6 @@ class DateTime
     }
 
     /**
-     * @param DateTime $dateTime
      * @return boolean
      */
     public function comesBeforeOrIsEqual(DateTime $dateTime)
@@ -122,7 +119,6 @@ class DateTime
     }
 
     /**
-     * @param DateTime $dateTime
      * @return boolean
      */
     public function comesAfter(DateTime $dateTime)
@@ -131,7 +127,6 @@ class DateTime
     }
 
     /**
-     * @param DateTime $dateTime
      * @return boolean
      */
     public function comesAfterOrIsEqual(DateTime $dateTime)
@@ -151,8 +146,8 @@ class DateTime
             throw new InvalidArgumentException(
                 sprintf(
                     'Given format "%s" is not a valid format for DateTime',
-                    $format
-                )
+                    $format,
+                ),
             );
         }
 
@@ -162,7 +157,7 @@ class DateTime
     /**
      * @return string An ISO 8601 representation of this DateTime.
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->format(self::FORMAT);
     }

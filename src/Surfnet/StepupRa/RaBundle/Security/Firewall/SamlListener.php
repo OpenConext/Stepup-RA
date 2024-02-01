@@ -33,7 +33,7 @@ class SamlListener
     public function __construct(
         private readonly AuthenticationHandler   $authenticationHandler,
         private readonly SamlInteractionProvider $samlInteractionProvider,
-        private readonly LoggerInterface         $logger
+        private readonly LoggerInterface         $logger,
     ) {
     }
 
@@ -46,7 +46,7 @@ class SamlListener
 
             $this->logger->warning(sprintf(
                 'Could not authenticate, AuthenticationException encountered: "%s"',
-                $exception->getMessage()
+                $exception->getMessage(),
             ));
 
             throw $exception;
@@ -55,8 +55,8 @@ class SamlListener
 
             $this->logger->error(sprintf(
                 'Could not authenticate, Exception of type "%s" encountered: %s',
-                get_class($exception),
-                $exception->getMessage()
+                $exception::class,
+                $exception->getMessage(),
             ));
 
             throw $exception;

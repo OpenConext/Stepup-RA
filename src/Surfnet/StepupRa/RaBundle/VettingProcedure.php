@@ -76,12 +76,16 @@ class VettingProcedure
      * @param string $id
      * @param string $authorityId
      * @param string $registrationCode
-     * @param VerifiedSecondFactor $secondFactor
      * @param bool $skipProvePossession
      * @return self
      */
-    public static function start($id, $authorityId, $registrationCode, VerifiedSecondFactor $secondFactor, $skipProvePossession)
-    {
+    public static function start(
+        $id,
+        $authorityId,
+        $registrationCode,
+        VerifiedSecondFactor $secondFactor,
+        $skipProvePossession,
+    ) {
         if (!is_string($id)) {
             throw InvalidArgumentException::invalidType('string', 'id', $id);
         }
@@ -122,7 +126,7 @@ class VettingProcedure
         if (!$this->isReadyForSecondFactorToBeVerified()) {
             throw new DomainException(
                 'Second factor is not yet ready for verification of second factor, ' .
-                'it has already been verified or the registration code is unknown.'
+                'it has already been verified or the registration code is unknown.',
             );
         }
 
@@ -144,7 +148,7 @@ class VettingProcedure
         if (!$this->isReadyForIdentityVerification()) {
             throw new DomainException(
                 'Second factor is not yet ready for verification of its Identity; ' .
-                'verify the registrant has the same second factor as used during the registration process.'
+                'verify the registrant has the same second factor as used during the registration process.',
             );
         }
 
@@ -174,7 +178,7 @@ class VettingProcedure
             throw new DomainException(
                 'Second factor is not yet ready for verification of its Identity; ' .
                 'verify the registrant has the same second factor as used during the registration process, '.
-                "and verify the registrant's identity."
+                "and verify the registrant's identity.",
             );
         }
 

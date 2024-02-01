@@ -22,16 +22,11 @@ use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\InstitutionConfigurat
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Service\InstitutionConfigurationOptionsService as ApiInstitutionConfigurationOptionsService;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 
-final class InstitutionConfigurationOptionsService implements InstitutionConfigurationOptionsServiceInterface
+final readonly class InstitutionConfigurationOptionsService implements InstitutionConfigurationOptionsServiceInterface
 {
-    /**
-     * @var ApiInstitutionConfigurationOptionsService
-     */
-    private $apiInstitutionConfigurationOptionsService;
-
-    public function __construct(ApiInstitutionConfigurationOptionsService $apiService)
-    {
-        $this->apiInstitutionConfigurationOptionsService = $apiService;
+    public function __construct(
+        private ApiInstitutionConfigurationOptionsService $apiInstitutionConfigurationOptionsService,
+    ) {
     }
 
     /**

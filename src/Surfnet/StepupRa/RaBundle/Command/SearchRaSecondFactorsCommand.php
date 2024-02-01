@@ -22,10 +22,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class SearchRaSecondFactorsCommand
 {
-    const STATUS_UNVERIFIED = 'unverified';
-    const STATUS_VERIFIED = 'verified';
-    const STATUS_VETTED = 'vetted';
-    const STATUS_REVOKED = 'revoked';
+    public const STATUS_UNVERIFIED = 'unverified';
+    public const STATUS_VERIFIED = 'verified';
+    public const STATUS_VETTED = 'vetted';
+    public const STATUS_REVOKED = 'revoked';
 
     /**
      * @Assert\NotBlank(message="ra.search_ra_second_factors.actor.blank")

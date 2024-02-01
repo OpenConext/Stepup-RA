@@ -24,6 +24,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
 
 class VerifyIdentityType extends AbstractType
 {
@@ -54,7 +55,7 @@ class VerifyIdentityType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand',
+            'data_class' => VerifyIdentityCommand::class,
         ]);
     }
 

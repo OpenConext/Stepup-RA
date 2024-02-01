@@ -36,29 +36,11 @@ use Surfnet\StepupRa\RaBundle\Command\SearchRaLocationsCommand;
  */
 class RaLocationService
 {
-    /**
-     * @var \Surfnet\StepupMiddlewareClientBundle\Configuration\Service\RaLocationService
-     */
-    private $apiRaLocationService;
-
-    /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        ApiRaLocationService $apiRaLocationService,
-        CommandService $commandService,
-        LoggerInterface $logger
+        private readonly ApiRaLocationService $apiRaLocationService,
+        private readonly CommandService $commandService,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->apiRaLocationService = $apiRaLocationService;
-        $this->commandService = $commandService;
-        $this->logger = $logger;
     }
 
     /**
@@ -71,7 +53,6 @@ class RaLocationService
     }
 
     /**
-     * @param SearchRaLocationsCommand $command
      * @return RaLocationCollection
      */
     public function search(SearchRaLocationsCommand $command)
@@ -106,7 +87,7 @@ class RaLocationService
                 $middlewareCommand->name,
                 $middlewareCommand->institution,
                 $command->currentUserId,
-                implode(", ", $result->getErrors())
+                implode(", ", $result->getErrors()),
             ));
         }
 
@@ -130,7 +111,7 @@ class RaLocationService
                 $middlewareCommand->name,
                 $middlewareCommand->institution,
                 $command->currentUserId,
-                implode(", ", $result->getErrors())
+                implode(", ", $result->getErrors()),
             ));
         }
 
@@ -138,7 +119,6 @@ class RaLocationService
     }
 
     /**
-     * @param RemoveRaLocationCommand $command
      * @return bool
      */
     public function remove(RemoveRaLocationCommand $command)
@@ -154,7 +134,7 @@ class RaLocationService
                 $middlewareCommand->raLocationId,
                 $middlewareCommand->institution,
                 $command->currentUserId,
-                implode(", ", $result->getErrors())
+                implode(", ", $result->getErrors()),
             ));
         }
 

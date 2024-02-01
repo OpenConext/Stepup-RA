@@ -26,21 +26,15 @@ use Symfony\Component\Routing\RouterInterface;
 
 class InitiateGssfType extends AbstractType
 {
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
-    public function __construct(RouterInterface $router)
+    public function __construct(private readonly RouterInterface $router)
     {
-        $this->router = $router;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $action = $this->router->generate(
             'ra_vetting_gssf_authenticate',
-            ['procedureId' => $options['procedureId'], 'provider' => $options['provider']]
+            ['procedureId' => $options['procedureId'], 'provider' => $options['provider']],
         );
 
         $builder

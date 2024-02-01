@@ -31,7 +31,7 @@ class CreateRaType extends AbstractType
     {
         $options = array_combine(
             $builder->getData()->availableInstitutions,
-            $builder->getData()->availableInstitutions
+            $builder->getData()->availableInstitutions,
         );
 
         $builder
@@ -51,7 +51,7 @@ class CreateRaType extends AbstractType
                     ButtonGroupType::class,
                     [
                         'inherit_data' => true,
-                    ]
+                    ],
                 )
                 ->add('create_ra', SubmitType::class, [
                     'label' => 'ra.management.form.create_ra.label.create_ra',
@@ -61,7 +61,7 @@ class CreateRaType extends AbstractType
                     'label' => 'ra.management.form.create_ra.label.cancel',
                     'route' => 'ra_management_ra_candidate_search',
                     'attr'  => ['class' => 'btn btn-link cancel'],
-                ])
+                ]),
             )
         ;
     }

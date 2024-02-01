@@ -24,23 +24,13 @@ use Surfnet\StepupRa\RaBundle\Value\TimeFrame;
 
 class SessionLifetimeGuard
 {
-    /**
-     * @var TimeFrame
-     */
-    private $relativeTimeoutLimit;
-    /**
-     * @var TimeFrame
-     */
-    private $absoluteTimeoutLimit;
-
-    public function __construct(TimeFrame $absoluteTimeoutLimit, TimeFrame $relativeTimeoutLimit)
-    {
-        $this->absoluteTimeoutLimit = $absoluteTimeoutLimit;
-        $this->relativeTimeoutLimit = $relativeTimeoutLimit;
+    public function __construct(
+        private readonly TimeFrame $absoluteTimeoutLimit,
+        private readonly TimeFrame $relativeTimeoutLimit,
+    ) {
     }
 
     /**
-     * @param AuthenticatedSessionStateHandler $sessionStateHandler
      * @return bool
      */
     public function sessionLifetimeWithinLimits(AuthenticatedSessionStateHandler $sessionStateHandler)
@@ -50,7 +40,6 @@ class SessionLifetimeGuard
     }
 
     /**
-     * @param AuthenticatedSessionStateHandler $sessionStateHandler
      * @return bool
      */
     public function sessionLifetimeWithinAbsoluteLimit(AuthenticatedSessionStateHandler $sessionStateHandler)
@@ -71,7 +60,6 @@ class SessionLifetimeGuard
     }
 
     /**
-     * @param AuthenticatedSessionStateHandler $sessionStateHandler
      * @return bool
      */
     public function sessionLifetimeWithinRelativeLimit(AuthenticatedSessionStateHandler $sessionStateHandler)

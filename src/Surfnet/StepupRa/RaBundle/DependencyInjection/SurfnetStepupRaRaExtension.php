@@ -43,16 +43,16 @@ class SurfnetStepupRaRaExtension extends Extension
         $gssfSecondFactors = array_keys($config['enabled_generic_second_factors']);
         $container->setParameter(
             'surfnet_stepup_ra.enabled_second_factors',
-            array_merge($config['enabled_second_factors'], $gssfSecondFactors)
+            array_merge($config['enabled_second_factors'], $gssfSecondFactors),
         );
 
         $container->setParameter(
             'ra.security.authentication.session.maximum_absolute_lifetime_in_seconds',
-            $config['session_lifetimes']['max_absolute_lifetime']
+            $config['session_lifetimes']['max_absolute_lifetime'],
         );
         $container->setParameter(
             'ra.security.authentication.session.maximum_relative_lifetime_in_seconds',
-            $config['session_lifetimes']['max_relative_lifetime']
+            $config['session_lifetimes']['max_relative_lifetime'],
         );
 
         $container->setParameter('surfnet_stepup_ra.self_service_url', $config['self_service_url']);

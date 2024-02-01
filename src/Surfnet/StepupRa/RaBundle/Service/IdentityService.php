@@ -33,36 +33,12 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class IdentityService implements UserProviderInterface
 {
-    /**
-     * @var \Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService
-     */
-    private $apiIdentityService;
-
-    /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
-     */
-    private $tokenStorage;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        ApiIdentityService $apiIdentityService,
-        CommandService $commandService,
-        TokenStorageInterface $tokenStorage,
-        LoggerInterface $logger
+        private readonly ApiIdentityService $apiIdentityService,
+        private readonly CommandService $commandService,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->apiIdentityService = $apiIdentityService;
-        $this->commandService = $commandService;
-        $this->tokenStorage = $tokenStorage;
-        $this->logger = $logger;
     }
 
     /**
@@ -92,7 +68,7 @@ class IdentityService implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return $class === 'Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity';
+        return $class === Identity::class;
     }
 
     /**
@@ -135,12 +111,11 @@ class IdentityService implements UserProviderInterface
 
         throw new RuntimeException(sprintf(
             'Got an unexpected amount of identities, expected 0 or 1, got "%d"',
-            count($elements)
+            count($elements),
         ));
     }
 
     /**
-     * @param Identity $identity
      * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RegistrationAuthorityCredentials|null
      */
     public function getRaCredentials(Identity $identity)
@@ -158,7 +133,6 @@ class IdentityService implements UserProviderInterface
     }
 
     /**
-     * @param SwitchLocaleCommand $command
      * @return bool
      */
     public function switchLocale(SwitchLocaleCommand $command)

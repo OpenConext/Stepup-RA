@@ -34,42 +34,12 @@ use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
  */
 class RaSecondFactorService
 {
-    /**
-     * @var \Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaSecondFactorService
-     */
-    private $apiRaSecondFactorService;
-
-    /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var RaSecondFactorExport
-     */
-    private $exporter;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @param ApiRaSecondFactorService $apiRaSecondFactorService
-     * @param CommandService $commandService
-     * @param RaSecondFactorExport $exporter
-     * @param LoggerInterface $logger
-     */
     public function __construct(
-        ApiRaSecondFactorService $apiRaSecondFactorService,
-        CommandService $commandService,
-        RaSecondFactorExport $exporter,
-        LoggerInterface $logger
+        private readonly ApiRaSecondFactorService $apiRaSecondFactorService,
+        private readonly CommandService $commandService,
+        private readonly RaSecondFactorExport $exporter,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->apiRaSecondFactorService = $apiRaSecondFactorService;
-        $this->commandService = $commandService;
-        $this->exporter = $exporter;
-        $this->logger = $logger;
     }
 
     public function revoke(RevokeSecondFactorCommand $command)
@@ -87,7 +57,7 @@ class RaSecondFactorService
                 $middlewareCommand->secondFactorId,
                 $middlewareCommand->identityId,
                 $middlewareCommand->authorityId,
-                implode(", ", $result->getErrors())
+                implode(", ", $result->getErrors()),
             ));
         }
 
@@ -95,7 +65,6 @@ class RaSecondFactorService
     }
 
     /**
-     * @param SearchRaSecondFactorsCommand $command
      * @return RaSecondFactorCollection
      */
     public function search(SearchRaSecondFactorsCommand $command)
@@ -109,7 +78,6 @@ class RaSecondFactorService
      * Searches for a collection of second factor tokens and returns a Http response with an attachment
      * Content-Disposition.
      *
-     * @param ExportRaSecondFactorsCommand $command
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function export(ExportRaSecondFactorsCommand $command)

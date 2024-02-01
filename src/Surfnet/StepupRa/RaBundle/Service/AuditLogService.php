@@ -25,18 +25,11 @@ use Surfnet\StepupRa\RaBundle\Command\SearchSecondFactorAuditLogCommand;
 
 class AuditLogService
 {
-    /**
-     * @var ApiAuditLogService
-     */
-    private $apiAuditLogService;
-
-    public function __construct(ApiAuditLogService $auditLogService)
+    public function __construct(private readonly ApiAuditLogService $apiAuditLogService)
     {
-        $this->apiAuditLogService = $auditLogService;
     }
 
     /**
-     * @param SearchSecondFactorAuditLogCommand $command
      * @return AuditLog
      */
     public function getAuditlog(SearchSecondFactorAuditLogCommand $command)

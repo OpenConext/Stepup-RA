@@ -20,20 +20,12 @@ namespace Surfnet\StepupRa\RaBundle\Value;
 
 use DateInterval;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
+use Stringable;
 
-final class TimeFrame
+final readonly class TimeFrame implements Stringable
 {
-    /**
-     * @var DateInterval
-     */
-    private $timeFrame;
-
-    /**
-     * @param DateInterval $timeFrame
-     */
-    final private function __construct(DateInterval $timeFrame)
+    final private function __construct(private DateInterval $timeFrame)
     {
-        $this->timeFrame = $timeFrame;
     }
 
     /**
@@ -50,7 +42,6 @@ final class TimeFrame
     }
 
     /**
-     * @param DateTime $dateTime
      * @return DateTime
      */
     public function getEndWhenStartingAt(DateTime $dateTime)
@@ -59,7 +50,6 @@ final class TimeFrame
     }
 
     /**
-     * @param TimeFrame $other
      * @return bool
      */
     public function equals(TimeFrame $other)
@@ -67,7 +57,7 @@ final class TimeFrame
         return $this->timeFrame->s === $other->timeFrame->s;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->timeFrame->format('%S');
     }
