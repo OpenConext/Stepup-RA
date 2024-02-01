@@ -18,18 +18,13 @@
 
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Token;
 
+use SAML2\Assertion;
 use Surfnet\StepupBundle\Value\Loa;
-use Surfnet\StepupRa\RaBundle\Exception\LogicException;
-use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Symfony\Component\Security\Core\Authentication\Token\AbstractToken;
-use Symfony\Component\Security\Core\Role\RoleInterface;
 
 class SamlToken extends AbstractToken
 {
-    /**
-     * @var \SAML2\Assertion
-     */
-    public $assertion;
+    public Assertion $assertion;
 
     public function __construct(
         private Loa $loa, array $roles = [])
@@ -40,18 +35,13 @@ class SamlToken extends AbstractToken
 
     /**
      * Returns the user credentials.
-     *
-     * @return mixed The user credentials
      */
-    public function getCredentials()
+    public function getCredentials(): string
     {
         return '';
     }
 
-    /**
-     * @return Loa
-     */
-    public function getLoa()
+    public function getLoa(): Loa
     {
         return $this->loa;
     }

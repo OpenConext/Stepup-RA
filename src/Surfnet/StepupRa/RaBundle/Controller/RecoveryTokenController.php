@@ -84,7 +84,7 @@ final class RecoveryTokenController extends AbstractController
         ));
 
         return $this->render(
-            '@SurfnetStepupRaRa/recovery_token/search.html.twig',
+            'recovery_token/search.html.twig',
             [
                 'form' => $form->createView(),
                 'revocationForm' => $revocationForm->createView(),

@@ -89,7 +89,7 @@ class RaManagementController extends AbstractController
         $raListings = $raList->getElements();
 
         return $this->render(
-            'SurfnetStepupRaRaBundle:ra_management:manage.html.twig',
+            'ra_management/manage.html.twig',
             [
                 'form' => $form->createView(),
                 'raList' => $raListings,
@@ -147,7 +147,7 @@ class RaManagementController extends AbstractController
         ));
 
         return $this->render(
-            'SurfnetStepupRaRaBundle:ra_management:ra_candidate_overview.html.twig',
+            'ra_management/ra_candidate_overview.html.twig',
             [
                 'form'         => $form->createView(),
                 'raCandidates' => $raCandidateList,
@@ -205,7 +205,7 @@ class RaManagementController extends AbstractController
             $this->addFlash('error', 'ra.management.create_ra.error.middleware_command_failed');
         }
 
-        return $this->render('SurfnetStepupRaRaBundle:ra_management:create_ra.html.twig', [
+        return $this->render('ra_management/create_ra.html.twig', [
             'raCandidate' => $raCandidate->raCandidate,
             'form'        => $form->createView()
         ]);
@@ -252,7 +252,7 @@ class RaManagementController extends AbstractController
             $this->addFlash('error', 'ra.management.amend_ra_info.error.middleware_command_failed');
         }
 
-        return $this->render('SurfnetStepupRaRaBundle:ra_management:amend_ra_information.html.twig', [
+        return $this->render('ra_management/amend_ra_information.html.twig', [
             'raListing' => $raListing,
             'form' => $form->createView(),
         ]);
@@ -304,7 +304,7 @@ class RaManagementController extends AbstractController
             $this->addFlash('error', 'ra.management.retract_ra.middleware_command_failed');
         }
 
-        return $this->render('SurfnetStepupRaRaBundle:ra_management:confirm_retract_ra.html.twig', [
+        return $this->render('ra_management/confirm_retract_ra.html.twig', [
             'raListing' => $raListing,
             'form'      => $form->createView()
         ]);

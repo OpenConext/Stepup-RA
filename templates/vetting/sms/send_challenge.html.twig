@@ -1,11 +1,11 @@
-{% extends "base.html.twig" %}
+{% extends "../../base.html.twig" %}
 
 {% block page_title %}{{ 'ra.vetting.sms.send_challenge.title.page'|trans }}{% endblock %}
 
 {% block page_header %}
     {{ parent() }}
 
-    {% include 'SurfnetStepupRaRaBundle:vetting/partial:progress_bar.html.twig' with {'progress': 25, 'step': 2} only %}
+    {% include 'vetting/partial/progress_bar.html.twig' with {'progress': 25, 'step': 2} only %}
 {% endblock %}
 
 {% block content %}

@@ -90,7 +90,7 @@ class VettingController extends AbstractController
 
             return $this
                 ->render(
-                    'SurfnetStepupRaRaBundle:vetting:second_factor_type_disabled.html.twig',
+                    'vetting/second_factor_type_disabled.html.twig',
                     ['secondFactorType' => $secondFactor->type],
                 )
                 ->setStatusCode(Response::HTTP_BAD_REQUEST);

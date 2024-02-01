@@ -276,6 +276,6 @@ final class GssfController extends SecondFactorController
             ],
         );
 
-        return $this->render('SurfnetStepupRaRaBundle:vetting/gssf:initiate.html.twig', $templateParameters);
+        return $this->render('vetting/gssf/initiate.html.twig', $templateParameters);
     }
 }

@@ -1,11 +1,11 @@
-{% extends "base.html.twig" %}
+{% extends "../../base.html.twig" %}
 
 {% block page_title %}{{ secondFactorConfig.getPageTitle() }}{% endblock %}
 
 {% block page_header %}
     {{ parent() }}
 
-    {% include 'SurfnetStepupRaRaBundle:vetting/partial:progress_bar.html.twig' with {'progress': 25, 'step': 2} only %}
+    {% include 'vetting/partial/progress_bar.html.twig' with {'progress': 25, 'step': 2} only %}
 {% endblock %}
 
 {% block content %}
@@ -22,6 +22,6 @@
 
     <hr>
 
-    {% include 'SurfnetStepupRaRaBundle:vetting/partial:cancel_vetting_procedure.html.twig' with { 'procedureId': app.request.attributes.get('procedureId') } only %}
+    {% include 'vetting/partial/cancel_vetting_procedure.html.twig' with { 'procedureId': app.request.attributes.get('procedureId') } only %}
 
 {% endblock %}
