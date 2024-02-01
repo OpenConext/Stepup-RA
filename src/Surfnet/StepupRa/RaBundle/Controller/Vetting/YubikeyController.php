@@ -80,5 +80,4 @@ class YubikeyController extends SecondFactorController
             parameters: ['form' => $form->createView()],
         );
     }
-
 }

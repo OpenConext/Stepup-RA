@@ -24,7 +24,7 @@ use Surfnet\StepupRa\RaBundle\VettingProcedure;
 
 interface VettingProcedureRepository
 {
-     public function store(VettingProcedure $vettingProcedure);
+    public function store(VettingProcedure $vettingProcedure);
 
 
     public function retrieve(string $id): ?VettingProcedure;

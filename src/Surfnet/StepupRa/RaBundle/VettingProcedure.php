@@ -51,8 +51,7 @@ class VettingProcedure
         string               $registrationCode,
         VerifiedSecondFactor $secondFactor,
         bool                 $skipProvePossession,
-    ): VettingProcedure
-    {
+    ): VettingProcedure {
         $procedure = new self();
         $procedure->id = $id;
         $procedure->authorityId = $authorityId;

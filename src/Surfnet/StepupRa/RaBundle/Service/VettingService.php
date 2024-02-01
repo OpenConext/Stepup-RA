@@ -44,6 +44,7 @@ use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult as GssfVerificatio
 use Surfnet\StepupRa\RaBundle\Value\DateTime;
 use Surfnet\StepupRa\RaBundle\VettingProcedure;
 use Symfony\Contracts\Translation\TranslatorInterface;
+
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
@@ -199,8 +200,10 @@ class VettingService
         return $verification;
     }
 
-    public function verifyYubikeyPublicId(string $procedureId, VerifyYubikeyPublicIdCommand $command): YubikeySecondFactor\VerificationResult
-    {
+    public function verifyYubikeyPublicId(
+        string $procedureId,
+        VerifyYubikeyPublicIdCommand $command,
+    ): YubikeySecondFactor\VerificationResult {
         $procedure = $this->getProcedure($procedureId);
 
         $command->expectedPublicId = $procedure->getSecondFactor()->secondFactorIdentifier;

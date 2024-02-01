@@ -37,8 +37,10 @@ class SamlController extends AbstractController
             $this->container->get('surfnet_saml.remote.idp'),
             $this->container->get('surfnet_saml.hosted.service_provider'),
         );
-        return $this->render('saml/consume_assertion.html.twig',
-            ['assertion' => $assertion]);
+        return $this->render(
+            'saml/consume_assertion.html.twig',
+            ['assertion' => $assertion],
+        );
     }
 
     public function metadata(): XMLResponse
