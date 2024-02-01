@@ -31,7 +31,8 @@ class SamlToken extends AbstractToken
      */
     public $assertion;
 
-    public function __construct(private readonly Loa $loa, array $roles = [])
+    public function __construct(
+        private Loa $loa, array $roles = [])
     {
         parent::__construct($roles);
         $this->setAuthenticated(count($roles));
