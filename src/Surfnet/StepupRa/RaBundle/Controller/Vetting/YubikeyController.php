@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -18,33 +20,32 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\VerifyYubikeyPublicIdType;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class YubikeyController extends SecondFactorController
 {
-    /**
-     * @Template
-     * @param string  $procedureId
-     * @return array|Response
-     */
-    public function verify(Request $request, $procedureId)
+    public function __construct(
+        private readonly VettingService $vettingService,
+        // TODO: with sf 6 autowire attribute for procedureAwareLogger
+    ) {
+    }
+
+    public function verify(Request $request, string $procedureId): Response
     {
         $this->assertSecondFactorEnabled('yubikey');
 
         $this->denyAccessUnlessGranted('ROLE_RA');
 
-        $logger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
-        $logger->notice('Requested Yubikey Verfication');
+        $procedureLogger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
+        $procedureLogger->notice('Requested Yubikey Verfication');
 
-        if (!$this->getVettingService()->hasProcedure($procedureId)) {
-            $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
+        if (!$this->vettingService->hasProcedure($procedureId)) {
+            $procedureLogger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
             throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
         }
 
@@ -52,10 +53,10 @@ class YubikeyController extends SecondFactorController
         $form = $this->createForm(VerifyYubikeyPublicIdType::class, $command)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $result = $this->getVettingService()->verifyYubikeyPublicId($procedureId, $command);
+            $result = $this->vettingService->verifyYubikeyPublicId($procedureId, $command);
 
             if ($result->didPublicIdMatch()) {
-                $logger->notice('Yubikey Verified, redirecting to verify identity');
+                $procedureLogger->notice('Yubikey Verified, redirecting to verify identity');
 
                 return $this->redirectToRoute('ra_vetting_verify_identity', ['procedureId' => $procedureId]);
             }
@@ -68,19 +69,16 @@ class YubikeyController extends SecondFactorController
                 $this->addFlash('error', 'ra.prove_yubikey_possession.different_yubikey_used');
             }
 
-            $logger->notice('Yubikey could not be verified, added error to form');
+            $procedureLogger->notice('Yubikey could not be verified, added error to form');
         }
 
-        $logger->notice('Rendering Yubikey Verification Form');
+        $procedureLogger->notice('Rendering Yubikey Verification Form');
         // OTP field is rendered empty in the template.
-        return ['form' => $form->createView()];
+
+        return $this->render(
+            view: 'vetting/yubikey/verify.html.twig',
+            parameters: ['form' => $form->createView()],
+        );
     }
 
-    /**
-     * @return VettingService
-     */
-    private function getVettingService()
-    {
-        return $this->container->get('ra.service.vetting');
-    }
 }
