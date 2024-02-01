@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 /**
  * Copyright 2014 SURFnet bv
@@ -41,6 +41,10 @@ class VettingProcedure
 
     private ?bool $skipProvePossession;
 
+    final private function __construct()
+    {
+    }
+
     public static function start(
         string               $id,
         string               $authorityId,
@@ -57,10 +61,6 @@ class VettingProcedure
         $procedure->skipProvePossession = $skipProvePossession;
 
         return $procedure;
-    }
-
-    final private function __construct()
-    {
     }
 
     /**
@@ -80,6 +80,11 @@ class VettingProcedure
         }
 
         $this->inputSecondFactorIdentifier = $secondFactorIdentifier;
+    }
+
+    private function isReadyForSecondFactorToBeVerified(): bool
+    {
+        return !empty($this->registrationCode);
     }
 
     /**
@@ -106,6 +111,16 @@ class VettingProcedure
         $this->identityVerified = true;
     }
 
+    private function isReadyForIdentityVerification(): bool
+    {
+        return $this->isPossessionProvenOrCanItBeSkipped() && !empty($this->registrationCode);
+    }
+
+    private function isPossessionProvenOrCanItBeSkipped(): bool
+    {
+        return ($this->inputSecondFactorIdentifier === $this->secondFactor->secondFactorIdentifier || $this->skipProvePossession);
+    }
+
     /**
      * @throws DomainException
      */
@@ -114,12 +129,18 @@ class VettingProcedure
         if (!$this->isReadyForVetting()) {
             throw new DomainException(
                 'Second factor is not yet ready for verification of its Identity; ' .
-                'verify the registrant has the same second factor as used during the registration process, '.
+                'verify the registrant has the same second factor as used during the registration process, ' .
                 "and verify the registrant's identity.",
             );
         }
+    }
 
-        $this->vetted = true;
+    private function isReadyForVetting(): bool
+    {
+        return $this->isPossessionProvenOrCanItBeSkipped()
+            && !empty($this->registrationCode)
+            && !empty($this->documentNumber)
+            && $this->identityVerified === true;
     }
 
     public function getId(): string
@@ -160,28 +181,5 @@ class VettingProcedure
     public function isProvePossessionSkippable(): ?bool
     {
         return $this->skipProvePossession;
-    }
-
-    private function isReadyForSecondFactorToBeVerified(): bool
-    {
-        return !empty($this->registrationCode);
-    }
-
-    private function isReadyForIdentityVerification(): bool
-    {
-        return $this->isPossessionProvenOrCanItBeSkipped() && !empty($this->registrationCode);
-    }
-
-    private function isReadyForVetting(): bool
-    {
-        return $this->isPossessionProvenOrCanItBeSkipped()
-            && !empty($this->registrationCode)
-            && !empty($this->documentNumber)
-            && $this->identityVerified === true;
-    }
-
-    private function isPossessionProvenOrCanItBeSkipped(): bool
-    {
-        return ($this->inputSecondFactorIdentifier === $this->secondFactor->secondFactorIdentifier || $this->skipProvePossession);
     }
 }
