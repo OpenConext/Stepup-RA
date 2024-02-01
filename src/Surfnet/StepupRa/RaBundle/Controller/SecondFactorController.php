@@ -27,6 +27,7 @@ use Surfnet\StepupRa\RaBundle\Command\SearchSecondFactorAuditLogCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -37,11 +38,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 final class SecondFactorController extends AbstractController
 {
-    /**
-     * @Template
-     * @return array|Response
-     */
-    public function search(Request $request)
+    public function search(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 
@@ -70,7 +67,7 @@ final class SecondFactorController extends AbstractController
 
         if ($form->isSubmitted() && $form->getClickedButton()->getName() == 'export') {
             $this->get('logger')->notice('Forwarding to export second factors action');
-            return $this->forward('SurfnetStepupRaRaBundle:SecondFactor:export', ['command' => $command]);
+            return $this->forward('\Surfnet\StepupRa\RaBundle\Controller\SecondFactorController::export', ['command' => $command]);
         }
 
         $pagination = $this->getPaginator()->paginate(
@@ -87,7 +84,7 @@ final class SecondFactorController extends AbstractController
             $secondFactors->getTotalItems(),
         ));
 
-        return [
+        return $this->render('second_factor/search.html.twig', [
             'form'                  => $form->createView(),
             'revocationForm'        => $revocationForm->createView(),
             'secondFactors'         => $secondFactors,
@@ -96,10 +93,10 @@ final class SecondFactorController extends AbstractController
             'orderBy'               => $command->orderBy,
             'orderDirection'        => $command->orderDirection ?: 'asc',
             'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',
-        ];
+        ]);
     }
 
-    public function export(SearchRaSecondFactorsCommand $command)
+    public function export(SearchRaSecondFactorsCommand $command): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
 
@@ -110,10 +107,7 @@ final class SecondFactorController extends AbstractController
         return $this->getSecondFactorService()->export($exportCommand);
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function revoke(Request $request)
+    public function revoke(Request $request): RedirectResponse
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 
@@ -149,10 +143,7 @@ final class SecondFactorController extends AbstractController
         return $this->redirectToRoute('ra_second_factors_search');
     }
 
-    /**
-     * @return Response
-     */
-    public function auditLog(Request $request)
+    public function auditLog(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
         $logger = $this->get('logger');

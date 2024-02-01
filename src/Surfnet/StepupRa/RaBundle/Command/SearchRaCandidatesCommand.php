@@ -18,65 +18,41 @@
 
 namespace Surfnet\StepupRa\RaBundle\Command;
 
+use AllowDynamicProperties;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class SearchRaCandidatesCommand
 {
     /**
      * @Assert\NotBlank(message="ra.search_ra_candidates.actor_id.blank")
-     * @Assert\Type("string", message="ra.search_ra_candidates.actor_id.type")
-     *
-     * @var string
      */
-    public $actorId;
+    public string $actorId;
 
-    /**
-     * @var string
-     */
-    public $institution;
+    public string $institution;
 
-    /**
-     * @var string|null
-     */
-    public $name;
+    public ?string $name;
 
-    /**
-     * @var string|null
-     */
-    public $email;
+    public ?string $email;
 
-    /**
-     * @var string
-     */
-    public $raInstitution;
+    public string $raInstitution;
 
     /**
      * @Assert\Choice(
      *     {"name", "email"},
      *     message="ra.search_ra_candidates.order_by.invalid_choice"
      * )
-     *
-     * @var string|null
      */
-    public $orderBy;
+    public ?string $orderBy;
 
     /**
      * @Assert\Choice({"asc", "desc"}, message="ra.search_ra_candidates.order_direction.invalid_choice")
-     *
-     * @var string|null
      */
-    public $orderDirection;
+    public ?string $orderDirection;
 
     /**
-     * @Assert\Type("integer", message="ra.search_ra_candidates.page_number.type")
      * @Assert\GreaterThan(0, message="ra.search_ra_candidates.page_number.greater_than_zero")
-     *
-     * @var int
      */
-    public $pageNumber;
+    public int $pageNumber;
 
-    /**
-     * @var array
-     */
-    public $institutionFilterOptions;
+    public array $institutionFilterOptions;
 }

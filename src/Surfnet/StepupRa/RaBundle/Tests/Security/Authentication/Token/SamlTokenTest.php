@@ -40,7 +40,6 @@ class SamlTokenTest extends TestCase
         $samlToken = new SamlToken(
             new Loa(Loa::LOA_1, 'http://some.url.tld/authentication/loa1'),
             ['ROLE_RAA'],
-            $institutionConfigurationOptions
         );
 
         $serialized = $samlToken->serialize();

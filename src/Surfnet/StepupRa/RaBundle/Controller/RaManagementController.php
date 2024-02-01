@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitution;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
 use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
@@ -32,6 +33,7 @@ use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaListingType;
 use Surfnet\StepupRa\RaBundle\Service\RaListingService;
 use Surfnet\StepupRa\RaBundle\Value\RoleAtInstitution;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -41,9 +43,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class RaManagementController extends AbstractController
 {
-    /**
-     * @return Response
-     */
     public function manage(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
@@ -85,7 +84,7 @@ class RaManagementController extends AbstractController
             $raList->getTotalItems(),
         ));
 
-        /** @var \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing[] $raListings */
+        /** @var RaListing[] $raListings */
         $raListings = $raList->getElements();
 
         return $this->render(
@@ -99,10 +98,7 @@ class RaManagementController extends AbstractController
         );
     }
 
-    /**
-     * @return Response
-     */
-    public function raCandidateSearch(Request $request)
+    public function raCandidateSearch(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
@@ -156,10 +152,7 @@ class RaManagementController extends AbstractController
         );
     }
 
-    /**
-     * @return Response
-     */
-    public function createRa(Request $request)
+    public function createRa(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
@@ -214,9 +207,8 @@ class RaManagementController extends AbstractController
     /**
      * @param         $identityId
      * @param         $raInstitution
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function amendRaInformation(Request $request, $identityId, $raInstitution)
+    public function amendRaInformation(Request $request, $identityId, $raInstitution): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
@@ -261,7 +253,7 @@ class RaManagementController extends AbstractController
     /**
      * @param         $identityId
      * @param         $raInstitution
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @return RedirectResponse|Response
      */
     public function retractRegistrationAuthority(Request $request, $identityId, $raInstitution)
     {

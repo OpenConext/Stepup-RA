@@ -18,19 +18,16 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Surfnet\SamlBundle\Http\PostBinding;
 use Surfnet\SamlBundle\Http\XMLResponse;
 use Surfnet\SamlBundle\Metadata\MetadataFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class SamlController extends AbstractController
 {
-    /**
-     * @Template
-     */
-    public function consumeAssertion(Request $httpRequest)
+    public function consumeAssertion(Request $httpRequest): Response
     {
         /** @var PostBinding $postBinding */
         $postBinding = $this->get('surfnet_saml.http.post_binding');
@@ -40,11 +37,11 @@ class SamlController extends AbstractController
             $this->get('surfnet_saml.remote.idp'),
             $this->get('surfnet_saml.hosted.service_provider'),
         );
-
-        return $assertion->getAttributes();
+        return $this->render('saml/consume_assertion.html.twig',
+            ['assertion' => $assertion]);
     }
 
-    public function metadata()
+    public function metadata(): XMLResponse
     {
         /** @var MetadataFactory $metadataFactory */
         $metadataFactory = $this->get('surfnet_saml.metadata_factory');

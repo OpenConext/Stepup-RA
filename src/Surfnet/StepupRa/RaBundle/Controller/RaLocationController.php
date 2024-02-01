@@ -18,7 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\ChangeRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\CreateRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\RemoveRaLocationCommand;
@@ -28,24 +28,22 @@ use Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaLocationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaLocationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RemoveRaLocationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
+use Surfnet\StepupRa\RaBundle\Service\InstitutionListingService;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
+use Surfnet\StepupRa\RaBundle\Service\RaLocationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects) By making the Form Type classes explicit, MD now realizes couping
- *                                                 is to high.
+ *                                                 is too high.
  */
 final class RaLocationController extends AbstractController
 {
-    /**
-     * @Template
-     * @return array|Response
-     */
-    public function manage(Request $request)
+    public function manage(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 
@@ -82,7 +80,6 @@ final class RaLocationController extends AbstractController
             }
         }
 
-
         $command = new SearchRaLocationsCommand();
         $command->institution = $institution;
         $command->orderBy = $request->get('orderBy');
@@ -97,7 +94,7 @@ final class RaLocationController extends AbstractController
             $locations->getTotalItems(),
         ));
 
-        return [
+        return $this->render('ra_location/manage.html.twig', [
             'form'                  => isset($form) ? $form->createView() : null,
             'institution'           => $institution,
             'locations'             => $locations,
@@ -105,10 +102,10 @@ final class RaLocationController extends AbstractController
             'orderBy'               => $command->orderBy,
             'orderDirection'        => $command->orderDirection ?: 'asc',
             'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',
-        ];
+        ]);
     }
 
-    public function create(Request $request)
+    public function create(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
         $logger = $this->get('logger');
@@ -146,7 +143,7 @@ final class RaLocationController extends AbstractController
         ]);
     }
 
-    public function change(Request $request)
+    public function change(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
         $logger = $this->get('logger');
@@ -195,10 +192,7 @@ final class RaLocationController extends AbstractController
         ]);
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function remove(Request $request)
+    public function remove(Request $request): RedirectResponse
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 
@@ -234,34 +228,22 @@ final class RaLocationController extends AbstractController
         return $this->redirectToRoute('ra_locations_manage', ['institution' => $command->institution]);
     }
 
-    /**
-     * @return \Surfnet\StepupRa\RaBundle\Service\RaLocationService
-     */
-    private function getRaLocationService()
+    private function getRaLocationService(): RaLocationService
     {
         return $this->get('ra.service.ra_location');
     }
 
-    /**
-     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
-     */
-    private function getCurrentUser()
+    private function getCurrentUser(): Identity
     {
         return $this->get('security.token_storage')->getToken()->getUser();
     }
 
-    /**
-     * @return ProfileService
-     */
-    private function getProfileService()
+    private function getProfileService(): ProfileService
     {
         return $this->get('ra.service.profile');
     }
 
-    /**
-     * @return InstitutionListingService
-     */
-    private function getInstitutionListingService()
+    private function getInstitutionListingService(): InstitutionListingService
     {
         return $this->get('ra.service.institution_listing');
     }
