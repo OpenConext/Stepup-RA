@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,20 +24,10 @@ use Surfnet\StepupRa\RaBundle\VettingProcedure;
 
 interface VettingProcedureRepository
 {
-    /**
-     * @param VettingProcedure $vettingProcedure
-     */
-    public function store(VettingProcedure $vettingProcedure);
+     public function store(VettingProcedure $vettingProcedure);
 
-    /**
-     * @param string $id
-     * @return VettingProcedure|null
-     */
-    public function retrieve($id);
 
-    /**
-     * @param string $id
-     * @return void
-     */
-    public function remove($id);
+    public function retrieve(string $id): ?VettingProcedure;
+
+    public function remove(string $id): mixed;
 }

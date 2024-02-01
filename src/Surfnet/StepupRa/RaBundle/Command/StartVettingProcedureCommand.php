@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -18,6 +20,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Command;
 
+use Surfnet\StepupBundle\Value\Loa;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -25,28 +28,18 @@ class StartVettingProcedureCommand
 {
     /**
      * The ID of the authority that will vet a second factor.
-     *
-     * @var string
      */
-    public $authorityId;
+    public string $authorityId;
 
     /**
      * The LoA of the authority.
-     *
-     * @var \Surfnet\StepupBundle\Value\Loa
      */
-    public $authorityLoa;
+    public Loa $authorityLoa;
 
     /**
      * @Assert\NotBlank(message="ra.start_vetting_procedure.registration_code.may_not_be_empty")
-     * @Assert\Type(type="string", message="ra.start_vetting_procedure.registration_code.must_be_string")
-     *
-     * @var string
      */
-    public $registrationCode;
+    public string $registrationCode;
 
-    /**
-     * @var VerifiedSecondFactor
-     */
-    public $secondFactor;
+    public VerifiedSecondFactor $secondFactor;
 }
