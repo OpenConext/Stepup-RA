@@ -66,8 +66,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         array $configuration,
         array $routes,
         ContainerBuilder $container,
-    ): void
-    {
+    ): void {
         if ($container->has('gssp.provider.' . $provider)) {
             throw new InvalidConfigurationException(sprintf('Cannot create the same provider "%s" twice', $provider));
         }
@@ -184,8 +183,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         array $configuration,
         array $routes,
         ContainerBuilder $container,
-    ): void
-    {
+    ): void {
         $metadataConfiguration = new Definition(MetadataConfiguration::class);
 
         $propertyMap = [

@@ -27,8 +27,8 @@ class SessionVettingProcedureRepository implements VettingProcedureRepository
 {
     public function __construct(
         private readonly RequestStack $requestStack,
-        private readonly string $namespace)
-    {
+        private readonly string $namespace,
+    ) {
     }
 
     public function store(VettingProcedure $vettingProcedure): void
