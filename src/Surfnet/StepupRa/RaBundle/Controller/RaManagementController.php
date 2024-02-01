@@ -44,7 +44,7 @@ class RaManagementController extends AbstractController
     /**
      * @return Response
      */
-    public function manageAction(Request $request): Response
+    public function manage(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
@@ -102,7 +102,7 @@ class RaManagementController extends AbstractController
     /**
      * @return Response
      */
-    public function raCandidateSearchAction(Request $request)
+    public function raCandidateSearch(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
@@ -159,7 +159,7 @@ class RaManagementController extends AbstractController
     /**
      * @return Response
      */
-    public function createRaAction(Request $request)
+    public function createRa(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
@@ -216,7 +216,7 @@ class RaManagementController extends AbstractController
      * @param         $raInstitution
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function amendRaInformationAction(Request $request, $identityId, $raInstitution)
+    public function amendRaInformation(Request $request, $identityId, $raInstitution)
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
@@ -263,7 +263,7 @@ class RaManagementController extends AbstractController
      * @param         $raInstitution
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function retractRegistrationAuthorityAction(Request $request, $identityId, $raInstitution)
+    public function retractRegistrationAuthority(Request $request, $identityId, $raInstitution)
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');

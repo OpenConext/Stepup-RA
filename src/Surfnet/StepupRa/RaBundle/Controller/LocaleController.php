@@ -28,7 +28,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 final class LocaleController extends AbstractController
 {
-    public function switchLocaleAction(Request $request)
+    public function switchLocale(Request $request)
     {
         $returnUrl = $request->query->get('return-url');
 

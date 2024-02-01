@@ -39,7 +39,7 @@ class SmsController extends SecondFactorController
      * @param string $procedureId
      * @return array|Response
      */
-    public function sendChallengeAction(Request $request, $procedureId)
+    public function sendChallenge(Request $request, $procedureId)
     {
         $this->assertSecondFactorEnabled('sms');
 
@@ -103,7 +103,7 @@ class SmsController extends SecondFactorController
      * @param string $procedureId
      * @return array|Response
      */
-    public function provePossessionAction(Request $request, $procedureId)
+    public function provePossession(Request $request, $procedureId)
     {
         $this->assertSecondFactorEnabled('sms');
         $this->denyAccessUnlessGranted('ROLE_RA');

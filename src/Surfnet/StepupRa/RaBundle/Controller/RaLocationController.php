@@ -45,7 +45,7 @@ final class RaLocationController extends AbstractController
      * @Template
      * @return array|Response
      */
-    public function manageAction(Request $request)
+    public function manage(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 
@@ -108,7 +108,7 @@ final class RaLocationController extends AbstractController
         ];
     }
 
-    public function createAction(Request $request)
+    public function create(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
         $logger = $this->get('logger');
@@ -146,7 +146,7 @@ final class RaLocationController extends AbstractController
         ]);
     }
 
-    public function changeAction(Request $request)
+    public function change(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
         $logger = $this->get('logger');
@@ -198,7 +198,7 @@ final class RaLocationController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function removeAction(Request $request)
+    public function remove(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 

@@ -29,7 +29,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RaaController extends AbstractController
 {
-    public function institutionConfigurationAction(Request $request)
+    public function institutionConfiguration(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');

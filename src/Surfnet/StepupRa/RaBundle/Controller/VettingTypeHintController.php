@@ -48,7 +48,7 @@ class VettingTypeHintController extends AbstractController
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity) Given the two forms being handled in this action, cc is higher.
      */
-    public function vettingTypeHintAction(Request $request): Response
+    public function vettingTypeHint(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');

@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SecurityController extends AbstractController
 {
-    public function sessionExpiredAction(Request $request)
+    public function sessionExpired(Request $request)
     {
         $redirectToUrl = $this
             ->get('ra.security.authentication.session.session_storage')

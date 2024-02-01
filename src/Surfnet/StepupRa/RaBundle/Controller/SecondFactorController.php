@@ -41,7 +41,7 @@ final class SecondFactorController extends AbstractController
      * @Template
      * @return array|Response
      */
-    public function searchAction(Request $request)
+    public function search(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 
@@ -99,7 +99,7 @@ final class SecondFactorController extends AbstractController
         ];
     }
 
-    public function exportAction(SearchRaSecondFactorsCommand $command)
+    public function export(SearchRaSecondFactorsCommand $command)
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
 
@@ -113,7 +113,7 @@ final class SecondFactorController extends AbstractController
     /**
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function revokeAction(Request $request)
+    public function revoke(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 
@@ -152,7 +152,7 @@ final class SecondFactorController extends AbstractController
     /**
      * @return Response
      */
-    public function auditLogAction(Request $request)
+    public function auditLog(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
         $logger = $this->get('logger');

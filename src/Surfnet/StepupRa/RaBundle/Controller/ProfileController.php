@@ -23,7 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 final class ProfileController extends AbstractController
 {
-    public function profileAction()
+    public function profile()
     {
         $logger = $this->get('logger');
 

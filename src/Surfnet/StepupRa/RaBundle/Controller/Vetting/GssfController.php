@@ -45,7 +45,7 @@ final class GssfController extends SecondFactorController
      * @param string $provider
      * @return array|Response
      */
-    public function initiateAction($procedureId, $provider)
+    public function initiate($procedureId, $provider)
     {
         $this->assertSecondFactorEnabled($provider);
 
@@ -67,7 +67,7 @@ final class GssfController extends SecondFactorController
      * @param string $provider
      * @return array|Response
      */
-    public function authenticateAction($procedureId, $provider)
+    public function authenticate($procedureId, $provider)
     {
         $this->assertSecondFactorEnabled($provider);
 
@@ -117,7 +117,7 @@ final class GssfController extends SecondFactorController
      * @param string  $provider
      * @return array|Response
      */
-    public function verifyAction(Request $httpRequest, $provider)
+    public function verify(Request $httpRequest, $provider)
     {
         $this->assertSecondFactorEnabled($provider);
 
@@ -198,7 +198,7 @@ final class GssfController extends SecondFactorController
      * @param string $provider
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function metadataAction($provider)
+    public function metadata($provider)
     {
         $this->assertSecondFactorEnabled($provider);
 
