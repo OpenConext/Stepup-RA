@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -22,86 +24,31 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
-/**
- * @SuppressWarnings(PHPMD.UnusedPrivateFields)
- */
 class VettingProcedure
 {
-    /**
-     * @var string
-     */
-    private $id;
+    private string $id;
+    private string $authorityId;
 
-    /**
-     * @var string
-     */
-    private $authorityId;
+    private ?string $registrationCode;
 
-    /**
-     * @var string|null
-     */
-    private $registrationCode;
+    private VerifiedSecondFactor $secondFactor;
 
-    /**
-     * @var VerifiedSecondFactor
-     */
-    private $secondFactor;
+    private ?string $inputSecondFactorIdentifier;
 
-    /**
-     * @var string|null
-     */
-    private $inputSecondFactorIdentifier;
+    private ?string $documentNumber;
 
-    /**
-     * @var string|null
-     */
-    private $documentNumber;
+    private ?bool $identityVerified;
 
-    /**
-     * @var boolean|null
-     */
-    private $identityVerified;
+    private ?bool $skipProvePossession;
 
-    /**
-     * @var boolean|null
-     */
-    private $skipProvePossession;
-
-    /**
-     * @var boolean|null
-     */
-    private $vetted;
-
-    /**
-     * @param string $id
-     * @param string $authorityId
-     * @param string $registrationCode
-     * @param bool $skipProvePossession
-     * @return self
-     */
     public static function start(
-        $id,
-        $authorityId,
-        $registrationCode,
+        string               $id,
+        string               $authorityId,
+        string               $registrationCode,
         VerifiedSecondFactor $secondFactor,
-        $skipProvePossession,
-    ) {
-        if (!is_string($id)) {
-            throw InvalidArgumentException::invalidType('string', 'id', $id);
-        }
-
-        if (!is_string($authorityId)) {
-            throw InvalidArgumentException::invalidType('string', 'authorityId', $authorityId);
-        }
-
-        if (!is_string($registrationCode)) {
-            throw InvalidArgumentException::invalidType('string', 'registrationCode', $registrationCode);
-        }
-
-        if (!is_bool($skipProvePossession)) {
-            throw InvalidArgumentException::invalidType('string', 'skipProvePossession', $skipProvePossession);
-        }
-
+        bool                 $skipProvePossession,
+    ): VettingProcedure
+    {
         $procedure = new self();
         $procedure->id = $id;
         $procedure->authorityId = $authorityId;
@@ -117,11 +64,9 @@ class VettingProcedure
     }
 
     /**
-     * @param string $secondFactorIdentifier
-     * @return void
      * @throws DomainException
      */
-    public function verifySecondFactorIdentifier($secondFactorIdentifier)
+    public function verifySecondFactorIdentifier(string $secondFactorIdentifier): void
     {
         if (!$this->isReadyForSecondFactorToBeVerified()) {
             throw new DomainException(
@@ -138,22 +83,15 @@ class VettingProcedure
     }
 
     /**
-     * @param string $documentNumber
-     * @param bool $identityVerified
-     * @return void
      * @throws DomainException
      */
-    public function verifyIdentity($documentNumber, $identityVerified)
+    public function verifyIdentity(string $documentNumber, bool $identityVerified): void
     {
         if (!$this->isReadyForIdentityVerification()) {
             throw new DomainException(
                 'Second factor is not yet ready for verification of its Identity; ' .
                 'verify the registrant has the same second factor as used during the registration process.',
             );
-        }
-
-        if (!is_string($documentNumber)) {
-            throw InvalidArgumentException::invalidType('string', 'documentNumber', $documentNumber);
         }
 
         if (empty($documentNumber)) {
@@ -169,10 +107,9 @@ class VettingProcedure
     }
 
     /**
-     * @return void
      * @throws DomainException
      */
-    public function vet()
+    public function vet(): void
     {
         if (!$this->isReadyForVetting()) {
             throw new DomainException(
@@ -185,90 +122,57 @@ class VettingProcedure
         $this->vetted = true;
     }
 
-    /**
-     * @return string
-     */
-    public function getId()
+    public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return VerifiedSecondFactor
-     */
-    public function getSecondFactor()
+    public function getSecondFactor(): VerifiedSecondFactor
     {
         return $this->secondFactor;
     }
 
-    /**
-     * @return string
-     */
-    public function getAuthorityId()
+    public function getAuthorityId(): string
     {
         return $this->authorityId;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getRegistrationCode()
+    public function getRegistrationCode(): ?string
     {
         return $this->registrationCode;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getInputSecondFactorIdentifier()
+    public function getInputSecondFactorIdentifier(): ?string
     {
         return $this->inputSecondFactorIdentifier;
     }
 
-    /**
-     * @return null|string
-     */
-    public function getDocumentNumber()
+    public function getDocumentNumber(): ?string
     {
         return $this->documentNumber;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function isIdentityVerified()
+    public function isIdentityVerified(): ?bool
     {
         return $this->identityVerified;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function isProvePossessionSkippable()
+    public function isProvePossessionSkippable(): ?bool
     {
         return $this->skipProvePossession;
     }
 
-    /**
-     * @return bool
-     */
-    private function isReadyForSecondFactorToBeVerified()
+    private function isReadyForSecondFactorToBeVerified(): bool
     {
         return !empty($this->registrationCode);
     }
 
-    /**
-     * @return bool
-     */
-    private function isReadyForIdentityVerification()
+    private function isReadyForIdentityVerification(): bool
     {
         return $this->isPossessionProvenOrCanItBeSkipped() && !empty($this->registrationCode);
     }
 
-    /**
-     * @return bool
-     */
-    private function isReadyForVetting()
+    private function isReadyForVetting(): bool
     {
         return $this->isPossessionProvenOrCanItBeSkipped()
             && !empty($this->registrationCode)
@@ -276,10 +180,7 @@ class VettingProcedure
             && $this->identityVerified === true;
     }
 
-    /**
-     * @return bool
-     */
-    private function isPossessionProvenOrCanItBeSkipped()
+    private function isPossessionProvenOrCanItBeSkipped(): bool
     {
         return ($this->inputSecondFactorIdentifier === $this->secondFactor->secondFactorIdentifier || $this->skipProvePossession);
     }
