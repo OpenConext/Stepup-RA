@@ -44,7 +44,7 @@ final class RecoveryTokenController extends AbstractController
     ) {
     }
 
-    public function searchAction(Request $request): Response
+    public function search(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 
@@ -98,7 +98,7 @@ final class RecoveryTokenController extends AbstractController
         );
     }
 
-    public function revokeAction(Request $request): RedirectResponse
+    public function revoke(Request $request): RedirectResponse
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 

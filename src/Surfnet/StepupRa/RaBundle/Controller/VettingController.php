@@ -50,7 +50,7 @@ class VettingController extends AbstractController
      * @SuppressWarnings(PHPMD.CyclomaticComplexity) https://www.pivotaltracker.com/story/show/135045063
      * @SuppressWarnings(PHPMD.NPathComplexity)      https://www.pivotaltracker.com/story/show/135045063
      */
-    public function startProcedureAction(Request $request)
+    public function startProcedure(Request $request)
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
         $logger = $this->get('logger');
@@ -165,7 +165,7 @@ class VettingController extends AbstractController
         }
     }
 
-    public function cancelProcedureAction($procedureId)
+    public function cancelProcedure($procedureId)
     {
         $logger = $this->get('ra.procedure_logger')->forProcedure($procedureId);
 
@@ -188,7 +188,7 @@ class VettingController extends AbstractController
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
      */
-    public function verifyIdentityAction(Request $request, $procedureId)
+    public function verifyIdentity(Request $request, $procedureId)
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 
@@ -276,7 +276,7 @@ class VettingController extends AbstractController
     /**
      * @Template
      */
-    public function vettingCompletedAction()
+    public function vettingCompleted()
     {
         return [];
     }

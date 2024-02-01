@@ -34,7 +34,7 @@ class YubikeyController extends SecondFactorController
      * @param string  $procedureId
      * @return array|Response
      */
-    public function verifyAction(Request $request, $procedureId)
+    public function verify(Request $request, $procedureId)
     {
         $this->assertSecondFactorEnabled('yubikey');
 

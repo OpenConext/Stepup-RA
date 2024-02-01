@@ -30,7 +30,7 @@ class SamlController extends AbstractController
     /**
      * @Template
      */
-    public function consumeAssertionAction(Request $httpRequest)
+    public function consumeAssertion(Request $httpRequest)
     {
         /** @var PostBinding $postBinding */
         $postBinding = $this->get('surfnet_saml.http.post_binding');
@@ -44,7 +44,7 @@ class SamlController extends AbstractController
         return $assertion->getAttributes();
     }
 
-    public function metadataAction()
+    public function metadata()
     {
         /** @var MetadataFactory $metadataFactory */
         $metadataFactory = $this->get('surfnet_saml.metadata_factory');
