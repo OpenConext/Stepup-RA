@@ -26,15 +26,9 @@ class ProfileService
 {
     public function __construct(
         private readonly ApiProfileService $apiProfileService,
-        private readonly LoggerInterface $logger,
     ) {
     }
-
-    /**
-     * @param string $identityId
-     * @return null|Profile
-     */
-    public function findByIdentityId($identityId)
+    public function findByIdentityId(string $identityId): ?Profile
     {
         return $this->apiProfileService->get($identityId);
     }
