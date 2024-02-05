@@ -47,7 +47,7 @@ final class RecoveryTokenController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_RA');
 
         $identity = $this->getCurrentUser();
-        $this->container->get('logger')->notice('Starting search for recovery tokens');
+        $this->logger->notice('Starting search for recovery tokens');
 
         $command = new SearchRecoveryTokensCommand();
         $command->actorId = $identity->id;
