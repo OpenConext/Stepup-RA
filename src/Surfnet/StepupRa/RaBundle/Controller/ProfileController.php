@@ -21,6 +21,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 final class ProfileController extends AbstractController
 {
@@ -31,7 +32,7 @@ final class ProfileController extends AbstractController
     {
     }
 
-    public function profile()
+    public function profile(): Response
     {
         $this->logger->notice('Opening profile page');
 
