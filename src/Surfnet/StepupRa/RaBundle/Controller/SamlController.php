@@ -18,24 +18,32 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
+use Surfnet\SamlBundle\Entity\IdentityProvider;
 use Surfnet\SamlBundle\Http\PostBinding;
 use Surfnet\SamlBundle\Http\XMLResponse;
 use Surfnet\SamlBundle\Metadata\MetadataFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Surfnet\SamlBundle\Entity\ServiceProvider;
 
 class SamlController extends AbstractController
 {
+    public function __construct(
+        private readonly PostBinding $postBinding,
+        private readonly IdentityProvider $remoteIdp,
+        private readonly ServiceProvider $hostedServiceProvider,
+        private readonly MetadataFactory $metadataFactory,
+    ) {
+    }
+
     public function consumeAssertion(Request $httpRequest): Response
     {
-        /** @var PostBinding $postBinding */
-        $postBinding = $this->container->get('surfnet_saml.http.post_binding');
 
-        $assertion = $postBinding->processResponse(
+        $assertion = $this->postBinding->processResponse(
             $httpRequest,
-            $this->container->get('surfnet_saml.remote.idp'),
-            $this->container->get('surfnet_saml.hosted.service_provider'),
+            $this->remoteIdp,
+            $this->hostedServiceProvider,
         );
         return $this->render(
             'saml/consume_assertion.html.twig',
@@ -45,9 +53,7 @@ class SamlController extends AbstractController
 
     public function metadata(): XMLResponse
     {
-        /** @var MetadataFactory $metadataFactory */
-        $metadataFactory = $this->container->get('surfnet_saml.metadata_factory');
 
-        return new XMLResponse($metadataFactory->generate());
+        return new XMLResponse($this->metadataFactory->generate());
     }
 }
