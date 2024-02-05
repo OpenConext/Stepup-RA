@@ -33,15 +33,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 class VettingTypeHintController extends AbstractController
 {
+//    private readonly array $locales;
+
     public function __construct(
-        private readonly LoggerInterface $logger,
+        private readonly LoggerInterface           $logger,
         private readonly InstitutionListingService $institutionListingService,
-        private readonly ProfileService $profileService,
-        private readonly VettingTypeHintService $vettingTypeHintService,
+        private readonly ProfileService            $profileService,
+        private readonly VettingTypeHintService    $vettingTypeHintService,
         /**
          * @var string[]
          */
-        private array $locales,
+         private readonly array $locales = [],
     ) {
     }
 

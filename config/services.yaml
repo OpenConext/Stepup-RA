@@ -11,6 +11,10 @@ services:
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
     public: true
 
+  Surfnet\StepupRa\RaBundle\Controller\:
+    resource: '../src/Surfnet/StepupRa/RaBundle/Controller/*'
+    tags: [ 'controller.service_arguments' ]
+
   twig.extension.text: # Required by JMSTranslationBundle
     class: Twig_Extensions_Extension_Text
     tags: [{ name: twig.extension }]

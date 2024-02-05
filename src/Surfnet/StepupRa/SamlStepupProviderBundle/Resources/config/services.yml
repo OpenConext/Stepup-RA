@@ -1,7 +1,14 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
     gssp.provider_repository:
         public: true
         class: Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ProviderRepository
+    Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ProviderRepository:
+        alias: gssp.provider_repository
 
     gssp.sessionbag:
         class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
