@@ -20,8 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\EventListener;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -33,7 +32,7 @@ final readonly class LocaleListener implements EventSubscriberInterface
     {
     }
 
-    public function setRequestLocale(ResponseEvent $event): void
+    public function setRequestLocale(RequestEvent $event): void
     {
         $token = $this->tokenStorage->getToken();
 

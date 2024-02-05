@@ -25,9 +25,8 @@ use Surfnet\StepupRa\RaBundle\Security\Authentication\AuthenticatedSessionStateH
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SamlAuthenticationStateHandler;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SamlInteractionProvider;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -38,10 +37,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
  */
 class ProcessSamlAuthenticationHandler implements AuthenticationHandler
 {
-    /**
-     * @var AuthenticationHandler
-     */
-    private $nextHandler;
+    private AuthenticationHandler $nextHandler;
 
     public function __construct(
         private readonly TokenStorageInterface $tokenStorage,
@@ -51,11 +47,10 @@ class ProcessSamlAuthenticationHandler implements AuthenticationHandler
         private readonly AuthenticationManagerInterface $authenticationManager,
         private readonly LoaResolutionService $loaResolutionService,
         private readonly SamlAuthenticationLogger $authenticationLogger,
-        private readonly EngineInterface $templating,
     ) {
     }
 
-    public function process(GetResponseEvent $event)
+    public function process(RequestEvent $event): void
     {
         if ($this->tokenStorage->getToken() === null
             && $this->samlInteractionProvider->isSamlAuthenticationInitiated()
@@ -100,7 +95,7 @@ class ProcessSamlAuthenticationHandler implements AuthenticationHandler
         }
     }
 
-    public function setNext(AuthenticationHandler $handler)
+    public function setNext(AuthenticationHandler $handler): void
     {
         $this->nextHandler = $handler;
     }
