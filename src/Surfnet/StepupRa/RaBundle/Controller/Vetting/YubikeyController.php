@@ -20,6 +20,7 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
+use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\VerifyYubikeyPublicIdType;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
@@ -31,8 +32,10 @@ class YubikeyController extends SecondFactorController
 {
     public function __construct(
         private readonly VettingService $vettingService,
+        LoggerInterface $logger,
         // TODO: with sf 6 autowire attribute for procedureAwareLogger
     ) {
+        parent::__construct($logger);
     }
 
     public function verify(Request $request, string $procedureId): Response
