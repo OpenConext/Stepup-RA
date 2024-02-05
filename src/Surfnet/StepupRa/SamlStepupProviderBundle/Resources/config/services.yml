@@ -11,13 +11,13 @@ services:
         alias: gssp.provider_repository
 
     gssp.sessionbag:
-        class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
+        class: Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag
         factory: ['@session', 'getBag']
         arguments: ['gssp']
 
     gssp.session.namespaced_attribute_bag:
         public: false
-        class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
+        class: Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag
         arguments:
             - '__gssp__'
             - '/'
