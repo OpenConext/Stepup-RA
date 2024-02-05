@@ -233,6 +233,8 @@ services:
         arguments:
             - "@ra.service.command"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\RaService:
+        alias: ra.service.ra
 
     ra.service.second_factor:
         class: Surfnet\StepupRa\RaBundle\Service\SecondFactorService

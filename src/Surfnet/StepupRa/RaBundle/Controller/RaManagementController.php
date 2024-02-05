@@ -34,12 +34,13 @@ use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaListingType;
 use Surfnet\StepupRa\RaBundle\Service\RaCandidateService;
 use Surfnet\StepupRa\RaBundle\Service\RaListingService;
+use Surfnet\StepupRa\RaBundle\Service\RaService;
 use Surfnet\StepupRa\RaBundle\Value\RoleAtInstitution;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -51,6 +52,8 @@ class RaManagementController extends AbstractController
         private readonly RaListingService $raListingService,
         private readonly RaCandidateService $raCandidateService,
         private readonly PaginatorInterface $paginator,
+        private readonly TranslatorInterface $translator,
+        private readonly RaService $raService,
     )
     {
     }
@@ -192,7 +195,7 @@ class RaManagementController extends AbstractController
             if ($success) {
                 $this->addFlash(
                     'success',
-                    $this->container->get('translator')->trans('ra.management.create_ra.identity_accredited'),
+                    $this->translator->trans('ra.management.create_ra.identity_accredited'),
                 );
 
                 $this->logger->debug('Identity Accredited, redirecting to candidate overview');
@@ -237,8 +240,8 @@ class RaManagementController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->logger->notice(sprintf("RA(A) '%s' information amendment form submitted, processing", $identityId));
 
-            if ($this->container->get('ra.service.ra')->amendRegistrationAuthorityInformation($command)) {
-                $this->addFlash('success', $this->container->get('translator')->trans('ra.management.amend_ra_info.info_amended'));
+            if ($this->raService->amendRegistrationAuthorityInformation($command)) {
+                $this->addFlash('success', $this->translator->trans('ra.management.amend_ra_info.info_amended'));
 
                 $this->logger->notice(sprintf("RA(A) '%s' information successfully amended", $identityId));
                 return $this->redirectToRoute('ra_management_manage');
@@ -257,9 +260,8 @@ class RaManagementController extends AbstractController
     /**
      * @param         $identityId
      * @param         $raInstitution
-     * @return RedirectResponse|Response
      */
-    public function retractRegistrationAuthority(Request $request, $identityId, $raInstitution)
+    public function retractRegistrationAuthority(Request $request, $identityId, $raInstitution): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
@@ -285,10 +287,10 @@ class RaManagementController extends AbstractController
 
             $this->logger->notice(sprintf('Confirmed retraction of RA credentials for identity "%s"', $identityId));
 
-            if ($this->container->get('ra.service.ra')->retractRegistrationAuthority($command)) {
+            if ($this->raService->retractRegistrationAuthority($command)) {
                 $this->logger->notice(sprintf('Registration authority for identity "%s" retracted', $identityId));
 
-                $this->addFlash('success', $this->container->get('translator')->trans('ra.management.retract_ra.success'));
+                $this->addFlash('success', $this->translator->trans('ra.management.retract_ra.success'));
                 return $this->redirectToRoute('ra_management_manage');
             }
 
