@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication;
 
+use SAML2\Assertion;
 use Surfnet\SamlBundle\Entity\IdentityProvider;
 use Surfnet\SamlBundle\Entity\ServiceProvider;
 use Surfnet\SamlBundle\Http\PostBinding;
@@ -27,6 +28,7 @@ use Surfnet\StepupBundle\Service\LoaResolutionService;
 use Surfnet\StepupBundle\Value\Loa;
 use Surfnet\StepupRa\RaBundle\Exception\LoaTooLowException;
 use Surfnet\StepupRa\RaBundle\Exception\UnexpectedIssuerException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
@@ -54,10 +56,7 @@ class SamlInteractionProvider
         return $this->samlAuthenticationStateHandler->hasRequestId();
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function initiateSamlRequest()
+    public function initiateSamlRequest(): RedirectResponse
     {
         $authnRequest = AuthnRequestFactory::createNewRequest(
             $this->serviceProvider,
@@ -68,18 +67,16 @@ class SamlInteractionProvider
 
         $this->samlAuthenticationStateHandler->setRequestId($authnRequest->getRequestId());
 
-        return $this->redirectBinding->createRedirectResponseFor($authnRequest);
+        return $this->redirectBinding->createResponseFor($authnRequest);
     }
 
     /**
-     * @return \SAML2\Assertion
      * @throws LoaTooLowException When required LoA is not met by response
      * @throws AuthenticationException When response LoA cannot be resolved
      * @throws UnexpectedIssuerException
      */
-    public function processSamlResponse(Request $request)
+    public function processSamlResponse(Request $request): Assertion
     {
-        /** @var \SAML2\Assertion $assertion */
         $assertion = $this->postBinding->processResponse(
             $request,
             $this->identityProvider,
@@ -106,7 +103,7 @@ class SamlInteractionProvider
                 sprintf(
                     "Gateway responded with LoA '%s', which is lower than required LoA '%s'",
                     $assertion->getAuthnContextClassRef(),
-                    (string) $this->requiredLoa,
+                    $this->requiredLoa,
                 ),
             );
         }

@@ -29,7 +29,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class InitiateSamlAuthenticationHandler implements AuthenticationHandler
 {
-    private ?AuthenticationHandler $nextHandler;
+    private ?AuthenticationHandler $nextHandler = null;
 
     public function __construct(
         private readonly TokenStorageInterface $tokenStorage,
@@ -80,9 +80,7 @@ class InitiateSamlAuthenticationHandler implements AuthenticationHandler
             return;
         }
 
-        if ($this->nextHandler) {
-            $this->nextHandler->process($event);
-        }
+        $this->nextHandler?->process($event);
     }
 
     public function setNext(AuthenticationHandler $handler): void

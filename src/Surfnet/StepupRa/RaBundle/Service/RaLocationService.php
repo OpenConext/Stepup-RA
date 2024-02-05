@@ -23,6 +23,7 @@ use Surfnet\StepupMiddlewareClient\Configuration\Dto\RaLocationSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Command\AddRaLocationCommand as MiddlewareCreateLocationCommand;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Command\ChangeRaLocationCommand as MiddlewareChangeRaLocationCommand;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Command\RemoveRaLocationCommand as MiddlewareRemoveRaLocationCommand;
+use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\RaLocation;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\RaLocationCollection;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Service\RaLocationService as ApiRaLocationService;
 use Surfnet\StepupMiddlewareClientBundle\Uuid\Uuid;
@@ -43,11 +44,7 @@ class RaLocationService
     ) {
     }
 
-    /**
-     * @param string $id
-     * @return null|\Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\RaLocation
-     */
-    public function find($id)
+    public function find(string $id): ?RaLocation
     {
         return $this->apiRaLocationService->get($id);
     }

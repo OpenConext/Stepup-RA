@@ -25,6 +25,8 @@ use Surfnet\StepupBundle\Value\SecondFactorType;
 use Surfnet\StepupBundle\Value\VettingType;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaCandidateSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AccreditIdentityCommand;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateCollection;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitutions;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaCandidateService as ApiRaCandidateService;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
@@ -43,10 +45,7 @@ class RaCandidateService
     ) {
     }
 
-    /**
-     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateCollection
-     */
-    public function search(SearchRaCandidatesCommand $command)
+    public function search(SearchRaCandidatesCommand $command): RaCandidateCollection
     {
         $query = new RaCandidateSearchQuery($command->actorId, $command->pageNumber);
 
@@ -79,25 +78,13 @@ class RaCandidateService
         return $this->apiRaCandidateService->search($query);
     }
 
-    /**
-     * @param string $identityId
-     * @param string $actorId
-     * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitutions
-     */
-    public function getRaCandidate($identityId, $actorId)
+    public function getRaCandidate(string $identityId, string $actorId): ?RaCandidateInstitutions
     {
-        if (!is_string($identityId)) {
-            throw InvalidArgumentException::invalidType('string', 'identityId', $identityId);
-        }
-
-        if (!is_string($actorId)) {
-            throw InvalidArgumentException::invalidType('string', 'actorId', $actorId);
-        }
 
         return $this->apiRaCandidateService->get($identityId, $actorId);
     }
 
-    public function accreditCandidate(AccreditCandidateCommand $command)
+    public function accreditCandidate(AccreditCandidateCommand $command): bool
     {
         $apiCommand                     = new AccreditIdentityCommand();
         $apiCommand->raInstitution      = $command->roleAtInstitution->getInstitution();
@@ -128,12 +115,12 @@ class RaCandidateService
     /**
      * @return string[]
      */
-    private function getLoa3SecondFactorTypes()
+    private function getLoa3SecondFactorTypes(): array
     {
-        $loa3 = new Loa(Loa::LOA_3, 'LOA3');
         return array_filter(
             $this->secondFactorTypeService->getAvailableSecondFactorTypes(),
-            function ($secondFactorType) use ($loa3) {
+            function ($secondFactorType) {
+                $loa3 = new Loa(Loa::LOA_3, 'LOA3');
                 $secondFactorType = new SecondFactorType($secondFactorType);
                 return $this->secondFactorTypeService->canSatisfy(
                     $secondFactorType,

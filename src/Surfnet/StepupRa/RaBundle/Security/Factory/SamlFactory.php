@@ -25,7 +25,7 @@ use Symfony\Component\DependencyInjection\ChildDefinition;
 
 class SamlFactory implements SecurityFactoryInterface
 {
-    public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint)
+    public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint): array
     {
         $providerId = 'security.authentication.provider.saml.' . $id;
         $container->setDefinition(

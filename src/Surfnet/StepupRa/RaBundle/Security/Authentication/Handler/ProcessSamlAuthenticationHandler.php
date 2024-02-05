@@ -37,7 +37,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
  */
 class ProcessSamlAuthenticationHandler implements AuthenticationHandler
 {
-    private AuthenticationHandler $nextHandler;
+    private ?AuthenticationHandler $nextHandler = null;
 
     public function __construct(
         private readonly TokenStorageInterface $tokenStorage,
@@ -90,9 +90,7 @@ class ProcessSamlAuthenticationHandler implements AuthenticationHandler
             return;
         }
 
-        if ($this->nextHandler) {
-            $this->nextHandler->process($event);
-        }
+        $this->nextHandler?->process($event);
     }
 
     public function setNext(AuthenticationHandler $handler): void

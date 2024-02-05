@@ -34,7 +34,7 @@ class SessionStorageTest extends TestCase
      */
     public function tearDown(): void
     {
-        $this->setCurrentTime(null);
+        $this->setCurrentTime();
     }
 
     /**
