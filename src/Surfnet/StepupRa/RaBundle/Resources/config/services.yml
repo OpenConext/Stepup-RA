@@ -191,6 +191,8 @@ services:
             - "@ra.service.command"
             - "@logger"
             - "@surfnet_stepup.service.second_factor_type"
+    Surfnet\StepupRa\RaBundle\Service\RaCandidateService:
+        alias: ra.service.ra_candidate
 
     ra.service.ra_location:
         class: Surfnet\StepupRa\RaBundle\Service\RaLocationService
@@ -198,12 +200,16 @@ services:
             - "@surfnet_stepup_middleware_client.configuration.service.ra_location"
             - "@ra.service.command"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\RaLocationService:
+        alias: ra.service.ra_location
 
     ra.service.ra_listing:
         class: Surfnet\StepupRa\RaBundle\Service\RaListingService
         arguments:
             - "@surfnet_stepup_middleware_client.identity.service.ra_listing"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\RaListingService:
+        alias: ra.service.ra_listing
 
     ra.service.ra_second_factor_exporter:
         class: Surfnet\StepupRa\RaBundle\Service\RaSecondFactorExport
