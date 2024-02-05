@@ -33,9 +33,6 @@ class YubikeyService
     {
     }
 
-    /**
-     * @return YubikeyVerificationResult
-     */
     public function verify(VerifyYubikeyOtpCommand $command): YubikeyVerificationResult
     {
         $this->logger->info('Verifying Yubikey OTP');

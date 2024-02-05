@@ -28,12 +28,7 @@ final class ProviderRepository
     /**
      * @var Provider[]
      */
-    private array $providers;
-
-    public function __construct()
-    {
-        $this->providers = [];
-    }
+    private array $providers = [];
 
     public function addProvider(Provider $provider): void
     {

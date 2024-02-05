@@ -34,7 +34,6 @@ final class VerificationResult
 
     /**
      * @param string $procedureId
-     * @return VerificationResult
      */
     public static function verificationSucceeded($procedureId): VerificationResult
     {
@@ -59,7 +58,6 @@ final class VerificationResult
 
     /**
      * @param string $procedureId
-     * @return VerificationResult
      */
     public static function verificationFailed($procedureId): VerificationResult
     {
@@ -74,17 +72,11 @@ final class VerificationResult
         return $result;
     }
 
-    /**
-     * @return bool
-     */
     public function isSuccess(): bool
     {
         return $this->verificationSucceeded && $this->procedureId;
     }
 
-    /**
-     * @return bool
-     */
     public function didVerificationSucceed(): bool
     {
         return $this->verificationSucceeded;

@@ -23,14 +23,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
-final class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
+final readonly class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 {
     /**
      * @param string[] $logoutRedirectUrl
      */
     public function __construct(
-        private readonly TokenStorageInterface $tokenStorage,
-        private readonly array $logoutRedirectUrl,
+        private TokenStorageInterface $tokenStorage,
+        private array $logoutRedirectUrl,
     )
     {
     }

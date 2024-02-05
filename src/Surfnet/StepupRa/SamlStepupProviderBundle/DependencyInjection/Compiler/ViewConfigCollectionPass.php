@@ -26,9 +26,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class ViewConfigCollectionPass implements CompilerPassInterface
 {
-    /**
-     * @param ContainerBuilder $container
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->has('surfnet_stepup.provider.collection')) {

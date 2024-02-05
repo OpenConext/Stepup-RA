@@ -28,25 +28,16 @@ class YubikeyVerificationResult
     {
     }
 
-    /**
-     * @return bool
-     */
     public function isSuccessful(): bool
     {
         return !$this->clientError && !$this->serverError;
     }
 
-    /**
-     * @return boolean
-     */
     public function isClientError(): bool
     {
         return $this->clientError;
     }
 
-    /**
-     * @return boolean
-     */
     public function isServerError(): bool
     {
         return $this->serverError;

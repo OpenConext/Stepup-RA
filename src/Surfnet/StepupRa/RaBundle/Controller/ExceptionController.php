@@ -28,7 +28,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 final class ExceptionController extends BaseExceptionController
 {
     /**
-     * @param Exception $exception
      * @return array View parameters 'title' and 'description'
      */
     protected function getPageTitleAndDescription(Exception $exception): array

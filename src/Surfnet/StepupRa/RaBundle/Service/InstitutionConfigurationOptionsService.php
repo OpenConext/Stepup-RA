@@ -31,7 +31,6 @@ final readonly class InstitutionConfigurationOptionsService implements Instituti
 
     /**
      * @param string $institution
-     * @return null|InstitutionConfigurationOptions
      */
     public function getInstitutionConfigurationOptionsFor($institution): ?InstitutionConfigurationOptions
     {

@@ -49,9 +49,6 @@ class RaLocationService
         return $this->apiRaLocationService->get($id);
     }
 
-    /**
-     * @return RaLocationCollection
-     */
     public function search(SearchRaLocationsCommand $command): RaLocationCollection
     {
         $query = new RaLocationSearchQuery($command->institution);
@@ -115,9 +112,6 @@ class RaLocationService
         return $result->isSuccessful();
     }
 
-    /**
-     * @return bool
-     */
     public function remove(RemoveRaLocationCommand $command): bool
     {
         $middlewareCommand = new MiddlewareRemoveRaLocationCommand();

@@ -30,18 +30,12 @@ class SessionLifetimeGuard
     ) {
     }
 
-    /**
-     * @return bool
-     */
     public function sessionLifetimeWithinLimits(AuthenticatedSessionStateHandler $sessionStateHandler): bool
     {
         return $this->sessionLifetimeWithinAbsoluteLimit($sessionStateHandler)
         && $this->sessionLifetimeWithinRelativeLimit($sessionStateHandler);
     }
 
-    /**
-     * @return bool
-     */
     public function sessionLifetimeWithinAbsoluteLimit(AuthenticatedSessionStateHandler $sessionStateHandler): bool
     {
         if (!$sessionStateHandler->isAuthenticationMomentLogged()) {
@@ -51,17 +45,9 @@ class SessionLifetimeGuard
         $authenticationMoment = $sessionStateHandler->getAuthenticationMoment();
         $sessionTimeoutMoment = $this->absoluteTimeoutLimit->getEndWhenStartingAt($authenticationMoment);
         $now = DateTime::now();
-
-        if ($now->comesBeforeOrIsEqual($sessionTimeoutMoment)) {
-            return true;
-        }
-
-        return false;
+        return $now->comesBeforeOrIsEqual($sessionTimeoutMoment);
     }
 
-    /**
-     * @return bool
-     */
     public function sessionLifetimeWithinRelativeLimit(AuthenticatedSessionStateHandler $sessionStateHandler): bool
     {
         if (!$sessionStateHandler->hasSeenInteraction()) {
@@ -71,11 +57,6 @@ class SessionLifetimeGuard
         $lastInteractionMoment = $sessionStateHandler->getLastInteractionMoment();
         $sessionTimeoutMoment = $this->relativeTimeoutLimit->getEndWhenStartingAt($lastInteractionMoment);
         $now = DateTime::now();
-
-        if ($now->comesBeforeOrIsEqual($sessionTimeoutMoment)) {
-            return true;
-        }
-
-        return false;
+        return $now->comesBeforeOrIsEqual($sessionTimeoutMoment);
     }
 }

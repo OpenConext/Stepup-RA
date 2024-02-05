@@ -29,17 +29,17 @@ class VettingProcedure
     private string $id;
     private string $authorityId;
 
-    private ?string $registrationCode;
+    private ?string $registrationCode = null;
 
     private VerifiedSecondFactor $secondFactor;
 
-    private ?string $inputSecondFactorIdentifier;
+    private ?string $inputSecondFactorIdentifier = null;
 
-    private ?string $documentNumber;
+    private ?string $documentNumber = null;
 
-    private ?bool $identityVerified;
+    private ?bool $identityVerified = null;
 
-    private ?bool $skipProvePossession;
+    private ?bool $skipProvePossession = null;
 
     final private function __construct()
     {
@@ -83,7 +83,7 @@ class VettingProcedure
 
     private function isReadyForSecondFactorToBeVerified(): bool
     {
-        return !empty($this->registrationCode);
+        return isset($this->registrationCode) && ($this->registrationCode !== null && $this->registrationCode !== '' && $this->registrationCode !== '0');
     }
 
     /**
@@ -98,11 +98,11 @@ class VettingProcedure
             );
         }
 
-        if (empty($documentNumber)) {
+        if ($documentNumber === '' || $documentNumber === '0') {
             throw new InvalidArgumentException('Document number may not be empty.');
         }
 
-        if ($identityVerified !== true) {
+        if (!$identityVerified) {
             throw new DomainException("The registrant's identity must have been confirmed by the RA.");
         }
 
@@ -112,7 +112,7 @@ class VettingProcedure
 
     private function isReadyForIdentityVerification(): bool
     {
-        return $this->isPossessionProvenOrCanItBeSkipped() && !empty($this->registrationCode);
+        return $this->isPossessionProvenOrCanItBeSkipped() && (isset($this->registrationCode) && ($this->registrationCode !== null && $this->registrationCode !== '' && $this->registrationCode !== '0'));
     }
 
     private function isPossessionProvenOrCanItBeSkipped(): bool
@@ -137,8 +137,8 @@ class VettingProcedure
     private function isReadyForVetting(): bool
     {
         return $this->isPossessionProvenOrCanItBeSkipped()
-            && !empty($this->registrationCode)
-            && !empty($this->documentNumber)
+            && (isset($this->registrationCode) && ($this->registrationCode !== null && $this->registrationCode !== '' && $this->registrationCode !== '0'))
+            && (isset($this->documentNumber) && ($this->documentNumber !== null && $this->documentNumber !== '' && $this->documentNumber !== '0'))
             && $this->identityVerified === true;
     }
 

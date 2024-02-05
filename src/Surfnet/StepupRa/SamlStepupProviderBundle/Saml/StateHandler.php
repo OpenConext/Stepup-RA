@@ -20,9 +20,9 @@ namespace Surfnet\StepupRa\SamlStepupProviderBundle\Saml;
 
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
-final class StateHandler
+final readonly class StateHandler
 {
-    public function __construct(private readonly AttributeBag $attributeBag, private readonly string $provider)
+    public function __construct(private AttributeBag $attributeBag, private string $provider)
     {
     }
 

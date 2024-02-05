@@ -57,7 +57,7 @@ class SamlProvider implements AuthenticationProviderInterface
         $identity = $this->identityService->findByNameIdAndInstitution($nameId, $institution);
 
         // if no identity can be found, we're done.
-        if ($identity === null) {
+        if (!$identity instanceof \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity) {
             throw new BadCredentialsException(
                 'Unable to find Identity matching the criteria. Has the identity been registered before?',
             );
@@ -79,7 +79,7 @@ class SamlProvider implements AuthenticationProviderInterface
         }
 
         // Get authorizations (explicit RA(A) roles use_ra/use_raa).
-        foreach ($profile->authorizations as $institution => $role) {
+        foreach ($profile->authorizations as $role) {
             if ($role[0] == 'raa' && !in_array('ROLE_RAA', $roles)) {
                 $roles[] = 'ROLE_RAA';
             }

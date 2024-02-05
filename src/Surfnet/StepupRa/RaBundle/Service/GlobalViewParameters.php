@@ -44,9 +44,6 @@ final class GlobalViewParameters
         $this->supportUrl = $supportUrl;
     }
 
-    /**
-     * @return string
-     */
     public function getSupportUrl(): string
     {
         return $this->supportUrl[$this->translator->getLocale()];
