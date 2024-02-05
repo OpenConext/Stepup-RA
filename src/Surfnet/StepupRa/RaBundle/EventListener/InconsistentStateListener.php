@@ -20,7 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\EventListener;
 
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Exception\InconsistentStateException;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 
 class InconsistentStateListener
 {
@@ -28,7 +28,7 @@ class InconsistentStateListener
     {
     }
 
-    public function onKernelException(GetResponseForExceptionEvent $event)
+    public function onKernelException(ExceptionEvent $event): void
     {
         $exception = $event->getThrowable();
 
