@@ -83,7 +83,11 @@ class VettingProcedure
 
     private function isReadyForSecondFactorToBeVerified(): bool
     {
-        return isset($this->registrationCode) && ($this->registrationCode !== null && $this->registrationCode !== '' && $this->registrationCode !== '0');
+        return (
+            $this->registrationCode !== null &&
+            $this->registrationCode !== '' &&
+            $this->registrationCode !== '0'
+        );
     }
 
     /**
@@ -112,7 +116,7 @@ class VettingProcedure
 
     private function isReadyForIdentityVerification(): bool
     {
-        return $this->isPossessionProvenOrCanItBeSkipped() && (isset($this->registrationCode) && ($this->registrationCode !== null && $this->registrationCode !== '' && $this->registrationCode !== '0'));
+        return $this->isPossessionProvenOrCanItBeSkipped() && ($this->registrationCode !== null && ($this->registrationCode !== null && $this->registrationCode !== '' && $this->registrationCode !== '0'));
     }
 
     private function isPossessionProvenOrCanItBeSkipped(): bool
@@ -137,8 +141,8 @@ class VettingProcedure
     private function isReadyForVetting(): bool
     {
         return $this->isPossessionProvenOrCanItBeSkipped()
-            && (isset($this->registrationCode) && ($this->registrationCode !== null && $this->registrationCode !== '' && $this->registrationCode !== '0'))
-            && (isset($this->documentNumber) && ($this->documentNumber !== null && $this->documentNumber !== '' && $this->documentNumber !== '0'))
+            && ($this->registrationCode !== null && ($this->registrationCode !== null && $this->registrationCode !== '' && $this->registrationCode !== '0'))
+            && ($this->documentNumber !== null && ($this->documentNumber !== null && $this->documentNumber !== '' && $this->documentNumber !== '0'))
             && $this->identityVerified === true;
     }
 
