@@ -22,29 +22,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class AmendRegistrationAuthorityInformationCommand
 {
-    /**
-     * @var string
-     */
-    public $identityId;
+    public string $identityId;
 
     /**
      * @Assert\NotBlank(message="ra.amend_ra_information.location")
-     * @Assert\Type(type="string")
-     *
-     * @var string
      */
-    public $location;
+    public string $location;
 
     /**
      * @Assert\NotBlank(message="ra.amend_ra_information.contact_information")
-     * @Assert\Type(type="string")
-     *
-     * @var string
      */
-    public $contactInformation;
+    public string $contactInformation;
 
-    /**
-     * @var string
-     */
-    public $institution;
+    public string $institution;
 }
