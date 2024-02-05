@@ -25,19 +25,19 @@ use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 
 class VerifyYubikeyPublicIdType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('otp', OtpType::class);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => VerifyYubikeyPublicIdCommand::class,
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_verify_yubikey_public_id';
     }

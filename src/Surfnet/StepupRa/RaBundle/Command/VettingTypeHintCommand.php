@@ -99,7 +99,7 @@ class VettingTypeHintCommand
      * Based on the languages that are configured on the application eg: nl_NL or en_EN,..
      * test if the passed parameter contains a valid language identifier.
      */
-    private function assertValidLanguageInName($name)
+    private function assertValidLanguageInName($name): void
     {
         $locale = $this->extractLocaleFromFormFieldName($name);
         if (!in_array($locale, $this->locales, true)) {
@@ -138,7 +138,7 @@ class VettingTypeHintCommand
         return $matches[1];
     }
 
-    public function setHints(array $hints)
+    public function setHints(array $hints): void
     {
         foreach ($hints as $hint) {
             $this->hints[$hint['locale']] = $hint['hint'];

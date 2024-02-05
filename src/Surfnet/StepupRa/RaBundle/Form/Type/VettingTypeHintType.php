@@ -30,7 +30,7 @@ class VettingTypeHintType extends AbstractType
 {
     final public const HINT_TEXTAREA_NAME_PREFIX = 'vetting_type_hint_';
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         foreach ($builder->getData()->locales as $locale) {
             $builder
@@ -58,7 +58,7 @@ class VettingTypeHintType extends AbstractType
             );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(
             [
@@ -67,7 +67,7 @@ class VettingTypeHintType extends AbstractType
         );
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'vetting_type_hint';
     }

@@ -36,7 +36,7 @@ class YubikeySecondFactorService
     /**
      * @return VerificationResult
      */
-    public function verifyYubikeyPublicId(VerifyYubikeyPublicIdCommand $command)
+    public function verifyYubikeyPublicId(VerifyYubikeyPublicIdCommand $command): VerificationResult
     {
         $verifyOtpCommand = new VerifyYubikeyOtpCommand();
         $verifyOtpCommand->otp = $command->otp;
