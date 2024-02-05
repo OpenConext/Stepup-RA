@@ -24,64 +24,39 @@ final class SearchRecoveryTokensCommand
 {
     /**
      * @Assert\NotBlank(message="ra.search_ra_recovery_tokens.actor.blank")
-     * @Assert\Type("string", message="ra.search_ra_recovery_tokens.actor.type")
-     *
-     * @var string
      */
-    public $actorId;
+    public string $actorId = '';
 
-    /**
-     * @var string|null
-     */
-    public $name;
+    public ?string $name = null;
 
-    /**
-     * @var string|null
-     */
-    public $type;
+    public ?string $type = null;
 
-    /**
-     * @var string
-     */
-    public $status;
+    public string $status = '';
 
-    /**
-     * @var string|null
-     */
-    public $email;
+    public ?string $email = null;
 
     /**
      * @Assert\Choice(
      *     {"name", "type", "email", "status"},
      *     message="ra.search_ra_recovery_tokens.order_by.invalid_choice"
      * )
-     *
-     * @var string|null
      */
-    public $orderBy;
+    public ?string $orderBy = null;
 
     /**
      * @Assert\Choice({"asc", "desc"}, message="ra.search_ra_recovery_tokens.order_direction.invalid_choice")
-     *
-     * @var string|null
      */
-    public $orderDirection;
+    public ?string $orderDirection = null;
 
     /**
-     * @Assert\Type("integer", message="ra.search_ra_recovery_tokens.page_number.type")
      * @Assert\GreaterThan(0, message="ra.search_ra_recovery_tokens.page_number.greater_than_zero")
-     *
-     * @var int
      */
-    public $pageNumber;
+    public int $pageNumber = 0;
 
     /**
-     * @var string|null The institution to filter the results on
+     * The institution to filter the results on
      */
-    public $institution;
+    public ?string $institution = null;
 
-    /**
-     * @var array
-     */
-    public $institutionFilterOptions;
+    public array $institutionFilterOptions = [];
 }
