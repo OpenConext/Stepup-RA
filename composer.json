@@ -21,7 +21,6 @@
         "nelmio/security-bundle": "^2.12",
         "openconext/monitor-bundle": "^3.0",
         "ramsey/uuid": "^3.5",
-        "sensio/framework-extra-bundle": "^5.5",
         "sensiolabs/security-checker": "^6.0",
         "surfnet/stepup-bundle": "^5.0",
         "surfnet/stepup-middleware-client-bundle": "^4.1",
@@ -40,7 +39,9 @@
         "twbs/bootstrap": "~3.3.0",
         "twig/extensions": "~1.5",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "ext-openssl": "*",
+        "ext-dom": "*"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.0",

@@ -18,7 +18,6 @@
 
 namespace Surfnet\StepupRa\RaBundle\Command;
 
-use AllowDynamicProperties;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class SearchRaCandidatesCommand

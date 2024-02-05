@@ -18,7 +18,6 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
-use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Profile;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\ProfileService as ApiProfileService;
 

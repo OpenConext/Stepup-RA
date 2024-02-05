@@ -25,7 +25,6 @@ use Surfnet\StepupRa\RaBundle\Security\Authentication\AuthenticatedSessionStateH
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SamlAuthenticationStateHandler;
 use Surfnet\StepupRa\RaBundle\Value\DateTime;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SessionStorage implements AuthenticatedSessionStateHandler, SamlAuthenticationStateHandler
 {

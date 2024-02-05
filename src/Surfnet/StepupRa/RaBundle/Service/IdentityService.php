@@ -28,7 +28,6 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RegistrationAuthorityCrede
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService as ApiIdentityService;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
