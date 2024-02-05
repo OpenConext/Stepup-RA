@@ -178,6 +178,8 @@ services:
         class: Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService
         arguments:
             - "@surfnet_stepup_middleware_client.configuration.service.institution_configuration_options"
+    Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService:
+        alias: ra.service.institution_configuration_options
 
     ra.service.locale_provider:
         class: Surfnet\StepupRa\RaBundle\Service\LocaleProviderService
