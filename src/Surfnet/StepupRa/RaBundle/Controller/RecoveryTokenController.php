@@ -18,14 +18,12 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
-use Knp\Component\Pager\Paginator;
+use Knp\Component\Pager\PaginatorInterface;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\RevokeRecoveryTokenCommand;
-use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRecoveryTokensCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\RevokeRecoveryTokenType;
-use Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRecoveryTokensType;
 use Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -38,7 +36,7 @@ final class RecoveryTokenController extends AbstractController
 {
     public function __construct(
         private readonly RecoveryTokenService $recoveryTokenService,
-        private readonly Paginator $paginator,
+        private readonly PaginatorInterface $paginator,
         private readonly TokenStorageInterface $tokenStorage,
         private readonly LoggerInterface $logger,
     ) {

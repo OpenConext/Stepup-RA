@@ -19,7 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Surfnet\StepupRa\RaBundle\Assert;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class GlobalViewParameters
 {

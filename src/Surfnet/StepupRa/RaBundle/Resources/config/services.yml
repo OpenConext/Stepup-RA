@@ -122,6 +122,8 @@ services:
             - "@ra.service.identity"
             - "@surfnet_stepup.service.second_factor_type"
             - "@surfnet_stepup_middleware_client.identity.service.second_factor"
+    Surfnet\StepupRa\RaBundle\Service\VettingService:
+        alias: ra.service.vetting
 
     ra.service.yubikey:
         public: false
@@ -161,6 +163,8 @@ services:
         arguments:
             - "@surfnet_stepup_middleware_client.identity.service.audit_log"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\AuditLogService:
+        alias: ra.service.audit_log
 
     ra.service.identity:
         class: Surfnet\StepupRa\RaBundle\Service\IdentityService
@@ -213,6 +217,8 @@ services:
             - "@ra.service.command"
             - "@ra.service.ra_second_factor_exporter"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService:
+        alias: ra.service.ra_second_factor
 
     ra.service.ra:
         class: Surfnet\StepupRa\RaBundle\Service\RaService
@@ -225,6 +231,8 @@ services:
         arguments:
             - "@surfnet_stepup_middleware_client.identity.service.second_factor"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\SecondFactorService:
+        alias: ra.service.second_factor
 
     ra.service.global_view_parameters:
         class: Surfnet\StepupRa\RaBundle\Service\GlobalViewParameters
@@ -238,11 +246,15 @@ services:
         arguments:
             - "@surfnet_stepup_middleware_client.identity.service.profile"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\ProfileService:
+        alias: ra.service.profile
 
     ra.service.institution_listing:
         class: Surfnet\StepupRa\RaBundle\Service\InstitutionListingService
         arguments:
             - "@surfnet_stepup_middleware_client.identity.service.institution_listing"
+    Surfnet\StepupRa\RaBundle\Service\InstitutionListingService:
+        alias: ra.service.institution_listing
 
     Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService:
         arguments:
@@ -260,7 +272,7 @@ services:
     ra.repository.vetting_procedure:
         class: Surfnet\StepupRa\RaBundle\Repository\SessionVettingProcedureRepository
         arguments:
-            - "@session"
+            - "@request_stack"
             - 'Surfnet/StepupRa/RaBundle/Repository/VettingProcedureRepository'
 
     #Logger

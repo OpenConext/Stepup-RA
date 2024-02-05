@@ -33,7 +33,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SmsController extends SecondFactorController
 {
-    
     public function __construct(
         private readonly VettingService $vettingService,
     ) {
