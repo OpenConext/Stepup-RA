@@ -23,16 +23,13 @@ use Surfnet\SamlBundle\Monolog\SamlAuthenticationLogger;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\AuthenticatedSessionStateHandler;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SamlAuthenticationStateHandler;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\SamlInteractionProvider;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class InitiateSamlAuthenticationHandler implements AuthenticationHandler
 {
-    /**
-     * @var AuthenticationHandler|null
-     */
-    private $nextHandler;
+    private ?AuthenticationHandler $nextHandler;
 
     public function __construct(
         private readonly TokenStorageInterface $tokenStorage,
@@ -45,7 +42,7 @@ class InitiateSamlAuthenticationHandler implements AuthenticationHandler
     ) {
     }
 
-    public function process(GetResponseEvent $event)
+    public function process(RequestEvent $event): void
     {
         $acsUri = $this->router->generate('ra_serviceprovider_consume_assertion');
 
@@ -88,7 +85,7 @@ class InitiateSamlAuthenticationHandler implements AuthenticationHandler
         }
     }
 
-    public function setNext(AuthenticationHandler $handler)
+    public function setNext(AuthenticationHandler $handler): void
     {
         $this->nextHandler = $handler;
     }
