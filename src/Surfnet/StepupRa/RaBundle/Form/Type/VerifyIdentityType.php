@@ -28,7 +28,7 @@ use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
 
 class VerifyIdentityType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('documentNumber', TextType::class, [
             'label' => 'ra.form.verify_identity.document_number.label',
@@ -52,14 +52,14 @@ class VerifyIdentityType extends AbstractType
         ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => VerifyIdentityCommand::class,
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_verify_identity';
     }

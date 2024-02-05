@@ -34,7 +34,7 @@ class VettingTypeHintService
     ) {
     }
 
-    public function save(VettingTypeHintCommand $command)
+    public function save(VettingTypeHintCommand $command): bool
     {
         $middlewareCommand = new SaveVettingTypeHintCommand();
         $middlewareCommand->identityId = $command->identityId;

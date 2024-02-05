@@ -78,11 +78,7 @@ final class ViewConfigTest extends TestCase
         $viewConfig->getGssfIdMismatch();
     }
 
-    /**
-     * @param string $locale
-     * @return ViewConfig
-     */
-    private function buildViewConfig($locale = '')
+    private function buildViewConfig(?string $locale = ''): ViewConfig
     {
         $request = m::mock(RequestStack::class);
         $request->shouldReceive('getCurrentRequest->getLocale')->andReturn($locale)->byDefault();
@@ -98,9 +94,8 @@ final class ViewConfigTest extends TestCase
 
     /**
      * @param $string
-     * @return array
      */
-    private function getTranslationsArray($string)
+    private function getTranslationsArray($string): array
     {
         return [
             'en_GB' => 'EN ' . $string,

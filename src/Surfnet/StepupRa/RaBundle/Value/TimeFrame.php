@@ -32,7 +32,7 @@ final readonly class TimeFrame implements Stringable
      * @param int $seconds
      * @return TimeFrame
      */
-    public static function ofSeconds($seconds)
+    public static function ofSeconds($seconds): TimeFrame
     {
         if (!is_int($seconds) || $seconds < 1) {
             throw InvalidArgumentException::invalidType('positive integer', 'seconds', $seconds);
@@ -44,7 +44,7 @@ final readonly class TimeFrame implements Stringable
     /**
      * @return DateTime
      */
-    public function getEndWhenStartingAt(DateTime $dateTime)
+    public function getEndWhenStartingAt(DateTime $dateTime): DateTime
     {
         return $dateTime->add($this->timeFrame);
     }
@@ -52,7 +52,7 @@ final readonly class TimeFrame implements Stringable
     /**
      * @return bool
      */
-    public function equals(TimeFrame $other)
+    public function equals(TimeFrame $other): bool
     {
         return $this->timeFrame->s === $other->timeFrame->s;
     }

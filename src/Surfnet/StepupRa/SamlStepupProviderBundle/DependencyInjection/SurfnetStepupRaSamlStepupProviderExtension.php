@@ -117,7 +117,8 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         array $configuration,
         array $routes,
         ContainerBuilder $container,
-    ) {
+    ): void
+    {
         $hostedDefinition = $this->buildHostedEntityDefinition($provider, $configuration, $routes);
         $container->setDefinition('gssp.provider.' . $provider . '.hosted_entities', $hostedDefinition);
 
@@ -135,7 +136,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
      * @param string $provider
      * @return Definition
      */
-    private function buildHostedEntityDefinition($provider, array $configuration, array $routes)
+    private function buildHostedEntityDefinition($provider, array $configuration, array $routes): Definition
     {
         $entityId = ['entity_id_route' => $this->createRouteConfig($provider, $routes['metadata'])];
         $spAdditional = [
@@ -164,7 +165,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
     /**
      * @param string           $provider
      */
-    private function createRemoteDefinition($provider, array $configuration, ContainerBuilder $container)
+    private function createRemoteDefinition($provider, array $configuration, ContainerBuilder $container): void
     {
         $definition    = new Definition(IdentityProvider::class, [
             [
@@ -209,7 +210,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         $container->setDefinition('gssp.provider.' . $provider . '.metadata.factory', $metadataFactory);
     }
 
-    private function createRouteConfig($provider, $routeName)
+    private function createRouteConfig($provider, $routeName): array
     {
         // In the future, we ought to wrap this in an object.
         // https://www.pivotaltracker.com/story/show/90095392

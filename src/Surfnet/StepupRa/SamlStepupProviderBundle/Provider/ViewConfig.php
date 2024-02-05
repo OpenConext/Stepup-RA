@@ -25,95 +25,49 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class ViewConfig implements ViewConfigInterface
 {
     /**
-     * @var array
-     */
-    public $title;
-
-    /**
-     * @var array
-     */
-    public $pageTitle;
-
-    /**
-     * @var array
-     */
-    public $explanation;
-
-    /**
-     * @var array
-     */
-    public $initiate;
-
-    /**
-     * @var array
-     */
-    public $gssfIdMismatch;
-
-    /**
      * The arrays are arrays of translated text, indexed on locale.
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         private readonly RequestStack $requestStack,
-        array $title,
-        array $pageTitle,
-        array $explanation,
-        array $initiate,
-        array $gssfIdMismatch,
+        public array $title,
+        public array $pageTitle,
+        public array $explanation,
+        public array $initiate,
+        public array $gssfIdMismatch,
     ) {
-        $this->title = $title;
-        $this->pageTitle = $pageTitle;
-        $this->explanation = $explanation;
-        $this->initiate = $initiate;
-        $this->gssfIdMismatch = $gssfIdMismatch;
     }
 
-    /**
-     * @return array
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getTranslation($this->title);
     }
 
-    /**
-     * @return array
-     */
-    public function getExplanation()
+    public function getExplanation(): string
     {
         return $this->getTranslation($this->explanation);
     }
 
-    /**
-     * @return array
-     */
-    public function getGssfIdMismatch()
+    public function getGssfIdMismatch(): string
     {
         return $this->getTranslation($this->gssfIdMismatch);
     }
 
-    /**
-     * @return array
-     */
-    public function getInitiate()
+    public function getInitiate(): string
     {
         return $this->getTranslation($this->initiate);
     }
 
-    /**
-     * @return array
-     */
-    public function getPageTitle()
+    public function getPageTitle(): string
     {
         return $this->getTranslation($this->pageTitle);
     }
 
     /**
-     * @return mixed
      * @throws LogicException
      */
-    private function getTranslation(array $translations)
+    private function getTranslation(array $translations): mixed
     {
         $currentLocale = $this->requestStack->getCurrentRequest()->getLocale();
         if (is_null($currentLocale)) {
