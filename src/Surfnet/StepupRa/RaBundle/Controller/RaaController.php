@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
+use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionListingService;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
@@ -26,23 +27,33 @@ use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RaaController extends AbstractController
 {
-    public function institutionConfiguration(Request $request)
+    public function __construct(
+        private readonly InstitutionConfigurationOptionsService $institutionConfigurationOptionsService,
+        private readonly ProfileService $profileService,
+        private readonly InstitutionListingService $institutionListingService,
+        private readonly LoggerInterface $logger,
+    )
+    {
+    }
+
+    public function institutionConfiguration(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
 
-        $logger = $this->container->get('logger');
         /** @var Identity $identity */
         $identity = $this->getUser();
 
-        $profile = $this->getProfileService()->findByIdentityId($identity->id);
+        $profile = $this->profileService->findByIdentityId($identity->id);
 
         if ($this->isGranted('ROLE_SRAA')) {
             $institution = $identity->institution;
-            $choices = $this->getInstitutionListingService()->getAll();
+            $choices = $this->institutionListingService->getAll();
         } else {
             $choices = $profile->getRaaInstitutions();
             $institution = reset($choices);
@@ -62,15 +73,15 @@ class RaaController extends AbstractController
             }
         }
 
-        $logger->notice(sprintf('Opening the institution configuration for "%s"', $institution));
+        $this->logger->notice(sprintf('Opening the institution configuration for "%s"', $institution));
 
         // Load the configuration for the institution that was selected.
-        $configuration = $this->getInstitutionConfigurationOptionsService()
+        $configuration = $this->institutionConfigurationOptionsService
             ->getInstitutionConfigurationOptionsFor($institution);
 
         if (!$configuration) {
-            $logger->warning(sprintf('Unable to find the institution configuration for "%s"', $institution));
-            return $this->createNotFoundException('The institution configuration could not be found');
+            $this->logger->warning(sprintf('Unable to find the institution configuration for "%s"', $institution));
+            throw new NotFoundHttpException('The institution configuration could not be found');
         }
 
         return $this->render(
@@ -81,29 +92,5 @@ class RaaController extends AbstractController
                 'institution' => $institution,
             ],
         );
-    }
-
-    /**
-     * @return InstitutionConfigurationOptionsService
-     */
-    private function getInstitutionConfigurationOptionsService()
-    {
-        return $this->container->get('ra.service.institution_configuration_options');
-    }
-
-    /**
-     * @return ProfileService
-     */
-    private function getProfileService()
-    {
-        return $this->container->get('ra.service.profile');
-    }
-
-    /**
-     * @return InstitutionListingService
-     */
-    private function getInstitutionListingService()
-    {
-        return $this->container->get('ra.service.institution_listing');
     }
 }
