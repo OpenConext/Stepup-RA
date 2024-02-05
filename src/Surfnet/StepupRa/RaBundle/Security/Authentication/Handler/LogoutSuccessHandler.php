@@ -28,11 +28,14 @@ final class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
     /**
      * @param string[] $logoutRedirectUrl
      */
-    public function __construct(private readonly TokenStorageInterface $tokenStorage, private array $logoutRedirectUrl)
+    public function __construct(
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly array $logoutRedirectUrl,
+    )
     {
     }
 
-    public function onLogoutSuccess(Request $request)
+    public function onLogoutSuccess(Request $request): RedirectResponse
     {
         $token    = $this->tokenStorage->getToken();
         $identity = $token->getUser();
