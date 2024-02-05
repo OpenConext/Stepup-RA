@@ -29,12 +29,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class LocaleController extends AbstractController
 {
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly UserProviderInterface $identityService,
+        private readonly TranslatorInterface $translator,
     )
     {
     }
@@ -73,13 +75,13 @@ final class LocaleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && !$form->isValid()) {
-            $this->addFlash('error', $this->container->get('translator')->trans('ra.flash.invalid_switch_locale_form'));
+            $this->addFlash('error', $this->translator->trans('ra.flash.invalid_switch_locale_form'));
             $this->logger->error('The switch locale form unexpectedly contained invalid data');
             return $this->redirect($returnUrl);
         }
 
         if (!$this->identityService->switchLocale($command)) {
-            $this->addFlash('error', $this->container->get('translator')->trans('ra.flash.error_while_switching_locale'));
+            $this->addFlash('error', $this->translator->trans('ra.flash.error_while_switching_locale'));
             $this->logger->error('An error occurred while switching locales');
             return $this->redirect($returnUrl);
         }

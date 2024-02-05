@@ -37,6 +37,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects) By making the Form Type classes explicit, MD now realizes couping
@@ -49,6 +50,7 @@ final class RaLocationController extends AbstractController
         private readonly InstitutionListingService $institutionListingService,
         private readonly ProfileService $profileService,
         private readonly LoggerInterface $logger,
+        private readonly TranslatorInterface $translator,
     )
     {
     }
@@ -136,7 +138,7 @@ final class RaLocationController extends AbstractController
             if ($success) {
                 $this->addFlash(
                     'success',
-                    $this->container->get('translator')->trans('ra.create_ra_location.created'),
+                    $this->translator->trans('ra.create_ra_location.created'),
                 );
 
                 $this->logger->debug('RA Location added, redirecting to the RA location overview');
@@ -184,7 +186,7 @@ final class RaLocationController extends AbstractController
             if ($success) {
                 $this->addFlash(
                     'success',
-                    $this->container->get('translator')->trans('ra.create_ra_location.changed'),
+                    $this->translator->trans('ra.create_ra_location.changed'),
                 );
 
                 $this->logger->debug('RA Location added, redirecting to the RA location overview');
@@ -219,14 +221,12 @@ final class RaLocationController extends AbstractController
             $command->currentUserId,
         ));
 
-        $translator = $this->container->get('translator');
-        $flashBag = $this->container->get('session')->getFlashBag();
         if ($this->raLocationService->remove($command)) {
             $this->logger->notice('RA Location removal Succeeded');
-            $this->addFlash('success', $translator->trans('ra.ra_location.revocation.removed'));
+            $this->addFlash('success', $this->translator->trans('ra.ra_location.revocation.removed'));
         } else {
             $this->logger->notice('RA Location removal Failed');
-            $flashBag->add('error', $translator->trans('ra.ra_location.revocation.could_not_remove'));
+            $this->addFlash('error', $this->translator->trans('ra.ra_location.revocation.could_not_remove'));
         }
 
         $this->logger->notice('Redirecting back to RA Location Manage Page');

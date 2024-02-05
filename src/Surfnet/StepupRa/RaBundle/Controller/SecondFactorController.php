@@ -36,6 +36,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects) By making the Form Type classes explicit, MD now realizes couping
@@ -49,6 +50,7 @@ final class SecondFactorController extends AbstractController
         private readonly RaSecondFactorService $secondFactorService,
         private readonly UserProviderInterface $identityService,
         private readonly AuditLogService $auditLogService,
+        private readonly TranslatorInterface $translator,
     )
     {
     }
@@ -141,14 +143,12 @@ final class SecondFactorController extends AbstractController
             $command->currentUserId,
         ));
 
-        $translator = $this->container->get('translator');
-        $flashBag = $this->container->get('session')->getFlashBag();
         if ($this->secondFactorService->revoke($command)) {
             $this->logger->notice('Second Factor revocation Succeeded');
-            $flashBag->add('success', $translator->trans('ra.second_factor.revocation.revoked'));
+            $this->addFlash('success', $this->translator->trans('ra.second_factor.revocation.revoked'));
         } else {
             $this->logger->notice('Second Factor revocation Failed');
-            $flashBag->add('error', $translator->trans('ra.second_factor.revocation.could_not_revoke'));
+            $this->addFlash('error', $this->translator->trans('ra.second_factor.revocation.could_not_revoke'));
         }
 
         $this->logger->notice('Redirecting back to Second Factor Search Page');

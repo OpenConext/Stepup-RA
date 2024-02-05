@@ -30,11 +30,13 @@ use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SmsController extends SecondFactorController
 {
     public function __construct(
         private readonly VettingService $vettingService,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -125,7 +127,7 @@ class SmsController extends SecondFactorController
         if ($cancelButton->isClicked()) {
             $vettingService->cancelProcedure($procedureId);
 
-            $this->addFlash('info', $this->container->get('translator')->trans('ra.vetting.flash.cancelled'));
+            $this->addFlash('info', $this->translator->trans('ra.vetting.flash.cancelled'));
 
             return $this->redirectToRoute('ra_vetting_search');
         }

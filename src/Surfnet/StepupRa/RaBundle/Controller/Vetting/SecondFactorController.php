@@ -18,17 +18,21 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 abstract class SecondFactorController extends AbstractController
 {
-    /**
-     * @param string $type
-     */
-    protected function assertSecondFactorEnabled($type)
+    public function __construct(
+        private readonly LoggerInterface $logger,
+    )
+    {
+    }
+
+    protected function assertSecondFactorEnabled(string $type): void
     {
         if (!in_array($type, $this->getParameter('surfnet_stepup_ra.enabled_second_factors'))) {
-            $this->container->get('logger')->warning('A controller action was called for a disabled second factor');
+            $this->logger->warning('A controller action was called for a disabled second factor');
 
             throw $this->createNotFoundException();
         }

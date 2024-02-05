@@ -183,7 +183,7 @@ class VettingController extends AbstractController
         }
 
         $this->vettingService->cancelProcedure($procedureId);
-        $this->addFlash('info', $this->container->get('translator')->trans('ra.vetting.flash.cancelled'));
+        $this->addFlash('info', $this->translator->trans('ra.vetting.flash.cancelled'));
 
         return $this->redirectToRoute('ra_vetting_search');
     }
@@ -211,7 +211,7 @@ class VettingController extends AbstractController
         $cancelButton = $form->get('cancel');
         if ($cancelButton->isClicked()) {
             $this->vettingService->cancelProcedure($procedureId);
-            $this->addFlash('info', $this->container->get('translator')->trans('ra.vetting.flash.cancelled'));
+            $this->addFlash('info', $this->translator->trans('ra.vetting.flash.cancelled'));
 
             return $this->redirectToRoute('ra_vetting_search');
         }
