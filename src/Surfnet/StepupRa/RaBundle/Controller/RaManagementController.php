@@ -18,6 +18,8 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
+use Knp\Component\Pager\PaginatorInterface;
+use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitution;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
@@ -30,6 +32,7 @@ use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaCandidatesType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaListingType;
+use Surfnet\StepupRa\RaBundle\Service\RaCandidateService;
 use Surfnet\StepupRa\RaBundle\Service\RaListingService;
 use Surfnet\StepupRa\RaBundle\Value\RoleAtInstitution;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,18 +46,24 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class RaManagementController extends AbstractController
 {
+    public function __construct(
+        private readonly LoggerInterface $logger,
+        private readonly RaListingService $raListingService,
+        private readonly RaCandidateService $raCandidateService,
+        private readonly PaginatorInterface $paginator,
+    )
+    {
+    }
+
     public function manage(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
 
-        $logger = $this->container->get('logger');
         $institution = $this->getUser()->institution;
-        $logger->notice(sprintf('Loading overview of RA(A)s for institution "%s"', $institution));
+        $this->logger->notice(sprintf('Loading overview of RA(A)s for institution "%s"', $institution));
 
         $identity = $this->getCurrentUser();
-
-        $service = $this->getRaListingService();
 
         $command = new SearchRaListingCommand();
         $command->actorId = $identity->id;
@@ -63,23 +72,23 @@ class RaManagementController extends AbstractController
         $command->orderDirection = $request->get('orderDirection');
 
         // The options that will populate the institution filter choice list.
-        $raList = $service->search($command);
+        $raList = $this->raListingService->search($command);
         $command->institutionFilterOptions = $raList->getFilterOption('institution');
         $command->raInstitutionFilterOptions = $raList->getFilterOption('raInstitution');
 
         $form = $this->createForm(SearchRaListingType::class, $command, ['method' => 'get']);
         $form->handleRequest($request);
 
-        $raList = $service->search($command);
+        $raList = $this->raListingService->search($command);
 
-        $pagination = $this->getPaginator()->paginate(
+        $pagination = $this->paginator->paginate(
             $raList->getTotalItems() > 0 ? $raList->getElements() : [],
             $raList->getCurrentPage(),
             $raList->getItemsPerPage(),
         );
         $pagination->setTotalItemCount($raList->getTotalItems());
 
-        $logger->notice(sprintf(
+        $this->logger->notice(sprintf(
             'Searching for RA(A)s yielded "%d" results',
             $raList->getTotalItems(),
         ));
@@ -102,14 +111,11 @@ class RaManagementController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
-
-        $logger = $this->container->get('logger');
+        
         $identity = $this->getCurrentUser();
         $institution = $identity->institution;
 
-        $logger->notice(sprintf('Searching for RaCandidates within institution "%s"', $institution));
-
-        $service = $this->getRaCandidateService();
+        $this->logger->notice(sprintf('Searching for RaCandidates within institution "%s"', $institution));
 
         $command                   = new SearchRaCandidatesCommand();
         $command->actorId          = $identity->id;
@@ -119,7 +125,7 @@ class RaManagementController extends AbstractController
         $command->orderBy          = $request->get('orderBy');
         $command->orderDirection   = $request->get('orderDirection');
 
-        $raCandidateList = $service->search($command);
+        $raCandidateList = $this->raCandidateService->search($command);
 
         // The options that will populate the institution filter choice list.
         $command->institutionFilterOptions = $raCandidateList->getFilterOption('institution');
@@ -127,16 +133,16 @@ class RaManagementController extends AbstractController
         $form = $this->createForm(SearchRaCandidatesType::class, $command, ['method' => 'get']);
         $form->handleRequest($request);
 
-        $raCandidateList = $service->search($command);
+        $raCandidateList = $this->raCandidateService->search($command);
 
-        $pagination = $this->getPaginator()->paginate(
+        $pagination = $this->paginator->paginate(
             $raCandidateList->getTotalItems() > 0 ? $raCandidateList->getElements() : [],
             $raCandidateList->getCurrentPage(),
             $raCandidateList->getItemsPerPage(),
         );
         $pagination->setTotalItemCount($raCandidateList->getTotalItems());
 
-        $logger->notice(sprintf(
+        $this->logger->notice(sprintf(
             'Searching for RaCandidates within institution "%s" yielded "%s" results',
             $institution,
             $raCandidateList->getTotalItems(),
@@ -156,15 +162,14 @@ class RaManagementController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
-        $logger = $this->container->get('logger');
 
-        $logger->notice('Page for Accreditation of Identity to Ra or Raa requested');
+        $this->logger->notice('Page for Accreditation of Identity to Ra or Raa requested');
         $identityId = $request->get('identityId');
 
-        $raCandidate = $this->getRaCandidateService()->getRaCandidate($identityId, $this->getUser()->id);
+        $raCandidate = $this->raCandidateService->getRaCandidate($identityId, $this->getUser()->id);
 
         if (!$raCandidate->raCandidate) {
-            $logger->warning(sprintf('RaCandidate based on identity "%s" not found', $identityId));
+            $this->logger->warning(sprintf('RaCandidate based on identity "%s" not found', $identityId));
             throw new NotFoundHttpException();
         }
 
@@ -180,9 +185,9 @@ class RaManagementController extends AbstractController
 
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $logger->debug('Accreditation form submitted, start processing command');
+            $this->logger->debug('Accreditation form submitted, start processing command');
 
-            $success = $this->getRaCandidateService()->accreditCandidate($command);
+            $success = $this->raCandidateService->accreditCandidate($command);
 
             if ($success) {
                 $this->addFlash(
@@ -190,11 +195,11 @@ class RaManagementController extends AbstractController
                     $this->container->get('translator')->trans('ra.management.create_ra.identity_accredited'),
                 );
 
-                $logger->debug('Identity Accredited, redirecting to candidate overview');
+                $this->logger->debug('Identity Accredited, redirecting to candidate overview');
                 return $this->redirectToRoute('ra_management_ra_candidate_search');
             }
 
-            $logger->debug('Identity Accreditation failed, adding error to form');
+            $this->logger->debug('Identity Accreditation failed, adding error to form');
             $this->addFlash('error', 'ra.management.create_ra.error.middleware_command_failed');
         }
 
@@ -213,13 +218,12 @@ class RaManagementController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
 
-        $logger = $this->container->get('logger');
-        $logger->notice(sprintf("Loading information amendment form for RA(A) '%s'", $identityId));
+        $this->logger->notice(sprintf("Loading information amendment form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId, $raInstitution, $this->getUser()->id);
+        $raListing = $this->raListingService->get($identityId, $raInstitution, $this->getUser()->id);
 
         if (!$raListing) {
-            $logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
+            $this->logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
             throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
         }
 
@@ -231,16 +235,16 @@ class RaManagementController extends AbstractController
 
         $form = $this->createForm(AmendRegistrationAuthorityInformationType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $logger->notice(sprintf("RA(A) '%s' information amendment form submitted, processing", $identityId));
+            $this->logger->notice(sprintf("RA(A) '%s' information amendment form submitted, processing", $identityId));
 
             if ($this->container->get('ra.service.ra')->amendRegistrationAuthorityInformation($command)) {
                 $this->addFlash('success', $this->container->get('translator')->trans('ra.management.amend_ra_info.info_amended'));
 
-                $logger->notice(sprintf("RA(A) '%s' information successfully amended", $identityId));
+                $this->logger->notice(sprintf("RA(A) '%s' information successfully amended", $identityId));
                 return $this->redirectToRoute('ra_management_manage');
             }
 
-            $logger->notice(sprintf("Information of RA(A) '%s' failed to be amended, informing user", $identityId));
+            $this->logger->notice(sprintf("Information of RA(A) '%s' failed to be amended, informing user", $identityId));
             $this->addFlash('error', 'ra.management.amend_ra_info.error.middleware_command_failed');
         }
 
@@ -259,13 +263,12 @@ class RaManagementController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
         $this->denyAccessUnlessGranted('ROLE_SRAA');
-        $logger = $this->container->get('logger');
 
-        $logger->notice(sprintf("Loading retract registration authority form for RA(A) '%s'", $identityId));
+        $this->logger->notice(sprintf("Loading retract registration authority form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->getRaListingService()->get($identityId, $raInstitution, $this->getUser()->id);
+        $raListing = $this->raListingService->get($identityId, $raInstitution, $this->getUser()->id);
         if (!$raListing) {
-            $logger->warning(sprintf("RA listing for identity ID '%s@%s' not found", $identityId, $this->getUser()->institution));
+            $this->logger->warning(sprintf("RA listing for identity ID '%s@%s' not found", $identityId, $this->getUser()->institution));
             throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
         }
 
@@ -276,20 +279,20 @@ class RaManagementController extends AbstractController
         $form = $this->createForm(RetractRegistrationAuthorityType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('button-group')->get('cancel')->isClicked()) {
-                $logger->notice('Retraction of registration authority cancelled');
+                $this->logger->notice('Retraction of registration authority cancelled');
                 return $this->redirectToRoute('ra_management_manage');
             }
 
-            $logger->notice(sprintf('Confirmed retraction of RA credentials for identity "%s"', $identityId));
+            $this->logger->notice(sprintf('Confirmed retraction of RA credentials for identity "%s"', $identityId));
 
             if ($this->container->get('ra.service.ra')->retractRegistrationAuthority($command)) {
-                $logger->notice(sprintf('Registration authority for identity "%s" retracted', $identityId));
+                $this->logger->notice(sprintf('Registration authority for identity "%s" retracted', $identityId));
 
                 $this->addFlash('success', $this->container->get('translator')->trans('ra.management.retract_ra.success'));
                 return $this->redirectToRoute('ra_management_manage');
             }
 
-            $logger->notice(sprintf(
+            $this->logger->notice(sprintf(
                 'Could not retract Registration Authority credentials for identity "%s"',
                 $identityId,
             ));
@@ -303,22 +306,6 @@ class RaManagementController extends AbstractController
     }
 
     /**
-     * @return RaListingService
-     */
-    private function getRaListingService()
-    {
-        return $this->container->get('ra.service.ra_listing');
-    }
-
-    /**
-     * @return \Surfnet\StepupRa\RaBundle\Service\RaCandidateService
-     */
-    private function getRaCandidateService()
-    {
-        return $this->container->get('ra.service.ra_candidate');
-    }
-
-    /**
      * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
      */
     private function getCurrentUser()
@@ -326,11 +313,4 @@ class RaManagementController extends AbstractController
         return $this->container->get('security.token_storage')->getToken()->getUser();
     }
 
-    /**
-     * @return \Knp\Component\Pager\Paginator
-     */
-    private function getPaginator()
-    {
-        return $this->container->get('knp_paginator');
-    }
 }
