@@ -18,9 +18,10 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Psr\Log\LoggerInterface;
 use Surfnet\StepupBundle\Service\SecondFactorTypeService;
 use Surfnet\StepupBundle\Value\SecondFactorType;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
@@ -32,10 +33,11 @@ use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\SubmitButton;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -43,44 +45,50 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class VettingController extends AbstractController
 {
+    public function __construct(
+        private readonly VettingService $vettingService,
+        private readonly SecondFactorService $secondFactorService,
+        private readonly SecondFactorTypeService $secondFactorTypeService,
+        private readonly LoggerInterface $logger,
+        private readonly TranslatorInterface $translator,
+    ) {
+    }
+
+
     /**
-     * @Template
-     * @return array|Response
-     *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity) https://www.pivotaltracker.com/story/show/135045063
      * @SuppressWarnings(PHPMD.NPathComplexity)      https://www.pivotaltracker.com/story/show/135045063
      */
-    public function startProcedure(Request $request)
+    public function startProcedure(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
-        $logger = $this->container->get('logger');
         $identity = $this->getIdentity();
 
-        $logger->notice('Vetting Procedure Search started');
+        $this->logger->notice('Vetting Procedure Search started');
 
         $command = new StartVettingProcedureCommand();
 
         $form = $this->createForm(StartVettingProcedureType::class, $command)->handleRequest($request);
 
         if (!$form->isSubmitted() || !$form->isValid()) {
-            $logger->notice('No search submitted, displaying search by registration code form');
+            $this->logger->notice('No search submitted, displaying search by registration code form');
 
-            return ['form' => $form->createView()];
+            return $this->render('vetting/start_procedure.html.twig', ['form' => $form->createView()]);
         }
 
-        $secondFactor = $this->getSecondFactorService()
+        $secondFactor = $this->secondFactorService
             ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode, $identity->id);
 
         if ($secondFactor === null) {
             $this->addFlash('error', 'ra.form.start_vetting_procedure.unknown_registration_code');
-            $logger->notice('Cannot start new vetting procedure, no second factor found');
+            $this->logger->notice('Cannot start new vetting procedure, no second factor found');
 
-            return ['form' => $form->createView()];
+            return $this->render('vetting/start_procedure.html.twig', ['form' => $form->createView()]);
         }
 
         $enabledSecondFactors = $this->container->getParameter('surfnet_stepup_ra.enabled_second_factors');
         if (!in_array($secondFactor->type, $enabledSecondFactors, true)) {
-            $logger->warning(
+            $this->logger->warning(
                 sprintf(
                     'An RA attempted vetting of disabled second factor "%s" of type "%s"',
                     $secondFactor->id,
@@ -102,10 +110,10 @@ class VettingController extends AbstractController
         $command->authorityLoa = $token->getLoa();
         $command->secondFactor = $secondFactor;
 
-        if ($this->getVettingService()->isExpiredRegistrationCode($command)) {
+        if ($this->vettingService->isExpiredRegistrationCode($command)) {
             $this->addFlash(
                 'error',
-                $this->getTranslator()
+                $this->translator
                     ->trans(
                         'ra.verify_identity.registration_code_expired',
                         [
@@ -114,30 +122,30 @@ class VettingController extends AbstractController
                     ),
             );
 
-            $logger->notice(
+            $this->logger->notice(
                 'Second factor registration code is expired',
                 ['registration_requested_at' => $secondFactor->registrationRequestedAt->format('Y-m-d')],
             );
 
-            return ['form' => $form->createView()];
+            return $this->render('vetting/start_procedure.html.twig', ['form' => $form->createView()]);
         }
 
-        if (!$this->getVettingService()->isLoaSufficientToStartProcedure($command)) {
+        if (!$this->vettingService->isLoaSufficientToStartProcedure($command)) {
             $this->addFlash('error', 'ra.form.start_vetting_procedure.loa_insufficient');
 
-            $logger->notice('Cannot start new vetting procedure, Authority LoA is insufficient');
+            $this->logger->notice('Cannot start new vetting procedure, Authority LoA is insufficient');
 
-            return ['form' => $form->createView()];
+            return $this->render('vetting/start_procedure.html.twig', ['form' => $form->createView()]);
         }
 
-        $procedureId = $this->getVettingService()->startProcedure($command);
+        $procedureId = $this->vettingService->startProcedure($command);
 
         $this->container->get('ra.procedure_logger')
             ->forProcedure($procedureId)
             ->notice(sprintf('Starting new Vetting Procedure for second factor of type "%s"', $secondFactor->type));
 
 
-        if ($this->getVettingService()->isProvePossessionSkippable($procedureId)) {
+        if ($this->vettingService->isProvePossessionSkippable($procedureId)) {
             $this->container->get('ra.procedure_logger')
                 ->forProcedure($procedureId)
                 ->notice(sprintf('Vetting Procedure for second factor of type "%s" skips the possession proven step', $secondFactor->type));
@@ -150,7 +158,7 @@ class VettingController extends AbstractController
             return $this->redirectToRoute('ra_vetting_yubikey_verify', ['procedureId' => $procedureId]);
         } elseif ($secondFactorType->isSms()) {
             return $this->redirectToRoute('ra_vetting_sms_send_challenge', ['procedureId' => $procedureId]);
-        } elseif ($this->getSecondFactorTypeService()->isGssf($secondFactorType)) {
+        } elseif ($this->secondFactorTypeService->isGssf($secondFactorType)) {
             return $this->redirectToRoute(
                 'ra_vetting_gssf_initiate',
                 [
@@ -165,37 +173,33 @@ class VettingController extends AbstractController
         }
     }
 
-    public function cancelProcedure($procedureId)
+    public function cancelProcedure($procedureId): RedirectResponse
     {
         $logger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
 
-        if (!$this->getVettingService()->hasProcedure($procedureId)) {
+        if (!$this->vettingService->hasProcedure($procedureId)) {
             $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
             throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
         }
 
-        $this->getVettingService()->cancelProcedure($procedureId);
+        $this->vettingService->cancelProcedure($procedureId);
         $this->addFlash('info', $this->container->get('translator')->trans('ra.vetting.flash.cancelled'));
 
         return $this->redirectToRoute('ra_vetting_search');
     }
 
     /**
-     * @Template
-     * @param string $procedureId
-     * @return array|Response
-     *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
      */
-    public function verifyIdentity(Request $request, $procedureId)
+    public function verifyIdentity(Request $request, string $procedureId): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
 
         $logger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
         $logger->notice('Verify Identity Form requested');
 
-        if (!$this->getVettingService()->hasProcedure($procedureId)) {
+        if (!$this->vettingService->hasProcedure($procedureId)) {
             $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
             throw new NotFoundHttpException(sprintf('Vetting procedure "%s" not found', $procedureId));
         }
@@ -206,13 +210,13 @@ class VettingController extends AbstractController
         /** @var SubmitButton $cancelButton */
         $cancelButton = $form->get('cancel');
         if ($cancelButton->isClicked()) {
-            $this->getVettingService()->cancelProcedure($procedureId);
+            $this->vettingService->cancelProcedure($procedureId);
             $this->addFlash('info', $this->container->get('translator')->trans('ra.vetting.flash.cancelled'));
 
             return $this->redirectToRoute('ra_vetting_search');
         }
 
-        $vettingService = $this->getVettingService();
+        $vettingService = $this->vettingService;
         $commonName = $vettingService->getIdentityCommonName($procedureId);
 
         $showForm = function ($error = null) use ($form, $commonName) {
@@ -220,7 +224,7 @@ class VettingController extends AbstractController
                 $this->addFlash('error', $error);
             }
 
-            return ['commonName' => $commonName, 'form' => $form->createView()];
+            return $this->render('vetting/verify_identity.html.twig', ['commonName' => $commonName, 'form' => $form->createView()]);
         };
 
         if (!$form->isSubmitted() || !$form->isValid()) {
@@ -232,7 +236,7 @@ class VettingController extends AbstractController
         try {
             $vettingService->verifyIdentity($procedureId, $command);
         } catch (DomainException $e) {
-            $this->container->get('logger')->error(
+            $this->logger->error(
                 "RA attempted to verify identity, but the vetting procedure does not allow it",
                 ['exception' => $e, 'procedure' => $procedureId],
             );
@@ -251,7 +255,7 @@ class VettingController extends AbstractController
             $logger->error('RA attempted to vet second factor, but the command failed');
 
             if (in_array(VettingService::REGISTRATION_CODE_EXPIRED_ERROR, $vetting->getErrors())) {
-                $registrationCodeExpiredError = $this->getTranslator()
+                $registrationCodeExpiredError = $this->translator
                     ->trans(
                         'ra.verify_identity.registration_code_expired',
                         [
@@ -273,51 +277,13 @@ class VettingController extends AbstractController
         }
     }
 
-    /**
-     * @Template
-     */
-    public function vettingCompleted()
+    public function vettingCompleted(): Response
     {
-        return [];
+        return $this->render('vetting/vetting_completed.html.twig');
     }
 
-    /**
-     * @return SecondFactorService
-     */
-    private function getSecondFactorService()
-    {
-        return $this->container->get('ra.service.second_factor');
-    }
-
-    /**
-     * @return SecondFactorTypeService
-     */
-    private function getSecondFactorTypeService()
-    {
-        return $this->container->get('surfnet_stepup.service.second_factor_type');
-    }
-
-    /**
-     * @return VettingService
-     */
-    private function getVettingService()
-    {
-        return $this->container->get('ra.service.vetting');
-    }
-
-    /**
-     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
-     */
-    private function getIdentity()
+    private function getIdentity(): Identity
     {
         return $this->container->get('security.token_storage')->getToken()->getUser();
-    }
-
-    /**
-     * @return TranslatorInterface
-     */
-    private function getTranslator()
-    {
-        return $this->container->get('translator');
     }
 }
