@@ -47,7 +47,7 @@ class SamlToken extends AbstractToken
         return $this->loa;
     }
 
-    public function serialize()
+    public function serialize(): array|string
     {
         return serialize(
             [
@@ -57,7 +57,7 @@ class SamlToken extends AbstractToken
         );
     }
 
-    public function unserialize($serialized)
+    public function unserialize($serialized): void
     {
         [$parent, $this->loa, ] = unserialize(
             $serialized,

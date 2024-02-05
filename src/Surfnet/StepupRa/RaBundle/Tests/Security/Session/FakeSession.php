@@ -49,32 +49,32 @@ class FakeSession implements SessionInterface
         $this->sessionId = bin2hex(openssl_random_pseudo_bytes(16));
     }
 
-    public function start()
+    public function start(): true
     {
         return true;
     }
 
-    public function getId()
+    public function getId(): string
     {
         return $this->sessionId;
     }
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->sessionId = $id;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->sessionName;
     }
 
-    public function setName($name)
+    public function setName($name): void
     {
         $this->sessionName = $name;
     }
 
-    public function invalidate($lifetime = null)
+    public function invalidate($lifetime = null): true
     {
         $this->sessionContent = [];
         $this->bags = [];
@@ -83,7 +83,7 @@ class FakeSession implements SessionInterface
         return true;
     }
 
-    public function migrate($destroy = false, $lifetime = null)
+    public function migrate($destroy = false, $lifetime = null): true
     {
         if ($destroy) {
             $this->sessionContent = [];
@@ -100,7 +100,7 @@ class FakeSession implements SessionInterface
         // noop
     }
 
-    public function has($name)
+    public function has($name): bool
     {
         return array_key_exists($name, $this->sessionContent);
     }
@@ -110,17 +110,17 @@ class FakeSession implements SessionInterface
         return $this->has($name) ? $this->sessionContent[$name] : $default;
     }
 
-    public function set($name, $value)
+    public function set($name, $value): void
     {
         $this->sessionContent[$name] = $value;
     }
 
-    public function all()
+    public function all(): array
     {
         return $this->sessionContent;
     }
 
-    public function replace(array $attributes)
+    public function replace(array $attributes): void
     {
         $this->sessionContent = $attributes;
     }
@@ -137,17 +137,17 @@ class FakeSession implements SessionInterface
         return $return;
     }
 
-    public function clear()
+    public function clear(): void
     {
         $this->sessionContent = [];
     }
 
-    public function isStarted()
+    public function isStarted(): true
     {
         return true;
     }
 
-    public function registerBag(SessionBagInterface $bag)
+    public function registerBag(SessionBagInterface $bag): void
     {
         $this->bags[$bag->getName()] = $bag;
     }

@@ -218,7 +218,7 @@ class SessionLifetimeGuardTest extends TestCase
     /**
      * @return array
      */
-    public function bothLimitsVerificationProvider()
+    public function bothLimitsVerificationProvider(): array
     {
         $withinLimit = new DateTime(new CoreDateTime('@1001'));
         $overLimit   = new DateTime(new CoreDateTime('@999'));
@@ -237,7 +237,7 @@ class SessionLifetimeGuardTest extends TestCase
      *
      * @param DateTime|null $now
      */
-    private function setCurrentTime(DateTime $now = null)
+    private function setCurrentTime(DateTime $now = null): void
     {
         $nowProperty = new ReflectionProperty(DateTime::class, 'now');
         $nowProperty->setAccessible(true);
@@ -250,7 +250,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @param DateTime|null $moment
      * @return AuthenticatedSessionStateHandler mocked
      */
-    private function createSessionMockAuthenticatedAt(DateTime $moment = null)
+    private function createSessionMockAuthenticatedAt(DateTime $moment = null): AuthenticatedSessionStateHandler
     {
         $sessionMock = Mockery::mock(AuthenticatedSessionStateHandler::class);
         $sessionMock
@@ -278,7 +278,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @param DateTime|null $moment
      * @return AuthenticatedSessionStateHandler mocked
      */
-    private function createSessionMockLastInteractionAt(DateTime $moment = null)
+    private function createSessionMockLastInteractionAt(DateTime $moment = null): AuthenticatedSessionStateHandler
     {
         $sessionMock = Mockery::mock(AuthenticatedSessionStateHandler::class);
 

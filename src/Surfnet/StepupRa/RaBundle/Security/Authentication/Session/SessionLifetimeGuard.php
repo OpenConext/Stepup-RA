@@ -33,7 +33,7 @@ class SessionLifetimeGuard
     /**
      * @return bool
      */
-    public function sessionLifetimeWithinLimits(AuthenticatedSessionStateHandler $sessionStateHandler)
+    public function sessionLifetimeWithinLimits(AuthenticatedSessionStateHandler $sessionStateHandler): bool
     {
         return $this->sessionLifetimeWithinAbsoluteLimit($sessionStateHandler)
         && $this->sessionLifetimeWithinRelativeLimit($sessionStateHandler);
@@ -42,7 +42,7 @@ class SessionLifetimeGuard
     /**
      * @return bool
      */
-    public function sessionLifetimeWithinAbsoluteLimit(AuthenticatedSessionStateHandler $sessionStateHandler)
+    public function sessionLifetimeWithinAbsoluteLimit(AuthenticatedSessionStateHandler $sessionStateHandler): bool
     {
         if (!$sessionStateHandler->isAuthenticationMomentLogged()) {
             return true;
@@ -62,7 +62,7 @@ class SessionLifetimeGuard
     /**
      * @return bool
      */
-    public function sessionLifetimeWithinRelativeLimit(AuthenticatedSessionStateHandler $sessionStateHandler)
+    public function sessionLifetimeWithinRelativeLimit(AuthenticatedSessionStateHandler $sessionStateHandler): bool
     {
         if (!$sessionStateHandler->hasSeenInteraction()) {
             return true;

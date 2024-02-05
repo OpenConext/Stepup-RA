@@ -51,7 +51,7 @@ class SamlInteractionProvider
     /**
      * @return bool
      */
-    public function isSamlAuthenticationInitiated()
+    public function isSamlAuthenticationInitiated(): bool
     {
         return $this->samlAuthenticationStateHandler->hasRequestId();
     }
@@ -114,7 +114,7 @@ class SamlInteractionProvider
     /**
      * Resets the SAML flow.
      */
-    public function reset()
+    public function reset(): void
     {
         $this->samlAuthenticationStateHandler->clearRequestId();
     }

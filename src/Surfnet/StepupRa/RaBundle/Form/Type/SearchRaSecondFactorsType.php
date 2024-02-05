@@ -32,7 +32,7 @@ class SearchRaSecondFactorsType extends AbstractType
     {
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('name', null, [
             'label' => 'ra.form.ra_search_ra_second_factors.label.name',
@@ -90,7 +90,7 @@ class SearchRaSecondFactorsType extends AbstractType
         $builder->add($buttonGroup);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => SearchRaSecondFactorsCommand::class,
@@ -100,7 +100,7 @@ class SearchRaSecondFactorsType extends AbstractType
         $resolver->setAllowedTypes('enable_export_button', 'bool');
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_search_ra_second_factors';
     }

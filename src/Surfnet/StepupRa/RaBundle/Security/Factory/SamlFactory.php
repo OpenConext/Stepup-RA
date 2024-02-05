@@ -49,12 +49,12 @@ class SamlFactory implements SecurityFactoryInterface
         return [$providerId, $listenerId, $defaultEntryPoint];
     }
 
-    public function getPosition()
+    public function getPosition(): string
     {
         return 'pre_auth';
     }
 
-    public function getKey()
+    public function getKey(): string
     {
         return 'saml';
     }

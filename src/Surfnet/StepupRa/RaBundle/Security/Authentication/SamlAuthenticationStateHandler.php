@@ -20,23 +20,11 @@ namespace Surfnet\StepupRa\RaBundle\Security\Authentication;
 
 interface SamlAuthenticationStateHandler
 {
-    /**
-     * @return string
-     */
-    public function getRequestId();
+    public function getRequestId(): string;
     
-    /**
-     * @param string $requestId
-     */
-    public function setRequestId($requestId);
+    public function setRequestId(string $requestId);
     
-    /**
-     * @return bool
-     */
-    public function hasRequestId();
+    public function hasRequestId(): bool;
 
-    /**
-     * Removes the requestId from the session
-     */
-    public function clearRequestId();
+    public function clearRequestId(): void;
 }

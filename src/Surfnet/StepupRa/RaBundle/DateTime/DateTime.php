@@ -30,7 +30,7 @@ class DateTime
     /**
      * @return CoreDateTime
      */
-    public static function now()
+    public static function now(): CoreDateTime
     {
         return self::$now ?: new CoreDateTime;
     }

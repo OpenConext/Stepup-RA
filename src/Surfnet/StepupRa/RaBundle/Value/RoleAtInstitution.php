@@ -35,7 +35,7 @@ class RoleAtInstitution
     /**
      * @param string $role
      */
-    public function setRole($role)
+    public function setRole($role): void
     {
         Assert::nullOrString($role, 'Role must be null or a string value');
         $this->role = $role;
@@ -44,7 +44,7 @@ class RoleAtInstitution
     /**
      * @param string $institution
      */
-    public function setInstitution($institution)
+    public function setInstitution($institution): void
     {
         Assert::nullOrString($institution, 'Institution must be null or a string value');
         $this->institution = $institution;
@@ -53,7 +53,7 @@ class RoleAtInstitution
     /**
      * @return bool
      */
-    public function hasRole()
+    public function hasRole(): bool
     {
         return !is_null($this->role);
     }
@@ -61,7 +61,7 @@ class RoleAtInstitution
     /**
      * @return bool
      */
-    public function hasInstitution()
+    public function hasInstitution(): bool
     {
         return !is_null($this->institution);
     }
@@ -69,7 +69,7 @@ class RoleAtInstitution
     /**
      * @return string
      */
-    public function getRole()
+    public function getRole(): string
     {
         return $this->role;
     }
@@ -77,7 +77,7 @@ class RoleAtInstitution
     /**
      * @return string
      */
-    public function getInstitution()
+    public function getInstitution(): string
     {
         return $this->institution;
     }
