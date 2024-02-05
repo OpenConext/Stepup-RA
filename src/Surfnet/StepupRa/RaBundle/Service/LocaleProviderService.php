@@ -28,19 +28,19 @@ final readonly class LocaleProviderService implements StepupLocaleProviderServic
     {
     }
 
-    public function determinePreferredLocale()
+    public function determinePreferredLocale(): string
     {
         $token = $this->tokenStorage->getToken();
 
         if (!$token) {
-            return;
+            return '';
         }
 
         /** @var Identity $identity */
         $identity = $token->getUser();
 
         if (!$identity instanceof Identity) {
-            return;
+            return '';
         }
 
         return $identity->preferredLocale;

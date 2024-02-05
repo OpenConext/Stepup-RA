@@ -47,11 +47,8 @@ class SamlProvider implements AuthenticationProviderInterface
     /**
      * @SuppressWarnings(PHPMD.NPathComplexity)      - The authorization tests cause the complexity to raise, could and
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)   might be changed by introducing additional utility classes.
-     *                                                 Consider rebuilding this in the future.
-     * @param SamlToken|TokenInterface $token
-     * @return TokenInterface|void
      */
-    public function authenticate(TokenInterface $token)
+    public function authenticate(TokenInterface $token): TokenInterface
     {
         $translatedAssertion = $this->attributeDictionary->translate($token->assertion);
 

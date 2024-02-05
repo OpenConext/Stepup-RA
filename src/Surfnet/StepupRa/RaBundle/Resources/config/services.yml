@@ -145,13 +145,13 @@ services:
             - "@ra.service.gssf.sessionbag"
 
     ra.service.gssf.sessionbag:
-        class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
+        class: Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag
         factory: ['@session', 'getBag']
         arguments: ['ra.service.gssf']
 
     ra.service.gssf.namespaced_attribute_bag:
         public: false
-        class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
+        class: Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag
         arguments:
             - '__ra.service.gssf__'
             - '/'
