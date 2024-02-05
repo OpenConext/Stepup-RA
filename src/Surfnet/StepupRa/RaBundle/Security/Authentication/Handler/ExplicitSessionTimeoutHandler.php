@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\AuthenticatedSessionStateHandler;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Session\SessionLifetimeGuard;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Logout\CookieClearingLogoutHandler;
@@ -33,10 +33,7 @@ use Symfony\Component\Security\Http\Logout\SessionLogoutHandler;
  */
 class ExplicitSessionTimeoutHandler implements AuthenticationHandler
 {
-    /**
-     * @var AuthenticationHandler|null
-     */
-    private $nextHandler;
+    private ?AuthenticationHandler $nextHandler;
 
     public function __construct(
         private readonly TokenStorageInterface $tokenStorage,
@@ -49,7 +46,7 @@ class ExplicitSessionTimeoutHandler implements AuthenticationHandler
     ) {
     }
 
-    public function process(GetResponseEvent $event)
+    public function process(RequestEvent $event): void
     {
         if ($this->tokenStorage->getToken() !== null
             && !$this->sessionLifetimeGuard->sessionLifetimeWithinLimits($this->authenticatedSession)
@@ -99,7 +96,7 @@ class ExplicitSessionTimeoutHandler implements AuthenticationHandler
         }
     }
 
-    public function setNext(AuthenticationHandler $handler)
+    public function setNext(AuthenticationHandler $handler): void
     {
         $this->nextHandler = $handler;
     }
