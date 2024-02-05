@@ -27,9 +27,6 @@ class DateTime
      */
     private static $now;
 
-    /**
-     * @return CoreDateTime
-     */
     public static function now(): CoreDateTime
     {
         return self::$now ?: new CoreDateTime;

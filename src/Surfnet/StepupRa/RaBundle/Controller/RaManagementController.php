@@ -308,9 +308,6 @@ class RaManagementController extends AbstractController
         ]);
     }
 
-    /**
-     * @return Identity
-     */
     private function getCurrentUser(): Identity
     {
         return $this->container->get('security.token_storage')->getToken()->getUser();

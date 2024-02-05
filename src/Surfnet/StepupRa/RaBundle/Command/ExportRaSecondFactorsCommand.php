@@ -89,7 +89,6 @@ final class ExportRaSecondFactorsCommand
 
     /**
      * Builds the command from a SearchRaSecondFactorsCommand
-     * @return ExportRaSecondFactorsCommand
      */
     public static function fromSearchCommand(SearchRaSecondFactorsCommand $command): ExportRaSecondFactorsCommand
     {

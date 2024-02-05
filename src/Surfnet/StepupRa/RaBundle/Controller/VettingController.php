@@ -79,7 +79,7 @@ class VettingController extends AbstractController
         $secondFactor = $this->secondFactorService
             ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode, $identity->id);
 
-        if ($secondFactor === null) {
+        if (!$secondFactor instanceof \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor) {
             $this->addFlash('error', 'ra.form.start_vetting_procedure.unknown_registration_code');
             $this->logger->notice('Cannot start new vetting procedure, no second factor found');
 

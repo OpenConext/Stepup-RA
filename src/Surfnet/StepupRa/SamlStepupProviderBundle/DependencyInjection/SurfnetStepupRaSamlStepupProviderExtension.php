@@ -134,7 +134,6 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
 
     /**
      * @param string $provider
-     * @return Definition
      */
     private function buildHostedEntityDefinition($provider, array $configuration, array $routes): Definition
     {

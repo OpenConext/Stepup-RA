@@ -41,12 +41,12 @@ class SearchRaCandidatesCommand
      *     message="ra.search_ra_candidates.order_by.invalid_choice"
      * )
      */
-    public ?string $orderBy;
+    public ?string $orderBy = null;
 
     /**
      * @Assert\Choice({"asc", "desc"}, message="ra.search_ra_candidates.order_direction.invalid_choice")
      */
-    public ?string $orderDirection;
+    public ?string $orderDirection = null;
 
     /**
      * @Assert\GreaterThan(0, message="ra.search_ra_candidates.page_number.greater_than_zero")

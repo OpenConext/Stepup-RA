@@ -48,9 +48,6 @@ class SamlInteractionProvider
     ) {
     }
 
-    /**
-     * @return bool
-     */
     public function isSamlAuthenticationInitiated(): bool
     {
         return $this->samlAuthenticationStateHandler->hasRequestId();

@@ -30,7 +30,6 @@ final readonly class TimeFrame implements Stringable
 
     /**
      * @param int $seconds
-     * @return TimeFrame
      */
     public static function ofSeconds($seconds): TimeFrame
     {
@@ -41,17 +40,11 @@ final readonly class TimeFrame implements Stringable
         return new TimeFrame(new DateInterval('PT' . $seconds . 'S'));
     }
 
-    /**
-     * @return DateTime
-     */
     public function getEndWhenStartingAt(DateTime $dateTime): DateTime
     {
         return $dateTime->add($this->timeFrame);
     }
 
-    /**
-     * @return bool
-     */
     public function equals(TimeFrame $other): bool
     {
         return $this->timeFrame->s === $other->timeFrame->s;

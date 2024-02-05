@@ -38,7 +38,6 @@ final readonly class GssfService
 
     /**
      * @param string $gssfId
-     * @return VerificationResult
      */
     public function verify($gssfId): VerificationResult
     {

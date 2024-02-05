@@ -35,33 +35,21 @@ final class Provider
     ) {
     }
 
-    /**
-     * @return StateHandler
-     */
     public function getStateHandler(): StateHandler
     {
         return $this->stateHandler;
     }
 
-    /**
-     * @return IdentityProvider
-     */
     public function getRemoteIdentityProvider(): IdentityProvider
     {
         return $this->remoteIdentityProvider;
     }
 
-    /**
-     * @return ServiceProvider
-     */
     public function getServiceProvider(): ServiceProvider
     {
         return $this->serviceProvider;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
