@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use Psr\Log\LoggerInterface;
 use Surfnet\StepupBundle\Command\SendSmsChallengeCommand;
 use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
@@ -37,7 +38,9 @@ class SmsController extends SecondFactorController
     public function __construct(
         private readonly VettingService $vettingService,
         private readonly TranslatorInterface $translator,
+        LoggerInterface $logger,
     ) {
+        parent::__construct($logger);
     }
 
     public function sendChallenge(Request $request, string $procedureId): Response

@@ -54,6 +54,7 @@ final class GssfController extends SecondFactorController
         private readonly AttributeDictionary  $attributeDictionary,
         private readonly ViewConfigCollection $collection,
     ) {
+        parent::__construct($logger);
     }
     
     /**
