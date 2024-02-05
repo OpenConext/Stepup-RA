@@ -20,13 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Exception;
 
 class InvalidArgumentException extends \InvalidArgumentException
 {
-    /**
-     * @param string $expected description of expected type
-     * @param string $parameterName
-     * @param mixed $parameter the parameter that is not of the expected type.
-     * @return self
-     */
-    public static function invalidType($expected, $parameterName, mixed $parameter)
+    public static function invalidType(string $expected, string $parameterName, mixed $parameter): InvalidArgumentException
     {
         $message = sprintf(
             'Invalid argument type: "%s" expected, "%s" given for "%s"',
