@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Surfnet\StepupMiddlewareClientBundle\Command\Command;
 use Surfnet\StepupMiddlewareClientBundle\Command\Metadata;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService as MiddlewareCommandService;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -33,7 +34,7 @@ final readonly class CommandService
 
     public function execute(Command $command)
     {
-        /** @var \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity $identity */
+        /** @var Identity $identity */
         $identity = $this->tokenStorage->getToken()->getUser();
 
         return $this->commandService->execute($command, new Metadata($identity->id, $identity->institution));

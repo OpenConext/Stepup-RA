@@ -33,7 +33,7 @@ use Symfony\Component\Security\Http\Logout\SessionLogoutHandler;
  */
 class ExplicitSessionTimeoutHandler implements AuthenticationHandler
 {
-    private ?AuthenticationHandler $nextHandler;
+    private ?AuthenticationHandler $nextHandler = null;
 
     public function __construct(
         private readonly TokenStorageInterface $tokenStorage,
@@ -83,7 +83,7 @@ class ExplicitSessionTimeoutHandler implements AuthenticationHandler
 
             $this->sessionLogoutHandler->logout($request, $event->getResponse(), $token);
             $this->cookieClearingLogoutHandler->logout($request, $event->getResponse(), $token);
-            $this->tokenStorage->setToken(null);
+            $this->tokenStorage->setToken();
 
             // the session is restarted after invalidation during the logout, so we can (re)store the last GET request
             $this->authenticatedSession->setCurrentRequestUri($afterLoginRedirectTo);
@@ -91,9 +91,7 @@ class ExplicitSessionTimeoutHandler implements AuthenticationHandler
             return;
         }
 
-        if ($this->nextHandler !== null) {
-            $this->nextHandler->process($event);
-        }
+        $this->nextHandler?->process($event);
     }
 
     public function setNext(AuthenticationHandler $handler): void

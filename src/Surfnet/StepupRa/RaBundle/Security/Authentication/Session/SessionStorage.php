@@ -51,7 +51,7 @@ class SessionStorage implements AuthenticatedSessionStateHandler, SamlAuthentica
 
     public function isAuthenticationMomentLogged(): bool
     {
-        return $this->requestStack->getSession()->get(self::AUTH_SESSION_KEY . 'authenticated_at', null) !== null;
+        return $this->requestStack->getSession()->get(self::AUTH_SESSION_KEY . 'authenticated_at') !== null;
     }
 
     public function getAuthenticationMoment(): DateTime
@@ -70,7 +70,7 @@ class SessionStorage implements AuthenticatedSessionStateHandler, SamlAuthentica
 
     public function hasSeenInteraction(): bool
     {
-        return $this->requestStack->getSession()->get(self::AUTH_SESSION_KEY . 'last_interaction', null) !== null;
+        return $this->requestStack->getSession()->get(self::AUTH_SESSION_KEY . 'last_interaction') !== null;
     }
 
     public function getLastInteractionMoment(): DateTime

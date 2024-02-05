@@ -34,7 +34,7 @@ class SessionLifetimeGuardTest extends TestCase
      */
     public function tearDown(): void
     {
-        $this->setCurrentTime(null);
+        $this->setCurrentTime();
     }
 
     /**

@@ -24,6 +24,7 @@ use Surfnet\StepupBundle\Command\SwitchLocaleCommand;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\IdentitySearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\ExpressLocalePreferenceCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RegistrationAuthorityCredentials;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService as ApiIdentityService;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -61,32 +62,24 @@ class IdentityService implements UserProviderInterface
 
     /**
      * Whether this provider supports the given user class
-     *
-     * @param string $class
-     *
-     * @return bool
      */
-    public function supportsClass($class)
+    public function supportsClass($class): bool
     {
         return $class === Identity::class;
     }
 
     /**
      * @param string $identityId the UUID of the identity to find
-     * @return null|Identity
      */
-    public function findById($identityId)
+    public function findById(string $identityId): ?Identity
     {
         return $this->apiIdentityService->get($identityId);
     }
 
     /**
-     * @param string $nameId
-     * @param string $institution
-     * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
-     * @throws \Surfnet\StepupRa\RaBundle\Exception\RuntimeException
+     * @throws RuntimeException
      */
-    public function findByNameIdAndInstitution($nameId, $institution)
+    public function findByNameIdAndInstitution(string $nameId, string $institution): ?Identity
     {
         $searchQuery = new IdentitySearchQuery();
         $searchQuery->setNameId($nameId);
@@ -115,10 +108,7 @@ class IdentityService implements UserProviderInterface
         ));
     }
 
-    /**
-     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RegistrationAuthorityCredentials|null
-     */
-    public function getRaCredentials(Identity $identity)
+    public function getRaCredentials(Identity $identity): ?RegistrationAuthorityCredentials
     {
         try {
             $credentials = $this->apiIdentityService->getRegistrationAuthorityCredentials($identity);
@@ -132,12 +122,8 @@ class IdentityService implements UserProviderInterface
         return $credentials;
     }
 
-    /**
-     * @return bool
-     */
-    public function switchLocale(SwitchLocaleCommand $command)
+    public function switchLocale(SwitchLocaleCommand $command): bool
     {
-        /** @var TokenInterface|null */
         $token = $this->tokenStorage->getToken();
 
         if (!$token) {

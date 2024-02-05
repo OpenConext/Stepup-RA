@@ -18,27 +18,25 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
-use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListingCollection;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaListingService as ApiRaListingService;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
-use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
 final readonly class RaListingService
 {
-    public function __construct(private ApiRaListingService $apiRaListingService, private LoggerInterface $logger)
+    public function __construct(
+        private ApiRaListingService $apiRaListingService,
+    )
     {
     }
 
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)  -- The command to query mapping in search exceed the
      * @SuppressWarnings(PHPMD.NPathComplexity)          CyclomaticComplexity and NPathComplexity threshold.
-     *
-     * @return RaListingCollection
      */
-    public function search(SearchRaListingCommand $command)
+    public function search(SearchRaListingCommand $command): RaListingCollection
     {
         $query = new RaListingSearchQuery($command->actorId, $command->pageNumber);
 
@@ -73,26 +71,8 @@ final readonly class RaListingService
         return $this->apiRaListingService->search($query);
     }
 
-    /**
-     * @param string $identityId
-     * @param string $institution
-     * @param string $actorId
-     * @return null|RaListing
-     */
-    public function get($identityId, $institution, $actorId)
+    public function get(string $identityId, string $institution, string $actorId): ?RaListing
     {
-        if (!is_string($identityId)) {
-            throw InvalidArgumentException::invalidType('string', 'identityId', $identityId);
-        }
-
-        if (!is_string($institution)) {
-            throw InvalidArgumentException::invalidType('string', 'institution', $institution);
-        }
-
-        if (!is_string($actorId)) {
-            throw InvalidArgumentException::invalidType('string', 'actorId', $actorId);
-        }
-
         return $this->apiRaListingService->get($identityId, $institution, $actorId);
     }
 }

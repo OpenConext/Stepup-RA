@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Knp\Component\Pager\PaginatorInterface;
 use Psr\Log\LoggerInterface;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitution;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
@@ -308,7 +309,7 @@ class RaManagementController extends AbstractController
     }
 
     /**
-     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
+     * @return Identity
      */
     private function getCurrentUser()
     {
