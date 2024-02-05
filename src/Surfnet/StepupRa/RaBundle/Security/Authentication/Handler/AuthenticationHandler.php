@@ -18,24 +18,18 @@
 
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Handler;
 
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 interface AuthenticationHandler
 {
     /**
      * Checks if it can process the event and if so does so. Also determines if there
      * is a next handler to be called if it cannot process the event itself.
-     *
-     * @param GetResponseEvent $event
-     * @return void
      */
-    public function process(GetResponseEvent $event);
+    public function process(RequestEvent $event): void;
 
     /**
      * Allows setting the optional next handler
-     *
-     * @param AuthenticationHandler $handler
-     * @return void
      */
-    public function setNext(AuthenticationHandler $handler);
+    public function setNext(AuthenticationHandler $handler): void;
 }

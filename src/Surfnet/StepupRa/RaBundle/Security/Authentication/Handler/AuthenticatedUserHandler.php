@@ -21,15 +21,12 @@ namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Handler;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\AuthenticatedSessionStateHandler;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Session\SessionLifetimeGuard;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class AuthenticatedUserHandler implements AuthenticationHandler
 {
-    /**
-     * @var AuthenticationHandler
-     */
-    private $nextHandler;
+    private AuthenticationHandler $nextHandler;
 
     public function __construct(
         private readonly TokenStorageInterface $tokenStorage,
@@ -39,7 +36,7 @@ class AuthenticatedUserHandler implements AuthenticationHandler
     ) {
     }
 
-    public function process(GetResponseEvent $event)
+    public function process(RequestEvent $event): void
     {
         if ($this->tokenStorage->getToken() !== null
             && $this->sessionLifetimeGuard->sessionLifetimeWithinLimits($this->sessionStateHandler)
@@ -60,7 +57,7 @@ class AuthenticatedUserHandler implements AuthenticationHandler
         }
     }
 
-    public function setNext(AuthenticationHandler $next)
+    public function setNext(AuthenticationHandler $next): void
     {
         $this->nextHandler = $next;
     }
