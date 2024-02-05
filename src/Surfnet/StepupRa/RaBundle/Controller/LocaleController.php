@@ -21,14 +21,25 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupBundle\Command\SwitchLocaleCommand;
 use Surfnet\StepupBundle\Form\Type\SwitchLocaleType;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 final class LocaleController extends AbstractController
 {
-    public function switchLocale(Request $request)
+    public function __construct(
+        private readonly LoggerInterface $logger,
+        private readonly UserProviderInterface $identityService,
+    )
+    {
+    }
+
+    public function switchLocale(Request $request): RedirectResponse
     {
         $returnUrl = $request->query->get('return-url');
 
@@ -36,7 +47,7 @@ final class LocaleController extends AbstractController
         // @see https://github.com/symfony/symfony/blob/master/src/Symfony/Component/HttpFoundation/Request.php#L878
         $domain = $request->getSchemeAndHttpHost() . '/';
         if (!str_starts_with($returnUrl, $domain)) {
-            $this->container->get('logger')->error(sprintf(
+            $this->logger->error(sprintf(
                 'Identity "%s" used illegal return-url for redirection after changing locale, aborting request',
                 $this->getIdentity()->id,
             ));
@@ -44,9 +55,7 @@ final class LocaleController extends AbstractController
             throw new BadRequestHttpException('Invalid return-url given');
         }
 
-        /** @var LoggerInterface $logger */
-        $logger = $this->container->get('logger');
-        $logger->info('Switching locale...');
+        $this->logger->info('Switching locale...');
 
         $identity = $this->getIdentity();
         if (!$identity) {
@@ -65,26 +74,22 @@ final class LocaleController extends AbstractController
 
         if ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('error', $this->container->get('translator')->trans('ra.flash.invalid_switch_locale_form'));
-            $logger->error('The switch locale form unexpectedly contained invalid data');
+            $this->logger->error('The switch locale form unexpectedly contained invalid data');
             return $this->redirect($returnUrl);
         }
 
-        $service = $this->container->get('ra.service.identity');
-        if (!$service->switchLocale($command)) {
+        if (!$this->identityService->switchLocale($command)) {
             $this->addFlash('error', $this->container->get('translator')->trans('ra.flash.error_while_switching_locale'));
-            $logger->error('An error occurred while switching locales');
+            $this->logger->error('An error occurred while switching locales');
             return $this->redirect($returnUrl);
         }
 
-        $logger->info('Successfully switched locale');
+        $this->logger->info('Successfully switched locale');
 
         return $this->redirect($returnUrl);
     }
 
-    /**
-     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
-     */
-    private function getIdentity()
+    private function getIdentity(): Identity
     {
         return $this->container->get('security.token_storage')->getToken()->getUser();
     }
