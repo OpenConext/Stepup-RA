@@ -28,7 +28,7 @@ use Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand;
 
 class ChangeRaRoleType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('role', ChoiceType::class, [
@@ -58,14 +58,14 @@ class ChangeRaRoleType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => ChangeRaRoleCommand::class
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_management_change_ra_role';
     }

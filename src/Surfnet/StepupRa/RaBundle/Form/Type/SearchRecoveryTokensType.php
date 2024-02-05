@@ -28,7 +28,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class SearchRecoveryTokensType extends AbstractType
 {
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('name', null, [
             'label' => 'ra.form.ra_search_recovery_tokens.label.name',
@@ -80,14 +80,14 @@ class SearchRecoveryTokensType extends AbstractType
         $builder->add($buttonGroup);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => SearchRecoveryTokensCommand::class,
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_search_recovery_tokens';
     }

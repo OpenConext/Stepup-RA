@@ -27,7 +27,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('surfnet_stepup_ra_saml_stepup_provider');
         $rootNode = $treeBuilder->getRootNode();
@@ -38,7 +38,7 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function addRoutesSection(ArrayNodeDefinition $rootNode)
+    private function addRoutesSection(ArrayNodeDefinition $rootNode): void
     {
         $rootNode
             ->children()
@@ -62,7 +62,7 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
-    private function addProvidersSection(ArrayNodeDefinition $rootNode)
+    private function addProvidersSection(ArrayNodeDefinition $rootNode): void
     {
         /** @var ArrayNodeDefinition $protoType */
         $protoType = $rootNode

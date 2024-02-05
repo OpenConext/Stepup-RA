@@ -52,7 +52,7 @@ class RaLocationService
     /**
      * @return RaLocationCollection
      */
-    public function search(SearchRaLocationsCommand $command)
+    public function search(SearchRaLocationsCommand $command): RaLocationCollection
     {
         $query = new RaLocationSearchQuery($command->institution);
 
@@ -67,7 +67,7 @@ class RaLocationService
         return $this->apiRaLocationService->search($query);
     }
 
-    public function create(CreateRaLocationCommand $command)
+    public function create(CreateRaLocationCommand $command): bool
     {
         $middlewareCommand = new MiddlewareCreateLocationCommand();
         $middlewareCommand->id = Uuid::generate();
@@ -91,7 +91,7 @@ class RaLocationService
         return $result->isSuccessful();
     }
 
-    public function change(ChangeRaLocationCommand $command)
+    public function change(ChangeRaLocationCommand $command): bool
     {
         $middlewareCommand = new MiddlewareChangeRaLocationCommand();
         $middlewareCommand->id = $command->id;
@@ -118,7 +118,7 @@ class RaLocationService
     /**
      * @return bool
      */
-    public function remove(RemoveRaLocationCommand $command)
+    public function remove(RemoveRaLocationCommand $command): bool
     {
         $middlewareCommand = new MiddlewareRemoveRaLocationCommand();
         $middlewareCommand->institution = $command->institution;

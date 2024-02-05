@@ -35,7 +35,7 @@ class RecoveryTokenService
     ) {
     }
 
-    public function revoke(RevokeRecoveryTokenCommand $command)
+    public function revoke(RevokeRecoveryTokenCommand $command): bool
     {
         $middlewareCommand = new RevokeRegistrantsRecoveryTokenCommand();
         $middlewareCommand->recoveryTokenId = $command->recoveryTokenId;

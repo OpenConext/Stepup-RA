@@ -32,7 +32,7 @@ final readonly class CommandService
     ) {
     }
 
-    public function execute(Command $command)
+    public function execute(Command $command): \Surfnet\StepupMiddlewareClient\Service\ExecutionResult
     {
         /** @var Identity $identity */
         $identity = $this->tokenStorage->getToken()->getUser();

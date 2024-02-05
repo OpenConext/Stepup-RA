@@ -32,7 +32,7 @@ class AuditLogService
     /**
      * @return AuditLog
      */
-    public function getAuditlog(SearchSecondFactorAuditLogCommand $command)
+    public function getAuditlog(SearchSecondFactorAuditLogCommand $command): AuditLog
     {
         $query = new SecondFactorAuditLogSearchQuery($command->institution, $command->identityId, $command->pageNumber);
         $query->setOrderBy($command->orderBy);

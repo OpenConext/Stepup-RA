@@ -34,7 +34,7 @@ final class StateHandler
      * @param string $originalRequestId
      * @return $this
      */
-    public function setRequestId($originalRequestId)
+    public function setRequestId($originalRequestId): static
     {
         $this->set('request_id', $originalRequestId);
 
@@ -44,17 +44,17 @@ final class StateHandler
     /**
      * @return string|null
      */
-    public function getRequestId()
+    public function getRequestId(): ?string
     {
         return $this->get('request_id');
     }
 
-    public function clear()
+    public function clear(): void
     {
         $this->attributeBag->remove($this->provider);
     }
 
-    protected function set($key, $value)
+    protected function set($key, $value): void
     {
         $this->attributeBag->set($this->provider . '/' . $key, $value);
     }

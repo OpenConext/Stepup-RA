@@ -98,7 +98,7 @@ class SamlProvider implements AuthenticationProviderInterface
         return $authenticatedToken;
     }
 
-    private function getSingleStringValue($attribute, AssertionAdapter $translatedAssertion)
+    private function getSingleStringValue($attribute, AssertionAdapter $translatedAssertion): string
     {
         $values = $translatedAssertion->getAttributeValue($attribute);
 
@@ -137,7 +137,7 @@ class SamlProvider implements AuthenticationProviderInterface
         return $value;
     }
 
-    public function supports(TokenInterface $token)
+    public function supports(TokenInterface $token): bool
     {
         return $token instanceof SamlToken;
     }

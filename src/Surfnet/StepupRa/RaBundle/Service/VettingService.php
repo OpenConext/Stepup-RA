@@ -297,7 +297,7 @@ class VettingService
     /**
      * @throws UnknownVettingProcedureException
      */
-    public function isProvePossessionSkippable(string $procedureId): string
+    public function isProvePossessionSkippable(string $procedureId): ?bool
     {
         return $this->getProcedure($procedureId)->isProvePossessionSkippable();
     }
