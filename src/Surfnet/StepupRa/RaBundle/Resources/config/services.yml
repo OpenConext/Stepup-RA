@@ -68,12 +68,6 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType
         tags: [{ name: form.type, alias: ra_revoke_second_factor }]
 
-    ra.form.type.sraa_institution_select:
-        class: Surfnet\StepupRa\RaBundle\Form\Type\InstitutionSelectionType
-        arguments:
-            - "@ra.form.extension.institution_listing_choice_list"
-        tags: [{ name: form.type, alias: sraa_institution_select }]
-
     ra.form.type.management.create_ra:
         class: Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType
         tags: [{ name: form.type, alias: ra_management_create_ra }]
@@ -97,11 +91,6 @@ services:
         tags: [{ name: form.type, alias: ra_initiate_gssf }]
 
     # Form Extensions
-    ra.form.extension.institution_listing_choice_list:
-        class: Surfnet\StepupRa\RaBundle\Form\Extension\InstitutionListingChoiceList
-        arguments:
-            - "@surfnet_stepup_middleware_client.identity.service.institution_listing"
-
     ra.form.extension.second_factor_type_choice_list:
         class: Surfnet\StepupRa\RaBundle\Form\Extension\SecondFactorTypeChoiceList
         arguments:
