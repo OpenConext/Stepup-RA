@@ -19,7 +19,6 @@
 namespace Surfnet\StepupRa\RaBundle\Logger;
 
 use Psr\Log\LoggerInterface;
-use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 
 /**
