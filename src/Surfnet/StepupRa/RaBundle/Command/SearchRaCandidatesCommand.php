@@ -27,13 +27,13 @@ class SearchRaCandidatesCommand
      */
     public string $actorId;
 
-    public string $institution;
+    public ?string $institution = null;
 
-    public ?string $name;
+    public ?string $name = null;
 
-    public ?string $email;
+    public ?string $email = null;
 
-    public string $raInstitution;
+    public ?string $raInstitution = null;
 
     /**
      * @Assert\Choice(
