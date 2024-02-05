@@ -20,28 +20,20 @@ namespace Surfnet\StepupRa\RaBundle\Form\Extension;
 
 class RaRoleChoiceList
 {
-    /**
-     * @return array
-     */
-    public static function create()
+    public static function create(): array
     {
         return self::buildChoices();
     }
 
-    private static function buildChoices()
+    private static function buildChoices(): array
     {
         $choices = self::getChoices();
         $labels = array_map(fn($choice) => 'ra.form.extension.ra_role_choice.' . $choice, $choices);
 
-        $combined = array_combine($labels, $choices);
-
-        return $combined;
+        return array_combine($labels, $choices);
     }
 
-    /**
-     * @return array
-     */
-    public static function getChoices()
+    public static function getChoices(): array
     {
         return ['ra', 'raa'];
     }
