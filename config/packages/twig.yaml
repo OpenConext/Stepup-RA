@@ -3,7 +3,6 @@ twig:
     '%kernel.project_dir%/templates': SurfnetStepupRaRa
   debug:            "%kernel.debug%"
   strict_variables: "%kernel.debug%"
-  exception_controller: SurfnetStepupRaRaBundle:Exception:show
   date:
     format: "%date_format%"
     timezone: "%date_timezone%"

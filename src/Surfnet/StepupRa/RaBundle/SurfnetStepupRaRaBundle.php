@@ -32,7 +32,7 @@ class SurfnetStepupRaRaBundle extends Bundle
 
         /** @var SecurityExtension $extension */
         $extension = $container->getExtension('security');
-        $extension->addSecurityListenerFactory(new SamlFactory());
+        $extension->addAuthenticatorFactory(new SamlFactory());
 
         $container->addCompilerPass(new GssfSessionBagSessionPass());
     }
