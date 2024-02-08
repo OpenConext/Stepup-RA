@@ -30,7 +30,7 @@ final class ExceptionController extends BaseExceptionController
     /**
      * @return array View parameters 'title' and 'description'
      */
-    protected function getPageTitleAndDescription(Exception $exception): array
+    protected function getPageTitleAndDescription(\Throwable $exception): array
     {
         $translator = $this->getTranslator();
 

@@ -14,30 +14,30 @@
     "require": {
         "php": "^8.2",
         "fortawesome/font-awesome": "~4.2.0",
-        "guzzlehttp/guzzle": "^6",
+        "guzzlehttp/guzzle": "^6 || ^7",
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/translation-bundle": "^2.1",
-        "knplabs/knp-paginator-bundle": "^5.9",
-        "nelmio/security-bundle": "^2.12",
-        "openconext/monitor-bundle": "^3.0",
-        "surfnet/stepup-bundle": "^5.0",
-        "surfnet/stepup-middleware-client-bundle": "^4.1",
-        "surfnet/stepup-saml-bundle": "^4.3.2",
-        "symfony/asset": "4.4.* || ^5.1",
-        "symfony/expression-language": "4.4.* || ^5.1",
+        "knplabs/knp-paginator-bundle": "^5.9 || ^6.0",
+        "nelmio/security-bundle": "^2.12 || ^3.0",
+        "openconext/monitor-bundle": "^3.0 || ^4.0",
+        "surfnet/stepup-bundle": "^5.0 || ^6.0",
+        "surfnet/stepup-middleware-client-bundle": "^4.0 || ^5.0.0-beta",
+        "surfnet/stepup-saml-bundle": "^4.3.2 || ^6.0",
+        "symfony/asset": "4.4.* || ^5.1 || ^6.0",
+        "symfony/expression-language": "4.4.* || ^5.1 || ^6.0",
         "symfony/flex": "^v2.4.3",
-        "symfony/form": "4.4.* || ^5.1",
-        "symfony/http-foundation": "^5.0",
+        "symfony/form": "4.4.* || ^5.1 || ^6.0",
+        "symfony/http-foundation": "^5.0 || ^6.0",
         "symfony/monolog-bundle": "^3.5",
-        "symfony/security-bundle": "4.4.* || ^5.1",
-        "symfony/translation": "4.4.* || ^5.1",
-        "symfony/twig-bundle": "4.4.* |^5.1",
-        "symfony/validator": "4.4.* || ^5.1",
+        "symfony/security-bundle": "4.4.* || ^5.1 || ^6.0",
+        "symfony/translation": "4.4.* || ^5.1 || ^6.0",
+        "symfony/twig-bundle": "4.4.* || ^5.1 || ^6.0",
+        "symfony/validator": "4.4.* || ^5.1 || ^6.0",
         "symfony/webpack-encore-bundle": "^1.7",
         "twbs/bootstrap": "~3.3.0",
         "twig/extensions": "~1.5",
-        "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0",
+        "twig/extra-bundle": "^2.12 || ^3.0",
+        "twig/twig": "^2.12 || ^3.0",
         "ext-openssl": "*",
         "ext-dom": "*"
     },
@@ -56,7 +56,7 @@
         "symfony/maker-bundle": "^1.19",
         "symfony/phpunit-bridge": "^6.0",
         "symfony/stopwatch": "^5.1",
-        "symfony/web-profiler-bundle": "4.4.* || ^5.1"
+        "symfony/web-profiler-bundle": "4.4.* || ^5.1 || ^6.0"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -126,7 +126,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "4.4.* || ^5.0"
+            "require": "4.4.* || ^5.0 || ^6.0"
         },
         "symfony-app-dir": "app",
         "symfony-var-dir": "var",

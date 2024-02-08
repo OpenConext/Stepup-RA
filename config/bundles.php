@@ -7,7 +7,6 @@ return [
     JMS\TranslationBundle\JMSTranslationBundle::class => ['all' => true],
     Nelmio\SecurityBundle\NelmioSecurityBundle::class => ['all' => true],
     OpenConext\MonitorBundle\OpenConextMonitorBundle::class => ['all' => true],
-    Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
     Surfnet\SamlBundle\SurfnetSamlBundle::class => ['all' => true],
     Surfnet\StepupBundle\SurfnetStepupBundle::class => ['all' => true],
     Surfnet\StepupMiddlewareClientBundle\SurfnetStepupMiddlewareClientBundle::class => ['all' => true],

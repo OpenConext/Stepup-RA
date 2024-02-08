@@ -46,7 +46,7 @@ class IdentityService implements UserProviderInterface
      *
      * If needed, the username is the UUID of the identity so it can be fetched rather easy
      */
-    public function loadUserByUsername($username)
+    public function loadUserByUsername($username): never
     {
         throw new RuntimeException(sprintf('Cannot Load User By Username "%s"', $username));
     }

@@ -5,8 +5,6 @@ framework:
   form:            ~
   csrf_protection: ~
   validation:      { enable_annotations: true }
-  templating:
-    engines: ['twig', 'php']
   default_locale:  "%default_locale%"
   trusted_hosts:   ~
   session:
@@ -17,3 +15,4 @@ framework:
     cookie_secure: true
   fragments:       false
   http_method_override: true
+  error_controller: Surfnet\StepupRa\RaBundle\Controller\ExceptionController
