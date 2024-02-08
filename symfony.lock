@@ -101,9 +101,6 @@
     "myclabs/deep-copy": {
         "version": "1.9.5"
     },
-    "n98/junit-xml": {
-        "version": "1.0.0"
-    },
     "nelmio/security-bundle": {
         "version": "2.4",
         "recipe": {
@@ -447,9 +444,6 @@
     },
     "symfony/polyfill-php72": {
         "version": "v1.17.0"
-    },
-    "symfony/polyfill-php73": {
-        "version": "v1.17.1"
     },
     "symfony/polyfill-php80": {
         "version": "v1.17.1"
