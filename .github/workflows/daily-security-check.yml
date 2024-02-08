@@ -19,9 +19,9 @@ jobs:
         uses: andstor/file-existence-action@v2
         with:
           files: "composer.lock"
-      - name: Run php local security checker
-        if: steps.check_composer.outputs.files_exists == 'true'
-        uses: symfonycorp/security-checker-action@v4
+      -   name: Vulnerability check
+          run: php composer audit
+          if: steps.check_composer.outputs.files_exists == 'true'
 
       # node-yarn checks
       - name: Check for node-yarn project
