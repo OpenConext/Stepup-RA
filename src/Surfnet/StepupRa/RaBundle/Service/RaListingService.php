@@ -28,8 +28,7 @@ final readonly class RaListingService
 {
     public function __construct(
         private ApiRaListingService $apiRaListingService,
-    )
-    {
+    ) {
     }
 
     /**

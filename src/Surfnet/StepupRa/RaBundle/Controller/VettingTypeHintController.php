@@ -44,7 +44,7 @@ class VettingTypeHintController extends AbstractController
         /**
          * @var string[]
          */
-         private readonly array $locales = [],
+        private readonly array $locales = [],
     ) {
     }
 
@@ -54,7 +54,7 @@ class VettingTypeHintController extends AbstractController
     #[Route(
         path: '/vetting-type-hint',
         name: 'vetting_type_hint',
-        methods: ['GET', 'POST']
+        methods: ['GET', 'POST'],
     )]
     public function vettingTypeHint(Request $request): Response
     {

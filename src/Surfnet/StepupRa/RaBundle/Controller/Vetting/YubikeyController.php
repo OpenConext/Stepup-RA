@@ -43,7 +43,7 @@ class YubikeyController extends SecondFactorController
     #[Route(
         path: '/vetting-procedure/{procedureId}/verify-yubikey',
         name: 'ra_vetting_yubikey_verify',
-        methods: ['GET', 'POST']
+        methods: ['GET', 'POST'],
     )]
     public function verify(Request $request, string $procedureId): Response
     {

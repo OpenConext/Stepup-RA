@@ -25,8 +25,7 @@ abstract class SecondFactorController extends AbstractController
 {
     public function __construct(
         private readonly LoggerInterface $logger,
-    )
-    {
+    ) {
     }
 
     protected function assertSecondFactorEnabled(string $type): void

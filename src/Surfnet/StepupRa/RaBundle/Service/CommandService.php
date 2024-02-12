@@ -23,6 +23,7 @@ use Surfnet\StepupMiddlewareClientBundle\Command\Metadata;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService as MiddlewareCommandService;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Surfnet\StepupMiddlewareClient\Service\ExecutionResult;
 
 final readonly class CommandService
 {
@@ -32,7 +33,7 @@ final readonly class CommandService
     ) {
     }
 
-    public function execute(Command $command): \Surfnet\StepupMiddlewareClient\Service\ExecutionResult
+    public function execute(Command $command): ExecutionResult
     {
         /** @var Identity $identity */
         $identity = $this->tokenStorage->getToken()->getUser();

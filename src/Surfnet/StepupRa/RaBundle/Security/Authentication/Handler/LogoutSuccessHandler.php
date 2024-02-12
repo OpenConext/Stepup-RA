@@ -31,8 +31,7 @@ final readonly class LogoutSuccessHandler implements LogoutSuccessHandlerInterfa
     public function __construct(
         private TokenStorageInterface $tokenStorage,
         private array $logoutRedirectUrl,
-    )
-    {
+    ) {
     }
 
     public function onLogoutSuccess(Request $request): RedirectResponse

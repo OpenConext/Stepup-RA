@@ -338,6 +338,6 @@ class VettingService
     public function hasProcedure(string $procedureId): bool
     {
 
-        return $this->vettingProcedureRepository->retrieve($procedureId) instanceof \Surfnet\StepupRa\RaBundle\VettingProcedure;
+        return $this->vettingProcedureRepository->retrieve($procedureId) instanceof VettingProcedure;
     }
 }

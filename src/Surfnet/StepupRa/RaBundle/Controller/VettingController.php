@@ -39,6 +39,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
@@ -58,6 +59,7 @@ class VettingController extends AbstractController
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity) https://www.pivotaltracker.com/story/show/135045063
      * @SuppressWarnings(PHPMD.NPathComplexity)      https://www.pivotaltracker.com/story/show/135045063
+     * @SuppressWarnings(PHPMD.CouplingBetweenObjects)      https://www.pivotaltracker.com/story/show/135045063
      */
     #[Route(
         path: '/',
@@ -84,7 +86,7 @@ class VettingController extends AbstractController
         $secondFactor = $this->secondFactorService
             ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode, $identity->id);
 
-        if (!$secondFactor instanceof \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor) {
+        if (!$secondFactor instanceof VerifiedSecondFactor) {
             $this->addFlash('error', 'ra.form.start_vetting_procedure.unknown_registration_code');
             $this->logger->notice('Cannot start new vetting procedure, no second factor found');
 

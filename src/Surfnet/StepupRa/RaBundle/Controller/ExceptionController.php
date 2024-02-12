@@ -92,7 +92,7 @@ final class ExceptionController extends BaseExceptionController
                 'user_agent'  => $userAgent,
                 'ip_address'  => $ipAddress,
             ] + $this->getPageTitleAndDescription($exception),
-            $response
+            $response,
         );
     }
 }
