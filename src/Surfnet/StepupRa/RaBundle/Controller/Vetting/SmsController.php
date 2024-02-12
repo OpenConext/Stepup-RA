@@ -31,6 +31,7 @@ use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class SmsController extends SecondFactorController
@@ -43,6 +44,11 @@ class SmsController extends SecondFactorController
         parent::__construct($logger);
     }
 
+    #[Route(
+        path: '/vetting-procedure/{procedureId}/send-sms-challenge',
+        name: 'ra_vetting_sms_send_challenge',
+        methods: ['GET', 'POST'],
+    )]
     public function sendChallenge(Request $request, string $procedureId): Response
     {
         $this->assertSecondFactorEnabled('sms');
@@ -111,6 +117,11 @@ class SmsController extends SecondFactorController
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
+    #[Route(
+        path: '/vetting-procedure/{procedureId}/verify-sms-challenge',
+        name: 'ra_vetting_sms_prove_possession',
+        methods: ['GET', 'POST'],
+    )]
     public function provePossession(Request $request, string $procedureId): Response
     {
         $this->assertSecondFactorEnabled('sms');

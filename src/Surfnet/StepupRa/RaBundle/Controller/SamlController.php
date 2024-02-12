@@ -26,6 +26,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Surfnet\SamlBundle\Entity\ServiceProvider;
+use Symfony\Component\Routing\Attribute\Route;
 
 class SamlController extends AbstractController
 {
@@ -37,6 +38,7 @@ class SamlController extends AbstractController
     ) {
     }
 
+    #[Route('/saml/consume-assertion', name: 'ra_serviceprovider_consume_assertion', methods: ['POST'])]
     public function consumeAssertion(Request $httpRequest): Response
     {
 
@@ -51,6 +53,7 @@ class SamlController extends AbstractController
         );
     }
 
+    #[Route('/saml/metadata', name: 'ra_saml_metadata', methods: ['GET'])]
     public function metadata(): XMLResponse
     {
 

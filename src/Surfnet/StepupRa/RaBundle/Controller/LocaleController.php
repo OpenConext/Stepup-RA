@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -40,6 +41,12 @@ final class LocaleController extends AbstractController
     {
     }
 
+    #[Route(
+        path: '/switch-locale',
+        name: 'ra_switch_locale',
+        requirements: ['return-url' => '.+'],
+        methods: ['POST']
+    )]
     public function switchLocale(Request $request): RedirectResponse
     {
         $returnUrl = $request->query->get('return-url');

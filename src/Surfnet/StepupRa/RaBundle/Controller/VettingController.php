@@ -37,6 +37,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -54,11 +55,15 @@ class VettingController extends AbstractController
     ) {
     }
 
-
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity) https://www.pivotaltracker.com/story/show/135045063
      * @SuppressWarnings(PHPMD.NPathComplexity)      https://www.pivotaltracker.com/story/show/135045063
      */
+    #[Route(
+        path: '/',
+        name: 'ra_vetting_search',
+        methods: ['GET', 'POST'],
+    )]
     public function startProcedure(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
@@ -173,6 +178,11 @@ class VettingController extends AbstractController
         }
     }
 
+    #[Route(
+        path: '/vetting-procedure/{procedureId}/cancel',
+        name: 'ra_vetting_cancel',
+        methods: ['POST'],
+    )]
     public function cancelProcedure($procedureId): RedirectResponse
     {
         $logger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
@@ -192,6 +202,11 @@ class VettingController extends AbstractController
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
      */
+    #[Route(
+        path: '/vetting-procedure/{procedureId}/verify-identity',
+        name: 'ra_vetting_verify_identity',
+        methods: ['GET', 'POST'],
+    )]
     public function verifyIdentity(Request $request, string $procedureId): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
@@ -277,6 +292,11 @@ class VettingController extends AbstractController
         }
     }
 
+    #[Route(
+        path: '/vetting-procedure/{procedureId}/completed',
+        name: 'ra_vetting_completed',
+        methods: ['GET'],
+    )]
     public function vettingCompleted(): Response
     {
         return $this->render('vetting/vetting_completed.html.twig');

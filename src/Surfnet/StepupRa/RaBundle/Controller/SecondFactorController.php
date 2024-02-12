@@ -34,6 +34,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -54,6 +55,11 @@ final class SecondFactorController extends AbstractController
     {
     }
 
+    #[Route(
+        path: '/second-factors',
+        name: 'ra_second_factors_search',
+        methods: ['GET', 'POST']
+    )]
     public function search(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
@@ -123,6 +129,11 @@ final class SecondFactorController extends AbstractController
         return $this->secondFactorService->export($exportCommand);
     }
 
+    #[Route(
+        path: '/second-factors/revoke',
+        name: 'ra_second_factors_revoke',
+        methods: ['POST']
+    )]
     public function revoke(Request $request): RedirectResponse
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
@@ -155,6 +166,16 @@ final class SecondFactorController extends AbstractController
         return $this->redirectToRoute('ra_second_factors_search');
     }
 
+    #[Route(
+        path: '/second-factors/{identityId}/auditlog',
+        name: 'ra_second_factors_auditlog',
+        methods: ['GET']
+    )]
+    #[Route(
+        path: '/recovery-tokens/{identityId}/auditlog',
+        name: 'ra_recovery_tokens_auditlog',
+        methods: ['GET']
+    )]
     public function auditLog(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');

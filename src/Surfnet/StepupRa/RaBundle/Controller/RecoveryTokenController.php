@@ -30,6 +30,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 final class RecoveryTokenController extends AbstractController
@@ -42,6 +43,11 @@ final class RecoveryTokenController extends AbstractController
     ) {
     }
 
+    #[Route(
+        path: '/recovery-tokens',
+        name: 'ra_recovery_tokens_search',
+        methods: ['GET', 'POST']
+    )]
     public function search(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
@@ -96,6 +102,11 @@ final class RecoveryTokenController extends AbstractController
         );
     }
 
+    #[Route(
+        path: '/recovery-tokens/revoke',
+        name: 'ra_recovery_tokens_revoke',
+        methods: ['POST']
+    )]
     public function revoke(Request $request): RedirectResponse
     {
         $this->denyAccessUnlessGranted('ROLE_RA');

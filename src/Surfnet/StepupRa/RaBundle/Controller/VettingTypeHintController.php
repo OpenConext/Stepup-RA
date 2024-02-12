@@ -30,6 +30,7 @@ use Surfnet\StepupRa\RaBundle\Service\VettingTypeHintService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 
 class VettingTypeHintController extends AbstractController
 {
@@ -50,6 +51,11 @@ class VettingTypeHintController extends AbstractController
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity) Given the two forms being handled in this action, cc is higher.
      */
+    #[Route(
+        path: '/vetting-type-hint',
+        name: 'vetting_type_hint',
+        methods: ['GET', 'POST']
+    )]
     public function vettingTypeHint(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
