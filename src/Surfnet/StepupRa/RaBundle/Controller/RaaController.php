@@ -38,8 +38,7 @@ class RaaController extends AbstractController
         private readonly ProfileService $profileService,
         private readonly InstitutionListingService $institutionListingService,
         private readonly LoggerInterface $logger,
-    )
-    {
+    ) {
     }
 
     #[Route(

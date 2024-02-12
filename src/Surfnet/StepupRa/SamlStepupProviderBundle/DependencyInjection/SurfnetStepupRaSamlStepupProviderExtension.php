@@ -36,6 +36,9 @@ use Surfnet\SamlBundle\Entity\IdentityProvider;
 use Surfnet\SamlBundle\Metadata\MetadataConfiguration;
 use Surfnet\SamlBundle\Metadata\MetadataFactory;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class SurfnetStepupRaSamlStepupProviderExtension extends Extension
 {
 
@@ -120,8 +123,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         array $configuration,
         array $routes,
         ContainerBuilder $container,
-    ): void
-    {
+    ): void {
         $hostedDefinition = $this->buildHostedEntityDefinition($provider, $configuration, $routes);
         $container->setDefinition('gssp.provider.' . $provider . '.hosted_entities', $hostedDefinition);
 

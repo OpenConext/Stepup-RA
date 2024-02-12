@@ -56,8 +56,7 @@ class RaManagementController extends AbstractController
         private readonly PaginatorInterface $paginator,
         private readonly TranslatorInterface $translator,
         private readonly RaService $raService,
-    )
-    {
+    ) {
     }
 
     #[Route(
@@ -338,5 +337,4 @@ class RaManagementController extends AbstractController
     {
         return $this->container->get('security.token_storage')->getToken()->getUser();
     }
-
 }

@@ -46,7 +46,7 @@ final class RecoveryTokenController extends AbstractController
     #[Route(
         path: '/recovery-tokens',
         name: 'ra_recovery_tokens_search',
-        methods: ['GET', 'POST']
+        methods: ['GET', 'POST'],
     )]
     public function search(Request $request): Response
     {
@@ -105,7 +105,7 @@ final class RecoveryTokenController extends AbstractController
     #[Route(
         path: '/recovery-tokens/revoke',
         name: 'ra_recovery_tokens_revoke',
-        methods: ['POST']
+        methods: ['POST'],
     )]
     public function revoke(Request $request): RedirectResponse
     {

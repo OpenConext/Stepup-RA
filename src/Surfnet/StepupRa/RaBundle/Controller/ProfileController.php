@@ -29,8 +29,7 @@ final class ProfileController extends AbstractController
     public function __construct(
         private readonly ProfileService $profileService,
         private readonly LoggerInterface $logger,
-    )
-    {
+    ) {
     }
 
     #[Route(
@@ -47,5 +46,4 @@ final class ProfileController extends AbstractController
         return
             $this->render('profile/profile.html.twig', ['profile' => $profile]);
     }
-
 }

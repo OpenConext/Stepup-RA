@@ -33,7 +33,12 @@ class StartVettingProcedureType extends AbstractType
         $builder->add('registrationCode', TextType::class, [
             'label' => /** @Ignore */ false,
             'required' => true,
-            'attr' => ['autofocus' => true, 'autocomplete' => 'off', 'placeholder' => 'ra.form.start_vetting_procedure.enter_activation_code_here', 'class' => 'fa-search']
+            'attr' => [
+                'autofocus' => true,
+                'autocomplete' => 'off',
+                'placeholder' => 'ra.form.start_vetting_procedure.enter_activation_code_here',
+                'class' => 'fa-search',
+            ]
         ]);
         $builder->add('search', SubmitType::class, [
             'label' => 'ra.form.start_vetting_procedure.search',

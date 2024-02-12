@@ -32,19 +32,19 @@ class SamlFactory implements AuthenticatorFactoryInterface
         $providerId = 'security.authentication.provider.saml.' . $id;
         $container->setDefinition(
             $providerId,
-            new ChildDefinition('self_service.security.authentication.provider.saml')
+            new ChildDefinition('self_service.security.authentication.provider.saml'),
         );
 
         $listenerId = 'security.authentication.listener.saml.' . $id;
         $container->setDefinition(
             $listenerId,
-            new ChildDefinition('self_service.security.authentication.listener')
+            new ChildDefinition('self_service.security.authentication.listener'),
         );
 
         $cookieHandlerId = 'security.logout.handler.cookie_clearing.' . $id;
         $cookieHandler   = $container->setDefinition(
             $cookieHandlerId,
-            new ChildDefinition('security.logout.handler.cookie_clearing')
+            new ChildDefinition('security.logout.handler.cookie_clearing'),
         );
         $cookieHandler->addArgument([]);
 
@@ -65,8 +65,12 @@ class SamlFactory implements AuthenticatorFactoryInterface
         return -10;
     }
 
-    public function createAuthenticator(ContainerBuilder $container, string $firewallName, array $config, string $userProviderId): string|array
-    {
+    public function createAuthenticator(
+        ContainerBuilder $container,
+        string $firewallName,
+        array $config,
+        string $userProviderId,
+    ): string|array {
         return $config;
     }
 }

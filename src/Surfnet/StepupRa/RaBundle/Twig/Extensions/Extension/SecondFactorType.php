@@ -26,8 +26,7 @@ final class SecondFactorType extends AbstractExtension
 {
     public function __construct(
         private readonly SecondFactorTypeTranslationService $translator,
-    )
-    {
+    ) {
     }
 
     public function getName(): string

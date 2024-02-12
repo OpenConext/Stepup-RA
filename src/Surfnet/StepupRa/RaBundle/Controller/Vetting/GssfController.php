@@ -64,7 +64,7 @@ final class GssfController extends SecondFactorController
     #[Route(
         path: '/vetting-procedure/{procedureId}/gssf/{provider}/initiate-verification',
         name: 'ra_vetting_gssf_initiate',
-        methods: ['GET']
+        methods: ['GET'],
     )]
     public function initiate(string $procedureId, string $provider): Response
     {
@@ -86,7 +86,7 @@ final class GssfController extends SecondFactorController
     #[Route(
         path: '/vetting-procedure/{procedureId}/gssf/{provider}/authenticate',
         name: 'ra_vetting_gssf_authenticate',
-        methods: ['POST']
+        methods: ['POST'],
     )]
     public function authenticate(string $procedureId, string $provider): Response
     {
@@ -132,7 +132,7 @@ final class GssfController extends SecondFactorController
     #[Route(
         path: '/vetting-procedure/gssf/{provider}/verify',
         name: 'ra_vetting_gssf_verify',
-        methods: ['POST']
+        methods: ['POST'],
     )]
     public function verify(Request $httpRequest, string $provider): Response
     {
@@ -208,7 +208,7 @@ final class GssfController extends SecondFactorController
     #[Route(
         path: '/vetting-procedure/gssf/{provider}/metadata',
         name: 'ra_vetting_gssf_metadata',
-        methods: ['GET']
+        methods: ['GET'],
     )]
     public function metadata(string $provider): XMLResponse
     {

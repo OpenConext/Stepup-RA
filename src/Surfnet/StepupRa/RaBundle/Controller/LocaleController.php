@@ -37,15 +37,14 @@ final class LocaleController extends AbstractController
         private readonly LoggerInterface $logger,
         private readonly UserProviderInterface $identityService,
         private readonly TranslatorInterface $translator,
-    )
-    {
+    ) {
     }
 
     #[Route(
         path: '/switch-locale',
         name: 'ra_switch_locale',
         requirements: ['return-url' => '.+'],
-        methods: ['POST']
+        methods: ['POST'],
     )]
     public function switchLocale(Request $request): RedirectResponse
     {

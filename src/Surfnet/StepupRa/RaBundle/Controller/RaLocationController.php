@@ -52,8 +52,7 @@ final class RaLocationController extends AbstractController
         private readonly ProfileService $profileService,
         private readonly LoggerInterface $logger,
         private readonly TranslatorInterface $translator,
-    )
-    {
+    ) {
     }
 
     #[Route('/locations', name: 'ra_locations_manage', methods: ['GET', 'POST'])]
@@ -160,7 +159,7 @@ final class RaLocationController extends AbstractController
     #[Route(
         path: '/locations/{locationId}/change',
         name: 'ra_locations_change',
-        methods: ['GET', 'POST']
+        methods: ['GET', 'POST'],
     )]
     public function change(Request $request): Response
     {
@@ -247,5 +246,4 @@ final class RaLocationController extends AbstractController
     {
         return $this->container->get('security.token_storage')->getToken()->getUser();
     }
-
 }

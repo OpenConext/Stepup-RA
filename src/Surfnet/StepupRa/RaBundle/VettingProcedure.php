@@ -24,6 +24,9 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
+/**
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ */
 class VettingProcedure
 {
     private string $id;
@@ -116,12 +119,15 @@ class VettingProcedure
 
     private function isReadyForIdentityVerification(): bool
     {
-        return $this->isPossessionProvenOrCanItBeSkipped() && ($this->registrationCode !== null && ($this->registrationCode !== null && $this->registrationCode !== '' && $this->registrationCode !== '0'));
+        return $this->isPossessionProvenOrCanItBeSkipped() && !empty($this->registrationCode);
     }
 
     private function isPossessionProvenOrCanItBeSkipped(): bool
     {
-        return ($this->inputSecondFactorIdentifier === $this->secondFactor->secondFactorIdentifier || $this->skipProvePossession);
+        return (
+            $this->inputSecondFactorIdentifier === $this->secondFactor->secondFactorIdentifier
+            || $this->skipProvePossession
+        );
     }
 
     /**
@@ -141,8 +147,8 @@ class VettingProcedure
     private function isReadyForVetting(): bool
     {
         return $this->isPossessionProvenOrCanItBeSkipped()
-            && ($this->registrationCode !== null && ($this->registrationCode !== null && $this->registrationCode !== '' && $this->registrationCode !== '0'))
-            && ($this->documentNumber !== null && ($this->documentNumber !== null && $this->documentNumber !== '' && $this->documentNumber !== '0'))
+            && !empty($this->registrationCode)
+            && !empty($this->documentNumber)
             && $this->identityVerified === true;
     }
 
