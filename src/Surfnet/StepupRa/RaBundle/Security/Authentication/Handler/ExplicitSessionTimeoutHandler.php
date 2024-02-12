@@ -66,7 +66,6 @@ class ExplicitSessionTimeoutHandler implements AuthenticationHandler
                 implode(' and ', $invalidatedBy),
             ));
 
-
             $token   = $this->tokenStorage->getToken();
             $request = $event->getRequest();
 

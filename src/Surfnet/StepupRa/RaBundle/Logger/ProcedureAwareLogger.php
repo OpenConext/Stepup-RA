@@ -85,7 +85,6 @@ final class ProcedureAwareLogger implements LoggerInterface
         $this->logger->log($level, $message, $this->enrichContext($context));
     }
 
-
     /**
      * Adds the procedure to the log context.
      * @throws RuntimeException

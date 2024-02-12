@@ -111,7 +111,6 @@ class SessionLifetimeGuardTest extends TestCase
         $this->assertTrue($sessionLifetimeGuard->sessionLifetimeWithinAbsoluteLimit($sessionWithinTimeFrame));
     }
 
-
     /**
      * @test
      * @group security
@@ -159,7 +158,6 @@ class SessionLifetimeGuardTest extends TestCase
 
         $this->assertTrue($sessionLifetimeGuard->sessionLifetimeWithinRelativeLimit($sessionWithinTimeFrame));
     }
-
 
     /**
      * @test
