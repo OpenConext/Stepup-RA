@@ -127,11 +127,13 @@
         }
     },
     "extra": {
+        "runtime": {
+            "disable_dotenv": true
+        },
         "symfony": {
             "allow-contrib": false,
             "require": "6.4.*"
         },
-        "src-dir": "src/Surfnet",
         "incenteev-parameters": [
             {
                 "file": "config/openconext/parameters.yaml"
