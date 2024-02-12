@@ -27,19 +27,12 @@ final readonly class GssfService
     {
     }
 
-    /**
-     * @param string $gssfId
-     * @param string $procedureId
-     */
-    public function startVerification($gssfId, $procedureId): void
+    public function startVerification(string $gssfId, string $procedureId): void
     {
         $this->state->set('current_verification', ['procedureId' => $procedureId, 'gssfId' => $gssfId]);
     }
 
-    /**
-     * @param string $gssfId
-     */
-    public function verify($gssfId): VerificationResult
+    public function verify(string $gssfId): VerificationResult
     {
         $verification = $this->state->remove('current_verification');
 

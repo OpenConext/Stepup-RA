@@ -18,19 +18,24 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
-use Exception;
+use DateTime;
+use DateTimeInterface;
 use Surfnet\StepupBundle\Controller\ExceptionController as BaseExceptionController;
+use Surfnet\StepupBundle\Exception\Art;
 use Surfnet\StepupRa\RaBundle\Exception\LoaTooLowException;
 use Surfnet\StepupRa\RaBundle\Exception\MissingRequiredAttributeException;
 use Surfnet\StepupRa\RaBundle\Exception\UserNotRaException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Throwable;
 
 final class ExceptionController extends BaseExceptionController
 {
     /**
      * @return array View parameters 'title' and 'description'
      */
-    protected function getPageTitleAndDescription(\Throwable $exception): array
+    protected function getPageTitleAndDescription(Throwable $exception): array
     {
         $translator = $this->getTranslator();
 
@@ -57,5 +62,37 @@ final class ExceptionController extends BaseExceptionController
         }
 
         return parent::getPageTitleAndDescription($exception);
+    }
+
+    public function __invoke(Request $request, Throwable $exception): Response
+    {
+        $statusCode = $this->getStatusCode($exception);
+
+        $template = '@default/bundles/TwigBundle/Exception/error.html.twig';
+        if ($statusCode == 404) {
+            $template = '@default/bundles/TwigBundle/Exception/error404.html.twig';
+        }
+
+        $response = new Response('', $statusCode);
+
+        $timestamp = (new DateTime)->format(DateTimeInterface::ATOM);
+        $hostname  = $request->getHost();
+        $requestId = $this->requestId;
+        $errorCode = Art::forException($exception);
+        $userAgent = $request->headers->get('User-Agent');
+        $ipAddress = $request->getClientIp();
+
+        return $this->render(
+            $template,
+            [
+                'timestamp'   => $timestamp,
+                'hostname'    => $hostname,
+                'request_id'  => $requestId->get(),
+                'error_code'  => $errorCode,
+                'user_agent'  => $userAgent,
+                'ip_address'  => $ipAddress,
+            ] + $this->getPageTitleAndDescription($exception),
+            $response
+        );
     }
 }

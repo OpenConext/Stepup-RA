@@ -1,6 +1,6 @@
 twig:
   paths:
-    '%kernel.project_dir%/templates': SurfnetStepupRaRa
+    '%kernel.project_dir%/templates': 'default'
   debug:            "%kernel.debug%"
   strict_variables: "%kernel.debug%"
   date:

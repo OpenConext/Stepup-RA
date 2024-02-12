@@ -27,7 +27,6 @@ class SurfnetStepupRaSamlStepupProviderBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void
     {
-        $container->addCompilerPass(new StateHandlerSessionPass());
         $container->addCompilerPass(new ViewConfigCollectionPass());
     }
 }

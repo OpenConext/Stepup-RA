@@ -19,8 +19,11 @@
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Provider;
 
 use Psr\Log\LoggerInterface;
+use SAML2\Assertion;
 use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
 use Surfnet\SamlBundle\SAML2\Response\AssertionAdapter;
+use Surfnet\SamlBundle\Security\Authentication\Provider\SamlProviderInterface;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Exception\MissingRequiredAttributeException;
 use Surfnet\StepupRa\RaBundle\Exception\UserNotRaException;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
@@ -29,12 +32,14 @@ use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects) - The SamlProvider needs to test several authorizations in order
  *  to determine the user may, or may not log in. This causes the coupling.
  */
-class SamlProvider implements AuthenticationProviderInterface
+class SamlProvider implements SamlProviderInterface, UserProviderInterface
 {
     public function __construct(
         private readonly IdentityService $identityService,
@@ -57,7 +62,7 @@ class SamlProvider implements AuthenticationProviderInterface
         $identity = $this->identityService->findByNameIdAndInstitution($nameId, $institution);
 
         // if no identity can be found, we're done.
-        if (!$identity instanceof \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity) {
+        if (!$identity instanceof Identity) {
             throw new BadCredentialsException(
                 'Unable to find Identity matching the criteria. Has the identity been registered before?',
             );
@@ -137,5 +142,30 @@ class SamlProvider implements AuthenticationProviderInterface
     public function supports(TokenInterface $token): bool
     {
         return $token instanceof SamlToken;
+    }
+
+    public function getNameId(Assertion $assertion): string
+    {
+        // TODO: Implement getNameId() method.
+    }
+
+    public function getUser(Assertion $assertion): UserInterface
+    {
+        // TODO: Implement getUser() method.
+    }
+
+    public function refreshUser(UserInterface $user)
+    {
+        // TODO: Implement refreshUser() method.
+    }
+
+    public function supportsClass(string $class)
+    {
+        // TODO: Implement supportsClass() method.
+    }
+
+    public function loadUserByIdentifier(string $identifier): UserInterface
+    {
+        // TODO: Implement loadUserByIdentifier() method.
     }
 }
