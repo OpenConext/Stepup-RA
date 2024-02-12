@@ -28,11 +28,11 @@ final class ExportRaSecondFactorsCommand
     public const STATUS_REVOKED = 'revoked';
 
     /**
-     * @Assert\NotBlank(message="ra.search_ra_second_factors.actor.blank")
-     * @Assert\Type("string", message="ra.search_ra_second_factors.actor.type")
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'ra.search_ra_second_factors.actor.blank')]
+    #[Assert\Type('string', message: 'ra.search_ra_second_factors.actor.type')]
     public $actorId;
 
     /**
@@ -61,30 +61,21 @@ final class ExportRaSecondFactorsCommand
     public $institution;
 
     /**
-     * @Assert\Choice(
-     *     {"unverified", "verified", "vetted", "revoked"},
-     *     message="ra.search_ra_second_factors.status.invalid_choice"
-     * )
-     *
      * @var string|null One of the STATUS_* constants.
      */
+    #[Assert\Choice(['unverified', 'verified', 'vetted', 'revoked'], message: 'ra.search_ra_second_factors.status.invalid_choice')]
     public $status;
 
     /**
-     * @Assert\Choice(
-     *     {"name", "type", "secondFactorId", "email", "status"},
-     *     message="ra.search_ra_second_factors.order_by.invalid_choice"
-     * )
-     *
      * @var string|null
      */
+    #[Assert\Choice(['name', 'type', 'secondFactorId', 'email', 'status'], message: 'ra.search_ra_second_factors.order_by.invalid_choice')]
     public $orderBy;
 
     /**
-     * @Assert\Choice({"asc", "desc"}, message="ra.search_ra_second_factors.order_direction.invalid_choice")
-     *
      * @var string|null
      */
+    #[Assert\Choice(['asc', 'desc'], message: 'ra.search_ra_second_factors.order_direction.invalid_choice')]
     public $orderDirection;
 
     /**

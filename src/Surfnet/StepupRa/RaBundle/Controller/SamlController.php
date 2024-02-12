@@ -38,7 +38,7 @@ class SamlController extends AbstractController
     ) {
     }
 
-    #[Route('/saml/consume-assertion', name: 'ra_serviceprovider_consume_assertion', methods: ['POST'])]
+    #[Route('/authentication/consume-assertion', name: 'ra_serviceprovider_consume_assertion', methods: ['POST'])]
     public function consumeAssertion(Request $httpRequest): Response
     {
 
@@ -53,7 +53,11 @@ class SamlController extends AbstractController
         );
     }
 
-    #[Route('/saml/metadata', name: 'ra_saml_metadata', methods: ['GET'])]
+    #[Route(
+        path: '/authentication/metadata',
+        name: 'ra_saml_metadata',
+        methods: ['GET'],
+    )]
     public function metadata(): XMLResponse
     {
 

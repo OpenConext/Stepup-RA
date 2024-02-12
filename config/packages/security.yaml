@@ -1,7 +1,7 @@
 security:
     providers:
-        middleware:
-            id: ra.service.identity
+        saml-provider:
+            id: Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider
 
     firewalls:
         dev:
@@ -32,4 +32,5 @@ security:
 
     access_control:
         - { path: ^/saml, roles: PUBLIC_ACCESS, requires_channel: https }
+        - { path: ^/authentication, roles: PUBLIC_ACCESS, requires_channel: https }
         - { path: ^/, roles: ROLE_RA, requires_channel: https }
