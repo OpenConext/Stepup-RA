@@ -1,6 +1,10 @@
 parameters:
     trusted_proxies:   ~
 
+    app_env: prod
+    app_debug: false
+    app_secret: NotSoSecretReplaceMe!
+
     mailer_transport:  smtp
     mailer_host:       mailcatcher
     mailer_user:       ~
