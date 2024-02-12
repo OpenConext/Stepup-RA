@@ -104,15 +104,15 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
         return $authenticatedIdentity;
     }
 
-    private function getSingleStringValue($attribute, AssertionAdapter $translatedAssertion): string
+    private function getSingleStringValue(string $attributeName, AssertionAdapter $translatedAssertion): string
     {
-        $values = $translatedAssertion->getAttributeValue($attribute);
+        $values = $translatedAssertion->getAttributeValue($attributeName);
 
         if (empty($values)) {
             throw new MissingRequiredAttributeException(
                 sprintf(
                     'Missing a required SAML attribute. This application requires the "%s" attribute to function.',
-                    $attribute,
+                    $attributeName,
                 ),
             );
         }
@@ -122,7 +122,7 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
             $this->logger->warning(sprintf(
                 'Found "%d" values for attribute "%s", using first value',
                 count($values),
-                $attribute,
+                $attributeName,
             ));
         }
 
@@ -131,7 +131,7 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
         if (!is_string($value)) {
             $message = sprintf(
                 'First value of attribute "%s" must be a string, "%s" given',
-                $attribute,
+                $attributeName,
                 get_debug_type($value),
             );
 
