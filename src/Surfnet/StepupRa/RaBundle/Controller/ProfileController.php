@@ -22,23 +22,45 @@ use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Security;
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
-final class ProfileController extends AbstractController
+#[AsController]
+final class ProfileController
 {
     public function __construct(
         private readonly ProfileService $profileService,
         private readonly LoggerInterface $logger,
+        private readonly TokenInterface $token,
+        private readonly Environment $twig,
     )
     {
     }
 
+    /**
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
+    #[Route(
+        path: '/profile',
+        name: 'ra_profile',
+        methods: ['GET'],
+    )]
     public function profile(): Response
     {
         $this->logger->notice('Opening profile page');
 
-        $identity = $this->getUser();
+        $identity = $this->token->getUser();
         $profile = $this->profileService->findByIdentityId($identity->id);
-        return $this->render('profile/profile.html.twig', ['profile' => $profile]);
+        return new Response(
+            $this->twig->render('profile/profile.html.twig', ['profile' => $profile]));
     }
 
 }

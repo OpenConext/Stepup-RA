@@ -29,6 +29,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Attribute\Route;
 
 class RaaController extends AbstractController
 {
@@ -41,6 +42,11 @@ class RaaController extends AbstractController
     {
     }
 
+    #[Route(
+        path: '/institution-configuration',
+        name: 'institution-configuration',
+        methods: ['GET', 'POST'],
+    )]
     public function institutionConfiguration(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');

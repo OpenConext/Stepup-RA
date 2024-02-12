@@ -41,6 +41,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -59,6 +60,11 @@ class RaManagementController extends AbstractController
     {
     }
 
+    #[Route(
+        path: '/management/ra',
+        name: 'ra_management_manage',
+        methods: ['GET'],
+    )]
     public function manage(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
@@ -111,6 +117,11 @@ class RaManagementController extends AbstractController
         );
     }
 
+    #[Route(
+        path: '/management/search-ra-candidate',
+        name: 'ra_management_ra_candidate_search',
+        methods: ['GET', 'POST'],
+    )]
     public function raCandidateSearch(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
@@ -162,6 +173,11 @@ class RaManagementController extends AbstractController
         );
     }
 
+    #[Route(
+        path: '/management/create-ra/{identityId}',
+        name: 'ra_management_create_ra',
+        methods: ['GET', 'POST'],
+    )]
     public function createRa(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
@@ -217,6 +233,11 @@ class RaManagementController extends AbstractController
      * @param         $identityId
      * @param         $raInstitution
      */
+    #[Route(
+        path: '/management/amend-ra-information/{identityId}/{raInstitution}',
+        name: 'ra_management_amend_ra_information',
+        methods: ['GET', 'POST'],
+    )]
     public function amendRaInformation(Request $request, $identityId, $raInstitution): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');
@@ -262,6 +283,11 @@ class RaManagementController extends AbstractController
      * @param         $identityId
      * @param         $raInstitution
      */
+    #[Route(
+        path: '/management/retract-registration-authority/{identityId}/{raInstitution}',
+        name: 'ra_management_retract_registration_authority',
+        methods: ['GET', 'POST'],
+    )]
     public function retractRegistrationAuthority(Request $request, $identityId, $raInstitution): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RAA');

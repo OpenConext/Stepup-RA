@@ -23,10 +23,12 @@ namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\VerifyYubikeyPublicIdType;
+use Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Attribute\Route;
 
 class YubikeyController extends SecondFactorController
 {
@@ -38,6 +40,11 @@ class YubikeyController extends SecondFactorController
         parent::__construct($logger);
     }
 
+    #[Route(
+        path: '/vetting-procedure/{procedureId}/verify-yubikey',
+        name: 'ra_vetting_yubikey_verify',
+        methods: ['GET', 'POST']
+    )]
     public function verify(Request $request, string $procedureId): Response
     {
         $this->assertSecondFactorEnabled('yubikey');

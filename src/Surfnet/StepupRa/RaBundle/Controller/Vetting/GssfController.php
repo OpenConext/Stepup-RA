@@ -38,6 +38,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Orchestrates verification of GSSFs (Generic SAML Second Factors) through GSSPs (Generic SAML Stepup Providers).
@@ -60,6 +61,11 @@ final class GssfController extends SecondFactorController
     /**
      * Initiates verification of a GSSF.
      */
+    #[Route(
+        path: '/vetting-procedure/{procedureId}/gssf/{provider}/initiate-verification',
+        name: 'ra_vetting_gssf_initiate',
+        methods: ['GET']
+    )]
     public function initiate(string $procedureId, string $provider): Response
     {
         $this->assertSecondFactorEnabled($provider);
@@ -77,6 +83,11 @@ final class GssfController extends SecondFactorController
         return $this->renderInitiateForm($procedureId, $this->getProvider($provider)->getName());
     }
 
+    #[Route(
+        path: '/vetting-procedure/{procedureId}/gssf/{provider}/authenticate',
+        name: 'ra_vetting_gssf_authenticate',
+        methods: ['POST']
+    )]
     public function authenticate(string $procedureId, string $provider): Response
     {
         $this->assertSecondFactorEnabled($provider);
@@ -118,6 +129,11 @@ final class GssfController extends SecondFactorController
         return $this->redirectBinding->createResponseFor($authnRequest);
     }
 
+    #[Route(
+        path: '/vetting-procedure/gssf/{provider}/verify',
+        name: 'ra_vetting_gssf_verify',
+        methods: ['POST']
+    )]
     public function verify(Request $httpRequest, string $provider): Response
     {
         $this->assertSecondFactorEnabled($provider);
@@ -189,6 +205,11 @@ final class GssfController extends SecondFactorController
         );
     }
 
+    #[Route(
+        path: '/vetting-procedure/gssf/{provider}/metadata',
+        name: 'ra_vetting_gssf_metadata',
+        methods: ['GET']
+    )]
     public function metadata(string $provider): XMLResponse
     {
         $this->assertSecondFactorEnabled($provider);

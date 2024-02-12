@@ -37,6 +37,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -55,6 +56,7 @@ final class RaLocationController extends AbstractController
     {
     }
 
+    #[Route('/locations', name: 'ra_locations_manage', methods: ['GET', 'POST'])]
     public function manage(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
@@ -117,6 +119,7 @@ final class RaLocationController extends AbstractController
         ]);
     }
 
+    #[Route('/locations/create/{institution}', name: 'ra_locations_create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
@@ -154,6 +157,11 @@ final class RaLocationController extends AbstractController
         ]);
     }
 
+    #[Route(
+        path: '/locations/{locationId}/change',
+        name: 'ra_locations_change',
+        methods: ['GET', 'POST']
+    )]
     public function change(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
@@ -202,6 +210,7 @@ final class RaLocationController extends AbstractController
         ]);
     }
 
+    #[Route('/locations/remove', name: 'ra_locations_remove', methods: ['POST'])]
     public function remove(Request $request): RedirectResponse
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
