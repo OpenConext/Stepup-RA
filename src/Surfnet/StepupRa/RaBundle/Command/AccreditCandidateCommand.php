@@ -27,14 +27,10 @@ class AccreditCandidateCommand
 
     public string $institution;
 
-    /**
-     * @Assert\NotBlank(message="ra.accredit_candidate.location.may_not_be_blank")
-     */
+    #[Assert\NotBlank(message: 'ra.accredit_candidate.location.may_not_be_blank')]
     public string $location;
 
-    /**
-     * @Assert\NotBlank(message="ra.accredit_candidate.contact_information.may_not_be_blank")
-     */
+    #[Assert\NotBlank(message: 'ra.accredit_candidate.contact_information.may_not_be_blank')]
     public string $contactInformation;
 
     public RoleAtInstitution $roleAtInstitution;

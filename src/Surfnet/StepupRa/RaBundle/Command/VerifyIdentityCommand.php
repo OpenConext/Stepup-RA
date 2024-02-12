@@ -23,23 +23,17 @@ use Symfony\Component\Validator\Constraints as Assert;
 class VerifyIdentityCommand
 {
     /**
-     * @Assert\NotBlank(message="ra.verify_identity_command.document_number.may_not_be_empty")
-     * @Assert\Type(type="string", message="ra.verify_identity_command.document_number.must_be_string")
-     * @Assert\Length(
-     *      min=1,
-     *      max=6,
-     *      minMessage="ra.verify_identity_command.document_number.must_be_higher_than_minimum",
-     *      maxMessage="ra.verify_identity_command.document_number.must_be_lower_than_maximum"
-     * )
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'ra.verify_identity_command.document_number.may_not_be_empty')]
+    #[Assert\Type(type: 'string', message: 'ra.verify_identity_command.document_number.must_be_string')]
+    #[Assert\Length(min: 1, max: 6, minMessage: 'ra.verify_identity_command.document_number.must_be_higher_than_minimum', maxMessage: 'ra.verify_identity_command.document_number.must_be_lower_than_maximum')]
     public $documentNumber;
 
     /**
-     * @Assert\EqualTo(value=true, message="ra.verify_identity_command.identity_verified.must_be_checked")
-     *
      * @var bool
      */
+    #[Assert\EqualTo(value: true, message: 'ra.verify_identity_command.identity_verified.must_be_checked')]
     public $identityVerified;
 }

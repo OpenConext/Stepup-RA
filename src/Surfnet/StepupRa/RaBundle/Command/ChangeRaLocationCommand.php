@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright 2016 SURFnet bv
  *
@@ -22,42 +24,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class ChangeRaLocationCommand
 {
-    /**
-     * @var string
-     */
-    public $id;
+    public string $id;
 
-    /**
-     * @var string
-     */
-    public $institution;
+    public string $institution;
 
-    /**
-     * @var string
-     */
-    public $currentUserId;
+    public string $currentUserId;
 
-    /**
-     * @Assert\NotBlank(message="ra.accredit_candidate.name.may_not_be_blank")
-     * @Assert\Type(type="string")
-     *
-     * @var string
-     */
-    public $name;
+    #[Assert\NotBlank(message: 'ra.accredit_candidate.name.may_not_be_blank')]
+    public string $name;
 
-    /**
-     * @Assert\NotBlank(message="ra.accredit_candidate.location.may_not_be_blank")
-     * @Assert\Type(type="string")
-     *
-     * @var string
-     */
-    public $location;
+    #[Assert\NotBlank(message: 'ra.accredit_candidate.location.may_not_be_blank')]
+    public string $location;
 
-    /**
-     * @Assert\NotBlank(message="ra.accredit_candidate.contact_information.may_not_be_blank")
-     * @Assert\Type(type="string")
-     *
-     * @var string
-     */
-    public $contactInformation;
+    #[Assert\NotBlank(message: 'ra.accredit_candidate.contact_information.may_not_be_blank')]
+    public string $contactInformation;
 }

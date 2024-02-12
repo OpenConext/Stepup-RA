@@ -36,9 +36,7 @@ class StartVettingProcedureCommand
      */
     public Loa $authorityLoa;
 
-    /**
-     * @Assert\NotBlank(message="ra.start_vetting_procedure.registration_code.may_not_be_empty")
-     */
+    #[Assert\NotBlank(message: 'ra.start_vetting_procedure.registration_code.may_not_be_empty')]
     public string $registrationCode;
 
     public VerifiedSecondFactor $secondFactor;

@@ -24,14 +24,10 @@ class AmendRegistrationAuthorityInformationCommand
 {
     public string $identityId;
 
-    /**
-     * @Assert\NotBlank(message="ra.amend_ra_information.location")
-     */
+    #[Assert\NotBlank(message: 'ra.amend_ra_information.location')]
     public string $location;
 
-    /**
-     * @Assert\NotBlank(message="ra.amend_ra_information.contact_information")
-     */
+    #[Assert\NotBlank(message: 'ra.amend_ra_information.contact_information')]
     public string $contactInformation;
 
     public string $institution;

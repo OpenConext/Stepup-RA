@@ -18,18 +18,20 @@
 
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\Provider;
 
+use BadMethodCallException;
 use Psr\Log\LoggerInterface;
 use SAML2\Assertion;
 use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
 use Surfnet\SamlBundle\SAML2\Response\AssertionAdapter;
 use Surfnet\SamlBundle\Security\Authentication\Provider\SamlProviderInterface;
+use Surfnet\StepupBundle\Service\LoaResolutionService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Exception\MissingRequiredAttributeException;
 use Surfnet\StepupRa\RaBundle\Exception\UserNotRaException;
+use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
-use Symfony\Component\Security\Core\Authentication\Provider\AuthenticationProviderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -46,6 +48,7 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
         private readonly ProfileService $profileService,
         private readonly AttributeDictionary $attributeDictionary,
         private readonly LoggerInterface $logger,
+        private readonly LoaResolutionService $loaResolutionService,
     ) {
     }
 
@@ -53,9 +56,9 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
      * @SuppressWarnings(PHPMD.NPathComplexity)      - The authorization tests cause the complexity to raise, could and
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)   might be changed by introducing additional utility classes.
      */
-    public function authenticate(TokenInterface $token): TokenInterface
+    public function getUser(Assertion $assertion): UserInterface
     {
-        $translatedAssertion = $this->attributeDictionary->translate($token->assertion);
+        $translatedAssertion = $this->attributeDictionary->translate($assertion);
 
         $nameId   = $translatedAssertion->getNameID();
         $institution = $this->getSingleStringValue('schacHomeOrganization', $translatedAssertion);
@@ -93,11 +96,12 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
             }
         }
 
-        // set the token
-        $authenticatedToken = new SamlToken($token->getLoa(), $roles);
-        $authenticatedToken->setUser($identity);
+        $authenticatedIdentity = new AuthenticatedIdentity($identity);
+        $loa = $this->loaResolutionService->getLoa($assertion->getAuthnContextClassRef());
+        $authenticatedToken = new SamlToken($loa, $roles);
+        $authenticatedToken->setUser($authenticatedIdentity);
 
-        return $authenticatedToken;
+        return $authenticatedIdentity;
     }
 
     private function getSingleStringValue($attribute, AssertionAdapter $translatedAssertion): string
@@ -146,26 +150,22 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
 
     public function getNameId(Assertion $assertion): string
     {
-        // TODO: Implement getNameId() method.
+        return $this->attributeDictionary->translate($assertion)->getNameID();
     }
 
-    public function getUser(Assertion $assertion): UserInterface
-    {
-        // TODO: Implement getUser() method.
-    }
-
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $user): UserInterface
     {
         // TODO: Implement refreshUser() method.
+        return $user;
     }
 
-    public function supportsClass(string $class)
+    public function supportsClass(string $class): bool
     {
-        // TODO: Implement supportsClass() method.
+        return $class === AuthenticatedIdentity::class;
     }
 
     public function loadUserByIdentifier(string $identifier): UserInterface
     {
-        // TODO: Implement loadUserByIdentifier() method.
+        throw new BadMethodCallException('Use `getUser` to load a user by username');
     }
 }
