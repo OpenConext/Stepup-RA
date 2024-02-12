@@ -151,7 +151,6 @@ class VettingController extends AbstractController
             ->forProcedure($procedureId)
             ->notice(sprintf('Starting new Vetting Procedure for second factor of type "%s"', $secondFactor->type));
 
-
         if ($this->vettingService->isProvePossessionSkippable($procedureId)) {
             $this->container->get('ra.procedure_logger')
                 ->forProcedure($procedureId)

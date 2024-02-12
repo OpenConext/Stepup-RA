@@ -26,7 +26,6 @@ interface VettingProcedureRepository
 {
     public function store(VettingProcedure $vettingProcedure);
 
-
     public function retrieve(string $id): ?VettingProcedure;
 
     public function remove(string $id): mixed;

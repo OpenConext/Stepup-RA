@@ -244,7 +244,6 @@ class VettingService
         return $result;
     }
 
-
     /**
      * @throws UnknownVettingProcedureException
      * @throws DomainException
@@ -309,7 +308,6 @@ class VettingService
     {
         return $this->getProcedure($procedureId)->getSecondFactor()->secondFactorIdentifier;
     }
-
 
     /**
      * @throws UnknownVettingProcedureException
