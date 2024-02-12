@@ -18,31 +18,20 @@
 
 namespace Surfnet\StepupRa\RaBundle\Tests\Security\Session;
 
+use RuntimeException;
 use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Storage\MetadataBag;
 
 class FakeSession implements SessionInterface
 {
-    /**
-     * @var array
-     */
-    private $sessionContent = [];
+    private array $sessionContent = [];
 
-    /**
-     * @var string
-     */
-    private $sessionId = 'fake_session';
+    private string $sessionId = 'fake_session';
 
-    /**
-     * @var string
-     */
-    private $sessionName = 'fake_session';
+    private string $sessionName = 'fake_session';
 
-    /**
-     * @var array
-     */
-    private $bags = [];
+    private array $bags = [];
 
     public function __construct()
     {
@@ -158,15 +147,11 @@ class FakeSession implements SessionInterface
             return $this->bags[$name];
         }
 
-        return null;
+        throw new RuntimeException("Session parameter {name} not found");
     }
 
     public function getMetadataBag(): MetadataBag
     {
-        if (isset($this->bags['_sf_meta'])) {
-            return $this->bags['_sf_meta'];
-        }
-
-        return $this->bags['_sf_meta'] = new MetadataBag();
+        return $this->bags['_sf_meta'] ?? ($this->bags['_sf_meta'] = new MetadataBag());
     }
 }
