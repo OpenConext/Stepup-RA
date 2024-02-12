@@ -15,6 +15,22 @@ services:
     resource: '../src/Surfnet/StepupRa/RaBundle/Controller/*'
     tags: [ 'controller.service_arguments' ]
 
-  twig.extension.text: # Required by JMSTranslationBundle
-    class: Twig_Extensions_Extension_Text
-    tags: [{ name: twig.extension }]
+  logger:
+    alias: 'monolog.logger'
+    public: true
+
+  surfnet_saml.saml_provider:
+    class: Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider
+    arguments:
+      $identityService: '@ra.service.identity'
+
+  Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider:
+    alias: surfnet_saml.saml_provider
+
+  templating:
+    alias: 'twig'
+
+  ra.service.gssf:
+    class: Surfnet\StepupRa\RaBundle\Service\GssfService
+    arguments:
+      - "@gssp.session.namespaced_attribute_bag"

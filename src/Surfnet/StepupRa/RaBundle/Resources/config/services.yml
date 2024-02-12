@@ -1,11 +1,18 @@
 services:
     # To be compatible with loading services from the container instead of using DI, TODO, Utilize DI throughout the
     # application.
-    _defaults: { public: true }
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
 
     logger:
       alias: 'monolog.logger'
       public: true
+
+    Surfnet\StepupRa\RaBundle\Controller\:
+        resource: '../../Controller/'
+        tags: ['controller.service_arguments']
 
     ra.service.command:
         class: Surfnet\StepupRa\RaBundle\Service\CommandService
@@ -130,22 +137,6 @@ services:
 
     ra.service.gssf:
         class: Surfnet\StepupRa\RaBundle\Service\GssfService
-        arguments:
-            - "@ra.service.gssf.sessionbag"
-
-    ra.service.gssf.sessionbag:
-        class: Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag
-        factory: ['@session', 'getBag']
-        arguments: ['ra.service.gssf']
-
-    ra.service.gssf.namespaced_attribute_bag:
-        public: false
-        class: Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag
-        arguments:
-            - '__ra.service.gssf__'
-            - '/'
-        calls:
-            - [setName, ['ra.service.gssf']]
 
     ra.service.audit_log:
         class: Surfnet\StepupRa\RaBundle\Service\AuditLogService

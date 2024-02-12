@@ -10,11 +10,6 @@ services:
     Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ProviderRepository:
         alias: gssp.provider_repository
 
-    gssp.sessionbag:
-        class: Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag
-        factory: ['@session', 'getBag']
-        arguments: ['gssp']
-
     gssp.session.namespaced_attribute_bag:
         public: false
         class: Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag

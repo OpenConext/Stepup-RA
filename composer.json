@@ -13,6 +13,8 @@
     "minimum-stability": "stable",
     "require": {
         "php": "^8.2",
+        "ext-dom": "*",
+        "ext-openssl": "*",
         "fortawesome/font-awesome": "~4.2.0",
         "guzzlehttp/guzzle": "^7",
         "incenteev/composer-parameter-handler": "~2.0",
@@ -35,11 +37,8 @@
         "symfony/validator": "^6.0",
         "symfony/webpack-encore-bundle": "^1.7",
         "twbs/bootstrap": "~3.3.0",
-        "twig/extensions": "~1.5",
         "twig/extra-bundle": "^3.0",
-        "twig/twig": "^2.12 || ^3.0",
-        "ext-openssl": "*",
-        "ext-dom": "*"
+        "twig/twig": "^3.0"
     },
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^4.0",

@@ -10,7 +10,7 @@ services:
     ra.security.authentication.provider.saml:
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider
         arguments:
-            - "@ra.service.identity"
+            - '@ra.service.identity'
             - "@ra.service.profile"
             - "@surfnet_saml.saml.attribute_dictionary"
             - "@logger"
@@ -84,7 +84,7 @@ services:
             - "@security.authentication.manager"
             - "@surfnet_stepup.service.loa_resolution"
             - "@surfnet_saml.logger"
-            - "@templating"
+            - "@twig"
 
     # Session
     ra.security.authentication.session.session_storage:

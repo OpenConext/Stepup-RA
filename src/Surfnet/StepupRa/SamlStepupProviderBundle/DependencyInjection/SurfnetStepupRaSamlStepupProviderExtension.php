@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2014 SURFnet bv
  *
@@ -46,13 +48,14 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
         foreach ($config['providers'] as $provider => $providerConfiguration) {
             // may seem a bit strange, but this prevents casing issue when getting/setting/creating provider
             // service definitions etc.
+
+            assert(is_string($provider));
             if ($provider !== strtolower((string) $provider)) {
                 throw new InvalidConfigurationException('The provider name must be completely lowercase');
             }
@@ -76,7 +79,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         $this->createRemoteDefinition($provider, $configuration['remote'], $container);
 
         $stateHandlerDefinition = new Definition(StateHandler::class, [
-            new Reference('gssp.sessionbag'),
+            new Reference('request_stack'),
             $provider
         ]);
         $container->setDefinition('gssp.provider.' . $provider . '.statehandler', $stateHandlerDefinition);
