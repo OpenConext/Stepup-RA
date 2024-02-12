@@ -58,10 +58,10 @@ final class ViewConfigTest extends TestCase
      */
     public function translation_fails_when_no_current_language_set()
     {
-        $this->expectExceptionMessage("The current language is not set");
+        $this->expectExceptionMessage("The requested translation is not available in this language");
         $this->expectException(LogicException::class);
 
-        $viewConfig = $this->buildViewConfig(null);
+        $viewConfig = $this->buildViewConfig('');
         $viewConfig->getExplanation();
     }
 
@@ -78,7 +78,7 @@ final class ViewConfigTest extends TestCase
         $viewConfig->getGssfIdMismatch();
     }
 
-    private function buildViewConfig(?string $locale = ''): ViewConfig
+    private function buildViewConfig(string $locale = ''): ViewConfig
     {
         $request = m::mock(RequestStack::class);
         $request->shouldReceive('getCurrentRequest->getLocale')->andReturn($locale)->byDefault();

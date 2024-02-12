@@ -42,10 +42,10 @@ class SamlTokenTest extends TestCase
             ['ROLE_RAA'],
         );
 
-        $serialized = $samlToken->serialize();
+        $serialized = $samlToken->__serialize();
 
         $deserialized = new SamlToken(new Loa(Loa::LOA_2, 'http://some.url.tld/authentication/loa2'));
-        $deserialized->unserialize($serialized);
+        $deserialized->__unserialize($serialized);
 
         $this->assertEquals($samlToken, $deserialized);
     }

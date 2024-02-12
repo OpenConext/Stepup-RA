@@ -70,9 +70,7 @@ class ViewConfig implements ViewConfigInterface
     private function getTranslation(array $translations): mixed
     {
         $currentLocale = $this->requestStack->getCurrentRequest()->getLocale();
-        if (is_null($currentLocale)) {
-            throw new LogicException('The current language is not set');
-        }
+
         if (isset($translations[$currentLocale])) {
             return $translations[$currentLocale];
         }
