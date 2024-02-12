@@ -105,7 +105,7 @@ class FakeSession implements SessionInterface
         return array_key_exists($name, $this->sessionContent);
     }
 
-    public function get($name, $default = null)
+    public function get($name, $default = null): mixed
     {
         return $this->has($name) ? $this->sessionContent[$name] : $default;
     }
@@ -125,7 +125,7 @@ class FakeSession implements SessionInterface
         $this->sessionContent = $attributes;
     }
 
-    public function remove($name)
+    public function remove($name): mixed
     {
         $return = null;
         if ($this->has($name)) {
@@ -152,7 +152,7 @@ class FakeSession implements SessionInterface
         $this->bags[$bag->getName()] = $bag;
     }
 
-    public function getBag($name)
+    public function getBag($name): SessionBagInterface
     {
         if (array_key_exists($name, $this->bags)) {
             return $this->bags[$name];
@@ -161,7 +161,7 @@ class FakeSession implements SessionInterface
         return null;
     }
 
-    public function getMetadataBag()
+    public function getMetadataBag(): MetadataBag
     {
         if (isset($this->bags['_sf_meta'])) {
             return $this->bags['_sf_meta'];

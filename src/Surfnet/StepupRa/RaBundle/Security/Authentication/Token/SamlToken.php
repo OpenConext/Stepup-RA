@@ -31,7 +31,6 @@ class SamlToken extends AbstractToken
         array $roles = [],
     ) {
         parent::__construct($roles);
-        $this->setAuthenticated(count($roles));
     }
 
     /**
@@ -47,22 +46,17 @@ class SamlToken extends AbstractToken
         return $this->loa;
     }
 
-    public function serialize(): array|string
+    public function __serialize(): array
     {
-        return serialize(
-            [
-                parent::serialize(),
-                $this->loa,
-            ],
-        );
+        return [
+            'parent_data' => parent::__serialize(),
+            'loa' => $this->loa,
+        ];
     }
 
-    public function unserialize($serialized): void
+    public function __unserialize(array $data): void
     {
-        [$parent, $this->loa, ] = unserialize(
-            $serialized,
-        );
-
-        parent::unserialize($parent);
+        parent::__unserialize($data['parent_data']);
+        $this->loa = $data['loa'];
     }
 }
