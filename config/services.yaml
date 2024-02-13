@@ -31,9 +31,6 @@ services:
   Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider:
     alias: surfnet_saml.saml_provider
 
-  templating:
-    alias: 'twig'
-
   ra.service.gssf:
     class: Surfnet\StepupRa\RaBundle\Service\GssfService
     arguments:
