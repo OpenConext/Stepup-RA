@@ -11,6 +11,10 @@ services:
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
     public: true
 
+  Surfnet\StepupRa\RaBundle\Service\SecondFactorAssertionService:
+
+  Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger:
+
   Surfnet\StepupRa\RaBundle\Controller\:
     resource: '../src/Surfnet/StepupRa/RaBundle/Controller/*'
     tags: [ 'controller.service_arguments' ]

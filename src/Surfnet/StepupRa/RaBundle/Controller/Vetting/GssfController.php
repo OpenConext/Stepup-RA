@@ -31,9 +31,12 @@ use Surfnet\SamlBundle\SAML2\Response\Assertion\InResponseTo;
 use Surfnet\StepupBundle\Value\Provider\ViewConfigCollection;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Form\Type\InitiateGssfType;
+use Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger;
+use Surfnet\StepupRa\RaBundle\Service\SecondFactorAssertionService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\Provider;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ProviderRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -44,7 +47,7 @@ use Symfony\Component\Routing\Attribute\Route;
  * Orchestrates verification of GSSFs (Generic SAML Second Factors) through GSSPs (Generic SAML Stepup Providers).
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-final class GssfController extends SecondFactorController
+final class GssfController extends AbstractController
 {
     public function __construct(
         private readonly ProviderRepository   $providerRepository,
@@ -54,8 +57,9 @@ final class GssfController extends SecondFactorController
         private readonly PostBinding          $postBinding,
         private readonly AttributeDictionary  $attributeDictionary,
         private readonly ViewConfigCollection $collection,
+        private readonly SecondFactorAssertionService $secondFactorAssertionService,
+        private readonly ProcedureAwareLogger $procedureAwareLogger,
     ) {
-        parent::__construct($logger);
     }
     
     /**
@@ -68,11 +72,11 @@ final class GssfController extends SecondFactorController
     )]
     public function initiate(string $procedureId, string $provider): Response
     {
-        $this->assertSecondFactorEnabled($provider);
+        $this->secondFactorAssertionService->assertSecondFactorEnabled($provider);
 
         $this->denyAccessUnlessGranted('ROLE_RA');
 
-        $procedureLogger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
+        $procedureLogger = $this->procedureAwareLogger->forProcedure($procedureId);
         $procedureLogger->notice('Showing Initiate GSSF Verification Screen', ['provider' => $provider]);
 
         if (!$this->vettingService->hasProcedure($procedureId)) {
@@ -90,11 +94,11 @@ final class GssfController extends SecondFactorController
     )]
     public function authenticate(string $procedureId, string $provider): Response
     {
-        $this->assertSecondFactorEnabled($provider);
+        $this->secondFactorAssertionService->assertSecondFactorEnabled($provider);
 
         $this->denyAccessUnlessGranted('ROLE_RA');
 
-        $procedureLogger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
+        $procedureLogger = $this->procedureAwareLogger->forProcedure($procedureId);
         $procedureLogger->notice('Generating GSSF verification request', ['provider' => $provider]);
 
         if (!$this->vettingService->hasProcedure($procedureId)) {
@@ -136,7 +140,7 @@ final class GssfController extends SecondFactorController
     )]
     public function verify(Request $httpRequest, string $provider): Response
     {
-        $this->assertSecondFactorEnabled($provider);
+        $this->secondFactorAssertionService->assertSecondFactorEnabled($provider);
 
         $provider = $this->getProvider($provider);
 
@@ -212,7 +216,7 @@ final class GssfController extends SecondFactorController
     )]
     public function metadata(string $provider): XMLResponse
     {
-        $this->assertSecondFactorEnabled($provider);
+        $this->secondFactorAssertionService->assertSecondFactorEnabled($provider);
 
         $provider = $this->getProvider($provider);
 
@@ -237,7 +241,6 @@ final class GssfController extends SecondFactorController
     }
     private function renderInitiateForm(string $procedureId, string $provider, array $parameters = []): Response
     {
-        
         $secondFactorConfig = $this->collection->getByIdentifier($provider);
 
         $form = $this->createForm(
