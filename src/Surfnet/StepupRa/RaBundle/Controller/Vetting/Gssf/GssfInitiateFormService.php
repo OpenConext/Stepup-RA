@@ -20,7 +20,6 @@ declare(strict_types=1);
 
 namespace Surfnet\StepupRa\RaBundle\Controller\Vetting\Gssf;
 
-use JMS\TranslationBundle\Annotation\Ignore;
 use Surfnet\StepupBundle\Value\Provider\ViewConfigCollection;
 use Surfnet\StepupRa\RaBundle\Form\Type\InitiateGssfType;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -63,7 +62,7 @@ class GssfInitiateFormService
 
         return new Response(
             $this->twig->render(
-                '@default/vetting/gssf/initiate.html.twig',
+                'vetting/gssf/initiate.html.twig',
                 $templateParameters
             )
         );

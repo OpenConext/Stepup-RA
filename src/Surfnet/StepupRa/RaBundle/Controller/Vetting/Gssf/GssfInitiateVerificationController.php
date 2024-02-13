@@ -50,7 +50,7 @@ final class GssfInitiateVerificationController extends AbstractController
         name: 'ra_vetting_gssf_initiate',
         methods: ['GET'],
     )]
-    public function __invoke(string $procedureId, string $provider): Response
+    public function initiate(string $procedureId, string $provider): Response
     {
         $this->secondFactorAssertionService->assertSecondFactorEnabled($provider);
 
