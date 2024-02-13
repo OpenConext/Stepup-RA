@@ -4,6 +4,8 @@ services:
         autoconfigure: true
         public: true
 
+    Surfnet\StepupRa\SamlStepupProviderBundle\Provider\MetadataFactoryCollection:
+
     gssp.provider_repository:
         public: true
         class: Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ProviderRepository
