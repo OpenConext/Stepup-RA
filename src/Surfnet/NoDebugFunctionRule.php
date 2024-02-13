@@ -42,11 +42,13 @@ final class NoDebugFunctionRule implements Rule
             return [];
         }
 
-        if ($node->name instanceof Node\Name) {
-            $functionName = $node->name->toString();
-            if (in_array($functionName, ['dd', 'dump', 'var_dump', 'print_r', 'exit', 'die'])) {
-                return ["Do not use {$functionName} function"];
-            }
+        if (!$node->name instanceof Node\Name) {
+            return [];
+        }
+
+        $functionName = $node->name->toString();
+        if (in_array($functionName, ['dd', 'dump', 'var_dump', 'print_r', 'exit', 'die'])) {
+            return ["Do not use {$functionName} function"];
         }
 
         return [];
