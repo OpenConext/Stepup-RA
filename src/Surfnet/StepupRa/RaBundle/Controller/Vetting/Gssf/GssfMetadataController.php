@@ -19,8 +19,8 @@
 namespace Surfnet\StepupRa\RaBundle\Controller\Vetting\Gssf;
 
 use Surfnet\SamlBundle\Http\XMLResponse;
-use Surfnet\SamlBundle\Metadata\MetadataFactory;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorAssertionService;
+use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\MetadataFactoryCollection;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ProviderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
@@ -33,6 +33,7 @@ final class GssfMetadataController extends AbstractController
     public function __construct(
         private readonly ProviderRepository   $providerRepository,
         private readonly SecondFactorAssertionService $secondFactorAssertionService,
+        private readonly MetadataFactoryCollection $metadataFactoryCollection,
     ) {
     }
 
@@ -47,8 +48,7 @@ final class GssfMetadataController extends AbstractController
 
         $provider = $this->providerRepository->get($providerName);
 
-        /** @var MetadataFactory $factory */
-        $factory = $this->container->get('gssp.provider.' . $provider->getName() . '.metadata.factory');
+        $factory = $this->metadataFactoryCollection->getByIdentifier($provider->getName());
 
         return new XMLResponse($factory->generate());
     }
