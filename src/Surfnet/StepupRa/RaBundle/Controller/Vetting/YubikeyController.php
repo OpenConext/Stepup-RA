@@ -46,7 +46,7 @@ class YubikeyController extends AbstractController
         name: 'ra_vetting_yubikey_verify',
         methods: ['GET', 'POST'],
     )]
-    public function verify(Request $request, string $procedureId): Response
+    public function __invoke(Request $request, string $procedureId): Response
     {
         $this->secondFactorAssertionService->assertSecondFactorEnabled('yubikey');
 
