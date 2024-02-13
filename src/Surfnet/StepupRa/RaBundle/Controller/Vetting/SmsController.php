@@ -26,7 +26,10 @@ use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
 use Surfnet\StepupBundle\Value\PhoneNumber\InternationalPhoneNumber;
 use Surfnet\StepupRa\RaBundle\Form\Type\SendSmsChallengeType;
 use Surfnet\StepupRa\RaBundle\Form\Type\VerifyPhoneNumberType;
+use Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger;
+use Surfnet\StepupRa\RaBundle\Service\SecondFactorAssertionService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,14 +40,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class SmsController extends SecondFactorController
+class SmsController extends AbstractController
 {
     public function __construct(
         private readonly VettingService $vettingService,
         private readonly TranslatorInterface $translator,
-        LoggerInterface $logger,
+        private readonly SecondFactorAssertionService $secondFactorAssertionService,
+        private readonly ProcedureAwareLogger $procedureAwareLogger,
     ) {
-        parent::__construct($logger);
     }
 
     #[Route(
@@ -54,11 +57,11 @@ class SmsController extends SecondFactorController
     )]
     public function sendChallenge(Request $request, string $procedureId): Response
     {
-        $this->assertSecondFactorEnabled('sms');
+        $this->secondFactorAssertionService->assertSecondFactorEnabled('sms');
 
         $this->denyAccessUnlessGranted('ROLE_RA');
 
-        $logger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
+        $logger = $this->procedureAwareLogger->forProcedure($procedureId);
         $logger->notice('Received request for Send SMS Challenge page');
 
         if (!$this->vettingService->hasProcedure($procedureId)) {
@@ -127,9 +130,9 @@ class SmsController extends SecondFactorController
     )]
     public function provePossession(Request $request, string $procedureId): Response
     {
-        $this->assertSecondFactorEnabled('sms');
+        $this->secondFactorAssertionService->assertSecondFactorEnabled('sms');
         $this->denyAccessUnlessGranted('ROLE_RA');
-        $logger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
+        $logger = $this->procedureAwareLogger->forProcedure($procedureId);
 
         $logger->notice('Received request for Proof of Possession of SMS Second Factor page');
         $vettingService = $this->vettingService;

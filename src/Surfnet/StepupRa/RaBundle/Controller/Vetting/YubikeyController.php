@@ -24,20 +24,21 @@ use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\VerifyYubikeyPublicIdType;
 use Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger;
+use Surfnet\StepupRa\RaBundle\Service\SecondFactorAssertionService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
-class YubikeyController extends SecondFactorController
+class YubikeyController extends AbstractController
 {
     public function __construct(
         private readonly VettingService $vettingService,
-        LoggerInterface $logger,
-        // TODO: with sf 6 autowire attribute for procedureAwareLogger
+        private readonly SecondFactorAssertionService $secondFactorAssertionService,
+        private readonly ProcedureAwareLogger $procedureAwareLogger,
     ) {
-        parent::__construct($logger);
     }
 
     #[Route(
@@ -47,11 +48,11 @@ class YubikeyController extends SecondFactorController
     )]
     public function verify(Request $request, string $procedureId): Response
     {
-        $this->assertSecondFactorEnabled('yubikey');
+        $this->secondFactorAssertionService->assertSecondFactorEnabled('yubikey');
 
         $this->denyAccessUnlessGranted('ROLE_RA');
 
-        $procedureLogger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
+        $procedureLogger = $this->procedureAwareLogger->forProcedure($procedureId);
         $procedureLogger->notice('Requested Yubikey Verfication');
 
         if (!$this->vettingService->hasProcedure($procedureId)) {

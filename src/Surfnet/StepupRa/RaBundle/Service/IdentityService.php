@@ -54,7 +54,7 @@ class IdentityService implements UserProviderInterface
     /**
      * For now this functionality is disabled, unsure if actually needed
      */
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $user): UserInterface
     {
         throw new RuntimeException(sprintf('Cannot Refresh User "%s"', $user->getUsername()));
     }

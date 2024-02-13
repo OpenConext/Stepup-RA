@@ -38,15 +38,19 @@ class SamlController extends AbstractController
     ) {
     }
 
-    #[Route('/authentication/consume-assertion', name: 'ra_serviceprovider_consume_assertion', methods: ['POST'])]
+    #[Route(
+        path: '/authentication/consume-assertion',
+        name: 'ra_serviceprovider_consume_assertion',
+        methods: ['POST']
+    )]
     public function consumeAssertion(Request $httpRequest): Response
     {
-
         $assertion = $this->postBinding->processResponse(
             $httpRequest,
             $this->remoteIdp,
             $this->hostedServiceProvider,
         );
+
         return $this->render(
             'saml/consume_assertion.html.twig',
             ['assertion' => $assertion],
