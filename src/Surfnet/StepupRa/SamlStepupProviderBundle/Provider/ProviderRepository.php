@@ -20,11 +20,17 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\Provider;
 
+use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Exception\InvalidConfigurationException;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Exception\UnknownProviderException;
 
 final class ProviderRepository
 {
+
+    public function __construct(private LoggerInterface $logger)
+    {
+    }
+
     /**
      * @var Provider[]
      */
@@ -50,6 +56,7 @@ final class ProviderRepository
     public function get(string $providerName): Provider
     {
         if (!$this->has($providerName)) {
+            $this->logger->info(sprintf('Requested GSSP "%s" does not exist or is not registered', $providerName));
             throw UnknownProviderException::create($providerName, array_keys($this->providers));
         }
 
