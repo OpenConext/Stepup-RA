@@ -69,7 +69,6 @@ class VettingController extends AbstractController
     public function startProcedure(Request $request): Response
     {
         $this->denyAccessUnlessGranted('ROLE_RA');
-        $identity = $this->getIdentity();
 
         $this->logger->notice('Vetting Procedure Search started');
 
@@ -113,7 +112,7 @@ class VettingController extends AbstractController
 
         /** @var SamlToken $token */
         $token = $this->container->get('security.token_storage')->getToken();
-        $command->authorityId = $this->getIdentity()->id;
+        $command->authorityId =  $this->getUser()->getIdentity()->id;
         $command->authorityLoa = $token->getLoa();
         $command->secondFactor = $secondFactor;
 
@@ -301,10 +300,5 @@ class VettingController extends AbstractController
     public function vettingCompleted(): Response
     {
         return $this->render('vetting/vetting_completed.html.twig');
-    }
-
-    private function getIdentity(): Identity
-    {
-        return $this->container->get('security.token_storage')->getToken()->getUser();
     }
 }
