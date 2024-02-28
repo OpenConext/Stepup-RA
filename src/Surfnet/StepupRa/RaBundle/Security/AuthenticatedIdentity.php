@@ -23,9 +23,12 @@ namespace Surfnet\StepupRa\RaBundle\Security;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-readonly class AuthenticatedIdentity implements UserInterface
+class AuthenticatedIdentity implements UserInterface
 {
-    public function __construct(private Identity $originalIdentity)
+    public function __construct(
+        private readonly Identity $originalIdentity,
+        private readonly array    $roles = [],
+    )
     {
     }
 
@@ -39,13 +42,15 @@ readonly class AuthenticatedIdentity implements UserInterface
         return $this->originalIdentity->id ?: '';
     }
 
-    /**
-     * @inheritDoc
-     */
     public function getRoles(): array
     {
-        // You can customize this method based on your application's logic.
-        return ['ROLE_USER'];
+        $allRoles = $this->roles;
+
+        // user always has ROLE_USER at least
+        if (!in_array('ROLE_USER', $this->roles)) {
+            $allRoles[] = 'ROLE_USER';
+        }
+        return $allRoles;
     }
 
     /**
