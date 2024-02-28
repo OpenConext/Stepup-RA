@@ -32,6 +32,8 @@ use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
+use Symfony\Component\DependencyInjection\Attribute\AsAlias;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -96,7 +98,7 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
             }
         }
 
-        $authenticatedIdentity = new AuthenticatedIdentity($identity);
+        $authenticatedIdentity = new AuthenticatedIdentity($identity, $roles);
         $loa = $this->loaResolutionService->getLoa($assertion->getAuthnContextClassRef());
         $authenticatedToken = new SamlToken($loa, $roles);
         $authenticatedToken->setUser($authenticatedIdentity);
