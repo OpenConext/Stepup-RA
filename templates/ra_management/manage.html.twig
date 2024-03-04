@@ -7,7 +7,7 @@
             {{ form(form) }}
 
             {% if raList|length > 0 %}
-                <div class="result-count">{{ 'ra.management.search.text.number_results'|transchoice(numberOfResults, {'count': numberOfResults}) }}</div>
+                <div class="result-count">{{ 'ra.management.search.text.number_results'|trans({'count': numberOfResults}) }}</div>
             {% endif %}
 
             <hr>

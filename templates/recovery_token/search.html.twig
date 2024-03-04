@@ -8,7 +8,7 @@
             {{ form(form) }}
 
             {% if recoveryTokens.elements|length > 0 %}
-                <div class="result-count">{{ 'ra.recovery_token.search.text.number_of_recovery_tokens'|transchoice(numberOfRecoveryTokens, {'count': numberOfRecoveryTokens}) }}</div>
+                <div class="result-count">{{ 'ra.recovery_token.search.text.number_of_recovery_tokens'|trans({'count': numberOfRecoveryTokens}) }}</div>
             {% endif %}
 
             <hr>
