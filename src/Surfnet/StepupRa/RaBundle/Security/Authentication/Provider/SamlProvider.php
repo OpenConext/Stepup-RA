@@ -24,17 +24,12 @@ use SAML2\Assertion;
 use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
 use Surfnet\SamlBundle\SAML2\Response\AssertionAdapter;
 use Surfnet\SamlBundle\Security\Authentication\Provider\SamlProviderInterface;
-use Surfnet\StepupBundle\Service\LoaResolutionService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Exception\MissingRequiredAttributeException;
 use Surfnet\StepupRa\RaBundle\Exception\UserNotRaException;
 use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
-use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
-use Symfony\Component\DependencyInjection\Attribute\AsAlias;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -50,7 +45,7 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
         private readonly ProfileService $profileService,
         private readonly AttributeDictionary $attributeDictionary,
         private readonly LoggerInterface $logger,
-        private readonly LoaResolutionService $loaResolutionService,
+
     ) {
     }
 
@@ -98,12 +93,7 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
             }
         }
 
-        $authenticatedIdentity = new AuthenticatedIdentity($identity, $roles);
-        $loa = $this->loaResolutionService->getLoa($assertion->getAuthnContextClassRef());
-        $authenticatedToken = new SamlToken($loa, $roles);
-        $authenticatedToken->setUser($authenticatedIdentity);
-
-        return $authenticatedIdentity;
+        return new AuthenticatedIdentity($identity, $roles);
     }
 
     private function getSingleStringValue(string $attributeName, AssertionAdapter $translatedAssertion): string
@@ -145,11 +135,6 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
         return $value;
     }
 
-    public function supports(TokenInterface $token): bool
-    {
-        return $token instanceof SamlToken;
-    }
-
     public function getNameId(Assertion $assertion): string
     {
         return $this->attributeDictionary->translate($assertion)->getNameID();
@@ -157,7 +142,6 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
 
     public function refreshUser(UserInterface $user): UserInterface
     {
-        // TODO: Implement refreshUser() method.
         return $user;
     }
 
