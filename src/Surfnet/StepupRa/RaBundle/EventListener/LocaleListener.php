@@ -41,7 +41,7 @@ final readonly class LocaleListener implements EventSubscriberInterface
         }
 
         /** @var Identity $identity */
-        $identity = $token->getUser();
+        $identity = $token->getUser()->getIdentity();
 
         if (!$identity instanceof Identity) {
             return;
