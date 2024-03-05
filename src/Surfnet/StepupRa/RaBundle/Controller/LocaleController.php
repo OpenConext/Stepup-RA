@@ -21,21 +21,22 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupBundle\Command\SwitchLocaleCommand;
 use Surfnet\StepupBundle\Form\Type\SwitchLocaleType;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class LocaleController extends AbstractController
 {
     public function __construct(
         private readonly LoggerInterface $logger,
-        private readonly UserProviderInterface $identityService,
+        #[Autowire(service: 'ra.service.identity')]
+        private readonly IdentityService $identityService,
         private readonly TranslatorInterface $translator,
     ) {
     }
@@ -56,7 +57,7 @@ final class LocaleController extends AbstractController
         if (!str_starts_with((string) $returnUrl, $domain)) {
             $this->logger->error(sprintf(
                 'Identity "%s" used illegal return-url for redirection after changing locale, aborting request',
-                $this->getIdentity()->id,
+                $this->getUser()->getIdentity()->id,
             ));
 
             throw new BadRequestHttpException('Invalid return-url given');
@@ -64,7 +65,7 @@ final class LocaleController extends AbstractController
 
         $this->logger->info('Switching locale...');
 
-        $identity = $this->getIdentity();
+        $identity = $this->getUser()->getIdentity();
         if (!$identity) {
             throw new AccessDeniedHttpException('Cannot switch locales when not authenticated');
         }
@@ -96,8 +97,4 @@ final class LocaleController extends AbstractController
         return $this->redirect($returnUrl);
     }
 
-    private function getIdentity(): Identity
-    {
-        return $this->container->get('security.token_storage')->getToken()->getUser();
-    }
 }
