@@ -20,6 +20,7 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupRa\RaBundle\Security;
 
+use Surfnet\StepupBundle\Value\Loa;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -27,6 +28,7 @@ class AuthenticatedIdentity implements UserInterface
 {
     public function __construct(
         private readonly Identity $originalIdentity,
+        private readonly Loa $loa,
         private readonly array    $roles = [],
     )
     {
@@ -40,6 +42,11 @@ class AuthenticatedIdentity implements UserInterface
     public function getUsername(): string
     {
         return $this->originalIdentity->id ?: '';
+    }
+
+    public function getLoa(): Loa
+    {
+        return $this->loa;
     }
 
     public function getRoles(): array

@@ -24,12 +24,14 @@ use SAML2\Assertion;
 use Surfnet\SamlBundle\SAML2\Attribute\AttributeDictionary;
 use Surfnet\SamlBundle\SAML2\Response\AssertionAdapter;
 use Surfnet\SamlBundle\Security\Authentication\Provider\SamlProviderInterface;
+use Surfnet\StepupBundle\Service\LoaResolutionService;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Exception\MissingRequiredAttributeException;
 use Surfnet\StepupRa\RaBundle\Exception\UserNotRaException;
 use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
 use Surfnet\StepupRa\RaBundle\Service\IdentityService;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -41,11 +43,12 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class SamlProvider implements SamlProviderInterface, UserProviderInterface
 {
     public function __construct(
+        #[Autowire(service: 'ra.service.identity')]
         private readonly IdentityService $identityService,
         private readonly ProfileService $profileService,
         private readonly AttributeDictionary $attributeDictionary,
         private readonly LoggerInterface $logger,
-
+        private readonly LoaResolutionService $loaResolutionService,
     ) {
     }
 
@@ -93,7 +96,9 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
             }
         }
 
-        return new AuthenticatedIdentity($identity, $roles);
+        $loa = $this->loaResolutionService->getLoa($assertion->getAuthnContextClassRef());
+
+        return new AuthenticatedIdentity($identity, $loa, $roles);
     }
 
     private function getSingleStringValue(string $attributeName, AssertionAdapter $translatedAssertion): string
