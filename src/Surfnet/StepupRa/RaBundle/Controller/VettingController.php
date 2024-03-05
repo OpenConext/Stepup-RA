@@ -31,6 +31,8 @@ use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,6 +54,7 @@ class VettingController extends AbstractController
         private readonly SecondFactorTypeService $secondFactorTypeService,
         private readonly LoggerInterface $logger,
         private readonly TranslatorInterface $translator,
+        private readonly Security $security,
     ) {
     }
 
@@ -82,7 +85,7 @@ class VettingController extends AbstractController
         }
 
         $secondFactor = $this->secondFactorService
-            ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode, $identity->id);
+            ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode, $this->getUser()->getIdentity()->id);
 
         if (!$secondFactor instanceof VerifiedSecondFactor) {
             $this->addFlash('error', 'ra.form.start_vetting_procedure.unknown_registration_code');
@@ -91,7 +94,7 @@ class VettingController extends AbstractController
             return $this->render('vetting/start_procedure.html.twig', ['form' => $form->createView()]);
         }
 
-        $enabledSecondFactors = $this->container->getParameter('surfnet_stepup_ra.enabled_second_factors');
+        $enabledSecondFactors = $this->getParameter('surfnet_stepup_ra.enabled_second_factors');
         if (!in_array($secondFactor->type, $enabledSecondFactors, true)) {
             $this->logger->warning(
                 sprintf(
@@ -109,10 +112,8 @@ class VettingController extends AbstractController
                 ->setStatusCode(Response::HTTP_BAD_REQUEST);
         }
 
-        /** @var SamlToken $token */
-        $token = $this->container->get('security.token_storage')->getToken();
         $command->authorityId =  $this->getUser()->getIdentity()->id;
-        $command->authorityLoa = $token->getLoa();
+        $command->authorityLoa = $this->getUser()->getLoa();
         $command->secondFactor = $secondFactor;
 
         if ($this->vettingService->isExpiredRegistrationCode($command)) {
