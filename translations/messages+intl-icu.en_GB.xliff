@@ -69,22 +69,22 @@
       </trans-unit>
       <trans-unit id="37836182b3260cbaf343a44bfb622776839666cc" resname="ra.auditlog.action.accredited_as_ra">
         <source>ra.auditlog.action.accredited_as_ra</source>
-        <target>Accredited as RA @ %ra_institution%</target>
+        <target>Accredited as RA @ {ra_institution}</target>
         <jms:reference-file line="46">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="66b320bfe1f15eabe6e0baa04e94b71c2152f8e2" resname="ra.auditlog.action.accredited_as_raa">
         <source>ra.auditlog.action.accredited_as_raa</source>
-        <target>Accredited as RAA @ %ra_institution%</target>
+        <target>Accredited as RAA @ {ra_institution}</target>
         <jms:reference-file line="47">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ba50c2f5a7066cd14d8ae1f33c5f4decc892d0b7" resname="ra.auditlog.action.appointed_as_ra">
         <source>ra.auditlog.action.appointed_as_ra</source>
-        <target>Appointed as RA @ %ra_institution%</target>
+        <target>Appointed as RA @ {ra_institution}</target>
         <jms:reference-file line="48">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f1a9c08794cd9c91a7f63841cc1c9ff61c3da452" resname="ra.auditlog.action.appointed_as_raa">
         <source>ra.auditlog.action.appointed_as_raa</source>
-        <target>Appointed as RAA @ %ra_institution%</target>
+        <target>Appointed as RAA @ {ra_institution}</target>
         <jms:reference-file line="49">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9c05a55d8f3ef06afe4f9d81883c0cd6dc415933" resname="ra.auditlog.action.bootstrapped">
@@ -109,12 +109,12 @@
       </trans-unit>
       <trans-unit id="7a77bec92906bdd32a31ff501329a66ad26b04d0" resname="ra.auditlog.action.migrated_from">
         <source>ra.auditlog.action.migrated_from</source>
-        <target>Migrated from %ra_institution%</target>
+        <target>Migrated from {ra_institution}</target>
         <jms:reference-file line="52">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="6aa39f6178552a945a24b4bc3f374ca7fa447da7" resname="ra.auditlog.action.migrated_to">
         <source>ra.auditlog.action.migrated_to</source>
-        <target>Migrated to %ra_institution%</target>
+        <target>Migrated to {ra_institution}</target>
         <jms:reference-file line="51">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="59b375a103f9bff34d2da25cb0563524354b357d" resname="ra.auditlog.action.possession_proven">
@@ -592,7 +592,7 @@
       </trans-unit>
       <trans-unit id="6cb525e1f60344d3cd554ebf348b2b850086b7b7" resname="ra.institution_configuration.subtitle">
         <source>ra.institution_configuration.subtitle</source>
-        <target>Configuration of %name%</target>
+        <target>Configuration of {name}</target>
         <jms:reference-file line="14">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/institution_configuration/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="fda6e63bc4222df50869d83e3286cbcc34096cc1" resname="ra.institution_configuration.title">
@@ -1089,7 +1089,7 @@
       </trans-unit>
       <trans-unit id="47cc61ae8dc9ddaac28d766a3e6ef0d0e390dbec" resname="ra.ra_location.manage.subtitle">
         <source>ra.ra_location.manage.subtitle</source>
-        <target>Locations of %name%</target>
+        <target>Locations of {name}</target>
         <jms:reference-file line="13">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/ra_location/manage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b98d29d711e4ee19c0f1c9bf7d0177edb32931d9" resname="ra.ra_location.manage.text.no_locations">
@@ -1246,7 +1246,7 @@
       </trans-unit>
       <trans-unit id="f12e743e43bca49fe86f99db331ded47fb88f1da" resname="ra.registration.sms.text.otp_requests_remaining">
         <source>ra.registration.sms.text.otp_requests_remaining</source>
-        <target>Attempts remaining: %count%</target>
+        <target>Attempts remaining: {count}</target>
         <jms:reference-file line="23">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/vetting/sms/send_challenge.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ee8b15d139dd5ba69eb2bfbc1c540b03894bafd7" resname="ra.registration.yubikey.title.enter_challenge">
@@ -1428,7 +1428,7 @@
       </trans-unit>
       <trans-unit id="eff2ebc67229b22b80526799953593c40a2c6ef9" resname="ra.verify_identity.registration_code_expired">
         <source>ra.verify_identity.registration_code_expired</source>
-        <target>The activation code has expired. First, delete the current token registration of the user (by RA or user). The user then starts a new registration on %self_service_url% and will receive a new activation code that is valid for 14 days.</target>
+        <target>The activation code has expired. First, delete the current token registration of the user (by RA or user). The user then starts a new registration on {self_service_url} and will receive a new activation code that is valid for 14 days.</target>
         <jms:reference-file line="109">/src/../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php</jms:reference-file>
         <jms:reference-file line="256">/src/../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php</jms:reference-file>
         <jms:reference-file line="9">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/translations.html.twig</jms:reference-file>
@@ -1487,7 +1487,7 @@
       </trans-unit>
       <trans-unit id="45ae228a99ede93d840bae87b3b3d26793d5699c" resname="ra.vetting.second_factor_type_disabled.text.explanation">
         <source>ra.vetting.second_factor_type_disabled.text.explanation</source>
-        <target>Tokens of type %token_name% cannot be vetted. This token type has been disabled.</target>
+        <target>Tokens of type {token_name} cannot be vetted. This token type has been disabled.</target>
         <jms:reference-file line="10">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/vetting/second_factor_type_disabled.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f0337d112754854c20399930ae9c4a3b3f2fb01e" resname="ra.vetting.second_factor_type_disabled.title">
@@ -1497,7 +1497,7 @@
       </trans-unit>
       <trans-unit id="8e4a356a46fe95b04ae1cbb201b8d62e15670b2e" resname="ra.vetting.sms.challenge_body">
         <source>ra.vetting.sms.challenge_body</source>
-        <target>Your code: %challenge%</target>
+        <target>Your code: {challenge}</target>
         <jms:reference-file line="247">/src/../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6d55aa46fb97f555148f92291a878be8ed732361" resname="ra.vetting.sms.prove_possession.title.page">
@@ -1604,7 +1604,7 @@ The token is now activated and ready to be used.</target>
       </trans-unit>
       <trans-unit id="503e7024cbbeed07de169176e2e34729e2912693" resname="ra.vetting_type_hint.subtitle">
         <source>ra.vetting_type_hint.subtitle</source>
-        <target state="translated">Activation help texts for %institution%</target>
+        <target state="translated">Activation help texts for {institution}</target>
         <jms:reference-file line="14">/src/../src/Surfnet/StepupRa/RaBundle/Resources/views/vetting_type_hint/overview.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9e3439b0a5b23046bd4e327b2a802446ab119d3c" resname="ra.vetting_type_hint.success">
@@ -1743,7 +1743,7 @@ The token is now activated and ready to be used.</target>
       </trans-unit>
       <trans-unit id="13cca787752c500356fbd62690001b8cb2a04e9a" resname="stepup.error.support_page.text">
         <source>stepup.error.support_page.text</source>
-        <target><![CDATA[Please try again or visit <a href="%support_url%" target="_blank">the support page</a> if this does not fix your problem. On this page you will find more information about possible causes of the error and how to contact the support team.]]></target>
+        <target><![CDATA[Please try again or visit <a href="{support_url}" target="_blank">the support page</a> if this does not fix your problem. On this page you will find more information about possible causes of the error and how to contact the support team.]]></target>
         <jms:reference-file line="12">/src/../vendor/surfnet/stepup-bundle/src/Resources/views/Exception/error404.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="27518086f13a0c4f33e2e1f4c118187a4e41ce53" resname="stepup.error.timestamp">
