@@ -29,7 +29,7 @@ class AuthenticatedIdentity implements UserInterface
     public function __construct(
         private readonly Identity $originalIdentity,
         private readonly Loa $loa,
-        private readonly array    $roles = [],
+        private readonly array $roles = [],
     )
     {
     }
@@ -39,9 +39,24 @@ class AuthenticatedIdentity implements UserInterface
         return $this->originalIdentity;
     }
 
+    public function getId(): ?string
+    {
+        return $this->originalIdentity->id;
+    }
+
+    public function getInstitution(): string
+    {
+        return $this->originalIdentity->institution;
+    }
+
     public function getUsername(): string
     {
         return $this->originalIdentity->id ?: '';
+    }
+
+    public function getPreferredLocale(): string
+    {
+        return $this->originalIdentity->preferredLocale;
     }
 
     public function getLoa(): Loa
