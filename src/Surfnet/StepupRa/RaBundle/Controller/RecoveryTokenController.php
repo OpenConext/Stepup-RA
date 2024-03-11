@@ -32,13 +32,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class RecoveryTokenController extends AbstractController
 {
     public function __construct(
         private readonly RecoveryTokenService $recoveryTokenService,
         private readonly PaginatorInterface $paginator,
-        private readonly TokenStorageInterface $tokenStorage,
         private readonly LoggerInterface $logger,
     ) {
     }
@@ -48,11 +48,10 @@ final class RecoveryTokenController extends AbstractController
         name: 'ra_recovery_tokens_search',
         methods: ['GET', 'POST'],
     )]
+    #[IsGranted('ROLE_RA')]
     public function search(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RA');
-
-        $identity = $this->getCurrentUser();
+        $identity = $this->getUser()->getIdentity();
         $this->logger->notice('Starting search for recovery tokens');
 
         $command = new SearchRecoveryTokensCommand();
@@ -107,14 +106,13 @@ final class RecoveryTokenController extends AbstractController
         name: 'ra_recovery_tokens_revoke',
         methods: ['POST'],
     )]
+    #[IsGranted('ROLE_RA')]
     public function revoke(Request $request): RedirectResponse
     {
-        $this->denyAccessUnlessGranted('ROLE_RA');
-
         $this->logger->notice('Received request to revoke recovery token');
 
         $command = new RevokeRecoveryTokenCommand();
-        $command->currentUserId = $this->getCurrentUser()->id;
+        $command->currentUserId = $this->getUser()->getIdentity()->id;
 
         $form = $this->createForm(RevokeRecoveryTokenType::class, $command);
         $form->handleRequest($request);
@@ -137,12 +135,5 @@ final class RecoveryTokenController extends AbstractController
         $this->logger->notice('Redirecting back to recovery tokens search overview');
 
         return $this->redirectToRoute('ra_recovery_tokens_search');
-    }
-
-    private function getCurrentUser(): Identity
-    {
-        /** @var Identity $identity */
-        $identity = $this->tokenStorage->getToken()->getUser();
-        return $identity;
     }
 }

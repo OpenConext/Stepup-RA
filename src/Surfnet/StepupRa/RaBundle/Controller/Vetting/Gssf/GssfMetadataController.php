@@ -18,26 +18,22 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller\Vetting\Gssf;
 
-use Psr\Log\LoggerInterface;
 use Surfnet\SamlBundle\Http\XMLResponse;
-use Surfnet\SamlBundle\Metadata\MetadataFactory;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorAssertionService;
-use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\Provider;
+use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\MetadataFactoryCollection;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ProviderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Orchestrates verification of GSSFs (Generic SAML Second Factors) through GSSPs (Generic SAML Stepup Providers).
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 final class GssfMetadataController extends AbstractController
 {
     public function __construct(
         private readonly ProviderRepository   $providerRepository,
-        private readonly LoggerInterface      $logger,
         private readonly SecondFactorAssertionService $secondFactorAssertionService,
+        private readonly MetadataFactoryCollection $metadataFactoryCollection,
     ) {
     }
 
@@ -46,29 +42,14 @@ final class GssfMetadataController extends AbstractController
         name: 'ra_vetting_gssf_metadata',
         methods: ['GET'],
     )]
-    public function metadata(string $provider): XMLResponse
+    public function __invoke(string $providerName): XMLResponse
     {
-        $this->secondFactorAssertionService->assertSecondFactorEnabled($provider);
+        $this->secondFactorAssertionService->assertSecondFactorEnabled($providerName);
 
-        $provider = $this->getProvider($provider);
+        $provider = $this->providerRepository->get($providerName);
 
-        /** @var MetadataFactory $factory */
-        $factory = $this->container->get('gssp.provider.' . $provider->getName() . '.metadata.factory');
+        $factory = $this->metadataFactoryCollection->getByIdentifier($provider->getName());
 
         return new XMLResponse($factory->generate());
-    }
-
-    /**
-     * @throws NotFoundHttpException
-     */
-    private function getProvider(string $provider): Provider
-    {
-        if (!$this->providerRepository->has($provider)) {
-            $this->logger->info(sprintf('Requested GSSP "%s" does not exist or is not registered', $provider));
-
-            throw new NotFoundHttpException('Requested provider does not exist');
-        }
-
-        return $this->providerRepository->get($provider);
     }
 }

@@ -27,6 +27,7 @@ use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Form\Type\StartVettingProcedureType;
 use Surfnet\StepupRa\RaBundle\Form\Type\VerifyIdentityType;
+use Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
@@ -39,6 +40,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 
@@ -54,7 +56,7 @@ class VettingController extends AbstractController
         private readonly SecondFactorTypeService $secondFactorTypeService,
         private readonly LoggerInterface $logger,
         private readonly TranslatorInterface $translator,
-        private readonly Security $security,
+        private readonly ProcedureAwareLogger $procedureAwareLogger,
     ) {
     }
 
@@ -68,10 +70,9 @@ class VettingController extends AbstractController
         name: 'ra_vetting_search',
         methods: ['GET', 'POST'],
     )]
+    #[IsGranted('ROLE_RA')]
     public function startProcedure(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RA');
-
         $this->logger->notice('Vetting Procedure Search started');
 
         $command = new StartVettingProcedureCommand();
@@ -146,12 +147,12 @@ class VettingController extends AbstractController
 
         $procedureId = $this->vettingService->startProcedure($command);
 
-        $this->container->get('ra.procedure_logger')
+        $this->procedureAwareLogger
             ->forProcedure($procedureId)
             ->notice(sprintf('Starting new Vetting Procedure for second factor of type "%s"', $secondFactor->type));
 
         if ($this->vettingService->isProvePossessionSkippable($procedureId)) {
-            $this->container->get('ra.procedure_logger')
+            $this->procedureAwareLogger
                 ->forProcedure($procedureId)
                 ->notice(sprintf('Vetting Procedure for second factor of type "%s" skips the possession proven step', $secondFactor->type));
 
@@ -185,7 +186,7 @@ class VettingController extends AbstractController
     )]
     public function cancelProcedure($procedureId): RedirectResponse
     {
-        $logger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
+        $logger = $this->procedureAwareLogger->forProcedure($procedureId);
 
         if (!$this->vettingService->hasProcedure($procedureId)) {
             $logger->notice(sprintf('Vetting procedure "%s" not found', $procedureId));
@@ -207,11 +208,10 @@ class VettingController extends AbstractController
         name: 'ra_vetting_verify_identity',
         methods: ['GET', 'POST'],
     )]
+    #[IsGranted('ROLE_RA')]
     public function verifyIdentity(Request $request, string $procedureId): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RA');
-
-        $logger = $this->container->get('ra.procedure_logger')->forProcedure($procedureId);
+        $logger = $this->procedureAwareLogger->forProcedure($procedureId);
         $logger->notice('Verify Identity Form requested');
 
         if (!$this->vettingService->hasProcedure($procedureId)) {

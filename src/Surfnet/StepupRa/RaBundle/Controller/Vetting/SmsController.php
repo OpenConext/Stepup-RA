@@ -35,6 +35,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -55,11 +56,10 @@ class SmsController extends AbstractController
         name: 'ra_vetting_sms_send_challenge',
         methods: ['GET', 'POST'],
     )]
+    #[IsGranted('ROLE_RA')]
     public function sendChallenge(Request $request, string $procedureId): Response
     {
         $this->secondFactorAssertionService->assertSecondFactorEnabled('sms');
-
-        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $logger = $this->procedureAwareLogger->forProcedure($procedureId);
         $logger->notice('Received request for Send SMS Challenge page');
@@ -128,10 +128,10 @@ class SmsController extends AbstractController
         name: 'ra_vetting_sms_prove_possession',
         methods: ['GET', 'POST'],
     )]
+    #[IsGranted('ROLE_RA')]
     public function provePossession(Request $request, string $procedureId): Response
     {
         $this->secondFactorAssertionService->assertSecondFactorEnabled('sms');
-        $this->denyAccessUnlessGranted('ROLE_RA');
         $logger = $this->procedureAwareLogger->forProcedure($procedureId);
 
         $logger->notice('Received request for Proof of Possession of SMS Second Factor page');

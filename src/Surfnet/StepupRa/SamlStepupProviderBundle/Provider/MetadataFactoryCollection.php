@@ -34,7 +34,7 @@ class MetadataFactoryCollection
     {
         if (!$this->has($provider)) {
             throw new MetadataFactoryNotFoundException(
-                message: "The provider {$provider} does not exist in the collection"
+                message: "The provider {$provider} does not exist in the collection",
             );
         }
 

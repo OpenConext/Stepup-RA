@@ -41,7 +41,7 @@ class SamlController extends AbstractController
     #[Route(
         path: '/authentication/consume-assertion',
         name: 'ra_serviceprovider_consume_assertion',
-        methods: ['POST']
+        methods: ['POST'],
     )]
     public function consumeAssertion(Request $httpRequest): Response
     {

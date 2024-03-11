@@ -42,6 +42,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -64,15 +65,13 @@ class RaManagementController extends AbstractController
         name: 'ra_management_manage',
         methods: ['GET'],
     )]
+    #[IsGranted('ROLE_RAA')]
     public function manage(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RAA');
-        $this->denyAccessUnlessGranted('ROLE_SRAA');
-
-        $institution = $this->getUser()->institution;
+        $institution = $this->getUser()->getInstitution();
         $this->logger->notice(sprintf('Loading overview of RA(A)s for institution "%s"', $institution));
 
-        $identity = $this->getCurrentUser();
+        $identity = $this->getUser()->getIdentity();
 
         $command = new SearchRaListingCommand();
         $command->actorId = $identity->id;
@@ -121,12 +120,10 @@ class RaManagementController extends AbstractController
         name: 'ra_management_ra_candidate_search',
         methods: ['GET', 'POST'],
     )]
+    #[IsGranted('ROLE_RAA')]
     public function raCandidateSearch(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RAA');
-        $this->denyAccessUnlessGranted('ROLE_SRAA');
-        
-        $identity = $this->getCurrentUser();
+        $identity = $this->getUser()->getIdentity();
         $institution = $identity->institution;
 
         $this->logger->notice(sprintf('Searching for RaCandidates within institution "%s"', $institution));
@@ -177,17 +174,15 @@ class RaManagementController extends AbstractController
         name: 'ra_management_create_ra',
         methods: ['GET', 'POST'],
     )]
+    #[IsGranted('ROLE_RAA')]
     public function createRa(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RAA');
-        $this->denyAccessUnlessGranted('ROLE_SRAA');
-
         $this->logger->notice('Page for Accreditation of Identity to Ra or Raa requested');
         $identityId = $request->get('identityId');
 
-        $raCandidate = $this->raCandidateService->getRaCandidate($identityId, $this->getUser()->id);
+        $raCandidate = $this->raCandidateService->getRaCandidate($identityId, $this->getUser()->getIdentity()->id);
 
-        if (!$raCandidate->raCandidate) {
+        if (! isset($raCandidate->raCandidate)) {
             $this->logger->warning(sprintf('RaCandidate based on identity "%s" not found', $identityId));
             throw new NotFoundHttpException();
         }
@@ -199,7 +194,7 @@ class RaManagementController extends AbstractController
         $command->identityId = $identityId;
         $command->institution = $raCandidate->raCandidate->institution;
         $command->roleAtInstitution = new RoleAtInstitution();
-        $command->roleAtInstitution->setInstitution($this->getUser()->institution);
+        $command->roleAtInstitution->setInstitution($this->getUser()->getIdentity()->institution);
         $command->availableInstitutions = $selectOptions;
 
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
@@ -237,14 +232,12 @@ class RaManagementController extends AbstractController
         name: 'ra_management_amend_ra_information',
         methods: ['GET', 'POST'],
     )]
+    #[IsGranted('ROLE_RAA')]
     public function amendRaInformation(Request $request, $identityId, $raInstitution): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RAA');
-        $this->denyAccessUnlessGranted('ROLE_SRAA');
-
         $this->logger->notice(sprintf("Loading information amendment form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->raListingService->get($identityId, $raInstitution, $this->getUser()->id);
+        $raListing = $this->raListingService->get($identityId, $raInstitution, $this->getUser()->getIdentity()->id);
 
         if (!$raListing) {
             $this->logger->warning(sprintf("RA listing for identity ID '%s' not found", $identityId));
@@ -287,16 +280,14 @@ class RaManagementController extends AbstractController
         name: 'ra_management_retract_registration_authority',
         methods: ['GET', 'POST'],
     )]
+    #[IsGranted('ROLE_RAA')]
     public function retractRegistrationAuthority(Request $request, $identityId, $raInstitution): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RAA');
-        $this->denyAccessUnlessGranted('ROLE_SRAA');
-
         $this->logger->notice(sprintf("Loading retract registration authority form for RA(A) '%s'", $identityId));
 
-        $raListing = $this->raListingService->get($identityId, $raInstitution, $this->getUser()->id);
+        $raListing = $this->raListingService->get($identityId, $raInstitution, $this->getUser()->getIdentity()->id);
         if (!$raListing) {
-            $this->logger->warning(sprintf("RA listing for identity ID '%s@%s' not found", $identityId, $this->getUser()->institution));
+            $this->logger->warning(sprintf("RA listing for identity ID '%s@%s' not found", $identityId, $this->getUser()->getIdentity()->institution));
             throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
         }
 
@@ -331,10 +322,5 @@ class RaManagementController extends AbstractController
             'raListing' => $raListing,
             'form'      => $form->createView()
         ]);
-    }
-
-    private function getCurrentUser(): Identity
-    {
-        return $this->container->get('security.token_storage')->getToken()->getUser();
     }
 }

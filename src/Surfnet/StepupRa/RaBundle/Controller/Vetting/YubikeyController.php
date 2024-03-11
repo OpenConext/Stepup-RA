@@ -31,6 +31,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class YubikeyController extends AbstractController
 {
@@ -46,11 +47,10 @@ class YubikeyController extends AbstractController
         name: 'ra_vetting_yubikey_verify',
         methods: ['GET', 'POST'],
     )]
+    #[IsGranted('ROLE_RA')]
     public function __invoke(Request $request, string $procedureId): Response
     {
         $this->secondFactorAssertionService->assertSecondFactorEnabled('yubikey');
-
-        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $procedureLogger = $this->procedureAwareLogger->forProcedure($procedureId);
         $procedureLogger->notice('Requested Yubikey Verfication');

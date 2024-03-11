@@ -125,5 +125,4 @@ final class GssfVerifyController extends AbstractController
             ['gssfIdMismatch' => true],
         );
     }
-
 }
