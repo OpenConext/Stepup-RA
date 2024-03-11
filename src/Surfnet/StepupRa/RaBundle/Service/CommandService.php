@@ -36,7 +36,7 @@ final readonly class CommandService
     public function execute(Command $command): ExecutionResult
     {
         /** @var Identity $identity */
-        $identity = $this->tokenStorage->getToken()->getUser();
+        $identity = $this->tokenStorage->getToken()->getUser()->getIdentity();
 
         return $this->commandService->execute($command, new Metadata($identity->id, $identity->institution));
     }

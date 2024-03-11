@@ -30,6 +30,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class RaaController extends AbstractController
 {
@@ -46,13 +47,11 @@ class RaaController extends AbstractController
         name: 'institution-configuration',
         methods: ['GET', 'POST'],
     )]
+    #[IsGranted('ROLE_RAA')]
     public function institutionConfiguration(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RAA');
-        $this->denyAccessUnlessGranted('ROLE_SRAA');
-
         /** @var Identity $identity */
-        $identity = $this->getUser();
+        $identity = $this->getUser()->getIdentity();
 
         $profile = $this->profileService->findByIdentityId($identity->id);
 

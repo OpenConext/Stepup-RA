@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
  * Copyright 2015 SURFnet bv
  *
@@ -18,38 +20,49 @@
 
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\Saml;
 
-use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
+
+use Symfony\Component\HttpFoundation\RequestStack;
 
 final readonly class StateHandler
 {
-    public function __construct(private AttributeBag $attributeBag, private string $provider)
-    {
+    const REQUEST_ID = 'request_id';
+
+    public function __construct(
+        private RequestStack $requestStack,
+        private string $provider,
+    ) {
     }
 
-    public function setRequestId(string $originalRequestId): StateHandler
+    public function setRequestId(string $originalRequestId): self
     {
-        $this->set('request_id', $originalRequestId);
+        $this->set(self::REQUEST_ID, $originalRequestId);
 
         return $this;
     }
 
     public function getRequestId(): ?string
     {
-        return $this->get('request_id');
+        return $this->get(self::REQUEST_ID);
     }
 
     public function clear(): void
     {
-        $this->attributeBag->remove($this->provider);
+        $session = $this->requestStack->getSession();
+
+        $session->getBag('gssp.provider.' . $this->provider)->clear();
+
+        $this->requestStack->getSession()->remove($this->provider);
     }
 
-    protected function set($key, $value): void
+    protected function set(string $key, $value): void
     {
-        $this->attributeBag->set($this->provider . '/' . $key, $value);
+        $session = $this->requestStack->getSession();
+        $session->getBag('gssp.provider.' . $this->provider)->set($key, $value);
     }
 
-    protected function get($key)
+    protected function get(string $key)
     {
-        return $this->attributeBag->get($this->provider . '/' . $key);
+        $session = $this->requestStack->getSession();
+        return $session->getBag('gssp.provider.' . $this->provider)->get($key);
     }
 }

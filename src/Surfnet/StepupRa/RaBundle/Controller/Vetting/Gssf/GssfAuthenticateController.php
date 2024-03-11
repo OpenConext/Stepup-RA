@@ -28,6 +28,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /**
  * Orchestrates verification of GSSFs (Generic SAML Second Factors) through GSSPs (Generic SAML Stepup Providers).
@@ -49,11 +50,10 @@ final class GssfAuthenticateController extends AbstractController
         name: 'ra_vetting_gssf_authenticate',
         methods: ['POST'],
     )]
+    #[IsGranted('ROLE_RA')]
     public function __invoke(string $procedureId, string $provider): Response
     {
         $this->secondFactorAssertionService->assertSecondFactorEnabled($provider);
-
-        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $procedureLogger = $this->procedureAwareLogger->forProcedure($procedureId);
         $procedureLogger->notice('Generating GSSF verification request', ['provider' => $provider]);
@@ -89,5 +89,4 @@ final class GssfAuthenticateController extends AbstractController
 
         return $this->redirectBinding->createResponseFor($authnRequest);
     }
-
 }

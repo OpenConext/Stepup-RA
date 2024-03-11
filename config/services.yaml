@@ -25,11 +25,15 @@ services:
 
   surfnet_saml.saml_provider:
     class: Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider
-    arguments:
-      $identityService: '@ra.service.identity'
+#    arguments:
+#      $identityService: '@ra.service.identity'
 
   Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider:
     alias: surfnet_saml.saml_provider
+
+  Surfnet\StepupRa\SamlStepupProviderBundle\Session\SessionFactoryWithAttributeBag:
+    decorates: session.factory
+    arguments: [ '@.inner' ]
 
   ra.service.gssf:
     class: Surfnet\StepupRa\RaBundle\Service\GssfService

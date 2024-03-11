@@ -38,6 +38,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -56,13 +57,12 @@ final class RaLocationController extends AbstractController
     }
 
     #[Route('/locations', name: 'ra_locations_manage', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_RA')]
     public function manage(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RA');
-
         $institutionParameter = $request->get('institution');
 
-        $identity = $this->getCurrentUser();
+        $identity = $this->getUser()->getIdentity();
         $this->logger->notice('Starting search for locations');
 
         $profile = $this->profileService->findByIdentityId($identity->id);
@@ -118,14 +118,13 @@ final class RaLocationController extends AbstractController
         ]);
     }
 
-    #[Route('/locations/create/{institution}', name: 'ra_locations_create', methods: ['GET', 'POST'])]
+    #[Route('/locations/create/{institution}', name: 'ra_location_create', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_RA')]
     public function create(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RA');
-
         $institution = $request->get('institution');
 
-        $identity = $this->getCurrentUser();
+        $identity = $this->getUser()->getIdentity();
         $command = new CreateRaLocationCommand();
         $command->institution = $institution;
         $command->currentUserId = $identity->id;
@@ -158,13 +157,12 @@ final class RaLocationController extends AbstractController
 
     #[Route(
         path: '/locations/{locationId}/change',
-        name: 'ra_locations_change',
+        name: 'ra_location_change',
         methods: ['GET', 'POST'],
     )]
+    #[IsGranted('ROLE_RA')]
     public function change(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RA');
-
         $requestedLocationId = $request->get('locationId');
         $raLocation = $this->raLocationService->find($requestedLocationId);
 
@@ -173,7 +171,7 @@ final class RaLocationController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        $identity = $this->getCurrentUser();
+        $identity = $this->getUser()->getIdentity();
 
         $command = new ChangeRaLocationCommand();
         $command->institution = $raLocation->institution;
@@ -209,15 +207,14 @@ final class RaLocationController extends AbstractController
         ]);
     }
 
-    #[Route('/locations/remove', name: 'ra_locations_remove', methods: ['POST'])]
+    #[Route('/locations/remove', name: 'ra_location_remove', methods: ['POST'])]
+    #[IsGranted('ROLE_RA')]
     public function remove(Request $request): RedirectResponse
     {
-        $this->denyAccessUnlessGranted('ROLE_RA');
-
         $this->logger->notice('Received request to remove RA location');
 
         $command = new RemoveRaLocationCommand();
-        $command->currentUserId = $this->getCurrentUser()->id;
+        $command->currentUserId = $this->getUser()->getIdentity()->id;
 
         $form = $this->createForm(RemoveRaLocationType::class, $command);
         $form->handleRequest($request);
@@ -240,10 +237,5 @@ final class RaLocationController extends AbstractController
         $this->logger->notice('Redirecting back to RA Location Manage Page');
 
         return $this->redirectToRoute('ra_locations_manage', ['institution' => $command->institution]);
-    }
-
-    private function getCurrentUser(): Identity
-    {
-        return $this->container->get('security.token_storage')->getToken()->getUser();
     }
 }

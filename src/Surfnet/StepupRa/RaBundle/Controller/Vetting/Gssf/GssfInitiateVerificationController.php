@@ -26,6 +26,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /**
  * Orchestrates verification of GSSFs (Generic SAML Second Factors) through GSSPs (Generic SAML Stepup Providers).
@@ -50,11 +51,10 @@ final class GssfInitiateVerificationController extends AbstractController
         name: 'ra_vetting_gssf_initiate',
         methods: ['GET'],
     )]
+    #[IsGranted('ROLE_RA')]
     public function __invoke(string $procedureId, string $provider): Response
     {
         $this->secondFactorAssertionService->assertSecondFactorEnabled($provider);
-
-        $this->denyAccessUnlessGranted('ROLE_RA');
 
         $procedureLogger = $this->procedureAwareLogger->forProcedure($procedureId);
         $procedureLogger->notice('Showing Initiate GSSF Verification Screen', ['provider' => $provider]);
@@ -66,8 +66,7 @@ final class GssfInitiateVerificationController extends AbstractController
 
         return $this->gssfInitiateFormService->renderInitiateForm(
             procedureId: $procedureId,
-            providerName: $this->providerRepository->get($provider)->getName()
+            providerName: $this->providerRepository->get($provider)->getName(),
         );
     }
-
 }

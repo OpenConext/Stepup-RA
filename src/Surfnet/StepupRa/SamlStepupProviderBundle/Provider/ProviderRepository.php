@@ -27,7 +27,7 @@ use Surfnet\StepupRa\SamlStepupProviderBundle\Exception\UnknownProviderException
 final class ProviderRepository
 {
 
-    public function __construct(private LoggerInterface $logger)
+    public function __construct(private readonly LoggerInterface $logger)
     {
     }
 
@@ -61,5 +61,13 @@ final class ProviderRepository
         }
 
         return $this->providers[$providerName];
+    }
+
+    /**
+     * @return array<string, Provider>
+     */
+    public function getAll(): array
+    {
+        return $this->providers;
     }
 }

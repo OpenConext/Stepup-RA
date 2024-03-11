@@ -96,5 +96,4 @@ final class LocaleController extends AbstractController
 
         return $this->redirect($returnUrl);
     }
-
 }

@@ -41,7 +41,7 @@ final class ProfileController extends AbstractController
     {
         $this->logger->notice('Opening profile page');
 
-        $identity = $this->getUser();
+        $identity = $this->getUser()->getIdentity();
         $profile = $this->profileService->findByIdentityId($identity->id);
         return
             $this->render('profile/profile.html.twig', ['profile' => $profile]);

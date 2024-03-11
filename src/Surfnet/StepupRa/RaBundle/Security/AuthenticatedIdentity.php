@@ -30,8 +30,7 @@ class AuthenticatedIdentity implements UserInterface
         private readonly Identity $originalIdentity,
         private readonly Loa $loa,
         private readonly array $roles = [],
-    )
-    {
+    ) {
     }
 
     public function getIdentity(): Identity

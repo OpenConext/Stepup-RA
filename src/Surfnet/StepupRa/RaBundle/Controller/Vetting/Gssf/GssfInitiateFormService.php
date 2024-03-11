@@ -64,9 +64,8 @@ class GssfInitiateFormService
         return new Response(
             $this->twig->render(
                 '@default/vetting/gssf/initiate.html.twig',
-                $templateParameters
-            )
+                $templateParameters,
+            ),
         );
     }
-
 }

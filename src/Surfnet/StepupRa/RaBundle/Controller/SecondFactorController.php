@@ -20,7 +20,6 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Knp\Component\Pager\PaginatorInterface;
 use Psr\Log\LoggerInterface;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\ExportRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
@@ -30,12 +29,14 @@ use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType;
 use Surfnet\StepupRa\RaBundle\Service\AuditLogService;
 use Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -48,6 +49,7 @@ final class SecondFactorController extends AbstractController
         private readonly PaginatorInterface $paginator,
         private readonly LoggerInterface $logger,
         private readonly RaSecondFactorService $secondFactorService,
+        #[Autowire(service: 'ra.service.identity')]
         private readonly UserProviderInterface $identityService,
         private readonly AuditLogService $auditLogService,
         private readonly TranslatorInterface $translator,
@@ -59,11 +61,10 @@ final class SecondFactorController extends AbstractController
         name: 'ra_second_factors_search',
         methods: ['GET', 'POST'],
     )]
+    #[IsGranted('ROLE_RA')]
     public function search(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RA');
-
-        $identity = $this->getCurrentUser();
+        $identity = $this->getUser()->getIdentity();
         $this->logger->notice('Starting search for second factors');
 
         $command = new SearchRaSecondFactorsCommand();
@@ -117,10 +118,9 @@ final class SecondFactorController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_RAA')]
     public function export(SearchRaSecondFactorsCommand $command): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RAA');
-
         $this->logger->notice('Starting export of searched second factors');
 
         $exportCommand = ExportRaSecondFactorsCommand::fromSearchCommand($command);
@@ -130,17 +130,16 @@ final class SecondFactorController extends AbstractController
 
     #[Route(
         path: '/second-factors/revoke',
-        name: 'ra_second_factors_revoke',
+        name: 'ra_second_factor_revoke',
         methods: ['POST'],
     )]
+    #[IsGranted('ROLE_RA')]
     public function revoke(Request $request): RedirectResponse
     {
-        $this->denyAccessUnlessGranted('ROLE_RA');
-
         $this->logger->notice('Received request to revoke Second Factor');
 
         $command = new RevokeSecondFactorCommand();
-        $command->currentUserId = $this->getCurrentUser()->id;
+        $command->currentUserId = $this->getUser()->getIdentity()->id;
 
         $form = $this->createForm(RevokeSecondFactorType::class, $command);
         $form->handleRequest($request);
@@ -167,7 +166,7 @@ final class SecondFactorController extends AbstractController
 
     #[Route(
         path: '/second-factors/{identityId}/auditlog',
-        name: 'ra_second_factors_auditlog',
+        name: 'ra_second_factor_auditlog',
         methods: ['GET'],
     )]
     #[Route(
@@ -175,10 +174,9 @@ final class SecondFactorController extends AbstractController
         name: 'ra_recovery_tokens_auditlog',
         methods: ['GET'],
     )]
+    #[IsGranted('ROLE_RA')]
     public function auditLog(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_RA');
-
         $identityId = $request->get('identityId');
 
         $this->logger->notice(sprintf('Requested AuditLog for SecondFactors of identity "%s"', $identityId));
@@ -187,7 +185,7 @@ final class SecondFactorController extends AbstractController
         if (!$identity) {
             $this->logger->notice(sprintf(
                 'User with Identity "%s" requested non-existent identity "%s"',
-                $this->getCurrentUser()->id,
+                $this->getUser()->getIdentity()->id,
                 $identityId,
             ));
 
@@ -221,10 +219,5 @@ final class SecondFactorController extends AbstractController
                 'identity'   => $identity,
             ],
         );
-    }
-
-    private function getCurrentUser(): Identity
-    {
-        return $this->container->get('security.token_storage')->getToken()->getUser();
     }
 }

@@ -173,9 +173,8 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
     private function createRemoteDefinition(
         string $provider,
         array $configuration,
-        ContainerBuilder $container
-    ): void
-    {
+        ContainerBuilder $container,
+    ): void {
         $definition    = new Definition(IdentityProvider::class, [
             [
                 'entityId'        => $configuration['entity_id'],

@@ -52,5 +52,4 @@ final class GssfMetadataController extends AbstractController
 
         return new XMLResponse($factory->generate());
     }
-
 }
