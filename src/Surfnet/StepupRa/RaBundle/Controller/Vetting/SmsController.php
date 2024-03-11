@@ -86,7 +86,7 @@ class SmsController extends AbstractController
         if (!$form->isSubmitted() || !$form->isValid()) {
             $logger->notice('Form has not been submitted, not sending SMS, rendering Send SMS Challenge page');
 
-            $this->render(
+            return $this->render(
                 'vetting/sms/send_challenge.html.twig',
                 array_merge(
                     $viewVariables,
