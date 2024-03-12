@@ -129,11 +129,15 @@ services:
             - "@logger"
 
     ra.service.yubikey_second_factor:
-        public: true
+        public: false
         class: Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorService
         arguments:
             - "@ra.service.yubikey"
             - "@logger"
+
+    Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorServiceInterface:
+        alias: ra.service.yubikey_second_factor
+
 
     ra.service.gssf:
         class: Surfnet\StepupRa\RaBundle\Service\GssfService
