@@ -25,7 +25,7 @@ use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyOtpCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult;
 
-class YubikeySecondFactorService
+class YubikeySecondFactorService implements YubikeySecondFactorServiceInterface
 {
     public function __construct(
         private readonly YubikeyService $yubikeyService,
@@ -53,14 +53,6 @@ class YubikeySecondFactorService
             return new VerificationResult(VerificationResult::RESULT_OTP_VERIFICATION_FAILED, $publicId);
         } elseif ($verificationResult->isClientError()) {
             return new VerificationResult(VerificationResult::RESULT_OTP_INVALID, $publicId);
-        }
-
-        if ($publicId->getYubikeyPublicId() !== $command->expectedPublicId) {
-            $this->logger->notice(
-                'Yubikey used by registrant during vetting did not match the one used during registration.',
-            );
-
-            return new VerificationResult(VerificationResult::RESULT_PUBLIC_ID_DID_NOT_MATCH, $publicId);
         }
 
         $this->logger->info(

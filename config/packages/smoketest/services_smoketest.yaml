@@ -5,6 +5,15 @@ services:
     arguments:
       - "@surfnet_stepup.service.challenge_handler"
 
+  ra.service.yubikey_second_factor:
+    public: true
+    class: Surfnet\StepupRa\RaBundle\Tests\TestDouble\Service\YubikeySecondFactorService
+    arguments:
+      - "@logger"
+
+  Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorServiceInterface:
+    alias: ra.service.yubikey_second_factor
+
   # The middleware client bundle guzzle client is overloaded to be able to pass the testcookie to the ensure MW is
   # loaded in test mode. This way people setting the testcookie in prod will not switch their mw api into testmode
   # resulting in 500 errors.
