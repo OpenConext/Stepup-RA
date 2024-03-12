@@ -59,7 +59,7 @@ class VettingService
      */
     public function __construct(
         private readonly SmsSecondFactorServiceInterface $smsSecondFactorService,
-        private readonly YubikeySecondFactorService $yubikeySecondFactorService,
+        private readonly YubikeySecondFactorServiceInterface $yubikeySecondFactorService,
         private readonly GssfService $gssfService,
         private readonly CommandService $commandService,
         private readonly VettingProcedureRepository $vettingProcedureRepository,
