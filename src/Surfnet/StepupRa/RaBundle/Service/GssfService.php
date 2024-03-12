@@ -19,22 +19,27 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
 
 final readonly class GssfService
 {
-    public function __construct(private AttributeBagInterface $state)
+    public function __construct(
+//        private AttributeBagInterface $state
+    private RequestStack $requestStack,
+    )
     {
     }
 
     public function startVerification(string $gssfId, string $procedureId): void
     {
-        $this->state->set('current_verification', ['procedureId' => $procedureId, 'gssfId' => $gssfId]);
+        $this->requestStack->getSession()->set('current_verification', ['procedureId' => $procedureId, 'gssfId' => $gssfId]);
     }
 
     public function verify(string $gssfId): VerificationResult
     {
-        $verification = $this->state->remove('current_verification');
+        $verification = $this->requestStack->getSession()->remove('current_verification');
 
         if (!$verification) {
             return VerificationResult::noSuchProcedure();

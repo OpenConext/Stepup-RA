@@ -11,12 +11,3 @@ services:
         class: Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ProviderRepository
     Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ProviderRepository:
         alias: gssp.provider_repository
-
-    gssp.session.namespaced_attribute_bag:
-        public: false
-        class: Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag
-        arguments:
-            - '__gssp__'
-            - '/'
-        calls:
-            - [setName, ['gssp']]

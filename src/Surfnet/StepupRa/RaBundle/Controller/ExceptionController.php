@@ -64,7 +64,7 @@ final class ExceptionController extends BaseExceptionController
         return parent::getPageTitleAndDescription($exception);
     }
 
-    public function __invoke(Request $request, Throwable $exception): Response
+    public function show(Request $request, Throwable $exception): Response
     {
         $statusCode = $this->getStatusCode($exception);
 

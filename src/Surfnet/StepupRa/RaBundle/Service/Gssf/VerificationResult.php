@@ -18,29 +18,13 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service\Gssf;
 
-use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
-
 final class VerificationResult
 {
-    /**
-     * @var boolean
-     */
-    private $verificationSucceeded;
+    private bool $verificationSucceeded = false;
+    private ?string $procedureId = null;
 
-    /**
-     * @var string|null
-     */
-    private $procedureId;
-
-    /**
-     * @param string $procedureId
-     */
-    public static function verificationSucceeded($procedureId): VerificationResult
+    public static function verificationSucceeded(string $procedureId): VerificationResult
     {
-        if (!is_string($procedureId)) {
-            throw InvalidArgumentException::invalidType('string', 'procedureId', $procedureId);
-        }
-
         $result = new self();
         $result->verificationSucceeded = true;
         $result->procedureId = $procedureId;
@@ -56,15 +40,8 @@ final class VerificationResult
         return $result;
     }
 
-    /**
-     * @param string $procedureId
-     */
-    public static function verificationFailed($procedureId): VerificationResult
+    public static function verificationFailed(string $procedureId): VerificationResult
     {
-        if (!is_string($procedureId)) {
-            throw InvalidArgumentException::invalidType('string', 'procedureId', $procedureId);
-        }
-
         $result = new self();
         $result->verificationSucceeded = false;
         $result->procedureId = $procedureId;

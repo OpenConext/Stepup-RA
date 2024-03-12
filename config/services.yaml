@@ -38,4 +38,4 @@ services:
   ra.service.gssf:
     class: Surfnet\StepupRa\RaBundle\Service\GssfService
     arguments:
-      - "@gssp.session.namespaced_attribute_bag"
+      - "@request_stack"
