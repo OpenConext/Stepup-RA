@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Exception;
 
+use Symfony\Component\HttpKernel\Attribute\WithHttpStatus;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 /**
@@ -31,6 +32,8 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
  *
  * @package Surfnet\StepupRa\RaBundle\Exception
  */
-final class UserNotRaException extends AuthenticationException
+
+#[WithHttpStatus(401)]
+final class UserNotRaException extends RuntimeException
 {
 }
