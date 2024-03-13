@@ -7,12 +7,9 @@ framework:
         #auto_mapping:
         #    App\Entity\: []
 
-when@smoketest:
+when@smoketest: &smoketest
     framework:
         validation:
             not_compromised_password: false
 
-when@test:
-    framework:
-        validation:
-            not_compromised_password: false
+when@test: *smoketest # Use the same configuration as smoketest
