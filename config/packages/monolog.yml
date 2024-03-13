@@ -31,8 +31,6 @@ when@prod:
                 channels: [ "!event", "!doctrine" ]
 
 when@dev:
-    # The monolog configuration below overwrites the in logging.yml that
-    # is normally used for production.
     monolog:
         handlers:
             prod-signaler:
@@ -65,6 +63,7 @@ when@smoketest:
                 type: stream
                 path: "%kernel.logs_dir%/%kernel.environment%.log"
                 level: debug
+
 
 when@test:
     monolog:
