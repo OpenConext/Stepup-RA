@@ -20,6 +20,7 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\EventSubscriber;
 
+use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -27,15 +28,19 @@ use Symfony\Component\Security\Http\Event\LogoutEvent;
 
 readonly class CustomLogoutListener
 {
+    /**
+     * @param array<string, string> $logoutRedirectUrl
+     */
     public function __construct(
         private Security $security,
-        private array $logoutRedirectUrl,
+        private array $logoutRedirectUrl = [],
     ) {
     }
 
     #[AsEventListener(event: LogoutEvent::class)]
     public function onLogout(LogoutEvent $event): void
     {
+        assert($this->security->getUser() instanceof AuthenticatedIdentity);
         $identity = $this->security->getUser()->getIdentity();
 
         $logoutRedirectUrl = $this->logoutRedirectUrl[$identity->preferredLocale];
