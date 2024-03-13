@@ -24,3 +24,30 @@ framework:
   error_controller: Surfnet\StepupRa\RaBundle\Controller\ExceptionController::show
   php_errors:
     log: true
+
+when@dev:
+  framework:
+    router:
+      strict_requirements: true
+    profiler: { only_exceptions: false }
+
+when@smoketest:
+  imports:
+    - { resource: './services_smoketest.yaml' }
+
+  framework:
+    test: ~
+    session:
+      storage_factory_id: session.storage.factory.mock_file
+    profiler: { only_exceptions: false }
+    php_errors:
+      log: false # prevents user deprecated warnings
+
+when@test:
+  framework:
+    test: ~
+    session:
+      storage_factory_id: session.storage.factory.mock_file
+    profiler:
+      collect: false
+
