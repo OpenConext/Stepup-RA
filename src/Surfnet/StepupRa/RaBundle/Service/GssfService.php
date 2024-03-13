@@ -26,10 +26,9 @@ use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
 final readonly class GssfService
 {
     public function __construct(
-//        private AttributeBagInterface $state
-    private RequestStack $requestStack,
-    )
-    {
+        //        private AttributeBagInterface $state
+        private RequestStack $requestStack,
+    ) {
     }
 
     public function startVerification(string $gssfId, string $procedureId): void

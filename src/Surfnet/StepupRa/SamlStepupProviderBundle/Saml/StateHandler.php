@@ -20,7 +20,6 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\Saml;
 
-
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final readonly class StateHandler

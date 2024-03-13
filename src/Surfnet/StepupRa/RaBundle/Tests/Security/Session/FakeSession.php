@@ -84,7 +84,7 @@ class FakeSession implements SessionInterface
         return true;
     }
 
-    public function save()
+    public function save(): void
     {
         // noop
     }
