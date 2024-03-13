@@ -1,12 +1,4 @@
 services:
-    # Firewall
-    ra.security.authentication.listener:
-        class: Surfnet\StepupRa\RaBundle\Security\Firewall\SamlListener
-        arguments:
-            - "@ra.security.authentication.handler.authenticated_user_handler"
-            - "@ra.security.authentication.saml_interaction"
-            - "@logger"
-
     ra.security.authentication.saml_interaction:
         public: false
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\SamlInteractionProvider
