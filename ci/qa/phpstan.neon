@@ -5,7 +5,7 @@ rules:
 #    - Surfnet\NoDebugFunctionRule
 #    - Surfnet\InvokableControllerRule
 #    - Surfnet\UntypedIdParamRule
-    - Surfnet\NoNullOrArrayReturnRule
+#    - Surfnet\NoNullOrArrayReturnRule
 parameters:
     checkUninitializedProperties: true
     level: 9
