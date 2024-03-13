@@ -617,46 +617,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/AuthenticatedSessionStateHandler.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Call to method logout\\(\\) on an unknown class Symfony\\\\Component\\\\Security\\\\Http\\\\Logout\\\\CookieClearingLogoutHandler\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Handler/ExplicitSessionTimeoutHandler.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Call to method logout\\(\\) on an unknown class Symfony\\\\Component\\\\Security\\\\Http\\\\Logout\\\\SessionLogoutHandler\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Handler/ExplicitSessionTimeoutHandler.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Symfony\\\\Component\\\\Security\\\\Core\\\\Authentication\\\\Token\\\\Storage\\\\TokenStorageInterface\\:\\:setToken\\(\\) invoked with 0 parameters, 1 required\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Handler/ExplicitSessionTimeoutHandler.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Parameter \\$cookieClearingLogoutHandler of method Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\Authentication\\\\Handler\\\\ExplicitSessionTimeoutHandler\\:\\:__construct\\(\\) has invalid type Symfony\\\\Component\\\\Security\\\\Http\\\\Logout\\\\CookieClearingLogoutHandler\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Handler/ExplicitSessionTimeoutHandler.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Parameter \\$sessionLogoutHandler of method Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\Authentication\\\\Handler\\\\ExplicitSessionTimeoutHandler\\:\\:__construct\\(\\) has invalid type Symfony\\\\Component\\\\Security\\\\Http\\\\Logout\\\\SessionLogoutHandler\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Handler/ExplicitSessionTimeoutHandler.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\Authentication\\\\Handler\\\\ExplicitSessionTimeoutHandler\\:\\:\\$cookieClearingLogoutHandler has unknown class Symfony\\\\Component\\\\Security\\\\Http\\\\Logout\\\\CookieClearingLogoutHandler as its type\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Handler/ExplicitSessionTimeoutHandler.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\Authentication\\\\Handler\\\\ExplicitSessionTimeoutHandler\\:\\:\\$sessionLogoutHandler has unknown class Symfony\\\\Component\\\\Security\\\\Http\\\\Logout\\\\SessionLogoutHandler as its type\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Handler/ExplicitSessionTimeoutHandler.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Parameter \\#1 \\$requestId of method Surfnet\\\\SamlBundle\\\\Monolog\\\\SamlAuthenticationLogger\\:\\:forAuthentication\\(\\) expects string, string\\|null given\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Handler/InitiateSamlAuthenticationHandler.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Cannot access property \\$authorizations on Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Profile\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Provider/SamlProvider.php',
