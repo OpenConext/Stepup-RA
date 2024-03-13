@@ -117,9 +117,4 @@ services:
         arguments:
             - "%ra.security.authentication.session.maximum_relative_lifetime_in_seconds%"
 
-    ra.security.authentication.handler.logout_success:
-        class: Surfnet\StepupRa\RaBundle\Security\Authentication\Handler\LogoutSuccessHandler
-        arguments:
-            - "@security.token_storage"
-            - "%logout_redirect_url%"
 

@@ -657,16 +657,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Handler/InitiateSamlAuthenticationHandler.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot access property \\$preferredLocale on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Handler/LogoutSuccessHandler.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method getUser\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\Authentication\\\\Token\\\\TokenInterface\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Handler/LogoutSuccessHandler.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Cannot access property \\$authorizations on Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Profile\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Provider/SamlProvider.php',
@@ -1120,16 +1110,6 @@ $ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Exception\\\\UnknownProviderException\\:\\:create\\(\\) has parameter \\$unknownProvider with no type specified\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Exception/UnknownProviderException.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot access property \\$childNodes on DOMElement\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/Metadata.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Negated boolean expression is always false\\.$#',
-	'count' => 2,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/Metadata.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Cannot call method getLocale\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\Request\\|null\\.$#',
