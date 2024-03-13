@@ -9,3 +9,12 @@ twig:
   globals:
     global_view_parameters: "@ra.service.global_view_parameters"
   form_themes: ['bootstrap_3_horizontal_layout.html.twig', 'form/fields.html.twig']
+
+when@smoketest:
+  twig:
+    strict_variables: true
+
+when@test:
+  twig:
+    strict_variables: true
+
