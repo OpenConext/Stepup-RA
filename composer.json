@@ -26,7 +26,7 @@
         "guzzlehttp/guzzle": "^7",
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/translation-bundle": "^2.1",
-        "knplabs/knp-paginator-bundle": "^5.9 || ^6.0",
+        "knplabs/knp-paginator-bundle": "^6.0",
         "nelmio/security-bundle": "^3.0",
         "openconext/monitor-bundle": "^4.0",
         "surfnet/stepup-bundle": "^6.0",
