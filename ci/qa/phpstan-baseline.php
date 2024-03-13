@@ -2,11 +2,6 @@
 
 $ignoreErrors = [];
 $ignoreErrors[] = [
-	'message' => '#^Class Surfnet\\\\NoDebugFunctionRule implements generic interface PHPStan\\\\Rules\\\\Rule but does not specify its types\\: TNodeType$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/NoDebugFunctionRule.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Assert\\:\\:keysAre\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Assert.php',
@@ -22,9 +17,99 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Assert.php',
 ];
 $ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\AccreditCandidateCommand has an uninitialized property \\$contactInformation\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/AccreditCandidateCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\AccreditCandidateCommand has an uninitialized property \\$identityId\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/AccreditCandidateCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\AccreditCandidateCommand has an uninitialized property \\$institution\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/AccreditCandidateCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\AccreditCandidateCommand has an uninitialized property \\$location\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/AccreditCandidateCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\AccreditCandidateCommand has an uninitialized property \\$roleAtInstitution\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/AccreditCandidateCommand.php',
+];
+$ignoreErrors[] = [
 	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\AccreditCandidateCommand\\:\\:\\$availableInstitutions type has no value type specified in iterable type array\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/AccreditCandidateCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\AmendRegistrationAuthorityInformationCommand has an uninitialized property \\$contactInformation\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/AmendRegistrationAuthorityInformationCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\AmendRegistrationAuthorityInformationCommand has an uninitialized property \\$identityId\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/AmendRegistrationAuthorityInformationCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\AmendRegistrationAuthorityInformationCommand has an uninitialized property \\$institution\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/AmendRegistrationAuthorityInformationCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\AmendRegistrationAuthorityInformationCommand has an uninitialized property \\$location\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/AmendRegistrationAuthorityInformationCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\ChangeRaLocationCommand has an uninitialized property \\$contactInformation\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/ChangeRaLocationCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\ChangeRaLocationCommand has an uninitialized property \\$currentUserId\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/ChangeRaLocationCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\ChangeRaLocationCommand has an uninitialized property \\$id\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/ChangeRaLocationCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\ChangeRaLocationCommand has an uninitialized property \\$institution\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/ChangeRaLocationCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\ChangeRaLocationCommand has an uninitialized property \\$location\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/ChangeRaLocationCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\ChangeRaLocationCommand has an uninitialized property \\$name\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/ChangeRaLocationCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaCandidatesCommand has an uninitialized property \\$actorId\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/SearchRaCandidatesCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaCandidatesCommand has an uninitialized property \\$institutionFilterOptions\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/SearchRaCandidatesCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaCandidatesCommand has an uninitialized property \\$pageNumber\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/SearchRaCandidatesCommand.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaCandidatesCommand\\:\\:\\$institutionFilterOptions type has no value type specified in iterable type array\\.$#',
@@ -57,6 +142,36 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/SelectInstitutionCommand.php',
 ];
 $ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\StartVettingProcedureCommand has an uninitialized property \\$authorityId\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/StartVettingProcedureCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\StartVettingProcedureCommand has an uninitialized property \\$authorityLoa\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/StartVettingProcedureCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\StartVettingProcedureCommand has an uninitialized property \\$registrationCode\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/StartVettingProcedureCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\StartVettingProcedureCommand has an uninitialized property \\$secondFactor\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/StartVettingProcedureCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\VerifyIdentityCommand has an uninitialized property \\$documentNumber\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/VerifyIdentityCommand.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\VerifyIdentityCommand has an uninitialized property \\$identityVerified\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/VerifyIdentityCommand.php',
+];
+$ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\VettingTypeHintCommand\\:\\:__get\\(\\) has parameter \\$name with no type specified\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Command/VettingTypeHintCommand.php',
@@ -87,47 +202,27 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/ExceptionController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface\\:\\:switchLocale\\(\\)\\.$#',
-	'count' => 1,
+	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
+	'count' => 2,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/LocaleController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot call method getToken\\(\\) on mixed\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/LocaleController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Controller\\\\LocaleController\\:\\:__construct\\(\\) has parameter \\$identityService with generic interface Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface but does not specify its types\\: TUser$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/LocaleController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Negated boolean expression is always false\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/LocaleController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Parameter \\#1 \\$url of method Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\AbstractController\\:\\:redirect\\(\\) expects string, bool\\|float\\|int\\|string\\|null given\\.$#',
+	'message' => '#^Parameter \\#1 \\$url of method Symfony\\\\Bundle\\\\FrameworkBundle\\\\Controller\\\\AbstractController\\:\\:redirect\\(\\) expects string, string\\|null given\\.$#',
 	'count' => 3,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/LocaleController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupBundle\\\\Command\\\\SwitchLocaleCommand\\:\\:\\$identityId \\(string\\) does not accept string\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/LocaleController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot access property \\$id on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
+	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/ProfileController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot call method getRaaInstitutions\\(\\) on Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Profile\\|null\\.$#',
-	'count' => 1,
+	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
+	'count' => 4,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot call method getToken\\(\\) on mixed\\.$#',
+	'message' => '#^Cannot call method getRaaInstitutions\\(\\) on Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Profile\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
 ];
@@ -137,32 +232,12 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Parameter \\#1 \\$identityId of method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\ProfileService\\:\\:findByIdentityId\\(\\) expects string, string\\|null given\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\ChangeRaLocationCommand\\:\\:\\$currentUserId \\(string\\) does not accept string\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\CreateRaLocationCommand\\:\\:\\$currentUserId \\(string\\) does not accept string\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\CreateRaLocationCommand\\:\\:\\$institution \\(string\\) does not accept mixed\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\RemoveRaLocationCommand\\:\\:\\$currentUserId \\(string\\) does not accept string\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
 ];
@@ -187,27 +262,12 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot access property \\$id on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
-	'count' => 3,
+	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
+	'count' => 7,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot access property \\$institution on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
-	'count' => 3,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot access property \\$institutions on Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaCandidateInstitutions\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot access property \\$raCandidate on Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\RaCandidateInstitutions\\|null\\.$#',
-	'count' => 3,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method getToken\\(\\) on mixed\\.$#',
+	'message' => '#^Cannot call method getInstitution\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
@@ -237,11 +297,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Negated boolean expression is always false\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Parameter \\#1 \\$identityId of method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\RaCandidateService\\:\\:getRaCandidate\\(\\) expects string, mixed given\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
@@ -257,22 +312,12 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaCandidatesCommand\\:\\:\\$actorId \\(string\\) does not accept string\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaCandidatesCommand\\:\\:\\$orderBy \\(string\\|null\\) does not accept mixed\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaCandidatesCommand\\:\\:\\$orderDirection \\(string\\|null\\) does not accept mixed\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaListingCommand\\:\\:\\$actorId \\(string\\) does not accept string\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
@@ -287,6 +332,11 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
 $ignoreErrors[] = [
+	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaaController.php',
+];
+$ignoreErrors[] = [
 	'message' => '#^Cannot call method getRaaInstitutions\\(\\) on Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Profile\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaaController.php',
@@ -297,22 +347,12 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaaController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot call method getUser\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\Authentication\\\\Token\\\\TokenInterface\\|null\\.$#',
-	'count' => 1,
+	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
+	'count' => 2,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RecoveryTokenController.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Cannot cast mixed to int\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RecoveryTokenController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\RevokeRecoveryTokenCommand\\:\\:\\$currentUserId \\(string\\) does not accept string\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RecoveryTokenController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRecoveryTokensCommand\\:\\:\\$actorId \\(string\\) does not accept string\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RecoveryTokenController.php',
 ];
@@ -337,8 +377,8 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot call method getToken\\(\\) on mixed\\.$#',
-	'count' => 1,
+	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
+	'count' => 3,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
 ];
 $ignoreErrors[] = [
@@ -358,16 +398,6 @@ $ignoreErrors[] = [
 ];
 $ignoreErrors[] = [
 	'message' => '#^Parameter \\#3 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\RevokeSecondFactorCommand\\:\\:\\$currentUserId \\(string\\) does not accept string\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaSecondFactorsCommand\\:\\:\\$actorId \\(string\\) does not accept string\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
 ];
@@ -407,18 +437,13 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/Vetting/Gssf/GssfVerifyController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Call to an undefined method Psr\\\\Container\\\\ContainerInterface\\:\\:getParameter\\(\\)\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method forProcedure\\(\\) on mixed\\.$#',
-	'count' => 4,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method getToken\\(\\) on mixed\\.$#',
+	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'count' => 2,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Cannot call method getLoa\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
+	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php',
 ];
 $ignoreErrors[] = [
@@ -427,14 +452,14 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Parameter \\#2 \\$actorId of method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\SecondFactorService\\:\\:findVerifiedSecondFactorByRegistrationCode\\(\\) expects string, string\\|null given\\.$#',
+	'message' => '#^Parameter \\#2 \\$haystack of function in_array expects array, array\\|bool\\|float\\|int\\|string\\|null given\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\StartVettingProcedureCommand\\:\\:\\$authorityId \\(string\\) does not accept string\\|null\\.$#',
+	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php',
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingTypeHintController.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Cannot call method getRaaInstitutions\\(\\) on Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Profile\\|null\\.$#',
@@ -457,18 +482,13 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/DateTime/DateTime.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition\\:\\:children\\(\\)\\.$#',
-	'count' => 2,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/DependencyInjection/Configuration.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method integerNode\\(\\) on Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeParentInterface\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/DependencyInjection/Configuration.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Call to an undefined method Symfony\\\\Contracts\\\\Translation\\\\TranslatorInterface\\:\\:setLocale\\(\\)\\.$#',
 	'count' => 2,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/EventListener/LocaleListener.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
+	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/EventListener/LocaleListener.php',
 ];
 $ignoreErrors[] = [
@@ -557,6 +577,11 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Form/Type/VettingTypeHintType.php',
 ];
 $ignoreErrors[] = [
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Logger\\\\ProcedureAwareLogger has an uninitialized property \\$procedure\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Logger/ProcedureAwareLogger.php',
+];
+$ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Logger\\\\ProcedureAwareLogger\\:\\:enrichContext\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Logger/ProcedureAwareLogger.php',
@@ -575,6 +600,11 @@ $ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Repository\\\\VettingProcedureRepository\\:\\:store\\(\\) has no return type specified\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Repository/VettingProcedureRepository.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\AuthenticatedIdentity\\:\\:__construct\\(\\) has parameter \\$roles with no value type specified in iterable type array\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/AuthenticatedIdentity.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\AuthenticatedIdentity\\:\\:eraseCredentials\\(\\) return type has no value type specified in iterable type array\\.$#',
@@ -667,11 +697,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Provider/SamlProvider.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Parameter \\#1 \\$loa of class Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\Authentication\\\\Token\\\\SamlToken constructor expects Surfnet\\\\StepupBundle\\\\Value\\\\Loa, Surfnet\\\\StepupBundle\\\\Value\\\\Loa\\|null given\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Provider/SamlProvider.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Parameter \\#1 \\$loaIdentifier of method Surfnet\\\\StepupBundle\\\\Service\\\\LoaResolutionService\\:\\:getLoa\\(\\) expects string, string\\|null given\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Provider/SamlProvider.php',
@@ -684,6 +709,11 @@ $ignoreErrors[] = [
 $ignoreErrors[] = [
 	'message' => '#^Parameter \\#1 \\$value of function count expects array\\|Countable, mixed given\\.$#',
 	'count' => 2,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Provider/SamlProvider.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Parameter \\#2 \\$loa of class Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\AuthenticatedIdentity constructor expects Surfnet\\\\StepupBundle\\\\Value\\\\Loa, Surfnet\\\\StepupBundle\\\\Value\\\\Loa\\|null given\\.$#',
+	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Provider/SamlProvider.php',
 ];
 $ignoreErrors[] = [
@@ -717,11 +747,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Session/SessionStorage.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\Authentication\\\\Token\\\\SamlToken\\:\\:__unserialize\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Token/SamlToken.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\Factory\\\\SamlFactory\\:\\:create\\(\\) has parameter \\$config with no type specified\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Factory/SamlFactory.php',
@@ -752,6 +777,11 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/AuditLogService.php',
 ];
 $ignoreErrors[] = [
+	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/CommandService.php',
+];
+$ignoreErrors[] = [
 	'message' => '#^Cannot call method getUser\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\Authentication\\\\Token\\\\TokenInterface\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/CommandService.php',
@@ -778,6 +808,11 @@ $ignoreErrors[] = [
 ];
 $ignoreErrors[] = [
 	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getUsername\\(\\)\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/IdentityService.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/IdentityService.php',
 ];
@@ -872,7 +907,7 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/RaService.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Parameter \\#2 \\$haystack of function in_array expects array, array\\|bool\\|float\\|int\\|string\\|UnitEnum\\|null given\\.$#',
+	'message' => '#^Parameter \\#2 \\$haystack of function in_array expects array, array\\|bool\\|float\\|int\\|string\\|null given\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/SecondFactorAssertionService.php',
 ];
@@ -885,6 +920,11 @@ $ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\SecondFactorService\\:\\:findVerifiedSecondFactorByRegistrationCode\\(\\) should return Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\VerifiedSecondFactor\\|null but returns Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\VerifiedSecondFactor\\|false\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/SecondFactorService.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Call to an undefined method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\YubikeySecondFactorServiceInterface\\:\\:verifyYubikeyPublicId\\(\\)\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Cannot call method getAuthorityId\\(\\) on Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure\\|null\\.$#',
@@ -904,11 +944,6 @@ $ignoreErrors[] = [
 $ignoreErrors[] = [
 	'message' => '#^Cannot call method getSecondFactor\\(\\) on Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure\\|null\\.$#',
 	'count' => 17,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method getYubikeyPublicId\\(\\) on Surfnet\\\\StepupBundle\\\\Value\\\\YubikeyPublicId\\|null\\.$#',
-	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
 ];
 $ignoreErrors[] = [
@@ -972,11 +1007,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot call method getYubikeyPublicId\\(\\) on Surfnet\\\\StepupBundle\\\\Value\\\\YubikeyPublicId\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/YubikeySecondFactorService.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Twig\\\\Extensions\\\\Extension\\\\SecondFactorType\\:\\:translateSecondFactorType\\(\\) has parameter \\$secondFactorType with no type specified\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Twig/Extensions/Extension/SecondFactorType.php',
@@ -987,19 +1017,19 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Value/DateTime.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot call method scalarNode\\(\\) on Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeParentInterface\\|null\\.$#',
-	'count' => 2,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/DependencyInjection/Configuration.php',
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure has an uninitialized property \\$authorityId\\. Give it default value or assign it in the constructor\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/VettingProcedure.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Parameter \\#1 \\$rootNode of method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\DependencyInjection\\\\Configuration\\:\\:addProvidersSection\\(\\) expects Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition, Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition given\\.$#',
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure has an uninitialized property \\$id\\. Give it default value or assign it in the constructor\\.$#',
 	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/DependencyInjection/Configuration.php',
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/VettingProcedure.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Parameter \\#1 \\$rootNode of method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\DependencyInjection\\\\Configuration\\:\\:addRoutesSection\\(\\) expects Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\ArrayNodeDefinition, Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeDefinition given\\.$#',
+	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure has an uninitialized property \\$secondFactor\\. Give it default value or assign it in the constructor\\.$#',
 	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/DependencyInjection/Configuration.php',
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/VettingProcedure.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\DependencyInjection\\\\SurfnetStepupRaSamlStepupProviderExtension\\:\\:buildHostedEntityDefinition\\(\\) has parameter \\$configuration with no value type specified in iterable type array\\.$#',
@@ -1162,17 +1192,17 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/ViewConfig.php',
 ];
 $ignoreErrors[] = [
+	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionBagInterface\\:\\:get\\(\\)\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Saml/StateHandler.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionBagInterface\\:\\:set\\(\\)\\.$#',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Saml/StateHandler.php',
+];
+$ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Saml\\\\StateHandler\\:\\:get\\(\\) has no return type specified\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Saml/StateHandler.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Saml\\\\StateHandler\\:\\:get\\(\\) has parameter \\$key with no type specified\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Saml/StateHandler.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Saml\\\\StateHandler\\:\\:set\\(\\) has parameter \\$key with no type specified\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Saml/StateHandler.php',
 ];
