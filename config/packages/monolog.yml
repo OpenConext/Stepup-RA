@@ -50,7 +50,7 @@ when@dev:
                 level: NOTICE
                 path: "%kernel.logs_dir%/%kernel.environment%.log"
 
-when@smoketest:
+when@smoketest: &smoketest
     monolog:
         handlers:
             main:
@@ -64,17 +64,4 @@ when@smoketest:
                 path: "%kernel.logs_dir%/%kernel.environment%.log"
                 level: debug
 
-
-when@test:
-    monolog:
-        handlers:
-            main:
-                type: fingers_crossed
-                action_level: error
-                handler: nested
-                excluded_http_codes: [ 404, 405 ]
-                channels: [ "!event" ]
-            nested:
-                type: stream
-                path: "%kernel.logs_dir%/%kernel.environment%.log"
-                level: debug
+when@test: *smoketest # Use the same configuration as smoketest
