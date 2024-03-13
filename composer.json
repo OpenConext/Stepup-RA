@@ -86,7 +86,7 @@
             "yarn install",
             "yarn encore production"
         ],
-        "test": [
+        "check": [
             "@phplint",
             "@phpmd",
             "@phpcs",
