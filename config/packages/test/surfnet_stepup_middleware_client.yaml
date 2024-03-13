@@ -1,3 +1,0 @@
-surfnet_stepup_middleware_client:
-  authorisation:
-    password: secret

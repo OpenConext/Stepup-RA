@@ -5,3 +5,13 @@ surfnet_stepup_middleware_client:
   url:
     command_api: "%middleware_url_command_api%"
     api: "%middleware_url_api%"
+
+when@smoketest:
+  surfnet_stepup_middleware_client:
+    authorisation:
+      password: secret
+
+when@test:
+  surfnet_stepup_middleware_client:
+    authorisation:
+      password: secret
