@@ -39,3 +39,8 @@ services:
     class: Surfnet\StepupRa\RaBundle\Service\GssfService
     arguments:
       - "@request_stack"
+
+  Surfnet\StepupRa\RaBundle\Security\Authentication\EventSubscriber\CustomLogoutListener:
+    arguments:
+      - '@security.helper'
+      - "%logout_redirect_url%"
