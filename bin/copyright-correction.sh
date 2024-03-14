@@ -3,6 +3,9 @@
 # Get all PHP files in src/ directory
 files=$(find src/ -type f -name "*.php")
 
+# Initialize counter
+counter=0
+
 for file in $files
 do
     # Get the year of the first commit of the file
@@ -17,4 +20,17 @@ do
 
     # Replace the year in the copyright statement
     sed -i "s/Copyright [0-9]\{4\} SURFnet bv/Copyright $year SURFnet bv/g" $file
+
+    # Check if the file was changed by using git diff
+    if git diff --quiet -- $file
+    then
+        # No output means no changes
+        continue
+    else
+        # Increment counter
+        ((counter++))
+    fi
 done
+
+# Print the number of files changed
+echo "Number of files changed: $counter"
