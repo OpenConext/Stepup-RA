@@ -86,7 +86,7 @@ class Configuration implements ConfigurationInterface
                         ->example('3600 -> 1 hour * 60 minutes * 60 seconds')
                         ->validate()
                             ->ifTrue(
-                                fn($lifetime) => !is_int($lifetime)
+                                fn($lifetime) => !is_int($lifetime),
                             )
                             ->thenInvalid('max_absolute_lifetime must be an integer')
                         ->end()
@@ -101,7 +101,7 @@ class Configuration implements ConfigurationInterface
                         ->example('600 -> 10 minutes * 60 seconds')
                         ->validate()
                             ->ifTrue(
-                                fn($lifetime) => !is_int($lifetime)
+                                fn($lifetime) => !is_int($lifetime),
                             )
                             ->thenInvalid('max_relative_lifetime must be an integer')
                         ->end()
@@ -117,7 +117,7 @@ class Configuration implements ConfigurationInterface
                 ->info('The URL of Self Service, where a user can register and revoke second factors')
                 ->validate()
                     ->ifTrue(
-                        fn($url) => filter_var($url, FILTER_VALIDATE_URL) === false
+                        fn($url) => filter_var($url, FILTER_VALIDATE_URL) === false,
                     )
                     ->thenInvalid('self_service_url must be a valid url')
             ->end();

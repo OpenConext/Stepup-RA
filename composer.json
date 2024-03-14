@@ -50,6 +50,7 @@
         "twig/twig": "^3.0"
     },
     "require-dev": {
+        "malukenho/docheader": "^1.0.0",
         "matthiasnoback/symfony-config-test": "^4.0",
         "mockery/mockery": "^1.0",
         "overtrue/phplint": "^9.0",
@@ -91,11 +92,13 @@
             "@phpmd",
             "@phpcs",
             "@jscpd",
+            "@license-headers",
             "@phpstan",
             "@phpunit",
             "@security-tests"
         ],
         "phplint": "./ci/qa/phplint",
+        "license-headers": "./ci/qa/docheader",
         "phpmd": "./ci/qa/phpmd",
         "phpcs": "./ci/qa/phpcs",
         "phpstan": "./ci/qa/phpstan",
@@ -122,6 +125,9 @@
         ]
     },
     "config": {
+        "audit": {
+            "abandoned": "report"
+        },
         "allow-plugins": {
             "symfony/flex": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
