@@ -1,5 +1,8 @@
 {
     "browserslist": "last 2 versions, ie 11, > 1%",
+    "engines" : {
+        "node" : ">=20.0.0"
+    },
     "devDependencies": {
         "@babel/core": "^7.20.5",
         "@babel/preset-env": "^7.20.2",
