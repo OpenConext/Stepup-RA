@@ -23,6 +23,7 @@ use Surfnet\StepupMiddlewareClientBundle\Command\Command;
 use Surfnet\StepupMiddlewareClientBundle\Command\Metadata;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService as MiddlewareCommandService;
+use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 final readonly class CommandService
@@ -35,8 +36,10 @@ final readonly class CommandService
 
     public function execute(Command $command): ExecutionResult
     {
-        /** @var Identity $identity */
-        $identity = $this->tokenStorage->getToken()->getUser()->getIdentity();
+        $userIdentifier = $this->tokenStorage->getToken()->getUser();
+        assert($userIdentifier instanceof AuthenticatedIdentity);
+
+        $identity = $userIdentifier->getIdentity();
 
         return $this->commandService->execute($command, new Metadata($identity->id, $identity->institution));
     }

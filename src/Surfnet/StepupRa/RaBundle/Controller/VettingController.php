@@ -28,6 +28,7 @@ use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Form\Type\StartVettingProcedureType;
 use Surfnet\StepupRa\RaBundle\Form\Type\VerifyIdentityType;
 use Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger;
+use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
 use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
@@ -73,6 +74,10 @@ class VettingController extends AbstractController
     #[IsGranted('ROLE_RA')]
     public function startProcedure(Request $request): Response
     {
+        $userIdentifier = $this->getUser();
+        assert($userIdentifier instanceof AuthenticatedIdentity);
+        $identity = $userIdentifier->getIdentity();
+
         $this->logger->notice('Vetting Procedure Search started');
 
         $command = new StartVettingProcedureCommand();
@@ -86,7 +91,7 @@ class VettingController extends AbstractController
         }
 
         $secondFactor = $this->secondFactorService
-            ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode, $this->getUser()->getIdentity()->id);
+            ->findVerifiedSecondFactorByRegistrationCode($command->registrationCode, $identity->id);
 
         if (!$secondFactor instanceof VerifiedSecondFactor) {
             $this->addFlash('error', 'ra.form.start_vetting_procedure.unknown_registration_code');
@@ -113,8 +118,8 @@ class VettingController extends AbstractController
                 ->setStatusCode(Response::HTTP_BAD_REQUEST);
         }
 
-        $command->authorityId =  $this->getUser()->getIdentity()->id;
-        $command->authorityLoa = $this->getUser()->getLoa();
+        $command->authorityId =  $identity->id;
+        $command->authorityLoa = $userIdentifier->getLoa();
         $command->secondFactor = $secondFactor;
 
         if ($this->vettingService->isExpiredRegistrationCode($command)) {

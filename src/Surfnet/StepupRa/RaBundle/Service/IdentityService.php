@@ -27,6 +27,7 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RegistrationAuthorityCredentials;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService as ApiIdentityService;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
+use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -56,6 +57,7 @@ class IdentityService implements UserProviderInterface
      */
     public function refreshUser(UserInterface $user): UserInterface
     {
+        assert($user instanceof AuthenticatedIdentity);
         throw new RuntimeException(sprintf('Cannot Refresh User "%s"', $user->getUsername()));
     }
 
@@ -129,8 +131,10 @@ class IdentityService implements UserProviderInterface
             throw new RuntimeException('Cannot switch locales when unauthenticated');
         }
 
-        /** @var Identity $identity */
-        $identity = $token->getUser()->getIdentity();
+        $userIdentifier = $token->getUser();
+        assert($userIdentifier instanceof AuthenticatedIdentity);
+
+        $identity = $userIdentifier->getIdentity();
 
         $expressLocalePreferenceCommand = new ExpressLocalePreferenceCommand();
         $expressLocalePreferenceCommand->identityId = $command->identityId;
