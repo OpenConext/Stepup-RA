@@ -22,10 +22,7 @@ use DateTime as CoreDateTime;
 
 class DateTime
 {
-    /**
-     * @var CoreDateTime|null
-     */
-    private static $now;
+    private static ?CoreDateTime $now = null;
 
     public static function now(): CoreDateTime
     {
