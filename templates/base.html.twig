@@ -48,11 +48,11 @@
     {% block content_div_start %}<div class="content">{% endblock content_div_start %}
         {% block page_header %}
             <div class="page-header clearfix">
-                <img src="/images/header-logo.png" class="pull-right logo" alt="OpenConext Stepup">
+                <img src="{{ asset('build/images/header-logo.png') }}" class="pull-right logo" alt="OpenConext Stepup">
                 <h1>{{ 'app.name'|trans }}</h1>
             </div>
             {% block menu %}
-                {% if app.user %}
+                {% if app.user %}chmod public
                     <div class="row-fluid">
                         <div class="col-sm-8">
                             <ul class="nav nav-pills">

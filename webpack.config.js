@@ -11,7 +11,7 @@ Encore
     .setOutputPath('public/build/')
     .copyFiles([
         {
-            from: './assets/images',
+            from: './assets/openconext/images',
             to: './images/[path][name].[ext]',
         }
     ])
