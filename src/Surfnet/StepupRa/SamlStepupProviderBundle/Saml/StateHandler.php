@@ -69,7 +69,6 @@ final readonly class StateHandler
         $bag = $session->getBag('gssp.provider.' . $this->provider);
         assert($bag instanceof AttributeBag);
 
-
         return $bag->get($key);
     }
 }
