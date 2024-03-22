@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Copyright 2016 SURFnet bv
  *
@@ -38,7 +40,7 @@ class DateTime implements Stringable
      *
      * @var self|null
      */
-    private static $now;
+    private static ?self $now = null;
 
     private CoreDateTime $dateTime;
 
@@ -107,7 +109,6 @@ class DateTime implements Stringable
 
     public function format(string $format): string
     {
-
         return $this->dateTime->format($format);
     }
 

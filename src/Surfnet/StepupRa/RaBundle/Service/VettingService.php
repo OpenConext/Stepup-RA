@@ -320,7 +320,7 @@ class VettingService
     /**
      * @throws UnknownVettingProcedureException
      */
-    private function getProcedure(string $procedureId): ?VettingProcedure
+    private function getProcedure(string $procedureId): VettingProcedure
     {
         $procedure = $this->vettingProcedureRepository->retrieve($procedureId);
 

@@ -54,7 +54,7 @@ final readonly class StateHandler
         $this->requestStack->getSession()->remove($this->provider);
     }
 
-    protected function set(string $key, $value): void
+    protected function set(string $key, mixed $value): void
     {
         $session = $this->requestStack->getSession();
         $bag = $session->getBag('gssp.provider.' . $this->provider);
@@ -63,7 +63,7 @@ final readonly class StateHandler
         $bag->set($key, $value);
     }
 
-    protected function get(string $key)
+    protected function get(string $key): mixed
     {
         $session = $this->requestStack->getSession();
         $bag = $session->getBag('gssp.provider.' . $this->provider);
