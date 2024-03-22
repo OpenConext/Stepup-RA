@@ -18,7 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Exception;
 
-use \InvalidArgumentException as BaseInvalidArgumentException;
+use InvalidArgumentException as BaseInvalidArgumentException;
 
 class InvalidArgumentException extends BaseInvalidArgumentException
 {

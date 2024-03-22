@@ -18,11 +18,11 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use Surfnet\StepupBundle\Command\SendSmsChallengeCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Surfnet\StepupBundle\Command\SendSmsChallengeCommand;
 
 class SendSmsChallengeType extends AbstractType
 {

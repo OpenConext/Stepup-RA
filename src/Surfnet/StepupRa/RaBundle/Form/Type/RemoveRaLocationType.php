@@ -18,11 +18,11 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use Surfnet\StepupRa\RaBundle\Command\RemoveRaLocationCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Surfnet\StepupRa\RaBundle\Command\RemoveRaLocationCommand;
 
 class RemoveRaLocationType extends AbstractType
 {

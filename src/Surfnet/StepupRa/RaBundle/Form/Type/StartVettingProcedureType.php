@@ -19,12 +19,12 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use JMS\TranslationBundle\Annotation\Ignore;
+use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 
 class StartVettingProcedureType extends AbstractType
 {

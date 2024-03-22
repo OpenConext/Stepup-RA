@@ -19,9 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
 
 final readonly class GssfService
 {

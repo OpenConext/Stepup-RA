@@ -18,8 +18,6 @@
 
 namespace Surfnet\StepupRa\RaBundle\Value;
 
-use Surfnet\StepupRa\RaBundle\Assert;
-
 class RoleAtInstitution
 {
     private ?string $role = null;

@@ -18,12 +18,12 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use Surfnet\StepupMiddlewareClient\Service\ExecutionResult;
 use Surfnet\StepupMiddlewareClientBundle\Command\Command;
 use Surfnet\StepupMiddlewareClientBundle\Command\Metadata;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService as MiddlewareCommandService;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Surfnet\StepupMiddlewareClient\Service\ExecutionResult;
 
 final readonly class CommandService
 {

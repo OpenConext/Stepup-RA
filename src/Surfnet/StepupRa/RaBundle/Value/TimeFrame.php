@@ -19,8 +19,8 @@
 namespace Surfnet\StepupRa\RaBundle\Value;
 
 use DateInterval;
-use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 use Stringable;
+use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
 final readonly class TimeFrame implements Stringable
 {
