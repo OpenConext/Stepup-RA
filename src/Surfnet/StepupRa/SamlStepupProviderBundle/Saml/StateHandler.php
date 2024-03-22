@@ -21,6 +21,7 @@ declare(strict_types = 1);
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\Saml;
 
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 final readonly class StateHandler
 {
@@ -56,12 +57,19 @@ final readonly class StateHandler
     protected function set(string $key, $value): void
     {
         $session = $this->requestStack->getSession();
-        $session->getBag('gssp.provider.' . $this->provider)->set($key, $value);
+        $bag = $session->getBag('gssp.provider.' . $this->provider);
+        assert($bag instanceof AttributeBag);
+
+        $bag->set($key, $value);
     }
 
     protected function get(string $key)
     {
         $session = $this->requestStack->getSession();
-        return $session->getBag('gssp.provider.' . $this->provider)->get($key);
+        $bag = $session->getBag('gssp.provider.' . $this->provider);
+        assert($bag instanceof AttributeBag);
+
+
+        return $bag->get($key);
     }
 }

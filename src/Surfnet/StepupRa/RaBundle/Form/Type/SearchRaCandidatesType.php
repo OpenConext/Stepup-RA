@@ -31,8 +31,9 @@ class SearchRaCandidatesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var $command SearchRaCandidatesCommand */
         $command = $builder->getData();
+        assert($command instanceof SearchRaCandidatesCommand);
+
         $institutions = $command->institutionFilterOptions;
 
         $builder
