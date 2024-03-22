@@ -19,9 +19,11 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AmendRegistrationAuthorityInformationCommand as AmendRegistrationAuthorityInformationApiCommand;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AmendRegistrationAuthorityInformationCommand
+    as AmendRegistrationAuthorityInformationApiCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AppointRoleCommand;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Command\RetractRegistrationAuthorityCommand as ApiRetractRegistrationAuthorityCommand;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Command\RetractRegistrationAuthorityCommand
+    as ApiRetractRegistrationAuthorityCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
 use Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand;
 use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;

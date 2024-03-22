@@ -22,5 +22,8 @@ jobs:
       - name: Yarn install
         run: yarn
 
+      - name: build frontend
+        run: yarn encore prod
+
       - name: Run QA tests
         run: composer check
