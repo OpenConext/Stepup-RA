@@ -82,7 +82,7 @@ class SamlInteractionProvider
 
         $this->samlAuthenticationStateHandler->clearRequestId();
 
-        if ($assertion->getIssuer() !== $this->identityProvider->getEntityId()) {
+        if ($assertion->getIssuer()->getValue() !== $this->identityProvider->getEntityId()) {
             throw new UnexpectedIssuerException(sprintf(
                 'Expected issuer to be configured remote IdP "%s", got "%s"',
                 $this->identityProvider->getEntityId(),

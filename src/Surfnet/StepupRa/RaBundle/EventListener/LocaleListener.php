@@ -19,17 +19,21 @@
 namespace Surfnet\StepupRa\RaBundle\EventListener;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 use InvalidArgumentException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final readonly class LocaleListener implements EventSubscriberInterface
 {
-    public function __construct(private TokenStorageInterface $tokenStorage, private TranslatorInterface $translator)
-    {
+    public function __construct(
+        private TokenStorageInterface $tokenStorage,
+        private TranslatorInterface $translator,
+    ) {
     }
 
     public function setRequestLocale(RequestEvent $event): void
@@ -40,12 +44,10 @@ final readonly class LocaleListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var Identity $identity */
-        $identity = $token->getUser()->getIdentity();
+        $userIdentifier = $token->getUser();
+        assert($userIdentifier instanceof AuthenticatedIdentity);
 
-        if (!$identity instanceof Identity) {
-            return;
-        }
+        $identity = $userIdentifier->getIdentity();
 
         $request = $event->getRequest();
         $request->setLocale($identity->preferredLocale);

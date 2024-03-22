@@ -23,6 +23,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller\Vetting\Gssf;
 use JMS\TranslationBundle\Annotation\Ignore;
 use Surfnet\StepupBundle\Value\Provider\ViewConfigCollection;
 use Surfnet\StepupRa\RaBundle\Form\Type\InitiateGssfType;
+use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
@@ -39,6 +40,7 @@ class GssfInitiateFormService
     public function renderInitiateForm(string $procedureId, string $providerName, array $parameters = []): Response
     {
         $secondFactorConfig = $this->collection->getByIdentifier($providerName);
+        assert($secondFactorConfig instanceof ViewConfig);
 
         $form = $this->formFactory->create(
             InitiateGssfType::class,

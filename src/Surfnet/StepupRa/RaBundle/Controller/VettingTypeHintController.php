@@ -24,6 +24,7 @@ use Surfnet\StepupRa\RaBundle\Command\VettingTypeHintCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\VettingTypeHintType;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
+use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionListingService;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Surfnet\StepupRa\RaBundle\Service\VettingTypeHintService;
@@ -60,8 +61,10 @@ class VettingTypeHintController extends AbstractController
     #[IsGranted('ROLE_RAA')]
     public function vettingTypeHint(Request $request): Response
     {
-        /** @var Identity $identity */
-        $identity = $this->getUser()->getIdentity();
+        $userIdentifier = $this->getUser();
+        assert($userIdentifier instanceof AuthenticatedIdentity);
+
+        $identity = $userIdentifier->getIdentity();
 
         $profile = $this->profileService->findByIdentityId($identity->id);
 
