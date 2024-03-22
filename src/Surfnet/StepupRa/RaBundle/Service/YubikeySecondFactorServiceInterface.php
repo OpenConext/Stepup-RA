@@ -20,6 +20,10 @@ declare(strict_types=1);
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
+use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult;
+
 interface YubikeySecondFactorServiceInterface
 {
+    public function verifyYubikeyPublicId(VerifyYubikeyPublicIdCommand $command): VerificationResult;
 }
