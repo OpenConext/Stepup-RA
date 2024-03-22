@@ -20,8 +20,8 @@ namespace Surfnet\StepupRa\RaBundle\Value;
 
 use DateInterval;
 use DateTime as CoreDateTime;
-use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 use Stringable;
+use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyPublicMethods) due to comparison methods

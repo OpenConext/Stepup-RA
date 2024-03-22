@@ -23,7 +23,6 @@ use Surfnet\StepupBundle\Value\YubikeyPublicId;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorServiceInterface;
-use Surfnet\StepupRa\RaBundle\Service\YubikeyService;
 
 
 /**

@@ -20,9 +20,9 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 
 use GuzzleHttp\Client;
 use Psr\Log\LoggerInterface;
+use RuntimeException;
 use Surfnet\StepupBundle\Http\JsonHelper;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyOtpCommand;
-use RuntimeException;
 
 class YubikeyService
 {

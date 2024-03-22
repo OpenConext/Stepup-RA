@@ -19,7 +19,6 @@
 namespace Surfnet\StepupRa\RaBundle\Exception;
 
 use Symfony\Component\HttpKernel\Attribute\WithHttpStatus;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 /**
  * Exception for the case where a user is not granted RA privileges.
