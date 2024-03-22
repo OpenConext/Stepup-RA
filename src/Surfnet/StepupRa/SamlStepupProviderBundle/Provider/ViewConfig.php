@@ -31,10 +31,15 @@ class ViewConfig implements ViewConfigInterface
      */
     public function __construct(
         private readonly RequestStack $requestStack,
+        /** @var array<string, string> $title */
         public array $title,
+        /** @var array<string, string> $pageTitle */
         public array $pageTitle,
+        /** @var array<string, string> $explanation */
         public array $explanation,
+        /** @var array<string, string> $initiate */
         public array $initiate,
+        /** @var array<string, string> $gssfIdMismatch */
         public array $gssfIdMismatch,
     ) {
     }
@@ -66,10 +71,13 @@ class ViewConfig implements ViewConfigInterface
 
     /**
      * @throws LogicException
+     * @param array<string, string> $translations
      */
-    private function getTranslation(array $translations): mixed
+    private function getTranslation(
+        array $translations
+    ): string
     {
-        $currentLocale = $this->requestStack->getCurrentRequest()->getLocale();
+        $currentLocale = $this->requestStack->getCurrentRequest()?->getLocale();
 
         if (isset($translations[$currentLocale])) {
             return $translations[$currentLocale];
