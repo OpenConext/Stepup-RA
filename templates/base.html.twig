@@ -48,7 +48,7 @@
     {% block content_div_start %}<div class="content">{% endblock content_div_start %}
         {% block page_header %}
             <div class="page-header clearfix">
-                <img src="/images/header-logo.png" class="pull-right logo" alt="OpenConext Stepup">
+                <img src="{{ asset('build/images/header-logo.png') }}" class="pull-right logo" alt="OpenConext Stepup">
                 <h1>{{ 'app.name'|trans }}</h1>
             </div>
             {% block menu %}
@@ -65,25 +65,25 @@
                                 <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_recovery_tokens' %} class="active"{% endif %}>
                                     <a href="{{ path('ra_recovery_tokens_search') }}">{{ 'ra.menu.search_recovery_tokens'|trans }}</a>
                                 </li>
-                                {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                                {% if is_granted('ROLE_RAA') %}
                                     <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_management' %} class="active"{% endif %}>
                                         <a href="{{ path('ra_management_manage') }}">{{ 'ra.menu.ra_management'|trans }}</a>
                                     </li>
                                 {% endif %}
 
-                                {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                                {% if is_granted('ROLE_RAA') %}
                                     <li role="presentation"{% if app.request.attributes.get('_route') starts with 'ra_locations' %} class="active"{% endif %}>
                                         <a href="{{ path('ra_locations_manage') }}">{{ 'ra.menu.ra_locations'|trans }}</a>
                                     </li>
                                 {% endif %}
 
-                                {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                                {% if is_granted('ROLE_RAA') %}
                                     <li role="presentation"{% if app.request.attributes.get('_route') starts with 'vetting_type_hint' %} class="active"{% endif %}>
                                         <a href="{{ path('vetting_type_hint') }}">{{ 'ra.menu.vetting-type-hint'|trans }}</a>
                                     </li>
                                 {% endif %}
 
-                                {% if is_granted('ROLE_RAA') or is_granted('ROLE_SRAA') %}
+                                {% if is_granted('ROLE_RAA') %}
                                     <li role="presentation"{% if app.request.attributes.get('_route') starts with 'institution-configuration' %} class="active"{% endif %}>
                                         <a href="{{ path('institution-configuration') }}">{{ 'ra.menu.institution-configuration'|trans }}</a>
                                     </li>
@@ -112,18 +112,28 @@
         {% endblock page_header %}
 
         {% block form_errors %}
-            {% if app.session.flashbag.peekAll|length > 0 %}
-                <div class="row-fluid">
-                    <div id="flash" class="span12">
-                        {% for type, flashes in app.session.flashbag.all %}
-                            {% for flash in flashes %}
-                                <div class="alert alert-{{ type }} fade in">
-                                    {{ flash|trans }}
-                                </div>
+            {#
+            The check is needed to prevent starting the session when looking for "flash messages":
+            https://symfony.com/doc/current/session.html#avoid-starting-sessions-for-anonymous-users
+
+            TIP: With FOSHttpCache you can also adapt this to make it cache safe:
+            https://foshttpcachebundle.readthedocs.io/en/latest/features/helpers/flash-message.html
+            #}
+            {% if app.request.hasPreviousSession %}
+                {% set flash_messages = app.flashes %}
+                {% if flash_messages|length > 0 %}
+                    <div class="row-fluid">
+                        <div id="flash" class="span12">
+                            {% for type, messages in flash_messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ type }} fade in">
+                                        {{ message | trans }}
+                                    </div>
+                                {% endfor %}
                             {% endfor %}
-                        {% endfor %}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             {% endif %}
         {% endblock form_errors %}
 

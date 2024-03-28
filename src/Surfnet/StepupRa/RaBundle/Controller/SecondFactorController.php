@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,36 +18,54 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
-use Knp\Component\Pager\Paginator;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Knp\Component\Pager\PaginatorInterface;
+use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Command\ExportRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchSecondFactorAuditLogCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Surfnet\StepupRa\RaBundle\Service\AuditLogService;
+use Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects) By making the Form Type classes explicit, MD now realizes couping
  *                                                 is to high.
  */
-final class SecondFactorController extends Controller
+final class SecondFactorController extends AbstractController
 {
-    /**
-     * @Template
-     * @param Request $request
-     * @return array|Response
-     */
-    public function searchAction(Request $request)
-    {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
+    public function __construct(
+        private readonly PaginatorInterface $paginator,
+        private readonly LoggerInterface $logger,
+        private readonly RaSecondFactorService $secondFactorService,
+        #[Autowire(service: 'ra.service.identity')]
+        private readonly UserProviderInterface $identityService,
+        private readonly AuditLogService $auditLogService,
+        private readonly TranslatorInterface $translator,
+    ) {
+    }
 
-        $identity = $this->getCurrentUser();
-        $this->get('logger')->notice('Starting search for second factors');
+    #[Route(
+        path: '/second-factors',
+        name: 'ra_second_factors_search',
+        methods: ['GET', 'POST'],
+    )]
+    #[IsGranted('ROLE_RA')]
+    public function search(Request $request): Response
+    {
+        $identity = $this->getUser()->getIdentity();
+        $this->logger->notice('Starting search for second factors');
 
         $command = new SearchRaSecondFactorsCommand();
         $command->actorId = $identity->id;
@@ -55,40 +73,40 @@ final class SecondFactorController extends Controller
         $command->orderBy = $request->get('orderBy');
         $command->orderDirection = $request->get('orderDirection');
 
-        $secondFactors = $this->getSecondFactorService()->search($command);
+        $secondFactors = $this->secondFactorService->search($command);
 
         // The options that will populate the institution filter choice list.
         $command->institutionFilterOptions = $secondFactors->getFilterOption('institution');
 
         $form = $this->createForm(SearchRaSecondFactorsType::class, $command, [
             'method' => 'get',
-            'enable_export_button' => $this->isGranted(['ROLE_RAA']),
+            'enable_export_button' => $this->isGranted('ROLE_RAA'),
         ]);
         $form->handleRequest($request);
 
-        $secondFactors = $this->getSecondFactorService()->search($command);
+        $secondFactors = $this->secondFactorService->search($command);
         $secondFactorCount = $secondFactors->getTotalItems();
 
         if ($form->isSubmitted() && $form->getClickedButton()->getName() == 'export') {
-            $this->get('logger')->notice('Forwarding to export second factors action');
-            return $this->forward('SurfnetStepupRaRaBundle:SecondFactor:export', ['command' => $command]);
+            $this->logger->notice('Forwarding to export second factors action');
+            return $this->forward('\Surfnet\StepupRa\RaBundle\Controller\SecondFactorController::export', ['command' => $command]);
         }
 
-        $pagination = $this->getPaginator()->paginate(
+        $pagination = $this->paginator->paginate(
             $secondFactors->getElements(),
             $secondFactors->getCurrentPage(),
-            $secondFactors->getItemsPerPage()
+            $secondFactors->getItemsPerPage(),
         );
         $pagination->setTotalItemCount($secondFactors->getTotalItems());
 
         $revocationForm = $this->createForm(RevokeSecondFactorType::class, new RevokeSecondFactorCommand());
 
-        $this->get('logger')->notice(sprintf(
+        $this->logger->notice(sprintf(
             'Searching for second factors yielded "%d" results',
-            $secondFactors->getTotalItems()
+            $secondFactors->getTotalItems(),
         ));
 
-        return [
+        return $this->render('second_factor/search.html.twig', [
             'form'                  => $form->createView(),
             'revocationForm'        => $revocationForm->createView(),
             'secondFactors'         => $secondFactors,
@@ -97,85 +115,84 @@ final class SecondFactorController extends Controller
             'orderBy'               => $command->orderBy,
             'orderDirection'        => $command->orderDirection ?: 'asc',
             'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',
-        ];
+        ]);
     }
 
-    public function exportAction(SearchRaSecondFactorsCommand $command)
+    #[IsGranted('ROLE_RAA')]
+    public function export(SearchRaSecondFactorsCommand $command): Response
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA']);
-
-        $this->get('logger')->notice('Starting export of searched second factors');
+        $this->logger->notice('Starting export of searched second factors');
 
         $exportCommand = ExportRaSecondFactorsCommand::fromSearchCommand($command);
 
-        return $this->getSecondFactorService()->export($exportCommand);
+        return $this->secondFactorService->export($exportCommand);
     }
 
-    /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function revokeAction(Request $request)
+    #[Route(
+        path: '/second-factors/revoke',
+        name: 'ra_second_factor_revoke',
+        methods: ['POST'],
+    )]
+    #[IsGranted('ROLE_RA')]
+    public function revoke(Request $request): RedirectResponse
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
-
-        $logger = $this->get('logger');
-
-        $logger->notice('Received request to revoke Second Factor');
+        $this->logger->notice('Received request to revoke Second Factor');
 
         $command = new RevokeSecondFactorCommand();
-        $command->currentUserId = $this->getCurrentUser()->id;
+        $command->currentUserId = $this->getUser()->getIdentity()->id;
 
         $form = $this->createForm(RevokeSecondFactorType::class, $command);
         $form->handleRequest($request);
 
-        $logger->info(sprintf(
+        $this->logger->info(sprintf(
             'Sending middleware request to revoke Second Factor "%s" belonging to "%s" on behalf of "%s"',
             $command->secondFactorId,
             $command->identityId,
-            $command->currentUserId
+            $command->currentUserId,
         ));
 
-        $translator = $this->get('translator');
-        $flashBag = $this->get('session')->getFlashBag();
-        if ($this->getSecondFactorService()->revoke($command)) {
-            $logger->notice('Second Factor revocation Succeeded');
-            $flashBag->add('success', $translator->trans('ra.second_factor.revocation.revoked'));
+        if ($this->secondFactorService->revoke($command)) {
+            $this->logger->notice('Second Factor revocation Succeeded');
+            $this->addFlash('success', $this->translator->trans('ra.second_factor.revocation.revoked'));
         } else {
-            $logger->notice('Second Factor revocation Failed');
-            $flashBag->add('error', $translator->trans('ra.second_factor.revocation.could_not_revoke'));
+            $this->logger->notice('Second Factor revocation Failed');
+            $this->addFlash('error', $this->translator->trans('ra.second_factor.revocation.could_not_revoke'));
         }
 
-        $logger->notice('Redirecting back to Second Factor Search Page');
+        $this->logger->notice('Redirecting back to Second Factor Search Page');
 
         return $this->redirectToRoute('ra_second_factors_search');
     }
 
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function auditLogAction(Request $request)
+    #[Route(
+        path: '/second-factors/{identityId}/auditlog',
+        name: 'ra_second_factor_auditlog',
+        methods: ['GET'],
+    )]
+    #[Route(
+        path: '/recovery-tokens/{identityId}/auditlog',
+        name: 'ra_recovery_tokens_auditlog',
+        methods: ['GET'],
+    )]
+    #[IsGranted('ROLE_RA')]
+    public function auditLog(Request $request): Response
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
-        $logger = $this->get('logger');
-
         $identityId = $request->get('identityId');
 
-        $logger->notice(sprintf('Requested AuditLog for SecondFactors of identity "%s"', $identityId));
+        $this->logger->notice(sprintf('Requested AuditLog for SecondFactors of identity "%s"', $identityId));
 
-        $identity = $this->getIdentityService()->findById($identityId);
+        $identity = $this->identityService->findById($identityId);
         if (!$identity) {
-            $logger->notice(sprintf(
+            $this->logger->notice(sprintf(
                 'User with Identity "%s" requested non-existent identity "%s"',
-                $this->getCurrentUser()->id,
-                $identityId
+                $this->getUser()->getIdentity()->id,
+                $identityId,
             ));
 
             throw new NotFoundHttpException();
         }
 
-        $logger->info(sprintf('Retrieving audit log for Identity "%s"', $identity->id));
+        $this->logger->info(sprintf('Retrieving audit log for Identity "%s"', $identity->id));
 
         $command                 = new SearchSecondFactorAuditLogCommand();
         $command->identityId     = $identity->id;
@@ -184,63 +201,23 @@ final class SecondFactorController extends Controller
         $command->orderBy        = $request->get('orderBy', 'recordedOn');
         $command->orderDirection = $request->get('orderDirection', 'desc');
 
-        $auditLog = $this->getAuditLogService()->getAuditlog($command);
-        $pagination = $this->getPaginator()->paginate(
+        $auditLog = $this->auditLogService->getAuditlog($command);
+        $pagination = $this->paginator->paginate(
             $auditLog->getElements(),
             $auditLog->getCurrentPage(),
-            $auditLog->getItemsPerPage()
+            $auditLog->getItemsPerPage(),
         );
         $pagination->setTotalItemCount($auditLog->getTotalItems());
 
-        $logger->notice(sprintf('Audit log yielded "%d" results, rendering page', $auditLog->getTotalItems()));
+        $this->logger->notice(sprintf('Audit log yielded "%d" results, rendering page', $auditLog->getTotalItems()));
 
         return $this->render(
-            'SurfnetStepupRaRaBundle:second_factor:audit_log.html.twig',
+            'second_factor/audit_log.html.twig',
             [
                 'pagination' => $pagination,
                 'auditLog'   => $auditLog,
                 'identity'   => $identity,
-            ]
+            ],
         );
-    }
-
-    /**
-     * @return \Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService
-     */
-    private function getSecondFactorService()
-    {
-        return $this->get('ra.service.ra_second_factor');
-    }
-
-    /**
-     * @return \Surfnet\StepupRa\RaBundle\Service\IdentityService
-     */
-    private function getIdentityService()
-    {
-        return $this->get('ra.service.identity');
-    }
-
-    /**
-     * @return \Surfnet\StepupRa\RaBundle\Service\AuditLogService
-     */
-    private function getAuditLogService()
-    {
-        return $this->get('ra.service.audit_log');
-    }
-
-    /**
-     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
-     */
-    private function getCurrentUser()
-    {
-        return $this->get('security.token_storage')->getToken()->getUser();
-    }
-
-    /**
-     * @return Paginator
-     */
-    private function getPaginator()
-    {
-        return $this->get('knp_paginator');
     }
 }

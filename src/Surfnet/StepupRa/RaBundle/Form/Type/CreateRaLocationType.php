@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2016 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use Surfnet\StepupRa\RaBundle\Command\CreateRaLocationCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -26,7 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CreateRaLocationType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', null, [
@@ -44,7 +45,7 @@ class CreateRaLocationType extends AbstractType
                     ButtonGroupType::class,
                     [
                         'inherit_data' => true,
-                    ]
+                    ],
                 )
                 ->add('create_ra_location', SubmitType::class, [
                     'label' => 'ra.form.ra_create_ra_location.label.create_ra_location',
@@ -54,19 +55,19 @@ class CreateRaLocationType extends AbstractType
                     'label' => 'ra.form.ra_create_ra_location.label.cancel',
                     'route' => 'ra_locations_manage',
                     'attr'  => ['class' => 'btn btn-link cancel']
-                ])
+                ]),
             )
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\CreateRaLocationCommand'
+            'data_class' => CreateRaLocationCommand::class
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_create_ra_location';
     }

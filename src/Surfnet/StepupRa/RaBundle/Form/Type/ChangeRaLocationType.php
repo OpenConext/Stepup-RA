@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2016 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use Surfnet\StepupRa\RaBundle\Command\ChangeRaLocationCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -26,7 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ChangeRaLocationType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', null, [
@@ -49,7 +50,7 @@ class ChangeRaLocationType extends AbstractType
                         'row_attr' => [
                             'class' => 'form-group button-group'
                         ],
-                    ]
+                    ],
                 )
                 ->add('change_ra_location', SubmitType::class, [
                     'label' => 'ra.management.form.change_ra_location.label.change_ra_location',
@@ -59,19 +60,19 @@ class ChangeRaLocationType extends AbstractType
                     'label' => 'ra.management.form.change_ra_location.label.cancel',
                     'route' => 'ra_locations_manage',
                     'attr' => ['class' => 'btn btn-link pull-right cancel'],
-                ])
+                ]),
             )
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\ChangeRaLocationCommand'
+            'data_class' => ChangeRaLocationCommand::class
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_change_ra_location';
     }

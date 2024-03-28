@@ -1,10 +1,18 @@
 twig:
+  paths:
+    '%kernel.project_dir%/templates': 'default'
   debug:            "%kernel.debug%"
   strict_variables: "%kernel.debug%"
-  exception_controller: SurfnetStepupRaRaBundle:Exception:show
   date:
     format: "%date_format%"
     timezone: "%date_timezone%"
   globals:
     global_view_parameters: "@ra.service.global_view_parameters"
-  form_themes: ['bootstrap_3_horizontal_layout.html.twig', '@SurfnetStepupRaRa/form/fields.html.twig']
+  form_themes: ['bootstrap_3_horizontal_layout.html.twig', 'form/fields.html.twig']
+
+when@smoketest: &twig_smoketest
+  twig:
+    strict_variables: true
+
+when@test: *twig_smoketest # Use the same settings as smoketest
+

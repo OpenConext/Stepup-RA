@@ -26,10 +26,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class ViewConfigCollectionPass implements CompilerPassInterface
 {
-    /**
-     * @param ContainerBuilder $container
-     */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has('surfnet_stepup.provider.collection')) {
             return;
@@ -37,7 +34,7 @@ class ViewConfigCollectionPass implements CompilerPassInterface
 
         $definition = $container->findDefinition('surfnet_stepup.provider.collection');
         $taggedServices = $container->findTaggedServiceIds(
-            SurfnetStepupRaSamlStepupProviderExtension::VIEW_CONFIG_TAG_NAME
+            SurfnetStepupRaSamlStepupProviderExtension::VIEW_CONFIG_TAG_NAME,
         );
 
         $taggedServices = array_keys($taggedServices);

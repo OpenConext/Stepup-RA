@@ -9,9 +9,9 @@
 /config/*.key
 /config/keys
 /app/cache/*
-/config/legacy/parameters.yaml
-/config/legacy/samlstepupproviders_parameters.yaml
-/config/legacy/global_view_parameters.yaml
+/config/openconext/parameters.yaml
+/config/openconext/samlstepupproviders_parameters.yaml
+/config/openconext/global_view_parameters.yaml
 /app/logs/*
 !app/cache/.gitkeep
 !app/logs/.gitkeep

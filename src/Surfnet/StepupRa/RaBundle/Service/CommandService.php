@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,35 +18,28 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
+use Surfnet\StepupMiddlewareClient\Service\ExecutionResult;
 use Surfnet\StepupMiddlewareClientBundle\Command\Command;
 use Surfnet\StepupMiddlewareClientBundle\Command\Metadata;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Service\CommandService as MiddlewareCommandService;
+use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-final class CommandService
+final readonly class CommandService
 {
-    /**
-     * @var \Surfnet\StepupMiddlewareClientBundle\Service\CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
-     */
-    private $tokenStorage;
-
     public function __construct(
-        MiddlewareCommandService $commandService,
-        TokenStorageInterface $tokenStorage
+        private MiddlewareCommandService $commandService,
+        private TokenStorageInterface $tokenStorage,
     ) {
-        $this->commandService = $commandService;
-        $this->tokenStorage = $tokenStorage;
     }
 
-    public function execute(Command $command)
+    public function execute(Command $command): ExecutionResult
     {
-        /** @var \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity $identity */
-        $identity = $this->tokenStorage->getToken()->getUser();
+        $userIdentifier = $this->tokenStorage->getToken()->getUser();
+        assert($userIdentifier instanceof AuthenticatedIdentity);
+
+        $identity = $userIdentifier->getIdentity();
 
         return $this->commandService->execute($command, new Metadata($identity->id, $identity->institution));
     }

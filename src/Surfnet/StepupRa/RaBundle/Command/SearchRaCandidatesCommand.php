@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,61 +22,25 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class SearchRaCandidatesCommand
 {
-    /**
-     * @Assert\NotBlank(message="ra.search_ra_candidates.actor_id.blank")
-     * @Assert\Type("string", message="ra.search_ra_candidates.actor_id.type")
-     *
-     * @var string
-     */
-    public $actorId;
+    #[Assert\NotBlank(message: 'ra.search_ra_candidates.actor_id.blank')]
+    public string $actorId;
 
-    /**
-     * @var string
-     */
-    public $institution;
+    public ?string $institution = null;
 
-    /**
-     * @var string|null
-     */
-    public $name;
+    public ?string $name = null;
 
-    /**
-     * @var string|null
-     */
-    public $email;
+    public ?string $email = null;
 
-    /**
-     * @var string
-     */
-    public $raInstitution;
+    public ?string $raInstitution = null;
 
-    /**
-     * @Assert\Choice(
-     *     {"name", "email"},
-     *     message="ra.search_ra_candidates.order_by.invalid_choice"
-     * )
-     *
-     * @var string|null
-     */
-    public $orderBy;
+    #[Assert\Choice(['name', 'email'], message: 'ra.search_ra_candidates.order_by.invalid_choice')]
+    public ?string $orderBy = null;
 
-    /**
-     * @Assert\Choice({"asc", "desc"}, message="ra.search_ra_candidates.order_direction.invalid_choice")
-     *
-     * @var string|null
-     */
-    public $orderDirection;
+    #[Assert\Choice(['asc', 'desc'], message: 'ra.search_ra_candidates.order_direction.invalid_choice')]
+    public ?string $orderDirection = null;
 
-    /**
-     * @Assert\Type("integer", message="ra.search_ra_candidates.page_number.type")
-     * @Assert\GreaterThan(0, message="ra.search_ra_candidates.page_number.greater_than_zero")
-     *
-     * @var int
-     */
-    public $pageNumber;
+    #[Assert\GreaterThan(0, message: 'ra.search_ra_candidates.page_number.greater_than_zero')]
+    public int $pageNumber;
 
-    /**
-     * @var array
-     */
-    public $institutionFilterOptions;
+    public array $institutionFilterOptions;
 }

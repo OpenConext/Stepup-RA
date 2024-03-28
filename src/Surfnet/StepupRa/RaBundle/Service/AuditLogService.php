@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,21 +25,11 @@ use Surfnet\StepupRa\RaBundle\Command\SearchSecondFactorAuditLogCommand;
 
 class AuditLogService
 {
-    /**
-     * @var ApiAuditLogService
-     */
-    private $apiAuditLogService;
-
-    public function __construct(ApiAuditLogService $auditLogService)
+    public function __construct(private readonly ApiAuditLogService $apiAuditLogService)
     {
-        $this->apiAuditLogService = $auditLogService;
     }
 
-    /**
-     * @param SearchSecondFactorAuditLogCommand $command
-     * @return AuditLog
-     */
-    public function getAuditlog(SearchSecondFactorAuditLogCommand $command)
+    public function getAuditlog(SearchSecondFactorAuditLogCommand $command): AuditLog
     {
         $query = new SecondFactorAuditLogSearchQuery($command->institution, $command->identityId, $command->pageNumber);
         $query->setOrderBy($command->orderBy);

@@ -18,20 +18,33 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Surfnet\StepupRa\RaBundle\Security\Authentication\Session\SessionStorage;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 
-class SecurityController extends Controller
+class SecurityController extends AbstractController
 {
-    public function sessionExpiredAction(Request $request)
+    public function __construct(
+        private readonly SessionStorage $sessionStorage,
+    ) {
+    }
+
+    #[Route(
+        path: '/authentication/session-expired',
+        name: 'ra_security_session_expired',
+        methods: ['GET'],
+    )]
+    public function sessionExpired(Request $request): Response
     {
         $redirectToUrl = $this
-            ->get('ra.security.authentication.session.session_storage')
+            ->sessionStorage
             ->getCurrentRequestUri();
 
         return $this->render(
-            '@SurfnetStepupRaRa/security/session_expired.html.twig',
-            ['redirect_to_url' => $redirectToUrl]
+            'security/session_expired.html.twig',
+            ['redirect_to_url' => $redirectToUrl],
         );
     }
 }

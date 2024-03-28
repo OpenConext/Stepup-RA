@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,7 +26,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RetractRegistrationAuthorityType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
             $builder->create(
@@ -33,7 +34,7 @@ class RetractRegistrationAuthorityType extends AbstractType
                 ButtonGroupType::class,
                 [
                     'inherit_data' => true,
-                ]
+                ],
             )
             ->add('confirm', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-warning pull-right'],
@@ -42,18 +43,18 @@ class RetractRegistrationAuthorityType extends AbstractType
             ->add('cancel', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-info pull-right'],
                 'label' => 'ra.management.retract_ra.modal.cancel',
-            ])
+            ]),
         );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand'
+            'data_class' => RetractRegistrationAuthorityCommand::class
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_management_retract_registration_authority';
     }

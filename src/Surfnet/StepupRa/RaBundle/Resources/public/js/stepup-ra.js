@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import moment from "moment";
+
 (function ($) {
     'use strict';
 

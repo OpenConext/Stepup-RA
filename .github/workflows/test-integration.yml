@@ -1,48 +1,29 @@
-name: test-integration
-on:
-  pull_request:
-  push:
-    branches: [ master, develop ]
+name: Run QA tests (static analysis, lint and unit tests)
+on: [pull_request]
+
 jobs:
-  build:
+  run-qa-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: /var/www/html/
+    container:
+      image:  ghcr.io/openconext/openconext-basecontainers/php82-apache2-node20-composer2:latest
+      volumes:
+        - .:/var/www/html
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-      - uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v2
-        id: yarn-cache
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-      - name: Init environment
-        run: |
-          cd ci/docker
-          docker-compose up -d
-      - name: Install dependencies
-        run: |
-          cd ci/docker && docker-compose exec -T stepup-ra bash -lc '
-          composer install
-          yarn
-          ./bin/console assets:install
-          '
-      - name: Build frontend assets
-        run: cd ci/docker && docker-compose exec -T stepup-ra bash -lc 'yarn encore production'
-      - name: Run test scripts
-        run: cd ci/docker && docker-compose exec -T stepup-ra bash -lc ' composer test '
-      - name: Output log files on failure
-        if: failure()
-        run: cd ci/docker && docker-compose exec -T stepup-ra -c 'cat var/log/webtest.log'
+        uses: actions/checkout@v4
+
+      - name: Composer install
+        run: composer install
+
+      - name: Yarn install
+        run: yarn
+
+      - name: build frontend
+        run: yarn encore prod
+
+      - name: Run QA tests
+        run: composer check

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2016 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ use Surfnet\StepupMiddlewareClient\Configuration\Dto\RaLocationSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Command\AddRaLocationCommand as MiddlewareCreateLocationCommand;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Command\ChangeRaLocationCommand as MiddlewareChangeRaLocationCommand;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Command\RemoveRaLocationCommand as MiddlewareRemoveRaLocationCommand;
+use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\RaLocation;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\RaLocationCollection;
 use Surfnet\StepupMiddlewareClientBundle\Configuration\Service\RaLocationService as ApiRaLocationService;
 use Surfnet\StepupMiddlewareClientBundle\Uuid\Uuid;
@@ -36,45 +37,19 @@ use Surfnet\StepupRa\RaBundle\Command\SearchRaLocationsCommand;
  */
 class RaLocationService
 {
-    /**
-     * @var \Surfnet\StepupMiddlewareClientBundle\Configuration\Service\RaLocationService
-     */
-    private $apiRaLocationService;
-
-    /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        ApiRaLocationService $apiRaLocationService,
-        CommandService $commandService,
-        LoggerInterface $logger
+        private readonly ApiRaLocationService $apiRaLocationService,
+        private readonly CommandService $commandService,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->apiRaLocationService = $apiRaLocationService;
-        $this->commandService = $commandService;
-        $this->logger = $logger;
     }
 
-    /**
-     * @param string $id
-     * @return null|\Surfnet\StepupMiddlewareClientBundle\Configuration\Dto\RaLocation
-     */
-    public function find($id)
+    public function find(string $id): ?RaLocation
     {
         return $this->apiRaLocationService->get($id);
     }
 
-    /**
-     * @param SearchRaLocationsCommand $command
-     * @return RaLocationCollection
-     */
-    public function search(SearchRaLocationsCommand $command)
+    public function search(SearchRaLocationsCommand $command): RaLocationCollection
     {
         $query = new RaLocationSearchQuery($command->institution);
 
@@ -89,7 +64,7 @@ class RaLocationService
         return $this->apiRaLocationService->search($query);
     }
 
-    public function create(CreateRaLocationCommand $command)
+    public function create(CreateRaLocationCommand $command): bool
     {
         $middlewareCommand = new MiddlewareCreateLocationCommand();
         $middlewareCommand->id = Uuid::generate();
@@ -106,14 +81,14 @@ class RaLocationService
                 $middlewareCommand->name,
                 $middlewareCommand->institution,
                 $command->currentUserId,
-                implode(", ", $result->getErrors())
+                implode(", ", $result->getErrors()),
             ));
         }
 
         return $result->isSuccessful();
     }
 
-    public function change(ChangeRaLocationCommand $command)
+    public function change(ChangeRaLocationCommand $command): bool
     {
         $middlewareCommand = new MiddlewareChangeRaLocationCommand();
         $middlewareCommand->id = $command->id;
@@ -130,18 +105,14 @@ class RaLocationService
                 $middlewareCommand->name,
                 $middlewareCommand->institution,
                 $command->currentUserId,
-                implode(", ", $result->getErrors())
+                implode(", ", $result->getErrors()),
             ));
         }
 
         return $result->isSuccessful();
     }
 
-    /**
-     * @param RemoveRaLocationCommand $command
-     * @return bool
-     */
-    public function remove(RemoveRaLocationCommand $command)
+    public function remove(RemoveRaLocationCommand $command): bool
     {
         $middlewareCommand = new MiddlewareRemoveRaLocationCommand();
         $middlewareCommand->institution = $command->institution;
@@ -154,7 +125,7 @@ class RaLocationService
                 $middlewareCommand->raLocationId,
                 $middlewareCommand->institution,
                 $command->currentUserId,
-                implode(", ", $result->getErrors())
+                implode(", ", $result->getErrors()),
             ));
         }
 

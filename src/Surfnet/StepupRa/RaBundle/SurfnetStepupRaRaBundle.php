@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,19 +20,18 @@ namespace Surfnet\StepupRa\RaBundle;
 
 use Surfnet\StepupRa\RaBundle\DependencyInjection\Compiler\GssfSessionBagSessionPass;
 use Surfnet\StepupRa\RaBundle\Security\Factory\SamlFactory;
+use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SurfnetStepupRaRaBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 
-        /** @var \Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension $extension */
+        /** @var SecurityExtension $extension */
         $extension = $container->getExtension('security');
-        $extension->addSecurityListenerFactory(new SamlFactory());
-
-        $container->addCompilerPass(new GssfSessionBagSessionPass());
+        $extension->addAuthenticatorFactory(new SamlFactory());
     }
 }

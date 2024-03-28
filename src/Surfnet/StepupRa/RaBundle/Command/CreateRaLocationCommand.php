@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2016 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,26 +38,26 @@ class CreateRaLocationCommand
     public $currentUserId;
 
     /**
-     * @Assert\NotBlank(message="ra.accredit_candidate.name.may_not_be_blank")
-     * @Assert\Type(type="string")
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'ra.accredit_candidate.name.may_not_be_blank')]
+    #[Assert\Type(type: 'string')]
     public $name;
 
     /**
-     * @Assert\NotBlank(message="ra.accredit_candidate.location.may_not_be_blank")
-     * @Assert\Type(type="string")
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'ra.accredit_candidate.location.may_not_be_blank')]
+    #[Assert\Type(type: 'string')]
     public $location;
 
     /**
-     * @Assert\NotBlank(message="ra.accredit_candidate.contact_information.may_not_be_blank")
-     * @Assert\Type(type="string")
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'ra.accredit_candidate.contact_information.may_not_be_blank')]
+    #[Assert\Type(type: 'string')]
     public $contactInformation;
 }

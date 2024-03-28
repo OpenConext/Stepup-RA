@@ -23,9 +23,9 @@ use Surfnet\StepupRa\RaBundle\Exception\AssertionFailedException;
 
 final class Assert extends Assertion
 {
-    protected static $exceptionClass = '\Surfnet\StepupRa\RaBundle\Exception\AssertionFailedException';
+    protected static $exceptionClass = AssertionFailedException::class;
 
-    public static function keysAre(array $array, array $expectedKeys, $propertyPath = null)
+    public static function keysAre(array $array, array $expectedKeys, $propertyPath = null): void
     {
         $givenKeys = array_keys($array);
 
@@ -42,33 +42,33 @@ final class Assert extends Assertion
         if ($givenCount < $expectedCount) {
             $message = sprintf(
                 'Required keys "%s" are missing',
-                implode('", "', array_diff($expectedKeys, $givenKeys))
+                implode('", "', array_diff($expectedKeys, $givenKeys)),
             );
         } elseif ($givenCount > $expectedCount) {
             $message = sprintf(
                 'Additional keys "%s" found',
-                implode('", "', array_diff($givenKeys, $expectedKeys))
+                implode('", "', array_diff($givenKeys, $expectedKeys)),
             );
         } else {
             $additional = array_diff($givenKeys, $expectedKeys);
             $required = array_diff($expectedKeys, $givenKeys);
 
             $message = 'Keys do not match requirements';
-            if (!empty($additional)) {
+            if ($additional !== []) {
                 $message .= sprintf(
                     ', additional keys "%s" found',
-                    implode('", "', array_diff($givenKeys, $expectedKeys))
+                    implode('", "', array_diff($givenKeys, $expectedKeys)),
                 );
             }
 
-            if (!empty($required)) {
+            if ($required !== []) {
                 $message .= sprintf(
                     ', required keys "%s" are missing',
-                    implode('", "', array_diff($expectedKeys, $givenKeys))
+                    implode('", "', array_diff($expectedKeys, $givenKeys)),
                 );
             }
         }
 
-        throw new AssertionFailedException($message, 0, $propertyPath, $array);
+        throw new AssertionFailedException($message, 0, $array, $propertyPath);
     }
 }

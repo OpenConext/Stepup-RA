@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,10 +29,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchRaCandidatesType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        /** @var $command SearchRaCandidatesCommand */
         $command = $builder->getData();
+        assert($command instanceof SearchRaCandidatesCommand);
+
         $institutions = $command->institutionFilterOptions;
 
         $builder
@@ -51,14 +54,14 @@ class SearchRaCandidatesType extends AbstractType
             ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand',
+            'data_class' => SearchRaCandidatesCommand::class,
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_search_ra_candidates';
     }

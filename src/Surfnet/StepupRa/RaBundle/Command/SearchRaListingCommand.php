@@ -24,11 +24,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 class SearchRaListingCommand
 {
     /**
-     * @Assert\NotBlank(message="ra.search_ra_candidates.actor_id.blank")
-     * @Assert\Type("string", message="ra.search_ra_candidates.actor_id.type")
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'ra.search_ra_candidates.actor_id.blank')]
+    #[Assert\Type('string', message: 'ra.search_ra_candidates.actor_id.type')]
     public $actorId;
 
     /**
@@ -52,28 +52,23 @@ class SearchRaListingCommand
     public $roleAtInstitution;
 
     /**
-     * @Assert\Choice(
-     *     {"name", "email"},
-     *     message="ra.search_ra_candidates.order_by.invalid_choice"
-     * )
-     *
      * @var string|null
      */
+    #[Assert\Choice(['name', 'email'], message: 'ra.search_ra_candidates.order_by.invalid_choice')]
     public $orderBy;
 
     /**
-     * @Assert\Choice({"asc", "desc"}, message="ra.search_ra_candidates.order_direction.invalid_choice")
-     *
      * @var string|null
      */
+    #[Assert\Choice(['asc', 'desc'], message: 'ra.search_ra_candidates.order_direction.invalid_choice')]
     public $orderDirection;
 
     /**
-     * @Assert\Type("integer", message="ra.search_ra_candidates.page_number.type")
-     * @Assert\GreaterThan(0, message="ra.search_ra_candidates.page_number.greater_than_zero")
      *
      * @var int
      */
+    #[Assert\Type('integer', message: 'ra.search_ra_candidates.page_number.type')]
+    #[Assert\GreaterThan(0, message: 'ra.search_ra_candidates.page_number.greater_than_zero')]
     public $pageNumber;
 
     /**

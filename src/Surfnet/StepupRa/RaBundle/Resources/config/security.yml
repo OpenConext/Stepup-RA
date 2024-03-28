@@ -1,20 +1,4 @@
 services:
-    # Firewall
-    ra.security.authentication.listener:
-        class: Surfnet\StepupRa\RaBundle\Security\Firewall\SamlListener
-        arguments:
-            - "@ra.security.authentication.handler.authenticated_user_handler"
-            - "@ra.security.authentication.saml_interaction"
-            - "@logger"
-
-    ra.security.authentication.provider.saml:
-        class: Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider
-        arguments:
-            - "@ra.service.identity"
-            - "@ra.service.profile"
-            - "@surfnet_saml.saml.attribute_dictionary"
-            - "@logger"
-
     ra.security.authentication.saml_interaction:
         public: false
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\SamlInteractionProvider
@@ -33,65 +17,15 @@ services:
         factory: ["@surfnet_stepup.service.loa_resolution", getLoa]
         arguments: ["%surfnet_stepup_ra.security.required_loa%"]
 
-    # Authentication Handlers
-    ra.security.authentication.handler.authenticated_user_handler:
-        public: false
-        class: Surfnet\StepupRa\RaBundle\Security\Authentication\Handler\AuthenticatedUserHandler
-        arguments:
-            - "@security.token_storage"
-            - "@ra.security.authentication.session.session_lifetime_guard"
-            - "@ra.security.authentication.session.session_storage"
-            - "@logger"
-        calls:
-            - ["setNext", ["@ra.security.authentication.handler.explicit_session_timeout"]]
-
-    ra.security.authentication.handler.explicit_session_timeout:
-        public: false
-        class: Surfnet\StepupRa\RaBundle\Security\Authentication\Handler\ExplicitSessionTimeoutHandler
-        arguments:
-            - "@security.token_storage"
-            - "@ra.security.authentication.session.session_storage"
-            - "@ra.security.authentication.session.session_lifetime_guard"
-            - "@security.logout.handler.session"
-            - "@security.logout.handler.cookie_clearing.saml_based"
-            - "@router"
-            - "@logger"
-        calls:
-            - ["setNext", ["@ra.security.authentication.handler.initiate_saml_request"]]
-
-    ra.security.authentication.handler.initiate_saml_request:
-        public: false
-        class: Surfnet\StepupRa\RaBundle\Security\Authentication\Handler\InitiateSamlAuthenticationHandler
-        arguments:
-            - "@security.token_storage"
-            - "@ra.security.authentication.session.session_storage"
-            - "@ra.security.authentication.session.session_storage"
-            - "@ra.security.authentication.saml_interaction"
-            - "@router"
-            - "@surfnet_saml.logger"
-            - "@logger"
-        calls:
-            - ["setNext", ["@ra.security.authentication.handler.process_saml_response"]]
-
-    ra.security.authentication.handler.process_saml_response:
-        public: false
-        class: Surfnet\StepupRa\RaBundle\Security\Authentication\Handler\ProcessSamlAuthenticationHandler
-        arguments:
-            - "@security.token_storage"
-            - "@ra.security.authentication.saml_interaction"
-            - "@ra.security.authentication.session.session_storage"
-            - "@ra.security.authentication.session.session_storage"
-            - "@security.authentication.manager"
-            - "@surfnet_stepup.service.loa_resolution"
-            - "@surfnet_saml.logger"
-            - "@templating"
-
     # Session
     ra.security.authentication.session.session_storage:
         public: true
         class: Surfnet\StepupRa\RaBundle\Security\Authentication\Session\SessionStorage
         arguments:
-            - "@session"
+            - "@request_stack"
+
+    Surfnet\StepupRa\RaBundle\Security\Authentication\Session\SessionStorage:
+        alias: ra.security.authentication.session.session_storage
 
     ra.security.authentication.session.session_lifetime_guard:
         public: false
@@ -114,9 +48,4 @@ services:
         arguments:
             - "%ra.security.authentication.session.maximum_relative_lifetime_in_seconds%"
 
-    ra.security.authentication.handler.logout_success:
-        class: Surfnet\StepupRa\RaBundle\Security\Authentication\Handler\LogoutSuccessHandler
-        arguments:
-            - "@security.token_storage"
-            - "%logout_redirect_url%"
 

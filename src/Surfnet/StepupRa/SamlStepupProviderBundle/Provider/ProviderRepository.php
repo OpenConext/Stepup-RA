@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,55 +20,54 @@
 
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\Provider;
 
+use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Exception\InvalidConfigurationException;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Exception\UnknownProviderException;
 
 final class ProviderRepository
 {
-    /**
-     * @var []Provider
-     */
-    private $providers;
 
-    public function __construct()
+    public function __construct(private readonly LoggerInterface $logger)
     {
-        $this->providers = [];
     }
 
     /**
-     * @param Provider $provider
+     * @var Provider[]
      */
-    public function addProvider(Provider $provider)
+    private array $providers = [];
+
+    public function addProvider(Provider $provider): void
     {
         if ($this->has($provider->getName())) {
             throw new InvalidConfigurationException(sprintf(
                 'Provider "%s" has already been added to the repository',
-                $provider->getName()
+                $provider->getName(),
             ));
         }
 
         $this->providers[$provider->getName()] = $provider;
     }
 
-    /**
-     * @param string $providerName
-     * @return bool
-     */
-    public function has($providerName)
+    public function has(string $providerName): bool
     {
         return array_key_exists($providerName, $this->providers);
     }
 
-    /**
-     * @param string $providerName
-     * @return Provider
-     */
-    public function get($providerName)
+    public function get(string $providerName): Provider
     {
         if (!$this->has($providerName)) {
+            $this->logger->info(sprintf('Requested GSSP "%s" does not exist or is not registered', $providerName));
             throw UnknownProviderException::create($providerName, array_keys($this->providers));
         }
 
         return $this->providers[$providerName];
+    }
+
+    /**
+     * @return array<string, Provider>
+     */
+    public function getAll(): array
+    {
+        return $this->providers;
     }
 }

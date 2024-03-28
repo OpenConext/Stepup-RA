@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +20,7 @@
 
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\DependencyInjection;
 
+use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\MetadataFactoryCollection;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -25,27 +28,39 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Surfnet\StepupRa\SamlStepupProviderBundle\Saml\StateHandler;
+use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\Provider;
+use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig;
+use Surfnet\SamlBundle\Entity\ServiceProvider;
+use Surfnet\SamlBundle\Entity\HostedEntities;
+use Surfnet\SamlBundle\Entity\IdentityProvider;
+use Surfnet\SamlBundle\Metadata\MetadataConfiguration;
+use Surfnet\SamlBundle\Metadata\MetadataFactory;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class SurfnetStepupRaSamlStepupProviderExtension extends Extension
 {
 
-    const VIEW_CONFIG_TAG_NAME = 'gssp.view_config';
+    final public const VIEW_CONFIG_TAG_NAME = 'gssp.view_config';
 
     /**
      * {@inheritdoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
         foreach ($config['providers'] as $provider => $providerConfiguration) {
             // may seem a bit strange, but this prevents casing issue when getting/setting/creating provider
             // service definitions etc.
-            if ($provider !== strtolower($provider)) {
+
+            assert(is_string($provider));
+            if ($provider !== strtolower((string) $provider)) {
                 throw new InvalidConfigurationException('The provider name must be completely lowercase');
             }
 
@@ -57,8 +72,8 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         $provider,
         array $configuration,
         array $routes,
-        ContainerBuilder $container
-    ) {
+        ContainerBuilder $container,
+    ): void {
         if ($container->has('gssp.provider.' . $provider)) {
             throw new InvalidConfigurationException(sprintf('Cannot create the same provider "%s" twice', $provider));
         }
@@ -67,13 +82,13 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         $this->createMetadataDefinition($provider, $configuration['hosted'], $routes, $container);
         $this->createRemoteDefinition($provider, $configuration['remote'], $container);
 
-        $stateHandlerDefinition = new Definition('Surfnet\StepupRa\SamlStepupProviderBundle\Saml\StateHandler', [
-            new Reference('gssp.sessionbag'),
+        $stateHandlerDefinition = new Definition(StateHandler::class, [
+            new Reference('request_stack'),
             $provider
         ]);
         $container->setDefinition('gssp.provider.' . $provider . '.statehandler', $stateHandlerDefinition);
 
-        $providerDefinition = new Definition('Surfnet\StepupRa\SamlStepupProviderBundle\Provider\Provider', [
+        $providerDefinition = new Definition(Provider::class, [
             $provider,
             new Reference('gssp.provider.' . $provider . '.hosted.sp'),
             new Reference('gssp.provider.' . $provider . '.remote.idp'),
@@ -83,7 +98,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         $providerDefinition->setPublic(false);
         $container->setDefinition('gssp.provider.' . $provider, $providerDefinition);
 
-        $viewConfigDefinition = new Definition('Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig', [
+        $viewConfigDefinition = new Definition(ViewConfig::class, [
             new Reference('request_stack'),
             $configuration['view_config']['title'],
             $configuration['view_config']['page_title'],
@@ -103,21 +118,18 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
 
     /**
      * @param string           $provider
-     * @param array            $configuration
-     * @param array            $routes
-     * @param ContainerBuilder $container
      */
     private function createHostedDefinitions(
         $provider,
         array $configuration,
         array $routes,
-        ContainerBuilder $container
-    ) {
+        ContainerBuilder $container,
+    ): void {
         $hostedDefinition = $this->buildHostedEntityDefinition($provider, $configuration, $routes);
         $container->setDefinition('gssp.provider.' . $provider . '.hosted_entities', $hostedDefinition);
 
         $hostedSpDefinition  = (new Definition())
-            ->setClass('Surfnet\SamlBundle\Entity\ServiceProvider')
+            ->setClass(ServiceProvider::class)
             ->setFactory([
                 new Reference('gssp.provider.' . $provider . '.hosted_entities'),
                 'getServiceProvider'
@@ -128,11 +140,8 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
 
     /**
      * @param string $provider
-     * @param array  $configuration
-     * @param array  $routes
-     * @return Definition
      */
-    private function buildHostedEntityDefinition($provider, array $configuration, array $routes)
+    private function buildHostedEntityDefinition($provider, array $configuration, array $routes): Definition
     {
         $entityId = ['entity_id_route' => $this->createRouteConfig($provider, $routes['metadata'])];
         $spAdditional = [
@@ -146,7 +155,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         $serviceProvider  = array_merge($configuration['service_provider'], $spAdditional, $entityId);
         $identityProvider = array_merge($idpAdditional, $entityId);
 
-        $hostedDefinition = new Definition('Surfnet\SamlBundle\Entity\HostedEntities', [
+        $hostedDefinition = new Definition(HostedEntities::class, [
             new Reference('router'),
             new Reference('request_stack'),
             $serviceProvider,
@@ -160,12 +169,13 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
 
     /**
      * @param string           $provider
-     * @param array            $configuration
-     * @param ContainerBuilder $container
      */
-    private function createRemoteDefinition($provider, array $configuration, ContainerBuilder $container)
-    {
-        $definition    = new Definition('Surfnet\SamlBundle\Entity\IdentityProvider', [
+    private function createRemoteDefinition(
+        string $provider,
+        array $configuration,
+        ContainerBuilder $container,
+    ): void {
+        $definition    = new Definition(IdentityProvider::class, [
             [
                 'entityId'        => $configuration['entity_id'],
                 'ssoUrl'          => $configuration['sso_url'],
@@ -177,20 +187,13 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         $container->setDefinition('gssp.provider.' . $provider . '.remote.idp', $definition);
     }
 
-    /**
-     * @param string           $provider
-     * @param array            $configuration
-     * @param array            $routes
-     * @param ContainerBuilder $container
-     * @return Definition
-     */
     private function createMetadataDefinition(
-        $provider,
+        string $provider,
         array $configuration,
         array $routes,
-        ContainerBuilder $container
-    ) {
-        $metadataConfiguration = new Definition('Surfnet\SamlBundle\Metadata\MetadataConfiguration');
+        ContainerBuilder $container,
+    ): void {
+        $metadataConfiguration = new Definition(MetadataConfiguration::class);
 
         $propertyMap = [
             'entityIdRoute'          => $this->createRouteConfig($provider, $routes['metadata']),
@@ -205,17 +208,23 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         $metadataConfiguration->setPublic(false);
         $container->setDefinition('gssp.provider.' . $provider . 'metadata.configuration', $metadataConfiguration);
 
-        $metadataFactory = new Definition('Surfnet\SamlBundle\Metadata\MetadataFactory', [
-            new Reference('templating'),
+        $metadataFactory = new Definition(MetadataFactory::class, [
+            new Reference('twig'),
             new Reference('router'),
             new Reference('surfnet_saml.signing_service'),
             new Reference('gssp.provider.' . $provider . 'metadata.configuration')
         ]);
-        $metadataFactory->setPublic(true);
-        $container->setDefinition('gssp.provider.' . $provider . '.metadata.factory', $metadataFactory);
+        $metadataFactoryServiceId = 'gssp.provider.' . $provider . '.metadata.factory';
+        $container->setDefinition($metadataFactoryServiceId, $metadataFactory);
+        // Should not be read from container directly, use MetadataFactoryCollection instead
+        // @deprecated: this service should not be used anymore
+        $metadataFactory->setPublic(false);
+
+        $container = $container->getDefinition(MetadataFactoryCollection::class);
+        $container->addMethodCall('add', [$provider, new Reference($metadataFactoryServiceId)]);
     }
 
-    private function createRouteConfig($provider, $routeName)
+    private function createRouteConfig($provider, $routeName): array
     {
         // In the future, we ought to wrap this in an object.
         // https://www.pivotaltracker.com/story/show/90095392

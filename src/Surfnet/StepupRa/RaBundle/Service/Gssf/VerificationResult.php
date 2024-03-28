@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,30 +18,13 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service\Gssf;
 
-use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
-
 final class VerificationResult
 {
-    /**
-     * @var boolean
-     */
-    private $verificationSucceeded;
+    private bool $verificationSucceeded = false;
+    private ?string $procedureId = null;
 
-    /**
-     * @var string|null
-     */
-    private $procedureId;
-
-    /**
-     * @param string $procedureId
-     * @return VerificationResult
-     */
-    public static function verificationSucceeded($procedureId)
+    public static function verificationSucceeded(string $procedureId): VerificationResult
     {
-        if (!is_string($procedureId)) {
-            throw InvalidArgumentException::invalidType('string', 'procedureId', $procedureId);
-        }
-
         $result = new self();
         $result->verificationSucceeded = true;
         $result->procedureId = $procedureId;
@@ -49,7 +32,7 @@ final class VerificationResult
         return $result;
     }
 
-    public static function noSuchProcedure()
+    public static function noSuchProcedure(): VerificationResult
     {
         $result = new self();
         $result->verificationSucceeded = false;
@@ -57,16 +40,8 @@ final class VerificationResult
         return $result;
     }
 
-    /**
-     * @param string $procedureId
-     * @return VerificationResult
-     */
-    public static function verificationFailed($procedureId)
+    public static function verificationFailed(string $procedureId): VerificationResult
     {
-        if (!is_string($procedureId)) {
-            throw InvalidArgumentException::invalidType('string', 'procedureId', $procedureId);
-        }
-
         $result = new self();
         $result->verificationSucceeded = false;
         $result->procedureId = $procedureId;
@@ -74,18 +49,12 @@ final class VerificationResult
         return $result;
     }
 
-    /**
-     * @return bool
-     */
-    public function isSuccess()
+    public function isSuccess(): bool
     {
         return $this->verificationSucceeded && $this->procedureId;
     }
 
-    /**
-     * @return bool
-     */
-    public function didVerificationSucceed()
+    public function didVerificationSucceed(): bool
     {
         return $this->verificationSucceeded;
     }
@@ -93,7 +62,7 @@ final class VerificationResult
     /**
      * @return null|string NULL if no procedure ID was known for given SAML request ID.
      */
-    public function getProcedureId()
+    public function getProcedureId(): ?string
     {
         return $this->procedureId;
     }

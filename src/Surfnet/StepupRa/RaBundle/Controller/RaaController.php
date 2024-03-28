@@ -18,30 +18,46 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
+use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionListingService;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-class RaaController extends Controller
+class RaaController extends AbstractController
 {
-    public function institutionConfigurationAction(Request $request)
+    public function __construct(
+        private readonly InstitutionConfigurationOptionsService $institutionConfigurationOptionsService,
+        private readonly ProfileService $profileService,
+        private readonly InstitutionListingService $institutionListingService,
+        private readonly LoggerInterface $logger,
+    ) {
+    }
+
+    #[Route(
+        path: '/institution-configuration',
+        name: 'institution-configuration',
+        methods: ['GET', 'POST'],
+    )]
+    #[IsGranted('ROLE_RAA')]
+    public function institutionConfiguration(Request $request): Response
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
-
-        $logger = $this->get('logger');
         /** @var Identity $identity */
-        $identity = $this->getUser();
+        $identity = $this->getUser()->getIdentity();
 
-        $profile = $this->getProfileService()->findByIdentityId($identity->id);
+        $profile = $this->profileService->findByIdentityId($identity->id);
 
         if ($this->isGranted('ROLE_SRAA')) {
             $institution = $identity->institution;
-            $choices = $this->getInstitutionListingService()->getAll();
+            $choices = $this->institutionListingService->getAll();
         } else {
             $choices = $profile->getRaaInstitutions();
             $institution = reset($choices);
@@ -61,48 +77,24 @@ class RaaController extends Controller
             }
         }
 
-        $logger->notice(sprintf('Opening the institution configuration for "%s"', $institution));
+        $this->logger->notice(sprintf('Opening the institution configuration for "%s"', $institution));
 
         // Load the configuration for the institution that was selected.
-        $configuration = $this->getInstitutionConfigurationOptionsService()
+        $configuration = $this->institutionConfigurationOptionsService
             ->getInstitutionConfigurationOptionsFor($institution);
 
         if (!$configuration) {
-            $logger->warning(sprintf('Unable to find the institution configuration for "%s"', $institution));
-            return $this->createNotFoundException('The institution configuration could not be found');
+            $this->logger->warning(sprintf('Unable to find the institution configuration for "%s"', $institution));
+            throw new NotFoundHttpException('The institution configuration could not be found');
         }
 
         return $this->render(
-            '@SurfnetStepupRaRa/institution_configuration/overview.html.twig',
+            'institution_configuration/overview.html.twig',
             [
                 'configuration' => (array)$configuration,
                 'form' => isset($form) ? $form->createView() : null,
                 'institution' => $institution,
-            ]
+            ],
         );
-    }
-
-    /**
-     * @return InstitutionConfigurationOptionsService
-     */
-    private function getInstitutionConfigurationOptionsService()
-    {
-        return $this->get('ra.service.institution_configuration_options');
-    }
-
-    /**
-     * @return ProfileService
-     */
-    private function getProfileService()
-    {
-        return $this->get('ra.service.profile');
-    }
-
-    /**
-     * @return InstitutionListingService
-     */
-    private function getInstitutionListingService()
-    {
-        return $this->get('ra.service.institution_listing');
     }
 }

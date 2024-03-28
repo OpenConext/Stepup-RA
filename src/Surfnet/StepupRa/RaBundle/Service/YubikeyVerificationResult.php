@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,45 +21,24 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 class YubikeyVerificationResult
 {
     /**
-     * @var bool
-     */
-    private $clientError;
-
-    /**
-     * @var bool
-     */
-    private $serverError;
-
-    /**
      * @param bool $clientError
      * @param bool $serverError
      */
-    public function __construct($clientError, $serverError)
+    public function __construct(private $clientError, private $serverError)
     {
-        $this->clientError = $clientError;
-        $this->serverError = $serverError;
     }
 
-    /**
-     * @return bool
-     */
-    public function isSuccessful()
+    public function isSuccessful(): bool
     {
         return !$this->clientError && !$this->serverError;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isClientError()
+    public function isClientError(): bool
     {
         return $this->clientError;
     }
 
-    /**
-     * @return boolean
-     */
-    public function isServerError()
+    public function isServerError(): bool
     {
         return $this->serverError;
     }

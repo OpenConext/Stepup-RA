@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,36 +19,24 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Surfnet\StepupRa\RaBundle\Service\Gssf\VerificationResult;
-use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-final class GssfService
+final readonly class GssfService
 {
-    /**
-     * @var \Symfony\Component\HttpFoundation\Session\Attribute\AttributeBagInterface
-     */
-    private $state;
-
-    public function __construct(AttributeBagInterface $state)
-    {
-        $this->state = $state;
+    public function __construct(
+        //        private AttributeBagInterface $state
+        private RequestStack $requestStack,
+    ) {
     }
 
-    /**
-     * @param string $gssfId
-     * @param string $procedureId
-     */
-    public function startVerification($gssfId, $procedureId)
+    public function startVerification(string $gssfId, string $procedureId): void
     {
-        $this->state->set('current_verification', ['procedureId' => $procedureId, 'gssfId' => $gssfId]);
+        $this->requestStack->getSession()->set('current_verification', ['procedureId' => $procedureId, 'gssfId' => $gssfId]);
     }
 
-    /**
-     * @param string $gssfId
-     * @return VerificationResult
-     */
-    public function verify($gssfId)
+    public function verify(string $gssfId): VerificationResult
     {
-        $verification = $this->state->remove('current_verification');
+        $verification = $this->requestStack->getSession()->remove('current_verification');
 
         if (!$verification) {
             return VerificationResult::noSuchProcedure();

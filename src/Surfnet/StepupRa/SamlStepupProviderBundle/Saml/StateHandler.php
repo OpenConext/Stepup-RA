@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,58 +20,55 @@
 
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\Saml;
 
-use Surfnet\StepupRa\GatewayBundle\Saml\Proxy\ProxyStateHandler;
-use Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
-final class StateHandler
+final readonly class StateHandler
 {
-    /**
-     * @var string
-     */
-    private $provider;
+    const REQUEST_ID = 'request_id';
 
-    /**
-     * @var NamespacedAttributeBag
-     */
-    private $attributeBag;
-
-    public function __construct(NamespacedAttributeBag $attributeBag, $provider)
-    {
-        $this->attributeBag = $attributeBag;
-        $this->provider = $provider;
+    public function __construct(
+        private RequestStack $requestStack,
+        private string $provider,
+    ) {
     }
 
-    /**
-     * @param string $originalRequestId
-     * @return $this
-     */
-    public function setRequestId($originalRequestId)
+    public function setRequestId(string $originalRequestId): self
     {
-        $this->set('request_id', $originalRequestId);
+        $this->set(self::REQUEST_ID, $originalRequestId);
 
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getRequestId()
+    public function getRequestId(): ?string
     {
-        return $this->get('request_id');
+        return $this->get(self::REQUEST_ID);
     }
 
-    public function clear()
+    public function clear(): void
     {
-        $this->attributeBag->remove($this->provider);
+        $session = $this->requestStack->getSession();
+
+        $session->getBag('gssp.provider.' . $this->provider)->clear();
+
+        $this->requestStack->getSession()->remove($this->provider);
     }
 
-    protected function set($key, $value)
+    protected function set(string $key, mixed $value): void
     {
-        $this->attributeBag->set($this->provider . '/' . $key, $value);
+        $session = $this->requestStack->getSession();
+        $bag = $session->getBag('gssp.provider.' . $this->provider);
+        assert($bag instanceof AttributeBag);
+
+        $bag->set($key, $value);
     }
 
-    protected function get($key)
+    protected function get(string $key): mixed
     {
-        return $this->attributeBag->get($this->provider . '/' . $key);
+        $session = $this->requestStack->getSession();
+        $bag = $session->getBag('gssp.provider.' . $this->provider);
+        assert($bag instanceof AttributeBag);
+
+        return $bag->get($key);
     }
 }

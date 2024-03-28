@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\SamlStepupProviderBundle\Tests\Provider;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
+use Surfnet\StepupRa\RaBundle\Exception\LogicException;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -57,10 +58,10 @@ final class ViewConfigTest extends TestCase
      */
     public function translation_fails_when_no_current_language_set()
     {
-        $this->expectExceptionMessage("The current language is not set");
-        $this->expectException(\Surfnet\StepupRa\RaBundle\Exception\LogicException::class);
+        $this->expectExceptionMessage("The requested translation is not available in this language");
+        $this->expectException(LogicException::class);
 
-        $viewConfig = $this->buildViewConfig(null);
+        $viewConfig = $this->buildViewConfig('');
         $viewConfig->getExplanation();
     }
 
@@ -71,17 +72,13 @@ final class ViewConfigTest extends TestCase
     public function view_config_cannot_serve_french_translations()
     {
         $this->expectExceptionMessage("The requested translation is not available in this language: fr_FR. Available languages: en_GB, nl_NL");
-        $this->expectException(\Surfnet\StepupRa\RaBundle\Exception\LogicException::class);
+        $this->expectException(LogicException::class);
 
         $viewConfig = $this->buildViewConfig('fr_FR');
         $viewConfig->getGssfIdMismatch();
     }
 
-    /**
-     * @param string $locale
-     * @return ViewConfig
-     */
-    private function buildViewConfig($locale = '')
+    private function buildViewConfig(string $locale = ''): ViewConfig
     {
         $request = m::mock(RequestStack::class);
         $request->shouldReceive('getCurrentRequest->getLocale')->andReturn($locale)->byDefault();
@@ -97,9 +94,8 @@ final class ViewConfigTest extends TestCase
 
     /**
      * @param $string
-     * @return array
      */
-    private function getTranslationsArray($string)
+    private function getTranslationsArray($string): array
     {
         return [
             'en_GB' => 'EN ' . $string,

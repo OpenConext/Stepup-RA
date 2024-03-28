@@ -7,9 +7,6 @@ openconext_monitor:
   resource: "@OpenConextMonitorBundle/Resources/config/routing.yml"
   prefix: /
 
-surfnet_stepup_ra_ra:
-  resource: "@SurfnetStepupRaRaBundle/Resources/config/routing.yml"
-
 logout:
   path: /logout
   methods: [POST]

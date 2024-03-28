@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ class SurfnetStepupRaRaExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
@@ -43,16 +43,16 @@ class SurfnetStepupRaRaExtension extends Extension
         $gssfSecondFactors = array_keys($config['enabled_generic_second_factors']);
         $container->setParameter(
             'surfnet_stepup_ra.enabled_second_factors',
-            array_merge($config['enabled_second_factors'], $gssfSecondFactors)
+            array_merge($config['enabled_second_factors'], $gssfSecondFactors),
         );
 
         $container->setParameter(
             'ra.security.authentication.session.maximum_absolute_lifetime_in_seconds',
-            $config['session_lifetimes']['max_absolute_lifetime']
+            $config['session_lifetimes']['max_absolute_lifetime'],
         );
         $container->setParameter(
             'ra.security.authentication.session.maximum_relative_lifetime_in_seconds',
-            $config['session_lifetimes']['max_relative_lifetime']
+            $config['session_lifetimes']['max_relative_lifetime'],
         );
 
         $container->setParameter('surfnet_stepup_ra.self_service_url', $config['self_service_url']);

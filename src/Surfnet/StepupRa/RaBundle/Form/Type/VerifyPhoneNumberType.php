@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,14 +27,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VerifyPhoneNumberType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('challenge', TextType::class, [
             'label' => 'ra.form.ra_verify_phone_number.text.challenge',
             'required' => true,
-            'attr' => array(
-                'autofocus' => true,
-            ),
+            'attr' => ['autofocus' => true],
         ]);
         $builder->add('verifyChallenge', SubmitType::class, [
             'label' => 'ra.form.ra_verify_phone_number.button.verify_challenge',
@@ -51,10 +50,10 @@ class VerifyPhoneNumberType extends AbstractType
         ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupBundle\Command\VerifyPossessionOfPhoneCommand',
+            'data_class' => VerifyPossessionOfPhoneCommand::class,
             'procedureId' => null,
         ]);
 
@@ -63,7 +62,7 @@ class VerifyPhoneNumberType extends AbstractType
         $resolver->setAllowedTypes('procedureId', 'string');
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_verify_phone_number';
     }

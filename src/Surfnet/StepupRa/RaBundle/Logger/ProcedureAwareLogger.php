@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@
 namespace Surfnet\StepupRa\RaBundle\Logger;
 
 use Psr\Log\LoggerInterface;
-use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 
 /**
@@ -27,87 +26,70 @@ use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
  */
 final class ProcedureAwareLogger implements LoggerInterface
 {
-    /**
-     * @var string|null
-     */
-    private $procedure;
+    private string $procedure;
 
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    public function __construct(LoggerInterface $logger)
+    public function __construct(private readonly LoggerInterface $logger)
     {
-        $this->logger = $logger;
     }
 
-    public function forProcedure($procedure)
+    public function forProcedure(string $procedure): ProcedureAwareLogger
     {
-        if (!is_string($procedure)) {
-            throw InvalidArgumentException::invalidType('string', 'procedure', $procedure);
-        }
-
         $logger            = new self($this->logger);
         $logger->procedure = $procedure;
 
         return $logger;
     }
 
-    public function emergency($message, array $context = [])
+    public function emergency($message, array $context = []): void
     {
         $this->logger->emergency($message, $this->enrichContext($context));
     }
 
-    public function alert($message, array $context = [])
+    public function alert($message, array $context = []): void
     {
         $this->logger->alert($message, $this->enrichContext($context));
     }
 
-    public function critical($message, array $context = [])
+    public function critical($message, array $context = []): void
     {
         $this->logger->critical($message, $this->enrichContext($context));
     }
 
-    public function error($message, array $context = [])
+    public function error($message, array $context = []): void
     {
         $this->logger->error($message, $this->enrichContext($context));
     }
 
-    public function warning($message, array $context = [])
+    public function warning($message, array $context = []): void
     {
         $this->logger->warning($message, $this->enrichContext($context));
     }
 
-    public function notice($message, array $context = [])
+    public function notice($message, array $context = []): void
     {
         $this->logger->notice($message, $this->enrichContext($context));
     }
 
-    public function info($message, array $context = [])
+    public function info($message, array $context = []): void
     {
         $this->logger->info($message, $this->enrichContext($context));
     }
 
-    public function debug($message, array $context = [])
+    public function debug($message, array $context = []): void
     {
         $this->logger->debug($message, $this->enrichContext($context));
     }
 
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
-        $this->logger->log($message, $this->enrichContext($context));
+        $this->logger->log($level, $message, $this->enrichContext($context));
     }
-
 
     /**
      * Adds the procedure to the log context.
-     *
-     * @param array $context
-     * @return array
      * @throws RuntimeException
      */
-    private function enrichContext(array $context)
+    private function enrichContext(array $context): array
     {
         if (!$this->procedure) {
             throw new RuntimeException('Authentication logging context is unknown');

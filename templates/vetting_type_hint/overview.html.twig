@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'ra.vetting_type_hint.title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12" >
+            {% include 'partial/language_switcher.html.twig' with {'form': form} only %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>{{ 'ra.vetting_type_hint.subtitle'|trans({'%institution%': institution}) }}</h3>
+            <p>{{ 'ra.vetting_type_hint.help'|trans }}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            {{ form(hintForm) }}
+        </div>
+    </div>
+{% endblock content %}

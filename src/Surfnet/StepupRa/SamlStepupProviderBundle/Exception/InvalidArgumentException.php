@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +22,15 @@ use InvalidArgumentException as CoreInvalidArgumentException;
 
 class InvalidArgumentException extends CoreInvalidArgumentException
 {
-    public static function invalidType($expectedType, $parameter, $value)
+    public static function invalidType(mixed $expectedType, mixed $parameter, mixed $value): InvalidArgumentException
     {
         return new self(
             sprintf(
                 'Invalid Argument, parameter "%s" should be of type "%s", "%s" given',
                 $parameter,
                 $expectedType,
-                is_object($value) ? get_class($value) : gettype($value)
-            )
+                get_debug_type($value),
+            ),
         );
     }
 }

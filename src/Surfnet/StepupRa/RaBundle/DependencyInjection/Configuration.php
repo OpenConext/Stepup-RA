@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ class Configuration implements ConfigurationInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('surfnet_stepup_ra_ra');
         $rootNode = $treeBuilder->getRootNode();
@@ -41,25 +41,20 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function appendLoaConfiguration(NodeBuilder $childNodes)
+    private function appendLoaConfiguration(NodeBuilder $childNodes): void
     {
         $childNodes
             ->scalarNode('required_loa')
                 ->info('The required LOA to be able to log in, should match the loa defined at the gateway')
                 ->isRequired()
                     ->validate()
-                        ->ifTrue(function ($value) {
-                            return !is_string($value);
-                        })
+                        ->ifTrue(fn($value) => !is_string($value))
                         ->thenInvalid('the required loa must be a string')
                     ->end()
             ->end();
     }
 
-    /**
-     * @param NodeBuilder $childNodes
-     */
-    private function appendSecondFactorTypesConfiguration(NodeBuilder $childNodes)
+    private function appendSecondFactorTypesConfiguration(NodeBuilder $childNodes): void
     {
         $childNodes
             ->arrayNode('enabled_second_factors')
@@ -78,10 +73,7 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
-    /**
-     * @param NodeBuilder $childNodes
-     */
-    private function appendSessionConfiguration(NodeBuilder $childNodes)
+    private function appendSessionConfiguration(NodeBuilder $childNodes): void
     {
         $childNodes
             ->arrayNode('session_lifetimes')
@@ -94,9 +86,7 @@ class Configuration implements ConfigurationInterface
                         ->example('3600 -> 1 hour * 60 minutes * 60 seconds')
                         ->validate()
                             ->ifTrue(
-                                function ($lifetime) {
-                                    return !is_int($lifetime);
-                                }
+                                fn($lifetime) => !is_int($lifetime),
                             )
                             ->thenInvalid('max_absolute_lifetime must be an integer')
                         ->end()
@@ -106,14 +96,12 @@ class Configuration implements ConfigurationInterface
                         ->defaultValue(600)
                         ->info(
                             'The maximum relative lifetime of a session; the maximum allowed time between two '
-                            . 'interactions by the user'
+                            . 'interactions by the user',
                         )
                         ->example('600 -> 10 minutes * 60 seconds')
                         ->validate()
                             ->ifTrue(
-                                function ($lifetime) {
-                                    return !is_int($lifetime);
-                                }
+                                fn($lifetime) => !is_int($lifetime),
                             )
                             ->thenInvalid('max_relative_lifetime must be an integer')
                         ->end()
@@ -122,16 +110,14 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
-    private function appendUrlConfiguration(NodeBuilder $childNodes)
+    private function appendUrlConfiguration(NodeBuilder $childNodes): void
     {
         $childNodes
             ->scalarNode('self_service_url')
                 ->info('The URL of Self Service, where a user can register and revoke second factors')
                 ->validate()
                     ->ifTrue(
-                        function ($url) {
-                            return filter_var($url, FILTER_VALIDATE_URL) === false;
-                        }
+                        fn($url) => filter_var($url, FILTER_VALIDATE_URL) === false,
                     )
                     ->thenInvalid('self_service_url must be a valid url')
             ->end();

@@ -1,0 +1,16 @@
+includes:
+    - ./phpstan-baseline.php
+    - ../../vendor/phpstan/phpstan-symfony/extension.neon
+rules:
+#    - Surfnet\NoDebugFunctionRule
+#    - Surfnet\InvokableControllerRule
+#    - Surfnet\UntypedIdParamRule
+#    - Surfnet\NoNullOrArrayReturnRule
+parameters:
+    checkUninitializedProperties: true
+    level: 9
+    paths:
+        - ../../src
+    excludePaths:
+        - ../../src/Surfnet/StepupRa/RaBundle/Tests
+        - ../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Tests

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,30 +20,20 @@ namespace Surfnet\StepupRa\RaBundle\Form\Extension;
 
 class RaRoleChoiceList
 {
-    /**
-     * @return array
-     */
-    public static function create()
+    public static function create(): array
     {
         return self::buildChoices();
     }
 
-    private static function buildChoices()
+    private static function buildChoices(): array
     {
         $choices = self::getChoices();
-        $labels = array_map(function ($choice) {
-            return 'ra.form.extension.ra_role_choice.' . $choice;
-        }, $choices);
+        $labels = array_map(fn($choice) => 'ra.form.extension.ra_role_choice.' . $choice, $choices);
 
-        $combined = array_combine($labels, $choices);
-
-        return $combined;
+        return array_combine($labels, $choices);
     }
 
-    /**
-     * @return array
-     */
-    public static function getChoices()
+    public static function getChoices(): array
     {
         return ['ra', 'raa'];
     }
