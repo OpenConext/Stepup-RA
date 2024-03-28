@@ -12,20 +12,24 @@ jobs:
     if: always()
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: OpenConext/Stepup-Build
-          ref: master
+          ref: feature/php82_build
+
       - name: Output the semver tag to the tag variable
         id: vars
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+
       - name: Run release script
         run: ./stepup-build.sh ${COMPONENT_NAME} --tag ${{ steps.vars.outputs.tag }}
+      
       - name: Grab the archive filename
         id: archive
         run: |
           echo ::set-output name=archive::$(find . -maxdepth 1 -name "$COMPONENT_NAME*.tar.bz2" -printf '%f\n')
           echo ::set-output name=shasum::$(find . -maxdepth 1 -name "$COMPONENT_NAME*.sha" -printf '%f\n')
+      
       - name: Create Draft Release
         id: create_release
         uses: actions/create-release@v1
@@ -37,6 +41,7 @@ jobs:
           body: Auto generated release. Please update these release notes manually.
           draft: true
           prerelease: false
+      
       - uses: actions/upload-release-asset@v1.0.1
         name: Upload the release artefact tarbal
         env:
