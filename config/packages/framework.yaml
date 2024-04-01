@@ -32,9 +32,6 @@ when@dev:
     profiler: { only_exceptions: false }
 
 when@smoketest:
-  imports:
-    - { resource: './services_smoketest.yaml' }
-
   framework:
     test: ~
     session:
