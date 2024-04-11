@@ -36,10 +36,11 @@ when@smoketest:
     test: ~
     session:
       storage_factory_id: session.storage.factory.mock_file
-    profiler: { only_exceptions: false }
+    profiler:
+      only_exceptions: false
+      collect: true
     php_errors:
       log: false # prevents user deprecated warnings
-
 when@test:
   framework:
     test: ~

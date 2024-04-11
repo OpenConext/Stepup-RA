@@ -1,0 +1,6 @@
+when@dev:
+when@test:
+when@smoketest:
+    web_profiler:
+        toolbar: true
+        intercept_redirects: false
