@@ -18,7 +18,7 @@ declare(strict_types = 1);
  * limitations under the License.
  */
 
-namespace src;
+namespace Surfnet\StepupRa;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
