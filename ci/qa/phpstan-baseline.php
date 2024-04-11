@@ -422,11 +422,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Call to an undefined method Surfnet\\\\StepupBundle\\\\Value\\\\Provider\\\\ViewConfigInterface\\:\\:getInitiate\\(\\)\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/Vetting/Gssf/GssfInitiateFormService.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Controller\\\\Vetting\\\\Gssf\\\\GssfInitiateFormService\\:\\:renderInitiateForm\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/Vetting/Gssf/GssfInitiateFormService.php',
@@ -437,17 +432,12 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/Vetting/Gssf/GssfVerifyController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
-	'count' => 2,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method getLoa\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
+	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Controller\\\\VettingController\\:\\:cancelProcedure\\(\\) has parameter \\$procedureId with no type specified\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Controller\\\\VettingController\\:\\:cancelProcedure\\(\\) has parameter \\$procedureId with no type specified\\.$#',
+	'message' => '#^Parameter \\#2 \\$actorId of method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\SecondFactorService\\:\\:findVerifiedSecondFactorByRegistrationCode\\(\\) expects string, string\\|null given\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php',
 ];
@@ -457,13 +447,18 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
+	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\StartVettingProcedureCommand\\:\\:\\$authorityId \\(string\\) does not accept string\\|null\\.$#',
 	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingTypeHintController.php',
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Cannot call method getRaaInstitutions\\(\\) on Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\Profile\\|null\\.$#',
 	'count' => 2,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingTypeHintController.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Controller\\\\VettingTypeHintController\\:\\:__construct\\(\\) has parameter \\$locales with no value type specified in iterable type array\\.$#',
+	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingTypeHintController.php',
 ];
 $ignoreErrors[] = [
@@ -477,18 +472,8 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingTypeHintController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Static property Surfnet\\\\StepupRa\\\\RaBundle\\\\DateTime\\\\DateTime\\:\\:\\$now is never written, only read\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/DateTime/DateTime.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Call to an undefined method Symfony\\\\Contracts\\\\Translation\\\\TranslatorInterface\\:\\:setLocale\\(\\)\\.$#',
 	'count' => 2,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/EventListener/LocaleListener.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
-	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/EventListener/LocaleListener.php',
 ];
 $ignoreErrors[] = [
@@ -555,16 +540,6 @@ $ignoreErrors[] = [
 	'message' => '#^Cannot access property \\$availableInstitutions on mixed\\.$#',
 	'count' => 2,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Form/Type/CreateRaType.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot access property \\$institutionFilterOptions on mixed\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaCandidatesType.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^PHPDoc tag @var has invalid value \\(\\$command SearchRaCandidatesCommand\\)\\: Unexpected token "\\$command", expected type at offset 9$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Form/Type/SearchRaCandidatesType.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Cannot access property \\$availableInstitutions on mixed\\.$#',
@@ -672,16 +647,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/SamlAuthenticationStateHandler.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\Authentication\\\\SamlInteractionProvider\\:\\:\\$loaResolutionService is never read, only written\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/SamlInteractionProvider.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Unreachable statement \\- code above always terminates\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/SamlInteractionProvider.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\Authentication\\\\Session\\\\SessionStorage\\:\\:getCurrentRequestUri\\(\\) should return string but returns mixed\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/Authentication/Session/SessionStorage.php',
@@ -727,11 +692,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/AuditLogService.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/CommandService.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Cannot call method getUser\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\Authentication\\\\Token\\\\TokenInterface\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/CommandService.php',
@@ -755,16 +715,6 @@ $ignoreErrors[] = [
 	'message' => '#^Parameter \\#1 \\$procedureId of static method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\Gssf\\\\VerificationResult\\:\\:verificationSucceeded\\(\\) expects string, mixed given\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/GssfService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\:\\:getUsername\\(\\)\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/IdentityService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/IdentityService.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\IdentityService implements generic interface Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface but does not specify its types\\: TUser$#',
@@ -872,57 +822,7 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/SecondFactorService.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Call to an undefined method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\YubikeySecondFactorServiceInterface\\:\\:verifyYubikeyPublicId\\(\\)\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method getAuthorityId\\(\\) on Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method getDocumentNumber\\(\\) on Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method getRegistrationCode\\(\\) on Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method getSecondFactor\\(\\) on Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure\\|null\\.$#',
-	'count' => 17,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method isIdentityVerified\\(\\) on Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method isProvePossessionSkippable\\(\\) on Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure\\|null\\.$#',
-	'count' => 2,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method verifyIdentity\\(\\) on Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method verifySecondFactorIdentifier\\(\\) on Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure\\|null\\.$#',
-	'count' => 3,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot call method vet\\(\\) on Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\VettingService\\:\\:getProcedure\\(\\) never returns null so it can be removed from the return type\\.$#',
+	'message' => '#^Cannot call method getYubikeyPublicId\\(\\) on Surfnet\\\\StepupBundle\\\\Value\\\\YubikeyPublicId\\|null\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
 ];
@@ -932,8 +832,8 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Parameter \\#1 \\$vettingProcedure of method Surfnet\\\\StepupRa\\\\RaBundle\\\\Repository\\\\VettingProcedureRepository\\:\\:store\\(\\) expects Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure, Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure\\|null given\\.$#',
-	'count' => 4,
+	'message' => '#^Parameter \\#1 \\$secondFactorIdentifier of method Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure\\:\\:verifySecondFactorIdentifier\\(\\) expects string, string\\|null given\\.$#',
+	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/VettingService.php',
 ];
 $ignoreErrors[] = [
@@ -960,11 +860,6 @@ $ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Twig\\\\Extensions\\\\Extension\\\\SecondFactorType\\:\\:translateSecondFactorType\\(\\) has parameter \\$secondFactorType with no type specified\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Twig/Extensions/Extension/SecondFactorType.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Static property Surfnet\\\\StepupRa\\\\RaBundle\\\\Value\\\\DateTime\\:\\:\\$now is never written, only read\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Value/DateTime.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure has an uninitialized property \\$authorityId\\. Give it default value or assign it in the constructor\\.$#',
@@ -1047,17 +942,12 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/DependencyInjection/SurfnetStepupRaSamlStepupProviderExtension.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Exception\\\\InvalidArgumentException\\:\\:invalidType\\(\\) has parameter \\$expectedType with no type specified\\.$#',
+	'message' => '#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Exception/InvalidArgumentException.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Exception\\\\InvalidArgumentException\\:\\:invalidType\\(\\) has parameter \\$parameter with no type specified\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Exception/InvalidArgumentException.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Exception\\\\InvalidArgumentException\\:\\:invalidType\\(\\) has parameter \\$value with no type specified\\.$#',
+	'message' => '#^Parameter \\#3 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Exception/InvalidArgumentException.php',
 ];
@@ -1072,82 +962,7 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Exception/UnknownProviderException.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot call method getLocale\\(\\) on Symfony\\\\Component\\\\HttpFoundation\\\\Request\\|null\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/ViewConfig.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Provider\\\\ViewConfig\\:\\:__construct\\(\\) has parameter \\$explanation with no value type specified in iterable type array\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/ViewConfig.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Provider\\\\ViewConfig\\:\\:__construct\\(\\) has parameter \\$gssfIdMismatch with no value type specified in iterable type array\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/ViewConfig.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Provider\\\\ViewConfig\\:\\:__construct\\(\\) has parameter \\$initiate with no value type specified in iterable type array\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/ViewConfig.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Provider\\\\ViewConfig\\:\\:__construct\\(\\) has parameter \\$pageTitle with no value type specified in iterable type array\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/ViewConfig.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Provider\\\\ViewConfig\\:\\:__construct\\(\\) has parameter \\$title with no value type specified in iterable type array\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/ViewConfig.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Provider\\\\ViewConfig\\:\\:getExplanation\\(\\) should return string but returns mixed\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/ViewConfig.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Provider\\\\ViewConfig\\:\\:getGssfIdMismatch\\(\\) should return string but returns mixed\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/ViewConfig.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Provider\\\\ViewConfig\\:\\:getInitiate\\(\\) should return string but returns mixed\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/ViewConfig.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Provider\\\\ViewConfig\\:\\:getPageTitle\\(\\) should return string but returns mixed\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/ViewConfig.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Provider\\\\ViewConfig\\:\\:getTitle\\(\\) should return string but returns mixed\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/ViewConfig.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Provider\\\\ViewConfig\\:\\:getTranslation\\(\\) has parameter \\$translations with no value type specified in iterable type array\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Provider/ViewConfig.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionBagInterface\\:\\:get\\(\\)\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Saml/StateHandler.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Session\\\\SessionBagInterface\\:\\:set\\(\\)\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Saml/StateHandler.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Saml\\\\StateHandler\\:\\:get\\(\\) has no return type specified\\.$#',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Saml/StateHandler.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Saml\\\\StateHandler\\:\\:set\\(\\) has parameter \\$value with no type specified\\.$#',
+	'message' => '#^Method Surfnet\\\\StepupRa\\\\SamlStepupProviderBundle\\\\Saml\\\\StateHandler\\:\\:getRequestId\\(\\) should return string\\|null but returns mixed\\.$#',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/SamlStepupProviderBundle/Saml/StateHandler.php',
 ];
