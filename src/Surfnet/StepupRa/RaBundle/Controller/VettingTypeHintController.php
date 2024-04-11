@@ -36,17 +36,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class VettingTypeHintController extends AbstractController
 {
-//    private readonly array $locales;
 
     public function __construct(
         private readonly LoggerInterface           $logger,
         private readonly InstitutionListingService $institutionListingService,
         private readonly ProfileService            $profileService,
         private readonly VettingTypeHintService    $vettingTypeHintService,
-        /**
-         * @var string[]
-         */
-        private readonly array $locales = [],
+        private readonly array $locales,
     ) {
     }
 
