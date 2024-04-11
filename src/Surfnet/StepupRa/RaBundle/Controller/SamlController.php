@@ -64,7 +64,6 @@ class SamlController extends AbstractController
     )]
     public function metadata(): XMLResponse
     {
-
         return new XMLResponse($this->metadataFactory->generate());
     }
 }
