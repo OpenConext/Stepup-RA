@@ -305,9 +305,6 @@
     "symfony/deprecation-contracts": {
         "version": "v2.4.0"
     },
-    "symfony/dotenv": {
-        "version": "v4.4.10"
-    },
     "symfony/error-handler": {
         "version": "v4.4.10"
     },
