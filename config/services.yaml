@@ -337,14 +337,6 @@ services:
       - "@ra.service.profile"
     tags: ['controller.service_arguments']
 
-  Surfnet\StepupRa\RaBundle\Controller\RecoveryTokenController:
-    arguments:
-      - '@Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService'
-      - '@Knp\Component\Pager\PaginatorInterface'
-      - '@security.token_storage'
-      - "@logger"
-    tags: ['controller.service_arguments']
-
   Surfnet\StepupRa\RaBundle\Controller\VettingTypeHintController:
     arguments:
       - '@logger'
