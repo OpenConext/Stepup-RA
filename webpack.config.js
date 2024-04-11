@@ -36,7 +36,7 @@ Encore
     ])
 
     .addStyleEntry('global', [
-        './src/Surfnet/StepupRa/RaBundle/Resources/public/less/style.less',
+        './assets/less/style.less',
         './vendor/surfnet/stepup-bundle/src/Resources/public/less/stepup.less',
     ])
 
