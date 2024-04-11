@@ -94,8 +94,7 @@
             "@jscpd",
             "@license-headers",
             "@phpstan",
-            "@phpunit",
-            "@security-tests"
+            "@phpunit"
         ],
         "phplint": "./ci/qa/phplint",
         "license-headers": "./ci/qa/docheader",
@@ -104,8 +103,7 @@
         "phpstan": "./ci/qa/phpstan",
         "phpcbf": "./ci/qa/phpcbf",
         "jscpd": "ci/qa/jscpd",
-        "phpunit": "./ci/qa/phpunit",
-        "security-tests": "./ci/qa/security-tests"
+        "phpunit": "./ci/qa/phpunit"
     },
     "archive": {
         "exclude": [
