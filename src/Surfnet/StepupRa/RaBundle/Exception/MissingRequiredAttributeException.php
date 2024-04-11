@@ -18,8 +18,6 @@
 
 namespace Surfnet\StepupRa\RaBundle\Exception;
 
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-
-final class MissingRequiredAttributeException extends AuthenticationException
+final class MissingRequiredAttributeException extends RuntimeException
 {
 }
