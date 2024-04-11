@@ -1,5 +1,5 @@
 imports:
-    - { resource: samlstepupproviders_parameters.yaml }
+    - { resource: ../openconext/samlstepupproviders_parameters.yaml }
 
 surfnet_stepup_ra_saml_stepup_provider:
     routes:
