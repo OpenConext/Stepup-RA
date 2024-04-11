@@ -74,9 +74,8 @@ class ViewConfig implements ViewConfigInterface
      * @param array<string, string> $translations
      */
     private function getTranslation(
-        array $translations
-    ): string
-    {
+        array $translations,
+    ): string {
         $currentLocale = $this->requestStack->getCurrentRequest()?->getLocale();
 
         if (isset($translations[$currentLocale])) {
