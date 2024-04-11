@@ -24,7 +24,6 @@ use Surfnet\StepupBundle\Command\SwitchLocaleCommand;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\IdentitySearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\ExpressLocalePreferenceCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RegistrationAuthorityCredentials;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService as ApiIdentityService;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
@@ -107,20 +106,6 @@ class IdentityService implements UserProviderInterface
             'Got an unexpected amount of identities, expected 0 or 1, got "%d"',
             count($elements),
         ));
-    }
-
-    public function getRaCredentials(Identity $identity): ?RegistrationAuthorityCredentials
-    {
-        try {
-            $credentials = $this->apiIdentityService->getRegistrationAuthorityCredentials($identity);
-        } catch (Exception $e) {
-            $message = sprintf('Exception when retrieving RA credentials: "%s"', $e->getMessage());
-            $this->logger->critical($message);
-
-            throw new RuntimeException($message, 0, $e);
-        }
-
-        return $credentials;
     }
 
     public function switchLocale(SwitchLocaleCommand $command): bool
