@@ -4,15 +4,17 @@ monolog:
             type: fingers_crossed
             action_level: ERROR
             passthru_level: NOTICE # this means that all message of level NOTICE or higher are always logged
+            channels: [ "!event" ]
             handler: main_syslog
             bubble: false # if we handle it, nothing else should
         main_syslog:
             type: stream
             path: "php://stderr"
             formatter: surfnet_stepup.monolog.json_formatter
+            channels: [ "!event" ]
 
 when@dev:
-when@test: &test
+when@test:
     monolog:
         handlers:
             main_syslog:
@@ -24,5 +26,3 @@ when@test: &test
                 type: console
                 process_psr_3_messages: false
                 channels: ["!event", "!doctrine", "!deprecation", "!console"]
-
-when@smoketest: *test
