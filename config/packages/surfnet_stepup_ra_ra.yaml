@@ -1,5 +1,5 @@
 surfnet_stepup_ra_ra:
-  required_loa: "%loa_required_for_login%"
+  required_loa: "%authentication_context_class_ref%"
   enabled_second_factors: "%enabled_second_factors%"
   enabled_generic_second_factors: "%enabled_generic_second_factors%"
   session_lifetimes:
