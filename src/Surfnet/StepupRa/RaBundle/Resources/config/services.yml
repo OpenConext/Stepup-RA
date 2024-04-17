@@ -316,7 +316,6 @@ services:
         arguments:
             - '@Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService'
             - '@Knp\Component\Pager\PaginatorInterface'
-            - '@security.token_storage'
             - "@logger"
         tags: ['controller.service_arguments']
 

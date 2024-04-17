@@ -37,25 +37,19 @@ use function property_exists;
 class VettingTypeHintCommand
 {
 
-    /**
-     * @var string
-     */
-    public $identityId;
+    public string $identityId;
 
-    /**
-     * @var string
-     */
-    public $institution;
+    public string $institution;
 
     /**
      * @var string[]
      */
-    public $locales;
+    public array $locales;
 
     /**
      * @var string[]
      */
-    public $hints = [];
+    public array $hints = [];
 
     /**
      * The translatable hints are set, using the PHP magic setter

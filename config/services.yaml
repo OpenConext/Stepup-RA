@@ -19,6 +19,15 @@ services:
     resource: '../src/Surfnet/StepupRa/RaBundle/Controller/*'
     tags: [ 'controller.service_arguments' ]
 
+  Surfnet\StepupRa\RaBundle\Controller\VettingTypeHintController:
+    arguments:
+      - '@logger'
+      - '@ra.service.institution_listing'
+      - '@ra.service.profile'
+      - '@Surfnet\StepupRa\RaBundle\Service\VettingTypeHintService'
+      - '%locales%'
+    tags: ['controller.service_arguments']
+
   logger:
     alias: 'monolog.logger'
     public: true

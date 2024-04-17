@@ -42,7 +42,7 @@ class VettingTypeHintController extends AbstractController
         private readonly InstitutionListingService $institutionListingService,
         private readonly ProfileService            $profileService,
         private readonly VettingTypeHintService    $vettingTypeHintService,
-        private readonly array $locales,
+        private readonly array $locales = [],
     ) {
     }
 

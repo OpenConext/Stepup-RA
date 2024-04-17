@@ -29,7 +29,7 @@ final class SearchRecoveryTokensCommand
 
     public ?string $type = null;
 
-    public string $status = '';
+    public ?string $status = '';
 
     public ?string $email = null;
 
