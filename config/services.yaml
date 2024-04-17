@@ -15,27 +15,12 @@ services:
 
   Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger:
 
-  Surfnet\StepupRa\RaBundle\Controller\:
-    resource: '../src/Surfnet/StepupRa/RaBundle/Controller/*'
-    tags: [ 'controller.service_arguments' ]
-
-  Surfnet\StepupRa\RaBundle\Controller\VettingTypeHintController:
-    arguments:
-      - '@logger'
-      - '@ra.service.institution_listing'
-      - '@ra.service.profile'
-      - '@Surfnet\StepupRa\RaBundle\Service\VettingTypeHintService'
-      - '%locales%'
-    tags: ['controller.service_arguments']
-
   logger:
     alias: 'monolog.logger'
     public: true
 
   surfnet_saml.saml_provider:
     class: Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider
-#    arguments:
-#      $identityService: '@ra.service.identity'
 
   Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider:
     alias: surfnet_saml.saml_provider

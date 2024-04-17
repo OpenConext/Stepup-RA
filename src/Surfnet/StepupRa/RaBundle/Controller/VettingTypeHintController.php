@@ -19,7 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Psr\Log\LoggerInterface;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupMiddlewareClient\Identity\Dto\VettingTypeHint;
 use Surfnet\StepupRa\RaBundle\Command\VettingTypeHintCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\VettingTypeHintType;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
@@ -33,6 +33,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use function array_flip;
+use function array_keys;
+use function array_values;
 
 class VettingTypeHintController extends AbstractController
 {
@@ -48,6 +51,7 @@ class VettingTypeHintController extends AbstractController
 
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity) Given the two forms being handled in this action, cc is higher.
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     #[Route(
         path: '/vetting-type-hint',
@@ -93,10 +97,13 @@ class VettingTypeHintController extends AbstractController
         $command->institution = $institution;
         $command->identityId = $identity->id;
         $command->locales = $this->locales;
-        $hints = $this->vettingTypeHintService->findBy($institution);
-        if ($hints) {
-            $command->setHints($hints->hints);
+        $hintsEntity = $this->vettingTypeHintService->findBy($institution);
+        $hints = $this->createEmptyHints();
+
+        if ($hintsEntity instanceof VettingTypeHint && !empty($hintsEntity->hints)) {
+            $hints = $hintsEntity->hints;
         }
+        $command->setHints($hints);
         $hintForm = $this->createForm(VettingTypeHintType::class, $command);
         $hintForm->handleRequest($request);
 
@@ -121,5 +128,17 @@ class VettingTypeHintController extends AbstractController
                 'institution' => $institution,
             ],
         );
+    }
+
+    /**
+     * @return array<array<string, string>>
+     */
+    private function createEmptyHints(): array
+    {
+        $emptyHints = [];
+        foreach ($this->locales as $locale) {
+            $emptyHints[] = ['locale' => $locale, 'hint' => ''];
+        }
+        return $emptyHints;
     }
 }

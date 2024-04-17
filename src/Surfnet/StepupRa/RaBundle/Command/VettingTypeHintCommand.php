@@ -37,14 +37,14 @@ use function property_exists;
 class VettingTypeHintCommand
 {
 
-    public string $identityId;
+    public string $identityId = '';
 
-    public string $institution;
+    public string $institution = '';
 
     /**
      * @var string[]
      */
-    public array $locales;
+    public array $locales = [];
 
     /**
      * @var string[]

@@ -1,3 +1,6 @@
+imports:
+    - { resource: '../../../../../../config/openconext/parameters.yaml' }
+
 services:
     # To be compatible with loading services from the container instead of using DI, TODO, Utilize DI throughout the
     # application.
@@ -11,7 +14,30 @@ services:
       public: true
 
     Surfnet\StepupRa\RaBundle\Controller\:
-        resource: '../../Controller/'
+        resource: '../../Controller/*'
+        tags: [ 'controller.service_arguments' ]
+
+    # Controller overrides
+    ra.controller.profile:
+        class: Surfnet\StepupRa\RaBundle\Controller\ProfileController
+        arguments:
+            - "@ra.service.profile"
+        tags: ['controller.service_arguments']
+
+    Surfnet\StepupRa\RaBundle\Controller\RecoveryTokenController:
+        arguments:
+            - '@Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService'
+            - '@Knp\Component\Pager\PaginatorInterface'
+            - "@logger"
+        tags: ['controller.service_arguments']
+
+    Surfnet\StepupRa\RaBundle\Controller\VettingTypeHintController:
+        arguments:
+            - '@logger'
+            - '@ra.service.institution_listing'
+            - '@ra.service.profile'
+            - '@Surfnet\StepupRa\RaBundle\Service\VettingTypeHintService'
+            - '%locales%'
         tags: ['controller.service_arguments']
 
     ra.service.command:
@@ -304,26 +330,3 @@ services:
             - "@surfnet_stepup.service.second_factor_type_translator"
         tags:
             - { name : twig.extension }
-
-    # Controller
-    ra.controller.profile:
-        class: Surfnet\StepupRa\RaBundle\Controller\ProfileController
-        arguments:
-            - "@ra.service.profile"
-        tags: ['controller.service_arguments']
-
-    Surfnet\StepupRa\RaBundle\Controller\RecoveryTokenController:
-        arguments:
-            - '@Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService'
-            - '@Knp\Component\Pager\PaginatorInterface'
-            - "@logger"
-        tags: ['controller.service_arguments']
-
-    Surfnet\StepupRa\RaBundle\Controller\VettingTypeHintController:
-        arguments:
-            - '@logger'
-            - '@ra.service.institution_listing'
-            - '@ra.service.profile'
-            - '@Surfnet\StepupRa\RaBundle\Service\VettingTypeHintService'
-            - '%locales%'
-        tags: ['controller.service_arguments']
