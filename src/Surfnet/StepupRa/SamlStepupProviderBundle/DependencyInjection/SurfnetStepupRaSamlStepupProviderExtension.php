@@ -52,8 +52,8 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(dirname(__DIR__, 5) . '/config'));
-        $loader->load('services.yaml');
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yml');
 
         foreach ($config['providers'] as $provider => $providerConfiguration) {
             // may seem a bit strange, but this prevents casing issue when getting/setting/creating provider

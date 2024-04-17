@@ -1,0 +1,51 @@
+services:
+    ra.security.authentication.saml_interaction:
+        public: false
+        class: Surfnet\StepupRa\RaBundle\Security\Authentication\SamlInteractionProvider
+        arguments:
+            - "@surfnet_saml.hosted.service_provider"
+            - "@surfnet_saml.remote.idp"
+            - "@surfnet_saml.http.redirect_binding"
+            - "@surfnet_saml.http.post_binding"
+            - "@ra.security.authentication.session.session_storage"
+            - "@surfnet_stepup.service.loa_resolution"
+            - "@ra.security.required_loa"
+
+    ra.security.required_loa:
+        public: false
+        class: Surfnet\StepupBundle\Value\Loa
+        factory: ["@surfnet_stepup.service.loa_resolution", getLoa]
+        arguments: ["%surfnet_stepup_ra.security.required_loa%"]
+
+    # Session
+    ra.security.authentication.session.session_storage:
+        public: true
+        class: Surfnet\StepupRa\RaBundle\Security\Authentication\Session\SessionStorage
+        arguments:
+            - "@request_stack"
+
+    Surfnet\StepupRa\RaBundle\Security\Authentication\Session\SessionStorage:
+        alias: ra.security.authentication.session.session_storage
+
+    ra.security.authentication.session.session_lifetime_guard:
+        public: false
+        class: Surfnet\StepupRa\RaBundle\Security\Authentication\Session\SessionLifetimeGuard
+        arguments:
+            - "@ra.security.authentication.session.absolute_maximum_lifetime"
+            - "@ra.security.authentication.session.relative_maximum_lifetime"
+
+    ra.security.authentication.session.absolute_maximum_lifetime:
+        public: false
+        class: Surfnet\StepupRa\RaBundle\Value\TimeFrame
+        factory: [Surfnet\StepupRa\RaBundle\Value\TimeFrame, ofSeconds]
+        arguments:
+            - "%ra.security.authentication.session.maximum_absolute_lifetime_in_seconds%"
+
+    ra.security.authentication.session.relative_maximum_lifetime:
+        public: false
+        class: Surfnet\StepupRa\RaBundle\Value\TimeFrame
+        factory: [Surfnet\StepupRa\RaBundle\Value\TimeFrame, ofSeconds]
+        arguments:
+            - "%ra.security.authentication.session.maximum_relative_lifetime_in_seconds%"
+
+
