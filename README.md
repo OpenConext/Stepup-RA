@@ -12,12 +12,15 @@ This component is part of "Step-up Authentication as-a Service" and requires oth
 
 ## Installation
 
-Clone the repository or download the archive to a directory. Install the dependencies by running `composer install`.
+Clone the repository or download the archive to a directory. 
 
+Start the devconf Stepup environment with SelfService with local code inclusion (see devconf readme for details).   
+
+Run `bash` on the selfservice container (`docker exec -it stepup-selfservice-1 bash`) 
+
+Install the dependencies by running `composer install`.
 Install the JS dependencies: `yarn`
-
 Symlink assets from external packages: `./bin/console assets:install`
-
 Finally build the front-end resources: `yarn encore dev` or `yarn encore production`
 
 ## Release strategy
