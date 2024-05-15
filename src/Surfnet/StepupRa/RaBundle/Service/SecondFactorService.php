@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,36 +29,16 @@ use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 
 class SecondFactorService
 {
-    /**
-     * @var \Surfnet\StepupMiddlewareClientBundle\Identity\Service\SecondFactorService
-     */
-    private $apiSecondFactorService;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @param ApiSecondFactorService $apiSecondFactorService
-     * @param LoggerInterface        $logger
-     */
     public function __construct(
-        ApiSecondFactorService $apiSecondFactorService,
-        LoggerInterface $logger
+        private readonly ApiSecondFactorService $apiSecondFactorService,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->apiSecondFactorService = $apiSecondFactorService;
-        $this->logger = $logger;
     }
 
-    /**
-     * @param string $registrationCode
-     * @param string $actorInstitution
-     * @param string $actorId
-     * @return null|VerifiedSecondFactor
-     */
-    public function findVerifiedSecondFactorByRegistrationCode($registrationCode, $actorId)
-    {
+    public function findVerifiedSecondFactorByRegistrationCode(
+        string $registrationCode,
+        string $actorId,
+    ): ?VerifiedSecondFactor {
         $query = new VerifiedSecondFactorSearchQuery();
         $query->setActorId($actorId);
         $query->setRegistrationCode($registrationCode);
@@ -82,7 +64,7 @@ class SecondFactorService
         }
 
         throw new RuntimeException(
-            sprintf('Got an unexpected amount of identities, expected 0 or 1, got "%d"', $elementCount)
+            sprintf('Got an unexpected amount of identities, expected 0 or 1, got "%d"', $elementCount),
         );
     }
 }

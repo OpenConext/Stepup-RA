@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,11 +23,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 class VerifyYubikeyOtpCommand
 {
     /**
-     * @Assert\NotBlank(message="ra.verify_yubikey_command.otp.may_not_be_empty")
-     * @Assert\Type(type="string", message="ra.verify_yubikey_command.otp.must_be_string")
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'ra.verify_yubikey_command.otp.may_not_be_empty')]
+    #[Assert\Type(type: 'string', message: 'ra.verify_yubikey_command.otp.must_be_string')]
     public $otp;
 
     /**

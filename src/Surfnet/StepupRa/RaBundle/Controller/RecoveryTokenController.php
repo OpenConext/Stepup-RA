@@ -18,60 +18,41 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
-use Knp\Component\Pager\Paginator;
+use Knp\Component\Pager\PaginatorInterface;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\RevokeRecoveryTokenCommand;
-use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRecoveryTokensCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\RevokeRecoveryTokenType;
-use Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRecoveryTokensType;
 use Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-final class RecoveryTokenController extends Controller
+final class RecoveryTokenController extends AbstractController
 {
-    /**
-     * @var RecoveryTokenService
-     */
-    private $recoveryTokenService;
-
-    /**
-     * @var Paginator
-     */
-    private $paginator;
-
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        RecoveryTokenService $recoveryTokenService,
-        Paginator $paginator,
-        TokenStorageInterface $tokenStorage,
-        LoggerInterface $logger
+        private readonly RecoveryTokenService $recoveryTokenService,
+        private readonly PaginatorInterface $paginator,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->recoveryTokenService = $recoveryTokenService;
-        $this->paginator = $paginator;
-        $this->tokenStorage = $tokenStorage;
-        $this->logger = $logger;
     }
 
-    public function searchAction(Request $request): Response
+    #[Route(
+        path: '/recovery-tokens',
+        name: 'ra_recovery_tokens_search',
+        methods: ['GET', 'POST'],
+    )]
+    #[IsGranted('ROLE_RA')]
+    public function search(Request $request): Response
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
-
-        $identity = $this->getCurrentUser();
-        $this->get('logger')->notice('Starting search for recovery tokens');
+        $identity = $this->getUser()->getIdentity();
+        $this->logger->notice('Starting search for recovery tokens');
 
         $command = new SearchRecoveryTokensCommand();
         $command->actorId = $identity->id;
@@ -94,7 +75,7 @@ final class RecoveryTokenController extends Controller
         $pagination = $this->paginator->paginate(
             $recoveryTokens->getElements(),
             $recoveryTokens->getCurrentPage(),
-            $recoveryTokens->getItemsPerPage()
+            $recoveryTokens->getItemsPerPage(),
         );
         $pagination->setTotalItemCount($recoveryTokenCount);
 
@@ -102,11 +83,11 @@ final class RecoveryTokenController extends Controller
 
         $this->logger->notice(sprintf(
             'Searching for recovery tokens yielded "%d" results',
-            $recoveryTokenCount
+            $recoveryTokenCount,
         ));
 
         return $this->render(
-            '@SurfnetStepupRaRa/recovery_token/search.html.twig',
+            'recovery_token/search.html.twig',
             [
                 'form' => $form->createView(),
                 'revocationForm' => $revocationForm->createView(),
@@ -116,18 +97,22 @@ final class RecoveryTokenController extends Controller
                 'orderBy' => $command->orderBy,
                 'orderDirection' => $command->orderDirection ?: 'asc',
                 'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',
-            ]
+            ],
         );
     }
 
-    public function revokeAction(Request $request): RedirectResponse
+    #[Route(
+        path: '/recovery-tokens/revoke',
+        name: 'ra_recovery_tokens_revoke',
+        methods: ['POST'],
+    )]
+    #[IsGranted('ROLE_RA')]
+    public function revoke(Request $request): RedirectResponse
     {
-        $this->denyAccessUnlessGranted(['ROLE_RA']);
-
         $this->logger->notice('Received request to revoke recovery token');
 
         $command = new RevokeRecoveryTokenCommand();
-        $command->currentUserId = $this->getCurrentUser()->id;
+        $command->currentUserId = $this->getUser()->getIdentity()->id;
 
         $form = $this->createForm(RevokeRecoveryTokenType::class, $command);
         $form->handleRequest($request);
@@ -136,7 +121,7 @@ final class RecoveryTokenController extends Controller
             'Sending middleware request to revoke recovery token "%s" belonging to "%s" on behalf of "%s"',
             $command->recoveryTokenId,
             $command->identityId,
-            $command->currentUserId
+            $command->currentUserId,
         ));
 
         if ($this->recoveryTokenService->revoke($command)) {
@@ -150,12 +135,5 @@ final class RecoveryTokenController extends Controller
         $this->logger->notice('Redirecting back to recovery tokens search overview');
 
         return $this->redirectToRoute('ra_recovery_tokens_search');
-    }
-
-    private function getCurrentUser(): Identity
-    {
-        /** @var Identity $identity */
-        $identity = $this->tokenStorage->getToken()->getUser();
-        return $identity;
     }
 }

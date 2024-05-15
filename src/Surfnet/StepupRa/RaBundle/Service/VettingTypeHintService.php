@@ -27,32 +27,14 @@ use Surfnet\StepupRa\RaBundle\Command\VettingTypeHintCommand;
 
 class VettingTypeHintService
 {
-    /**
-     * @var CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var LibraryVettingTypeHintService
-     */
-    private $service;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        CommandService $commandService,
-        LibraryVettingTypeHintService $vettingTypeHintService,
-        LoggerInterface $logger
+        private readonly CommandService $commandService,
+        private readonly LibraryVettingTypeHintService $service,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->commandService = $commandService;
-        $this->service = $vettingTypeHintService;
-        $this->logger = $logger;
     }
 
-    public function save(VettingTypeHintCommand $command)
+    public function save(VettingTypeHintCommand $command): bool
     {
         $middlewareCommand = new SaveVettingTypeHintCommand();
         $middlewareCommand->identityId = $command->identityId;
@@ -66,7 +48,7 @@ class VettingTypeHintService
                 'Saving of the vetting type hint for institution "%s" by user "%s" failed: "%s"',
                 $middlewareCommand->institution,
                 $command->identityId,
-                implode(", ", $result->getErrors())
+                implode(", ", $result->getErrors()),
             ));
         }
 
@@ -77,7 +59,7 @@ class VettingTypeHintService
     {
         try {
             return $this->service->findOne($institution);
-        } catch (NotFoundException $e) {
+        } catch (NotFoundException) {
             return null;
         }
     }

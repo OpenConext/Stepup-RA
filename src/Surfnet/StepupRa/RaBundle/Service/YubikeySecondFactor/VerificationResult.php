@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,15 +23,10 @@ use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 
 class VerificationResult
 {
-    const RESULT_PUBLIC_ID_MATCHED = 0;
-    const RESULT_PUBLIC_ID_DID_NOT_MATCH = 1;
-    const RESULT_OTP_VERIFICATION_FAILED = 2;
-    const RESULT_OTP_INVALID = 3;
-
-    /**
-     * @var \Surfnet\StepupBundle\Value\YubikeyPublicId|null
-     */
-    private $publicId;
+    final public const RESULT_PUBLIC_ID_MATCHED = 0;
+    final public const RESULT_PUBLIC_ID_DID_NOT_MATCH = 1;
+    final public const RESULT_OTP_VERIFICATION_FAILED = 2;
+    final public const RESULT_OTP_INVALID = 3;
 
     /**
      * @var int One of the RESULT constants.
@@ -42,7 +37,7 @@ class VerificationResult
      * @param int $result
      * @param YubikeyPublicId|null $publicId
      */
-    public function __construct($result, YubikeyPublicId $publicId = null)
+    public function __construct($result, private readonly ?YubikeyPublicId $publicId = null)
     {
         $acceptableResults = [
             self::RESULT_PUBLIC_ID_MATCHED,
@@ -56,28 +51,24 @@ class VerificationResult
         }
 
         $this->result = $result;
-        $this->publicId = $publicId;
     }
 
-    public function didPublicIdMatch()
+    public function didPublicIdMatch(): bool
     {
-        return $this->result === self::RESULT_PUBLIC_ID_MATCHED && $this->publicId !== null;
+        return $this->result === self::RESULT_PUBLIC_ID_MATCHED && $this->publicId instanceof YubikeyPublicId;
     }
 
-    public function wasOtpInvalid()
+    public function wasOtpInvalid(): bool
     {
         return $this->result === self::RESULT_OTP_INVALID;
     }
 
-    public function didOtpVerificationFail()
+    public function didOtpVerificationFail(): bool
     {
         return $this->result === self::RESULT_OTP_VERIFICATION_FAILED;
     }
 
-    /**
-     * @return YubikeyPublicId|null
-     */
-    public function getPublicId()
+    public function getPublicId(): ?YubikeyPublicId
     {
         return $this->publicId;
     }

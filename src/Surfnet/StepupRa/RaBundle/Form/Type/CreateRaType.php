@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,11 +27,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CreateRaType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $options = array_combine(
             $builder->getData()->availableInstitutions,
-            $builder->getData()->availableInstitutions
+            $builder->getData()->availableInstitutions,
         );
 
         $builder
@@ -51,7 +51,7 @@ class CreateRaType extends AbstractType
                     ButtonGroupType::class,
                     [
                         'inherit_data' => true,
-                    ]
+                    ],
                 )
                 ->add('create_ra', SubmitType::class, [
                     'label' => 'ra.management.form.create_ra.label.create_ra',
@@ -61,19 +61,19 @@ class CreateRaType extends AbstractType
                     'label' => 'ra.management.form.create_ra.label.cancel',
                     'route' => 'ra_management_ra_candidate_search',
                     'attr'  => ['class' => 'btn btn-link cancel'],
-                ])
+                ]),
             )
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => AccreditCandidateCommand::class
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_management_create_ra';
     }

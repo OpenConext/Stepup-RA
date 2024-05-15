@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,36 +20,20 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 
 use GuzzleHttp\Client;
 use Psr\Log\LoggerInterface;
+use RuntimeException;
 use Surfnet\StepupBundle\Http\JsonHelper;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyOtpCommand;
 
 class YubikeyService
 {
     /**
-     * @var Client
-     */
-    private $guzzleClient;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
      * @param Client $guzzleClient A Guzzle client configured with the Yubikey API base URL and authentication.
-     * @param LoggerInterface $logger
      */
-    public function __construct(Client $guzzleClient, LoggerInterface $logger)
+    public function __construct(private readonly Client $guzzleClient, private readonly LoggerInterface $logger)
     {
-        $this->guzzleClient = $guzzleClient;
-        $this->logger = $logger;
     }
 
-    /**
-     * @param VerifyYubikeyOtpCommand $command
-     * @return YubikeyVerificationResult
-     */
-    public function verify(VerifyYubikeyOtpCommand $command)
+    public function verify(VerifyYubikeyOtpCommand $command): YubikeyVerificationResult
     {
         $this->logger->info('Verifying Yubikey OTP');
 
@@ -69,7 +53,7 @@ class YubikeyService
 
         try {
             $result = JsonHelper::decode((string) $response->getBody());
-        } catch (\RuntimeException $e) {
+        } catch (RuntimeException) {
             $this->logger->error('Yubikey OTP verification failed; server responded with malformed JSON.');
 
             return new YubikeyVerificationResult(false, true);

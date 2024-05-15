@@ -37,25 +37,19 @@ use function property_exists;
 class VettingTypeHintCommand
 {
 
-    /**
-     * @var string
-     */
-    public $identityId;
+    public string $identityId = '';
 
-    /**
-     * @var string
-     */
-    public $institution;
+    public string $institution = '';
 
     /**
      * @var string[]
      */
-    public $locales;
+    public array $locales = [];
 
     /**
      * @var string[]
      */
-    public $hints = [];
+    public array $hints = [];
 
     /**
      * The translatable hints are set, using the PHP magic setter
@@ -89,7 +83,7 @@ class VettingTypeHintCommand
         try {
             $this->assertValidLanguageInName($name);
             $locale = $this->extractLocaleFromFormFieldName($name);
-        } catch (RuntimeException $e) {
+        } catch (RuntimeException) {
             return false;
         }
         return array_key_exists($locale, $this->hints);
@@ -99,7 +93,7 @@ class VettingTypeHintCommand
      * Based on the languages that are configured on the application eg: nl_NL or en_EN,..
      * test if the passed parameter contains a valid language identifier.
      */
-    private function assertValidLanguageInName($name)
+    private function assertValidLanguageInName($name): void
     {
         $locale = $this->extractLocaleFromFormFieldName($name);
         if (!in_array($locale, $this->locales, true)) {
@@ -108,8 +102,8 @@ class VettingTypeHintCommand
                     'An invalid language ("%s") was rendered on the VettingTypeHintType form. ' .
                     'Unable to process it in VettingTypeHintCommand. Configure it in the ' .
                     'parameters.yaml or investigate why this rogue language ended up on the form.',
-                    $locale
-                )
+                    $locale,
+                ),
             );
         }
     }
@@ -118,7 +112,7 @@ class VettingTypeHintCommand
     {
         if (empty($this->locales)) {
             throw new RuntimeException(
-                'No locales have been configured on the command yet, unable to process vetting type hints'
+                'No locales have been configured on the command yet, unable to process vetting type hints',
             );
         }
 
@@ -131,14 +125,14 @@ class VettingTypeHintCommand
                     'Unable to extract a locale from the form field name "%s". The field name prefix ' .
                     'did not match the configured value "%s"',
                     $name,
-                    $prefix
-                )
+                    $prefix,
+                ),
             );
         }
         return $matches[1];
     }
 
-    public function setHints(array $hints)
+    public function setHints(array $hints): void
     {
         foreach ($hints as $hint) {
             $this->hints[$hint['locale']] = $hint['hint'];

@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.0.0
+- Update php8 and Symfony 6.4
+
 ## 5.0.5
 - Translate remaining [Recovery token] occurrences #303
 - Installed security updates for phpseclib/phpseclib and guzzlehttp/psr7

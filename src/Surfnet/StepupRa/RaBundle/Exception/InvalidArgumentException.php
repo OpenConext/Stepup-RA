@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,21 +18,20 @@
 
 namespace Surfnet\StepupRa\RaBundle\Exception;
 
-class InvalidArgumentException extends \InvalidArgumentException
+use InvalidArgumentException as BaseInvalidArgumentException;
+
+class InvalidArgumentException extends BaseInvalidArgumentException
 {
-    /**
-     * @param string $expected description of expected type
-     * @param string $parameterName
-     * @param mixed $parameter the parameter that is not of the expected type.
-     * @return self
-     */
-    public static function invalidType($expected, $parameterName, $parameter)
-    {
+    public static function invalidType(
+        string $expected,
+        string $parameterName,
+        mixed $parameter,
+    ): InvalidArgumentException {
         $message = sprintf(
             'Invalid argument type: "%s" expected, "%s" given for "%s"',
             $expected,
-            is_object($parameter) ? get_class($parameter) : gettype($parameter),
-            $parameterName
+            get_debug_type($parameter),
+            $parameterName,
         );
 
         return new self($message);

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2016 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,27 +23,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class SearchRaLocationsCommand
 {
     /**
-     * @Assert\NotBlank(message="ra.search_ra_second_factors.institution.blank")
-     * @Assert\Type("string", message="ra.search_ra_second_factors.institution.type")
      *
      * @var string
      */
+    #[Assert\NotBlank(message: 'ra.search_ra_second_factors.institution.blank')]
+    #[Assert\Type('string', message: 'ra.search_ra_second_factors.institution.type')]
     public $institution;
 
     /**
-     * @Assert\Choice(
-     *     {"name", "type", "secondFactorId", "email", "status"},
-     *     message="ra.search_ra_second_factors.order_by.invalid_choice"
-     * )
-     *
      * @var string|null
      */
+    #[Assert\Choice(['name', 'type', 'secondFactorId', 'email', 'status'], message: 'ra.search_ra_second_factors.order_by.invalid_choice')]
     public $orderBy;
 
     /**
-     * @Assert\Choice({"asc", "desc"}, message="ra.search_ra_second_factors.order_direction.invalid_choice")
-     *
      * @var string|null
      */
+    #[Assert\Choice(['asc', 'desc'], message: 'ra.search_ra_second_factors.order_direction.invalid_choice')]
     public $orderDirection;
 }

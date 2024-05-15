@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,43 +26,19 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Command\ExpressLocalePreferenc
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService as ApiIdentityService;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
+use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class IdentityService implements UserProviderInterface
 {
-    /**
-     * @var \Surfnet\StepupMiddlewareClientBundle\Identity\Service\IdentityService
-     */
-    private $apiIdentityService;
-
-    /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
-     */
-    private $tokenStorage;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        ApiIdentityService $apiIdentityService,
-        CommandService $commandService,
-        TokenStorageInterface $tokenStorage,
-        LoggerInterface $logger
+        private readonly ApiIdentityService $apiIdentityService,
+        private readonly CommandService $commandService,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->apiIdentityService = $apiIdentityService;
-        $this->commandService = $commandService;
-        $this->tokenStorage = $tokenStorage;
-        $this->logger = $logger;
     }
 
     /**
@@ -70,47 +46,40 @@ class IdentityService implements UserProviderInterface
      *
      * If needed, the username is the UUID of the identity so it can be fetched rather easy
      */
-    public function loadUserByUsername($username)
+    public function loadUserByIdentifier(string $identifier): never
     {
-        throw new RuntimeException(sprintf('Cannot Load User By Username "%s"', $username));
+        throw new RuntimeException(sprintf('Cannot Load User By Username "%s"', $identifier));
     }
 
     /**
      * For now this functionality is disabled, unsure if actually needed
      */
-    public function refreshUser(UserInterface $user)
+    public function refreshUser(UserInterface $user): UserInterface
     {
+        assert($user instanceof AuthenticatedIdentity);
         throw new RuntimeException(sprintf('Cannot Refresh User "%s"', $user->getUsername()));
     }
 
     /**
      * Whether this provider supports the given user class
-     *
-     * @param string $class
-     *
-     * @return bool
      */
-    public function supportsClass($class)
+    public function supportsClass($class): bool
     {
-        return $class === 'Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity';
+        return $class === Identity::class;
     }
 
     /**
      * @param string $identityId the UUID of the identity to find
-     * @return null|Identity
      */
-    public function findById($identityId)
+    public function findById(string $identityId): ?Identity
     {
         return $this->apiIdentityService->get($identityId);
     }
 
     /**
-     * @param string $nameId
-     * @param string $institution
-     * @return null|\Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity
-     * @throws \Surfnet\StepupRa\RaBundle\Exception\RuntimeException
+     * @throws RuntimeException
      */
-    public function findByNameIdAndInstitution($nameId, $institution)
+    public function findByNameIdAndInstitution(string $nameId, string $institution): ?Identity
     {
         $searchQuery = new IdentitySearchQuery();
         $searchQuery->setNameId($nameId);
@@ -135,43 +104,22 @@ class IdentityService implements UserProviderInterface
 
         throw new RuntimeException(sprintf(
             'Got an unexpected amount of identities, expected 0 or 1, got "%d"',
-            count($elements)
+            count($elements),
         ));
     }
 
-    /**
-     * @param Identity $identity
-     * @return \Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RegistrationAuthorityCredentials|null
-     */
-    public function getRaCredentials(Identity $identity)
+    public function switchLocale(SwitchLocaleCommand $command): bool
     {
-        try {
-            $credentials = $this->apiIdentityService->getRegistrationAuthorityCredentials($identity);
-        } catch (Exception $e) {
-            $message = sprintf('Exception when retrieving RA credentials: "%s"', $e->getMessage());
-            $this->logger->critical($message);
-
-            throw new RuntimeException($message, 0, $e);
-        }
-
-        return $credentials;
-    }
-
-    /**
-     * @param SwitchLocaleCommand $command
-     * @return bool
-     */
-    public function switchLocale(SwitchLocaleCommand $command)
-    {
-        /** @var TokenInterface|null */
         $token = $this->tokenStorage->getToken();
 
         if (!$token) {
             throw new RuntimeException('Cannot switch locales when unauthenticated');
         }
 
-        /** @var Identity $identity */
-        $identity = $token->getUser();
+        $userIdentifier = $token->getUser();
+        assert($userIdentifier instanceof AuthenticatedIdentity);
+
+        $identity = $userIdentifier->getIdentity();
 
         $expressLocalePreferenceCommand = new ExpressLocalePreferenceCommand();
         $expressLocalePreferenceCommand->identityId = $command->identityId;

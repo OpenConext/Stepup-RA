@@ -1,20 +1,18 @@
 security:
     providers:
-        middleware:
-            id: ra.service.identity
+        saml-provider:
+            id: Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/|^/_trans(/|$)
             security: false
 
-        default:
-            pattern: ^/authentication/(metadata|session-expired)$
-            logout_on_user_change: true
-            anonymous: ~
+        login_firewall:
+            pattern:    ^/saml/metadata
 
         monitor:
-            pattern: ^/(info|health)$
+            pattern: ^/(internal/)?(info|health)$
             security: false
 
         csp_report:
@@ -22,15 +20,10 @@ security:
             security: false
 
         saml_based:
-            saml: true
-            logout_on_user_change: true
+            custom_authenticators:
+                - Surfnet\SamlBundle\Security\Authentication\SamlAuthenticator
             logout:
                 path: /logout
-                success_handler: "ra.security.authentication.handler.logout_success"
-                invalidate_session: true
-                csrf_token_generator: security.csrf.token_manager
-                csrf_parameter: 't'
-                csrf_token_id: 'registration_authority_logout_token'
 
     role_hierarchy:
         ROLE_SRAA: ROLE_RAA
@@ -38,5 +31,6 @@ security:
         ROLE_RA: ROLE_USER
 
     access_control:
-        - { path: ^/authentication, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/saml, roles: PUBLIC_ACCESS, requires_channel: https }
+        - { path: ^/authentication, roles: PUBLIC_ACCESS, requires_channel: https }
         - { path: ^/, roles: ROLE_RA, requires_channel: https }

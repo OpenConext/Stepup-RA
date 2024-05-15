@@ -1,0 +1,24 @@
+FROM ghcr.io/openconext/openconext-basecontainers/php82-apache2:latest
+ARG APP_VERSION
+ARG GIT_SHA
+ARG GIT_COMMIT_TIME
+ENV OPENCONEXT_APP_VERSION=${APP_VERSION}
+ENV OPENCONEXT_GIT_SHA=${GIT_SHA}
+ENV OPENCONEXT_COMMIT_DATE=${GIT_COMMIT_TIME}
+
+# Set the default workdir
+WORKDIR /var/www/html
+COPY *.tar.bz2 /tmp/
+RUN tar -xvjf /tmp/*.tar.bz2 -C /var/www/html/ && \
+  rm -rf /tmp/*.tar.bz2
+
+# Add the application configuration files
+COPY config/openconext/parameters.yaml.dist config/openconext/parameters.yaml
+COPY config/openconext/samlstepupproviders_parameters.yaml.dist config/openconext/samlstepupproviders_parameters.yaml
+
+# Add the config files for Apache2
+RUN rm -rf /etc/apache2/sites-enabled/*
+COPY ./docker/conf/apache2.conf /etc/apache2/sites-enabled/apache2.conf
+RUN rm -rf /var/www/html/var/cache/prod && \ 
+  mkdir -p /var/www/html/var/cache/ && \ 
+  chown -R www-data /var/www/html/var

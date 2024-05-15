@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,48 +20,57 @@
 
 namespace Surfnet\StepupRa\RaBundle\Security\Factory;
 
-use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface;
+use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AuthenticatorFactoryInterface;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ChildDefinition;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class SamlFactory implements SecurityFactoryInterface
+class SamlFactory implements AuthenticatorFactoryInterface
 {
-    public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint)
+    public function create(ContainerBuilder $container, string $id, $config, $userProvider, $defaultEntryPoint): array
     {
         $providerId = 'security.authentication.provider.saml.' . $id;
         $container->setDefinition(
             $providerId,
-            new ChildDefinition('ra.security.authentication.provider.saml')
+            new ChildDefinition('self_service.security.authentication.provider.saml'),
         );
 
         $listenerId = 'security.authentication.listener.saml.' . $id;
         $container->setDefinition(
             $listenerId,
-            new ChildDefinition('ra.security.authentication.listener')
+            new ChildDefinition('self_service.security.authentication.listener'),
         );
 
         $cookieHandlerId = 'security.logout.handler.cookie_clearing.' . $id;
         $cookieHandler   = $container->setDefinition(
             $cookieHandlerId,
-            new ChildDefinition('security.logout.handler.cookie_clearing')
+            new ChildDefinition('security.logout.handler.cookie_clearing'),
         );
         $cookieHandler->addArgument([]);
 
-        return array($providerId, $listenerId, $defaultEntryPoint);
+        return [$providerId, $listenerId, $defaultEntryPoint];
     }
 
-    public function getPosition()
-    {
-        return 'pre_auth';
-    }
-
-    public function getKey()
+    public function getKey(): string
     {
         return 'saml';
     }
 
-    public function addConfiguration(NodeDefinition $builder)
+    public function addConfiguration(NodeDefinition $builder): void
     {
+    }
+
+    public function getPriority(): int
+    {
+        return -10;
+    }
+
+    public function createAuthenticator(
+        ContainerBuilder $container,
+        string $firewallName,
+        array $config,
+        string $userProviderId,
+    ): string|array {
+        return $config;
     }
 }

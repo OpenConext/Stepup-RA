@@ -32,3 +32,14 @@ nelmio_security:
     enabled: true
     hsts_max_age: 31536000 # 365 days
     hsts_subdomains: true
+
+when@smoketest: &nelmio_security_smoketest
+  nelmio_security:
+    csp:
+      enforce:
+        img-src: [ self, 'data:' ]
+        script-src: [ self, unsafe-inline ]
+        style-src: [ self, unsafe-inline ]
+
+when@test: *nelmio_security_smoketest # Use the same settings as smoketest
+when@dev: *nelmio_security_smoketest # Use the same settings as smoketest

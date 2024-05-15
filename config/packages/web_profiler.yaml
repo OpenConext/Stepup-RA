@@ -1,0 +1,7 @@
+when@dev: &template
+    web_profiler:
+        toolbar: true
+        intercept_redirects: false
+when@test: *template
+when@smoketest: *template
+

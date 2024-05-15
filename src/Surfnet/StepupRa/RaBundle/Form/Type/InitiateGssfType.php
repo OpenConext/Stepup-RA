@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use JMS\TranslationBundle\Annotation\Ignore;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,21 +27,15 @@ use Symfony\Component\Routing\RouterInterface;
 
 class InitiateGssfType extends AbstractType
 {
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-
-    public function __construct(RouterInterface $router)
+    public function __construct(private readonly RouterInterface $router)
     {
-        $this->router = $router;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $action = $this->router->generate(
             'ra_vetting_gssf_authenticate',
-            ['procedureId' => $options['procedureId'], 'provider' => $options['provider']]
+            ['procedureId' => $options['procedureId'], 'provider' => $options['provider']],
         );
 
         $builder
@@ -52,14 +47,14 @@ class InitiateGssfType extends AbstractType
             ->setAction($action);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired(['procedureId', 'provider']);
         $resolver->setAllowedTypes('procedureId', 'string');
         $resolver->setAllowedTypes('provider', 'string');
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_initiate_gssf';
     }

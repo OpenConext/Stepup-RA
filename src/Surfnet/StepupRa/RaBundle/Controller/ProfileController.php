@@ -18,27 +18,32 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
+use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 
-final class ProfileController extends Controller
+final class ProfileController extends AbstractController
 {
-    public function profileAction()
-    {
-        $logger = $this->get('logger');
-
-        $logger->notice('Opening profile page');
-
-        $identity = $this->getUser();
-        $profile = $this->getProfileService()->findByIdentityId($identity->id);
-        return $this->render('SurfnetStepupRaRaBundle:profile:profile.html.twig', ['profile' => $profile]);
+    public function __construct(
+        private readonly ProfileService $profileService,
+        private readonly LoggerInterface $logger,
+    ) {
     }
 
-    /**
-     * @return ProfileService
-     */
-    private function getProfileService()
+    #[Route(
+        path: '/profile',
+        name: 'ra_profile',
+        methods: ['GET'],
+    )]
+    public function profile(): Response
     {
-        return $this->get('ra.service.profile');
+        $this->logger->notice('Opening profile page');
+
+        $identity = $this->getUser()->getIdentity();
+        $profile = $this->profileService->findByIdentityId($identity->id);
+        return
+            $this->render('profile/profile.html.twig', ['profile' => $profile]);
     }
 }

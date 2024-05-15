@@ -59,7 +59,7 @@ class TimeFrameTest extends TestCase
     /**
      * @return array
      */
-    public function notPositiveIntegerProvider()
+    public function notPositiveIntegerProvider(): array
     {
         return [
             'empty string' => [''],

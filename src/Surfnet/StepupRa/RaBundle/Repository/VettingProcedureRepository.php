@@ -1,7 +1,9 @@
 <?php
 
+declare(strict_types = 1);
+
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,20 +24,9 @@ use Surfnet\StepupRa\RaBundle\VettingProcedure;
 
 interface VettingProcedureRepository
 {
-    /**
-     * @param VettingProcedure $vettingProcedure
-     */
     public function store(VettingProcedure $vettingProcedure);
 
-    /**
-     * @param string $id
-     * @return VettingProcedure|null
-     */
-    public function retrieve($id);
+    public function retrieve(string $id): ?VettingProcedure;
 
-    /**
-     * @param string $id
-     * @return void
-     */
-    public function remove($id);
+    public function remove(string $id): mixed;
 }

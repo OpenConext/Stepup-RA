@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use JMS\TranslationBundle\Annotation\Ignore;
+use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,17 +28,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class StartVettingProcedureType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('registrationCode', TextType::class, [
             'label' => /** @Ignore */ false,
             'required' => true,
-            'attr' => array(
+            'attr' => [
                 'autofocus' => true,
                 'autocomplete' => 'off',
                 'placeholder' => 'ra.form.start_vetting_procedure.enter_activation_code_here',
                 'class' => 'fa-search',
-            )
+            ]
         ]);
         $builder->add('search', SubmitType::class, [
             'label' => 'ra.form.start_vetting_procedure.search',
@@ -44,14 +46,14 @@ class StartVettingProcedureType extends AbstractType
         ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand',
+            'data_class' => StartVettingProcedureCommand::class,
         ]);
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_start_vetting_procedure';
     }

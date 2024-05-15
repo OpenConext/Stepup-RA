@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2018 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Exception;
 
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\HttpKernel\Attribute\WithHttpStatus;
 
 /**
  * Exception for the case where a user is not granted RA privileges.
@@ -31,6 +31,8 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
  *
  * @package Surfnet\StepupRa\RaBundle\Exception
  */
-final class UserNotRaException extends AuthenticationException
+
+#[WithHttpStatus(401)]
+final class UserNotRaException extends RuntimeException
 {
 }

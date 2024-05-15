@@ -1,4 +1,8 @@
+parameters:
+  acs_location_route_name: ra_serviceprovider_consume_assertion
+
 surfnet_saml:
+  enable_authentication: true
   hosted:
     attribute_dictionary:
       ignore_unknown_attributes: true

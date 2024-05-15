@@ -18,66 +18,38 @@
 
 namespace Surfnet\StepupRa\RaBundle\Value;
 
-use Surfnet\StepupRa\RaBundle\Assert;
-
 class RoleAtInstitution
 {
-    /**
-     * @var string
-     */
-    private $role;
+    private ?string $role = null;
 
-    /**
-     * @var string
-     */
-    private $institution;
+    private ?string $institution = null;
 
-    /**
-     * @param string $role
-     */
-    public function setRole($role)
+    public function setRole(?string $role): void
     {
-        Assert::nullOrString($role, 'Role must be null or a string value');
         $this->role = $role;
     }
 
-    /**
-     * @param string $institution
-     */
-    public function setInstitution($institution)
+    public function setInstitution(?string $institution): void
     {
-        Assert::nullOrString($institution, 'Institution must be null or a string value');
         $this->institution = $institution;
     }
 
-    /**
-     * @return bool
-     */
-    public function hasRole()
+    public function hasRole(): bool
     {
         return !is_null($this->role);
     }
 
-    /**
-     * @return bool
-     */
-    public function hasInstitution()
+    public function hasInstitution(): bool
     {
         return !is_null($this->institution);
     }
 
-    /**
-     * @return string
-     */
-    public function getRole()
+    public function getRole(): ?string
     {
         return $this->role;
     }
 
-    /**
-     * @return string
-     */
-    public function getInstitution()
+    public function getInstitution(): ?string
     {
         return $this->institution;
     }

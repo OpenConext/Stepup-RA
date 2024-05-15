@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2017 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,18 +25,11 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RaSecondFactorExport
 {
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
-    public function __construct(
-        LoggerInterface $logger
-    ) {
-        $this->logger = $logger;
+    public function __construct(private readonly LoggerInterface $logger)
+    {
     }
 
-    public function export(RaSecondFactorExportCollection $collection, $fileName)
+    public function export(RaSecondFactorExportCollection $collection, $fileName): StreamedResponse
     {
         $this->logger->notice(sprintf('Exporting %d rows to "%s"', $collection->count(), $fileName));
 
@@ -61,7 +54,7 @@ class RaSecondFactorExport
             [
                 'Content-Type' => 'application/csv',
                 'Content-Disposition' => sprintf('attachment; filename="%s.csv"', $fileName),
-            ]
+            ],
         );
     }
 }

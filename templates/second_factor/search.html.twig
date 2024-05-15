@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'ra.second_factor.search.title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="search-second-factors row">
+        <div class="col-sm-12">
+            {{ form(form) }}
+
+            {% if secondFactors.elements|length > 0 %}
+                <div class="result-count">{{ 'ra.second_factor.search.text.number_of_second_factors'|trans({'count': numberOfSecondFactors}) }}</div>
+            {% endif %}
+
+            <hr>
+
+            {% if secondFactors.elements|length > 0 %}
+                <table class="table table-striped orderable">
+                    <thead>
+                    <tr>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.second_factor_id'|trans, 'secondFactorId') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.type'|trans, 'type') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.name'|trans, 'name') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.institution'|trans, 'institution') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.email'|trans, 'email') }}</th>
+                        <th>{{ 'ra.second_factor.search.column.document_number'|trans }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'ra.second_factor.search.column.status'|trans, 'status') }}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for secondFactor in secondFactors.elements %}
+
+                        {% set isDeprovisioned = (secondFactor.status == 'forgotten') %}
+                        {% set isRevoked = (secondFactor.status == 'revoked') %}
+
+                        <tr{% if isDeprovisioned %} class="forgotten"{% endif %}>
+                            <td class="break-all">{{ secondFactor.secondFactorId }}</td>
+                            <td>{{ secondFactor.type|trans_second_factor_type }}</td>
+                            <td>{{ secondFactor.name }}</td>
+                            <td>{{ secondFactor.institution }}</td>
+                            <td>{{ secondFactor.email }}</td>
+                            <td>{% if secondFactor.documentNumber is not empty %}{{ secondFactor.documentNumber}}{% else %}&mdash;{% endif %}</td>
+                            <td>{{ ('ra.second_factor.search.status.'~secondFactor.status)|trans }}</td>
+                            <td class="button-column">
+                                <a href="{{ path('ra_second_factor_auditlog', {identityId: secondFactor.identityId}) }}" class="btn btn-info audit-log">{{ 'ra.secondfactor.auditlog'|trans }}</a>
+                                {% if not isRevoked and not isDeprovisioned %}
+                                <button class="btn btn-warning revoke" data-toggle="modal" data-target="#revocationModal"
+                                        data-sfid="{{ secondFactor.id }}"
+                                        data-sfidentifier="{{ secondFactor.secondFactorId }}"
+                                        data-sftype="{{ secondFactor.type }}"
+                                        data-sfidentityid="{{ secondFactor.identityId }}"
+                                        data-sfname="{{ secondFactor.name }}"
+                                        data-sfemail="{{ secondFactor.email }}"
+                                        data-sfinstitution="{{ secondFactor.institution }}"
+                                        >
+                                    {{ 'ra.secondfactor.revoke'|trans }}
+                                </button>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                {{ knp_pagination_render(pagination) }}
+            {% else %}
+                <p>
+                    {{ 'ra.second_factor.search.text.no_second_factors'|trans }}
+                </p>
+            {% endif %}
+        </div>
+        <div class="modal fade" id="revocationModal" tabindex="-1" role="dialog" aria-labelledby="revocationModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'ra.second_factor.revocation.modal.close'|trans}}"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">{{ 'ra.second_factor.revocation.modal.confirm'|trans }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                        {{ 'ra.second_factor.revocation.modal.are_you_sure'|trans }}
+                        </p>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>{{ 'ra.second_factor.revocation.modal.sf_identifier'|trans }}</th>
+                                <td class="identifier"></td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'ra.second_factor.revocation.modal.sf_type'|trans }}</th>
+                                <td class="type"></td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'ra.second_factor.revocation.modal.sf_name'|trans }}</th>
+                                <td class="name"></td>
+                            </tr>
+                            <tr>
+                                <th>{{ 'ra.second_factor.revocation.modal.sf_email'|trans }}</th>
+                                <td class="email"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'ra.second_factor.revocation.modal.cancel'|trans }}</button>
+                        <button type="button" class="btn btn-warning revoke">{{ 'ra.second_factor.revocation.modal.confirm'|trans }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hidden">
+            {{ form(revocationForm, {'action': path('ra_second_factor_revoke')}) }}
+        </div>
+    </div>
+{% endblock %}

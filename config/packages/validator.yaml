@@ -6,3 +6,10 @@ framework:
         # For instance, basic validation constraints will be inferred from Doctrine's metadata.
         #auto_mapping:
         #    App\Entity\: []
+
+when@smoketest: &smoketest
+    framework:
+        validation:
+            not_compromised_password: false
+
+when@test: *smoketest # Use the same configuration as smoketest

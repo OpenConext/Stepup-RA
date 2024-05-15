@@ -1,4 +1,4 @@
-var Encore = require('@symfony/webpack-encore');
+const Encore = require('@symfony/webpack-encore');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -9,6 +9,12 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
+    .copyFiles([
+        {
+            from: './assets/openconext/images',
+            to: './images/[path][name].[ext]',
+        }
+    ])
     // public path used by the web server to access the output path
     .setPublicPath('/build')
     // only needed for CDN's or sub-directory deploy
@@ -30,7 +36,7 @@ Encore
     ])
 
     .addStyleEntry('global', [
-        './src/Surfnet/StepupRa/RaBundle/Resources/public/less/style.less',
+        './assets/less/style.less',
         './vendor/surfnet/stepup-bundle/src/Resources/public/less/stepup.less',
     ])
 

@@ -27,7 +27,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SelectInstitutionType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(
@@ -36,27 +36,27 @@ class SelectInstitutionType extends AbstractType
                 [
                     'label' => 'ra.form.select_institution.label.institution',
                     'choices' => $builder->getData()->availableInstitutions,
-                ]
+                ],
             )->add(
                 'select_and_apply',
                 SubmitType::class,
                 [
                     'label' => 'ra.form.select_institution.button.switch',
                     'attr' => ['class' => 'btn btn-primary pull-right'],
-                ]
+                ],
             );
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(
             [
                 'data_class' => SelectInstitutionCommand::class,
-            ]
+            ],
         );
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'select_institution';
     }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,36 +18,52 @@
 
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Surfnet\SamlBundle\Entity\IdentityProvider;
+use Surfnet\SamlBundle\Http\PostBinding;
 use Surfnet\SamlBundle\Http\XMLResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Surfnet\SamlBundle\Metadata\MetadataFactory;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Surfnet\SamlBundle\Entity\ServiceProvider;
+use Symfony\Component\Routing\Attribute\Route;
 
-class SamlController extends Controller
+class SamlController extends AbstractController
 {
-    /**
-     * @Template
-     */
-    public function consumeAssertionAction(Request $httpRequest)
-    {
-        /** @var \Surfnet\SamlBundle\Http\PostBinding $postBinding */
-        $postBinding = $this->get('surfnet_saml.http.post_binding');
-
-        /** @var \SAML2\Assertion $assertion */
-        $assertion = $postBinding->processResponse(
-            $httpRequest,
-            $this->get('surfnet_saml.remote.idp'),
-            $this->get('surfnet_saml.hosted.service_provider')
-        );
-
-        return $assertion->getAttributes();
+    public function __construct(
+        private readonly PostBinding $postBinding,
+        private readonly IdentityProvider $remoteIdp,
+        private readonly ServiceProvider $hostedServiceProvider,
+        private readonly MetadataFactory $metadataFactory,
+    ) {
     }
 
-    public function metadataAction()
+    #[Route(
+        path: '/authentication/consume-assertion',
+        name: 'ra_serviceprovider_consume_assertion',
+        methods: ['POST'],
+    )]
+    public function consumeAssertion(Request $httpRequest): Response
     {
-        /** @var \Surfnet\SamlBundle\Metadata\MetadataFactory $metadataFactory */
-        $metadataFactory = $this->get('surfnet_saml.metadata_factory');
+        $assertion = $this->postBinding->processResponse(
+            $httpRequest,
+            $this->remoteIdp,
+            $this->hostedServiceProvider,
+        );
 
-        return new XMLResponse($metadataFactory->generate());
+        return $this->render(
+            'saml/consume_assertion.html.twig',
+            ['assertion' => $assertion],
+        );
+    }
+
+    #[Route(
+        path: '/authentication/metadata',
+        name: 'ra_saml_metadata',
+        methods: ['GET'],
+    )]
+    public function metadata(): XMLResponse
+    {
+        return new XMLResponse($this->metadataFactory->generate());
     }
 }

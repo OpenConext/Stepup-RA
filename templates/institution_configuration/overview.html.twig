@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'ra.institution_configuration.title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12" >
+            {% include 'partial/language_switcher.html.twig' with {'form': form} only %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>{{ 'ra.institution_configuration.subtitle'|trans({'%name%': institution}) }}</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+
+            <table class="table table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.use_ra_locations'|trans }}</th>
+                    <td>{{ configuration.useRaLocations ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.show_ra_contact_information'|trans }}</th>
+                    <td>{{ configuration.showRaaContactInformation ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.verify_email'|trans }}</th>
+                    <td>{{ configuration.verifyEmail ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.sso_on_2fa'|trans }}</th>
+                    <td>{{ configuration.ssoOn2fa ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.allowed_second_factors'|trans }}</th>
+                    <td>
+                        {% if configuration.allowedSecondFactors is empty %}
+                            {{ 'ra.institution_configuration.all_second_factors_enabled'|trans }}
+                        {% else %}
+                            {% for allowedSecondFactor in configuration.allowedSecondFactors %}
+                                {{ allowedSecondFactor }}<br>
+                            {% endfor %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.number_of_tokens_per_identity'|trans }}</th>
+                    <td>{{ configuration.numberOfTokensPerIdentity }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.select_raa'|trans }}</th>
+                    <td>
+                        {% if configuration.selectRaa|length > 0 %}
+                            {% for selectRaaFrom in configuration.selectRaa %}
+                                {{ selectRaaFrom }}<br>
+                            {% endfor %}
+                        {% else %}
+                            {{ 'ra.institution_configuration.no_entries'|trans }}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.use_ra'|trans }}</th>
+                    <td>
+                        {% if configuration.useRa|length > 0 %}
+                            {% for useRaFrom in configuration.useRa %}
+                                {{ useRaFrom }}<br>
+                            {% endfor %}
+                        {% else %}
+                            {{ 'ra.institution_configuration.no_entries'|trans }}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.use_raa'|trans }}</th>
+                    <td>
+                        {% if configuration.useRaa|length > 0 %}
+                            {% for useRaaFrom in configuration.useRaa %}
+                                {{ useRaaFrom }}<br>
+                            {% endfor %}
+                        {% else %}
+                            {{ 'ra.institution_configuration.no_entries'|trans }}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.allow_self_vet'|trans }}</th>
+                    <td>{{ configuration.selfVet ? 'ra.institution_configuration.allow'|trans : 'ra.institution_configuration.disallow'|trans }}</td>
+                </tr>
+                <tr>
+                    <th>{{ 'ra.institution_configuration.allow_self_assertedTokens'|trans }}</th>
+                    <td>{{ configuration.allowSelfAssertedTokens ? 'ra.institution_configuration.allow'|trans : 'ra.institution_configuration.disallow'|trans }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}

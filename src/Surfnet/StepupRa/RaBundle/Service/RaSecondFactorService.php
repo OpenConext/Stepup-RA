@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaSecondFactorService 
 use Surfnet\StepupRa\RaBundle\Command\ExportRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @SuppressWarnings(PHPMD.NPathComplexity) -- The command to query mapping in search and export exceed the
@@ -34,45 +35,15 @@ use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
  */
 class RaSecondFactorService
 {
-    /**
-     * @var \Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaSecondFactorService
-     */
-    private $apiRaSecondFactorService;
-
-    /**
-     * @var \Surfnet\StepupRa\RaBundle\Service\CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var RaSecondFactorExport
-     */
-    private $exporter;
-
-    /**
-     * @var \Psr\Log\LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @param ApiRaSecondFactorService $apiRaSecondFactorService
-     * @param CommandService $commandService
-     * @param RaSecondFactorExport $exporter
-     * @param LoggerInterface $logger
-     */
     public function __construct(
-        ApiRaSecondFactorService $apiRaSecondFactorService,
-        CommandService $commandService,
-        RaSecondFactorExport $exporter,
-        LoggerInterface $logger
+        private readonly ApiRaSecondFactorService $apiRaSecondFactorService,
+        private readonly CommandService $commandService,
+        private readonly RaSecondFactorExport $exporter,
+        private readonly LoggerInterface $logger,
     ) {
-        $this->apiRaSecondFactorService = $apiRaSecondFactorService;
-        $this->commandService = $commandService;
-        $this->exporter = $exporter;
-        $this->logger = $logger;
     }
 
-    public function revoke(RevokeSecondFactorCommand $command)
+    public function revoke(RevokeSecondFactorCommand $command): bool
     {
         $middlewareCommand                 = new RevokeRegistrantsSecondFactorCommand();
         $middlewareCommand->secondFactorId = $command->secondFactorId;
@@ -87,18 +58,14 @@ class RaSecondFactorService
                 $middlewareCommand->secondFactorId,
                 $middlewareCommand->identityId,
                 $middlewareCommand->authorityId,
-                implode(", ", $result->getErrors())
+                implode(", ", $result->getErrors()),
             ));
         }
 
         return $result->isSuccessful();
     }
 
-    /**
-     * @param SearchRaSecondFactorsCommand $command
-     * @return RaSecondFactorCollection
-     */
-    public function search(SearchRaSecondFactorsCommand $command)
+    public function search(SearchRaSecondFactorsCommand $command): RaSecondFactorCollection
     {
         $query = new RaSecondFactorSearchQuery($command->pageNumber, $command->actorId);
         $this->buildQuery($command, $query);
@@ -108,11 +75,8 @@ class RaSecondFactorService
     /**
      * Searches for a collection of second factor tokens and returns a Http response with an attachment
      * Content-Disposition.
-     *
-     * @param ExportRaSecondFactorsCommand $command
-     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function export(ExportRaSecondFactorsCommand $command)
+    public function export(ExportRaSecondFactorsCommand $command): Response
     {
         $query = new RaSecondFactorExportQuery($command->actorId);
         $this->buildQuery($command, $query);
@@ -120,7 +84,7 @@ class RaSecondFactorService
         return $this->exporter->export($collection, $query->getFileName());
     }
 
-    private function buildQuery($command, $query)
+    private function buildQuery($command, $query): void
     {
         if ($command->name) {
             $query->setName($command->name);

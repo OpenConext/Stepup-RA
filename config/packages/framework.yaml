@@ -3,17 +3,49 @@ framework:
   translator:      { fallback: "%default_locale%" }
   secret:          "%secret%"
   form:            ~
+  handle_all_throwables: true
+  annotations:
+    enabled: false
   csrf_protection: ~
-  validation:      { enable_annotations: true }
-  templating:
-    engines: ['twig', 'php']
+  validation:      { enable_attributes: true }
   default_locale:  "%default_locale%"
   trusted_hosts:   ~
+
   session:
     # handler_id set to null will use default session handler from php.ini
     handler_id:  ~
     name: sess_ra
+    cookie_samesite: lax
     cookie_httponly: true
     cookie_secure: true
+
   fragments:       false
   http_method_override: true
+  error_controller: Surfnet\StepupRa\RaBundle\Controller\ExceptionController::show
+  php_errors:
+    log: true
+
+when@dev:
+  framework:
+    router:
+      strict_requirements: true
+    profiler: { only_exceptions: false }
+
+when@smoketest:
+  framework:
+    test: ~
+    session:
+      storage_factory_id: session.storage.factory.mock_file
+    profiler:
+      only_exceptions: false
+      collect: true
+    php_errors:
+      log: false # prevents user deprecated warnings
+when@test:
+  framework:
+    test: ~
+    session:
+      storage_factory_id: session.storage.factory.mock_file
+    profiler:
+      collect: false
+

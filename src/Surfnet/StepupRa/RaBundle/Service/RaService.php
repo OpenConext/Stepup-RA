@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,30 +22,19 @@ use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AmendRegistrationAuthorityInformationCommand
     as AmendRegistrationAuthorityInformationApiCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\AppointRoleCommand;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Command\RetractRegistrationAuthorityCommand as ApiRetractRegistrationAuthorityCommand;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Command\RetractRegistrationAuthorityCommand
+    as ApiRetractRegistrationAuthorityCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
 use Surfnet\StepupRa\RaBundle\Command\ChangeRaRoleCommand;
 use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 
-final class RaService
+final readonly class RaService
 {
-    /**
-     * @var CommandService
-     */
-    private $commandService;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    public function __construct(CommandService $commandService, LoggerInterface $logger)
+    public function __construct(private CommandService $commandService, private LoggerInterface $logger)
     {
-        $this->commandService = $commandService;
-        $this->logger = $logger;
     }
 
-    public function amendRegistrationAuthorityInformation(AmendRegistrationAuthorityInformationCommand $command)
+    public function amendRegistrationAuthorityInformation(AmendRegistrationAuthorityInformationCommand $command): bool
     {
         $apiCommand = new AmendRegistrationAuthorityInformationApiCommand();
         $apiCommand->identityId = $command->identityId;
@@ -59,14 +48,14 @@ final class RaService
             $this->logger->error(sprintf(
                 "Amending of registration authority %s's information failed: '%s'",
                 $apiCommand->identityId,
-                implode("', '", $result->getErrors())
+                implode("', '", $result->getErrors()),
             ));
         }
 
         return $result->isSuccessful();
     }
 
-    public function changeRegistrationAuthorityRole(ChangeRaRoleCommand $command)
+    public function changeRegistrationAuthorityRole(ChangeRaRoleCommand $command): bool
     {
         $apiCommand             = new AppointRoleCommand();
         $apiCommand->identityId = $command->identityId;
@@ -79,14 +68,14 @@ final class RaService
                 'Could not change Identity "%s" role to "%s": "%s"',
                 $apiCommand->identityId,
                 $apiCommand->role,
-                implode("', '", $result->getErrors())
+                implode("', '", $result->getErrors()),
             ));
         }
 
         return $result->isSuccessful();
     }
 
-    public function retractRegistrationAuthority(RetractRegistrationAuthorityCommand $command)
+    public function retractRegistrationAuthority(RetractRegistrationAuthorityCommand $command): bool
     {
         $apiCommand              = new ApiRetractRegistrationAuthorityCommand();
         $apiCommand->identityId  = $command->identityId;
@@ -98,7 +87,7 @@ final class RaService
             $this->logger->error(sprintf(
                 'Could not retract registration authority for identity "%s": "%s"',
                 $apiCommand->identityId,
-                implode("', '", $result->getErrors())
+                implode("', '", $result->getErrors()),
             ));
         }
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2018 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,6 @@
 
 namespace Surfnet\StepupRa\RaBundle\Exception;
 
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-
-final class MissingRequiredAttributeException extends AuthenticationException
+final class MissingRequiredAttributeException extends RuntimeException
 {
 }

@@ -22,66 +22,30 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class SearchRecoveryTokensCommand
 {
-    /**
-     * @Assert\NotBlank(message="ra.search_ra_recovery_tokens.actor.blank")
-     * @Assert\Type("string", message="ra.search_ra_recovery_tokens.actor.type")
-     *
-     * @var string
-     */
-    public $actorId;
+    #[Assert\NotBlank(message: 'ra.search_ra_recovery_tokens.actor.blank')]
+    public string $actorId = '';
+
+    public ?string $name = null;
+
+    public ?string $type = null;
+
+    public ?string $status = '';
+
+    public ?string $email = null;
+
+    #[Assert\Choice(['name', 'type', 'email', 'status'], message: 'ra.search_ra_recovery_tokens.order_by.invalid_choice')]
+    public ?string $orderBy = null;
+
+    #[Assert\Choice(['asc', 'desc'], message: 'ra.search_ra_recovery_tokens.order_direction.invalid_choice')]
+    public ?string $orderDirection = null;
+
+    #[Assert\GreaterThan(0, message: 'ra.search_ra_recovery_tokens.page_number.greater_than_zero')]
+    public int $pageNumber = 0;
 
     /**
-     * @var string|null
+     * The institution to filter the results on
      */
-    public $name;
+    public ?string $institution = null;
 
-    /**
-     * @var string|null
-     */
-    public $type;
-
-    /**
-     * @var string
-     */
-    public $status;
-
-    /**
-     * @var string|null
-     */
-    public $email;
-
-    /**
-     * @Assert\Choice(
-     *     {"name", "type", "email", "status"},
-     *     message="ra.search_ra_recovery_tokens.order_by.invalid_choice"
-     * )
-     *
-     * @var string|null
-     */
-    public $orderBy;
-
-    /**
-     * @Assert\Choice({"asc", "desc"}, message="ra.search_ra_recovery_tokens.order_direction.invalid_choice")
-     *
-     * @var string|null
-     */
-    public $orderDirection;
-
-    /**
-     * @Assert\Type("integer", message="ra.search_ra_recovery_tokens.page_number.type")
-     * @Assert\GreaterThan(0, message="ra.search_ra_recovery_tokens.page_number.greater_than_zero")
-     *
-     * @var int
-     */
-    public $pageNumber;
-
-    /**
-     * @var string|null The institution to filter the results on
-     */
-    public $institution;
-
-    /**
-     * @var array
-     */
-    public $institutionFilterOptions;
+    public array $institutionFilterOptions = [];
 }

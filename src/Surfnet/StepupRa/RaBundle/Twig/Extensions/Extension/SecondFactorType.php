@@ -19,34 +19,29 @@
 namespace Surfnet\StepupRa\RaBundle\Twig\Extensions\Extension;
 
 use Surfnet\StepupBundle\Service\SecondFactorTypeTranslationService;
-use Twig_Extension;
-use Twig_SimpleFilter;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 
-final class SecondFactorType extends Twig_Extension
+final class SecondFactorType extends AbstractExtension
 {
-    /**
-     * @var SecondFactorTypeTranslationService
-     */
-    private $translator;
-
-    public function __construct(SecondFactorTypeTranslationService $translator)
-    {
-        $this->translator = $translator;
+    public function __construct(
+        private readonly SecondFactorTypeTranslationService $translator,
+    ) {
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'ra.twig.second_factor_type';
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
-            new Twig_SimpleFilter('trans_second_factor_type', [$this, 'translateSecondFactorType']),
+            new TwigFilter('trans_second_factor_type', $this->translateSecondFactorType(...)),
         ];
     }
 
-    public function translateSecondFactorType($secondFactorType)
+    public function translateSecondFactorType($secondFactorType): ?string
     {
         return $this->translator->translate($secondFactorType, 'ra.second_factor.search.type.%s');
     }

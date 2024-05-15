@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('surfnet_stepup_ra_saml_stepup_provider');
         $rootNode = $treeBuilder->getRootNode();
@@ -38,10 +38,7 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNode
-     */
-    private function addRoutesSection(ArrayNodeDefinition $rootNode)
+    private function addRoutesSection(ArrayNodeDefinition $rootNode): void
     {
         $rootNode
             ->children()
@@ -50,18 +47,14 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('consume_assertion')
                         ->isRequired()
                         ->validate()
-                            ->ifTrue(function ($v) {
-                                return !is_string($v) || strlen($v) === 0;
-                            })
+                            ->ifTrue(fn($v) => !is_string($v) || $v === '')
                             ->thenInvalid('Consume assertion route must be a non-empty string')
                         ->end()
                     ->end()
                     ->scalarNode('metadata')
                         ->isRequired()
                         ->validate()
-                            ->ifTrue(function ($v) {
-                                return !is_string($v) || strlen($v) === 0;
-                            })
+                            ->ifTrue(fn($v) => !is_string($v) || $v === '')
                             ->thenInvalid('Metadata route must be a non-empty string')
                         ->end()
                     ->end()
@@ -69,10 +62,7 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
-    /**
-     * @param ArrayNodeDefinition $rootNode
-     */
-    private function addProvidersSection(ArrayNodeDefinition $rootNode)
+    private function addProvidersSection(ArrayNodeDefinition $rootNode): void
     {
         /** @var ArrayNodeDefinition $protoType */
         $protoType = $rootNode
@@ -127,7 +117,7 @@ class Configuration implements ConfigurationInterface
                             ->isRequired()
                             ->info(
                                 'The contents of the certificate used to sign the AuthnResponse with, if different from'
-                                . ' the public key configured below'
+                                . ' the public key configured below',
                             )
                         ->end()
                     ->end()

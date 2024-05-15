@@ -1,11 +1,44 @@
+imports:
+    - { resource: '../../../../../../config/openconext/parameters.yaml' }
+
 services:
     # To be compatible with loading services from the container instead of using DI, TODO, Utilize DI throughout the
     # application.
-    _defaults: { public: true }
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
 
     logger:
       alias: 'monolog.logger'
       public: true
+
+    Surfnet\StepupRa\RaBundle\Controller\:
+        resource: '../../Controller/*'
+        tags: [ 'controller.service_arguments' ]
+
+    # Controller overrides
+    ra.controller.profile:
+        class: Surfnet\StepupRa\RaBundle\Controller\ProfileController
+        arguments:
+            - "@ra.service.profile"
+        tags: ['controller.service_arguments']
+
+    Surfnet\StepupRa\RaBundle\Controller\RecoveryTokenController:
+        arguments:
+            - '@Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService'
+            - '@Knp\Component\Pager\PaginatorInterface'
+            - "@logger"
+        tags: ['controller.service_arguments']
+
+    Surfnet\StepupRa\RaBundle\Controller\VettingTypeHintController:
+        arguments:
+            - '@logger'
+            - '@ra.service.institution_listing'
+            - '@ra.service.profile'
+            - '@Surfnet\StepupRa\RaBundle\Service\VettingTypeHintService'
+            - '%locales%'
+        tags: ['controller.service_arguments']
 
     ra.service.command:
         class: Surfnet\StepupRa\RaBundle\Service\CommandService
@@ -68,12 +101,6 @@ services:
         class: Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType
         tags: [{ name: form.type, alias: ra_revoke_second_factor }]
 
-    ra.form.type.sraa_institution_select:
-        class: Surfnet\StepupRa\RaBundle\Form\Type\InstitutionSelectionType
-        arguments:
-            - "@ra.form.extension.institution_listing_choice_list"
-        tags: [{ name: form.type, alias: sraa_institution_select }]
-
     ra.form.type.management.create_ra:
         class: Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType
         tags: [{ name: form.type, alias: ra_management_create_ra }]
@@ -97,11 +124,6 @@ services:
         tags: [{ name: form.type, alias: ra_initiate_gssf }]
 
     # Form Extensions
-    ra.form.extension.institution_listing_choice_list:
-        class: Surfnet\StepupRa\RaBundle\Form\Extension\InstitutionListingChoiceList
-        arguments:
-            - "@surfnet_stepup_middleware_client.identity.service.institution_listing"
-
     ra.form.extension.second_factor_type_choice_list:
         class: Surfnet\StepupRa\RaBundle\Form\Extension\SecondFactorTypeChoiceList
         arguments:
@@ -122,6 +144,8 @@ services:
             - "@ra.service.identity"
             - "@surfnet_stepup.service.second_factor_type"
             - "@surfnet_stepup_middleware_client.identity.service.second_factor"
+    Surfnet\StepupRa\RaBundle\Service\VettingService:
+        alias: ra.service.vetting
 
     ra.service.yubikey:
         public: false
@@ -131,36 +155,26 @@ services:
             - "@logger"
 
     ra.service.yubikey_second_factor:
-        public: true
+        public: false
         class: Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorService
         arguments:
             - "@ra.service.yubikey"
             - "@logger"
 
+    Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorServiceInterface:
+        alias: ra.service.yubikey_second_factor
+
+
     ra.service.gssf:
         class: Surfnet\StepupRa\RaBundle\Service\GssfService
-        arguments:
-            - "@ra.service.gssf.sessionbag"
-
-    ra.service.gssf.sessionbag:
-        class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
-        factory: ['@session', 'getBag']
-        arguments: ['ra.service.gssf']
-
-    ra.service.gssf.namespaced_attribute_bag:
-        public: false
-        class: Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag
-        arguments:
-            - '__ra.service.gssf__'
-            - '/'
-        calls:
-            - [setName, ['ra.service.gssf']]
 
     ra.service.audit_log:
         class: Surfnet\StepupRa\RaBundle\Service\AuditLogService
         arguments:
             - "@surfnet_stepup_middleware_client.identity.service.audit_log"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\AuditLogService:
+        alias: ra.service.audit_log
 
     ra.service.identity:
         class: Surfnet\StepupRa\RaBundle\Service\IdentityService
@@ -174,6 +188,8 @@ services:
         class: Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService
         arguments:
             - "@surfnet_stepup_middleware_client.configuration.service.institution_configuration_options"
+    Surfnet\StepupRa\RaBundle\Service\InstitutionConfigurationOptionsService:
+        alias: ra.service.institution_configuration_options
 
     ra.service.locale_provider:
         class: Surfnet\StepupRa\RaBundle\Service\LocaleProviderService
@@ -187,6 +203,8 @@ services:
             - "@ra.service.command"
             - "@logger"
             - "@surfnet_stepup.service.second_factor_type"
+    Surfnet\StepupRa\RaBundle\Service\RaCandidateService:
+        alias: ra.service.ra_candidate
 
     ra.service.ra_location:
         class: Surfnet\StepupRa\RaBundle\Service\RaLocationService
@@ -194,12 +212,16 @@ services:
             - "@surfnet_stepup_middleware_client.configuration.service.ra_location"
             - "@ra.service.command"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\RaLocationService:
+        alias: ra.service.ra_location
 
     ra.service.ra_listing:
         class: Surfnet\StepupRa\RaBundle\Service\RaListingService
         arguments:
             - "@surfnet_stepup_middleware_client.identity.service.ra_listing"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\RaListingService:
+        alias: ra.service.ra_listing
 
     ra.service.ra_second_factor_exporter:
         class: Surfnet\StepupRa\RaBundle\Service\RaSecondFactorExport
@@ -213,18 +235,24 @@ services:
             - "@ra.service.command"
             - "@ra.service.ra_second_factor_exporter"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\RaSecondFactorService:
+        alias: ra.service.ra_second_factor
 
     ra.service.ra:
         class: Surfnet\StepupRa\RaBundle\Service\RaService
         arguments:
             - "@ra.service.command"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\RaService:
+        alias: ra.service.ra
 
     ra.service.second_factor:
         class: Surfnet\StepupRa\RaBundle\Service\SecondFactorService
         arguments:
             - "@surfnet_stepup_middleware_client.identity.service.second_factor"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\SecondFactorService:
+        alias: ra.service.second_factor
 
     ra.service.global_view_parameters:
         class: Surfnet\StepupRa\RaBundle\Service\GlobalViewParameters
@@ -238,11 +266,15 @@ services:
         arguments:
             - "@surfnet_stepup_middleware_client.identity.service.profile"
             - "@logger"
+    Surfnet\StepupRa\RaBundle\Service\ProfileService:
+        alias: ra.service.profile
 
     ra.service.institution_listing:
         class: Surfnet\StepupRa\RaBundle\Service\InstitutionListingService
         arguments:
             - "@surfnet_stepup_middleware_client.identity.service.institution_listing"
+    Surfnet\StepupRa\RaBundle\Service\InstitutionListingService:
+        alias: ra.service.institution_listing
 
     Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService:
         arguments:
@@ -260,7 +292,7 @@ services:
     ra.repository.vetting_procedure:
         class: Surfnet\StepupRa\RaBundle\Repository\SessionVettingProcedureRepository
         arguments:
-            - "@session"
+            - "@request_stack"
             - 'Surfnet/StepupRa/RaBundle/Repository/VettingProcedureRepository'
 
     #Logger
@@ -298,27 +330,3 @@ services:
             - "@surfnet_stepup.service.second_factor_type_translator"
         tags:
             - { name : twig.extension }
-
-    # Controller
-    ra.controller.profile:
-        class: Surfnet\StepupRa\RaBundle\Controller\ProfileController
-        arguments:
-            - "@ra.service.profile"
-        tags: ['controller.service_arguments']
-
-    Surfnet\StepupRa\RaBundle\Controller\RecoveryTokenController:
-        arguments:
-            - '@Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService'
-            - '@Knp\Component\Pager\PaginatorInterface'
-            - '@security.token_storage'
-            - "@logger"
-        tags: ['controller.service_arguments']
-
-    Surfnet\StepupRa\RaBundle\Controller\VettingTypeHintController:
-        arguments:
-            - '@logger'
-            - '@ra.service.institution_listing'
-            - '@ra.service.profile'
-            - '@Surfnet\StepupRa\RaBundle\Service\VettingTypeHintService'
-            - '%locales%'
-        tags: ['controller.service_arguments']

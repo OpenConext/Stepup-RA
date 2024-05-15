@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,31 +19,24 @@
 namespace Surfnet\StepupRa\RaBundle\EventListener;
 
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use InvalidArgumentException;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class LocaleListener implements EventSubscriberInterface
+final readonly class LocaleListener implements EventSubscriberInterface
 {
-    /**
-     * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
-     */
-    private $tokenStorage;
-
-    /**
-     * @var TranslatorInterface
-     */
-    private $translator;
-
-    public function __construct(TokenStorageInterface $tokenStorage, TranslatorInterface $translator)
-    {
-        $this->tokenStorage = $tokenStorage;
-        $this->translator = $translator;
+    public function __construct(
+        private TokenStorageInterface $tokenStorage,
+        private TranslatorInterface $translator,
+    ) {
     }
 
-    public function setRequestLocale(GetResponseEvent $event)
+    public function setRequestLocale(RequestEvent $event): void
     {
         $token = $this->tokenStorage->getToken();
 
@@ -51,12 +44,10 @@ final class LocaleListener implements EventSubscriberInterface
             return;
         }
 
-        /** @var Identity $identity */
-        $identity = $token->getUser();
+        $userIdentifier = $token->getUser();
+        assert($userIdentifier instanceof AuthenticatedIdentity);
 
-        if (!$identity instanceof Identity) {
-            return;
-        }
+        $identity = $userIdentifier->getIdentity();
 
         $request = $event->getRequest();
         $request->setLocale($identity->preferredLocale);
@@ -64,12 +55,12 @@ final class LocaleListener implements EventSubscriberInterface
         // As per \Symfony\Component\HttpKernel\EventListener\TranslatorListener::setLocale()
         try {
             $this->translator->setLocale($request->getLocale());
-        } catch (\InvalidArgumentException $e) {
+        } catch (InvalidArgumentException) {
             $this->translator->setLocale($request->getDefaultLocale());
         }
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             // Default locale listener listens at P16

@@ -18,35 +18,16 @@
 
 namespace Surfnet\StepupRa\RaBundle\Service;
 
-use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Profile;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\ProfileService as ApiProfileService;
 
 class ProfileService
 {
-    /**
-     * @var ApiProfileService
-     */
-    private $apiProfileService;
-
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
     public function __construct(
-        ApiProfileService $apiProfileService,
-        LoggerInterface $logger
+        private readonly ApiProfileService $apiProfileService,
     ) {
-        $this->apiProfileService = $apiProfileService;
-        $this->logger = $logger;
     }
-
-    /**
-     * @param string $identityId
-     * @return null|Profile
-     */
-    public function findByIdentityId($identityId)
+    public function findByIdentityId(string $identityId): ?Profile
     {
         return $this->apiProfileService->get($identityId);
     }

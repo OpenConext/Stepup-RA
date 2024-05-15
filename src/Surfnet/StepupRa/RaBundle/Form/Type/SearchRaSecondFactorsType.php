@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,17 +28,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SearchRaSecondFactorsType extends AbstractType
 {
-    /**
-     * @var SecondFactorTypeChoiceList
-     */
-    private $secondFactorTypeChoiseList;
-
-    public function __construct(SecondFactorTypeChoiceList $secondFactorTypeChoiceList)
+    public function __construct(private readonly SecondFactorTypeChoiceList $secondFactorTypeChoiseList)
     {
-        $this->secondFactorTypeChoiseList = $secondFactorTypeChoiceList;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('name', null, [
             'label' => 'ra.form.ra_search_ra_second_factors.label.name',
@@ -79,7 +73,7 @@ class SearchRaSecondFactorsType extends AbstractType
             ButtonGroupType::class,
             [
                 'inherit_data' => true,
-            ]
+            ],
         )
             ->add('search', SubmitType::class, [
                 'label' => 'ra.form.ra_search_ra_second_factors.button.search',
@@ -96,17 +90,17 @@ class SearchRaSecondFactorsType extends AbstractType
         $builder->add($buttonGroup);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => 'Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand',
+            'data_class' => SearchRaSecondFactorsCommand::class,
             'enable_export_button' => true,
         ]);
 
         $resolver->setAllowedTypes('enable_export_button', 'bool');
     }
 
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return 'ra_search_ra_second_factors';
     }

@@ -1,0 +1,79 @@
+parameters:
+    trusted_proxies:   ~
+
+    app_env: prod
+    app_debug: false
+    app_secret: NotSoSecretReplaceMe!
+
+    mailer_transport:  smtp
+    mailer_host:       mailcatcher
+    mailer_user:       ~
+    mailer_password:   ~
+
+    default_locale:    en_GB
+    locales:           [nl_NL, en_GB]
+    locale_cookie_domain:   example.org
+    secret:            NotSoSecretReplaceMe!
+
+    debug_toolbar:          true
+    debug_redirects:        false
+    use_assetic_controller: true
+
+    gateway_api_url: https://gateway.dev.openconext.local/
+    gateway_api_username: ra
+    gateway_api_password: ra_secret
+
+    middleware_credentials_username: ra
+    middleware_credentials_password: ra_secret
+    middleware_url_command_api: https://middleware.dev.openconext.local/command
+    middleware_url_api: https://middleware.dev.openconext.local/
+
+    sms_originator: SURFStepup
+    sms_otp_expiry_interval: 900 # 15 minutes
+    sms_maximum_otp_requests: 10
+
+    saml_sp_publickey: /config/ra/ra_saml_sp.crt
+    saml_sp_privatekey: /config/ra/ra_saml_sp.key
+    saml_metadata_publickey: /config/ra/ra_saml_sp.crt
+    saml_metadata_privatekey: /config/ra/ra_saml_sp.key
+    saml_remote_idp_entity_id: https://gateway.dev.openconext.local/authentication/metadata
+    saml_remote_idp_sso_url: https://gateway.dev.openconext.local/authentication/single-sign-on
+    saml_remote_idp_certificate: 'MIIDwTCCAqmgAwIBAgIUYuSUugwc4J4NyW9WGqYJ/liwM4owDQYJKoZIhvcNAQELBQAwcDELMAkGA1UEBhMCTkwxEDAOBgNVBAgMB1V0cmVjaHQxEDAOBgNVBAcMB1V0cmVjaHQxJzAlBgNVBAoMHkRldmVsb3BtZW50IERvY2tlciBlbnZpcm9ubWVudDEUMBIGA1UEAwwLR2F0ZXdheSBJRFAwHhcNMjMwNTE3MTIxNTEyWhcNMzMwNTE0MTIxNTEyWjBwMQswCQYDVQQGEwJOTDEQMA4GA1UECAwHVXRyZWNodDEQMA4GA1UEBwwHVXRyZWNodDEnMCUGA1UECgweRGV2ZWxvcG1lbnQgRG9ja2VyIGVudmlyb25tZW50MRQwEgYDVQQDDAtHYXRld2F5IElEUDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAM2ulQVs5WpbJOAf7Cv/VPDTJqbWHVdUxAmdwZJlcNTRKNFVp4aJzQ3dpiyiGghI5odnzU0/BWBoHZFNYPU/OFr/gzn6iJGxL63L9+mFgE8PR9HpkV5TaRnr21+nZ0EXWjDZk9Px0enERicCItTeQzAUJeA0A9miIcK5IKIz/zSBSR3c802SGD/VelUqY7Z2/UJM97cT92L+4Fz+4zhxxoThbPbrR0CweiROIt82grdwg7zf0+b62MOuVtqFh0yPLRAFfLc4LjHuxFUdUvOHVta7x74dwdmHikqfujM10XN+sNns3LDJde2yPWchU6ktq7cjgbYfIW/vzVzafP1Jk40CAwEAAaNTMFEwHQYDVR0OBBYEFGYn6LWRDZa7+YryUncIlwJB2VorMB8GA1UdIwQYMBaAFGYn6LWRDZa7+YryUncIlwJB2VorMA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEBAJ57lcOF6PWWW56mS2s5gKFImtfRFzlfiyHsF14L7+nQ5NjfOhpU0wRpnTjK91KP0wCwlxzGFXR8yfqfBFJryIV7aDdYPH/RIkwVaNBI0fsD/ozlYb18seieDEGLvQtTlrmc0UNHtWz6FW3L2geM3ENaqpOATl1Ywp4EPML7Dh0CbhhyM8PnPCEsdclouIeP5/B9Swfk3omXehof6bkFbntqA03msFBiW50twkfKeKULcJGXo667hto27KNxZUauqtPbnAGpUQmge8nxSQlN8RPwlvygVM4LVMF9qP9YxloTH0xVNwN4noZUhfMNsKoJ7Hg5Xulaok8oCqmzEiSroEg='
+    # Previously we called this parameter: loa_required_for_login, the saml bundle
+    # also requires a similar parameter but it is called authentication_context_class_ref
+    authentication_context_class_ref: 'http://dev.openconext.local/assurance/loa3'
+    enabled_second_factors:
+        - sms
+        - yubikey
+        - tiqr
+        - demo_gssp
+        - webauthn
+        - azuremfa
+    enabled_generic_second_factors:
+        azuremfa:
+            loa: 2
+        tiqr:
+            loa: 2
+        webauthn:
+            loa: 3
+        demo_gssp:
+            loa: 3
+
+    asset_version: 1
+
+    stepup_loa_loa1: http://dev.openconext.local/assurance/loa1
+    stepup_loa_loa2: http://dev.openconext.local/assurance/loa2
+    stepup_loa_loa3: http://dev.openconext.local/assurance/loa3
+    stepup_loa_self_asserted: 'http://dev.openconext.local/assurance/loa1.5'
+
+    logout_redirect_url:
+            nl_NL: https://www.surf.nl/over-surf/werkmaatschappijen/surfnet
+            en_GB: https://www.surf.nl/en/about-surf/subsidiaries/surfnet
+
+    session_max_absolute_lifetime: 28800 # 8 hours * 60 minutes * 60 seconds
+    session_max_relative_lifetime: 1800  # 30 minutes * 60 seconds
+    self_service_url: 'https://selfservice.dev.openconext.local/'
+
+    # Date format defaults for Twig date functions
+    date_format: 'Y-m-d H:i P'
+    date_timezone: Europe/Amsterdam

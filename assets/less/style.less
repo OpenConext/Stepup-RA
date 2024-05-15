@@ -1,0 +1,247 @@
+@import "../../node_modules/bootstrap-less/bootstrap/index";
+@import "../../node_modules/font-awesome/less/font-awesome";
+
+.progress-steps {
+    font-size: 110%;
+}
+
+div.page-header {
+    img.logo {
+        max-width: 180px;
+        max-height: 90px;
+    }
+}
+
+table.orderable th {
+    color: @brand-primary;
+}
+
+form input[type=text] {
+    max-width: 350px;
+}
+
+.ra-start-vetting-procedure-container {
+    margin: 3em auto;
+    max-width: 500px;
+
+    form[name="ra_start_vetting_procedure"] {
+
+        margin-bottom: 1em;
+
+        input[name="ra_start_vetting_procedure[registrationCode]"] {
+            min-width: 220px;
+            text-transform: uppercase;
+        }
+
+        ::-webkit-input-placeholder { text-transform: none; }
+        :-moz-placeholder { text-transform: none; }
+        ::-moz-placeholder { text-transform: none; }
+        :-ms-input-placeholder { text-transform: none; }
+    }
+
+    p {
+        color: #999999;
+    }
+}
+
+form[name="ra_verify_yubikey_public_id"] {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 525px;
+
+    > .form-group > .col-sm-9 {
+        float: none;
+        margin: 0 auto;
+    }
+}
+
+div.form-ra-verify-identity {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 650px;
+
+    .left-aligned {
+        padding-left: 24px;
+        text-align: left;
+    }
+
+    table tbody tr th.half-width, table tbody tr td.half-width {
+        width: 50%;
+    }
+
+    .form-group-verify-identity {
+        margin-top: 2em;
+        text-align: center;
+
+        label {
+
+            font-weight: bold;
+        }
+    }
+}
+
+div.form-ra-create-ra, div.form-ra-amend-ra-info, div.form-ra-change-role {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 650px;
+
+    .control-text {
+        padding-top: 7px;
+    }
+}
+
+div.emulate-form-layout {
+    .control-text {
+        padding-top: 7px;
+    }
+}
+
+.question {
+    padding: 15px;
+}
+
+div.form-ra-send-sms-challenge {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 525px;
+
+    form {
+        text-align: center;
+    }
+}
+
+div.form-retract-registration-authority {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 650px;
+
+    button {
+        margin-left: 1em;
+    }
+}
+
+form[name="ra_verify_phone_number"] {
+    margin: 1em auto;
+    padding: 0.75em 1em;
+    max-width: 525px;
+
+    input[type="text"] {
+        font-family: "Monaco", "Inconsolata", "Consolas", monospace;
+        text-transform: uppercase;
+    }
+}
+
+select.form-control {
+    max-width: 175px;
+}
+
+.search-second-factors {
+    form[name="ra_search_ra_second_factors"] {
+        input#ra_search_ra_second_factors_name {
+            max-width: 300px;
+        }
+        input#ra_search_ra_second_factors_secondFactorId {
+            max-width: 200px;
+        }
+
+    }
+    tr.forgotten td {
+        color: #777777;
+    }
+    td.button-column {
+        .audit-log, .revoke {
+            margin: 0px 3px 3px 3px;
+        }
+    }
+}
+
+form[name="ra_search_ra_candidates"] {
+    input#ra_search_ra_candidates_name {
+        max-width: 300px;
+    }
+    input#ra_search_ra_candidates_email {
+        max-width: 300px;
+    }
+    input#ra_search_ra_candidates_institution {
+        max-width: 300px;
+    }
+}
+
+form[name="logout"] button {
+    line-height: 26px;
+}
+
+form[name="stepup_switch_locale"] {
+    .pull-right();
+}
+form[name="select_institution"] {
+    margin-left: 15px;
+
+    h3 {
+        margin-bottom: 2em;
+    }
+    div.row.horizontal {
+        div.form-group {
+            float: left;
+            width: 60%;
+
+            .control-label {
+                text-align: left;
+            }
+        }
+    }
+}
+
+#select_institution_select_and_apply {
+    display: block;
+}
+.js #select_institution_select_and_apply {
+    display: none
+}
+
+select[name="stepup_switch_locale[locale]"] {
+    min-width: 150px;
+}
+
+.hidden {
+    display: none;
+}
+
+.container {
+    @media (min-width: @screen-lg-min) {
+        width: 1190px;
+    }
+}
+
+.container-cancel-vetting {
+    text-align: center;
+}
+
+.generate-progress(100);
+
+.generate-progress(@n, @i: 0) when (@i =< @n) {
+    .progress-@{i} {
+        width: (@i * 1%);
+    }
+    .generate-progress(@n, (@i + 5));
+}
+
+.cancel {
+    color: @brand-danger;
+}
+
+.result-count {
+    margin-top: 1em;
+}
+
+.break-all {
+    word-wrap: break-word; word-break: break-all
+}
+
+.identity-verified {
+    margin: 20px 0;
+
+    label {
+        font-weight: bold;
+    }
+}

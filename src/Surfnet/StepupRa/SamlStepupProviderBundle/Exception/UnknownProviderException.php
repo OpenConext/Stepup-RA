@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,14 +18,14 @@
 
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\Exception;
 
-class UnknownProviderException extends RuntimeException
+final class UnknownProviderException extends RuntimeException
 {
-    public static function create($unknownProvider, array $knownProviders)
+    public static function create($unknownProvider, array $knownProviders): UnknownProviderException
     {
-        return new static(sprintf(
+        return new UnknownProviderException(sprintf(
             'Unknown Generic SAML Stepup Provider requested "%s", known providers: "%s"',
-            is_object($unknownProvider) ? '(object)' . get_class($unknownProvider) : $unknownProvider,
-            implode('", "', $knownProviders)
+            is_object($unknownProvider) ? '(object)' . $unknownProvider::class : $unknownProvider,
+            implode('", "', $knownProviders),
         ));
     }
 }

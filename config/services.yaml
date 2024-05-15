@@ -1,12 +1,40 @@
 imports:
-  - { resource: 'legacy/samlstepupproviders_parameters.yaml' }
-  - { resource: 'legacy/global_view_parameters.yaml' }
-  - { resource: 'legacy/parameters.yaml' }
-  - { resource: 'legacy/samlstepupproviders.yaml' }
-
-
+  - { resource: 'openconext/samlstepupproviders_parameters.yaml' }
+  - { resource: 'openconext/global_view_parameters.yaml' }
+  - { resource: 'openconext/parameters.yaml' }
+  - { resource: 'openconext/samlstepupproviders.yaml' }
 
 services:
-  twig.extension.text: # Required by JMSTranslationBundle
-    class: Twig_Extensions_Extension_Text
-    tags: [{ name: twig.extension }]
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: true
+
+  Surfnet\StepupRa\RaBundle\Service\SecondFactorAssertionService:
+
+  Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger:
+
+  logger:
+    alias: 'monolog.logger'
+    public: true
+
+  surfnet_saml.saml_provider:
+    class: Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider
+
+  Surfnet\StepupRa\RaBundle\Security\Authentication\Provider\SamlProvider:
+    alias: surfnet_saml.saml_provider
+
+  Surfnet\StepupRa\SamlStepupProviderBundle\Session\SessionFactoryWithAttributeBag:
+    decorates: session.factory
+    arguments: [ '@.inner' ]
+
+  ra.service.gssf:
+    class: Surfnet\StepupRa\RaBundle\Service\GssfService
+    arguments:
+      - "@request_stack"
+
+  Surfnet\StepupRa\RaBundle\Security\Authentication\EventSubscriber\CustomLogoutListener:
+    arguments:
+      - '@security.helper'
+      - "%logout_redirect_url%"

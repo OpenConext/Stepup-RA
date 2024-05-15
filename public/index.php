@@ -1,30 +1,29 @@
 <?php
-use App\Kernel;
-use Symfony\Component\ErrorHandler\Debug;
-use Symfony\Component\HttpFoundation\Request;
 
-require dirname(__DIR__).'/config/bootstrap.php';
+declare(strict_types = 1);
 
-if ($_SERVER['APP_DEBUG']) {
-    umask(0000);
+/**
+ * Copyright 2020 SURFnet B.V.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-    Debug::enable();
-}
 
-if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? false) {
-    Request::setTrustedProxies(explode(',', $trustedProxies), Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);
-}
+use Surfnet\StepupRa\Kernel;
 
-if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? false) {
-    Request::setTrustedHosts([$trustedHosts]);
-}
-if (isset($_COOKIE['testcookie']) && strpos($_SERVER['HTTP_USER_AGENT'], 'GuzzleHttp') !== false) {
-    $_SERVER['APP_ENV'] = 'smoketest';
-    $_SERVER['APP_DEBUG'] = true;
-}
+require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
+require_once dirname(__DIR__).'/config/bootstrap.php';
 
-$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
-$request = Request::createFromGlobals();
-$response = $kernel->handle($request);
-$response->send();
-$kernel->terminate($request, $response);
+return function (array $context) {
+    return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
+};

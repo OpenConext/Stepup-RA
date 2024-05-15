@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,71 +25,32 @@ use Surfnet\StepupRa\SamlStepupProviderBundle\Saml\StateHandler;
 final class Provider
 {
     /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var \Surfnet\SamlBundle\Entity\ServiceProvider
-     */
-    private $serviceProvider;
-
-    /**
-     * @var \Surfnet\SamlBundle\Entity\IdentityProvider
-     */
-    private $remoteIdentityProvider;
-
-    /**
-     * @var \Surfnet\StepupRa\SamlStepupProviderBundle\Saml\StateHandler
-     */
-    private $stateHandler;
-
-    /**
      * @param string           $name
-     * @param ServiceProvider  $serviceProvider
-     * @param IdentityProvider $remoteIdentityProvider
-     * @param StateHandler     $stateHandler
      */
     public function __construct(
-        $name,
-        ServiceProvider $serviceProvider,
-        IdentityProvider $remoteIdentityProvider,
-        StateHandler $stateHandler
+        private $name,
+        private readonly ServiceProvider $serviceProvider,
+        private readonly IdentityProvider $remoteIdentityProvider,
+        private readonly StateHandler $stateHandler,
     ) {
-        $this->name                    = $name;
-        $this->serviceProvider         = $serviceProvider;
-        $this->remoteIdentityProvider  = $remoteIdentityProvider;
-        $this->stateHandler            = $stateHandler;
     }
 
-    /**
-     * @return StateHandler
-     */
-    public function getStateHandler()
+    public function getStateHandler(): StateHandler
     {
         return $this->stateHandler;
     }
 
-    /**
-     * @return IdentityProvider
-     */
-    public function getRemoteIdentityProvider()
+    public function getRemoteIdentityProvider(): IdentityProvider
     {
         return $this->remoteIdentityProvider;
     }
 
-    /**
-     * @return ServiceProvider
-     */
-    public function getServiceProvider()
+    public function getServiceProvider(): ServiceProvider
     {
         return $this->serviceProvider;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

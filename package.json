@@ -1,11 +1,15 @@
 {
     "browserslist": "last 2 versions, ie 11, > 1%",
+    "engines" : {
+        "node" : ">=20.0.0"
+    },
     "devDependencies": {
         "@babel/core": "^7.20.5",
         "@babel/preset-env": "^7.20.2",
-        "@symfony/webpack-encore": "^4",
+        "@symfony/webpack-encore": "^4.6.1",
         "bootstrap-less": "^3.3.8",
         "core-js": "^3.0.0",
+        "file-loader": "^6.0.0",
         "font-awesome": "^4.7.0",
         "jquery": "^3.5.1",
         "jscpd": "^3.4.5",

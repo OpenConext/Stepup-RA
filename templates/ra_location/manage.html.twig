@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}{{ 'ra.ra_location.manage.title'|trans }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12" >
+            {% include 'partial/language_switcher.html.twig' with {'form': form} only %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>{{ 'ra.ra_location.manage.subtitle'|trans({'%name%': institution}) }}</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <a class="btn btn-default pull-right" href="{{ path('ra_location_create', {'institution': institution}) }}">
+                <i class="fa fa-plus"></i>
+                {{ 'ra.ra_location.manage.add'|trans }}
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            {% if locations.elements|length > 0 %}
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>{{ 'ra.ra_location.manage.column.name'|trans }}</th>
+                        <th>{{ 'ra.ra_location.manage.column.location'|trans }}</th>
+                        <th>{{ 'ra.ra_location.manage.column.contactInformation'|trans }}</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for location in locations.elements %}
+                        <tr>
+                            <td>{{ location.name }}</td>
+                            <td>{{ location.location }}</td>
+                            <td>{{ location.contactInformation }}</td>
+                            <td>
+                                <a class="btn btn-default" href="{{ path('ra_location_change', {locationId: location.id}) }}">
+                                    {{ 'ra.ra_location.manage.edit'|trans }}
+                                </a>
+                                <button class="btn btn-warning remove"
+                                        data-toggle="modal"
+                                        data-target="#removalModal"
+                                        data-locationid="{{ location.id }}"
+                                        data-locationinstitution="{{ location.institution }}"
+                                        data-locationname="{{ location.name }}"
+                                        data-locationlocation="{{ location.location }}"
+                                        data-locationcontactinformation="{{ location.contactInformation }}"
+                                >
+                                    {{ 'ra.ra_location.manage.remove'|trans }}
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>
+                    {{ 'ra.ra_location.manage.text.no_locations'|trans }}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="modal fade" id="removalModal" tabindex="-1" role="dialog" aria-labelledby="removalModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'ra.ra_location.removal.modal.close'|trans}}"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">{{ 'ra.ra_location.removal.modal.confirm'|trans }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        {{ 'ra.ra_location.removal.modal.are_you_sure'|trans }}
+                    </p>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>{{ 'ra.ra_location.removal.modal.name'|trans }}</th>
+                            <td class="name"></td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'ra.ra_location.removal.modal.location'|trans }}</th>
+                            <td class="location"></td>
+                        </tr>
+                        <tr>
+                            <th>{{ 'ra.ra_location.removal.modal.contactInformation'|trans }}</th>
+                            <td class="contactInformation"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'ra.ra_location.removal.modal.cancel'|trans }}</button>
+                    <button type="button" class="btn btn-warning remove">{{ 'ra.ra_location.removal.modal.confirm'|trans }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="hidden">
+        {{ form(removalForm, {'action': path('ra_location_remove')}) }}
+    </div>
+{% endblock %}

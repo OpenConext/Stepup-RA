@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2014 SURFnet bv
+ * Copyright 2015 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,29 +22,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class AmendRegistrationAuthorityInformationCommand
 {
-    /**
-     * @var string
-     */
-    public $identityId;
+    public string $identityId;
 
-    /**
-     * @Assert\NotBlank(message="ra.amend_ra_information.location")
-     * @Assert\Type(type="string")
-     *
-     * @var string
-     */
-    public $location;
+    #[Assert\NotBlank(message: 'ra.amend_ra_information.location')]
+    public string $location;
 
-    /**
-     * @Assert\NotBlank(message="ra.amend_ra_information.contact_information")
-     * @Assert\Type(type="string")
-     *
-     * @var string
-     */
-    public $contactInformation;
+    #[Assert\NotBlank(message: 'ra.amend_ra_information.contact_information')]
+    public string $contactInformation;
 
-    /**
-     * @var string
-     */
-    public $institution;
+    public string $institution;
 }

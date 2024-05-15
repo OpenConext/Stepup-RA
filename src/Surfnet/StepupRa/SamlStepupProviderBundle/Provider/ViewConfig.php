@@ -25,113 +25,59 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class ViewConfig implements ViewConfigInterface
 {
     /**
-     * @var array
-     */
-    public $title;
-
-    /**
-     * @var array
-     */
-    public $pageTitle;
-
-    /**
-     * @var array
-     */
-    public $explanation;
-
-    /**
-     * @var array
-     */
-    public $initiate;
-
-    /**
-     * @var array
-     */
-    public $gssfIdMismatch;
-
-    /**
-     * @var RequestStack
-     */
-    private $requestStack;
-
-    /**
      * The arrays are arrays of translated text, indexed on locale.
      *
-     * @param RequestStack $requestStack
-     * @param array $title
-     * @param array $pageTitle
-     * @param array $explanation
-     * @param array $initiate
-     * @param array $gssfIdMismatch
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
-        RequestStack $requestStack,
-        array $title,
-        array $pageTitle,
-        array $explanation,
-        array $initiate,
-        array $gssfIdMismatch
+        private readonly RequestStack $requestStack,
+        /** @var array<string, string> $title */
+        public array $title,
+        /** @var array<string, string> $pageTitle */
+        public array $pageTitle,
+        /** @var array<string, string> $explanation */
+        public array $explanation,
+        /** @var array<string, string> $initiate */
+        public array $initiate,
+        /** @var array<string, string> $gssfIdMismatch */
+        public array $gssfIdMismatch,
     ) {
-        $this->requestStack = $requestStack;
-        $this->title = $title;
-        $this->pageTitle = $pageTitle;
-        $this->explanation = $explanation;
-        $this->initiate = $initiate;
-        $this->gssfIdMismatch = $gssfIdMismatch;
     }
 
-    /**
-     * @return array
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getTranslation($this->title);
     }
 
-    /**
-     * @return array
-     */
-    public function getExplanation()
+    public function getExplanation(): string
     {
         return $this->getTranslation($this->explanation);
     }
 
-    /**
-     * @return array
-     */
-    public function getGssfIdMismatch()
+    public function getGssfIdMismatch(): string
     {
         return $this->getTranslation($this->gssfIdMismatch);
     }
 
-    /**
-     * @return array
-     */
-    public function getInitiate()
+    public function getInitiate(): string
     {
         return $this->getTranslation($this->initiate);
     }
 
-    /**
-     * @return array
-     */
-    public function getPageTitle()
+    public function getPageTitle(): string
     {
         return $this->getTranslation($this->pageTitle);
     }
 
     /**
-     * @param array $translations
-     * @return mixed
      * @throws LogicException
+     * @param array<string, string> $translations
      */
-    private function getTranslation(array $translations)
-    {
-        $currentLocale = $this->requestStack->getCurrentRequest()->getLocale();
-        if (is_null($currentLocale)) {
-            throw new LogicException('The current language is not set');
-        }
+    private function getTranslation(
+        array $translations,
+    ): string {
+        $currentLocale = $this->requestStack->getCurrentRequest()?->getLocale();
+
         if (isset($translations[$currentLocale])) {
             return $translations[$currentLocale];
         }
@@ -139,8 +85,8 @@ class ViewConfig implements ViewConfigInterface
             sprintf(
                 'The requested translation is not available in this language: %s. Available languages: %s',
                 $currentLocale,
-                implode(', ', array_keys($translations))
-            )
+                implode(', ', array_keys($translations)),
+            ),
         );
     }
 }

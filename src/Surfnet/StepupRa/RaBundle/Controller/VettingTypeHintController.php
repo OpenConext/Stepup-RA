@@ -19,67 +19,52 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Psr\Log\LoggerInterface;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use Surfnet\StepupMiddlewareClient\Identity\Dto\VettingTypeHint;
 use Surfnet\StepupRa\RaBundle\Command\VettingTypeHintCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\VettingTypeHintType;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
+use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionListingService;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
 use Surfnet\StepupRa\RaBundle\Service\VettingTypeHintService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use function array_flip;
+use function array_keys;
+use function array_values;
 
-class VettingTypeHintController extends Controller
+class VettingTypeHintController extends AbstractController
 {
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-
-    /**
-     * @var ProfileService
-     */
-    private $profileService;
-
-    /**
-     * @var VettingTypeHintService
-     */
-    private $vettingTypeHintService;
-
-    /**
-     * @var InstitutionListingService
-     */
-    private $institutionListingService;
-
-    /**
-     * @var string[]
-     */
-    private $locales;
 
     public function __construct(
-        LoggerInterface $logger,
-        InstitutionListingService $institutionListingService,
-        ProfileService $profileService,
-        VettingTypeHintService $vettingTypeHintService,
-        array $locales
+        private readonly LoggerInterface           $logger,
+        private readonly InstitutionListingService $institutionListingService,
+        private readonly ProfileService            $profileService,
+        private readonly VettingTypeHintService    $vettingTypeHintService,
+        private readonly array $locales = [],
     ) {
-        $this->institutionListingService = $institutionListingService;
-        $this->profileService = $profileService;
-        $this->vettingTypeHintService = $vettingTypeHintService;
-        $this->locales = $locales;
-        $this->logger = $logger;
     }
 
     /**
      * @SuppressWarnings(PHPMD.CyclomaticComplexity) Given the two forms being handled in this action, cc is higher.
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
-    public function vettingTypeHintAction(Request $request)
+    #[Route(
+        path: '/vetting-type-hint',
+        name: 'vetting_type_hint',
+        methods: ['GET', 'POST'],
+    )]
+    #[IsGranted('ROLE_RAA')]
+    public function vettingTypeHint(Request $request): Response
     {
-        $this->denyAccessUnlessGranted(['ROLE_RAA', 'ROLE_SRAA']);
+        $userIdentifier = $this->getUser();
+        assert($userIdentifier instanceof AuthenticatedIdentity);
 
-        /** @var Identity $identity */
-        $identity = $this->getUser();
+        $identity = $userIdentifier->getIdentity();
 
         $profile = $this->profileService->findByIdentityId($identity->id);
 
@@ -112,10 +97,13 @@ class VettingTypeHintController extends Controller
         $command->institution = $institution;
         $command->identityId = $identity->id;
         $command->locales = $this->locales;
-        $hints = $this->vettingTypeHintService->findBy($institution);
-        if ($hints) {
-            $command->setHints($hints->hints);
+        $hintsEntity = $this->vettingTypeHintService->findBy($institution);
+        $hints = $this->createEmptyHints();
+
+        if ($hintsEntity instanceof VettingTypeHint && !empty($hintsEntity->hints)) {
+            $hints = $hintsEntity->hints;
         }
+        $command->setHints($hints);
         $hintForm = $this->createForm(VettingTypeHintType::class, $command);
         $hintForm->handleRequest($request);
 
@@ -133,12 +121,24 @@ class VettingTypeHintController extends Controller
         }
 
         return $this->render(
-            '@SurfnetStepupRaRa/vetting_type_hint/overview.html.twig',
+            'vetting_type_hint/overview.html.twig',
             [
                 'form' => isset($form) ? $form->createView() : null,
                 'hintForm' => $hintForm->createView(),
                 'institution' => $institution,
-            ]
+            ],
         );
+    }
+
+    /**
+     * @return array<array<string, string>>
+     */
+    private function createEmptyHints(): array
+    {
+        $emptyHints = [];
+        foreach ($this->locales as $locale) {
+            $emptyHints[] = ['locale' => $locale, 'hint' => ''];
+        }
+        return $emptyHints;
     }
 }
