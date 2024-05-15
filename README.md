@@ -7,12 +7,8 @@ This component is part of "Step-up Authentication as-a Service" and requires oth
 
 ## Requirements
 
- * PHP 7.2
- * [Composer](https://getcomposer.org/)
- * A web server (Apache, Nginx)
- * Graylog2 (or disable this Monolog handler)
- * A working [Gateway](https://github.com/OpenConext/Stepup-Gateway)
- * Working [Middleware](https://github.com/OpenConext/Stepup-Middleware)
+ * Docker Compose
+ * A clone of [OpenConext-devconf](https://github.com/OpenConext/OpenConext-devconf/)
 
 ## Installation
 
@@ -20,7 +16,7 @@ Clone the repository or download the archive to a directory. Install the depende
 
 Install the JS dependencies: `yarn`
 
-Symlink assets from external packages: `php72 ./bin/console assets:install`
+Symlink assets from external packages: `./bin/console assets:install`
 
 Finally build the front-end resources: `yarn encore dev` or `yarn encore production`
 
