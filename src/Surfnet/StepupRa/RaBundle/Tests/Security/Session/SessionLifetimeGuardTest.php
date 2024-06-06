@@ -239,7 +239,7 @@ class SessionLifetimeGuardTest extends TestCase
     {
         $nowProperty = new ReflectionProperty(DateTime::class, 'now');
         $nowProperty->setAccessible(true);
-        $nowProperty->setValue($now);
+        $nowProperty->setValue(null, $now);
     }
 
     /**
