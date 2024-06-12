@@ -3,7 +3,7 @@
 declare(strict_types = 1);
 
 /**
- * Copyright 2016 SURFnet bv
+ * Copyright 2024 SURFnet bv
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,8 +42,6 @@ class AuthenticatedUserListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            // The firewall, which makes the token available, listens at P8
-            // We must jump in after the firewall, forcing us to overwrite the translator locale.
             KernelEvents::REQUEST => ['updateLastInteractionMoment', 6],
         ];
     }

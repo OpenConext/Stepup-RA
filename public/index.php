@@ -18,8 +18,7 @@ declare(strict_types = 1);
  * limitations under the License.
  */
 
-
-use src\Kernel;
+use Surfnet\StepupRa\Kernel;
 
 require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 require_once dirname(__DIR__).'/config/bootstrap.php';

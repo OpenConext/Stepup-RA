@@ -49,8 +49,6 @@ final readonly class ExplicitSessionTimeoutListener implements EventSubscriberIn
     public static function getSubscribedEvents(): array
     {
         return [
-            // The firewall, which makes the token available, listens at P8
-            // We must jump in after the firewall, forcing us to overwrite the translator locale.
             KernelEvents::REQUEST => ['checkSessionTimeout', 5],
         ];
     }

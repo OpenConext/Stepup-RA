@@ -18,7 +18,7 @@ declare(strict_types = 1);
  * limitations under the License.
  */
 
-namespace src;
+namespace Surfnet\StepupRa;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
@@ -30,6 +30,6 @@ class Kernel extends BaseKernel
     // see https://symfony.com/doc/current/reference/configuration/kernel.html#kernel-project-dir
     public function getProjectDir(): string
     {
-        return dirname(__DIR__);
+        return dirname(__DIR__, 3);
     }
 }
