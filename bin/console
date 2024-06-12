@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+
 use Surfnet\StepupRa\Kernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 

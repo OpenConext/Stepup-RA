@@ -38,3 +38,13 @@ services:
     arguments:
       - '@security.helper'
       - "%logout_redirect_url%"
+
+  Surfnet\StepupRa\RaBundle\EventListener\AuthenticatedUserListener:
+
+  Surfnet\StepupRa\RaBundle\EventListener\ExplicitSessionTimeoutListener:
+
+  Surfnet\StepupRa\RaBundle\Security\Authentication\Session\SessionLifetimeGuard:
+    alias: ra.security.authentication.session.session_lifetime_guard
+
+  Surfnet\StepupRa\RaBundle\Security\Authentication\AuthenticatedSessionStateHandler:
+    alias: ra.security.authentication.session.session_storage

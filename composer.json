@@ -8,7 +8,7 @@
             "Surfnet\\": "src\\Surfnet"
         },
         "classmap": [
-            "src/Kernel.php"
+            "src/Surfnet/StepupRa/Kernel.php"
         ]
     },
     "minimum-stability": "stable",

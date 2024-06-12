@@ -3,5 +3,5 @@ controllers:
     type: attribute
 
 kernel:
-    resource: ../../src/Kernel.php
+    resource: ../../src/Surfnet/StepupRa/Kernel.php
     type: attribute
