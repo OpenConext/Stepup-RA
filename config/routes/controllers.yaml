@@ -2,6 +2,11 @@ controllers:
     resource: ../../src/Surfnet/StepupRa/RaBundle/Controller
     type: attribute
 
+open_conext_monitor:
+    resource: "@OpenConextMonitorBundle/src/Controller"
+    type: attribute
+    prefix: /
+
 kernel:
     resource: ../../src/Surfnet/StepupRa/Kernel.php
     type: attribute
