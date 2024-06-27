@@ -3,10 +3,6 @@ nelmio_security_report:
   defaults: { _controller: nelmio_security.csp_reporter_controller:indexAction }
   methods: [POST]
 
-openconext_monitor:
-  resource: "@OpenConextMonitorBundle/Resources/config/routing.yml"
-  prefix: /
-
 logout:
   path: /logout
   methods: [POST]

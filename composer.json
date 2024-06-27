@@ -124,7 +124,8 @@
             "symfony/flex": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "phpstan/extension-installer": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "endroid/installer": false
         },
         "optimize-autoloader": true,
         "sort-packages": true,

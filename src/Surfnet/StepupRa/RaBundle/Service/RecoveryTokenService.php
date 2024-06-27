@@ -20,6 +20,7 @@ namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RecoveryTokenSearchQuery;
+use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\RevokeRegistrantsRecoveryTokenCommand;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RecoveryTokenCollection;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService as ApiRecoveryTokenService;
@@ -57,7 +58,7 @@ class RecoveryTokenService
         return $result->isSuccessful();
     }
 
-    public function search(SearchRecoveryTokensCommand $command): RecoveryTokenCollection
+    public function search(SearchRecoveryTokensCommand $command): CollectionDto
     {
         $query = new RecoveryTokenSearchQuery($command->pageNumber, $command->actorId);
 
