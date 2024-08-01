@@ -40,7 +40,7 @@
         "symfony/twig-bundle": "6.4.*",
         "symfony/validator": "6.4.*",
         "symfony/webpack-encore-bundle": "^1.7",
-        "twbs/bootstrap": "~3.3.0",
+        "twbs/bootstrap": "~3.4.1",
         "twig/extra-bundle": "^3.0",
         "twig/twig": "^3.0"
     },
