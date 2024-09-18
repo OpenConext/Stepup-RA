@@ -48,3 +48,9 @@ services:
 
   Surfnet\StepupRa\RaBundle\Security\Authentication\AuthenticatedSessionStateHandler:
     alias: ra.security.authentication.session.session_storage
+
+  Surfnet\SamlBundle\Security\Authentication\Handler\FailureHandler:
+    class: Surfnet\StepupRa\RaBundle\Security\Authentication\Handler\FailureHandler
+    public: false
+    arguments:
+      $exceptionController: '@Surfnet\StepupRa\RaBundle\Controller\ExceptionController'
