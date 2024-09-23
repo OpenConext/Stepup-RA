@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.0.1
+- Ensure the correct error page is displayed when authentication fails #332
+- Upgrade of numerous NPM and Composer dependencies
+
 ## 6.0.0
 - Update php8 and Symfony 6.4
 
