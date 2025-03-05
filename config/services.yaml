@@ -54,3 +54,7 @@ services:
     public: false
     arguments:
       $exceptionController: '@Surfnet\StepupRa\RaBundle\Controller\ExceptionController'
+
+  Surfnet\StepupRa\RaBundle\Controller\SamlController:
+    bind:
+      $remoteIdp: '@surfnet_saml.remote.idp'
