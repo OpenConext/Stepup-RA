@@ -37,6 +37,10 @@
                     <td>{{ configuration.ssoOn2fa ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
                 </tr>
                 <tr>
+                    <th>{{ 'ra.institution_configuration.sso_registration_bypass'|trans }}</th>
+                    <td>{{ configuration.ssoRegistrationBypass ? 'ra.institution_configuration.yes'|trans : 'ra.institution_configuration.no'|trans }}</td>
+                </tr>
+                <tr>
                     <th>{{ 'ra.institution_configuration.allowed_second_factors'|trans }}</th>
                     <td>
                         {% if configuration.allowedSecondFactors is empty %}

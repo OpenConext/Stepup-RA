@@ -25,7 +25,7 @@
         "nelmio/security-bundle": "^3.0",
         "openconext/monitor-bundle": "^4.2",
         "surfnet/stepup-bundle": "^6.0",
-        "surfnet/stepup-middleware-client-bundle": "^5.0.0",
+        "surfnet/stepup-middleware-client-bundle": "^5.3.0",
         "surfnet/stepup-saml-bundle": "^6.0",
         "symfony/asset": "6.4.*",
         "symfony/expression-language": "6.4.*",
