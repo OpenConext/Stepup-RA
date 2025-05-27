@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a7931779dbbbbb2c740351e48619bee9",
+    "content-hash": "bd9a94ac56f2aa4b4663708e798e5338",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2345,16 +2345,16 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "5.1.0",
+            "version": "5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-Middleware-clientbundle.git",
-                "reference": "ef18b536caaff91da938ff9d4f29729bec3fb593"
+                "reference": "0294e909e8cec89f2a0cf7305fe1f6cb86ada2da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/ef18b536caaff91da938ff9d4f29729bec3fb593",
-                "reference": "ef18b536caaff91da938ff9d4f29729bec3fb593",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/0294e909e8cec89f2a0cf7305fe1f6cb86ada2da",
+                "reference": "0294e909e8cec89f2a0cf7305fe1f6cb86ada2da",
                 "shasum": ""
             },
             "require": {
@@ -2398,9 +2398,9 @@
             "description": "Symfony 5|6 bundle for consuming the Step-up Middleware API.",
             "support": {
                 "issues": "https://github.com/OpenConext/Stepup-Middleware-clientbundle/issues",
-                "source": "https://github.com/OpenConext/Stepup-Middleware-clientbundle/tree/5.1.0"
+                "source": "https://github.com/OpenConext/Stepup-Middleware-clientbundle/tree/5.3.0"
             },
-            "time": "2024-06-24T14:02:39+00:00"
+            "time": "2025-05-15T08:51:47+00:00"
         },
         {
             "name": "surfnet/stepup-saml-bundle",
