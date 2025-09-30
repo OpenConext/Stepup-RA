@@ -17,7 +17,7 @@
         "ext-dom": "*",
         "ext-openssl": "*",
         "doctrine/annotations": "^2.0",
-        "fortawesome/font-awesome": "~4.2.0",
+        "fortawesome/font-awesome": "~4.7.0",
         "guzzlehttp/guzzle": "^7",
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/translation-bundle": "^2.1",
