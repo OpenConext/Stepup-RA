@@ -1401,7 +1401,7 @@ Het token is nu geactiveerd en klaar voor gebruik.</target>
       </trans-unit>
       <trans-unit id="Ot80P8r" resname="ra.institution_configuration.sso_registration_bypass">
         <source>ra.institution_configuration.sso_registration_bypass</source>
-        <target>Single sign on registratie omzeilen?</target>
+        <target>GSSP Fallback ingeschakeld?</target>
       </trans-unit>
     </body>
   </file>
