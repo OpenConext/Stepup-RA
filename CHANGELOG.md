@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.1.1
+- Update xmlseclibs to 3.1.4 to fix canonicalization bypass error (security)
+
 ## 6.0.1
 - Ensure the correct error page is displayed when authentication fails #332
 - Upgrade of numerous NPM and Composer dependencies
