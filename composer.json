@@ -1,7 +1,6 @@
 {
     "name": "surfnet/stepup-ra",
     "license": "Apache-2.0",
-    "version": "0",
     "description": "The SURFnet Step-up Registration Authority application allows Registration Authorities to vet identities by combining a real-world identity, federated identity and a token.",
     "autoload": {
         "psr-4": {
