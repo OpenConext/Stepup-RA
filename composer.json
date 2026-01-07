@@ -76,8 +76,14 @@
             "@auto-scripts"
         ],
         "frontend-install": [
-            "yarn install",
-            "yarn encore production"
+            "yarn install --frozen-lockfile",
+            "yarn encore production",
+            "./bin/console cache:clear",
+            "@fix-dev-permissions"
+        ],
+        "fix-dev-permissions": [
+            "chown -R www-data:www-data /var/www/html/var/log",
+            "chown -R www-data:www-data /var/www/html/var/cache"
         ],
         "check": [
             "@phplint",
