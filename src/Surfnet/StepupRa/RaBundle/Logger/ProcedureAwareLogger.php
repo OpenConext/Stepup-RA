@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Exception\RuntimeException;
 
 /**
- * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * @SuppressWarnings("PHPMD.TooManyPublicMethods")
  */
 final class ProcedureAwareLogger implements LoggerInterface
 {

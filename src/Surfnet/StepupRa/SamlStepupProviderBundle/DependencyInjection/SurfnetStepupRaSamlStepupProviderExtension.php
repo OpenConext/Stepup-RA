@@ -38,7 +38,7 @@ use Surfnet\SamlBundle\Metadata\MetadataConfiguration;
 use Surfnet\SamlBundle\Metadata\MetadataFactory;
 
 /**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects")
  */
 class SurfnetStepupRaSamlStepupProviderExtension extends Extension
 {

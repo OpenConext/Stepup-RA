@@ -40,7 +40,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects) By making the Form Type classes explicit, MD now realizes couping
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects") By making the Form Type classes explicit, MD now realizes couping
  *                                                 is to high.
  */
 final class SecondFactorController extends AbstractController

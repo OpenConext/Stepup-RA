@@ -30,7 +30,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /**
  * Orchestrates verification of GSSFs (Generic SAML Second Factors) through GSSPs (Generic SAML Stepup Providers).
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects")
  */
 final class GssfInitiateVerificationController extends AbstractController
 {

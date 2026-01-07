@@ -46,8 +46,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 
 /**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects")
+ * @SuppressWarnings("PHPMD.ExcessiveMethodLength")
  */
 class VettingController extends AbstractController
 {
@@ -62,9 +62,9 @@ class VettingController extends AbstractController
     }
 
     /**
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity) https://www.pivotaltracker.com/story/show/135045063
-     * @SuppressWarnings(PHPMD.NPathComplexity)      https://www.pivotaltracker.com/story/show/135045063
-     * @SuppressWarnings(PHPMD.CouplingBetweenObjects)      https://www.pivotaltracker.com/story/show/135045063
+     * @SuppressWarnings("PHPMD.CyclomaticComplexity") https://www.pivotaltracker.com/story/show/135045063
+     * @SuppressWarnings("PHPMD.NPathComplexity")      https://www.pivotaltracker.com/story/show/135045063
+     * @SuppressWarnings("PHPMD.CouplingBetweenObjects")      https://www.pivotaltracker.com/story/show/135045063
      */
     #[Route(
         path: '/',
@@ -205,8 +205,8 @@ class VettingController extends AbstractController
     }
 
     /**
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings("PHPMD.CyclomaticComplexity")
+     * @SuppressWarnings("PHPMD.NPathComplexity")
      */
     #[Route(
         path: '/vetting-procedure/{procedureId}/verify-identity',

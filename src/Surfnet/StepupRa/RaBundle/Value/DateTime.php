@@ -26,7 +26,7 @@ use Stringable;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
 /**
- * @SuppressWarnings(PHPMD.TooManyPublicMethods) due to comparison methods
+ * @SuppressWarnings("PHPMD.TooManyPublicMethods") due to comparison methods
  */
 class DateTime implements Stringable
 {
