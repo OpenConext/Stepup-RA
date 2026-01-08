@@ -24,6 +24,9 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @extends AbstractType<RemoveRaLocationCommand>
+ */
 class RemoveRaLocationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void

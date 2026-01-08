@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use InvalidArgumentException;
 use Surfnet\StepupRa\RaBundle\Command\VettingTypeHintCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -26,13 +27,21 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @extends AbstractType<VettingTypeHintCommand>
+ */
 class VettingTypeHintType extends AbstractType
 {
     final public const HINT_TEXTAREA_NAME_PREFIX = 'vetting_type_hint_';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        foreach ($builder->getData()->locales as $locale) {
+        $data = $builder->getData();
+        if (! $data instanceof VettingTypeHintCommand) {
+            throw new InvalidArgumentException('VettingTypeHintCommand is required.');
+        }
+
+        foreach ($data->locales as $locale) {
             $builder
                 ->add(
                     self::HINT_TEXTAREA_NAME_PREFIX . $locale,

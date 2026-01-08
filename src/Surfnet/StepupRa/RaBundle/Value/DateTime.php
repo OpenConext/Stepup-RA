@@ -38,7 +38,7 @@ class DateTime implements Stringable
     /**
      * Allows for mocking of time.
      *
-     * @var self|null
+     * @phpstan-ignore-next-line property.unusedType
      */
     private static ?self $now = null;
 
@@ -46,7 +46,7 @@ class DateTime implements Stringable
 
     public static function now(): DateTime
     {
-        return self::$now ?: new self(new CoreDateTime);
+        return self::$now ?? new self(new CoreDateTime);
     }
 
     /**

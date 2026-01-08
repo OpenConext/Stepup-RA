@@ -22,10 +22,11 @@ use DateTime as CoreDateTime;
 
 class DateTime
 {
+    /** @phpstan-ignore-next-line property.unusedType */
     private static ?CoreDateTime $now = null;
 
     public static function now(): CoreDateTime
     {
-        return self::$now ?: new CoreDateTime;
+        return self::$now ?? new CoreDateTime;
     }
 }

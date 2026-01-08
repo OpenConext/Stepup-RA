@@ -36,7 +36,6 @@ final readonly class LocaleProviderService implements StepupLocaleProviderServic
             return '';
         }
 
-        /** @var Identity $identity */
         $identity = $token->getUser();
 
         if (!$identity instanceof Identity) {

@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use InvalidArgumentException;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -25,13 +26,22 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @extends AbstractType<AccreditCandidateCommand>
+ */
 class CreateRaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $options = array_combine(
-            $builder->getData()->availableInstitutions,
-            $builder->getData()->availableInstitutions,
+        $data = $builder->getData();
+
+        if (! $data instanceof AccreditCandidateCommand) {
+            throw new InvalidArgumentException('AccreditCandidateCommand is required.');
+        }
+
+        $choices = array_combine(
+            $data->availableInstitutions,
+            $data->availableInstitutions,
         );
 
         $builder
@@ -41,7 +51,7 @@ class CreateRaType extends AbstractType
             ->add('contactInformation', TextareaType::class, [
                 'label' => 'ra.management.form.create_ra.label.contact_information'
             ])->add('roleAtInstitution', RoleAtInstitutionType::class, [
-                'choices' => $options,
+                'choices' => $choices,
                 'required' => true,
                 'label' => 'ra.management.form.create_ra.label.role',
             ])

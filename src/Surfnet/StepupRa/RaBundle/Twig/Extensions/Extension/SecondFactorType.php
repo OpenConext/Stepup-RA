@@ -41,7 +41,7 @@ final class SecondFactorType extends AbstractExtension
         ];
     }
 
-    public function translateSecondFactorType($secondFactorType): ?string
+    public function translateSecondFactorType($secondFactorType): string
     {
         return $this->translator->translate($secondFactorType, 'ra.second_factor.search.type.%s');
     }
