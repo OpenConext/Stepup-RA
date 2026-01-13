@@ -42,7 +42,7 @@ class DateTime implements Stringable
      */
     private static ?self $now = null;
 
-    private CoreDateTime $dateTime;
+    private readonly CoreDateTime $dateTime;
 
     public static function now(): DateTime
     {
