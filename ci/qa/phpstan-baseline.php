@@ -608,18 +608,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Exception/AssertionFailedException.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Exception\\\\AssertionFailedException\\:\\:getPropertyPath\\(\\) has no return type specified\\.$#',
-	'identifier' => 'missingType.return',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Exception/AssertionFailedException.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Exception\\\\AssertionFailedException\\:\\:getValue\\(\\) has no return type specified\\.$#',
-	'identifier' => 'missingType.return',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Exception/AssertionFailedException.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Form\\\\Extension\\\\RaRoleChoiceList\\:\\:buildChoices\\(\\) return type has no value type specified in iterable type array\\.$#',
 	'identifier' => 'missingType.iterableValue',
 	'count' => 1,
@@ -675,12 +663,6 @@ $ignoreErrors[] = [
 ];
 $ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\AuthenticatedIdentity\\:\\:__construct\\(\\) has parameter \\$roles with no value type specified in iterable type array\\.$#',
-	'identifier' => 'missingType.iterableValue',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/AuthenticatedIdentity.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Security\\\\AuthenticatedIdentity\\:\\:eraseCredentials\\(\\) return type has no value type specified in iterable type array\\.$#',
 	'identifier' => 'missingType.iterableValue',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Security/AuthenticatedIdentity.php',

@@ -20,6 +20,7 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupRa\RaBundle\Security;
 
+use LogicException;
 use Surfnet\StepupBundle\Value\Loa;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -95,9 +96,8 @@ class AuthenticatedIdentity implements UserInterface
     /**
      * @inheritDoc
      */
-    public function eraseCredentials(): array
+    public function eraseCredentials(): void
     {
-        return [];
     }
 
     /**
@@ -111,6 +111,12 @@ class AuthenticatedIdentity implements UserInterface
     public function getUserIdentifier(): string
     {
         $parts = explode(':', $this->originalIdentity->nameId);
-        return end($parts);
+        $identifier = end($parts);
+
+        if ($identifier === false || $identifier === '') {
+            throw new LogicException('Cannot determine user identifier from nameId');
+        }
+
+        return $identifier;
     }
 }
