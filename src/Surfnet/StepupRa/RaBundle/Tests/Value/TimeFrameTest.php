@@ -27,11 +27,10 @@ class TimeFrameTest extends TestCase
 {
     /**
      * @test
-     * @group value
      * @dataProvider notPositiveIntegerProvider
-     *
      * @param mixed $notPositiveInteger
      */
+    #[\PHPUnit\Framework\Attributes\Group('value')]
     public function it_cannot_be_given_an_non_positive_amount_of_seconds($notPositiveInteger)
     {
         $this->expectException(InvalidArgumentException::class);
@@ -41,8 +40,8 @@ class TimeFrameTest extends TestCase
 
     /**
      * @test
-     * @group value
      */
+    #[\PHPUnit\Framework\Attributes\Group('value')]
     public function to_string_output_matches_amount_of_seconds_as_string()
     {
         $seconds = 1000;

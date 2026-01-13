@@ -28,8 +28,8 @@ final class ConfigurationTest extends TestCase
 
     /**
      * @test
-     * @group configuration
      */
+    #[\PHPUnit\Framework\Attributes\Group('configuration')]
     public function it_requires_second_factors_to_be_configured()
     {
         $configuration = [
@@ -44,8 +44,8 @@ final class ConfigurationTest extends TestCase
 
     /**
      * @test
-     * @group configuration
      */
+    #[\PHPUnit\Framework\Attributes\Group('configuration')]
     public function it_requires_session_timeout_configuration()
     {
         $configuration = ['enabled_second_factors' => ['sms']];
@@ -55,8 +55,8 @@ final class ConfigurationTest extends TestCase
 
     /**
      * @test
-     * @group configuration
      */
+    #[\PHPUnit\Framework\Attributes\Group('configuration')]
     public function it_requires_maximum_absolute_timeout_to_be_configured()
     {
         $configuration = [
@@ -69,8 +69,8 @@ final class ConfigurationTest extends TestCase
 
     /**
      * @test
-     * @group configuration
      */
+    #[\PHPUnit\Framework\Attributes\Group('configuration')]
     public function it_requires_maximum_relative_timeout_to_be_configured()
     {
         $configuration = [
@@ -83,8 +83,8 @@ final class ConfigurationTest extends TestCase
 
     /**
      * @test
-     * @group configuration
      */
+    #[\PHPUnit\Framework\Attributes\Group('configuration')]
     public function it_allows_one_enabled_second_factor()
     {
         $this->assertConfigurationIsValid([['enabled_second_factors' => ['sms']]], 'enabled_second_factors');
@@ -92,8 +92,8 @@ final class ConfigurationTest extends TestCase
 
     /**
      * @test
-     * @group configuration
      */
+    #[\PHPUnit\Framework\Attributes\Group('configuration')]
     public function it_allows_two_enabled_second_factors()
     {
         $this->assertConfigurationIsValid([['enabled_second_factors' => ['sms', 'yubikey']]], 'enabled_second_factors');

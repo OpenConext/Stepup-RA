@@ -28,9 +28,9 @@ final class VettingServiceTest extends TestCase
 {
     /**
      * @test
-     * @group vetting
      * @dataProvider validRegistrationDatesProvider
      */
+    #[\PHPUnit\Framework\Attributes\Group('vetting')]
     public function registration_code_is_valid_within_two_weeks_after_verification($registrationRequestedAt)
     {
         $command = new StartVettingProcedureCommand();
@@ -56,9 +56,9 @@ final class VettingServiceTest extends TestCase
 
     /**
      * @test
-     * @group vetting
      * @dataProvider expiredRegistrationDatesProvider
      */
+    #[\PHPUnit\Framework\Attributes\Group('vetting')]
     public function registration_code_is_invalid_two_weeks_after_verification($registrationRequestedAt)
     {
         $command = new StartVettingProcedureCommand();
