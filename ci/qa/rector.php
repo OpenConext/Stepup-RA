@@ -11,7 +11,6 @@ return RectorConfig::configure()
          __DIR__ . '/../../src',
          __DIR__ . '/../../templates',
     ])
-    // uncomment to reach your current PHP version
     ->withPhpSets()
     ->withAttributesSets(all: true)
     ->withComposerBased(twig: true, doctrine: true, phpunit: true, symfony: true)

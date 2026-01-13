@@ -37,9 +37,7 @@ class SecondFactorAssertionServiceTest extends TestCase
         $this->service = new SecondFactorAssertionService($this->parameterBag, $this->logger);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function assertSecondFactorEnabled_should_throw_exception_when_second_factor_disabled()
     {
         $type = 'sms';
@@ -58,9 +56,7 @@ class SecondFactorAssertionServiceTest extends TestCase
         $this->service->assertSecondFactorEnabled($type);
     }
 
-    /**
-     * @test
-     */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function assertSecondFactorEnabled_should_not_throw_exception_when_second_factor_enabled()
     {
         $type = 'sms';
