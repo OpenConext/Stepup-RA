@@ -26,4 +26,4 @@ jobs:
         run: yarn encore prod
 
       - name: Run QA tests
-        run: composer check
+        run: composer check-ci

@@ -85,6 +85,10 @@
             "chown -R www-data:www-data /var/www/html/var/cache"
         ],
         "check": [
+            "@check-ci",
+            "@rector"
+        ],
+        "check-ci": [
             "@phplint",
             "@phpmd",
             "@phpcs",
@@ -95,6 +99,8 @@
         ],
         "phplint": "./ci/qa/phplint",
         "license-headers": "./ci/qa/docheader",
+        "rector":  "./ci/qa/rector.sh --dry-run",
+        "rector-fix":  "./ci/qa/rector.sh",
         "phpmd": "./ci/qa/phpmd",
         "phpcs": "./ci/qa/phpcs",
         "phpstan": "./ci/qa/phpstan",

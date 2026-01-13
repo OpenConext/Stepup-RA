@@ -89,8 +89,8 @@ final class RecoveryTokenController extends AbstractController
         return $this->render(
             'recovery_token/search.html.twig',
             [
-                'form' => $form->createView(),
-                'revocationForm' => $revocationForm->createView(),
+                'form' => $form,
+                'revocationForm' => $revocationForm,
                 'recoveryTokens' => $recoveryTokens,
                 'pagination' => $pagination,
                 'numberOfRecoveryTokens' => $recoveryTokenCount,

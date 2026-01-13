@@ -107,7 +107,7 @@ class RaManagementController extends AbstractController
         return $this->render(
             'ra_management/manage.html.twig',
             [
-                'form' => $form->createView(),
+                'form' => $form,
                 'raList' => $raListings,
                 'numberOfResults' => $raList->getTotalItems(),
                 'pagination' => $pagination,
@@ -162,7 +162,7 @@ class RaManagementController extends AbstractController
         return $this->render(
             'ra_management/ra_candidate_overview.html.twig',
             [
-                'form'         => $form->createView(),
+                'form'         => $form,
                 'raCandidates' => $raCandidateList,
                 'pagination'   => $pagination
             ],
@@ -219,7 +219,7 @@ class RaManagementController extends AbstractController
 
         return $this->render('ra_management/create_ra.html.twig', [
             'raCandidate' => $raCandidate->raCandidate,
-            'form'        => $form->createView()
+            'form'        => $form
         ]);
     }
 
@@ -267,7 +267,7 @@ class RaManagementController extends AbstractController
 
         return $this->render('ra_management/amend_ra_information.html.twig', [
             'raListing' => $raListing,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
@@ -326,7 +326,7 @@ class RaManagementController extends AbstractController
 
         return $this->render('ra_management/confirm_retract_ra.html.twig', [
             'raListing' => $raListing,
-            'form'      => $form->createView()
+            'form'      => $form
         ]);
     }
 }

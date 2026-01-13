@@ -107,8 +107,8 @@ final class SecondFactorController extends AbstractController
         ));
 
         return $this->render('second_factor/search.html.twig', [
-            'form'                  => $form->createView(),
-            'revocationForm'        => $revocationForm->createView(),
+            'form'                  => $form,
+            'revocationForm'        => $revocationForm,
             'secondFactors'         => $secondFactors,
             'pagination'            => $pagination,
             'numberOfSecondFactors' => $secondFactorCount,

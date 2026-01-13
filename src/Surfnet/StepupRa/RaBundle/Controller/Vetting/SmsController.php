@@ -159,7 +159,7 @@ class SmsController extends AbstractController
 
             return $this->render(
                 'vetting/sms/prove_possession.html.twig',
-                ['form' => $form->createView()],
+                ['form' => $form],
             );
         }
 
@@ -184,7 +184,7 @@ class SmsController extends AbstractController
 
         return $this->render(
             'vetting/sms/prove_possession.html.twig',
-            ['form' => $form->createView()],
+            ['form' => $form],
         );
     }
 }

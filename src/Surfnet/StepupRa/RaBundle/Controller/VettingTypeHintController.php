@@ -124,7 +124,7 @@ class VettingTypeHintController extends AbstractController
             'vetting_type_hint/overview.html.twig',
             [
                 'form' => isset($form) ? $form->createView() : null,
-                'hintForm' => $hintForm->createView(),
+                'hintForm' => $hintForm,
                 'institution' => $institution,
             ],
         );

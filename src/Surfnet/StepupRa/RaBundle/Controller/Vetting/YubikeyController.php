@@ -88,7 +88,7 @@ class YubikeyController extends AbstractController
 
         return $this->render(
             view: 'vetting/yubikey/verify.html.twig',
-            parameters: ['form' => $form->createView()],
+            parameters: ['form' => $form],
         );
     }
 }
