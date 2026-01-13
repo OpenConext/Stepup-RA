@@ -1,7 +1,4 @@
 {
-    "beberlei/assert": {
-        "version": "v2.9.9"
-    },
     "composer/ca-bundle": {
         "version": "1.2.7"
     },
@@ -187,9 +184,6 @@
     "ralouphie/getallheaders": {
         "version": "3.0.3"
     },
-    "ramsey/uuid": {
-        "version": "3.9.3"
-    },
     "robrichards/xmlseclibs": {
         "version": "3.1.0"
     },
@@ -257,7 +251,7 @@
         "version": "4.1.1"
     },
     "surfnet/stepup-middleware-client-bundle": {
-        "version": "4.0.0"
+        "version": "dev-feature/update_sf74"
     },
     "surfnet/stepup-saml-bundle": {
         "version": "4.1.11"
@@ -424,14 +418,23 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.17.1"
     },
-    "symfony/polyfill-php80": {
-        "version": "v1.17.1"
-    },
     "symfony/process": {
         "version": "v4.4.37"
     },
     "symfony/property-access": {
         "version": "v4.4.10"
+    },
+    "symfony/property-info": {
+        "version": "7.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.3",
+            "ref": "dae70df71978ae9226ae915ffd5fad817f5ca1f7"
+        },
+        "files": [
+            "config/packages/property_info.yaml"
+        ]
     },
     "symfony/routing": {
         "version": "4.2",
