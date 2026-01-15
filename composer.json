@@ -23,7 +23,7 @@
         "nelmio/security-bundle": "^3.7",
         "openconext/monitor-bundle": "^4.3.1",
         "surfnet/stepup-bundle": "^7.0.1",
-        "surfnet/stepup-middleware-client-bundle": "dev-feature/update_sf74#bf63618f1607fcc3aaf62a665ccdd6296f32ee64",
+        "surfnet/stepup-middleware-client-bundle": "^6.0",
         "surfnet/stepup-saml-bundle": "^7.0.1",
         "symfony/asset": "7.4.*",
         "symfony/expression-language": "7.4.*",

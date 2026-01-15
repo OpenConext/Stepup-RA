@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e3a88893ab4694054b09aee1df9ab4c4",
+    "content-hash": "5ad6d4fe768e00c47f386c27e2419805",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -2287,16 +2287,16 @@
         },
         {
             "name": "surfnet/stepup-middleware-client-bundle",
-            "version": "dev-feature/update_sf74",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OpenConext/Stepup-Middleware-clientbundle.git",
-                "reference": "bf63618f1607fcc3aaf62a665ccdd6296f32ee64"
+                "reference": "2617692014d49b14f0621542807574ddb781438e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/bf63618f1607fcc3aaf62a665ccdd6296f32ee64",
-                "reference": "bf63618f1607fcc3aaf62a665ccdd6296f32ee64",
+                "url": "https://api.github.com/repos/OpenConext/Stepup-Middleware-clientbundle/zipball/2617692014d49b14f0621542807574ddb781438e",
+                "reference": "2617692014d49b14f0621542807574ddb781438e",
                 "shasum": ""
             },
             "require": {
@@ -2339,12 +2339,12 @@
             "license": [
                 "Apache-2.0"
             ],
-            "description": "Symfony 5|6 bundle for consuming the Step-up Middleware API.",
+            "description": "Symfony bundle for consuming the Step-up Middleware API.",
             "support": {
                 "issues": "https://github.com/OpenConext/Stepup-Middleware-clientbundle/issues",
-                "source": "https://github.com/OpenConext/Stepup-Middleware-clientbundle/tree/feature/update_sf74"
+                "source": "https://github.com/OpenConext/Stepup-Middleware-clientbundle/tree/6.0.0"
             },
-            "time": "2026-01-13T13:19:59+00:00"
+            "time": "2026-01-15T15:18:26+00:00"
         },
         {
             "name": "surfnet/stepup-saml-bundle",
@@ -10470,9 +10470,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "surfnet/stepup-middleware-client-bundle": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
