@@ -54,13 +54,13 @@ class SearchRaListingCommand
     /**
      * @var string|null
      */
-    #[Assert\Choice(['name', 'email'], message: 'ra.search_ra_candidates.order_by.invalid_choice')]
+    #[Assert\Choice(choices: ['name', 'email'], message: 'ra.search_ra_candidates.order_by.invalid_choice')]
     public $orderBy;
 
     /**
      * @var string|null
      */
-    #[Assert\Choice(['asc', 'desc'], message: 'ra.search_ra_candidates.order_direction.invalid_choice')]
+    #[Assert\Choice(choices: ['asc', 'desc'], message: 'ra.search_ra_candidates.order_direction.invalid_choice')]
     public $orderDirection;
 
     /**

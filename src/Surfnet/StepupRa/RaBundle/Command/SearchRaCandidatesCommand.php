@@ -34,10 +34,10 @@ class SearchRaCandidatesCommand
 
     public ?string $raInstitution = null;
 
-    #[Assert\Choice(['name', 'email'], message: 'ra.search_ra_candidates.order_by.invalid_choice')]
+    #[Assert\Choice(choices: ['name', 'email'], message: 'ra.search_ra_candidates.order_by.invalid_choice')]
     public ?string $orderBy = null;
 
-    #[Assert\Choice(['asc', 'desc'], message: 'ra.search_ra_candidates.order_direction.invalid_choice')]
+    #[Assert\Choice(choices: ['asc', 'desc'], message: 'ra.search_ra_candidates.order_direction.invalid_choice')]
     public ?string $orderDirection = null;
 
     #[Assert\GreaterThan(0, message: 'ra.search_ra_candidates.page_number.greater_than_zero')]

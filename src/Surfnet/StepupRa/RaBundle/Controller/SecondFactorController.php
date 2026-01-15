@@ -24,6 +24,7 @@ use Surfnet\StepupRa\RaBundle\Command\ExportRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\RevokeSecondFactorCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchSecondFactorAuditLogCommand;
+use Surfnet\StepupRa\RaBundle\Controller\Traits\OrderFromRequest;
 use Surfnet\StepupRa\RaBundle\Form\Type\RevokeSecondFactorType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRaSecondFactorsType;
 use Surfnet\StepupRa\RaBundle\Service\AuditLogService;
@@ -45,6 +46,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class SecondFactorController extends AbstractController
 {
+    use OrderFromRequest;
+
     public function __construct(
         private readonly PaginatorInterface $paginator,
         private readonly LoggerInterface $logger,
@@ -69,9 +72,9 @@ final class SecondFactorController extends AbstractController
 
         $command = new SearchRaSecondFactorsCommand();
         $command->actorId = $identity->id;
-        $command->pageNumber = (int) $request->get('p', 1);
-        $command->orderBy = $request->get('orderBy');
-        $command->orderDirection = $request->get('orderDirection');
+        $command->pageNumber = $request->query->has('p') ? $request->query->getInt('p') : $request->request->getInt('p', 1);
+        $command->orderBy = $this->getString($request, 'orderBy');
+        $command->orderDirection = $this->getString($request, 'orderDirection');
 
         $secondFactors = $this->secondFactorService->search($command);
 
@@ -175,10 +178,8 @@ final class SecondFactorController extends AbstractController
         methods: ['GET'],
     )]
     #[IsGranted('ROLE_RA')]
-    public function auditLog(Request $request): Response
+    public function auditLog(Request $request, string $identityId): Response
     {
-        $identityId = $request->get('identityId');
-
         $this->logger->notice(sprintf('Requested AuditLog for SecondFactors of identity "%s"', $identityId));
 
         $identity = $this->identityService->findById($identityId);
@@ -197,9 +198,9 @@ final class SecondFactorController extends AbstractController
         $command                 = new SearchSecondFactorAuditLogCommand();
         $command->identityId     = $identity->id;
         $command->institution    = $identity->institution;
-        $command->pageNumber     = (int) $request->get('p', 1);
-        $command->orderBy        = $request->get('orderBy', 'recordedOn');
-        $command->orderDirection = $request->get('orderDirection', 'desc');
+        $command->pageNumber     = $request->query->getInt('p', 1);
+        $command->orderBy        = $request->query->getString('orderBy', 'recordedOn');
+        $command->orderDirection = $request->query->getString('orderDirection', 'desc');
 
         $auditLog = $this->auditLogService->getAuditlog($command);
         $pagination = $this->paginator->paginate(

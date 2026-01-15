@@ -27,6 +27,7 @@ use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationComma
 use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
+use Surfnet\StepupRa\RaBundle\Controller\Traits\OrderFromRequest;
 use Surfnet\StepupRa\RaBundle\Form\Type\AmendRegistrationAuthorityInformationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
@@ -49,6 +50,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class RaManagementController extends AbstractController
 {
+    use OrderFromRequest;
+
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly RaListingService $raListingService,
@@ -74,9 +77,9 @@ class RaManagementController extends AbstractController
 
         $command = new SearchRaListingCommand();
         $command->actorId = $identity->id;
-        $command->pageNumber = (int) $request->get('p', 1);
-        $command->orderBy = $request->get('orderBy');
-        $command->orderDirection = $request->get('orderDirection');
+        $command->pageNumber = $request->query->getInt('p', 1);
+        $command->orderBy = $request->query->get('orderBy');
+        $command->orderDirection = $request->query->get('orderDirection');
 
         // The options that will populate the institution filter choice list.
         $raList = $this->raListingService->search($command);
@@ -131,9 +134,9 @@ class RaManagementController extends AbstractController
         $command->actorId          = $identity->id;
         $command->actorInstitution = $institution;
         $command->raInstitution    = null;
-        $command->pageNumber       = (int) $request->get('p', 1);
-        $command->orderBy          = $request->get('orderBy');
-        $command->orderDirection   = $request->get('orderDirection');
+        $command->pageNumber = $request->query->has('p') ? $request->query->getInt('p') : $request->request->getInt('p', 1);
+        $command->orderBy = $this->getString($request, 'orderBy');
+        $command->orderDirection = $this->getString($request, 'orderDirection');
 
         $raCandidateList = $this->raCandidateService->search($command);
 

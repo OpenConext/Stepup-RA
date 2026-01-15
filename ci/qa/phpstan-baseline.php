@@ -272,36 +272,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Parameter \\#1 \\$id of method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\RaLocationService\\:\\:find\\(\\) expects string, mixed given\\.$#',
-	'identifier' => 'argument.type',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#',
-	'identifier' => 'argument.type',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\CreateRaLocationCommand\\:\\:\\$institution \\(string\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaLocationsCommand\\:\\:\\$orderBy \\(string\\|null\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaLocationsCommand\\:\\:\\$orderDirection \\(string\\|null\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\Form\\\\FormInterface\\:\\:isClicked\\(\\)\\.$#',
 	'identifier' => 'method.notFound',
 	'count' => 1,
@@ -317,12 +287,6 @@ $ignoreErrors[] = [
 	'message' => '#^Cannot call method getInstitution\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'identifier' => 'method.nonObject',
 	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Cannot cast mixed to int\\.$#',
-	'identifier' => 'cast.int',
-	'count' => 2,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
 $ignoreErrors[] = [
@@ -346,30 +310,6 @@ $ignoreErrors[] = [
 $ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Controller\\\\RaManagementController\\:\\:retractRegistrationAuthority\\(\\) has parameter \\$raInstitution with no type specified\\.$#',
 	'identifier' => 'missingType.parameter',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaCandidatesCommand\\:\\:\\$orderBy \\(string\\|null\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaCandidatesCommand\\:\\:\\$orderDirection \\(string\\|null\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaListingCommand\\:\\:\\$orderBy \\(string\\|null\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaListingCommand\\:\\:\\$orderDirection \\(string\\|null\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
@@ -398,24 +338,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RecoveryTokenController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot cast mixed to int\\.$#',
-	'identifier' => 'cast.int',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RecoveryTokenController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRecoveryTokensCommand\\:\\:\\$orderBy \\(string\\|null\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RecoveryTokenController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRecoveryTokensCommand\\:\\:\\$orderDirection \\(string\\|null\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RecoveryTokenController.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\Form\\\\FormInterface\\<Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaSecondFactorsCommand\\>\\:\\:getClickedButton\\(\\)\\.$#',
 	'identifier' => 'method.notFound',
 	'count' => 1,
@@ -434,50 +356,8 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Cannot cast mixed to int\\.$#',
-	'identifier' => 'cast.int',
-	'count' => 2,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Controller\\\\SecondFactorController\\:\\:__construct\\(\\) has parameter \\$identityService with generic interface Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface but does not specify its types\\: TUser$#',
 	'identifier' => 'missingType.generics',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#',
-	'identifier' => 'argument.type',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Parameter \\#3 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#',
-	'identifier' => 'argument.type',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaSecondFactorsCommand\\:\\:\\$orderBy \\(string\\|null\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaSecondFactorsCommand\\:\\:\\$orderDirection \\(string\\|null\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchSecondFactorAuditLogCommand\\:\\:\\$orderBy \\(string\\|null\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchSecondFactorAuditLogCommand\\:\\:\\$orderDirection \\(string\\|null\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
 ];
