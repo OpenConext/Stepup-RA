@@ -60,7 +60,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
             // service definitions etc.
 
             assert(is_string($provider));
-            if ($provider !== strtolower((string) $provider)) {
+            if ($provider !== strtolower($provider)) {
                 throw new InvalidConfigurationException('The provider name must be completely lowercase');
             }
 
@@ -167,9 +167,6 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         return $hostedDefinition;
     }
 
-    /**
-     * @param string           $provider
-     */
     private function createRemoteDefinition(
         string $provider,
         array $configuration,

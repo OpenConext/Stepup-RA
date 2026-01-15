@@ -53,9 +53,6 @@ class TimeFrameTest extends TestCase
         );
     }
 
-    /**
-     * @return array
-     */
     public static function notPositiveIntegerProvider(): array
     {
         return [

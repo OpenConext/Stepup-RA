@@ -63,9 +63,6 @@ class DateTime implements Stringable
         return new self($dateTime);
     }
 
-    /**
-     * @param CoreDateTime|null $dateTime
-     */
     public function __construct(?CoreDateTime $dateTime = null)
     {
         $this->dateTime = $dateTime ?: new CoreDateTime();

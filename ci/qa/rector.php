@@ -14,4 +14,6 @@ return RectorConfig::configure()
     ->withPhpSets()
     ->withAttributesSets(all: true)
     ->withComposerBased(twig: true, doctrine: true, phpunit: true, symfony: true)
-    ;
+    ->withPHPStanConfigs([__DIR__.'/phpstan.neon'])
+    ->withPreparedSets(deadCode: true)
+;

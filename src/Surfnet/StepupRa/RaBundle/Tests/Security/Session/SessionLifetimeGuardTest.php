@@ -195,9 +195,6 @@ class SessionLifetimeGuardTest extends TestCase
         $this->assertSame($isValid, $sessionLifetimeGuard->sessionLifetimeWithinLimits($authenticatedSessionMock));
     }
 
-    /**
-     * @return array
-     */
     public static function bothLimitsVerificationProvider(): array
     {
         $withinLimit = new DateTime(new CoreDateTime('@1001'));
