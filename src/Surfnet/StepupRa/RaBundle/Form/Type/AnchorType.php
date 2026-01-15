@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ButtonTypeInterface;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -27,7 +28,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @extends AbstractType<mixed>
  */
-class AnchorType extends AbstractType
+class AnchorType extends AbstractType implements ButtonTypeInterface
 {
     public function getParent(): string
     {

@@ -24,6 +24,7 @@ class SearchRaCandidatesCommand
 {
     #[Assert\NotBlank(message: 'ra.search_ra_candidates.actor_id.blank')]
     public string $actorId;
+    public ?string $actorInstitution = null;
 
     public ?string $institution = null;
 

@@ -72,7 +72,7 @@ class SearchRecoveryTokensType extends AbstractType
             'button-group',
             ButtonGroupType::class,
             [
-                'inherit_data' => true,
+                'mapped' => false,
             ],
         )
         ->add('search', SubmitType::class, [

@@ -328,3 +328,6 @@ services:
         class: Surfnet\StepupRa\RaBundle\Twig\Extensions\Extension\SecondFactorType
         arguments:
             - "@surfnet_stepup.service.second_factor_type_translator"
+
+    ra.twig.spaceless:
+        class: Surfnet\StepupRa\RaBundle\Twig\Extensions\Extension\Spaceless

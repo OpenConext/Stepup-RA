@@ -302,12 +302,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Access to an undefined property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaCandidatesCommand\\:\\:\\$actorInstitution\\.$#',
-	'identifier' => 'property.notFound',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\Form\\\\FormInterface\\:\\:isClicked\\(\\)\\.$#',
 	'identifier' => 'method.notFound',
 	'count' => 1,
@@ -352,24 +346,6 @@ $ignoreErrors[] = [
 $ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Controller\\\\RaManagementController\\:\\:retractRegistrationAuthority\\(\\) has parameter \\$raInstitution with no type specified\\.$#',
 	'identifier' => 'missingType.parameter',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Parameter \\#1 \\$identityId of method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\RaCandidateService\\:\\:getRaCandidate\\(\\) expects string, mixed given\\.$#',
-	'identifier' => 'argument.type',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#',
-	'identifier' => 'argument.type',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Property Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\AccreditCandidateCommand\\:\\:\\$identityId \\(string\\) does not accept mixed\\.$#',
-	'identifier' => 'assign.propertyType',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];

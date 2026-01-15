@@ -45,7 +45,7 @@ class AmendRegistrationAuthorityInformationType extends AbstractType
                     'button-group',
                     ButtonGroupType::class,
                     [
-                        'inherit_data' => true,
+                        'mapped' => false,
                     ],
                 )
                 ->add('amend_ra_info', SubmitType::class, [

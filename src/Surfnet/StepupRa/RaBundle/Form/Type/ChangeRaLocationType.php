@@ -47,7 +47,7 @@ class ChangeRaLocationType extends AbstractType
                     'button-group',
                     ButtonGroupType::class,
                     [
-                        'inherit_data' => true,
+                        'mapped' => false,
                         // The empty label ensures the buttons are positioned correctly
                         'label' => ' ',
                         'row_attr' => [

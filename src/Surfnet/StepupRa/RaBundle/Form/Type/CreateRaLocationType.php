@@ -47,7 +47,7 @@ class CreateRaLocationType extends AbstractType
                     'button-group',
                     ButtonGroupType::class,
                     [
-                        'inherit_data' => true,
+                        'mapped' => false,
                     ],
                 )
                 ->add('create_ra_location', SubmitType::class, [

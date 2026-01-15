@@ -36,6 +36,10 @@ final readonly class SecondFactorType
     #[AsTwigFilter(name: 'trans_second_factor_type')]
     public function translateSecondFactorType($secondFactorType): string
     {
+        if (is_null($secondFactorType)) {
+            return '';
+        }
+
         return $this->translator->translate($secondFactorType, 'ra.second_factor.search.type.%s');
     }
 }

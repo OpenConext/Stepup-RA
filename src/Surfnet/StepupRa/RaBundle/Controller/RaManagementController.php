@@ -20,7 +20,6 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Knp\Component\Pager\PaginatorInterface;
 use Psr\Log\LoggerInterface;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitution;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
@@ -175,14 +174,13 @@ class RaManagementController extends AbstractController
         methods: ['GET', 'POST'],
     )]
     #[IsGranted('ROLE_RAA')]
-    public function createRa(Request $request): Response
+    public function createRa(Request $request, string $identityId): Response
     {
         $this->logger->notice('Page for Accreditation of Identity to Ra or Raa requested');
-        $identityId = $request->get('identityId');
 
         $raCandidate = $this->raCandidateService->getRaCandidate($identityId, $this->getUser()->getIdentity()->id);
 
-        if (! isset($raCandidate->raCandidate)) {
+        if ($raCandidate === null || !isset($raCandidate->raCandidate)) {
             $this->logger->warning(sprintf('RaCandidate based on identity "%s" not found', $identityId));
             throw new NotFoundHttpException();
         }
