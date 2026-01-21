@@ -73,8 +73,8 @@ final class SecondFactorController extends AbstractController
         $command = new SearchRaSecondFactorsCommand();
         $command->actorId = $identity->id;
         $command->pageNumber = $request->query->has('p') ? $request->query->getInt('p') : $request->request->getInt('p', 1);
-        $command->orderBy = $this->getString($request, 'orderBy');
-        $command->orderDirection = $this->getString($request, 'orderDirection');
+        $command->orderBy = $this->getOrderBy($request);
+        $command->orderDirection = $this->getOrderDirection($request);
 
         $secondFactors = $this->secondFactorService->search($command);
 

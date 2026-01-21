@@ -716,6 +716,12 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/RaCandidateService.php',
 ];
 $ignoreErrors[] = [
+	'message' => '#^Left side of && is always true\\.$#',
+	'identifier' => 'booleanAnd.leftAlwaysTrue',
+	'count' => 2,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/RaListingService.php',
+];
+$ignoreErrors[] = [
 	'message' => '#^Parameter \\#1 \\$raInstitution of method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Dto\\\\RaListingSearchQuery\\:\\:setRaInstitution\\(\\) expects string, string\\|null given\\.$#',
 	'identifier' => 'argument.type',
 	'count' => 1,
@@ -846,6 +852,12 @@ $ignoreErrors[] = [
 	'identifier' => 'missingType.parameter',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Twig/Extensions/Extension/SecondFactorType.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Call to function is_int\\(\\) with int will always evaluate to true\\.$#',
+	'identifier' => 'function.alreadyNarrowedType',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Value/TimeFrame.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Class Surfnet\\\\StepupRa\\\\RaBundle\\\\VettingProcedure has an uninitialized property \\$authorityId\\. Give it default value or assign it in the constructor\\.$#',

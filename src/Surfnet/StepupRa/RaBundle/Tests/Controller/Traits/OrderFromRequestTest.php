@@ -31,11 +31,6 @@ final class OrderFromRequestTest extends TestCase
     {
         $this->traitObject = new class {
             use OrderFromRequest;
-
-            public function getStringPublic(Request $request, string $paramName): null|string
-            {
-                return $this->getString($request, $paramName);
-            }
         };
     }
 
@@ -43,7 +38,7 @@ final class OrderFromRequestTest extends TestCase
     public function it_returns_value_from_query_parameter(): void
     {
         $request = new Request(['orderBy' => 'name']);
-        $result = $this->traitObject->getStringPublic($request, 'orderBy');
+        $result = $this->traitObject->getOrderBy($request);
 
         $this->assertSame('name', $result);
     }
@@ -52,7 +47,7 @@ final class OrderFromRequestTest extends TestCase
     public function it_returns_value_from_request_parameter(): void
     {
         $request = new Request([], ['orderBy' => 'date']);
-        $result = $this->traitObject->getStringPublic($request, 'orderBy');
+        $result = $this->traitObject->getOrderBy($request);
 
         $this->assertSame('date', $result);
     }
@@ -61,7 +56,7 @@ final class OrderFromRequestTest extends TestCase
     public function it_returns_null_when_parameter_not_found(): void
     {
         $request = new Request();
-        $result = $this->traitObject->getStringPublic($request, 'orderBy');
+        $result = $this->traitObject->getOrderBy($request);
 
         $this->assertNull($result);
     }
@@ -71,7 +66,7 @@ final class OrderFromRequestTest extends TestCase
     {
         $request = new Request(['orderBy' => 'query_value'], ['orderBy' => 'request_value']);
 
-        $result = $this->traitObject->getStringPublic($request, 'orderBy');
+        $result = $this->traitObject->getOrderBy($request);
 
         $this->assertSame('query_value', $result);
     }
@@ -80,7 +75,7 @@ final class OrderFromRequestTest extends TestCase
     public function it_handles_empty_string_values(): void
     {
         $request = new Request(['orderBy' => '']);
-        $result = $this->traitObject->getStringPublic($request, 'orderBy');
+        $result = $this->traitObject->getOrderBy($request);
 
         $this->assertSame('', $result);
     }
@@ -88,10 +83,18 @@ final class OrderFromRequestTest extends TestCase
     #[Test]
     public function it_handles_numeric_string_values(): void
     {
-        $request = new Request(['page' => '42']);
-        $result = $this->traitObject->getStringPublic($request, 'page');
+        $request = new Request(['orderBy' => '42']);
+        $result = $this->traitObject->getOrderBy($request);
 
         $this->assertSame('42', $result);
     }
-}
 
+    #[Test]
+    public function it_returns_order_direction_from_query_parameter(): void
+    {
+        $request = new Request(['orderDirection' => 'asc']);
+        $result = $this->traitObject->getOrderDirection($request);
+
+        $this->assertSame('asc', $result);
+    }
+}

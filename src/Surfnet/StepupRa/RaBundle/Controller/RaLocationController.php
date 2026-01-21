@@ -66,7 +66,7 @@ final class RaLocationController extends AbstractController
     #[IsGranted('ROLE_RA')]
     public function manage(Request $request): Response
     {
-        $institutionParameter = $request->query->has('institution') ? $request->query->get('institution') : $request->request->get('institution');
+        $institutionParameter = $request->query->get('institution') ?? $request->request->get('institution');
 
         $identity = $this->getUser()->getIdentity();
         $this->logger->notice('Starting search for locations');
@@ -101,8 +101,8 @@ final class RaLocationController extends AbstractController
 
         $command = new SearchRaLocationsCommand();
         $command->institution = $institution;
-        $command->orderBy = $this->getString($request, 'orderBy');
-        $command->orderDirection = $this->getString($request, 'orderDirection');
+        $command->orderBy = $this->getOrderBy($request);
+        $command->orderDirection = $this->getOrderDirection($request);
 
         $locations = $this->raLocationService->search($command);
 

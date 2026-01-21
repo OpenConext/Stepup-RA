@@ -4,7 +4,6 @@ includes:
 rules:
 
 parameters:
-    treatPhpDocTypesAsCertain: false
     checkUninitializedProperties: true
     level: 9
     paths:

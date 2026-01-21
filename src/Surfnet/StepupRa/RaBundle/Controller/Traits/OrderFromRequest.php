@@ -24,17 +24,32 @@ trait OrderFromRequest
 {
 
     /**
-     * Convenience method to read get / post params as string, with default null.
-     * This is a commonly used pattern in the RA controllers
+     * Convenience method to read orderBy from both get & post params as string, with default null.
      */
-    private function getString(Request $request, string $paramName): null|string
+    public function getOrderBy(Request $request): null|string
     {
-        if ($request->query->has($paramName)) {
-            return $request->query->getString($paramName);
+        if ($request->query->has('orderBy')) {
+            return $request->query->getString('orderBy');
         }
 
-        if ($request->request->has($paramName)) {
-            return $request->request->getString($paramName);
+        if ($request->request->has('orderBy')) {
+            return $request->request->getString('orderBy');
+        }
+
+        return null;
+    }
+
+    /**
+     * Convenience method to read orderDirection from both get & post params as string, with default null.
+     */
+    public function getOrderDirection(Request $request): null|string
+    {
+        if ($request->query->has('orderDirection')) {
+            return $request->query->getString('orderDirection');
+        }
+
+        if ($request->request->has('orderDirection')) {
+            return $request->request->getString('orderDirection');
         }
 
         return null;

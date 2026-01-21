@@ -36,7 +36,7 @@ class DateTime implements Stringable
     final public const FORMAT = DATE_ATOM;
 
     /**
-     * Allows for mocking of time.
+     * Allows for mocking of time via reflection
      *
      * @phpstan-ignore-next-line property.unusedType
      */
@@ -46,7 +46,7 @@ class DateTime implements Stringable
 
     public static function now(): DateTime
     {
-        return self::$now ?? new self(new CoreDateTime);
+        return self::$now ?: new self(new CoreDateTime);
     }
 
     /**

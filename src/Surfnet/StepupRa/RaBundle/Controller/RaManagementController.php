@@ -135,8 +135,8 @@ class RaManagementController extends AbstractController
         $command->actorInstitution = $institution;
         $command->raInstitution    = null;
         $command->pageNumber = $request->query->has('p') ? $request->query->getInt('p') : $request->request->getInt('p', 1);
-        $command->orderBy = $this->getString($request, 'orderBy');
-        $command->orderDirection = $this->getString($request, 'orderDirection');
+        $command->orderBy = $this->getOrderBy($request);
+        $command->orderDirection = $this->getOrderDirection($request);
 
         $raCandidateList = $this->raCandidateService->search($command);
 

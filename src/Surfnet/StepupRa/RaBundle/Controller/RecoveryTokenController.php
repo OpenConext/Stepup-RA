@@ -58,8 +58,8 @@ final class RecoveryTokenController extends AbstractController
         $command = new SearchRecoveryTokensCommand();
         $command->actorId = $identity->id;
         $command->pageNumber = $request->query->has('p') ? $request->query->getInt('p') : $request->request->getInt('p', 1);
-        $command->orderBy = $this->getString($request, 'orderBy');
-        $command->orderDirection = $this->getString($request, 'orderDirection');
+        $command->orderBy = $this->getOrderBy($request);
+        $command->orderDirection = $this->getOrderDirection($request);
 
         // Huh, why do we load the recovery tokens at this point?
         // This is just to get the filter options for the available institutions of the search results.

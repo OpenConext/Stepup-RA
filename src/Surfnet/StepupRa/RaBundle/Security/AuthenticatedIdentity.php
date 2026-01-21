@@ -113,7 +113,7 @@ class AuthenticatedIdentity implements UserInterface
         $parts = explode(':', $this->originalIdentity->nameId);
         $identifier = end($parts);
 
-        if ($identifier === false || $identifier === '') {
+        if ($identifier === '') {
             throw new LogicException('Cannot determine user identifier from nameId');
         }
 
