@@ -70,7 +70,7 @@ class CreateRaType extends AbstractType
                 ->add('cancel', AnchorType::class, [
                     'label' => 'ra.management.form.create_ra.label.cancel',
                     'route' => 'ra_management_ra_candidate_search',
-                    'attr'  => ['class' => 'btn btn-link cancel'],
+                    'attr' => ['class' => 'btn btn-link cancel'],
                 ]),
             )
         ;

@@ -162,7 +162,7 @@ class SessionLifetimeGuardTest extends TestCase
 
     /**
      *
-     * @param bool          $isValid
+     * @param bool $isValid
      * @param null|DateTime $authenticationMoment
      * @param null|DateTime $interactionMoment
      */
@@ -201,14 +201,14 @@ class SessionLifetimeGuardTest extends TestCase
     public static function bothLimitsVerificationProvider(): array
     {
         $withinLimit = new DateTime(new CoreDateTime('@1001'));
-        $overLimit   = new DateTime(new CoreDateTime('@999'));
+        $overLimit = new DateTime(new CoreDateTime('@999'));
 
         return [
-            'no authentication'               => [true, null, null],
-            'both within limit'               => [true, $withinLimit, $withinLimit],
+            'no authentication' => [true, null, null],
+            'both within limit' => [true, $withinLimit, $withinLimit],
             'too long since last interaction' => [false, $withinLimit, $overLimit],
-            'too long since authentication'   => [false, $overLimit, $withinLimit],
-            'both over limit'                 => [false, $overLimit, $overLimit]
+            'too long since authentication' => [false, $overLimit, $withinLimit],
+            'both over limit' => [false, $overLimit, $overLimit]
         ];
     }
 

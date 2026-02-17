@@ -117,7 +117,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
     }
 
     /**
-     * @param string           $provider
+     * @param string $provider
      */
     private function createHostedDefinitions(
         $provider,
@@ -128,7 +128,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         $hostedDefinition = $this->buildHostedEntityDefinition($provider, $configuration, $routes);
         $container->setDefinition('gssp.provider.' . $provider . '.hosted_entities', $hostedDefinition);
 
-        $hostedSpDefinition  = (new Definition())
+        $hostedSpDefinition = (new Definition())
             ->setClass(ServiceProvider::class)
             ->setFactory([
                 new Reference('gssp.provider.' . $provider . '.hosted_entities'),
@@ -152,7 +152,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
             'enabled' => false,
         ];
 
-        $serviceProvider  = array_merge($configuration['service_provider'], $spAdditional, $entityId);
+        $serviceProvider = array_merge($configuration['service_provider'], $spAdditional, $entityId);
         $identityProvider = array_merge($idpAdditional, $entityId);
 
         $hostedDefinition = new Definition(HostedEntities::class, [
@@ -172,10 +172,10 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         array $configuration,
         ContainerBuilder $container,
     ): void {
-        $definition    = new Definition(IdentityProvider::class, [
+        $definition = new Definition(IdentityProvider::class, [
             [
-                'entityId'        => $configuration['entity_id'],
-                'ssoUrl'          => $configuration['sso_url'],
+                'entityId' => $configuration['entity_id'],
+                'ssoUrl' => $configuration['sso_url'],
                 'certificateData' => $configuration['certificate'],
             ]
         ]);
@@ -193,12 +193,12 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         $metadataConfiguration = new Definition(MetadataConfiguration::class);
 
         $propertyMap = [
-            'entityIdRoute'          => $this->createRouteConfig($provider, $routes['metadata']),
-            'isSp'                   => true,
+            'entityIdRoute' => $this->createRouteConfig($provider, $routes['metadata']),
+            'isSp' => true,
             'assertionConsumerRoute' => $this->createRouteConfig($provider, $routes['consume_assertion']),
-            'isIdP'                  => false,
-            'publicKey'              => $configuration['metadata']['public_key'],
-            'privateKey'             => $configuration['metadata']['private_key'],
+            'isIdP' => false,
+            'publicKey' => $configuration['metadata']['public_key'],
+            'privateKey' => $configuration['metadata']['private_key'],
         ];
 
         $metadataConfiguration->setProperties($propertyMap);
@@ -226,7 +226,7 @@ class SurfnetStepupRaSamlStepupProviderExtension extends Extension
         // In the future, we ought to wrap this in an object.
         // https://www.pivotaltracker.com/story/show/90095392
         return [
-            'route'      => $routeName,
+            'route' => $routeName,
             'parameters' => ['provider' => $provider]
         ];
     }

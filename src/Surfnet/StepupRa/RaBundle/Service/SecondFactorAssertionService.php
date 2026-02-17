@@ -28,7 +28,7 @@ class SecondFactorAssertionService
 {
     public function __construct(
         private readonly ParameterBagInterface $parameterBag,
-        private readonly LoggerInterface       $logger,
+        private readonly LoggerInterface $logger,
     ) {
     }
 

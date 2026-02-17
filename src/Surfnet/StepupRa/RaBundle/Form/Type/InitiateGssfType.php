@@ -43,7 +43,7 @@ class InitiateGssfType extends AbstractType
 
         $builder
             ->add('submit', SubmitType::class, [
-                'attr'  => ['class' => 'btn btn-primary'],
+                'attr' => ['class' => 'btn btn-primary'],
                 /** @Ignore */
                 'label' => $options['label']
             ])

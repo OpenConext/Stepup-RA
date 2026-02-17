@@ -130,10 +130,10 @@ class RaManagementController extends AbstractController
 
         $this->logger->notice(sprintf('Searching for RaCandidates within institution "%s"', $institution));
 
-        $command                   = new SearchRaCandidatesCommand();
-        $command->actorId          = $identity->id;
+        $command = new SearchRaCandidatesCommand();
+        $command->actorId = $identity->id;
         $command->actorInstitution = $institution;
-        $command->raInstitution    = null;
+        $command->raInstitution = null;
         $command->pageNumber = $request->query->has('p') ? $request->query->getInt('p') : $request->request->getInt('p', 1);
         $command->orderBy = $this->getOrderBy($request);
         $command->orderDirection = $this->getOrderDirection($request);
@@ -164,9 +164,9 @@ class RaManagementController extends AbstractController
         return $this->render(
             'ra_management/ra_candidate_overview.html.twig',
             [
-                'form'         => $form,
+                'form' => $form,
                 'raCandidates' => $raCandidateList,
-                'pagination'   => $pagination
+                'pagination' => $pagination
             ],
         );
     }
@@ -220,13 +220,13 @@ class RaManagementController extends AbstractController
 
         return $this->render('ra_management/create_ra.html.twig', [
             'raCandidate' => $raCandidate->raCandidate,
-            'form'        => $form
+            'form' => $form
         ]);
     }
 
     /**
-     * @param         $identityId
-     * @param         $raInstitution
+     * @param $identityId
+     * @param $raInstitution
      */
     #[Route(
         path: '/management/amend-ra-information/{identityId}/{raInstitution}',
@@ -273,8 +273,8 @@ class RaManagementController extends AbstractController
     }
 
     /**
-     * @param         $identityId
-     * @param         $raInstitution
+     * @param $identityId
+     * @param $raInstitution
      */
     #[Route(
         path: '/management/retract-registration-authority/{identityId}/{raInstitution}',
@@ -327,7 +327,7 @@ class RaManagementController extends AbstractController
 
         return $this->render('ra_management/confirm_retract_ra.html.twig', [
             'raListing' => $raListing,
-            'form'      => $form
+            'form' => $form
         ]);
     }
 }

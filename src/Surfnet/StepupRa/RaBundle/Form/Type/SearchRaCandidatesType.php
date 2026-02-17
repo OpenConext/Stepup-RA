@@ -53,7 +53,7 @@ class SearchRaCandidatesType extends AbstractType
             ])
             ->add('search', SubmitType::class, [
                 'label' => 'ra.form.ra_search_ra_candidates.button.search',
-                'attr'  => ['class' => 'btn btn-primary search-button'],
+                'attr' => ['class' => 'btn btn-primary search-button'],
             ]);
     }
 

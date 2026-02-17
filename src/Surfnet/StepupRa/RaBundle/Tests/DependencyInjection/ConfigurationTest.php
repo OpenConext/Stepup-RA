@@ -33,7 +33,7 @@ final class ConfigurationTest extends TestCase
     public function it_requires_second_factors_to_be_configured()
     {
         $configuration = [
-            'session_lifetimes'      => [
+            'session_lifetimes' => [
                 'max_absolute_lifetime' => 3600,
                 'max_relative_lifetime' => 600
             ]

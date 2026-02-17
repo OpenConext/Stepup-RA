@@ -43,7 +43,7 @@ class YubikeySecondFactorService implements YubikeySecondFactorServiceInterface
         $verificationResult = $this->yubikeyService->verify($verifyOtpCommand);
 
         if (YubikeyOtp::isValid($command->otp)) {
-            $otp      = YubikeyOtp::fromString($command->otp);
+            $otp = YubikeyOtp::fromString($command->otp);
             $publicId = YubikeyPublicId::fromOtp($otp);
         } else {
             $publicId = null;

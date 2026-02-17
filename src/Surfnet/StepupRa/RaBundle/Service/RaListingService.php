@@ -32,8 +32,8 @@ final readonly class RaListingService
     }
 
     /**
-     * @SuppressWarnings("PHPMD.CyclomaticComplexity")  -- The command to query mapping in search exceed the
-     * @SuppressWarnings("PHPMD.NPathComplexity")          CyclomaticComplexity and NPathComplexity threshold.
+     * @SuppressWarnings("PHPMD.CyclomaticComplexity") -- The command to query mapping in search exceed the
+     * @SuppressWarnings("PHPMD.NPathComplexity") CyclomaticComplexity and NPathComplexity threshold.
      */
     public function search(SearchRaListingCommand $command): RaListingCollection
     {

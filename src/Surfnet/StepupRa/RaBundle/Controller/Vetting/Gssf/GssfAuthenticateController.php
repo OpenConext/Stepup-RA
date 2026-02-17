@@ -37,9 +37,9 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 final class GssfAuthenticateController extends AbstractController
 {
     public function __construct(
-        private readonly ProviderRepository   $providerRepository,
-        private readonly VettingService       $vettingService,
-        private readonly RedirectBinding      $redirectBinding,
+        private readonly ProviderRepository $providerRepository,
+        private readonly VettingService $vettingService,
+        private readonly RedirectBinding $redirectBinding,
         private readonly SecondFactorAssertionService $secondFactorAssertionService,
         private readonly ProcedureAwareLogger $procedureAwareLogger,
     ) {

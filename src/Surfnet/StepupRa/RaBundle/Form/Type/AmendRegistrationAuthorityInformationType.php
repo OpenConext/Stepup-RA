@@ -38,7 +38,7 @@ class AmendRegistrationAuthorityInformationType extends AbstractType
             ])
             ->add('contactInformation', TextareaType::class, [
                 'label' => 'ra.management.form.amend_ra_info.label.contact_information',
-                'attr' => ['class'=>'col-sm-2'],
+                'attr' => ['class' => 'col-sm-2'],
             ])
             ->add(
                 $builder->create(
@@ -55,7 +55,7 @@ class AmendRegistrationAuthorityInformationType extends AbstractType
                 ->add('cancel', AnchorType::class, [
                     'label' => 'ra.management.form.amend_ra_info.label.cancel',
                     'route' => 'ra_management_manage',
-                    'attr'  => ['class' => 'btn btn-link cancel']
+                    'attr' => ['class' => 'btn btn-link cancel']
                 ]),
             )
         ;

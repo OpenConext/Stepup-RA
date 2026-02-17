@@ -49,11 +49,11 @@ class VettingProcedure
     }
 
     public static function start(
-        string               $id,
-        string               $authorityId,
-        string               $registrationCode,
+        string $id,
+        string $authorityId,
+        string $registrationCode,
         VerifiedSecondFactor $secondFactor,
-        bool                 $skipProvePossession,
+        bool $skipProvePossession,
     ): VettingProcedure {
         $procedure = new self();
         $procedure->id = $id;

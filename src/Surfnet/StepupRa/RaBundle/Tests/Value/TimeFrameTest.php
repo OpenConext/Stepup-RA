@@ -60,12 +60,12 @@ class TimeFrameTest extends TestCase
     {
         return [
             'empty string' => [''],
-            'string'       => ['abc'],
-            'array'        => [[]],
-            'float'        => [2.718],
-            'zero'         => [0],
+            'string' => ['abc'],
+            'array' => [[]],
+            'float' => [2.718],
+            'zero' => [0],
             'negative int' => [-1],
-            'object'       => [new stdClass()],
+            'object' => [new stdClass()],
         ];
     }
 }

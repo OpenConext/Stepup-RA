@@ -114,12 +114,12 @@ final class RaLocationController extends AbstractController
         ));
 
         return $this->render('ra_location/manage.html.twig', [
-            'form'                  => isset($form) ? $form->createView() : null,
-            'institution'           => $institution,
-            'locations'             => $locations,
-            'removalForm'           => $removalForm,
-            'orderBy'               => $command->orderBy,
-            'orderDirection'        => $command->orderDirection ?: 'asc',
+            'form' => isset($form) ? $form->createView() : null,
+            'institution' => $institution,
+            'locations' => $locations,
+            'removalForm' => $removalForm,
+            'orderBy' => $command->orderBy,
+            'orderDirection' => $command->orderDirection ?: 'asc',
             'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',
         ]);
     }

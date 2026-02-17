@@ -42,7 +42,7 @@ class SamlFactory implements AuthenticatorFactoryInterface
         );
 
         $cookieHandlerId = 'security.logout.handler.cookie_clearing.' . $id;
-        $cookieHandler   = $container->setDefinition(
+        $cookieHandler = $container->setDefinition(
             $cookieHandlerId,
             new ChildDefinition('security.logout.handler.cookie_clearing'),
         );

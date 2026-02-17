@@ -154,7 +154,7 @@ class SessionStorageTest extends TestCase
         $sessionStorage->logAuthenticationMoment();
 
         $authenticationMoment = $sessionStorage->getAuthenticationMoment();
-        $interactionMoment    = $sessionStorage->getLastInteractionMoment();
+        $interactionMoment = $sessionStorage->getLastInteractionMoment();
 
         $this->assertEquals(
             $authenticationMoment,
@@ -171,7 +171,7 @@ class SessionStorageTest extends TestCase
         $fakeRequestStack = new FakeRequestStack();
         $sessionStorage = new SessionStorage($fakeRequestStack);
 
-        $now   = new DateTime(new CoreDateTime('@1000'));
+        $now = new DateTime(new CoreDateTime('@1000'));
         $later = new DateTime(new CoreDateTime('@2000'));
 
         $this->setCurrentTime($now);
