@@ -20,10 +20,10 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\VettingTypeHint;
-use Surfnet\StepupRa\RaBundle\Command\VettingTypeHintCommand;
-use Surfnet\StepupRa\RaBundle\Form\Type\VettingTypeHintType;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
+use Surfnet\StepupRa\RaBundle\Command\VettingTypeHintCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\SelectInstitutionType;
+use Surfnet\StepupRa\RaBundle\Form\Type\VettingTypeHintType;
 use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
 use Surfnet\StepupRa\RaBundle\Service\InstitutionListingService;
 use Surfnet\StepupRa\RaBundle\Service\ProfileService;
@@ -33,9 +33,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use function array_flip;
-use function array_keys;
-use function array_values;
 
 class VettingTypeHintController extends AbstractController
 {

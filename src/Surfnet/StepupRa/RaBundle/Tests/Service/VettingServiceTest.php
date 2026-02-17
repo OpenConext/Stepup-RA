@@ -19,6 +19,9 @@
 namespace Surfnet\StepupRa\RaBundle\Tests\Service;
 
 use Mockery;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
@@ -26,9 +29,9 @@ use Surfnet\StepupRa\RaBundle\Service\VettingService;
 
 final class VettingServiceTest extends TestCase
 {
-    #[\PHPUnit\Framework\Attributes\Group('vetting')]
-    #[\PHPUnit\Framework\Attributes\Test]
-    #[\PHPUnit\Framework\Attributes\DataProvider('validRegistrationDatesProvider')]
+    #[Group('vetting')]
+    #[Test]
+    #[DataProvider('validRegistrationDatesProvider')]
     public function registration_code_is_valid_within_two_weeks_after_verification($registrationRequestedAt)
     {
         $command = new StartVettingProcedureCommand();
@@ -38,7 +41,7 @@ final class VettingServiceTest extends TestCase
         $service = Mockery::mock(VettingService::class)->makePartial();
 
         $this->assertFalse(
-            $service->isExpiredRegistrationCode($command)
+            $service->isExpiredRegistrationCode($command),
         );
     }
 
@@ -52,9 +55,9 @@ final class VettingServiceTest extends TestCase
         ];
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('vetting')]
-    #[\PHPUnit\Framework\Attributes\Test]
-    #[\PHPUnit\Framework\Attributes\DataProvider('expiredRegistrationDatesProvider')]
+    #[Group('vetting')]
+    #[Test]
+    #[DataProvider('expiredRegistrationDatesProvider')]
     public function registration_code_is_invalid_two_weeks_after_verification($registrationRequestedAt)
     {
         $command = new StartVettingProcedureCommand();
@@ -64,7 +67,7 @@ final class VettingServiceTest extends TestCase
         $service = Mockery::mock(VettingService::class)->makePartial();
 
         $this->assertTrue(
-            $service->isExpiredRegistrationCode($command)
+            $service->isExpiredRegistrationCode($command),
         );
     }
 

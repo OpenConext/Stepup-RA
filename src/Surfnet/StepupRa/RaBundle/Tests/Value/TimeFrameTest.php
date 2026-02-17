@@ -18,6 +18,9 @@
 
 namespace Surfnet\StepupRa\RaBundle\Tests\Value;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
@@ -28,9 +31,9 @@ class TimeFrameTest extends TestCase
     /**
      * @param mixed $notPositiveInteger
      */
-    #[\PHPUnit\Framework\Attributes\Group('value')]
-    #[\PHPUnit\Framework\Attributes\Test]
-    #[\PHPUnit\Framework\Attributes\DataProvider('notPositiveIntegerProvider')]
+    #[Group('value')]
+    #[Test]
+    #[DataProvider('notPositiveIntegerProvider')]
     public function it_cannot_be_given_an_non_positive_amount_of_seconds($notPositiveInteger)
     {
         $this->expectException(InvalidArgumentException::class);
@@ -38,8 +41,8 @@ class TimeFrameTest extends TestCase
         TimeFrame::ofSeconds($notPositiveInteger);
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('value')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Group('value')]
+    #[Test]
     public function to_string_output_matches_amount_of_seconds_as_string()
     {
         $seconds = 1000;
@@ -49,7 +52,7 @@ class TimeFrameTest extends TestCase
         $this->assertEquals(
             '1000',
             (string) $timeFrame,
-            'The amount of seconds as string must match timeFrame::__toString'
+            'The amount of seconds as string must match timeFrame::__toString',
         );
     }
 

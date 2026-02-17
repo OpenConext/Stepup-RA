@@ -63,6 +63,7 @@ class VettingTypeHintCommandTest extends TestCase
         $command->locales = [0 => "nl_NL", 1 => "en_GB"];
 
         $this->expectException(RuntimeException::class);
+        // phpcs:ignore Generic.Files.LineLength.MaxExceeded
         $this->expectExceptionMessage('An invalid language ("en_US") was rendered on the VettingTypeHintType form. Unable to process it in VettingTypeHintCommand. Configure it in the parameters.yaml or investigate why this rogue language ended up on the form.');
         $command->__set(VettingTypeHintType::HINT_TEXTAREA_NAME_PREFIX . 'en_US', 'foobar');
     }
@@ -73,6 +74,7 @@ class VettingTypeHintCommandTest extends TestCase
         $command->locales = [0 => "nl_NL", 1 => "en_GB"];
 
         $this->expectException(RuntimeException::class);
+        // phpcs:ignore Generic.Files.LineLength.MaxExceeded
         $this->expectExceptionMessage('Unable to extract a locale from the form field name "sad_prefix_en_GB". The field name prefix did not match the configured value "vetting_type_hint_');
         $command->__set('sad_prefix_en_GB', 'foobar');
     }
@@ -120,6 +122,7 @@ class VettingTypeHintCommandTest extends TestCase
         ];
 
         $this->expectException(RuntimeException::class);
+        // phpcs:ignore Generic.Files.LineLength.MaxExceeded
         $this->expectExceptionMessage('Unable to extract a locale from the form field name "sad_prefix_nl_NL". The field name prefix did not match the configured value "vetting_type_hint_"');
         $command->__get('sad_prefix_nl_NL');
     }

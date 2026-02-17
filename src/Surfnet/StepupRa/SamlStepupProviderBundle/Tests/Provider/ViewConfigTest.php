@@ -19,6 +19,8 @@
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\Tests\Provider;
 
 use Mockery as m;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Surfnet\StepupRa\RaBundle\Exception\LogicException;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig;
@@ -30,8 +32,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class ViewConfigTest extends TestCase
 {
-    #[\PHPUnit\Framework\Attributes\Group('di')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Group('di')]
+    #[Test]
     public function view_config_translates_correctly()
     {
         $viewConfig = $this->buildViewConfig('nl_NL');
@@ -50,8 +52,8 @@ final class ViewConfigTest extends TestCase
         $this->assertEquals('EN gssfIdMismatch', $viewConfig->getGssfIdMismatch());
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('di')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Group('di')]
+    #[Test]
     public function translation_fails_when_no_current_language_set()
     {
         $this->expectExceptionMessage("The requested translation is not available in this language");
@@ -61,8 +63,8 @@ final class ViewConfigTest extends TestCase
         $viewConfig->getExplanation();
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('di')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Group('di')]
+    #[Test]
     public function view_config_cannot_serve_french_translations()
     {
         $this->expectExceptionMessage("The requested translation is not available in this language: fr_FR. Available languages: en_GB, nl_NL");
@@ -82,7 +84,7 @@ final class ViewConfigTest extends TestCase
             $this->getTranslationsArray('pageTitle'),
             $this->getTranslationsArray('explanation'),
             $this->getTranslationsArray('initiate'),
-            $this->getTranslationsArray('gssfIdMismatch')
+            $this->getTranslationsArray('gssfIdMismatch'),
         );
     }
 

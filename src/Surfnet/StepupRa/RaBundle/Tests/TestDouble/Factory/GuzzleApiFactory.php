@@ -57,7 +57,7 @@ class GuzzleApiFactory
             [
                 'base_uri' => $apiUri,
                 'cookies' => self::makeCookieJar($apiUri),
-            ]
+            ],
         );
     }
 
@@ -69,7 +69,7 @@ class GuzzleApiFactory
             [
                 'testcookie' => 'testcookie',
             ],
-            $cookieDomain
+            $cookieDomain,
         );
     }
 }

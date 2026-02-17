@@ -24,7 +24,6 @@ use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactor\VerificationResult;
 use Surfnet\StepupRa\RaBundle\Service\YubikeySecondFactorServiceInterface;
 
-
 /**
  * Serves a test double for : ApiBundle/Service/YubikeyService
  *

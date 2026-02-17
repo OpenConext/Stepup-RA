@@ -18,7 +18,6 @@
 
 namespace Surfnet\StepupRa\SamlStepupProviderBundle;
 
-use Surfnet\StepupRa\SamlStepupProviderBundle\DependencyInjection\Compiler\StateHandlerSessionPass;
 use Surfnet\StepupRa\SamlStepupProviderBundle\DependencyInjection\Compiler\ViewConfigCollectionPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

@@ -20,7 +20,6 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupRa\RaBundle\Controller\Vetting;
 
-use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Command\VerifyYubikeyPublicIdCommand;
 use Surfnet\StepupRa\RaBundle\Form\Type\VerifyYubikeyPublicIdType;
 use Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger;

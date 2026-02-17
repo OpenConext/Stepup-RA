@@ -18,14 +18,12 @@
 
 namespace Surfnet\StepupRa\RaBundle\EventListener;
 
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
+use InvalidArgumentException;
 use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use InvalidArgumentException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final readonly class LocaleListener implements EventSubscriberInterface
