@@ -31,7 +31,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class GssfMetadataController extends AbstractController
 {
     public function __construct(
-        private readonly ProviderRepository   $providerRepository,
+        private readonly ProviderRepository $providerRepository,
         private readonly SecondFactorAssertionService $secondFactorAssertionService,
         private readonly MetadataFactoryCollection $metadataFactoryCollection,
     ) {

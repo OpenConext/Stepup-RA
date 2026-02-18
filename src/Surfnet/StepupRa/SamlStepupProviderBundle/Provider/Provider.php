@@ -25,7 +25,7 @@ use Surfnet\StepupRa\SamlStepupProviderBundle\Saml\StateHandler;
 final class Provider
 {
     /**
-     * @param string           $name
+     * @param string $name
      */
     public function __construct(
         private $name,

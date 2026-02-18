@@ -33,7 +33,7 @@ class GssfInitiateFormService
     public function __construct(
         private readonly ViewConfigCollection $collection,
         private readonly FormFactoryInterface $formFactory,
-        private readonly Environment          $twig,
+        private readonly Environment $twig,
     ) {
     }
 

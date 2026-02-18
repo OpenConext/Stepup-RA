@@ -38,10 +38,10 @@ class VettingTypeHintController extends AbstractController
 {
 
     public function __construct(
-        private readonly LoggerInterface           $logger,
+        private readonly LoggerInterface $logger,
         private readonly InstitutionListingService $institutionListingService,
-        private readonly ProfileService            $profileService,
-        private readonly VettingTypeHintService    $vettingTypeHintService,
+        private readonly ProfileService $profileService,
+        private readonly VettingTypeHintService $vettingTypeHintService,
         private readonly array $locales = [],
     ) {
     }
@@ -66,7 +66,7 @@ class VettingTypeHintController extends AbstractController
         $profile = $this->profileService->findByIdentityId($identity->id);
 
         if ($this->isGranted('ROLE_SRAA')) {
-            $institution =  $request->query->get('institution', $identity->institution);
+            $institution = $request->query->get('institution', $identity->institution);
             $choices = $this->institutionListingService->getAll();
         } elseif ($request->query->has('institution')) {
             $choices = $profile->getRaaInstitutions();

@@ -60,8 +60,8 @@ class VettingController extends AbstractController
 
     /**
      * @SuppressWarnings("PHPMD.CyclomaticComplexity") https://www.pivotaltracker.com/story/show/135045063
-     * @SuppressWarnings("PHPMD.NPathComplexity")      https://www.pivotaltracker.com/story/show/135045063
-     * @SuppressWarnings("PHPMD.CouplingBetweenObjects")      https://www.pivotaltracker.com/story/show/135045063
+     * @SuppressWarnings("PHPMD.NPathComplexity") https://www.pivotaltracker.com/story/show/135045063
+     * @SuppressWarnings("PHPMD.CouplingBetweenObjects") https://www.pivotaltracker.com/story/show/135045063
      */
     #[Route(
         path: '/',
@@ -115,7 +115,7 @@ class VettingController extends AbstractController
                 ->setStatusCode(Response::HTTP_BAD_REQUEST);
         }
 
-        $command->authorityId =  $identity->id;
+        $command->authorityId = $identity->id;
         $command->authorityLoa = $userIdentifier->getLoa();
         $command->secondFactor = $secondFactor;
 
@@ -171,7 +171,7 @@ class VettingController extends AbstractController
                 'ra_vetting_gssf_initiate',
                 [
                     'procedureId' => $procedureId,
-                    'provider'    => $secondFactor->type
+                    'provider' => $secondFactor->type
                 ],
             );
         } else {

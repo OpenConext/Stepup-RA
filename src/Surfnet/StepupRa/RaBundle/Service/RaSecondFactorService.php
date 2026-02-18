@@ -45,10 +45,10 @@ class RaSecondFactorService
 
     public function revoke(RevokeSecondFactorCommand $command): bool
     {
-        $middlewareCommand                 = new RevokeRegistrantsSecondFactorCommand();
+        $middlewareCommand = new RevokeRegistrantsSecondFactorCommand();
         $middlewareCommand->secondFactorId = $command->secondFactorId;
-        $middlewareCommand->identityId     = $command->identityId;
-        $middlewareCommand->authorityId    = $command->currentUserId;
+        $middlewareCommand->identityId = $command->identityId;
+        $middlewareCommand->authorityId = $command->currentUserId;
 
         $result = $this->commandService->execute($middlewareCommand);
 

@@ -36,13 +36,13 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 final readonly class ExplicitSessionTimeoutListener implements EventSubscriberInterface
 {
     public function __construct(
-        private TokenStorageInterface            $tokenStorage,
+        private TokenStorageInterface $tokenStorage,
         private AuthenticatedSessionStateHandler $authenticatedSession,
         #[Autowire(service: 'ra.security.authentication.session.session_lifetime_guard')]
-        private SessionLifetimeGuard             $sessionLifetimeGuard,
-        private RouterInterface                  $router,
-        private LoggerInterface                  $logger,
-        private EventDispatcherInterface         $eventDispatcher,
+        private SessionLifetimeGuard $sessionLifetimeGuard,
+        private RouterInterface $router,
+        private LoggerInterface $logger,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
     }
 

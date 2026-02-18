@@ -110,13 +110,13 @@ final class SecondFactorController extends AbstractController
         ));
 
         return $this->render('second_factor/search.html.twig', [
-            'form'                  => $form,
-            'revocationForm'        => $revocationForm,
-            'secondFactors'         => $secondFactors,
-            'pagination'            => $pagination,
+            'form' => $form,
+            'revocationForm' => $revocationForm,
+            'secondFactors' => $secondFactors,
+            'pagination' => $pagination,
             'numberOfSecondFactors' => $secondFactorCount,
-            'orderBy'               => $command->orderBy,
-            'orderDirection'        => $command->orderDirection ?: 'asc',
+            'orderBy' => $command->orderBy,
+            'orderDirection' => $command->orderDirection ?: 'asc',
             'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',
         ]);
     }
@@ -195,11 +195,11 @@ final class SecondFactorController extends AbstractController
 
         $this->logger->info(sprintf('Retrieving audit log for Identity "%s"', $identity->id));
 
-        $command                 = new SearchSecondFactorAuditLogCommand();
-        $command->identityId     = $identity->id;
-        $command->institution    = $identity->institution;
-        $command->pageNumber     = $request->query->getInt('p', 1);
-        $command->orderBy        = $request->query->getString('orderBy', 'recordedOn');
+        $command = new SearchSecondFactorAuditLogCommand();
+        $command->identityId = $identity->id;
+        $command->institution = $identity->institution;
+        $command->pageNumber = $request->query->getInt('p', 1);
+        $command->orderBy = $request->query->getString('orderBy', 'recordedOn');
         $command->orderDirection = $request->query->getString('orderDirection', 'desc');
 
         $auditLog = $this->auditLogService->getAuditlog($command);
@@ -216,8 +216,8 @@ final class SecondFactorController extends AbstractController
             'second_factor/audit_log.html.twig',
             [
                 'pagination' => $pagination,
-                'auditLog'   => $auditLog,
-                'identity'   => $identity,
+                'auditLog' => $auditLog,
+                'identity' => $identity,
             ],
         );
     }

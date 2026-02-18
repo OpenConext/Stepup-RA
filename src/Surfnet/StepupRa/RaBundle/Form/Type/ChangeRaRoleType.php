@@ -35,7 +35,7 @@ class ChangeRaRoleType extends AbstractType
     {
         $builder
             ->add('role', ChoiceType::class, [
-                'label'       => 'ra.management.form.change_ra_role.label.role',
+                'label' => 'ra.management.form.change_ra_role.label.role',
                 'choices' => RaRoleChoiceList::create(),
                 'choice_value' => fn($choice) => $choice,
             ])
@@ -50,12 +50,12 @@ class ChangeRaRoleType extends AbstractType
                 )
                 ->add('create_ra', SubmitType::class, [
                     'label' => 'ra.management.form.change_ra_role.label.save',
-                    'attr'  => ['class' => 'btn btn-primary']
+                    'attr' => ['class' => 'btn btn-primary']
                 ])
                 ->add('cancel', AnchorType::class, [
                     'label' => 'ra.management.form.create_ra.label.cancel',
                     'route' => 'ra_management_ra_candidate_search',
-                    'attr'  => ['class' => 'btn btn-link']
+                    'attr' => ['class' => 'btn btn-link']
                 ]),
             )
         ;

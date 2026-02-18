@@ -32,10 +32,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class AuthenticatedUserListener implements EventSubscriberInterface
 {
     public function __construct(
-        private readonly TokenStorageInterface            $tokenStorage,
-        private readonly SessionLifetimeGuard             $sessionLifetimeGuard,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly SessionLifetimeGuard $sessionLifetimeGuard,
         private readonly AuthenticatedSessionStateHandler $sessionStateHandler,
-        private readonly LoggerInterface                  $logger,
+        private readonly LoggerInterface $logger,
     ) {
     }
 

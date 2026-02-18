@@ -40,11 +40,11 @@ use Symfony\Component\Routing\Attribute\Route;
 final class GssfVerifyController extends AbstractController
 {
     public function __construct(
-        private readonly ProviderRepository   $providerRepository,
-        private readonly VettingService       $vettingService,
-        private readonly LoggerInterface      $logger,
-        private readonly PostBinding          $postBinding,
-        private readonly AttributeDictionary  $attributeDictionary,
+        private readonly ProviderRepository $providerRepository,
+        private readonly VettingService $vettingService,
+        private readonly LoggerInterface $logger,
+        private readonly PostBinding $postBinding,
+        private readonly AttributeDictionary $attributeDictionary,
         private readonly GssfInitiateFormService $gssfInitiateFormService,
         private readonly SecondFactorAssertionService $secondFactorAssertionService,
     ) {

@@ -52,7 +52,7 @@ class SearchRaListingType extends AbstractType
                 'required' => false,
             ])->add('search', SubmitType::class, [
                 'label' => 'ra.form.ra_search_ra_listing.button.search',
-                'attr'  => ['class' => 'btn btn-primary search-button'],
+                'attr' => ['class' => 'btn btn-primary search-button'],
             ]);
     }
 

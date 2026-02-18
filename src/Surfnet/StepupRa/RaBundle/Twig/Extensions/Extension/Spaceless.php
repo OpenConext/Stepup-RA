@@ -27,7 +27,7 @@ use Twig\Attribute\AsTwigFilter;
  * the core deprecation by overriding the filter with our own implementation.
  *
  * Behavior intentionally mimics legacy implementation: it removes any whitespace characters that appear
- * between a closing angle bracket and an opening angle bracket (">   <" => "><"). Whitespace inside
+ * between a closing angle bracket and an opening angle bracket ("> <" => "><"). Whitespace inside
  * tags or textual content is preserved.
  */
 class Spaceless

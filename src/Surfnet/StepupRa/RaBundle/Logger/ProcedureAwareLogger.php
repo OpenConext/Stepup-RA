@@ -35,7 +35,7 @@ final class ProcedureAwareLogger implements LoggerInterface
 
     public function forProcedure(string $procedure): ProcedureAwareLogger
     {
-        $logger            = new self($this->logger);
+        $logger = new self($this->logger);
         $logger->procedure = $procedure;
 
         return $logger;

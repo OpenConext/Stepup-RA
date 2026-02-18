@@ -28,7 +28,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Tests the ViewConfig class
- * @package  Surfnet\StepupRa\SamlStepupProviderBundle\Tests\Provider
+ * @package Surfnet\StepupRa\SamlStepupProviderBundle\Tests\Provider
  */
 final class ViewConfigTest extends TestCase
 {

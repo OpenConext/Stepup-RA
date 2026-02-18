@@ -35,8 +35,8 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 final class GssfInitiateVerificationController extends AbstractController
 {
     public function __construct(
-        private readonly ProviderRepository   $providerRepository,
-        private readonly VettingService       $vettingService,
+        private readonly ProviderRepository $providerRepository,
+        private readonly VettingService $vettingService,
         private readonly GssfInitiateFormService $gssfInitiateFormService,
         private readonly SecondFactorAssertionService $secondFactorAssertionService,
         private readonly ProcedureAwareLogger $procedureAwareLogger,

@@ -76,7 +76,7 @@ final class ExceptionController extends BaseExceptionController
         $response = new Response('', $statusCode);
 
         $timestamp = (new DateTime)->format(DateTimeInterface::ATOM);
-        $hostname  = $request->getHost();
+        $hostname = $request->getHost();
         $requestId = $this->requestId;
         $errorCode = Art::forException($exception);
         $userAgent = $request->headers->get('User-Agent');
@@ -85,12 +85,12 @@ final class ExceptionController extends BaseExceptionController
         return $this->render(
             $template,
             [
-                'timestamp'   => $timestamp,
-                'hostname'    => $hostname,
-                'request_id'  => $requestId->get(),
-                'error_code'  => $errorCode,
-                'user_agent'  => $userAgent,
-                'ip_address'  => $ipAddress,
+                'timestamp' => $timestamp,
+                'hostname' => $hostname,
+                'request_id' => $requestId->get(),
+                'error_code' => $errorCode,
+                'user_agent' => $userAgent,
+                'ip_address' => $ipAddress,
             ] + $this->getPageTitleAndDescription($exception),
             $response,
         );

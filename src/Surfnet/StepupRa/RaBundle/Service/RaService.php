@@ -57,9 +57,9 @@ final readonly class RaService
 
     public function changeRegistrationAuthorityRole(ChangeRaRoleCommand $command): bool
     {
-        $apiCommand             = new AppointRoleCommand();
+        $apiCommand = new AppointRoleCommand();
         $apiCommand->identityId = $command->identityId;
-        $apiCommand->role       = $command->role;
+        $apiCommand->role = $command->role;
 
         $result = $this->commandService->execute($apiCommand);
 
@@ -77,8 +77,8 @@ final readonly class RaService
 
     public function retractRegistrationAuthority(RetractRegistrationAuthorityCommand $command): bool
     {
-        $apiCommand              = new ApiRetractRegistrationAuthorityCommand();
-        $apiCommand->identityId  = $command->identityId;
+        $apiCommand = new ApiRetractRegistrationAuthorityCommand();
+        $apiCommand->identityId = $command->identityId;
         $apiCommand->institution = $command->institution;
 
         $result = $this->commandService->execute($apiCommand);

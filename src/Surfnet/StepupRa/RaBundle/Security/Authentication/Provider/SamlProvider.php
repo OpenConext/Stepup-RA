@@ -53,14 +53,14 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
     }
 
     /**
-     * @SuppressWarnings("PHPMD.NPathComplexity")      - The authorization tests cause the complexity to raise, could and
-     * @SuppressWarnings("PHPMD.CyclomaticComplexity")   might be changed by introducing additional utility classes.
+     * @SuppressWarnings("PHPMD.NPathComplexity") - The authorization tests cause the complexity to raise, could and
+     * @SuppressWarnings("PHPMD.CyclomaticComplexity") might be changed by introducing additional utility classes.
      */
     public function getUser(Assertion $assertion): UserInterface
     {
         $translatedAssertion = $this->attributeDictionary->translate($assertion);
 
-        $nameId   = $translatedAssertion->getNameID();
+        $nameId = $translatedAssertion->getNameID();
         $institution = $this->getSingleStringValue('schacHomeOrganization', $translatedAssertion);
         $identity = $this->identityService->findByNameIdAndInstitution($nameId, $institution);
 
