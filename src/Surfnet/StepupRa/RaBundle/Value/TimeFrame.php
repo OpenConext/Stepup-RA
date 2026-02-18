@@ -31,7 +31,7 @@ final readonly class TimeFrame implements Stringable
     /**
      * @param int $seconds
      */
-    public static function ofSeconds($seconds): TimeFrame
+    public static function ofSeconds(mixed $seconds): TimeFrame
     {
         if (!is_int($seconds) || $seconds < 1) {
             throw InvalidArgumentException::invalidType('positive integer', 'seconds', $seconds);

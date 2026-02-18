@@ -30,7 +30,7 @@ use Surfnet\StepupRa\RaBundle\Command\SearchRaSecondFactorsCommand;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @SuppressWarnings(PHPMD.NPathComplexity) -- The command to query mapping in search and export exceed the
+ * @SuppressWarnings("PHPMD.NPathComplexity") -- The command to query mapping in search and export exceed the
  * NPathComplexity threshold.
  */
 class RaSecondFactorService

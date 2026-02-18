@@ -19,12 +19,12 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Psr\Log\LoggerInterface;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\ChangeRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\CreateRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\RemoveRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaLocationsCommand;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
+use Surfnet\StepupRa\RaBundle\Controller\Traits\OrderFromRequest;
 use Surfnet\StepupRa\RaBundle\Form\Type\ChangeRaLocationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaLocationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RemoveRaLocationType;
@@ -42,11 +42,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects) By making the Form Type classes explicit, MD now realizes couping
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects") By making the Form Type classes explicit, MD now realizes couping
  *                                                 is too high.
  */
 final class RaLocationController extends AbstractController
 {
+    use OrderFromRequest;
+
     public function __construct(
         private readonly RaLocationService $raLocationService,
         private readonly InstitutionListingService $institutionListingService,
@@ -56,11 +58,15 @@ final class RaLocationController extends AbstractController
     ) {
     }
 
+    /**
+     * @SuppressWarnings("PHPMD.CyclomaticComplexity")
+     * @SuppressWarnings("PHPMD.NPathComplexity")
+     */
     #[Route('/locations', name: 'ra_locations_manage', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_RA')]
     public function manage(Request $request): Response
     {
-        $institutionParameter = $request->get('institution');
+        $institutionParameter = $request->query->get('institution') ?? $request->request->get('institution');
 
         $identity = $this->getUser()->getIdentity();
         $this->logger->notice('Starting search for locations');
@@ -95,8 +101,8 @@ final class RaLocationController extends AbstractController
 
         $command = new SearchRaLocationsCommand();
         $command->institution = $institution;
-        $command->orderBy = $request->get('orderBy');
-        $command->orderDirection = $request->get('orderDirection');
+        $command->orderBy = $this->getOrderBy($request);
+        $command->orderDirection = $this->getOrderDirection($request);
 
         $locations = $this->raLocationService->search($command);
 
@@ -111,7 +117,7 @@ final class RaLocationController extends AbstractController
             'form'                  => isset($form) ? $form->createView() : null,
             'institution'           => $institution,
             'locations'             => $locations,
-            'removalForm'           => $removalForm->createView(),
+            'removalForm'           => $removalForm,
             'orderBy'               => $command->orderBy,
             'orderDirection'        => $command->orderDirection ?: 'asc',
             'inverseOrderDirection' => $command->orderDirection === 'asc' ? 'desc' : 'asc',
@@ -120,10 +126,8 @@ final class RaLocationController extends AbstractController
 
     #[Route('/locations/create/{institution}', name: 'ra_location_create', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_RA')]
-    public function create(Request $request): Response
+    public function create(Request $request, string $institution): Response
     {
-        $institution = $request->get('institution');
-
         $identity = $this->getUser()->getIdentity();
         $command = new CreateRaLocationCommand();
         $command->institution = $institution;
@@ -151,7 +155,7 @@ final class RaLocationController extends AbstractController
         }
 
         return $this->render('ra_location/create.html.twig', [
-            'form' => $form->createView()
+            'form' => $form
         ]);
     }
 
@@ -161,9 +165,9 @@ final class RaLocationController extends AbstractController
         methods: ['GET', 'POST'],
     )]
     #[IsGranted('ROLE_RA')]
-    public function change(Request $request): Response
+    public function change(Request $request, string $locationId): Response
     {
-        $requestedLocationId = $request->get('locationId');
+        $requestedLocationId = $locationId;
         $raLocation = $this->raLocationService->find($requestedLocationId);
 
         if (!$raLocation) {
@@ -203,7 +207,7 @@ final class RaLocationController extends AbstractController
         }
 
         return $this->render('ra_location/change.html.twig', [
-            'form' => $form->createView()
+            'form' => $form
         ]);
     }
 

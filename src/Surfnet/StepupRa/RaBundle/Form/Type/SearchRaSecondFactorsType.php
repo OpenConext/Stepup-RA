@@ -26,6 +26,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @extends AbstractType<SearchRaSecondFactorsCommand>
+ */
 class SearchRaSecondFactorsType extends AbstractType
 {
     public function __construct(private readonly SecondFactorTypeChoiceList $secondFactorTypeChoiseList)
@@ -72,7 +75,7 @@ class SearchRaSecondFactorsType extends AbstractType
             'button-group',
             ButtonGroupType::class,
             [
-                'inherit_data' => true,
+                'mapped' => false,
             ],
         )
             ->add('search', SubmitType::class, [

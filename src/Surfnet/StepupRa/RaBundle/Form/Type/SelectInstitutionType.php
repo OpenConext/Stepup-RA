@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Form\Type;
 
+use InvalidArgumentException;
 use Surfnet\StepupRa\RaBundle\Command\SelectInstitutionCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -25,17 +26,26 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @extends AbstractType<SelectInstitutionCommand>
+ */
 class SelectInstitutionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $data = $builder->getData();
+
+        if (! $data instanceof SelectInstitutionCommand) {
+            throw new InvalidArgumentException('Form data must be an instance of SelectInstitutionCommand');
+        }
+
         $builder
             ->add(
                 'institution',
                 ChoiceType::class,
                 [
                     'label' => 'ra.form.select_institution.label.institution',
-                    'choices' => $builder->getData()->availableInstitutions,
+                    'choices' => $data->availableInstitutions,
                 ],
             )->add(
                 'select_and_apply',

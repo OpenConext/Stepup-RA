@@ -26,7 +26,7 @@ use Stringable;
 use Surfnet\StepupRa\RaBundle\Exception\InvalidArgumentException;
 
 /**
- * @SuppressWarnings(PHPMD.TooManyPublicMethods) due to comparison methods
+ * @SuppressWarnings("PHPMD.TooManyPublicMethods") due to comparison methods
  */
 class DateTime implements Stringable
 {
@@ -36,13 +36,13 @@ class DateTime implements Stringable
     final public const FORMAT = DATE_ATOM;
 
     /**
-     * Allows for mocking of time.
+     * Allows for mocking of time via reflection
      *
-     * @var self|null
+     * @phpstan-ignore-next-line property.unusedType
      */
     private static ?self $now = null;
 
-    private CoreDateTime $dateTime;
+    private readonly CoreDateTime $dateTime;
 
     public static function now(): DateTime
     {
@@ -63,9 +63,6 @@ class DateTime implements Stringable
         return new self($dateTime);
     }
 
-    /**
-     * @param CoreDateTime|null $dateTime
-     */
     public function __construct(?CoreDateTime $dateTime = null)
     {
         $this->dateTime = $dateTime ?: new CoreDateTime();

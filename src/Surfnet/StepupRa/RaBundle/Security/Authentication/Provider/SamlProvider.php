@@ -37,7 +37,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects) - The SamlProvider needs to test several authorizations in order
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects") - The SamlProvider needs to test several authorizations in order
  *  to determine the user may, or may not log in. This causes the coupling.
  */
 class SamlProvider implements SamlProviderInterface, UserProviderInterface
@@ -53,8 +53,8 @@ class SamlProvider implements SamlProviderInterface, UserProviderInterface
     }
 
     /**
-     * @SuppressWarnings(PHPMD.NPathComplexity)      - The authorization tests cause the complexity to raise, could and
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)   might be changed by introducing additional utility classes.
+     * @SuppressWarnings("PHPMD.NPathComplexity")      - The authorization tests cause the complexity to raise, could and
+     * @SuppressWarnings("PHPMD.CyclomaticComplexity")   might be changed by introducing additional utility classes.
      */
     public function getUser(Assertion $assertion): UserInterface
     {

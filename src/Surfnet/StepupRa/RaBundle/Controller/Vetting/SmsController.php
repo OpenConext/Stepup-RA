@@ -39,7 +39,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects")
  */
 class SmsController extends AbstractController
 {
@@ -159,7 +159,7 @@ class SmsController extends AbstractController
 
             return $this->render(
                 'vetting/sms/prove_possession.html.twig',
-                ['form' => $form->createView()],
+                ['form' => $form],
             );
         }
 
@@ -184,7 +184,7 @@ class SmsController extends AbstractController
 
         return $this->render(
             'vetting/sms/prove_possession.html.twig',
-            ['form' => $form->createView()],
+            ['form' => $form],
         );
     }
 }

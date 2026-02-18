@@ -26,11 +26,9 @@ use Surfnet\StepupRa\RaBundle\Service\VettingService;
 
 final class VettingServiceTest extends TestCase
 {
-    /**
-     * @test
-     * @group vetting
-     * @dataProvider validRegistrationDatesProvider
-     */
+    #[\PHPUnit\Framework\Attributes\Group('vetting')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    #[\PHPUnit\Framework\Attributes\DataProvider('validRegistrationDatesProvider')]
     public function registration_code_is_valid_within_two_weeks_after_verification($registrationRequestedAt)
     {
         $command = new StartVettingProcedureCommand();
@@ -44,7 +42,7 @@ final class VettingServiceTest extends TestCase
         );
     }
 
-    public function validRegistrationDatesProvider(): array
+    public static function validRegistrationDatesProvider(): array
     {
         return [
             [date_create('- 1 week')],
@@ -54,11 +52,9 @@ final class VettingServiceTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     * @group vetting
-     * @dataProvider expiredRegistrationDatesProvider
-     */
+    #[\PHPUnit\Framework\Attributes\Group('vetting')]
+    #[\PHPUnit\Framework\Attributes\Test]
+    #[\PHPUnit\Framework\Attributes\DataProvider('expiredRegistrationDatesProvider')]
     public function registration_code_is_invalid_two_weeks_after_verification($registrationRequestedAt)
     {
         $command = new StartVettingProcedureCommand();
@@ -72,7 +68,7 @@ final class VettingServiceTest extends TestCase
         );
     }
 
-    public function expiredRegistrationDatesProvider(): array
+    public static function expiredRegistrationDatesProvider(): array
     {
         return [
             [date_create('- 3 weeks')],

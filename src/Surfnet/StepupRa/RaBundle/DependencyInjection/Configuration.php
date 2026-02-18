@@ -81,7 +81,6 @@ class Configuration implements ConfigurationInterface
                 ->children()
                     ->integerNode('max_absolute_lifetime')
                         ->isRequired()
-                        ->defaultValue(3600)
                         ->info('The maximum lifetime of a session regardless of interaction by the user, in seconds.')
                         ->example('3600 -> 1 hour * 60 minutes * 60 seconds')
                         ->validate()
@@ -93,7 +92,6 @@ class Configuration implements ConfigurationInterface
                     ->end()
                     ->integerNode('max_relative_lifetime')
                         ->isRequired()
-                        ->defaultValue(600)
                         ->info(
                             'The maximum relative lifetime of a session; the maximum allowed time between two '
                             . 'interactions by the user',

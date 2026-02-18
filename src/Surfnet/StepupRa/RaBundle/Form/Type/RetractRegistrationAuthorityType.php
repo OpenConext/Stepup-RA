@@ -24,6 +24,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @extends AbstractType<RetractRegistrationAuthorityCommand>
+ */
 class RetractRegistrationAuthorityType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -33,7 +36,7 @@ class RetractRegistrationAuthorityType extends AbstractType
                 'button-group',
                 ButtonGroupType::class,
                 [
-                    'inherit_data' => true,
+                    'mapped' => false,
                 ],
             )
             ->add('confirm', SubmitType::class, [

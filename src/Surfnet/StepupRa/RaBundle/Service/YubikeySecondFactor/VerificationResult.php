@@ -35,7 +35,6 @@ class VerificationResult
 
     /**
      * @param int $result
-     * @param YubikeyPublicId|null $publicId
      */
     public function __construct($result, private readonly ?YubikeyPublicId $publicId = null)
     {

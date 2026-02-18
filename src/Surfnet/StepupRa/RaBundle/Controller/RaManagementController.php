@@ -20,7 +20,6 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Knp\Component\Pager\PaginatorInterface;
 use Psr\Log\LoggerInterface;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitution;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
@@ -28,6 +27,7 @@ use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationComma
 use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
+use Surfnet\StepupRa\RaBundle\Controller\Traits\OrderFromRequest;
 use Surfnet\StepupRa\RaBundle\Form\Type\AmendRegistrationAuthorityInformationType;
 use Surfnet\StepupRa\RaBundle\Form\Type\CreateRaType;
 use Surfnet\StepupRa\RaBundle\Form\Type\RetractRegistrationAuthorityType;
@@ -46,10 +46,12 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects")
  */
 class RaManagementController extends AbstractController
 {
+    use OrderFromRequest;
+
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly RaListingService $raListingService,
@@ -75,9 +77,9 @@ class RaManagementController extends AbstractController
 
         $command = new SearchRaListingCommand();
         $command->actorId = $identity->id;
-        $command->pageNumber = (int) $request->get('p', 1);
-        $command->orderBy = $request->get('orderBy');
-        $command->orderDirection = $request->get('orderDirection');
+        $command->pageNumber = $request->query->getInt('p', 1);
+        $command->orderBy = $request->query->get('orderBy');
+        $command->orderDirection = $request->query->get('orderDirection');
 
         // The options that will populate the institution filter choice list.
         $raList = $this->raListingService->search($command);
@@ -107,7 +109,7 @@ class RaManagementController extends AbstractController
         return $this->render(
             'ra_management/manage.html.twig',
             [
-                'form' => $form->createView(),
+                'form' => $form,
                 'raList' => $raListings,
                 'numberOfResults' => $raList->getTotalItems(),
                 'pagination' => $pagination,
@@ -132,9 +134,9 @@ class RaManagementController extends AbstractController
         $command->actorId          = $identity->id;
         $command->actorInstitution = $institution;
         $command->raInstitution    = null;
-        $command->pageNumber       = (int) $request->get('p', 1);
-        $command->orderBy          = $request->get('orderBy');
-        $command->orderDirection   = $request->get('orderDirection');
+        $command->pageNumber = $request->query->has('p') ? $request->query->getInt('p') : $request->request->getInt('p', 1);
+        $command->orderBy = $this->getOrderBy($request);
+        $command->orderDirection = $this->getOrderDirection($request);
 
         $raCandidateList = $this->raCandidateService->search($command);
 
@@ -162,7 +164,7 @@ class RaManagementController extends AbstractController
         return $this->render(
             'ra_management/ra_candidate_overview.html.twig',
             [
-                'form'         => $form->createView(),
+                'form'         => $form,
                 'raCandidates' => $raCandidateList,
                 'pagination'   => $pagination
             ],
@@ -175,14 +177,13 @@ class RaManagementController extends AbstractController
         methods: ['GET', 'POST'],
     )]
     #[IsGranted('ROLE_RAA')]
-    public function createRa(Request $request): Response
+    public function createRa(Request $request, string $identityId): Response
     {
         $this->logger->notice('Page for Accreditation of Identity to Ra or Raa requested');
-        $identityId = $request->get('identityId');
 
         $raCandidate = $this->raCandidateService->getRaCandidate($identityId, $this->getUser()->getIdentity()->id);
 
-        if (! isset($raCandidate->raCandidate)) {
+        if ($raCandidate === null || !isset($raCandidate->raCandidate)) {
             $this->logger->warning(sprintf('RaCandidate based on identity "%s" not found', $identityId));
             throw new NotFoundHttpException();
         }
@@ -219,7 +220,7 @@ class RaManagementController extends AbstractController
 
         return $this->render('ra_management/create_ra.html.twig', [
             'raCandidate' => $raCandidate->raCandidate,
-            'form'        => $form->createView()
+            'form'        => $form
         ]);
     }
 
@@ -267,7 +268,7 @@ class RaManagementController extends AbstractController
 
         return $this->render('ra_management/amend_ra_information.html.twig', [
             'raListing' => $raListing,
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
@@ -326,7 +327,7 @@ class RaManagementController extends AbstractController
 
         return $this->render('ra_management/confirm_retract_ra.html.twig', [
             'raListing' => $raListing,
-            'form'      => $form->createView()
+            'form'      => $form
         ]);
     }
 }

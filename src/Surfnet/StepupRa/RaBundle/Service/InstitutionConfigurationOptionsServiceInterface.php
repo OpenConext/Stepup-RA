@@ -25,5 +25,5 @@ interface InstitutionConfigurationOptionsServiceInterface
     /**
      * @param $institution
      */
-    public function getInstitutionConfigurationOptionsFor($institution): ?InstitutionConfigurationOptions;
+    public function getInstitutionConfigurationOptionsFor($institution): InstitutionConfigurationOptions;
 }

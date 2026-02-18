@@ -35,7 +35,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 /**
  * Orchestrates verification of GSSFs (Generic SAML Second Factors) through GSSPs (Generic SAML Stepup Providers).
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects")
  */
 final class GssfVerifyController extends AbstractController
 {

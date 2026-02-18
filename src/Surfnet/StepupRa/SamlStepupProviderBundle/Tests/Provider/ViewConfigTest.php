@@ -30,10 +30,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class ViewConfigTest extends TestCase
 {
-    /**
-     * @test
-     * @group di
-     */
+    #[\PHPUnit\Framework\Attributes\Group('di')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function view_config_translates_correctly()
     {
         $viewConfig = $this->buildViewConfig('nl_NL');
@@ -52,10 +50,8 @@ final class ViewConfigTest extends TestCase
         $this->assertEquals('EN gssfIdMismatch', $viewConfig->getGssfIdMismatch());
     }
 
-    /**
-     * @test
-     * @group di
-     */
+    #[\PHPUnit\Framework\Attributes\Group('di')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function translation_fails_when_no_current_language_set()
     {
         $this->expectExceptionMessage("The requested translation is not available in this language");
@@ -65,10 +61,8 @@ final class ViewConfigTest extends TestCase
         $viewConfig->getExplanation();
     }
 
-    /**
-     * @test
-     * @group di
-     */
+    #[\PHPUnit\Framework\Attributes\Group('di')]
+    #[\PHPUnit\Framework\Attributes\Test]
     public function view_config_cannot_serve_french_translations()
     {
         $this->expectExceptionMessage("The requested translation is not available in this language: fr_FR. Available languages: en_GB, nl_NL");

@@ -29,7 +29,9 @@ when@dev:
   framework:
     router:
       strict_requirements: true
-    profiler: { only_exceptions: false }
+    profiler:
+      only_exceptions: false
+      collect_serializer_data: true
 
 when@smoketest:
   framework:
@@ -39,6 +41,7 @@ when@smoketest:
     profiler:
       only_exceptions: false
       collect: true
+      collect_serializer_data: true
     php_errors:
       log: false # prevents user deprecated warnings
 when@test:
@@ -48,4 +51,5 @@ when@test:
       storage_factory_id: session.storage.factory.mock_file
     profiler:
       collect: false
+      collect_serializer_data: true
 

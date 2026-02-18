@@ -46,8 +46,8 @@ use Surfnet\StepupRa\RaBundle\VettingProcedure;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects")
+ * @SuppressWarnings("PHPMD.TooManyPublicMethods")
  */
 class VettingService
 {
@@ -55,7 +55,7 @@ class VettingService
         'Surfnet\Stepup\Exception\DomainException: Cannot vet second factor, the registration window is closed.';
 
     /**
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @SuppressWarnings("PHPMD.ExcessiveParameterList")
      */
     public function __construct(
         private readonly SmsSecondFactorServiceInterface $smsSecondFactorService,

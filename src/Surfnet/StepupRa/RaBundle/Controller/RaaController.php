@@ -83,11 +83,6 @@ class RaaController extends AbstractController
         $configuration = $this->institutionConfigurationOptionsService
             ->getInstitutionConfigurationOptionsFor($institution);
 
-        if (!$configuration) {
-            $this->logger->warning(sprintf('Unable to find the institution configuration for "%s"', $institution));
-            throw new NotFoundHttpException('The institution configuration could not be found');
-        }
-
         return $this->render(
             'institution_configuration/overview.html.twig',
             [

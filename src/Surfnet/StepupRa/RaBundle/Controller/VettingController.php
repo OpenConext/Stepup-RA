@@ -46,8 +46,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 
 /**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects")
+ * @SuppressWarnings("PHPMD.ExcessiveMethodLength")
  */
 class VettingController extends AbstractController
 {
@@ -62,9 +62,9 @@ class VettingController extends AbstractController
     }
 
     /**
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity) https://www.pivotaltracker.com/story/show/135045063
-     * @SuppressWarnings(PHPMD.NPathComplexity)      https://www.pivotaltracker.com/story/show/135045063
-     * @SuppressWarnings(PHPMD.CouplingBetweenObjects)      https://www.pivotaltracker.com/story/show/135045063
+     * @SuppressWarnings("PHPMD.CyclomaticComplexity") https://www.pivotaltracker.com/story/show/135045063
+     * @SuppressWarnings("PHPMD.NPathComplexity")      https://www.pivotaltracker.com/story/show/135045063
+     * @SuppressWarnings("PHPMD.CouplingBetweenObjects")      https://www.pivotaltracker.com/story/show/135045063
      */
     #[Route(
         path: '/',
@@ -87,7 +87,7 @@ class VettingController extends AbstractController
         if (!$form->isSubmitted() || !$form->isValid()) {
             $this->logger->notice('No search submitted, displaying search by registration code form');
 
-            return $this->render('vetting/start_procedure.html.twig', ['form' => $form->createView()]);
+            return $this->render('vetting/start_procedure.html.twig', ['form' => $form]);
         }
 
         $secondFactor = $this->secondFactorService
@@ -97,7 +97,7 @@ class VettingController extends AbstractController
             $this->addFlash('error', 'ra.form.start_vetting_procedure.unknown_registration_code');
             $this->logger->notice('Cannot start new vetting procedure, no second factor found');
 
-            return $this->render('vetting/start_procedure.html.twig', ['form' => $form->createView()]);
+            return $this->render('vetting/start_procedure.html.twig', ['form' => $form]);
         }
 
         $enabledSecondFactors = $this->getParameter('surfnet_stepup_ra.enabled_second_factors');
@@ -139,7 +139,7 @@ class VettingController extends AbstractController
                 ['registration_requested_at' => $secondFactor->registrationRequestedAt->format('Y-m-d')],
             );
 
-            return $this->render('vetting/start_procedure.html.twig', ['form' => $form->createView()]);
+            return $this->render('vetting/start_procedure.html.twig', ['form' => $form]);
         }
 
         if (!$this->vettingService->isLoaSufficientToStartProcedure($command)) {
@@ -147,7 +147,7 @@ class VettingController extends AbstractController
 
             $this->logger->notice('Cannot start new vetting procedure, Authority LoA is insufficient');
 
-            return $this->render('vetting/start_procedure.html.twig', ['form' => $form->createView()]);
+            return $this->render('vetting/start_procedure.html.twig', ['form' => $form]);
         }
 
         $procedureId = $this->vettingService->startProcedure($command);
@@ -205,8 +205,8 @@ class VettingController extends AbstractController
     }
 
     /**
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings("PHPMD.CyclomaticComplexity")
+     * @SuppressWarnings("PHPMD.NPathComplexity")
      */
     #[Route(
         path: '/vetting-procedure/{procedureId}/verify-identity',
@@ -244,7 +244,7 @@ class VettingController extends AbstractController
                 $this->addFlash('error', $error);
             }
 
-            return $this->render('vetting/verify_identity.html.twig', ['commonName' => $commonName, 'form' => $form->createView()]);
+            return $this->render('vetting/verify_identity.html.twig', ['commonName' => $commonName, 'form' => $form]);
         };
 
         if (!$form->isSubmitted() || !$form->isValid()) {

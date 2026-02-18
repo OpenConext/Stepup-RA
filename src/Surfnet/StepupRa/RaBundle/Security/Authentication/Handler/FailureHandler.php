@@ -49,7 +49,7 @@ class FailureHandler extends DefaultAuthenticationFailureHandler
             $exception->getMessageKey(),
             $exception->getMessage(),
         );
-        $this->logger->notice($message);
+        $this->logger?->notice($message);
         // The exception controller is used to show the failed authentication
         return $this->exceptionController->show($request, $exception);
     }

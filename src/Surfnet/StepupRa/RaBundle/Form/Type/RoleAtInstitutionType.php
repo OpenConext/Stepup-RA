@@ -38,6 +38,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *  - search forms when you want to find identities with a specific role at a given institution
  *  - when roles are applied to identities
  *
+ * @extends AbstractType<RoleAtInstitution>
  */
 class RoleAtInstitutionType extends AbstractType
 {

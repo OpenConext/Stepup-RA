@@ -1,7 +1,6 @@
 {
     "name": "surfnet/stepup-ra",
     "license": "Apache-2.0",
-    "version": "0",
     "description": "The SURFnet Step-up Registration Authority application allows Registration Authorities to vet identities by combining a real-world identity, federated identity and a token.",
     "autoload": {
         "psr-4": {
@@ -16,48 +15,48 @@
         "php": "^8.2",
         "ext-dom": "*",
         "ext-openssl": "*",
-        "doctrine/annotations": "^2.0",
-        "guzzlehttp/guzzle": "^7",
-        "incenteev/composer-parameter-handler": "~2.0",
-        "jms/translation-bundle": "^2.1",
-        "knplabs/knp-paginator-bundle": "^6.0",
-        "nelmio/security-bundle": "^3.0",
-        "openconext/monitor-bundle": "^4.2",
-        "surfnet/stepup-bundle": "^6.0",
-        "surfnet/stepup-middleware-client-bundle": "^5.3.0",
-        "surfnet/stepup-saml-bundle": "^6.0",
-        "symfony/asset": "6.4.*",
-        "symfony/expression-language": "6.4.*",
-        "symfony/flex": "^v2.4.3",
-        "symfony/form": "6.4.*",
-        "symfony/framework-bundle": "6.4.*",
-        "symfony/http-foundation": "6.4.*",
-        "symfony/monolog-bundle": "^3.5",
-        "symfony/runtime": "6.4.*",
-        "symfony/security-bundle": "6.4.*",
-        "symfony/translation": "6.4.*",
-        "symfony/twig-bundle": "6.4.*",
-        "symfony/validator": "6.4.*",
-        "symfony/webpack-encore-bundle": "^1.7",
-        "twig/extra-bundle": "^3.0",
-        "twig/twig": "^3.0"
+        "doctrine/annotations": "^2.0.2",
+        "guzzlehttp/guzzle": "^7.10",
+        "incenteev/composer-parameter-handler": "^2.3",
+        "jms/translation-bundle": "^2.6",
+        "knplabs/knp-paginator-bundle": "^6.10",
+        "nelmio/security-bundle": "^3.7",
+        "openconext/monitor-bundle": "^4.3.1",
+        "surfnet/stepup-bundle": "^7.0.1",
+        "surfnet/stepup-middleware-client-bundle": "^6.0",
+        "surfnet/stepup-saml-bundle": "^7.0.1",
+        "symfony/asset": "7.4.*",
+        "symfony/expression-language": "7.4.*",
+        "symfony/flex": "^2.10.0",
+        "symfony/form": "7.4.*",
+        "symfony/framework-bundle": "7.4.*",
+        "symfony/http-foundation": "7.4.*",
+        "symfony/monolog-bundle": "^v4.0.1",
+        "symfony/runtime": "7.4.*",
+        "symfony/security-bundle": "7.4.*",
+        "symfony/translation": "7.4.*",
+        "symfony/twig-bundle": "7.4.*",
+        "symfony/validator": "7.4.*",
+        "symfony/webpack-encore-bundle": "^2.4",
+        "twig/extra-bundle": "^3.22.2",
+        "twig/twig": "^3.22.2"
     },
     "require-dev": {
-        "malukenho/docheader": "^1.0.0",
-        "matthiasnoback/symfony-config-test": "^4.0",
-        "mockery/mockery": "^1.0",
-        "overtrue/phplint": "^9.0",
-        "phpmd/phpmd": "^2.6",
-        "phpstan/phpstan": "^1.10",
-        "phpstan/phpstan-symfony": "^1.3",
-        "phpunit/phpunit": "^9.5",
-        "rector/rector": "^1.0",
-        "slevomat/coding-standard": "^8.13",
-        "squizlabs/php_codesniffer": "^3.4",
-        "symfony/maker-bundle": "^1.19",
-        "symfony/phpunit-bridge": "6.4.*",
-        "symfony/stopwatch": "^5.1",
-        "symfony/web-profiler-bundle": "6.4.*"
+        "malukenho/docheader": "^1.1.0",
+        "matthiasnoback/symfony-config-test": "^6.1",
+        "mockery/mockery": "^1.6.12",
+        "overtrue/phplint": "^9.7.1",
+        "phpmd/phpmd": "^2.15",
+        "phpstan/phpstan": "^2.1.33",
+        "phpstan/phpstan-symfony": "^2.0.9",
+        "phpunit/phpunit": "^11.0",
+        "rector/rector": "^2.3",
+        "slevomat/coding-standard": "^8.26",
+        "squizlabs/php_codesniffer": "^4.0",
+        "symfony/maker-bundle": "^1.65.1",
+        "symfony/phpunit-bridge": "7.4.*",
+        "symfony/stopwatch": "^7.4",
+        "symfony/web-profiler-bundle": "7.4.*"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -76,10 +75,20 @@
             "@auto-scripts"
         ],
         "frontend-install": [
-            "yarn install",
-            "yarn encore production"
+            "yarn install --frozen-lockfile",
+            "yarn encore production",
+            "./bin/console cache:clear",
+            "@fix-dev-permissions"
+        ],
+        "fix-dev-permissions": [
+            "chown -R www-data:www-data /var/www/html/var/log",
+            "chown -R www-data:www-data /var/www/html/var/cache"
         ],
         "check": [
+            "@check-ci",
+            "@rector"
+        ],
+        "check-ci": [
             "@phplint",
             "@phpmd",
             "@phpcs",
@@ -90,6 +99,8 @@
         ],
         "phplint": "./ci/qa/phplint",
         "license-headers": "./ci/qa/docheader",
+        "rector": "./ci/qa/rector.sh --dry-run",
+        "rector-fix": "./ci/qa/rector.sh",
         "phpmd": "./ci/qa/phpmd",
         "phpcs": "./ci/qa/phpcs",
         "phpstan": "./ci/qa/phpstan",
@@ -137,7 +148,7 @@
         },
         "symfony": {
             "allow-contrib": false,
-            "require": "6.4.*"
+            "require": "7.4.*"
         },
         "incenteev-parameters": [
             {
@@ -150,5 +161,6 @@
                 "file": "config/openconext/global_view_parameters.yaml"
             }
         ]
-    }
+    },
+    "type": "project"
 }

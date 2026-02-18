@@ -26,6 +26,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @extends AbstractType<ChangeRaRoleCommand>
+ */
 class ChangeRaRoleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -42,7 +45,7 @@ class ChangeRaRoleType extends AbstractType
                     'button-group',
                     ButtonGroupType::class,
                     [
-                        'inherit_data' => true,
+                        'mapped' => false,
                     ],
                 )
                 ->add('create_ra', SubmitType::class, [

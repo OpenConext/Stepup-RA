@@ -25,6 +25,8 @@ updates:
           - "*"
   # Maintain dependencies for npm
   - package-ecosystem: "npm"
+    cooldown:
+      default-days: 14
     directories:
       - "/"
     schedule:

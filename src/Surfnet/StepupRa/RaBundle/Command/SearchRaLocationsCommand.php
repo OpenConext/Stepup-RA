@@ -33,12 +33,12 @@ final class SearchRaLocationsCommand
     /**
      * @var string|null
      */
-    #[Assert\Choice(['name', 'type', 'secondFactorId', 'email', 'status'], message: 'ra.search_ra_second_factors.order_by.invalid_choice')]
+    #[Assert\Choice(choices: ['name', 'type', 'secondFactorId', 'email', 'status'], message: 'ra.search_ra_second_factors.order_by.invalid_choice')]
     public $orderBy;
 
     /**
      * @var string|null
      */
-    #[Assert\Choice(['asc', 'desc'], message: 'ra.search_ra_second_factors.order_direction.invalid_choice')]
+    #[Assert\Choice(choices: ['asc', 'desc'], message: 'ra.search_ra_second_factors.order_direction.invalid_choice')]
     public $orderDirection;
 }

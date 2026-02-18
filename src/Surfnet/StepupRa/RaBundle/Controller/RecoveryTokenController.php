@@ -20,9 +20,9 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Knp\Component\Pager\PaginatorInterface;
 use Psr\Log\LoggerInterface;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\Identity;
 use Surfnet\StepupRa\RaBundle\Command\RevokeRecoveryTokenCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRecoveryTokensCommand;
+use Surfnet\StepupRa\RaBundle\Controller\Traits\OrderFromRequest;
 use Surfnet\StepupRa\RaBundle\Form\Type\RevokeRecoveryTokenType;
 use Surfnet\StepupRa\RaBundle\Form\Type\SearchRecoveryTokensType;
 use Surfnet\StepupRa\RaBundle\Service\RecoveryTokenService;
@@ -31,11 +31,12 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class RecoveryTokenController extends AbstractController
 {
+    use OrderFromRequest;
+
     public function __construct(
         private readonly RecoveryTokenService $recoveryTokenService,
         private readonly PaginatorInterface $paginator,
@@ -56,9 +57,9 @@ final class RecoveryTokenController extends AbstractController
 
         $command = new SearchRecoveryTokensCommand();
         $command->actorId = $identity->id;
-        $command->pageNumber = (int) $request->get('p', 1);
-        $command->orderBy = $request->get('orderBy');
-        $command->orderDirection = $request->get('orderDirection');
+        $command->pageNumber = $request->query->has('p') ? $request->query->getInt('p') : $request->request->getInt('p', 1);
+        $command->orderBy = $this->getOrderBy($request);
+        $command->orderDirection = $this->getOrderDirection($request);
 
         // Huh, why do we load the recovery tokens at this point?
         // This is just to get the filter options for the available institutions of the search results.
@@ -89,8 +90,8 @@ final class RecoveryTokenController extends AbstractController
         return $this->render(
             'recovery_token/search.html.twig',
             [
-                'form' => $form->createView(),
-                'revocationForm' => $revocationForm->createView(),
+                'form' => $form,
+                'revocationForm' => $revocationForm,
                 'recoveryTokens' => $recoveryTokens,
                 'pagination' => $pagination,
                 'numberOfRecoveryTokens' => $recoveryTokenCount,

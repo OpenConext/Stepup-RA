@@ -50,8 +50,8 @@ class VettingTypeHintController extends AbstractController
     }
 
     /**
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity) Given the two forms being handled in this action, cc is higher.
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @SuppressWarnings("PHPMD.CyclomaticComplexity") Given the two forms being handled in this action, cc is higher.
+     * @SuppressWarnings("PHPMD.NPathComplexity")
      */
     #[Route(
         path: '/vetting-type-hint',
@@ -124,7 +124,7 @@ class VettingTypeHintController extends AbstractController
             'vetting_type_hint/overview.html.twig',
             [
                 'form' => isset($form) ? $form->createView() : null,
-                'hintForm' => $hintForm->createView(),
+                'hintForm' => $hintForm,
                 'institution' => $institution,
             ],
         );

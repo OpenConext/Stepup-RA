@@ -33,7 +33,7 @@ use Surfnet\StepupRa\RaBundle\Command\RemoveRaLocationCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaLocationsCommand;
 
 /**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings("PHPMD.CouplingBetweenObjects")
  */
 class RaLocationService
 {

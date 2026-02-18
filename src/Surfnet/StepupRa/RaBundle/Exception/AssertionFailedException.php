@@ -23,8 +23,13 @@ use Assert\AssertionFailedException as AssertAssertionFailedException;
 class AssertionFailedException extends InvalidArgumentException implements AssertAssertionFailedException
 {
     // @codingStandardsIgnoreStart Compliance with beberlei/assert's invalid argument exception
-    public function __construct($message, $code, private $value, private $propertyPath = null, private readonly array $constraints = [])
-    {
+    public function __construct(
+        $message,
+        $code,
+        private $value,
+        private $propertyPath = null,
+        private readonly array $constraints = [],
+    ) {
         parent::__construct($message, $code);
     }
     // @codingStandardsIgnoreEnd
