@@ -18,6 +18,7 @@ namespace Surfnet\StepupRa\SamlStepupProviderBundle\Tests\Provider;
  * limitations under the License.
  */
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Surfnet\SamlBundle\Metadata\MetadataFactory;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Exception\MetadataFactoryNotFoundException;
@@ -25,7 +26,7 @@ use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\MetadataFactoryCollection
 
 class MetadataFactoryCollectionTest extends TestCase
 {
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function metadata_factory_can_be_added_and_retrieved(): void
     {
         $identifier = 'provider1';
@@ -37,7 +38,7 @@ class MetadataFactoryCollectionTest extends TestCase
         $this->assertSame($factory, $collection->getByIdentifier($identifier));
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function exception_is_thrown_when_retrieving_non_existent_provider(): void
     {
         $identifier = 'provider1';

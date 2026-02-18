@@ -21,6 +21,7 @@ namespace Surfnet\StepupRa\RaBundle\Controller;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupBundle\Service\SecondFactorTypeService;
 use Surfnet\StepupBundle\Value\SecondFactorType;
+use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 use Surfnet\StepupRa\RaBundle\Command\StartVettingProcedureCommand;
 use Surfnet\StepupRa\RaBundle\Command\VerifyIdentityCommand;
 use Surfnet\StepupRa\RaBundle\Exception\DomainException;
@@ -29,12 +30,9 @@ use Surfnet\StepupRa\RaBundle\Form\Type\StartVettingProcedureType;
 use Surfnet\StepupRa\RaBundle\Form\Type\VerifyIdentityType;
 use Surfnet\StepupRa\RaBundle\Logger\ProcedureAwareLogger;
 use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
-use Surfnet\StepupRa\RaBundle\Security\Authentication\Token\SamlToken;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorService;
 use Surfnet\StepupRa\RaBundle\Service\VettingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Bundle\SecurityBundle\Security;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +41,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\VerifiedSecondFactor;
 
 /**
  * @SuppressWarnings("PHPMD.CouplingBetweenObjects")

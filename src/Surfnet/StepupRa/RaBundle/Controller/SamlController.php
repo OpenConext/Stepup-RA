@@ -19,13 +19,13 @@
 namespace Surfnet\StepupRa\RaBundle\Controller;
 
 use Surfnet\SamlBundle\Entity\IdentityProvider;
+use Surfnet\SamlBundle\Entity\ServiceProvider;
 use Surfnet\SamlBundle\Http\PostBinding;
 use Surfnet\SamlBundle\Http\XMLResponse;
 use Surfnet\SamlBundle\Metadata\MetadataFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Surfnet\SamlBundle\Entity\ServiceProvider;
 use Symfony\Component\Routing\Attribute\Route;
 
 class SamlController extends AbstractController

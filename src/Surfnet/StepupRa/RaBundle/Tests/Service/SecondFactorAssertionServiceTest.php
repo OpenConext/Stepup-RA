@@ -18,6 +18,7 @@
 
 namespace Surfnet\StepupRa\RaBundle\Tests\Service;
 
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Service\SecondFactorAssertionService;
@@ -37,7 +38,7 @@ class SecondFactorAssertionServiceTest extends TestCase
         $this->service = new SecondFactorAssertionService($this->parameterBag, $this->logger);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function assertSecondFactorEnabled_should_throw_exception_when_second_factor_disabled()
     {
         $type = 'sms';
@@ -56,7 +57,7 @@ class SecondFactorAssertionServiceTest extends TestCase
         $this->service->assertSecondFactorEnabled($type);
     }
 
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Test]
     public function assertSecondFactorEnabled_should_not_throw_exception_when_second_factor_enabled()
     {
         $type = 'sms';

@@ -20,7 +20,15 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupRa\SamlStepupProviderBundle\DependencyInjection;
 
+use Surfnet\SamlBundle\Entity\HostedEntities;
+use Surfnet\SamlBundle\Entity\IdentityProvider;
+use Surfnet\SamlBundle\Entity\ServiceProvider;
+use Surfnet\SamlBundle\Metadata\MetadataConfiguration;
+use Surfnet\SamlBundle\Metadata\MetadataFactory;
 use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\MetadataFactoryCollection;
+use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\Provider;
+use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig;
+use Surfnet\StepupRa\SamlStepupProviderBundle\Saml\StateHandler;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -28,14 +36,6 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Surfnet\StepupRa\SamlStepupProviderBundle\Saml\StateHandler;
-use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\Provider;
-use Surfnet\StepupRa\SamlStepupProviderBundle\Provider\ViewConfig;
-use Surfnet\SamlBundle\Entity\ServiceProvider;
-use Surfnet\SamlBundle\Entity\HostedEntities;
-use Surfnet\SamlBundle\Entity\IdentityProvider;
-use Surfnet\SamlBundle\Metadata\MetadataConfiguration;
-use Surfnet\SamlBundle\Metadata\MetadataFactory;
 
 /**
  * @SuppressWarnings("PHPMD.CouplingBetweenObjects")

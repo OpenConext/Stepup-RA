@@ -20,6 +20,8 @@ namespace Surfnet\StepupRa\RaBundle\Tests\Value;
 
 use DateInterval;
 use DateTime as CoreDateTime;
+use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Surfnet\StepupRa\RaBundle\Value\DateTime;
 
@@ -31,8 +33,8 @@ class DateTimeTest extends TestCase
      * that you're hopefully reading this as an instruction to check all the places that handle datetime for
      * compatibility with the new format. Think about log(-processors), (de-)serializers, etc.
      */
-    #[\PHPUnit\Framework\Attributes\Group('value')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Group('value')]
+    #[Test]
     public function the_configured_format_is_what_is_needed_for_correct_application_behavior()
     {
         $this->assertEquals('Y-m-d\\TH:i:sP', DateTime::FORMAT);
@@ -42,8 +44,8 @@ class DateTimeTest extends TestCase
      * Ensure that the __toString of our DateTime object actually uses the correct format. For the reason why, read the
      * docblock above the {@see the_configured_format_is_what_is_needed_for_correct_application_behavior()} test
      */
-    #[\PHPUnit\Framework\Attributes\Group('value')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Group('value')]
+    #[Test]
     public function to_string_returns_the_time_in_the_correct_format()
     {
         $coreDateTimeObject = new CoreDateTime('@1000');
@@ -52,8 +54,8 @@ class DateTimeTest extends TestCase
         $this->assertEquals($coreDateTimeObject->format(DateTime::FORMAT), (string) $ourDateTimeObject);
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('value')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Group('value')]
+    #[Test]
     public function add_returns_a_different_object_that_has_the_interval_added()
     {
         $base     = new DateTime(new CoreDateTime('@1000'));
@@ -65,8 +67,8 @@ class DateTimeTest extends TestCase
         $this->assertTrue($result > $base, 'DateTime::add adds the interval to the new object');
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('value')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Group('value')]
+    #[Test]
     public function sub_returns_a_different_object_that_has_the_interval_substracted()
     {
         $base     = new DateTime(new CoreDateTime('@1000'));
@@ -78,8 +80,8 @@ class DateTimeTest extends TestCase
         $this->assertTrue($result < $base, 'DateTime::sub subtracts the interval to the new object');
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('value')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Group('value')]
+    #[Test]
     public function comes_before_works_with_exclusive_comparison()
     {
         $base   = new DateTime(new CoreDateTime('@1000'));
@@ -92,8 +94,8 @@ class DateTimeTest extends TestCase
         $this->assertFalse($after->comesBefore($base));
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('value')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Group('value')]
+    #[Test]
     public function comes_before_or_is_equal_works_with_inclusive_comparison()
     {
         $base   = new DateTime(new CoreDateTime('@1000'));
@@ -106,8 +108,8 @@ class DateTimeTest extends TestCase
         $this->assertFalse($after->comesBeforeOrIsEqual($base));
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('value')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Group('value')]
+    #[Test]
     public function comes_after_works_with_exclusive_comparison()
     {
         $base   = new DateTime(new CoreDateTime('@1000'));
@@ -120,8 +122,8 @@ class DateTimeTest extends TestCase
         $this->assertTrue($after->comesAfter($base));
     }
 
-    #[\PHPUnit\Framework\Attributes\Group('value')]
-    #[\PHPUnit\Framework\Attributes\Test]
+    #[Group('value')]
+    #[Test]
     public function comes_after_or_is_equal_works_with_inclusive_comparison()
     {
         $base   = new DateTime(new CoreDateTime('@1000'));

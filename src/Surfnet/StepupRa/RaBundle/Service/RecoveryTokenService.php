@@ -22,7 +22,6 @@ use Psr\Log\LoggerInterface;
 use Surfnet\StepupMiddlewareClient\Identity\Dto\RecoveryTokenSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Dto\CollectionDto;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Command\RevokeRegistrantsRecoveryTokenCommand;
-use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RecoveryTokenCollection;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RecoveryTokenService as ApiRecoveryTokenService;
 use Surfnet\StepupRa\RaBundle\Command\RevokeRecoveryTokenCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRecoveryTokensCommand;

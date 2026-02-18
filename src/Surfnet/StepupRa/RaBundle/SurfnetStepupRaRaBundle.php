@@ -18,7 +18,6 @@
 
 namespace Surfnet\StepupRa\RaBundle;
 
-use Surfnet\StepupRa\RaBundle\DependencyInjection\Compiler\GssfSessionBagSessionPass;
 use Surfnet\StepupRa\RaBundle\Security\Factory\SamlFactory;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
