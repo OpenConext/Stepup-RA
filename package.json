@@ -15,7 +15,7 @@
         "jscpd": "^4.0.7",
         "less": "^4.5.1",
         "less-loader": "^12.3.0",
-        "lodash": "^4.17.20",
+        "lodash": "^4.17.23",
         "moment": "^2.29.2",
         "regenerator-runtime": "^0.14.1",
         "webpack": "^5.99.9",
