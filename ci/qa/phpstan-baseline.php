@@ -800,12 +800,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/SecondFactorService.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\SecondFactorService\\:\\:findVerifiedSecondFactorByRegistrationCode\\(\\) should return Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\VerifiedSecondFactor\\|null but returns Surfnet\\\\StepupMiddlewareClientBundle\\\\Identity\\\\Dto\\\\VerifiedSecondFactor\\|false\\.$#',
-	'identifier' => 'return.type',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/SecondFactorService.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Cannot call method getYubikeyPublicId\\(\\) on Surfnet\\\\StepupBundle\\\\Value\\\\YubikeyPublicId\\|null\\.$#',
 	'identifier' => 'method.nonObject',
 	'count' => 1,
