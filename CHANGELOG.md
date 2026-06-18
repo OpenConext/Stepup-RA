@@ -2,6 +2,7 @@
 
 ## 7.0.0
 - Update to Symfony 7.4
+- Upgrade of numerous NPM and Composer dependencies
 
 ## 6.0.1
 - Ensure the correct error page is displayed when authentication fails #332
