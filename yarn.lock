@@ -889,29 +889,29 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@jscpd/badge-reporter@4.2.4":
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/@jscpd/badge-reporter/-/badge-reporter-4.2.4.tgz#9f4da5dba5c158e7c71981a42cbff7b35bf1695b"
-  integrity sha512-g5vu05u0lX9rcHA0k3CptLfpOiuMzxh5+mUe2iYRAznTwH3ks6JAVAf9aPi5mBFttMCRiJh2zSt3xnSadHtMGg==
+"@jscpd/badge-reporter@4.2.5":
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/@jscpd/badge-reporter/-/badge-reporter-4.2.5.tgz#293f754e1f656310024b0692d1efd09dc338b81d"
+  integrity sha512-ktXrjPeRaRyUDktxTroSA2/w5sshXpQplWkUuq/e6XqEpKBSbGEnwZLIaegSijOrMwIcCXPQ9k4feXIz5eVJNA==
   dependencies:
     badgen "^3.2.3"
     colors "^1.4.0"
     fs-extra "^11.2.0"
 
-"@jscpd/core@4.2.4":
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/@jscpd/core/-/core-4.2.4.tgz#d2bc7529b584de4ec6b857101e33cf18b27063de"
-  integrity sha512-9V9YzmmhYg9682kFqi+n0KGOhXNSoqxHbuIP3i/l/oSd6upBOnnSeBWDZMGOenQRQnyKEtCIbnS9YFz+3B+siQ==
+"@jscpd/core@4.2.5":
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/@jscpd/core/-/core-4.2.5.tgz#b582d51438265ae22f3096a45ba9e5591f3baa85"
+  integrity sha512-Esf2deHxaoNEjePwf2jqP6Urzj+BAOsJVPFLbnnSsV+q7rLNMcn0UEEoKBXIOOt4qMkrkhl9DfwpMyPPOr6GkQ==
   dependencies:
     eventemitter3 "^5.0.1"
 
-"@jscpd/finder@4.2.4":
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/@jscpd/finder/-/finder-4.2.4.tgz#847d014f5130d66d5f0cb47f7cc4ff9a2ccc0cba"
-  integrity sha512-4LLEuAAmAraud/TAAlB5BByVdWfy7SYiPKacj5yEggpkNs0qsw2kiZ5EyU3LonB+/vntJJEDDpJMmvOeS58e0A==
+"@jscpd/finder@4.2.5":
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/@jscpd/finder/-/finder-4.2.5.tgz#615444e805ba5b553709d70443726e3649f6cafb"
+  integrity sha512-Rw0dtwp/EeLANbujOubuQeJIuXXXkAlT+f5geZhwkB9TxEYP0hqNrdOJUK/TDBKQjRGrOizEtdNy+S4UlbdzOQ==
   dependencies:
-    "@jscpd/core" "4.2.4"
-    "@jscpd/tokenizer" "4.2.4"
+    "@jscpd/core" "4.2.5"
+    "@jscpd/tokenizer" "4.2.5"
     blamer "^1.0.6"
     bytes "^3.1.2"
     cli-table3 "^0.6.5"
@@ -919,23 +919,23 @@
     fast-glob "^3.3.2"
     fs-extra "^11.2.0"
     markdown-table "^2.0.0"
-    pug "^3.0.3"
+    pug "^3.0.4"
 
-"@jscpd/html-reporter@4.2.4":
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/@jscpd/html-reporter/-/html-reporter-4.2.4.tgz#e0094063e3d77f9b3156aca64d8d313023ee07de"
-  integrity sha512-6UljCTVGf7O+o6D6fs1zNBG+vR1PTn47W2mSgb5hzSrvNw60rLrVoAMZMnr/TeIEdd/OEgAu+icbdvvVBfnvJw==
+"@jscpd/html-reporter@4.2.5":
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/@jscpd/html-reporter/-/html-reporter-4.2.5.tgz#c106cf2d8dc178ec4f032e464098790fbd497831"
+  integrity sha512-zMMIKbvi43dMgeNeHXlHQy1ovf+KJrzNlUubaBvCAVatqP23ksW8d3fmsevIQG9mMMTH0D1xOz+SxUn1FREOPg==
   dependencies:
     colors "1.4.0"
     fs-extra "^11.2.0"
-    pug "^3.0.3"
+    pug "^3.0.4"
 
-"@jscpd/tokenizer@4.2.4":
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/@jscpd/tokenizer/-/tokenizer-4.2.4.tgz#5de37e1c2033f3f511effc78ecaf484af31049fa"
-  integrity sha512-nM4kGyDvpcevt8t0zOsMQ82ShSc65c3LIQUHClTYwraiOGOmWgUQyen+JIiFCNF8eDCGR2Qa5iI5XBfGWYQzIg==
+"@jscpd/tokenizer@4.2.5":
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/@jscpd/tokenizer/-/tokenizer-4.2.5.tgz#514ac7c99d95e30ba0abbb70a9ca4d77032733f1"
+  integrity sha512-UM8Wx/jwahmflqQExlcKMQTYOAy58N/fn7Pv6NYrkD3EZm/FTk7gW97wkXy5aDE1Ts9oBUpT9tLY2rz7ogCHAQ==
   dependencies:
-    "@jscpd/core" "4.2.4"
+    "@jscpd/core" "4.2.5"
     spark-md5 "^3.0.2"
 
 "@nodelib/fs.scandir@2.1.5":
@@ -1522,15 +1522,15 @@ commander@^12.1.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-12.1.0.tgz#01423b36f501259fdaac4d0e4d60c96c991585d3"
   integrity sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==
 
+commander@^15.0.0:
+  version "15.0.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-15.0.0.tgz#96f3961f12adac1799ef3fbd8bc61d40572d1b11"
+  integrity sha512-z67u4ZhzCL/Tydu1lJARtEZYWbWaN7oYLHbsuzocr6y4N6WZAagG3RQ4FW61V1/0+jImpj293XfrcYnd1qxtPg==
+
 commander@^2.20.0:
   version "2.20.3"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
-
-commander@^5.0.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-5.1.0.tgz#46abbd1652f8e059bddaef99bbdcb2ad9cf179ae"
-  integrity sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==
 
 consola@^3.2.3:
   version "3.4.2"
@@ -2320,29 +2320,29 @@ js-tokens@^4.0.0:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-jscpd-sarif-reporter@4.2.4:
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/jscpd-sarif-reporter/-/jscpd-sarif-reporter-4.2.4.tgz#6a54cfecaa409f7e6835f485504c58f90033561d"
-  integrity sha512-JtX79kFSyAhqJh5TdLUcvtYJtJd1F8UW8b4Miaga+EIgUn2/nR0N2zWL9mH5cRXgbzLuQbbsw9kReUVIECApwQ==
+jscpd-sarif-reporter@4.2.5:
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/jscpd-sarif-reporter/-/jscpd-sarif-reporter-4.2.5.tgz#2033c83df99459a64d41c1a19ffeccb28ab7f19d"
+  integrity sha512-O8LcM9grAS5yO5x1Q0yegYaYcUX//IEBEyvzGFSYCeo1YzHbMnAI6EK7oTrwD+7Csjvfg9m8B8G7OOxzcSlr9w==
   dependencies:
     colors "^1.4.0"
     fs-extra "^11.2.0"
-    node-sarif-builder "^3.4.0"
+    node-sarif-builder "^4.1.0"
 
-jscpd@^4.2.4:
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/jscpd/-/jscpd-4.2.4.tgz#043692f132eb772a0e8792d12c57979241634672"
-  integrity sha512-PSo2U0G8OxULayGyQMv7T/0ZQ+c3PPltdMOz/57v9Xnmq5xSIhh4cnZ0oYZPKqejy10aFwAbMVxqAlo24+PQ3g==
+jscpd@^4.2.5:
+  version "4.2.5"
+  resolved "https://registry.yarnpkg.com/jscpd/-/jscpd-4.2.5.tgz#54a4f431e238f5da1b660e539518f55a415cfe7b"
+  integrity sha512-KDpApYw1ChGelfHb7MwYTEx694OnW52pv3McAasidUV4ILcGDQMiVJzB+vI8ox+ZPVfOSvdXQCk8uRa9B0LXnw==
   dependencies:
-    "@jscpd/badge-reporter" "4.2.4"
-    "@jscpd/core" "4.2.4"
-    "@jscpd/finder" "4.2.4"
-    "@jscpd/html-reporter" "4.2.4"
-    "@jscpd/tokenizer" "4.2.4"
+    "@jscpd/badge-reporter" "4.2.5"
+    "@jscpd/core" "4.2.5"
+    "@jscpd/finder" "4.2.5"
+    "@jscpd/html-reporter" "4.2.5"
+    "@jscpd/tokenizer" "4.2.5"
     colors "^1.4.0"
-    commander "^5.0.0"
+    commander "^15.0.0"
     fs-extra "^11.2.0"
-    jscpd-sarif-reporter "4.2.4"
+    jscpd-sarif-reporter "4.2.5"
 
 jsesc@^3.0.2, jsesc@~3.1.0:
   version "3.1.0"
@@ -2391,10 +2391,10 @@ less-loader@^12.3.3:
   resolved "https://registry.yarnpkg.com/less-loader/-/less-loader-12.3.3.tgz#01b483a08db8813962ec72af599f751edb760142"
   integrity sha512-F0+ErFFDj3Pt+nVrCN6VlEGEzocv9s7x/aR9v2riI+WM83UAfTYBDBjGPJnT55lBLR6JSI4fmWblt+aA2JN6/w==
 
-less@^4.6.4:
-  version "4.6.4"
-  resolved "https://registry.yarnpkg.com/less/-/less-4.6.4.tgz#3ff8068e6c8a59f1ece8a6b9227bda28c1ed68a2"
-  integrity sha512-OJmO5+HxZLLw0RLzkqaNHzcgEAQG7C0y3aMbwtCzIUFZsLMNNq/1IdAdHEycQ58CwUO3jPTHmoN+tE5I7FQxNg==
+less@^4.6.6:
+  version "4.6.6"
+  resolved "https://registry.yarnpkg.com/less/-/less-4.6.6.tgz#f7854302a3389d2daf96fb3444ba80a54436e66e"
+  integrity sha512-ooPSwQGQ2sVe8Dh1jVsbKKsRR2gd8lFK72BDkeSzjnD1T5aIHL65hCMfO0GVmtriKgDKrQv6xp9UrihUsWuAzA==
   dependencies:
     copy-anything "^3.0.5"
     parse-node-version "^1.0.1"
@@ -2402,7 +2402,7 @@ less@^4.6.4:
     errno "^0.1.1"
     graceful-fs "^4.1.2"
     image-size "~0.5.0"
-    make-dir "^2.1.0"
+    make-dir "^5.1.0"
     mime "^1.4.1"
     needle "^3.1.0"
     source-map "~0.6.0"
@@ -2467,13 +2467,10 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-make-dir@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"
-  integrity sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==
-  dependencies:
-    pify "^4.0.1"
-    semver "^5.6.0"
+make-dir@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-5.1.0.tgz#59b2d9acf7ffa543d14238617a697458fa8dd5c9"
+  integrity sha512-IfpFq6UM39dUNiphpA6uDezNx/AvWyhwfICWPR3t1VspkgkMZrL+Rk1RbN1bx+aeNYwOrqGJgEgV3yotk+ZUVw==
 
 markdown-table@^2.0.0:
   version "2.0.0"
@@ -2583,10 +2580,10 @@ node-releases@^2.0.27:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.27.tgz#eedca519205cf20f650f61d56b070db111231e4e"
   integrity sha512-nmh3lCkYZ3grZvqcCH+fjmQ7X+H0OeZgP40OierEaAptX4XofMh5kwNbWh7lBduUzCcV/8kZ+NDLCwm2iorIlA==
 
-node-sarif-builder@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/node-sarif-builder/-/node-sarif-builder-3.4.0.tgz#9c1ac026919f5977e1014f0e26d4f69f0f45becd"
-  integrity sha512-tGnJW6OKRii9u/b2WiUViTJS+h7Apxx17qsMUjsUeNDiMMX5ZFf8F8Fcz7PAQ6omvOxHZtvDTmOYKJQwmfpjeg==
+node-sarif-builder@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/node-sarif-builder/-/node-sarif-builder-4.1.0.tgz#263862b76694308d0d915988a87b32aa0cb63439"
+  integrity sha512-IWqZF6u0EI/07HTBm+zZ+MgXgWl09dnSJRGaDCPBSlOqilDcx6pj3Mpb3HvPN8V2Gr+ISw7ZrMsL7STWs1F++w==
   dependencies:
     "@types/sarif" "^2.1.7"
     fs-extra "^11.1.1"
@@ -2691,11 +2688,6 @@ picomatch@^4.0.2:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-4.0.3.tgz#796c76136d1eead715db1e7bad785dedd695a042"
   integrity sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==
-
-pify@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
-  integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
 pkg-dir@^4.2.0:
   version "4.2.0"
@@ -2982,10 +2974,10 @@ pug-attrs@^3.0.0:
     js-stringify "^1.0.2"
     pug-runtime "^3.0.0"
 
-pug-code-gen@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/pug-code-gen/-/pug-code-gen-3.0.3.tgz#58133178cb423fe1716aece1c1da392a75251520"
-  integrity sha512-cYQg0JW0w32Ux+XTeZnBEeuWrAY7/HNE6TWnhiHGnnRYlCgyAUPoyh9KzCMa9WhcJlJ1AtQqpEYHc+vbCzA+Aw==
+pug-code-gen@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/pug-code-gen/-/pug-code-gen-3.0.4.tgz#2a82cd317f4983d9b61b51035de34e4f964d788d"
+  integrity sha512-6okWYIKdasTyXICyEtvobmTZAVX57JkzgzIi4iRJlin8kmhG+Xry2dsus+Mun/nGCn6F2U49haHI5mkELXB14g==
   dependencies:
     constantinople "^4.0.1"
     doctypes "^1.1.0"
@@ -3062,12 +3054,12 @@ pug-walk@^2.0.0:
   resolved "https://registry.yarnpkg.com/pug-walk/-/pug-walk-2.0.0.tgz#417aabc29232bb4499b5b5069a2b2d2a24d5f5fe"
   integrity sha512-yYELe9Q5q9IQhuvqsZNwA5hfPkMJ8u92bQLIMcsMxf/VADjNtEYptU+inlufAFYcWdHlwNfZOEnOOQrZrcyJCQ==
 
-pug@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/pug/-/pug-3.0.3.tgz#e18324a314cd022883b1e0372b8af3a1a99f7597"
-  integrity sha512-uBi6kmc9f3SZ3PXxqcHiUZLmIXgfgWooKWXcwSGwQd2Zi5Rb0bT14+8CJjJgI8AB+nndLaNgHGrcc6bPIB665g==
+pug@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/pug/-/pug-3.0.4.tgz#9043ae8dd85fc8beb5becf09dd8e4b754b94b29f"
+  integrity sha512-kFfq5mMzrS7+wrl5pLJzZEzemx34OQ0w4SARfhy/3yxTlhbstsudDwJzhf1hP02yHzbjoVMSXUj/Sz6RNfMyXg==
   dependencies:
-    pug-code-gen "^3.0.3"
+    pug-code-gen "^3.0.4"
     pug-filters "^4.0.0"
     pug-lexer "^5.0.1"
     pug-linker "^4.0.0"
@@ -3257,11 +3249,6 @@ schema-utils@^4.0.0, schema-utils@^4.2.0, schema-utils@^4.3.0, schema-utils@^4.3
     ajv "^8.9.0"
     ajv-formats "^2.1.1"
     ajv-keywords "^5.1.0"
-
-semver@^5.6.0:
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.2.tgz#48d55db737c3287cd4835e17fa13feace1c41ef8"
-  integrity sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==
 
 semver@^6.3.1:
   version "6.3.1"
