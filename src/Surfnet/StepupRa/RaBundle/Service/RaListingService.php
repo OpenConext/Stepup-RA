@@ -22,12 +22,19 @@ use Surfnet\StepupMiddlewareClient\Identity\Dto\RaListingSearchQuery;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListingCollection;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaListingService as ApiRaListingService;
+use Surfnet\StepupRa\RaBundle\Command\ExportRaListingCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
+use Surfnet\StepupRa\RaBundle\Value\RoleAtInstitution;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 final readonly class RaListingService
 {
+    private const EXPORT_DEFAULT_ORDER_BY = 'commonName';
+    private const EXPORT_DEFAULT_ORDER_DIRECTION = 'asc';
+
     public function __construct(
         private ApiRaListingService $apiRaListingService,
+        private RaListingExport $raListingExport,
     ) {
     }
 
@@ -37,35 +44,16 @@ final readonly class RaListingService
      */
     public function search(SearchRaListingCommand $command): RaListingCollection
     {
-        $query = new RaListingSearchQuery($command->actorId, $command->pageNumber);
-
-        if ($command->name) {
-            $query->setName($command->name);
-        }
-
-        if ($command->email) {
-            $query->setEmail($command->email);
-        }
-
-        if ($command->institution) {
-            $query->setInstitution($command->institution);
-        }
-
-        if ($command->roleAtInstitution && $command->roleAtInstitution->hasRole()) {
-            $query->setRole($command->roleAtInstitution->getRole());
-        }
-
-        if ($command->roleAtInstitution && $command->roleAtInstitution->hasInstitution()) {
-            $query->setRaInstitution($command->roleAtInstitution->getInstitution());
-        }
-
-        if ($command->orderBy) {
-            $query->setOrderBy($command->orderBy);
-        }
-
-        if ($command->orderDirection) {
-            $query->setOrderDirection($command->orderDirection);
-        }
+        $query = $this->buildQuery(
+            $command->actorId,
+            $command->pageNumber,
+            $command->name,
+            $command->email,
+            $command->institution,
+            $command->roleAtInstitution,
+            $command->orderBy,
+            $command->orderDirection,
+        );
 
         return $this->apiRaListingService->search($query);
     }
@@ -73,5 +61,84 @@ final readonly class RaListingService
     public function get(string $identityId, string $institution, string $actorId): ?RaListing
     {
         return $this->apiRaListingService->get($identityId, $institution, $actorId);
+    }
+
+    public function export(ExportRaListingCommand $command): StreamedResponse
+    {
+        return $this->raListingExport->export($this->fetchAllPages($command), $command->getFileName());
+    }
+
+    /**
+     * @return iterable<RaListing>
+     */
+    private function fetchAllPages(ExportRaListingCommand $command): iterable
+    {
+        $pageNumber = 1;
+
+        do {
+            $query = $this->buildQuery(
+                $command->actorId,
+                $pageNumber,
+                $command->name,
+                $command->email,
+                $command->institution,
+                $command->roleAtInstitution,
+                $command->orderBy ?: self::EXPORT_DEFAULT_ORDER_BY,
+                $command->orderDirection ?: self::EXPORT_DEFAULT_ORDER_DIRECTION,
+            );
+
+            $collection = $this->apiRaListingService->search($query);
+            yield from $collection->getElements();
+
+            $lastPage = (int) ceil($collection->getTotalItems() / max($collection->getItemsPerPage(), 1));
+            $pageNumber++;
+        } while ($pageNumber <= $lastPage);
+    }
+
+    /**
+     * @SuppressWarnings("PHPMD.CyclomaticComplexity") -- The command to query mapping exceeds the
+     * @SuppressWarnings("PHPMD.NPathComplexity") CyclomaticComplexity and NPathComplexity threshold.
+     */
+    private function buildQuery(
+        string $actorId,
+        int $pageNumber,
+        ?string $name,
+        ?string $email,
+        ?string $institution,
+        ?RoleAtInstitution $roleAtInstitution,
+        ?string $orderBy = null,
+        ?string $orderDirection = null,
+    ): RaListingSearchQuery {
+        $query = new RaListingSearchQuery($actorId, $pageNumber);
+
+        if ($name) {
+            $query->setName($name);
+        }
+
+        if ($email) {
+            $query->setEmail($email);
+        }
+
+        if ($institution) {
+            $query->setInstitution($institution);
+        }
+
+        if ($roleAtInstitution && $roleAtInstitution->hasRole()) {
+            $query->setRole($roleAtInstitution->getRole());
+        }
+
+        if ($roleAtInstitution && $roleAtInstitution->hasInstitution()) {
+            $query->setRaInstitution($roleAtInstitution->getInstitution());
+        }
+
+        if ($orderBy) {
+            $query->setOrderBy($orderBy);
+        }
+
+        if ($orderDirection) {
+            $query->setOrderDirection($orderDirection);
+        }
+
+        return $query;
     }
 }

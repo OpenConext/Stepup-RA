@@ -215,11 +215,16 @@ services:
     Surfnet\StepupRa\RaBundle\Service\RaLocationService:
         alias: ra.service.ra_location
 
+    ra.service.ra_listing_exporter:
+        class: Surfnet\StepupRa\RaBundle\Service\RaListingExport
+        arguments:
+            - "@logger"
+
     ra.service.ra_listing:
         class: Surfnet\StepupRa\RaBundle\Service\RaListingService
         arguments:
             - "@surfnet_stepup_middleware_client.identity.service.ra_listing"
-            - "@logger"
+            - "@ra.service.ra_listing_exporter"
     Surfnet\StepupRa\RaBundle\Service\RaListingService:
         alias: ra.service.ra_listing
 

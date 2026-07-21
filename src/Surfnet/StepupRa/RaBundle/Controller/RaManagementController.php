@@ -24,6 +24,7 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaCandidateInstitution;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing;
 use Surfnet\StepupRa\RaBundle\Command\AccreditCandidateCommand;
 use Surfnet\StepupRa\RaBundle\Command\AmendRegistrationAuthorityInformationCommand;
+use Surfnet\StepupRa\RaBundle\Command\ExportRaListingCommand;
 use Surfnet\StepupRa\RaBundle\Command\RetractRegistrationAuthorityCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaCandidatesCommand;
 use Surfnet\StepupRa\RaBundle\Command\SearchRaListingCommand;
@@ -89,6 +90,11 @@ class RaManagementController extends AbstractController
         $form = $this->createForm(SearchRaListingType::class, $command, ['method' => 'get']);
         $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->getClickedButton()?->getName() === 'export') {
+            $this->logger->notice('Forwarding to export RA(A) listing action');
+            return $this->forward('\Surfnet\StepupRa\RaBundle\Controller\RaManagementController::export', ['command' => $command]);
+        }
+
         $raList = $this->raListingService->search($command);
 
         $pagination = $this->paginator->paginate(
@@ -115,6 +121,16 @@ class RaManagementController extends AbstractController
                 'pagination' => $pagination,
             ],
         );
+    }
+
+    #[IsGranted('ROLE_RAA')]
+    public function export(SearchRaListingCommand $command): Response
+    {
+        $this->logger->notice('Starting export of searched RA(A) listing');
+
+        $exportCommand = ExportRaListingCommand::fromSearchCommand($command);
+
+        return $this->raListingService->export($exportCommand);
     }
 
     #[Route(
