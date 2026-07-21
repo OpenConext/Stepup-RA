@@ -241,6 +241,10 @@
         <source>ra.form.ra_search_ra_candidates.label.name</source>
         <target>Name</target>
       </trans-unit>
+      <trans-unit id="k9J3xLp" resname="ra.form.ra_search_ra_listing.button.export">
+        <source>ra.form.ra_search_ra_listing.button.export</source>
+        <target>Export</target>
+      </trans-unit>
       <trans-unit id="gIS06rq" resname="ra.form.ra_search_ra_listing.button.search">
         <source>ra.form.ra_search_ra_listing.button.search</source>
         <target>Search</target>
@@ -372,6 +376,10 @@
       <trans-unit id="OI4DewE" resname="ra.form.role_at_institution.label.institution">
         <source>ra.form.role_at_institution.label.institution</source>
         <target>@</target>
+      </trans-unit>
+      <trans-unit id="p7VmQ2z" resname="ra.form.role_at_institution.placeholder.role">
+        <source>ra.form.role_at_institution.placeholder.role</source>
+        <target>RA/RAA</target>
       </trans-unit>
       <trans-unit id="SqK9YfO" resname="ra.form.select_institution.button.switch">
         <source>ra.form.select_institution.button.switch</source>

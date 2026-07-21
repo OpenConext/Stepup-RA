@@ -52,6 +52,7 @@ class RoleAtInstitutionType extends AbstractType
             'choices' => RaRoleChoiceList::create(),
             'choice_value' => fn($choice) => $choice,
             'required' => $isRequired,
+            'placeholder' => $isRequired ? null : 'ra.form.role_at_institution.placeholder.role',
         ])->add('institution', ChoiceType::class, [
             'label' => 'ra.form.role_at_institution.label.institution',
             'choices' => $selectRaaOptions,
