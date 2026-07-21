@@ -19,6 +19,7 @@
 namespace Surfnet\StepupRa\RaBundle\Service;
 
 use Psr\Log\LoggerInterface;
+use RuntimeException;
 use Surfnet\StepupMiddlewareClientBundle\Identity\Dto\RaListing;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -41,6 +42,9 @@ class RaListingExport
         return new StreamedResponse(
             function () use ($raListings, $columnNames) {
                 $handle = fopen('php://output', 'r+');
+                if ($handle === false) {
+                    throw new RuntimeException('Unable to open php://output for writing the RA(A) listing export');
+                }
                 fputcsv($handle, $columnNames);
                 foreach ($raListings as $raListing) {
                     fputcsv($handle, [
@@ -64,6 +68,9 @@ class RaListingExport
         );
     }
 
+    /**
+     * @return string[]
+     */
     private function getColumnNames(): array
     {
         return [

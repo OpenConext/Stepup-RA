@@ -344,6 +344,12 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
 ];
 $ignoreErrors[] = [
+	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\Form\\\\FormInterface\\<Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaListingCommand\\>\\:\\:getClickedButton\\(\\)\\.$#',
+	'identifier' => 'method.notFound',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
+];
+$ignoreErrors[] = [
 	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface\\:\\:findById\\(\\)\\.$#',
 	'identifier' => 'method.notFound',
 	'count' => 1,
@@ -714,12 +720,6 @@ $ignoreErrors[] = [
 	'identifier' => 'assign.propertyType',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/RaCandidateService.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Left side of && is always true\\.$#',
-	'identifier' => 'booleanAnd.leftAlwaysTrue',
-	'count' => 2,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/RaListingService.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Parameter \\#1 \\$raInstitution of method Surfnet\\\\StepupMiddlewareClient\\\\Identity\\\\Dto\\\\RaListingSearchQuery\\:\\:setRaInstitution\\(\\) expects string, string\\|null given\\.$#',

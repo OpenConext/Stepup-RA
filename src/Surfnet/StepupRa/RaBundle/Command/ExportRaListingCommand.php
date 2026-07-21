@@ -24,6 +24,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class ExportRaListingCommand
 {
+    /**
+     * @var string
+     */
     #[Assert\NotBlank(message: 'ra.search_ra_listing.actor_id.blank')]
     #[Assert\Type('string', message: 'ra.search_ra_listing.actor_id.type')]
     public $actorId;
