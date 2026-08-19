@@ -172,8 +172,8 @@ class SessionLifetimeGuardTest extends TestCase
     #[DataProvider('bothLimitsVerificationProvider')]
     public function an_authentication_session_is_verified_against_both_limits(
         $isValid,
-        DateTime $authenticationMoment = null,
-        DateTime $interactionMoment = null,
+        ?DateTime $authenticationMoment = null,
+        ?DateTime $interactionMoment = null,
     ) {
         $authenticatedSessionMock = Mockery::mock(AuthenticatedSessionStateHandler::class);
         $authenticatedSessionMock
@@ -217,7 +217,7 @@ class SessionLifetimeGuardTest extends TestCase
      *
      * @param DateTime|null $now
      */
-    private function setCurrentTime(DateTime $now = null): void
+    private function setCurrentTime(?DateTime $now = null): void
     {
         $nowProperty = new ReflectionProperty(DateTime::class, 'now');
         $nowProperty->setValue(null, $now);
@@ -229,7 +229,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @param DateTime|null $moment
      * @return AuthenticatedSessionStateHandler mocked
      */
-    private function createSessionMockAuthenticatedAt(DateTime $moment = null): AuthenticatedSessionStateHandler
+    private function createSessionMockAuthenticatedAt(?DateTime $moment = null): AuthenticatedSessionStateHandler
     {
         $sessionMock = Mockery::mock(AuthenticatedSessionStateHandler::class);
         $sessionMock
@@ -257,7 +257,7 @@ class SessionLifetimeGuardTest extends TestCase
      * @param DateTime|null $moment
      * @return AuthenticatedSessionStateHandler mocked
      */
-    private function createSessionMockLastInteractionAt(DateTime $moment = null): AuthenticatedSessionStateHandler
+    private function createSessionMockLastInteractionAt(?DateTime $moment = null): AuthenticatedSessionStateHandler
     {
         $sessionMock = Mockery::mock(AuthenticatedSessionStateHandler::class);
 

@@ -63,7 +63,7 @@ class IdentityService implements UserProviderInterface
     /**
      * Whether this provider supports the given user class
      */
-    public function supportsClass($class): bool
+    public function supportsClass(string $class): bool
     {
         return $class === Identity::class;
     }
