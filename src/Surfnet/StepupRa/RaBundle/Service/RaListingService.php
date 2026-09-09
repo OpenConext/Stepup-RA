@@ -66,7 +66,18 @@ final readonly class RaListingService
      */
     public function export(ExportRaListingCommand $command): StreamedResponse
     {
-        $raListings = [];
+        return $this->raListingExport->export($this->fetchAllPages($command), $command->getFileName());
+    }
+
+    /**
+     * Lazily fetches every page of RA listing results. Wrapped in a generator so no page is
+     * requested until the exporter actually starts consuming rows (which happens when the
+     * streamed response is sent), avoiding buffering the full result set in memory.
+     *
+     * @return iterable<RaListing>
+     */
+    private function fetchAllPages(ExportRaListingCommand $command): iterable
+    {
         $pageNumber = 1;
 
         do {
@@ -77,16 +88,16 @@ final readonly class RaListingService
                 $command->email,
                 $command->institution,
                 $command->roleAtInstitution,
+                $command->orderBy,
+                $command->orderDirection,
             );
 
             $collection = $this->apiRaListingService->search($query);
-            $raListings = array_merge($raListings, $collection->getElements());
+            yield from $collection->getElements();
 
             $lastPage = (int) ceil($collection->getTotalItems() / max($collection->getItemsPerPage(), 1));
             $pageNumber++;
         } while ($pageNumber <= $lastPage);
-
-        return $this->raListingExport->export($raListings, $command->getFileName());
     }
 
     /**

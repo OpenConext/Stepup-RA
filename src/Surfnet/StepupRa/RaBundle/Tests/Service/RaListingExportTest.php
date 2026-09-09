@@ -73,6 +73,51 @@ class RaListingExportTest extends TestCase
     }
 
     #[Test]
+    public function it_neutralizes_values_that_could_be_interpreted_as_spreadsheet_formulas()
+    {
+        $logger = Mockery::mock(LoggerInterface::class);
+        $logger->shouldReceive('notice');
+
+        $export = new RaListingExport($logger);
+
+        $raListing = new RaListing();
+        $raListing->identityId = 'identity-id';
+        $raListing->commonName = '=1+1';
+        $raListing->email = 'jane@example.org';
+        $raListing->institution = '-2+3';
+        $raListing->role = '@SUM(1,1)';
+        $raListing->raInstitution = 'institution-a';
+        $raListing->location = 'Room 101';
+        // A leading "+" is intentionally left untouched, since this column holds
+        // international phone numbers (e.g. "+31 6 12345678").
+        $raListing->contactInformation = '+31 6 12345678';
+
+        $response = $export->export([$raListing], 'ra_export_2026-07-24');
+
+        ob_start();
+        $response->sendContent();
+        $csv = ob_get_clean();
+
+        $rows = array_map(
+            fn(string $line) => str_getcsv($line, escape: ''),
+            explode("\n", rtrim(str_replace("\r\n", "\n", $csv), "\n")),
+        );
+
+        $this->assertSame(
+            [
+                "'=1+1",
+                'jane@example.org',
+                "'-2+3",
+                "'@SUM(1,1)",
+                'institution-a',
+                'Room 101',
+                '+31 6 12345678',
+            ],
+            $rows[1],
+        );
+    }
+
+    #[Test]
     public function it_streams_only_the_header_row_when_there_are_no_listings()
     {
         $logger = Mockery::mock(LoggerInterface::class);

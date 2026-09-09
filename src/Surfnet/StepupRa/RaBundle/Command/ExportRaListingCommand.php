@@ -52,6 +52,18 @@ final class ExportRaListingCommand
     public $roleAtInstitution;
 
     /**
+     * @var string|null
+     */
+    #[Assert\Choice(choices: ['name', 'email'], message: 'ra.search_ra_candidates.order_by.invalid_choice')]
+    public $orderBy;
+
+    /**
+     * @var string|null
+     */
+    #[Assert\Choice(choices: ['asc', 'desc'], message: 'ra.search_ra_candidates.order_direction.invalid_choice')]
+    public $orderDirection;
+
+    /**
      * Builds the command from a SearchRaListingCommand
      */
     public static function fromSearchCommand(SearchRaListingCommand $command): ExportRaListingCommand
@@ -63,6 +75,8 @@ final class ExportRaListingCommand
         $exportCommand->email = $command->email;
         $exportCommand->institution = $command->institution;
         $exportCommand->roleAtInstitution = $command->roleAtInstitution;
+        $exportCommand->orderBy = $command->orderBy;
+        $exportCommand->orderDirection = $command->orderDirection;
 
         return $exportCommand;
     }

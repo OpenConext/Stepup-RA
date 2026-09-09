@@ -57,10 +57,7 @@ class RaListingServiceTest extends TestCase
             ->shouldReceive('export')
             ->once()
             ->with(
-                Mockery::on(function (array $listings) {
-                    return array_map(fn (RaListing $listing) => $listing->identityId, $listings)
-                        === ['identity-1', 'identity-2', 'identity-3'];
-                }),
+                $this->matchesIdentityIdsOnce(['identity-1', 'identity-2', 'identity-3']),
                 'ra-raa-export_' . (new DateTime())->format('Y-m-d'),
             )
             ->andReturn($expectedResponse);
@@ -69,6 +66,42 @@ class RaListingServiceTest extends TestCase
 
         $command = new ExportRaListingCommand();
         $command->actorId = 'actor-id';
+
+        $this->assertSame($expectedResponse, $service->export($command));
+    }
+
+    #[Test]
+    public function export_preserves_the_requested_sort_order_across_pages()
+    {
+        $emptyPage = RaListingCollection::empty();
+
+        $apiService = Mockery::mock(ApiRaListingService::class);
+        $apiService
+            ->shouldReceive('search')
+            ->once()
+            ->with(Mockery::on(
+                fn (RaListingSearchQuery $query) => str_contains($query->toHttpQuery(), 'orderBy=email')
+                    && str_contains($query->toHttpQuery(), 'orderDirection=desc'),
+            ))
+            ->andReturn($emptyPage);
+
+        $expectedResponse = Mockery::mock(StreamedResponse::class);
+        $export = Mockery::mock(RaListingExport::class);
+        $export
+            ->shouldReceive('export')
+            ->once()
+            ->with(
+                $this->matchesIdentityIdsOnce([]),
+                Mockery::type('string'),
+            )
+            ->andReturn($expectedResponse);
+
+        $service = new RaListingService($apiService, $export);
+
+        $command = new ExportRaListingCommand();
+        $command->actorId = 'actor-id';
+        $command->orderBy = 'email';
+        $command->orderDirection = 'desc';
 
         $this->assertSame($expectedResponse, $service->export($command));
     }
@@ -89,7 +122,10 @@ class RaListingServiceTest extends TestCase
         $export
             ->shouldReceive('export')
             ->once()
-            ->with([], Mockery::type('string'))
+            ->with(
+                $this->matchesIdentityIdsOnce([]),
+                Mockery::type('string'),
+            )
             ->andReturn($expectedResponse);
 
         $service = new RaListingService($apiService, $export);
@@ -98,6 +134,31 @@ class RaListingServiceTest extends TestCase
         $command->actorId = 'actor-id';
 
         $this->assertSame($expectedResponse, $service->export($command));
+    }
+
+    /**
+     * Builds a Mockery::on() matcher that materializes an iterable/generator argument
+     * exactly once. Mockery may re-evaluate an argument matcher after the initial call
+     * (e.g. while verifying expectation counts), and generators cannot be traversed twice,
+     * so the result of the first evaluation is cached and reused on any later calls.
+     *
+     * @param string[] $expectedIdentityIds
+     */
+    private function matchesIdentityIdsOnce(array $expectedIdentityIds): Mockery\Matcher\Closure
+    {
+        $matches = null;
+
+        return Mockery::on(function (iterable $listings) use ($expectedIdentityIds, &$matches) {
+            if ($matches === null) {
+                $identityIds = array_map(
+                    fn (RaListing $listing) => $listing->identityId,
+                    iterator_to_array($listings, preserve_keys: false),
+                );
+                $matches = $identityIds === $expectedIdentityIds;
+            }
+
+            return $matches;
+        });
     }
 
     /**

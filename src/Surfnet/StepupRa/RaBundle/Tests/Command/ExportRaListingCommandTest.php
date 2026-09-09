@@ -51,6 +51,8 @@ class ExportRaListingCommandTest extends TestCase
         $this->assertSame('jane@example.org', $exportCommand->email);
         $this->assertSame('institution-a', $exportCommand->institution);
         $this->assertSame($roleAtInstitution, $exportCommand->roleAtInstitution);
+        $this->assertSame('name', $exportCommand->orderBy);
+        $this->assertSame('desc', $exportCommand->orderDirection);
     }
 
     #[Test]
