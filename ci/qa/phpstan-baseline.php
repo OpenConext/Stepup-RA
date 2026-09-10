@@ -686,12 +686,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/IdentityService.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\IdentityService\\:\\:supportsClass\\(\\) has parameter \\$class with no type specified\\.$#',
-	'identifier' => 'missingType.parameter',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Service/IdentityService.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Service\\\\InstitutionConfigurationOptionsServiceInterface\\:\\:getInstitutionConfigurationOptionsFor\\(\\) has parameter \\$institution with no type specified\\.$#',
 	'identifier' => 'missingType.parameter',
 	'count' => 1,

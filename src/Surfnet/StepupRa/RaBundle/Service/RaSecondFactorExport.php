@@ -38,14 +38,14 @@ class RaSecondFactorExport
         return new StreamedResponse(
             function () use ($collection, $keys) {
                 $handle = fopen('php://output', 'r+');
-                fputcsv($handle, $collection->getColumnNames());
+                fputcsv($handle, $collection->getColumnNames(), escape: '\\');
                 foreach ($collection->getElements() as $row) {
                     $cells = [];
                     $array = (array)$row;
                     foreach ($keys as $key) {
                         $cells[$key] = $array[$key];
                     }
-                    fputcsv($handle, $cells);
+                    fputcsv($handle, $cells, escape: '\\');
                 }
                 fflush($handle);
                 fclose($handle);

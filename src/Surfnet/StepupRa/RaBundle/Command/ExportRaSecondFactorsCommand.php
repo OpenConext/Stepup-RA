@@ -22,10 +22,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class ExportRaSecondFactorsCommand
 {
-    public const STATUS_UNVERIFIED = 'unverified';
-    public const STATUS_VERIFIED = 'verified';
-    public const STATUS_VETTED = 'vetted';
-    public const STATUS_REVOKED = 'revoked';
+    public const string STATUS_UNVERIFIED = 'unverified';
+    public const string STATUS_VERIFIED = 'verified';
+    public const string STATUS_VETTED = 'vetted';
+    public const string STATUS_REVOKED = 'revoked';
 
     /**
      *

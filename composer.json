@@ -12,7 +12,7 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "php": "^8.2",
+        "php": "^8.5",
         "ext-dom": "*",
         "ext-openssl": "*",
         "doctrine/annotations": "^2.0.2",
@@ -139,7 +139,7 @@
         "optimize-autoloader": true,
         "sort-packages": true,
         "platform": {
-            "php": "8.2.5"
+            "php": "8.5.2"
         }
     },
     "extra": {

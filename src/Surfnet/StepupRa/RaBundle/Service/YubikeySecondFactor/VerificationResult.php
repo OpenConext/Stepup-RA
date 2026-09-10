@@ -23,10 +23,10 @@ use Surfnet\StepupRa\RaBundle\Exception\DomainException;
 
 class VerificationResult
 {
-    final public const RESULT_PUBLIC_ID_MATCHED = 0;
-    final public const RESULT_PUBLIC_ID_DID_NOT_MATCH = 1;
-    final public const RESULT_OTP_VERIFICATION_FAILED = 2;
-    final public const RESULT_OTP_INVALID = 3;
+    final public const int RESULT_PUBLIC_ID_MATCHED = 0;
+    final public const int RESULT_PUBLIC_ID_DID_NOT_MATCH = 1;
+    final public const int RESULT_OTP_VERIFICATION_FAILED = 2;
+    final public const int RESULT_OTP_INVALID = 3;
 
     /**
      * @var int One of the RESULT constants.
