@@ -45,7 +45,7 @@ class RaListingExport
                 if ($handle === false) {
                     throw new RuntimeException('Unable to open php://output for writing the RA(A) listing export');
                 }
-                fputcsv($handle, $columnNames);
+                fputcsv($handle, $columnNames, escape: '');
 
                 $rowCount = 0;
                 foreach ($raListings as $raListing) {
@@ -57,7 +57,7 @@ class RaListingExport
                         $this->sanitizeCsvCell($raListing->raInstitution),
                         $this->sanitizeCsvCell($raListing->location),
                         $this->sanitizeCsvCell($raListing->contactInformation),
-                    ]);
+                    ], escape: '');
                     $rowCount++;
                 }
 

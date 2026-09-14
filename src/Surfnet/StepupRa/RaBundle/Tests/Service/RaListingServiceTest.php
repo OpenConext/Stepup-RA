@@ -29,6 +29,7 @@ use Surfnet\StepupMiddlewareClientBundle\Identity\Service\RaListingService as Ap
 use Surfnet\StepupRa\RaBundle\Command\ExportRaListingCommand;
 use Surfnet\StepupRa\RaBundle\Service\RaListingExport;
 use Surfnet\StepupRa\RaBundle\Service\RaListingService;
+use Surfnet\StepupRa\RaBundle\Value\RoleAtInstitution;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class RaListingServiceTest extends TestCase
@@ -102,6 +103,58 @@ class RaListingServiceTest extends TestCase
         $command->actorId = 'actor-id';
         $command->orderBy = 'email';
         $command->orderDirection = 'desc';
+
+        $this->assertSame($expectedResponse, $service->export($command));
+    }
+
+    #[Test]
+    public function export_propagates_all_search_filters_to_the_query()
+    {
+        $roleAtInstitution = new RoleAtInstitution();
+        $roleAtInstitution->setRole('ra');
+        $roleAtInstitution->setInstitution('ra-institution-a');
+
+        $command = new ExportRaListingCommand();
+        $command->actorId = 'actor-id';
+        $command->name = 'Jane';
+        $command->email = 'jane@example.org';
+        $command->institution = 'institution-a';
+        $command->roleAtInstitution = $roleAtInstitution;
+        $command->orderBy = 'email';
+        $command->orderDirection = 'desc';
+
+        $expectedQuery = new RaListingSearchQuery('actor-id', 1);
+        $expectedQuery->setName('Jane');
+        $expectedQuery->setEmail('jane@example.org');
+        $expectedQuery->setInstitution('institution-a');
+        $expectedQuery->setRole('ra');
+        $expectedQuery->setRaInstitution('ra-institution-a');
+        $expectedQuery->setOrderBy('email');
+        $expectedQuery->setOrderDirection('desc');
+
+        $emptyPage = RaListingCollection::empty();
+
+        $apiService = Mockery::mock(ApiRaListingService::class);
+        $apiService
+            ->shouldReceive('search')
+            ->once()
+            ->with(Mockery::on(
+                fn (RaListingSearchQuery $query) => $query->toHttpQuery() === $expectedQuery->toHttpQuery(),
+            ))
+            ->andReturn($emptyPage);
+
+        $expectedResponse = Mockery::mock(StreamedResponse::class);
+        $export = Mockery::mock(RaListingExport::class);
+        $export
+            ->shouldReceive('export')
+            ->once()
+            ->with(
+                $this->matchesIdentityIdsOnce([]),
+                Mockery::type('string'),
+            )
+            ->andReturn($expectedResponse);
+
+        $service = new RaListingService($apiService, $export);
 
         $this->assertSame($expectedResponse, $service->export($command));
     }
