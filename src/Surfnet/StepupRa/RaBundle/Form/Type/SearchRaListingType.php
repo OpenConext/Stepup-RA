@@ -50,10 +50,25 @@ class SearchRaListingType extends AbstractType
                 'choices' => $data->raInstitutionFilterOptions,
                 'label' => 'ra.form.ra_search_ra_listing.label.role',
                 'required' => false,
-            ])->add('search', SubmitType::class, [
+            ]);
+
+        $buttonGroup = $builder->create(
+            'button-group',
+            ButtonGroupType::class,
+            [
+                'mapped' => false,
+            ],
+        )
+            ->add('search', SubmitType::class, [
                 'label' => 'ra.form.ra_search_ra_listing.button.search',
                 'attr' => ['class' => 'btn btn-primary search-button'],
+            ])
+            ->add('export', SubmitType::class, [
+                'label' => 'ra.form.ra_search_ra_listing.button.export',
+                'attr' => ['class' => 'btn btn-secondary'],
             ]);
+
+        $builder->add($buttonGroup);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
