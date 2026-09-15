@@ -4,4 +4,9 @@ cd $(dirname $0)/../../
 
 # PHPUnit Bridge should always be used in Symfony applications. (https://symfony.com/doc/current/components/phpunit_bridge.html)
 # This will create a phpunit executable in /bin/ instead of /vendor/bin/
-XDEBUG_MODE=coverage ./vendor/bin/phpunit --configuration=ci/qa/phpunit.xml --coverage-text
+#
+# APP_ENV is exported as a real environment variable (not only via phpunit.xml's <server> tag,
+# which sets $_SERVER too late for config/bootstrap.php to see it) so kernel-booting tests get
+# the "test" environment (needed for e.g. framework.test, required by WebTestCase). variables_order
+# is forced to include "E" so $_ENV picks it up regardless of the host php.ini.
+APP_ENV=test XDEBUG_MODE=coverage php -d variables_order=EGPCS ./vendor/bin/phpunit --configuration=ci/qa/phpunit.xml --coverage-text

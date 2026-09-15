@@ -112,7 +112,17 @@ class VettingTypeHintController extends AbstractController
             if ($success) {
                 $this->addFlash('success', 'ra.vetting_type_hint.success');
 
-                return $this->redirectToRoute('vetting_type_hint', ['institution' => $command->institution]);
+                // The hidden institution field on the form is client-controlled, so only trust
+                // it for the redirect (and the resulting dropdown/subtitle) when it is one of
+                // the institutions this identity is actually authorised for. It reflects the
+                // institution chosen via the select-institution form on a previous request (that
+                // form never changes the URL), so falling back to $institution here would send
+                // the user right back to their home institution after every save.
+                $redirectInstitution = in_array($command->institution, $choices, true)
+                    ? $command->institution
+                    : $institution;
+
+                return $this->redirectToRoute('vetting_type_hint', ['institution' => $redirectInstitution]);
             }
 
             $this->logger->debug('Vetting type hint saving failed, adding error to form');
