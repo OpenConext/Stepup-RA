@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+- Upgrade to PHP 8.5 and Node 24 #519
+- Bump Docker base images, Composer dependencies, and yarn dependencies
+- Apply Rector cleanup for PHP 8.5 compatibility
+
 ## 7.0.0
 - Update to Symfony 7.4
 - Upgrade of numerous NPM and Composer dependencies

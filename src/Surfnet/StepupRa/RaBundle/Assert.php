@@ -19,10 +19,12 @@
 namespace Surfnet\StepupRa\RaBundle;
 
 use Assert\Assertion;
+use Override;
 use Surfnet\StepupRa\RaBundle\Exception\AssertionFailedException;
 
 final class Assert extends Assertion
 {
+    #[Override]
     protected static $exceptionClass = AssertionFailedException::class;
 
     public static function keysAre(array $array, array $expectedKeys, $propertyPath = null): void

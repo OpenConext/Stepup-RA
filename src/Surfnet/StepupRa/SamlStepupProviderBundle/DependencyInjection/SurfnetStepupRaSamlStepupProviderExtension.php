@@ -43,7 +43,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class SurfnetStepupRaSamlStepupProviderExtension extends Extension
 {
 
-    final public const VIEW_CONFIG_TAG_NAME = 'gssp.view_config';
+    final public const string VIEW_CONFIG_TAG_NAME = 'gssp.view_config';
 
     /**
      * {@inheritdoc}
