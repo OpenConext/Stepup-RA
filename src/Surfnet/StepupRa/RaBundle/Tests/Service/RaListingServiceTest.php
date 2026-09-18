@@ -108,6 +108,40 @@ class RaListingServiceTest extends TestCase
     }
 
     #[Test]
+    public function export_defaults_to_a_deterministic_sort_when_none_is_requested()
+    {
+        $emptyPage = RaListingCollection::empty();
+
+        $apiService = Mockery::mock(ApiRaListingService::class);
+        $apiService
+            ->shouldReceive('search')
+            ->once()
+            ->with(Mockery::on(
+                fn (RaListingSearchQuery $query) => str_contains($query->toHttpQuery(), 'orderBy=commonName')
+                    && str_contains($query->toHttpQuery(), 'orderDirection=asc'),
+            ))
+            ->andReturn($emptyPage);
+
+        $expectedResponse = Mockery::mock(StreamedResponse::class);
+        $export = Mockery::mock(RaListingExport::class);
+        $export
+            ->shouldReceive('export')
+            ->once()
+            ->with(
+                $this->matchesIdentityIdsOnce([]),
+                Mockery::type('string'),
+            )
+            ->andReturn($expectedResponse);
+
+        $service = new RaListingService($apiService, $export);
+
+        $command = new ExportRaListingCommand();
+        $command->actorId = 'actor-id';
+
+        $this->assertSame($expectedResponse, $service->export($command));
+    }
+
+    #[Test]
     public function export_propagates_all_search_filters_to_the_query()
     {
         $roleAtInstitution = new RoleAtInstitution();

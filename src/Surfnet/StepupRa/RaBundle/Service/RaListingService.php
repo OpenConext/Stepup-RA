@@ -29,6 +29,15 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 final readonly class RaListingService
 {
+    /**
+     * Export pages are fetched one at a time through separate, unrelated search requests (see
+     * fetchAllPages()). Without an explicit, stable sort, the underlying storage gives no
+     * ordering guarantee between those requests, so rows could be duplicated or dropped across
+     * pages. commonName is always unique per RA listing, making it a safe default sort key.
+     */
+    private const EXPORT_DEFAULT_ORDER_BY = 'commonName';
+    private const EXPORT_DEFAULT_ORDER_DIRECTION = 'asc';
+
     public function __construct(
         private ApiRaListingService $apiRaListingService,
         private RaListingExport $raListingExport,
@@ -88,8 +97,8 @@ final readonly class RaListingService
                 $command->email,
                 $command->institution,
                 $command->roleAtInstitution,
-                $command->orderBy,
-                $command->orderDirection,
+                $command->orderBy ?: self::EXPORT_DEFAULT_ORDER_BY,
+                $command->orderDirection ?: self::EXPORT_DEFAULT_ORDER_DIRECTION,
             );
 
             $collection = $this->apiRaListingService->search($query);
