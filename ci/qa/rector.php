@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use Rector\Php84\Rector\Class_\DeprecatedAnnotationToDeprecatedAttributeRector;
+use Rector\Php84\Rector\MethodCall\NewMethodCallWithoutParenthesesRector;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -16,4 +18,8 @@ return RectorConfig::configure()
     ->withComposerBased(twig: true, doctrine: true, phpunit: true, symfony: true)
     ->withPHPStanConfigs([__DIR__.'/phpstan.neon'])
     ->withPreparedSets(deadCode: true)
+    ->withSkip([
+        NewMethodCallWithoutParenthesesRector::class,
+        DeprecatedAnnotationToDeprecatedAttributeRector::class,
+    ])
 ;

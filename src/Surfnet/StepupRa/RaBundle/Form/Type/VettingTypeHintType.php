@@ -32,7 +32,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class VettingTypeHintType extends AbstractType
 {
-    final public const HINT_TEXTAREA_NAME_PREFIX = 'vetting_type_hint_';
+    final public const string HINT_TEXTAREA_NAME_PREFIX = 'vetting_type_hint_';
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {

@@ -30,7 +30,7 @@ class VerifyYubikeyPublicIdType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('otp', OtpType::class);
+        $builder->add('yubikeyInput', OtpType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

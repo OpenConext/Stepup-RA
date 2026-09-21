@@ -77,6 +77,10 @@
         <source>ra.auditlog.action.created</source>
         <target>Identiteit aangemaakt</target>
       </trans-unit>
+      <trans-unit id="hK6e.Tv" resname="ra.auditlog.action.deprovisioned">
+        <source>ra.auditlog.action.deprovisioned</source>
+        <target>Gedeprovisioneerd</target>
+      </trans-unit>
       <trans-unit id="jvc4R21" resname="ra.auditlog.action.email_changed">
         <source>ra.auditlog.action.email_changed</source>
         <target>E-mail gewijzigd</target>

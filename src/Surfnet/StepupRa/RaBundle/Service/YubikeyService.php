@@ -39,7 +39,7 @@ class YubikeyService
 
         $body = [
             'requester' => ['institution' => $command->institution, 'identity' => $command->identityId],
-            'otp' => ['value' => $command->otp],
+            'otp' => ['value' => $command->yubikeyInput],
         ];
         $response = $this->guzzleClient->post('api/verify-yubikey', ['json' => $body, 'http_errors' => false]);
         $statusCode = $response->getStatusCode();

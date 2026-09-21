@@ -36,14 +36,14 @@ class YubikeySecondFactorService implements YubikeySecondFactorServiceInterface
     public function verifyYubikeyPublicId(VerifyYubikeyPublicIdCommand $command): VerificationResult
     {
         $verifyOtpCommand = new VerifyYubikeyOtpCommand();
-        $verifyOtpCommand->otp = $command->otp;
+        $verifyOtpCommand->yubikeyInput = $command->yubikeyInput;
         $verifyOtpCommand->identityId = $command->identityId;
         $verifyOtpCommand->institution = $command->institution;
 
         $verificationResult = $this->yubikeyService->verify($verifyOtpCommand);
 
-        if (YubikeyOtp::isValid($command->otp)) {
-            $otp = YubikeyOtp::fromString($command->otp);
+        if (YubikeyOtp::isValid($command->yubikeyInput)) {
+            $otp = YubikeyOtp::fromString($command->yubikeyInput);
             $publicId = YubikeyPublicId::fromOtp($otp);
         } else {
             $publicId = null;
