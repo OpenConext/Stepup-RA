@@ -80,7 +80,7 @@ class RaListingExport
             return $value;
         }
 
-        if (in_array($value[0], ['=', '-', '@', "\t", "\r"], true)) {
+        if (in_array($value[0], ['=', '-', '+', '@', "\t", "\r"], true)) {
             return "'" . $value;
         }
 

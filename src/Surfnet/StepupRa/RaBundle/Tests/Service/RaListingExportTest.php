@@ -67,7 +67,7 @@ class RaListingExportTest extends TestCase
             $rows[0],
         );
         $this->assertSame(
-            ['Jane Doe', 'jane@example.org', 'institution-a', 'ra', 'institution-a', 'Room 101', '+31 6 12345678'],
+            ['Jane Doe', 'jane@example.org', 'institution-a', 'ra', 'institution-a', 'Room 101', "'+31 6 12345678"],
             $rows[1],
         );
     }
@@ -109,7 +109,7 @@ class RaListingExportTest extends TestCase
                 "'@SUM(1,1)",
                 'institution-a',
                 'Room 101',
-                '+31 6 12345678',
+                "'+31 6 12345678",
             ],
             $rows[1],
         );

@@ -24,44 +24,23 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class ExportRaListingCommand
 {
-    /**
-     * @var string
-     */
     #[Assert\NotBlank(message: 'ra.search_ra_listing.actor_id.blank')]
     #[Assert\Type('string', message: 'ra.search_ra_listing.actor_id.type')]
-    public $actorId;
+    public string $actorId = '';
 
-    /**
-     * @var string|null
-     */
-    public $name;
+    public ?string $name = null;
 
-    /**
-     * @var string|null
-     */
-    public $email;
+    public ?string $email = null;
 
-    /**
-     * @var string|null
-     */
-    public $institution;
+    public ?string $institution = null;
 
-    /**
-     * @var RoleAtInstitution|null
-     */
-    public $roleAtInstitution;
+    public ?RoleAtInstitution $roleAtInstitution = null;
 
-    /**
-     * @var string|null
-     */
     #[Assert\Choice(choices: ['name', 'email'], message: 'ra.search_ra_candidates.order_by.invalid_choice')]
-    public $orderBy;
+    public ?string $orderBy = null;
 
-    /**
-     * @var string|null
-     */
     #[Assert\Choice(choices: ['asc', 'desc'], message: 'ra.search_ra_candidates.order_direction.invalid_choice')]
-    public $orderDirection;
+    public ?string $orderDirection = null;
 
     public static function fromSearchCommand(SearchRaListingCommand $command): ExportRaListingCommand
     {
