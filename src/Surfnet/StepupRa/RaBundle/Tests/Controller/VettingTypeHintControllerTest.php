@@ -42,12 +42,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Twig\Environment;
 
-/**
- * Regression tests for the vetting-type-hint save flow: a successful save
- * must redirect using the institution the server already resolved for the
- * RAA, never the client-submitted hidden form field, and a failed save must
- * re-render the form without losing the submitted hints.
- */
 class VettingTypeHintControllerTest extends TestCase
 {
     private const HOME_INSTITUTION = 'example.org';
@@ -71,7 +65,6 @@ class VettingTypeHintControllerTest extends TestCase
             $router,
             $vettingTypeHintService,
             $twig,
-            // A tampered hidden field: the RAA is only authorized for HOME_INSTITUTION.
             'attacker.example',
         );
 
@@ -145,7 +138,6 @@ class VettingTypeHintControllerTest extends TestCase
             'email' => $identity->email,
             'common_name' => $identity->commonName,
             'preferred_locale' => $identity->preferredLocale,
-            // Single authorized institution, so no institution-select form is rendered.
             'authorizations' => [self::HOME_INSTITUTION => ['raa']],
             'is_sraa' => false,
         ]);
