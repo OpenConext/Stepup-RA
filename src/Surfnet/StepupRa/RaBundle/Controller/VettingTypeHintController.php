@@ -111,10 +111,16 @@ class VettingTypeHintController extends AbstractController
 
             if ($success) {
                 $this->addFlash('success', 'ra.vetting_type_hint.success');
-            } else {
-                $this->logger->debug('Vetting type hint saving failed, adding error to form');
-                $this->addFlash('error', 'ra.vetting_type_hint.error');
+
+                $redirectInstitution = in_array($command->institution, $choices, true)
+                    ? $command->institution
+                    : $institution;
+
+                return $this->redirectToRoute('vetting_type_hint', ['institution' => $redirectInstitution]);
             }
+
+            $this->logger->debug('Vetting type hint saving failed, adding error to form');
+            $this->addFlash('error', 'ra.vetting_type_hint.error');
         }
 
         return $this->render(
