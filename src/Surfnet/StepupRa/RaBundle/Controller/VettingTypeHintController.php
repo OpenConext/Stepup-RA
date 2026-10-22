@@ -105,7 +105,7 @@ class VettingTypeHintController extends AbstractController
         $hintForm->handleRequest($request);
 
         if ($hintForm->isSubmitted() && $hintForm->isValid()) {
-            $this->logger->debug('Vetting type hint form submitted, start processing command');
+            $this->logger->debug(sprintf('Vetting type hint form submitted, start processing command by user %s', $identity->id));
 
             $success = $this->vettingTypeHintService->save($command);
 
@@ -119,7 +119,7 @@ class VettingTypeHintController extends AbstractController
                 return $this->redirectToRoute('vetting_type_hint', ['institution' => $redirectInstitution]);
             }
 
-            $this->logger->debug('Vetting type hint saving failed, adding error to form');
+            $this->logger->debug(sprintf('Vetting type hint saving failed, adding error to form for user %s', $identity->id));
             $this->addFlash('error', 'ra.vetting_type_hint.error');
         }
 

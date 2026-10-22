@@ -39,7 +39,7 @@ final class ProfileController extends AbstractController
     )]
     public function profile(): Response
     {
-        $this->logger->notice('Opening profile page');
+        $this->logger->notice(sprintf('Opening profile page for user %s', $this->getUser()->getIdentity()->id));
 
         $identity = $this->getUser()->getIdentity();
         $profile = $this->profileService->findByIdentityId($identity->id);

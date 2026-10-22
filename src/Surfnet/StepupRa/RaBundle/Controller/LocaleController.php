@@ -64,7 +64,7 @@ final class LocaleController extends AbstractController
             throw new BadRequestHttpException('Invalid return-url given');
         }
 
-        $this->logger->info('Switching locale...');
+        $this->logger->info(sprintf('Switching locale for user %s...', $this->getUser()->getIdentity()->id));
 
         $identity = $this->getUser()->getIdentity();
         if (!$identity) {
@@ -83,17 +83,17 @@ final class LocaleController extends AbstractController
 
         if ($form->isSubmitted() && !$form->isValid()) {
             $this->addFlash('error', $this->translator->trans('ra.flash.invalid_switch_locale_form'));
-            $this->logger->error('The switch locale form unexpectedly contained invalid data');
+            $this->logger->error(sprintf('The switch locale form unexpectedly contained invalid data for user %s', $identity->id));
             return $this->redirect($returnUrl);
         }
 
         if (!$this->identityService->switchLocale($command)) {
             $this->addFlash('error', $this->translator->trans('ra.flash.error_while_switching_locale'));
-            $this->logger->error('An error occurred while switching locales');
+            $this->logger->error(sprintf('An error occurred while switching locales for user %s', $identity->id));
             return $this->redirect($returnUrl);
         }
 
-        $this->logger->info('Successfully switched locale');
+        $this->logger->info(sprintf('Successfully switched locale for user %s', $identity->id));
 
         return $this->redirect($returnUrl);
     }

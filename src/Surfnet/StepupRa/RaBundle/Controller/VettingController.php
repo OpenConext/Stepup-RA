@@ -75,14 +75,14 @@ class VettingController extends AbstractController
         assert($userIdentifier instanceof AuthenticatedIdentity);
         $identity = $userIdentifier->getIdentity();
 
-        $this->logger->notice('Vetting Procedure Search started');
+        $this->logger->notice(sprintf('Vetting Procedure Search started by user %s', $identity->id));
 
         $command = new StartVettingProcedureCommand();
 
         $form = $this->createForm(StartVettingProcedureType::class, $command)->handleRequest($request);
 
         if (!$form->isSubmitted() || !$form->isValid()) {
-            $this->logger->notice('No search submitted, displaying search by registration code form');
+            $this->logger->notice(sprintf('No search submitted, displaying search by registration code form for user %s', $identity->id));
 
             return $this->render('vetting/start_procedure.html.twig', ['form' => $form]);
         }
@@ -92,7 +92,7 @@ class VettingController extends AbstractController
 
         if (!$secondFactor instanceof VerifiedSecondFactor) {
             $this->addFlash('error', 'ra.form.start_vetting_procedure.unknown_registration_code');
-            $this->logger->notice('Cannot start new vetting procedure, no second factor found');
+            $this->logger->notice(sprintf('Cannot start new vetting procedure, no second factor found for user %s', $identity->id));
 
             return $this->render('vetting/start_procedure.html.twig', ['form' => $form]);
         }
@@ -101,7 +101,8 @@ class VettingController extends AbstractController
         if (!in_array($secondFactor->type, $enabledSecondFactors, true)) {
             $this->logger->warning(
                 sprintf(
-                    'An RA attempted vetting of disabled second factor "%s" of type "%s"',
+                    'An RA (user %s) attempted vetting of disabled second factor "%s" of type "%s"',
+                    $identity->id,
                     $secondFactor->id,
                     $secondFactor->type,
                 ),
@@ -132,7 +133,7 @@ class VettingController extends AbstractController
             );
 
             $this->logger->notice(
-                'Second factor registration code is expired',
+                sprintf('Second factor registration code is expired for user %s', $identity->id),
                 ['registration_requested_at' => $secondFactor->registrationRequestedAt->format('Y-m-d')],
             );
 
@@ -142,7 +143,7 @@ class VettingController extends AbstractController
         if (!$this->vettingService->isLoaSufficientToStartProcedure($command)) {
             $this->addFlash('error', 'ra.form.start_vetting_procedure.loa_insufficient');
 
-            $this->logger->notice('Cannot start new vetting procedure, Authority LoA is insufficient');
+            $this->logger->notice(sprintf('Cannot start new vetting procedure, Authority LoA is insufficient for user %s', $identity->id));
 
             return $this->render('vetting/start_procedure.html.twig', ['form' => $form]);
         }
@@ -254,7 +255,10 @@ class VettingController extends AbstractController
             $vettingService->verifyIdentity($procedureId, $command);
         } catch (DomainException $e) {
             $this->logger->error(
-                "RA attempted to verify identity, but the vetting procedure does not allow it",
+                sprintf(
+                    "RA (user %s) attempted to verify identity, but the vetting procedure does not allow it",
+                    $this->getUser()->getIdentity()->id,
+                ),
                 ['exception' => $e, 'procedure' => $procedureId],
             );
 
