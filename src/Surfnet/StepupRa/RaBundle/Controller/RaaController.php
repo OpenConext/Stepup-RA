@@ -76,7 +76,7 @@ class RaaController extends AbstractController
             }
         }
 
-        $this->logger->notice(sprintf('Opening the institution configuration for "%s"', $institution));
+        $this->logger->notice(sprintf('Opening the institution configuration for "%s" by user %s', $institution, $identity->id));
 
         // Load the configuration for the institution that was selected.
         $configuration = $this->institutionConfigurationOptionsService

@@ -68,7 +68,7 @@ final class SecondFactorController extends AbstractController
     public function search(Request $request): Response
     {
         $identity = $this->getUser()->getIdentity();
-        $this->logger->notice('Starting search for second factors');
+        $this->logger->notice(sprintf('Starting search for second factors by user %s', $identity->id));
 
         $command = new SearchRaSecondFactorsCommand();
         $command->actorId = $identity->id;
@@ -91,7 +91,7 @@ final class SecondFactorController extends AbstractController
         $secondFactorCount = $secondFactors->getTotalItems();
 
         if ($form->isSubmitted() && $form->getClickedButton()->getName() == 'export') {
-            $this->logger->notice('Forwarding to export second factors action');
+            $this->logger->notice(sprintf('Forwarding to export second factors action by user %s', $identity->id));
             return $this->forward('\Surfnet\StepupRa\RaBundle\Controller\SecondFactorController::export', ['command' => $command]);
         }
 
@@ -105,8 +105,9 @@ final class SecondFactorController extends AbstractController
         $revocationForm = $this->createForm(RevokeSecondFactorType::class, new RevokeSecondFactorCommand());
 
         $this->logger->notice(sprintf(
-            'Searching for second factors yielded "%d" results',
+            'Searching for second factors yielded "%d" results by user %s',
             $secondFactors->getTotalItems(),
+            $identity->id,
         ));
 
         return $this->render('second_factor/search.html.twig', [
@@ -124,7 +125,7 @@ final class SecondFactorController extends AbstractController
     #[IsGranted('ROLE_RAA')]
     public function export(SearchRaSecondFactorsCommand $command): Response
     {
-        $this->logger->notice('Starting export of searched second factors');
+        $this->logger->notice(sprintf('Starting export of searched second factors by user %s', $this->getUser()->getIdentity()->id));
 
         $exportCommand = ExportRaSecondFactorsCommand::fromSearchCommand($command);
 
@@ -139,7 +140,7 @@ final class SecondFactorController extends AbstractController
     #[IsGranted('ROLE_RA')]
     public function revoke(Request $request): RedirectResponse
     {
-        $this->logger->notice('Received request to revoke Second Factor');
+        $this->logger->notice(sprintf('Received request to revoke Second Factor by user %s', $this->getUser()->getIdentity()->id));
 
         $command = new RevokeSecondFactorCommand();
         $command->currentUserId = $this->getUser()->getIdentity()->id;
@@ -148,21 +149,21 @@ final class SecondFactorController extends AbstractController
         $form->handleRequest($request);
 
         $this->logger->info(sprintf(
-            'Sending middleware request to revoke Second Factor "%s" belonging to "%s" on behalf of "%s"',
+            'Sending middleware request to revoke Second Factor "%s" belonging to "%s" on behalf of user %s',
             $command->secondFactorId,
             $command->identityId,
             $command->currentUserId,
         ));
 
         if ($this->secondFactorService->revoke($command)) {
-            $this->logger->notice('Second Factor revocation Succeeded');
+            $this->logger->notice(sprintf('Second Factor revocation Succeeded by user %s', $command->currentUserId));
             $this->addFlash('success', $this->translator->trans('ra.second_factor.revocation.revoked'));
         } else {
-            $this->logger->notice('Second Factor revocation Failed');
+            $this->logger->notice(sprintf('Second Factor revocation Failed by user %s', $command->currentUserId));
             $this->addFlash('error', $this->translator->trans('ra.second_factor.revocation.could_not_revoke'));
         }
 
-        $this->logger->notice('Redirecting back to Second Factor Search Page');
+        $this->logger->notice(sprintf('Redirecting back to Second Factor Search Page by user %s', $command->currentUserId));
 
         return $this->redirectToRoute('ra_second_factors_search');
     }
@@ -180,12 +181,14 @@ final class SecondFactorController extends AbstractController
     #[IsGranted('ROLE_RA')]
     public function auditLog(Request $request, string $identityId): Response
     {
-        $this->logger->notice(sprintf('Requested AuditLog for SecondFactors of identity "%s"', $identityId));
+        $this->logger->notice(
+            sprintf('Requested AuditLog for SecondFactors of identity "%s" by user %s', $identityId, $this->getUser()->getIdentity()->id),
+        );
 
         $identity = $this->identityService->findById($identityId);
         if (!$identity) {
             $this->logger->notice(sprintf(
-                'User with Identity "%s" requested non-existent identity "%s"',
+                'User %s requested non-existent identity "%s"',
                 $this->getUser()->getIdentity()->id,
                 $identityId,
             ));
@@ -193,7 +196,7 @@ final class SecondFactorController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        $this->logger->info(sprintf('Retrieving audit log for Identity "%s"', $identity->id));
+        $this->logger->info(sprintf('Retrieving audit log for Identity "%s" by user %s', $identity->id, $this->getUser()->getIdentity()->id));
 
         $command = new SearchSecondFactorAuditLogCommand();
         $command->identityId = $identity->id;
@@ -210,7 +213,9 @@ final class SecondFactorController extends AbstractController
         );
         $pagination->setTotalItemCount($auditLog->getTotalItems());
 
-        $this->logger->notice(sprintf('Audit log yielded "%d" results, rendering page', $auditLog->getTotalItems()));
+        $this->logger->notice(
+            sprintf('Audit log yielded "%d" results, rendering page for user %s', $auditLog->getTotalItems(), $this->getUser()->getIdentity()->id),
+        );
 
         return $this->render(
             'second_factor/audit_log.html.twig',

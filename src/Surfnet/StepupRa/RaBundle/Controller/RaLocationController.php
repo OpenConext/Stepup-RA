@@ -69,7 +69,7 @@ final class RaLocationController extends AbstractController
         $institutionParameter = $request->query->get('institution') ?? $request->request->get('institution');
 
         $identity = $this->getUser()->getIdentity();
-        $this->logger->notice('Starting search for locations');
+        $this->logger->notice(sprintf('Starting search for locations by user %s', $identity->id));
 
         $profile = $this->profileService->findByIdentityId($identity->id);
 
@@ -109,8 +109,9 @@ final class RaLocationController extends AbstractController
         $removalForm = $this->createForm(RemoveRaLocationType::class, new RemoveRaLocationCommand());
 
         $this->logger->notice(sprintf(
-            'Searching for RA locations yielded "%d" results',
+            'Searching for RA locations yielded "%d" results by user %s',
             $locations->getTotalItems(),
+            $identity->id,
         ));
 
         return $this->render('ra_location/manage.html.twig', [
@@ -136,7 +137,7 @@ final class RaLocationController extends AbstractController
         $form = $this->createForm(CreateRaLocationType::class, $command)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->logger->debug('RA Location form submitted, start processing command');
+            $this->logger->debug(sprintf('RA Location form submitted, start processing command by user %s', $identity->id));
 
             $success = $this->raLocationService->create($command);
 
@@ -146,11 +147,11 @@ final class RaLocationController extends AbstractController
                     $this->translator->trans('ra.create_ra_location.created'),
                 );
 
-                $this->logger->debug('RA Location added, redirecting to the RA location overview');
+                $this->logger->debug(sprintf('RA Location added, redirecting to the RA location overview by user %s', $identity->id));
                 return $this->redirectToRoute('ra_locations_manage', ['institution' => $command->institution]);
             }
 
-            $this->logger->debug('RA Location creation failed, adding error to form');
+            $this->logger->debug(sprintf('RA Location creation failed, adding error to form for user %s', $identity->id));
             $this->addFlash('error', 'ra.create_ra_location.error.middleware_command_failed');
         }
 
@@ -171,7 +172,9 @@ final class RaLocationController extends AbstractController
         $raLocation = $this->raLocationService->find($requestedLocationId);
 
         if (!$raLocation) {
-            $this->logger->warning(sprintf('RaLocation for id "%s" not found', $requestedLocationId));
+            $this->logger->warning(
+                sprintf('RaLocation for id "%s" not found for user %s', $requestedLocationId, $this->getUser()->getIdentity()->id),
+            );
             throw new NotFoundHttpException();
         }
 
@@ -188,7 +191,7 @@ final class RaLocationController extends AbstractController
         $form = $this->createForm(ChangeRaLocationType::class, $command)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->logger->debug('RA Location form submitted, start processing command');
+            $this->logger->debug(sprintf('RA Location form submitted, start processing command by user %s', $identity->id));
 
             $success = $this->raLocationService->change($command);
 
@@ -198,11 +201,11 @@ final class RaLocationController extends AbstractController
                     $this->translator->trans('ra.create_ra_location.changed'),
                 );
 
-                $this->logger->debug('RA Location added, redirecting to the RA location overview');
+                $this->logger->debug(sprintf('RA Location changed, redirecting to the RA location overview by user %s', $identity->id));
                 return $this->redirectToRoute('ra_locations_manage', ['institution' => $command->institution]);
             }
 
-            $this->logger->debug('RA Location creation failed, adding error to form');
+            $this->logger->debug(sprintf('RA Location change failed, adding error to form for user %s', $identity->id));
             $this->addFlash('error', 'ra.create_ra_location.error.middleware_command_failed');
         }
 
@@ -215,7 +218,7 @@ final class RaLocationController extends AbstractController
     #[IsGranted('ROLE_RA')]
     public function remove(Request $request): RedirectResponse
     {
-        $this->logger->notice('Received request to remove RA location');
+        $this->logger->notice(sprintf('Received request to remove RA location by user %s', $this->getUser()->getIdentity()->id));
 
         $command = new RemoveRaLocationCommand();
         $command->currentUserId = $this->getUser()->getIdentity()->id;
@@ -224,21 +227,21 @@ final class RaLocationController extends AbstractController
         $form->handleRequest($request);
 
         $this->logger->info(sprintf(
-            'Sending middleware request to remove RA location "%s" belonging to "%s" on behalf of "%s"',
+            'Sending middleware request to remove RA location "%s" belonging to "%s" on behalf of user %s',
             $command->locationId,
             $command->institution,
             $command->currentUserId,
         ));
 
         if ($this->raLocationService->remove($command)) {
-            $this->logger->notice('RA Location removal Succeeded');
+            $this->logger->notice(sprintf('RA Location removal Succeeded by user %s', $command->currentUserId));
             $this->addFlash('success', $this->translator->trans('ra.ra_location.revocation.removed'));
         } else {
-            $this->logger->notice('RA Location removal Failed');
+            $this->logger->notice(sprintf('RA Location removal Failed by user %s', $command->currentUserId));
             $this->addFlash('error', $this->translator->trans('ra.ra_location.revocation.could_not_remove'));
         }
 
-        $this->logger->notice('Redirecting back to RA Location Manage Page');
+        $this->logger->notice(sprintf('Redirecting back to RA Location Manage Page by user %s', $command->currentUserId));
 
         return $this->redirectToRoute('ra_locations_manage', ['institution' => $command->institution]);
     }
