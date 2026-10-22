@@ -244,7 +244,7 @@ $ignoreErrors[] = [
 $ignoreErrors[] = [
 	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'identifier' => 'method.nonObject',
-	'count' => 2,
+	'count' => 3,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/LocaleController.php',
 ];
 $ignoreErrors[] = [
@@ -256,13 +256,13 @@ $ignoreErrors[] = [
 $ignoreErrors[] = [
 	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'identifier' => 'method.nonObject',
-	'count' => 1,
+	'count' => 2,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/ProfileController.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'identifier' => 'method.nonObject',
-	'count' => 4,
+	'count' => 6,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaLocationController.php',
 ];
 $ignoreErrors[] = [
@@ -278,9 +278,15 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
 $ignoreErrors[] = [
+	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\Form\\\\FormInterface\\<Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaListingCommand\\>\\:\\:getClickedButton\\(\\)\\.$#',
+	'identifier' => 'method.notFound',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
+];
+$ignoreErrors[] = [
 	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'identifier' => 'method.nonObject',
-	'count' => 7,
+	'count' => 25,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
 $ignoreErrors[] = [
@@ -334,7 +340,7 @@ $ignoreErrors[] = [
 $ignoreErrors[] = [
 	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'identifier' => 'method.nonObject',
-	'count' => 2,
+	'count' => 3,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RecoveryTokenController.php',
 ];
 $ignoreErrors[] = [
@@ -342,12 +348,6 @@ $ignoreErrors[] = [
 	'identifier' => 'method.notFound',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\Form\\\\FormInterface\\<Surfnet\\\\StepupRa\\\\RaBundle\\\\Command\\\\SearchRaListingCommand\\>\\:\\:getClickedButton\\(\\)\\.$#',
-	'identifier' => 'method.notFound',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Call to an undefined method Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserProviderInterface\\:\\:findById\\(\\)\\.$#',
@@ -358,7 +358,7 @@ $ignoreErrors[] = [
 $ignoreErrors[] = [
 	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'identifier' => 'method.nonObject',
-	'count' => 3,
+	'count' => 8,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
 ];
 $ignoreErrors[] = [
@@ -378,6 +378,12 @@ $ignoreErrors[] = [
 	'identifier' => 'argument.type',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/Vetting/Gssf/GssfVerifyController.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
+	'identifier' => 'method.nonObject',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/VettingController.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Method Surfnet\\\\StepupRa\\\\RaBundle\\\\Controller\\\\VettingController\\:\\:cancelProcedure\\(\\) has parameter \\$procedureId with no type specified\\.$#',
