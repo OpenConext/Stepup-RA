@@ -2,7 +2,7 @@ build:
     image: default-jammy
     environment:
         php: 8.5.2
-        node: v24
+        node: v23
 
 filter:
     excluded_paths:
