@@ -1,13 +1,41 @@
 # Changelog
 
-## Unreleased
+## 7.1.0
+- Add CSV export to RA Management search results #521
+- Display vetting type hint on the Institution configuration page #532
+- Show deprovisioned tokens in the audit log #531
+- Fix YubiKey OTP input for iCloud #540
+- Set session cookie to SameSite=None for cross-domain SAML POSTs #542
 - Upgrade to PHP 8.5 and Node 24 #519
-- Bump Docker base images, Composer dependencies, and yarn dependencies
 - Apply Rector cleanup for PHP 8.5 compatibility
+- Bump Docker base images, Composer dependencies, and yarn dependencies
+
+## 7.0.2
+**Security**
+- Upgrade PHP to fix CVE-2026-109618 and CVE-2026-109619
 
 ## 7.0.0
 - Update to Symfony 7.4
 - Upgrade of numerous NPM and Composer dependencies
+
+## 6.1.3 / 6.1.2
+- Re-releases of 6.1.1, no code changes
+
+## 6.1.1
+**Security**
+- Update xmlseclibs to 3.1.4 to fix canonicalization bypass
+
+## 6.1.0
+- Display the SSO registration bypass (GSSP fallback) feature toggle on the Institution configuration page
+- Fix remote metadata endpoint
+- Add dependabot configuration
+- Add Docker build test image workflow and test dockerfile
+- Upgrade of numerous NPM, Composer, and GitHub Actions dependencies
+
+## 6.0.2
+- Update simplesamlphp/saml2 to 4.16.14
+- Update Symfony patches
+- Bump http-proxy-middleware from 2.0.6 to 2.0.7
 
 ## 6.0.1
 - Ensure the correct error page is displayed when authentication fails #332
