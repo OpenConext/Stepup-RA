@@ -72,11 +72,10 @@ class RaManagementController extends AbstractController
     public function manage(Request $request): Response
     {
         $institution = $this->getUser()->getInstitution();
-        $this->logger->notice(
-            sprintf('Loading overview of RA(A)s for institution "%s" by user %s', $institution, $this->getUser()->getIdentity()->id),
-        );
-
         $identity = $this->getUser()->getIdentity();
+        $this->logger->notice(
+            sprintf('Loading overview of RA(A)s for institution "%s" by user %s', $institution, $identity->id),
+        );
 
         $command = new SearchRaListingCommand();
         $command->actorId = $identity->id;
@@ -129,7 +128,8 @@ class RaManagementController extends AbstractController
     #[IsGranted('ROLE_RAA')]
     public function export(SearchRaListingCommand $command): Response
     {
-        $this->logger->notice(sprintf('Starting export of searched RA(A) listing by user %s', $this->getUser()->getIdentity()->id));
+        $identity = $this->getUser()->getIdentity();
+        $this->logger->notice(sprintf('Starting export of searched RA(A) listing by user %s', $identity->id));
 
         $exportCommand = ExportRaListingCommand::fromSearchCommand($command);
 
@@ -199,15 +199,16 @@ class RaManagementController extends AbstractController
     #[IsGranted('ROLE_RAA')]
     public function createRa(Request $request, string $identityId): Response
     {
+        $identity = $this->getUser()->getIdentity();
         $this->logger->notice(
-            sprintf('Page for Accreditation of Identity to Ra or Raa requested by user %s', $this->getUser()->getIdentity()->id),
+            sprintf('Page for Accreditation of Identity to Ra or Raa requested by user %s', $identity->id),
         );
 
-        $raCandidate = $this->raCandidateService->getRaCandidate($identityId, $this->getUser()->getIdentity()->id);
+        $raCandidate = $this->raCandidateService->getRaCandidate($identityId, $identity->id);
 
         if ($raCandidate === null || !isset($raCandidate->raCandidate)) {
             $this->logger->warning(
-                sprintf('RaCandidate based on identity "%s" not found for user %s', $identityId, $this->getUser()->getIdentity()->id),
+                sprintf('RaCandidate based on identity "%s" not found for user %s', $identityId, $identity->id),
             );
             throw new NotFoundHttpException();
         }
@@ -219,13 +220,13 @@ class RaManagementController extends AbstractController
         $command->identityId = $identityId;
         $command->institution = $raCandidate->raCandidate->institution;
         $command->roleAtInstitution = new RoleAtInstitution();
-        $command->roleAtInstitution->setInstitution($this->getUser()->getIdentity()->institution);
+        $command->roleAtInstitution->setInstitution($identity->institution);
         $command->availableInstitutions = $selectOptions;
 
         $form = $this->createForm(CreateRaType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->logger->debug(
-                sprintf('Accreditation form submitted, start processing command by user %s', $this->getUser()->getIdentity()->id),
+                sprintf('Accreditation form submitted, start processing command by user %s', $identity->id),
             );
 
             $success = $this->raCandidateService->accreditCandidate($command);
@@ -237,13 +238,13 @@ class RaManagementController extends AbstractController
                 );
 
                 $this->logger->debug(
-                    sprintf('Identity Accredited, redirecting to candidate overview by user %s', $this->getUser()->getIdentity()->id),
+                    sprintf('Identity Accredited, redirecting to candidate overview by user %s', $identity->id),
                 );
                 return $this->redirectToRoute('ra_management_ra_candidate_search');
             }
 
             $this->logger->debug(
-                sprintf('Identity Accreditation failed, adding error to form for user %s', $this->getUser()->getIdentity()->id),
+                sprintf('Identity Accreditation failed, adding error to form for user %s', $identity->id),
             );
             $this->addFlash('error', 'ra.management.create_ra.error.middleware_command_failed');
         }
@@ -266,15 +267,16 @@ class RaManagementController extends AbstractController
     #[IsGranted('ROLE_RAA')]
     public function amendRaInformation(Request $request, $identityId, $raInstitution): Response
     {
+        $identity = $this->getUser()->getIdentity();
         $this->logger->notice(
-            sprintf("Loading information amendment form for RA(A) '%s' by user %s", $identityId, $this->getUser()->getIdentity()->id),
+            sprintf("Loading information amendment form for RA(A) '%s' by user %s", $identityId, $identity->id),
         );
 
-        $raListing = $this->raListingService->get($identityId, $raInstitution, $this->getUser()->getIdentity()->id);
+        $raListing = $this->raListingService->get($identityId, $raInstitution, $identity->id);
 
         if (!$raListing) {
             $this->logger->warning(
-                sprintf("RA listing for identity ID '%s' not found for user %s", $identityId, $this->getUser()->getIdentity()->id),
+                sprintf("RA listing for identity ID '%s' not found for user %s", $identityId, $identity->id),
             );
             throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
         }
@@ -288,20 +290,20 @@ class RaManagementController extends AbstractController
         $form = $this->createForm(AmendRegistrationAuthorityInformationType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->logger->notice(
-                sprintf("RA(A) '%s' information amendment form submitted, processing by user %s", $identityId, $this->getUser()->getIdentity()->id),
+                sprintf("RA(A) '%s' information amendment form submitted, processing by user %s", $identityId, $identity->id),
             );
 
             if ($this->raService->amendRegistrationAuthorityInformation($command)) {
                 $this->addFlash('success', $this->translator->trans('ra.management.amend_ra_info.info_amended'));
 
                 $this->logger->notice(
-                    sprintf("RA(A) '%s' information successfully amended by user %s", $identityId, $this->getUser()->getIdentity()->id),
+                    sprintf("RA(A) '%s' information successfully amended by user %s", $identityId, $identity->id),
                 );
                 return $this->redirectToRoute('ra_management_manage');
             }
 
             $this->logger->notice(
-                sprintf("Information of RA(A) '%s' failed to be amended, informing user %s", $identityId, $this->getUser()->getIdentity()->id),
+                sprintf("Information of RA(A) '%s' failed to be amended by user %s", $identityId, $identity->id),
             );
             $this->addFlash('error', 'ra.management.amend_ra_info.error.middleware_command_failed');
         }
@@ -324,19 +326,20 @@ class RaManagementController extends AbstractController
     #[IsGranted('ROLE_RAA')]
     public function retractRegistrationAuthority(Request $request, $identityId, $raInstitution): Response
     {
+        $identity = $this->getUser()->getIdentity();
         $this->logger->notice(
-            sprintf("Loading retract registration authority form for RA(A) '%s' by user %s", $identityId, $this->getUser()->getIdentity()->id),
+            sprintf("Loading retract registration authority form for RA(A) '%s' by user %s", $identityId, $identity->id),
         );
 
-        $raListing = $this->raListingService->get($identityId, $raInstitution, $this->getUser()->getIdentity()->id);
+        $raListing = $this->raListingService->get($identityId, $raInstitution, $identity->id);
         if (!$raListing) {
             $this
                 ->logger
                 ->warning(sprintf(
                     "RA listing for identity ID '%s@%s' not found for user %s",
                     $identityId,
-                    $this->getUser()->getIdentity()->institution,
-                    $this->getUser()->getIdentity()->id,
+                    $identity->institution,
+                    $identity->id,
                 ));
             throw new NotFoundHttpException(sprintf("RA listing for identity ID '%s' not found", $identityId));
         }
@@ -348,17 +351,17 @@ class RaManagementController extends AbstractController
         $form = $this->createForm(RetractRegistrationAuthorityType::class, $command)->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             if ($form->get('button-group')->get('cancel')->isClicked()) {
-                $this->logger->notice(sprintf('Retraction of registration authority cancelled by user %s', $this->getUser()->getIdentity()->id));
+                $this->logger->notice(sprintf('Retraction of registration authority cancelled by user %s', $identity->id));
                 return $this->redirectToRoute('ra_management_manage');
             }
 
             $this->logger->notice(
-                sprintf('Confirmed retraction of RA credentials for identity "%s" by user %s', $identityId, $this->getUser()->getIdentity()->id),
+                sprintf('Confirmed retraction of RA credentials for identity "%s" by user %s', $identityId, $identity->id),
             );
 
             if ($this->raService->retractRegistrationAuthority($command)) {
                 $this->logger->notice(
-                    sprintf('Registration authority for identity "%s" retracted by user %s', $identityId, $this->getUser()->getIdentity()->id),
+                    sprintf('Registration authority for identity "%s" retracted by user %s', $identityId, $identity->id),
                 );
 
                 $this->addFlash('success', $this->translator->trans('ra.management.retract_ra.success'));
@@ -368,7 +371,7 @@ class RaManagementController extends AbstractController
             $this->logger->notice(sprintf(
                 'Could not retract Registration Authority credentials for identity "%s" by user %s',
                 $identityId,
-                $this->getUser()->getIdentity()->id,
+                $identity->id,
             ));
             $this->addFlash('error', 'ra.management.retract_ra.middleware_command_failed');
         }
