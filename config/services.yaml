@@ -58,3 +58,7 @@ services:
   Surfnet\StepupRa\RaBundle\Controller\SamlController:
     bind:
       $remoteIdp: '@surfnet_saml.remote.idp'
+
+  Surfnet\StepupRa\RaBundle\Controller\CspReportController:
+    bind:
+      $securityLogger: '@monolog.logger.security'
