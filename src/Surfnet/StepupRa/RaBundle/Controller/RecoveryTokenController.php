@@ -53,7 +53,7 @@ final class RecoveryTokenController extends AbstractController
     public function search(Request $request): Response
     {
         $identity = $this->getUser()->getIdentity();
-        $this->logger->notice(sprintf('Starting search for recovery tokens by user %s', $identity->id));
+        $this->logger->notice('Starting search for recovery tokens');
 
         $command = new SearchRecoveryTokensCommand();
         $command->actorId = $identity->id;
@@ -83,9 +83,8 @@ final class RecoveryTokenController extends AbstractController
         $revocationForm = $this->createForm(RevokeRecoveryTokenType::class, new RevokeRecoveryTokenCommand());
 
         $this->logger->notice(sprintf(
-            'Searching for recovery tokens yielded "%d" results by user %s',
+            'Searching for recovery tokens yielded "%d" results',
             $recoveryTokenCount,
-            $identity->id,
         ));
 
         return $this->render(
@@ -111,7 +110,7 @@ final class RecoveryTokenController extends AbstractController
     #[IsGranted('ROLE_RA')]
     public function revoke(Request $request): RedirectResponse
     {
-        $this->logger->notice(sprintf('Received request to revoke recovery token by user %s', $this->getUser()->getIdentity()->id));
+        $this->logger->notice('Received request to revoke recovery token');
 
         $command = new RevokeRecoveryTokenCommand();
         $command->currentUserId = $this->getUser()->getIdentity()->id;
@@ -120,21 +119,21 @@ final class RecoveryTokenController extends AbstractController
         $form->handleRequest($request);
 
         $this->logger->info(sprintf(
-            'Sending middleware request to revoke recovery token "%s" belonging to "%s" on behalf of user %s',
+            'Sending middleware request to revoke recovery token "%s" belonging to "%s" on behalf of "%s"',
             $command->recoveryTokenId,
             $command->identityId,
             $command->currentUserId,
         ));
 
         if ($this->recoveryTokenService->revoke($command)) {
-            $this->logger->notice(sprintf('Recovery token revocation succeeded by user %s', $command->currentUserId));
+            $this->logger->notice('Recovery token revocation succeeded');
             $this->addFlash('success', 'ra.recovery_token.revocation.revoked');
         } else {
-            $this->logger->notice(sprintf('Recovery token revocation failed by user %s', $command->currentUserId));
+            $this->logger->notice('Recovery token revocation failed');
             $this->addFlash('error', 'ra.recovery_token.revocation.could_not_revoke');
         }
 
-        $this->logger->notice(sprintf('Redirecting back to recovery tokens search overview by user %s', $command->currentUserId));
+        $this->logger->notice('Redirecting back to recovery tokens search overview');
 
         return $this->redirectToRoute('ra_recovery_tokens_search');
     }
