@@ -38,6 +38,7 @@ services:
     arguments:
       - '@security.helper'
       - "%logout_redirect_url%"
+      - '@logger'
 
   Surfnet\StepupRa\RaBundle\EventListener\AuthenticatedUserListener:
 
