@@ -1,5 +1,14 @@
 # Changelog
 
+## 7.1.1
+
+- Fix CSP report route with double-colon service syntax #568
+- Log the acting user on every controller log line #557
+- Guard the logout listener against a missing authenticated user, fixing a 500 on logout with an expired session #569
+- Log NotFoundHttpException (404s) as info instead of error #570
+- Set a global ServerName in the Apache config
+- Bump Composer and yarn dependencies
+
 ## 7.1.0
 
 - Add CSV export to RA Management search results #521
