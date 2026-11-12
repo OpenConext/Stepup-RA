@@ -22,6 +22,9 @@ framework:
   fragments:       false
   http_method_override: true
   error_controller: Surfnet\StepupRa\RaBundle\Controller\ExceptionController::show
+  exceptions:
+    Symfony\Component\HttpKernel\Exception\NotFoundHttpException:
+      log_level: info
   php_errors:
     log: true
 
