@@ -244,7 +244,7 @@ $ignoreErrors[] = [
 $ignoreErrors[] = [
 	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'identifier' => 'method.nonObject',
-	'count' => 3,
+	'count' => 1,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/LocaleController.php',
 ];
 $ignoreErrors[] = [
@@ -286,7 +286,7 @@ $ignoreErrors[] = [
 $ignoreErrors[] = [
 	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'identifier' => 'method.nonObject',
-	'count' => 25,
+	'count' => 6,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/RaManagementController.php',
 ];
 $ignoreErrors[] = [
@@ -358,7 +358,7 @@ $ignoreErrors[] = [
 $ignoreErrors[] = [
 	'message' => '#^Cannot call method getIdentity\\(\\) on Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null\\.$#',
 	'identifier' => 'method.nonObject',
-	'count' => 8,
+	'count' => 4,
 	'path' => __DIR__ . '/../../src/Surfnet/StepupRa/RaBundle/Controller/SecondFactorController.php',
 ];
 $ignoreErrors[] = [

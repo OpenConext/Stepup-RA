@@ -125,7 +125,8 @@ final class SecondFactorController extends AbstractController
     #[IsGranted('ROLE_RAA')]
     public function export(SearchRaSecondFactorsCommand $command): Response
     {
-        $this->logger->notice(sprintf('Starting export of searched second factors by user %s', $this->getUser()->getIdentity()->id));
+        $identity = $this->getUser()->getIdentity();
+        $this->logger->notice(sprintf('Starting export of searched second factors by user %s', $identity->id));
 
         $exportCommand = ExportRaSecondFactorsCommand::fromSearchCommand($command);
 
@@ -140,10 +141,11 @@ final class SecondFactorController extends AbstractController
     #[IsGranted('ROLE_RA')]
     public function revoke(Request $request): RedirectResponse
     {
-        $this->logger->notice(sprintf('Received request to revoke Second Factor by user %s', $this->getUser()->getIdentity()->id));
+        $identity = $this->getUser()->getIdentity();
+        $this->logger->notice(sprintf('Received request to revoke Second Factor by user %s', $identity->id));
 
         $command = new RevokeSecondFactorCommand();
-        $command->currentUserId = $this->getUser()->getIdentity()->id;
+        $command->currentUserId = $identity->id;
 
         $form = $this->createForm(RevokeSecondFactorType::class, $command);
         $form->handleRequest($request);
@@ -181,22 +183,23 @@ final class SecondFactorController extends AbstractController
     #[IsGranted('ROLE_RA')]
     public function auditLog(Request $request, string $identityId): Response
     {
+        $actor = $this->getUser()->getIdentity();
         $this->logger->notice(
-            sprintf('Requested AuditLog for SecondFactors of identity "%s" by user %s', $identityId, $this->getUser()->getIdentity()->id),
+            sprintf('Requested AuditLog for SecondFactors of identity "%s" by user %s', $identityId, $actor->id),
         );
 
         $identity = $this->identityService->findById($identityId);
         if (!$identity) {
             $this->logger->notice(sprintf(
                 'User %s requested non-existent identity "%s"',
-                $this->getUser()->getIdentity()->id,
+                $actor->id,
                 $identityId,
             ));
 
             throw new NotFoundHttpException();
         }
 
-        $this->logger->info(sprintf('Retrieving audit log for Identity "%s" by user %s', $identity->id, $this->getUser()->getIdentity()->id));
+        $this->logger->info(sprintf('Retrieving audit log for Identity "%s" by user %s', $identity->id, $actor->id));
 
         $command = new SearchSecondFactorAuditLogCommand();
         $command->identityId = $identity->id;
@@ -214,7 +217,7 @@ final class SecondFactorController extends AbstractController
         $pagination->setTotalItemCount($auditLog->getTotalItems());
 
         $this->logger->notice(
-            sprintf('Audit log yielded "%d" results, rendering page for user %s', $auditLog->getTotalItems(), $this->getUser()->getIdentity()->id),
+            sprintf('Audit log yielded "%d" results, rendering page for user %s', $auditLog->getTotalItems(), $actor->id),
         );
 
         return $this->render(
