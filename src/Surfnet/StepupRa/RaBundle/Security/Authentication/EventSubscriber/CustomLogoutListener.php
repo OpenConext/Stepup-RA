@@ -20,6 +20,7 @@ declare(strict_types = 1);
 
 namespace Surfnet\StepupRa\RaBundle\Security\Authentication\EventSubscriber;
 
+use Psr\Log\LoggerInterface;
 use Surfnet\StepupRa\RaBundle\Security\AuthenticatedIdentity;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
@@ -33,15 +34,22 @@ readonly class CustomLogoutListener
      */
     public function __construct(
         private Security $security,
-        private array $logoutRedirectUrl = [],
+        private array $logoutRedirectUrl,
+        private LoggerInterface $logger,
     ) {
     }
 
     #[AsEventListener(event: LogoutEvent::class)]
     public function onLogout(LogoutEvent $event): void
     {
-        assert($this->security->getUser() instanceof AuthenticatedIdentity);
-        $identity = $this->security->getUser()->getIdentity();
+        $user = $this->security->getUser();
+        if (!$user instanceof AuthenticatedIdentity) {
+            $this->logger->debug('Logout requested without an authenticated user, session likely already expired');
+
+            return;
+        }
+
+        $identity = $user->getIdentity();
 
         $logoutRedirectUrl = $this->logoutRedirectUrl[$identity->preferredLocale];
 
