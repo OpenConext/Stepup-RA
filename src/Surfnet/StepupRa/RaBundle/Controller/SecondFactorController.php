@@ -182,11 +182,13 @@ final class SecondFactorController extends AbstractController
     {
         $this->logger->notice(sprintf('Requested AuditLog for SecondFactors of identity "%s"', $identityId));
 
+        $actor = $this->getUser()->getIdentity();
+
         $identity = $this->identityService->findById($identityId);
         if (!$identity) {
             $this->logger->notice(sprintf(
                 'User with Identity "%s" requested non-existent identity "%s"',
-                $this->getUser()->getIdentity()->id,
+                $actor->id,
                 $identityId,
             ));
 
@@ -196,6 +198,7 @@ final class SecondFactorController extends AbstractController
         $this->logger->info(sprintf('Retrieving audit log for Identity "%s"', $identity->id));
 
         $command = new SearchSecondFactorAuditLogCommand();
+        $command->actorId = $actor->id;
         $command->identityId = $identity->id;
         $command->institution = $identity->institution;
         $command->pageNumber = $request->query->getInt('p', 1);

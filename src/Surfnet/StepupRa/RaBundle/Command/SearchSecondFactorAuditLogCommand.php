@@ -23,6 +23,11 @@ class SearchSecondFactorAuditLogCommand
     /**
      * @var string
      */
+    public $actorId;
+
+    /**
+     * @var string
+     */
     public $institution;
 
     /**
